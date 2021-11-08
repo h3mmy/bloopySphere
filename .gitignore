@@ -8,6 +8,7 @@ kubeconfig
 # vscode-sops
 .decrypted~*.yaml
 .config.env
+.config.live.env
 # Ansible
 xanmanning.k3s*
 # Terraform

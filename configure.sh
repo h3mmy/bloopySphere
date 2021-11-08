@@ -108,7 +108,7 @@ _has_envar() {
 _has_valid_ip() {
     local ip="${1}"
     local variable_name="${2}"
-    
+
     if ! ipcalc "${ip}" | awk 'BEGIN{FS=":"; is_invalid=0} /^INVALID/ {is_invalid=1; print $1} END{exit is_invalid}' >/dev/null 2>&1; then
         _log "INFO" "Variable '${variable_name}' has an invalid IP address '${ip}'"
         exit 1
@@ -123,14 +123,14 @@ verify_gpg() {
 
     if ! gpg --list-keys "${BOOTSTRAP_PERSONAL_KEY_FP}" >/dev/null 2>&1; then
          _log "ERROR" "Invalid Personal GPG FP ${BOOTSTRAP_PERSONAL_KEY_FP}"
-        exit 1    
+        exit 1
     else
         _log "INFO" "Found Personal GPG Fingerprint '${BOOTSTRAP_PERSONAL_KEY_FP}'"
     fi
 
     if ! gpg --list-keys "${BOOTSTRAP_FLUX_KEY_FP}" >/dev/null 2>&1; then
          _log "ERROR" "Invalid Flux GPG FP '${BOOTSTRAP_FLUX_KEY_FP}'"
-        exit 1    
+        exit 1
     else
          _log "INFO" "Found Flux GPG Fingerprint '${BOOTSTRAP_FLUX_KEY_FP}'"
     fi
@@ -187,14 +187,14 @@ verify_cloudflare() {
     local account_zone=
     local errors=
 
-    _has_envar "BOOTSTRAP_CLOUDFLARE_APIKEY"
-    _has_envar "BOOTSTRAP_CLOUDFLARE_DOMAIN"
-    _has_envar "BOOTSTRAP_CLOUDFLARE_EMAIL"
+    _has_envar "BOOTSTRAP_GANDI_APIKEY"
+    _has_envar "BOOTSTRAP_GANDI_DOMAIN"
+    _has_envar "BOOTSTRAP_GANDI_EMAIL"
 
     # Try to retrieve zone information from Cloudflare's API
-    account_zone=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=${BOOTSTRAP_CLOUDFLARE_DOMAIN}&status=active" \
-        -H "X-Auth-Email: ${BOOTSTRAP_CLOUDFLARE_EMAIL}" \
-        -H "X-Auth-Key: ${BOOTSTRAP_CLOUDFLARE_APIKEY}" \
+    account_zone=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=${BOOTSTRAP_GANDI_DOMAIN}&status=active" \
+        -H "X-Auth-Email: ${BOOTSTRAP_GANDI_EMAIL}" \
+        -H "X-Auth-Key: ${BOOTSTRAP_GANDI_APIKEY}" \
         -H "Content-Type: application/json"
     )
 

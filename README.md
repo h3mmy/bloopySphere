@@ -218,7 +218,7 @@ In order to use Terraform and `cert-manager` with the Cloudflare DNS challenge y
 4. If everything goes as planned you should see Ansible running the k3s install Playbook against your nodes.
 
 5. Verify the nodes are online
-   
+
 ```sh
 kubectl --kubeconfig=./provision/kubeconfig get nodes
 # NAME           STATUS   ROLES                       AGE     VERSION
@@ -310,7 +310,7 @@ kubectl --kubeconfig=./provision/kubeconfig get pods -n flux-system
 
 3. Finally have Terraform execute the task by running `task terraform:apply:cloudflare`
 
-If Terraform was ran successfully head over to your browser and you _should_ be able to access `https://hajimari.${BOOTSTRAP_CLOUDFLARE_DOMAIN}`
+If Terraform was ran successfully head over to your browser and you _should_ be able to access `https://hajimari.${BOOTSTRAP_GANDI_DOMAIN}`
 
 ## :mega:&nbsp; Post installation
 
