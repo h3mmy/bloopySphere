@@ -84,7 +84,7 @@ resource "gandi_livedns_record" "ipv4" {
   zone = lookup(data.gandi_domain.gandi_livedns_domain, "id")
   values   = [chomp(data.http.ipv4.body)]
   type    = "A"
-  ttl     = 1
+  ttl     = 300
 }
 
 resource "gandi_livedns_record" "root" {
@@ -92,7 +92,7 @@ resource "gandi_livedns_record" "root" {
   zone = lookup(data.gandi_domain.gandi_livedns_domain, "id")
   values   = ["ipv4.${data.sops_file.gandi_secrets.data["gandi_domain"]}"]
   type    = "CNAME"
-  ttl     = 1
+  ttl     = 300
 }
 
 resource "gandi_livedns_record" "hajimari" {
@@ -100,5 +100,5 @@ resource "gandi_livedns_record" "hajimari" {
   zone = lookup(data.gandi_domain.gandi_livedns_domain, "id")
   values   = ["ipv4.${data.sops_file.gandi_secrets.data["gandi_domain"]}"]
   type    = "CNAME"
-  ttl     = 1
+  ttl     = 300
 }
