@@ -10,7 +10,7 @@ export PROJECT_DIR=$(git rev-parse --show-toplevel)
 export GPG_TTY=$(tty)
 
 # shellcheck disable=SC1091
-source "${PROJECT_DIR}/.config.env"
+source "${PROJECT_DIR}/.config.live.env"
 
 show_help() {
 cat << EOF
@@ -33,7 +33,7 @@ main() {
         verify_kubevip
         verify_gpg
         verify_git_repository
-        verify_cloudflare
+        verify_gandi
         success
     else
         # sops configuration file
@@ -54,8 +54,8 @@ main() {
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/core/cert-manager/secret.sops.yaml"
         # terraform
         envsubst < "${PROJECT_DIR}/tmpl/terraform/secret.sops.yaml" \
-            > "${PROJECT_DIR}/provision/terraform/cloudflare/secret.sops.yaml"
-        sops --encrypt --in-place "${PROJECT_DIR}/provision/terraform/cloudflare/secret.sops.yaml"
+            > "${PROJECT_DIR}/provision/terraform/gandi/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/provision/terraform/gandi/secret.sops.yaml"
         # ansible
         envsubst < "${PROJECT_DIR}/tmpl/ansible/kube-vip.yml" \
             > "${PROJECT_DIR}/provision/ansible/inventory/group_vars/kubernetes/kube-vip.yml"
@@ -183,7 +183,7 @@ verify_git_repository() {
     export GIT_TERMINAL_PROMPT=1
 }
 
-verify_cloudflare() {
+verify_gandi() {
     local account_zone=
     local errors=
 
@@ -191,18 +191,18 @@ verify_cloudflare() {
     _has_envar "BOOTSTRAP_GANDI_DOMAIN"
     _has_envar "BOOTSTRAP_GANDI_EMAIL"
 
-    # Try to retrieve zone information from Cloudflare's API
-    account_zone=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=${BOOTSTRAP_GANDI_DOMAIN}&status=active" \
+    # Try to retrieve zone information from gandi's API
+    account_zone=$(curl -s -X GET "https://api.gandi.net/v5/livedns/domains/${BOOTSTRAP_GANDI_DOMAIN}" \
         -H "X-Auth-Email: ${BOOTSTRAP_GANDI_EMAIL}" \
-        -H "X-Auth-Key: ${BOOTSTRAP_GANDI_APIKEY}" \
+        -H "Authorization: ApiKey ${BOOTSTRAP_GANDI_APIKEY}" \
         -H "Content-Type: application/json"
     )
 
-    if [[ "$(echo "${account_zone}" | jq ".success")" == "true" ]]; then
-        _log "INFO" "Verified Cloudflare Account and Zone information"
+    if [[ "$(echo "${account_zone}" | jq ".fqdn")" != null ]]; then
+        _log "INFO" "Verified Gandi Account and Zone information"
     else
         errors=$(echo "${account_zone}" | jq -c ".errors")
-        _log "ERROR" "Unable to get Cloudflare Account and Zone information ${errors}"
+        _log "ERROR" "Unable to get gandi Account and Zone information ${errors} response: $(echo "${account_zone}" | jq ".fqdn")"
         exit 1
     fi
 }

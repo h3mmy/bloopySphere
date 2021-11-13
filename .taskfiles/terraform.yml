@@ -3,20 +3,20 @@ version: "3"
 
 tasks:
 
-  init:cloudflare:
+  init:gandi:
     desc: Initialize terraform
-    dir: provision/terraform/cloudflare
+    dir: provision/terraform/gandi
     cmds:
       - "terraform init"
 
-  plan:cloudflare:
+  plan:gandi:
     desc: Prepare all the k8s nodes for running k3s
-    dir: provision/terraform/cloudflare
+    dir: provision/terraform/gandi
     cmds:
       - "terraform plan"
 
-  apply:cloudflare:
+  apply:gandi:
     desc: Prepare all the k8s nodes for running k3s
-    dir: provision/terraform/cloudflare
+    dir: provision/terraform/gandi
     cmds:
       - "terraform apply"
