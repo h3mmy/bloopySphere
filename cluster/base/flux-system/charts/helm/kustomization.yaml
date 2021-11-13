@@ -22,3 +22,7 @@ resources:
   - stakater-charts.yaml
   - traefik-charts.yaml
   - weaveworks-kured-charts.yaml
+  - cdr-charts.yaml
+  - oauth2-proxy-charts.yaml
+  - jupyterhub-charts.yaml
+  - codecentric-charts.yaml
