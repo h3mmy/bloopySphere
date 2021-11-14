@@ -34,6 +34,7 @@ main() {
         verify_gpg
         verify_git_repository
         verify_gandi
+        verify_cloudflare
         success
     else
         # sops configuration file
@@ -56,6 +57,9 @@ main() {
         envsubst < "${PROJECT_DIR}/tmpl/terraform/secret.sops.yaml" \
             > "${PROJECT_DIR}/provision/terraform/gandi/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/provision/terraform/gandi/secret.sops.yaml"
+        envsubst < "${PROJECT_DIR}/tmpl/terraform/secret.sops.yaml" \
+            > "${PROJECT_DIR}/provision/terraform/cloudflare/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/provision/terraform/cloudflare/secret.sops.yaml"
         # ansible
         envsubst < "${PROJECT_DIR}/tmpl/ansible/kube-vip.yml" \
             > "${PROJECT_DIR}/provision/ansible/inventory/group_vars/kubernetes/kube-vip.yml"
@@ -203,6 +207,30 @@ verify_gandi() {
     else
         errors=$(echo "${account_zone}" | jq -c ".errors")
         _log "ERROR" "Unable to get gandi Account and Zone information ${errors} response: $(echo "${account_zone}" | jq ".fqdn")"
+        exit 1
+    fi
+}
+
+verify_cloudflare() {
+    local account_zone=
+    local errors=
+
+    _has_envar "BOOTSTRAP_CLOUDFLARE_APIKEY"
+    _has_envar "BOOTSTRAP_CLOUDFLARE_DOMAIN"
+    _has_envar "BOOTSTRAP_CLOUDFLARE_EMAIL"
+
+    # Try to retrieve zone information from Cloudflare's API
+    account_zone=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=${BOOTSTRAP_CLOUDFLARE_DOMAIN}&status=active" \
+        -H "X-Auth-Email: ${BOOTSTRAP_CLOUDFLARE_EMAIL}" \
+        -H "X-Auth-Key: ${BOOTSTRAP_CLOUDFLARE_APIKEY}" \
+        -H "Content-Type: application/json"
+    )
+
+    if [[ "$(echo "${account_zone}" | jq ".success")" == "true" ]]; then
+        _log "INFO" "Verified Cloudflare Account and Zone information"
+    else
+        errors=$(echo "${account_zone}" | jq -c ".errors")
+        _log "ERROR" "Unable to get Cloudflare Account and Zone information ${errors}"
         exit 1
     fi
 }
