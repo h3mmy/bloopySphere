@@ -15,3 +15,5 @@ xanmanning.k3s*
 .terraform
 .terraform.tfstate*
 terraform.tfstate*
+# Sops
+sops.asc
