@@ -9,7 +9,6 @@ vars:
   ANSIBLE_INVENTORY_DIR: "{{.ANSIBLE_DIR}}/inventory"
 
 tasks:
-
   deps:
     desc: Upgrade Ansible galaxy deps
     dir: provision/ansible
@@ -21,6 +20,19 @@ tasks:
     dir: provision/ansible
     cmds:
       - "ansible all -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml --list-hosts"
+
+  clean-images:
+    desc: Clean up stale container images
+    dir: provision/ansible
+    cmds:
+      - "ansible kubernetes -i {{.ANSIBLE_INVENTORY_DIR}}/home/hosts.yml --one-line -a 'k3s crictl rmi --prune' --become"
+    silent: true
+
+  purge-manifests:
+    desc: Delete all manifests under /var/lib/rancher/k3s/server/manifests
+    dir: provision/ansible
+    cmds:
+      - "ansible master -i {{.ANSIBLE_INVENTORY_DIR}}/home/hosts.yml --one-line -a 'rm /var/lib/rancher/k3s/server/manifests/*' --become"
 
   playbook:ubuntu-prepare:
     desc: Prepare all the k8s nodes for running k3s

@@ -17,3 +17,5 @@ xanmanning.k3s*
 terraform.tfstate*
 # Sops
 sops.asc
+# TEmporary
+provision/talos/*
