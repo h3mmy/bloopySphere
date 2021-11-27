@@ -17,5 +17,6 @@ xanmanning.k3s*
 terraform.tfstate*
 # Sops
 sops.asc
+*.agekey
 # TEmporary
 provision/talos/*
