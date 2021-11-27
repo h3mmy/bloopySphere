@@ -6,9 +6,6 @@ set -o pipefail
 # shellcheck disable=SC2155
 export PROJECT_DIR=$(git rev-parse --show-toplevel)
 
-# shellcheck disable=SC2155
-export GPG_TTY=$(tty)
-
 # shellcheck disable=SC1091
 source "${PROJECT_DIR}/.config.live.env"
 
