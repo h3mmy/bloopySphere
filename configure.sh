@@ -215,6 +215,7 @@ verify_cloudflare() {
     _has_envar "BOOTSTRAP_CLOUDFLARE_APIKEY"
     _has_envar "BOOTSTRAP_CLOUDFLARE_DOMAIN"
     _has_envar "BOOTSTRAP_CLOUDFLARE_EMAIL"
+    _has_envar "BOOTSTRAP_CLOUDFLARE_APITOKEN"
 
     # Try to retrieve zone information from Cloudflare's API
     account_zone=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=${BOOTSTRAP_CLOUDFLARE_DOMAIN}&status=active" \
@@ -277,8 +278,8 @@ generate_ansible_host_secrets() {
             printf "kind: Secret\n"
             printf "ansible_user: %s\n" "${!node_username}"
             printf "ansible_become_pass: %s\n" "${!node_password}"
-        } > "${PROJECT_DIR}/provision/ansible/inventory/host_vars/k8s-${node_id}.sops.yml"
-        sops --encrypt --in-place "${PROJECT_DIR}/provision/ansible/inventory/host_vars/k8s-${node_id}.sops.yml"
+        } > "${PROJECT_DIR}/provision/ansible/inventory/host_vars/slowpoke.sops.yml"
+        sops --encrypt --in-place "${PROJECT_DIR}/provision/ansible/inventory/host_vars/slowpoke.sops.yml"
     done
 }
 
