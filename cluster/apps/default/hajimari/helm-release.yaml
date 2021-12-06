@@ -25,8 +25,8 @@ spec:
       remediateLastFailure: true
 
   dependsOn:
-  - name: cert-manager
-    namespace: cert-manager
+    - name: cert-manager
+      namespace: cert-manager
 
   values:
     image:

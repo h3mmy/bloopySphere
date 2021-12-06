@@ -1,0 +1,16 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: bloopy-auth
+  namespace: networking
+spec:
+  forwardAuth:
+    address: ${AUTH_SERVER}
+    trustForwardHeader: true
+    authResponseHeaders:
+      - X-Auth-User
+      - X-Secret
+    authRequestHeaders:
+      - "Accept"
+      - "X-CustomHeader"
