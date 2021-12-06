@@ -18,8 +18,8 @@ spec:
       interval: 5m
 
   install:
-  remediation:
-    retries: 4
+    remediation:
+      retries: 4
   upgrade:
     remediation:
       remediateLastFailure: true
