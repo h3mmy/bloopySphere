@@ -4,3 +4,5 @@ kind: Kustomization
 resources:
   - metrics-server
   - reloader
+  - intel-gpu-plugin
+  - nfs-subdir-external-provisioner
