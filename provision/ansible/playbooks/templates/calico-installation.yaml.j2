@@ -1,3 +1,4 @@
+#jinja2:lstrip_blocks: True
 ---
 apiVersion: operator.tigera.io/v1
 kind: Installation
@@ -12,8 +13,8 @@ spec:
         encapsulation: "{{ calico_encapsulation }}"
         natOutgoing: Enabled
         nodeSelector: all()
-      nodeAddressAutodetectionV4:
-        cidrs:
+    nodeAddressAutodetectionV4:
+      cidrs:
         - "{{ calico_node_cidr }}"
   containerIpForwarding: "Enabled"
   nodeMetricsPort: 9091
