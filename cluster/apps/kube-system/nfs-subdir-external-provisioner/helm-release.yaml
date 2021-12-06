@@ -21,7 +21,7 @@ spec:
   values:
     replicaCount: 1
     nfs:
-      server: "camelus"
+      server: "192.168.55.55"
       path: "/volume1/Data/slowpoke-volumes"
       mountOptions:
         - noatime
