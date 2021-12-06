@@ -26,7 +26,6 @@ spec:
         matchNames:
           - default
           - networking
-          - auth
       name: "you"
       customApps:
         - name: Some External Cluster Service
