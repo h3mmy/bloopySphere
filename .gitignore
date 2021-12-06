@@ -18,6 +18,10 @@ terraform.tfstate*
 # Sops
 sops.asc
 *.agekey
+# Node.js
+node_modules
+package-lock.json
+
 # TEmporary
 provision/talos/*
 cluster/core/rook-ceph
