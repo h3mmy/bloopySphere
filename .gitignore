@@ -20,3 +20,5 @@ sops.asc
 *.agekey
 # TEmporary
 provision/talos/*
+cluster/core/rook-ceph
+cluster/apps/kube-system/nfs-subdir-external-provisioner
