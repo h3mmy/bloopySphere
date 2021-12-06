@@ -22,7 +22,7 @@ spec:
     replicaCount: 1
     nfs:
       server: "camelus"
-      path: "/Data/slowpoke-volumes"
+      path: "/volume1/Data/slowpoke-volumes"
       mountOptions:
         - noatime
     storageClass:

@@ -6,3 +6,4 @@ resources:
   - reloader
   - intel-gpu-plugin
   - nfs-subdir-external-provisioner
+  - node-feature-discovery
