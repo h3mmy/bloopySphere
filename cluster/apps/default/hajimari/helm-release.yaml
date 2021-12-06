@@ -27,7 +27,6 @@ spec:
           - default
           - networking
           - auth
-          - media
       name: "you"
       customApps:
         - name: Some External Cluster Service
