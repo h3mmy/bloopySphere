@@ -10,12 +10,24 @@ spec:
     spec:
       # renovate: registryUrl=https://hajimari.io
       chart: hajimari
-      version: 1.1.1
+      version: 1.2.1
       sourceRef:
         kind: HelmRepository
         name: hajimari-charts
         namespace: flux-system
       interval: 5m
+
+  install:
+  remediation:
+    retries: 4
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+
+  dependsOn:
+  - name: cert-manager
+    namespace: cert-manager
+
   values:
     image:
       repository: ghcr.io/toboshii/hajimari
