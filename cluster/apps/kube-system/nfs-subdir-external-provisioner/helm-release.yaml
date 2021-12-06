@@ -22,7 +22,7 @@ spec:
     replicaCount: 1
     nfs:
       server: "192.168.55.55"
-      path: "/Data/slowpoke-volumes"
+      path: "/volume1/Data"
       mountOptions:
         - noatime
     storageClass:
