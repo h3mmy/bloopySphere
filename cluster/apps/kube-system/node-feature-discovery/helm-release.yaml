@@ -16,12 +16,26 @@ spec:
         name: node-feature-discovery-charts
         namespace: flux-system
   values:
+    master:
+      tolerations:
+        - key: "node-role.kubernetes.io/master"
+          operator: "Equal"
+          value: ""
+          effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: "node-role.kubernetes.io/master"
+                operator: In
+                values: [""]
     worker:
       annotations:
         configmap.reloader.stakater.com/reload: "nfd-worker-conf"
       nodeSelector:
         node-role.kubernetes.io/worker: "true"
-        node-role.kubernetes.io/control-plane: "true"  # At least until the Rpi is added back in
       config: |-
         core:
           sources:
