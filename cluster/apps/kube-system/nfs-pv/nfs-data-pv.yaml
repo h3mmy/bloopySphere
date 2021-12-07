@@ -15,12 +15,12 @@ spec:
     server: 192.168.55.55
     path: "/volume1/Data"
   mountOptions:
-  - nfsvers=4.1
-  - tcp
-  - intr
-  - hard
-  - noatime
-  - nodiratime
+    - nfsvers=4.1
+    - tcp
+    - intr
+    - hard
+    - noatime
+    - nodiratime
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

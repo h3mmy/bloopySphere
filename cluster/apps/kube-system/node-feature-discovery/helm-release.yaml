@@ -25,12 +25,12 @@ spec:
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
-            preference:
-              matchExpressions:
-              - key: "node-role.kubernetes.io/master"
-                operator: In
-                values: [""]
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: "node-role.kubernetes.io/master"
+                    operator: In
+                    values: [""]
     worker:
       annotations:
         configmap.reloader.stakater.com/reload: "nfd-worker-conf"
