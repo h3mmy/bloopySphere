@@ -7,4 +7,4 @@ resources:
   - intel-gpu-plugin
   - nfs-subdir-external-provisioner
   - node-feature-discovery
-  - nfs-pv
+  # - nfs-pv
