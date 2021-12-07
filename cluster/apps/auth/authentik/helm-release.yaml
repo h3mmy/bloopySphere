@@ -1,0 +1,63 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: authentik
+  namespace: security
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.goauthentik.io
+      chart: authentik
+      version: 4.0.3
+      sourceRef:
+        kind: HelmRepository
+        name: authentik-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    fullnameOverride: authentik
+    image:
+      repository: ghcr.io/goauthentik/server
+      tag: 2021.10.4
+    authentik:
+      outposts:
+        docker_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
+      secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
+      postgresql:
+        host: "authentik-postgresql"
+        name: "authentik"
+        user: "authentik"
+        password: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
+      redis:
+        host: "authentik-redis-master"
+      email:
+        host: "smtp.sendgrid.net"
+        port: 587
+        use_tls: true
+        username: "apikey"
+        password: "${SECRET_SENDGRID_API_KEY}"
+        from: "no-reply@${SECRET_DOMAIN}"
+    ingress:
+      enabled: true
+      ingressClassName: "traefik"
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare-ips@kubernetescrd"
+      hosts:
+      - host: "id.${SECRET_DOMAIN}"
+        paths:
+        - path: "/"
+          pathType: Prefix
+      tls:
+      - hosts:
+        - "id.${SECRET_DOMAIN}"
+    postgresql:
+      enabled: true
+      postgresqlPassword: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
+    redis:
+      enabled: true
+    prometheus:
+      serviceMonitor:
+        create: false
