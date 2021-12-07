@@ -35,7 +35,8 @@ spec:
       annotations:
         configmap.reloader.stakater.com/reload: "nfd-worker-conf"
       nodeSelector:
-        node-role.kubernetes.io/worker: "true"
+        #node-role.kubernetes.io/worker: "true" Temporary shift
+        node-role.kubernetes.io/master: "true"
       config: |-
         core:
           sources:
