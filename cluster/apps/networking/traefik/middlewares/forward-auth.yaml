@@ -2,15 +2,9 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: bloopy-auth
-  namespace: networking
+  name: authentik
 spec:
   forwardAuth:
-    address: ${AUTH_SERVER}
+    address: http://auth.${XYZ_DOMAIN}:9000/akprox/auth/traefik
     trustForwardHeader: true
-    authResponseHeaders:
-      - X-Auth-User
-      - X-Secret
-    authRequestHeaders:
-      - "Accept"
-      - "X-CustomHeader"
+    authResponseHeadersRegex: ^.*$
