@@ -91,11 +91,25 @@ spec:
                 pathType: Prefix
                 service:
                   port: 9000
+          - host: "minio.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  port: 9001
+          - host: "s3.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  port: 9000
         tls:
           - secretName: tls.minio
             hosts:
               - "{{ (index .Values.ingress.main.hosts 0).host }}"
               - "{{ (index .Values.ingress.main.hosts 1).host }}"
+              - "{{ (index .Values.ingress.main.hosts 2).host }}"
+              - "{{ (index .Values.ingress.main.hosts 3).host }}"
 
     podAnnotations:
       secret.reloader.stakater.com/reload: "minio"
