@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       # renovate: registryUrl=https://operator.min.io/
-      chart: minio-operator
+      chart: minio
       sourceRef:
         kind: GitRepository
         name: minio-charts
