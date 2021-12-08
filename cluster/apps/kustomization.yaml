@@ -6,4 +6,5 @@ resources:
   - kube-system
   - networking
   - system-upgrade
+  - storage
   - auth
