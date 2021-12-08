@@ -15,13 +15,29 @@ spec:
         kind: HelmRepository
         name: jetstack-charts
         namespace: flux-system
+
+  install:
+    remediation: # perform remediation when helm install fails
+      retries: 3
+
+  upgrade:
+    remediation: # perform remediation when helm upgrade fails
+      retries: 3
+      remediateLastFailure: true # remediate the last failure, when no retries remain
+    cleanupOnFail: true
+
+  rollback:
+    timeout: 10m
+    recreate: true
+    cleanupOnFail: true
+
   values:
     installCRDs: false
     webhook:
       enabled: true
     extraArgs:
       - --dns01-recursive-nameservers=1.1.1.1:53,10.1.0.9:53
-      # - --dns01-recursive-nameservers-only
+      - --dns01-recursive-nameservers-only
     replicaCount: 1
     podDnsPolicy: "None"
     podDnsConfig:
