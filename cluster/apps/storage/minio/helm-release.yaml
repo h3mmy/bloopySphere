@@ -77,7 +77,7 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: network-rfc1918-ips@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: rfc1918@kubernetescrd
         hosts:
           - host: "minio.${SECRET_DOMAIN}"
             paths:
