@@ -16,7 +16,7 @@ spec:
         name: authentik-charts
         namespace: flux-system
       interval: 5m
-      
+
   dependsOn:
     - name: cert-manager
       namespace: cert-manager
@@ -56,9 +56,14 @@ spec:
           paths:
             - path: "/"
               pathType: Prefix
+        - host: "auth.${XYZ_DOMAIN}"
+          paths:
+            - path: "/"
+              pathType: Prefix
       tls:
         - hosts:
             - "auth.${SECRET_DOMAIN}"
+            - "auth.${XYZ_DOMAIN}"
           secretName: "authentik-tls"
     postgresql:
       enabled: true

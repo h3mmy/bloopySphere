@@ -19,3 +19,4 @@ spec:
         selector:
           dnsZones:
             - ${SECRET_DOMAIN}
+            - ${XYZ_DOMAIN}

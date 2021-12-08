@@ -15,9 +15,20 @@ spec:
   tls:
     - hosts:
         - "traefik.${SECRET_DOMAIN}"
+        - "traefik.${XYZ_DOMAIN}"
       secretName: "traefik-dashboard-tls"
   rules:
     - host: "traefik.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: traefik
+                port:
+                  number: 9000
+    - host: "traefik.${XYZ_DOMAIN}"
       http:
         paths:
           - path: /
