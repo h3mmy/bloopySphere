@@ -6,3 +6,4 @@ resources:
   - auth.yaml
   - metallb-system.yaml
   - networking.yaml
+  - storage.yaml
