@@ -8,11 +8,10 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://operator.min.io/
-      chart: minio-operator
+      chart: /charts/kah-common
       sourceRef:
         kind: GitRepository
-        name: minio-charts
+        name: flux-system
         namespace: flux-system
       interval: 5m
   values:
