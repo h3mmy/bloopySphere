@@ -1,0 +1,1 @@
+Exclusively for static assets
