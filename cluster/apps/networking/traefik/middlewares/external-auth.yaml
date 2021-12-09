@@ -9,4 +9,4 @@ spec:
     middlewares:
       # Note this requires cloudflare proxy
       # - name: cloudflare-ips
-      - name: security-ak-outpost-traefik@kubernetescrd
+      - name: networking-ak-outpost-traefik-default@kubernetescrd
