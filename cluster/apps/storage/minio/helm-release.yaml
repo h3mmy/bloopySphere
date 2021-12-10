@@ -76,6 +76,10 @@ spec:
         ingressClassName: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
+          hajimari.io/instance: "bloop-quarky,bloop-xyz"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "nas"
+          hajimari.io/appName: "MinIO"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918-ips@kubernetescrd
         hosts:
