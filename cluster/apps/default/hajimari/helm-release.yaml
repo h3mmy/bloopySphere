@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: hajimari
+  name: hajimari-bloop
   namespace: default
 spec:
   interval: 5m
@@ -34,10 +34,14 @@ spec:
       tag: v0.2.0
     hajimari:
       defaultEnable: false
+      instanceName: "bloop-quarky"
       namespaceSelector:
         matchNames:
           - default
           - networking
+          - auth
+          - storage
+          - monitoring
       name: "you"
       customApps:
         - name: Some External Cluster Service
@@ -121,20 +125,10 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-          - host: "hajimari.${XYZ_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-          - host: "${XYZ_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
         tls:
           - hosts:
               - "hajimari.${SECRET_DOMAIN}"
               - "${SECRET_DOMAIN}"
-              - "hajimari.${XYZ_DOMAIN}"
-              - "${XYZ_DOMAIN}"
             secretName: "hajimari-tls"
     persistence:
       data:
