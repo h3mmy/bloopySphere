@@ -7,3 +7,5 @@ resources:
   - metallb-system.yaml
   - networking.yaml
   - storage.yaml
+  - monitoring.yaml
+
