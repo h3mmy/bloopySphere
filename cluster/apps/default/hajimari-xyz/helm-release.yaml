@@ -129,13 +129,13 @@ spec:
           - hosts:
               - "hajimari.${XYZ_DOMAIN}"
               - "${XYZ_DOMAIN}"
-            secretName: "hajimari-tls"
+            secretName: "tls.hajimari-xyz"
     persistence:
       data:
         enabled: true
-        existingClaim: hajimari-config
+        existingClaim: hajimari-xyz-config
     podAnnotations:
-      configmap.reloader.stakater.com/reload: "hajimari-settings"
+      configmap.reloader.stakater.com/reload: "hajimari-xyz-settings"
     resources:
       requests:
         cpu: 100m
