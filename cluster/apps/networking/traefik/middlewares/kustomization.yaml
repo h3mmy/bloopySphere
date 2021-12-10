@@ -8,3 +8,4 @@ resources:
   - forward-auth.yaml
   - rate-limit.yaml
   - external-auth.yaml
+  - xyz-auth.yaml
