@@ -49,9 +49,6 @@ spec:
         username: "apikey"
         password: "${SECRET_SENDGRID_API_KEY}"
         from: "no-reply@${XYZ_DOMAIN}"
-      branding:
-        title: bloopnet
-        logo: /static/assets/bloopnet-frog-muted.jpg
     ingress:
       enabled: true
       ingressClassName: "traefik"
