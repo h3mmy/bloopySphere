@@ -107,4 +107,5 @@ spec:
       tls:
         - hosts:
             - "id.${XYZ_DOMAIN}"
+            - "*.${XYZ_DOMAIN}"
           secretName: "tls.keycloak"
