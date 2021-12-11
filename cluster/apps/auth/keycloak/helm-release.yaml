@@ -102,7 +102,7 @@ spec:
         hajimari.io/enable: "true"
         hajimari.io/icon: "key-wireless"
         hajimari.io/appName: "keycloak"
-        hajimari.io/instance: "bloop-quarky"
+        hajimari.io/instance: "bloop-xyz"
       rules:
         - host: "id.${XYZ_DOMAIN}"
           paths:
