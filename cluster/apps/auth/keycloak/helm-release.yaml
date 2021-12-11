@@ -101,5 +101,5 @@ spec:
               pathType: Prefix
       tls:
         - hosts:
-            - "{{ (index .Values.ingress.main.rules.hosts 0).host }}"
+            - "id.${XYZ_DOMAIN}"
           secretName: "tls.keycloak"
