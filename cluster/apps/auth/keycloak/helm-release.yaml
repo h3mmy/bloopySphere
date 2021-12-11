@@ -100,6 +100,10 @@ spec:
           paths:
             - path: /
               pathType: Prefix
+        - host: "url8287.${XYZ_DOMAIN}"
+          paths:
+            - path: /
+              pathType: Prefix
       tls:
         - hosts:
             - "id.${XYZ_DOMAIN}"
