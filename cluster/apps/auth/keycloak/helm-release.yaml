@@ -49,7 +49,6 @@ spec:
         create: true
       persistence:
         enabled: true
-        existingClaim: pvc-postgres
       volumePermissions:
         enabled: true
       affinity:
