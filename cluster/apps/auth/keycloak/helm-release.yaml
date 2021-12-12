@@ -93,6 +93,30 @@ spec:
                     - i386
                     - i686
                     - x86
+
+    extraInitContainers: |
+      - name: theme-provider
+        image: myuser/mytheme:1
+        imagePullPolicy: IfNotPresent
+        command:
+          - sh
+        args:
+          - -c
+          - |
+            echo "Copying theme..."
+            cp -R /mytheme/* /theme
+        volumeMounts:
+          - name: theme
+            mountPath: /theme
+
+    extraVolumeMounts: |
+      - name: theme
+        mountPath: /opt/jboss/keycloak/themes/mytheme
+
+    extraVolumes: |
+      - name: theme
+        emptyDir: {}
+        
     ingress:
       enabled: true
       ingressClassName: "traefik"
