@@ -7,5 +7,5 @@ resources:
   - redirect-path.yaml
   - forward-auth.yaml
   - rate-limit.yaml
-  - external-auth.yaml
+  # - external-auth.yaml
   - xyz-auth.yaml
