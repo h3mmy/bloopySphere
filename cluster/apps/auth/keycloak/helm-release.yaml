@@ -96,7 +96,7 @@ spec:
 
     extraInitContainers: |
       - name: theme-provider
-        image: myuser/mytheme:1
+        image: ghcr.io/h3mmy/bloopnet_theme
         imagePullPolicy: IfNotPresent
         command:
           - sh
@@ -104,19 +104,19 @@ spec:
           - -c
           - |
             echo "Copying theme..."
-            cp -R /mytheme/* /theme
+            cp -R /bloopnet_theme/* /theme
         volumeMounts:
           - name: theme
             mountPath: /theme
 
     extraVolumeMounts: |
       - name: theme
-        mountPath: /opt/jboss/keycloak/themes/mytheme
+        mountPath: /opt/jboss/keycloak/themes/bloopnet_theme
 
     extraVolumes: |
       - name: theme
         emptyDir: {}
-        
+
     ingress:
       enabled: true
       ingressClassName: "traefik"
