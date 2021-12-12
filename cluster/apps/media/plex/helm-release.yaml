@@ -24,14 +24,14 @@ spec:
       # PLEX_CLAIM: "${SECRET_PLEX_CLAIM_TOKEN}"
     podSecurityContext:
       supplementalGroups:
-      - 44
-      - 109
-      - 100
-      - 5600
-      # Custom Camelus Group(s)
-      - 65541
-      - 65536
-      - 65537
+        - 44
+        - 109
+        - 100
+        - 5600
+        # Custom Camelus Group(s)
+        - 65541
+        - 65536
+        - 65537
     service:
       main:
         type: LoadBalancer
@@ -53,13 +53,13 @@ spec:
           hajimari.io/icon: "plex"
           hajimari.io/appName: "Plex"
         hosts:
-        - host: "plex.${XYZ_DOMAIN}"
-          paths:
-          - path: /
-            pathType: Prefix
+          - host: "plex.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
         tls:
-        - hosts:
-          - "{{ (index .Values.ingress.main.hosts 0).host }}"
+          - hosts:
+              - "{{ (index .Values.ingress.main.hosts 0).host }}"
     persistence:
       config:
         enabled: true
@@ -108,13 +108,13 @@ spec:
           tag: 2.4.1
         loki: http://loki.logs.svc.cluster.local:3100/loki/api/v1/push
         logs:
-        - name: promtail/plex
-          path: "/config/Library/Application Support/Plex Media Server/Logs/*.log"
-        - name: promtail/plex/plugins
-          path: "/config/Library/Application Support/Plex Media Server/Logs/PMS Plugin Logs/*.log"
+          - name: promtail/plex
+            path: "/config/Library/Application Support/Plex Media Server/Logs/*.log"
+          - name: promtail/plex/plugins
+            path: "/config/Library/Application Support/Plex Media Server/Logs/PMS Plugin Logs/*.log"
         volumeMounts:
-        - name: config
-          mountPath: /config
-          readOnly: true
+          - name: config
+            mountPath: /config
+            readOnly: true
         securityContext:
           runAsUser: 0

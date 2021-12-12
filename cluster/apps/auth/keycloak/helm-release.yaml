@@ -27,9 +27,9 @@ spec:
       requests:
         cpu: "500m"
         memory: "1024Mi"
-      # limits:
-      #   cpu: "500m"
-      #   memory: "1024Mi"
+    # limits:
+    #   cpu: "500m"
+    #   memory: "1024Mi"
 
     podSecurityContext:
       fsGroup: 1000
