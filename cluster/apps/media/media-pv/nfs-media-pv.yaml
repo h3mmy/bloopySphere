@@ -18,8 +18,8 @@ spec:
     - nfsvers=4.1
     - tcp
     - intr
-    - hard
     - noatime
+    - nodiratime
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

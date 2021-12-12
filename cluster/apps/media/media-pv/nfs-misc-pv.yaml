@@ -18,7 +18,7 @@ spec:
     - nfsvers=4.1
     - tcp
     - intr
-    - hard
+    - nodiratime
     - noatime
 ---
 apiVersion: v1
