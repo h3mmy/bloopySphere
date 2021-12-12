@@ -10,4 +10,3 @@ data:
   NAS_ADDRESS: 192.168.55.55
   LB_PLEX_IP: 10.1.0.105
   PROMETHEUS_PROFILE_IMG_URL: https://avatars3.githubusercontent.com/u/3380462
-
