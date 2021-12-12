@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nfs-data-pv
-  namespace: default
+  name: nfs-media-2-pv
+  namespace: media
 spec:
-  storageClassName: data
+  storageClassName: media-2
   capacity:
     storage: 1Mi
   accessModes:
@@ -13,7 +13,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: 192.168.55.55
-    path: "/volume1/Data"
+    path: "/volume2/Data2"
   mountOptions:
     - nfsvers=4.1
     - tcp
@@ -25,12 +25,12 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-data-pvc
-  namespace: default
+  name: nfs-media-2-pvc
+  namespace: media
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: data
+  storageClassName: media-2
   resources:
     requests:
       storage: 1Mi
