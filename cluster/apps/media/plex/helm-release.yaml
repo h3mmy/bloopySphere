@@ -62,7 +62,7 @@ spec:
         tls:
           - hosts:
               - "{{ (index .Values.ingress.main.hosts 0).host }}"
-          secretName: "tls.plex"
+            secretName: "tls.plex"
     persistence:
       config:
         enabled: true
