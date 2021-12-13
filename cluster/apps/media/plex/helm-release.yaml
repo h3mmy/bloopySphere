@@ -60,10 +60,10 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-        tls: {}
-        #  - hosts:
-          #    - "{{ (index .Values.ingress.main.hosts 0).host }}"
-           # secretName: "tls.plex"
+        tls: 
+          - hosts:
+              - "{{ (index .Values.ingress.main.hosts 0).host }}"
+            secretName: "tls.plex"
     persistence:
       config:
         enabled: true
