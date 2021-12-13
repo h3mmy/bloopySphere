@@ -63,7 +63,7 @@ spec:
       web:
         address: 80
         http:
-          redirections: 
+          redirections:
             entryPoint:
               to: websecure
               scheme: https
@@ -71,14 +71,14 @@ spec:
         tls:
           enabled: true
           options: "default"
-          domains: 
+          domains:
             - main: "${XYZ_DOMAIN}"
               sans:
                 - "*$.{XYZ_DOMAIN}"
             - bloop: "${SECRET_DOMAIN}"
               sans:
                 - "*.${SECRET_DOMAIN}"
-              
+
       metrics:
         port: 8082
         expose: true
@@ -88,6 +88,9 @@ spec:
         minVersion: VersionTLS12
         maxVersion: VersionTLS13
         sniStrict: true         # Disable for staging
+      plex:
+        minVersion: VersionTLS12
+        maxVersion: VersionTLS13
     pilot:
       enabled: false
     experimental:
