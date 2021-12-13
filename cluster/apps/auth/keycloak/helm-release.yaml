@@ -94,28 +94,28 @@ spec:
                     - i686
                     - x86
 
-    extraInitContainers: |
-      - name: theme-provider
-        image: ghcr.io/h3mmy/bloopnet_theme
-        imagePullPolicy: IfNotPresent
-        command:
-          - sh
-        args:
-          - -c
-          - |
-            echo "Copying theme..."
-            cp -R /bloopnet_theme/* /theme
-        volumeMounts:
-          - name: theme
-            mountPath: /theme
+    # extraInitContainers: |
+    #   - name: theme-provider
+    #     image: ghcr.io/h3mmy/bloopnet_theme
+    #     imagePullPolicy: IfNotPresent
+    #     command:
+    #       - sh
+    #     args:
+    #       - -c
+    #       - |
+    #         echo "Copying theme..."
+    #         cp -R /bloopnet_theme/* /theme
+    #     volumeMounts:
+    #       - name: theme
+    #         mountPath: /theme
 
-    extraVolumeMounts: |
-      - name: theme
-        mountPath: /opt/jboss/keycloak/themes/bloopnet_theme
+    # extraVolumeMounts: |
+    #   - name: theme
+    #     mountPath: /opt/jboss/keycloak/themes/bloopnet_theme
 
-    extraVolumes: |
-      - name: theme
-        emptyDir: {}
+    # extraVolumes: |
+    #   - name: theme
+    #     emptyDir: {}
 
     ingress:
       enabled: true
