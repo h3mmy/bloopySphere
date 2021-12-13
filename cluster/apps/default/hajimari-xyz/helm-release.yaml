@@ -42,6 +42,7 @@ spec:
           - auth
           - storage
           - monitoring
+          - media
       name: "you"
       customApps:
         - name: Some External Cluster Service
