@@ -75,6 +75,7 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "web"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.tls: "false"
         hosts:
           - host: "plex.${XYZ_DOMAIN}"
             paths:
