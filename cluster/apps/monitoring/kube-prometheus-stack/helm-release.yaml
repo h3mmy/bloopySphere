@@ -126,7 +126,7 @@ spec:
           - "prometheus.${XYZ_DOMAIN}"
         tls:
           - hosts:
-              - "{{ (index .Values.prometheus.ingress.main.hosts 0).host }}"
+              - "{{ (index .Values.prometheus.ingress.hosts 0).host }}"
             secretName: tls.prometheus
       thanosService:
         enabled: true
