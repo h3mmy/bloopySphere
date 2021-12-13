@@ -72,7 +72,7 @@ spec:
           - "alert-manager.${XYZ_DOMAIN}"
         tls:
           - hosts:
-              - "{{ (index .Values.alertmanager.ingress.main.hosts 0).host }}"
+              - "{{ (index .Values.alertmanager.ingress.hosts 0).host }}"
             secretName: "tls.alert-manager"
       alertmanagerSpec:
         storage:
