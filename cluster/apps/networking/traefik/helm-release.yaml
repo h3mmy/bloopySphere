@@ -71,6 +71,14 @@ spec:
         tls:
           enabled: true
           options: "default"
+          domains: 
+            - main: "${XYZ_DOMAIN}"
+              sans:
+                - "*$.{XYZ_DOMAIN}"
+            - bloop: "${SECRET_DOMAIN}"
+              sans:
+                - "*.${SECRET_DOMAIN}"
+              
       metrics:
         port: 8082
         expose: true
