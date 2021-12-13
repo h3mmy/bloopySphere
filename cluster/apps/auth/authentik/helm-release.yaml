@@ -70,8 +70,8 @@ spec:
               pathType: Prefix
       tls:
         - hosts:
-            - "{{ (index .Values.ingress.main.hosts 0).host }}"
-            - "{{ (index .Values.ingress.main.hosts 1).host }}"
+            - "{{ (index .Values.ingress.hosts 0).host }}"
+            - "{{ (index .Values.ingress.hosts 1).host }}"
           secretName: "authentik-tls"
     postgresql:
       enabled: true
