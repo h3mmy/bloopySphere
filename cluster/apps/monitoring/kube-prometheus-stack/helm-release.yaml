@@ -69,7 +69,10 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt-production
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hosts:
-          - "alert-manager.${XYZ_DOMAIN}"
+          - host: "alert-manager.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
         tls:
           - hosts:
               - "{{ (index .Values.alertmanager.ingress.hosts 0).host }}"
@@ -123,7 +126,10 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt-production
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hosts:
-          - "prometheus.${XYZ_DOMAIN}"
+          - host: "prometheus.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
         tls:
           - hosts:
               - "{{ (index .Values.prometheus.ingress.hosts 0).host }}"
