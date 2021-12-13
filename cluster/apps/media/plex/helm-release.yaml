@@ -69,6 +69,18 @@ spec:
           - hosts:
               - "{{ (index .Values.ingress.main.hosts 0).host }}"
             secretName: "tls.plex"
+      secondary:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          kubernetes.io/ingress.class: "traefik"
+          traefik.ingress.kubernetes.io/router.entrypoints: "web"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+        hosts:
+          - host: "plex.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
     persistence:
       config:
         enabled: true

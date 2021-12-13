@@ -35,7 +35,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/appName: "Thanos"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "rfc1918@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
         hosts:
           - host: "thanos.${XYZ_DOMAIN}"
             paths:
