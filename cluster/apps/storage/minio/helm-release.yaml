@@ -59,7 +59,7 @@ spec:
         valueFrom:
           secretKeyRef:
             name: minio
-            key: openid-config-client-scopes
+            key: openid-config-scopes
 
     args:
       - server
