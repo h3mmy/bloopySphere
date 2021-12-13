@@ -1,0 +1,9 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: plex-add-web
+  namespace: networking
+spec:
+  addPrefix:
+    prefix: "/web"
