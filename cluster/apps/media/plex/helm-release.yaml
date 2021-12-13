@@ -58,7 +58,7 @@ spec:
           hajimari.io/icon: "plex"
           hajimari.io/appName: "Plex"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.tls.options: "plex"
+          traefik.ingress.kubernetes.io/router.tls.options: "networking-plex@kubernetescrd"
           # traefik.ingress.kubernetes.io/router.middlewares: "networking-plex-add-web@kubernetescrd"
         hosts:
           - host: "plex.${XYZ_DOMAIN}"
