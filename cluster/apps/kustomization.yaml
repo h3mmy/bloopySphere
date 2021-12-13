@@ -9,3 +9,4 @@ resources:
   - storage
   - auth
   - media
+  - monitoring

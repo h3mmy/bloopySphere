@@ -47,7 +47,7 @@ spec:
         enabled: true
         annotations:
           kubernetes.io/ingress.class: "traefik"
-          cert-manager.io/cluster-issuer: letsencrypt-production
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
           hajimari.io/instance: "bloop-xyz"
           hajimari.io/enable: "true"
           hajimari.io/icon: "plex"
