@@ -61,7 +61,12 @@ spec:
       traefik:
         expose: true
       web:
-        redirectTo: websecure
+        address: 80
+        http:
+          redirections: 
+            entryPoint:
+              to: websecure
+              scheme: https
       websecure:
         tls:
           enabled: true
