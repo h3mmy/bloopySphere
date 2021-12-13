@@ -63,11 +63,11 @@ spec:
           secretKeyRef:
             name: minio
             key: openid-config-claim-name
-      MINIO_IDENTITY_OPENID_SCOPES:
+      MINIO_IDENTITY_OPENID_REDIRECT_URI:
         valueFrom:
           secretKeyRef:
             name: minio
-            key: openid-config-scopes
+            key: openid-config-callback-uri
 
     args:
       - server
