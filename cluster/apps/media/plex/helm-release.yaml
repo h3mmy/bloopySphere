@@ -102,7 +102,7 @@ spec:
         cpu: 1000m
         memory: 1500Mi
       limits:
-        gpu.intel.com/i915: 1
+        gpu.intel.com/i915: 2
         memory: 4900Mi
     addons:
       promtail:
