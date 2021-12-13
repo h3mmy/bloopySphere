@@ -59,7 +59,7 @@ spec:
           hajimari.io/appName: "Plex"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.tls.options: "networking-plex@kubernetescrd"
-          traefik.ingress.kubernetes.io/router.priority: 150
+          traefik.ingress.kubernetes.io/router.priority: "150"
           # traefik.ingress.kubernetes.io/router.middlewares: "networking-plex-add-web@kubernetescrd"
         hosts:
           - host: "plex.${XYZ_DOMAIN}"
@@ -77,7 +77,7 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
           traefik.ingress.kubernetes.io/router.tls: "false"
-          traefik.ingress.kubernetes.io/router.priority: 60
+          traefik.ingress.kubernetes.io/router.priority: "60"
         hosts:
           - host: "plex.${XYZ_DOMAIN}"
             paths:
