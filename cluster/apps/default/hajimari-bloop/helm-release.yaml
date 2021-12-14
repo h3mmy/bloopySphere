@@ -42,10 +42,11 @@ spec:
           - auth
           - storage
           - monitoring
-      name: "you"
+          - media
+      name: "Captain"
       customApps:
-        - name: Some External Cluster Service
-          url: http://192.168.1.100:5000
+        - name: Camelus-Plexii
+          url: http://10.1.0.50:5000
           icon: test-tube
       groups:
         - name: Communicate
@@ -117,7 +118,7 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-external-auth@kubernetescrd"
         hosts:
-          - host: "hajimari.${SECRET_DOMAIN}"
+          - host: "admin.${XYZ_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -129,7 +130,7 @@ spec:
           - hosts:
               - "{{ (index .Values.ingress.main.hosts 0).host }}"
               - "{{ (index .Values.ingress.main.hosts 1).host }}"
-            secretName: "hajimari-tls"
+            secretName: "tls.hajimari-admin"
     persistence:
       data:
         enabled: true
