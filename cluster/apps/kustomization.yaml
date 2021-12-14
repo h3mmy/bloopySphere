@@ -10,3 +10,4 @@ resources:
   - auth
   - media
   - monitoring
+  - flux-system

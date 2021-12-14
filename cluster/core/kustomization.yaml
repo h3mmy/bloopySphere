@@ -7,4 +7,3 @@ resources:
   - kube-system
   - metallb-system
   - system-upgrade
-  - flux-system
