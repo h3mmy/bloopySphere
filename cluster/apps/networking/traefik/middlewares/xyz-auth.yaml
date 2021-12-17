@@ -14,7 +14,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: xyz-auth
+  name: bloopnet-xyz-auth
   namespace: networking
 spec:
   chain:

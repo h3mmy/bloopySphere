@@ -3,7 +3,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: keycloak-auth
-  namespace: auth
+  namespace: networking
 spec:
   forwardAuth:
     address: https://id.${XYZ_DOMAIN}/auth/realms/Bloopnet/protocol/openid-connect/auth
