@@ -19,4 +19,4 @@ metadata:
 spec:
   chain:
     middlewares:
-      - name: auth-ak-outpost-traefik-default-xyz@kubernetescrd
+      - name: auth-ak-outpost-bloopnet-xyz@kubernetescrd
