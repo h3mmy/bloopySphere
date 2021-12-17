@@ -8,5 +8,5 @@ resources:
   - forward-auth.yaml
   - rate-limit.yaml
   - keycloak-forward-auth.yaml
-  # - xyz-auth.yaml
+  - xyz-auth.yaml
   - plex-add-web.yaml
