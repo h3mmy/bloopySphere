@@ -7,6 +7,7 @@ resources:
   - redirect-path.yaml
   - forward-auth.yaml
   - rate-limit.yaml
-  # - external-auth.yaml
+  - keycloak-forward-auth.yaml
+  - admin-auth.yaml
   - xyz-auth.yaml
   - plex-add-web.yaml

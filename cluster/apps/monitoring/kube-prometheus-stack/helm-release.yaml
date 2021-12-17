@@ -68,6 +68,9 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Alert Manager"
         hosts:
           - "alert-manager.${XYZ_DOMAIN}"
         tls:
@@ -122,6 +125,9 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Prometheus"
         hosts:
           - "prometheus.${XYZ_DOMAIN}"
         tls:
