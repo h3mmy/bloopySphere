@@ -43,7 +43,7 @@ spec:
         volumeSpec:
           nfs:
             server: "${NAS_ADDRESS}"
-            path: /volume1/Media
+            path: /volume3/Data/Library
         mountPath: /data/nas-media
 
     ingress:
