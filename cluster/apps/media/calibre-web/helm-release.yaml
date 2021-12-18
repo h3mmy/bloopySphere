@@ -53,7 +53,7 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          # traefik.ingress.kubernetes.io/router.middlewares: networking-external-auth@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: auth-ak-outpost-ldap-outpost@kubernetescrd
           hajimari.io/instance: "bloop-xyz"
           hajimari.io/enable: "true"
           hajimari.io/icon: "bookshelf"
