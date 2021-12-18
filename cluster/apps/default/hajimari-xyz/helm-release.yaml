@@ -44,9 +44,9 @@ spec:
           - media
       name: "you"
       customApps:
-        - name: Some External Cluster Service
-          url: http://192.168.1.100:5000
-          icon: test-tube
+        - name: Plex (LAN only)
+          url: http://101.1.0.105:32400/web
+          icon: play-network-outline
       groups:
         - name: Communicate
           links:

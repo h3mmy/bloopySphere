@@ -56,6 +56,7 @@ spec:
         hajimari.io/enable: "true"
         hajimari.io/icon: "account-lock-outline"
         hajimari.io/instance: "bloop-quarky,bloop-xyz"
+        hajimari.io/appName: "Login Settings"
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         # traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare-ips@kubernetescrd"
