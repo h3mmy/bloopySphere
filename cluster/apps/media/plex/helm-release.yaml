@@ -73,7 +73,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: "local-path"
+        storageClass: "nfs-client"
         accessMode: ReadWriteOnce
         size: 20Gi
       transcode:
