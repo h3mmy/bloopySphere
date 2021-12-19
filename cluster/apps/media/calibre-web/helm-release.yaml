@@ -31,6 +31,7 @@ spec:
     env:
       TZ: "${TZ}"
       PGID: "${MEDIA_GID}"
+      PUID: "${CALIBRE_WEB_PID}"
       # DOCKER_MODS: "linuxserver/calibre-web:calibre"
 
     persistence:
