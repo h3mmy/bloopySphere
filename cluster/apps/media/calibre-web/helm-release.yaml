@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: ghcr.io/linuxserver/calibre-web
-      tag: 0.6.14-ls143
+      tag: 0.6.14-ls142
 
     podAnnotations:
       backup.velero.io/backup-volumes: config
@@ -63,12 +63,6 @@ spec:
           - host: calibre-web.${XYZ_DOMAIN}
             paths:
               - path: /
-              # - path: /akprox
-              #   backend:
-              #     # Or, to use an external Outpost, create an ExternalName service and reference that here.
-              #     # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
-              #     name: auth-ak-outpost-books-auth
-              #     port: 9000
 
         tls:
           - secretName: tls.calibre-web
