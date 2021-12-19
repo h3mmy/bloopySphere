@@ -47,6 +47,9 @@ spec:
         - name: Plex (LAN only)
           url: http://101.1.0.105:32400/web
           icon: play-network-outline
+        - name: Plex Requests
+          url: https://requests.quarkynet.com/
+          icon: plex
       groups:
         - name: Communicate
           links:
