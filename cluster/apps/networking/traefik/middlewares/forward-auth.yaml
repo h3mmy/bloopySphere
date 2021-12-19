@@ -6,6 +6,6 @@ metadata:
   namespace: networking
 spec:
   forwardAuth:
-    address: http://auth.${XYZ_DOMAIN}:9000/akprox/auth/traefik
+    address: https://auth.${XYZ_DOMAIN}:9000/akprox/auth/traefik
     trustForwardHeader: true
     authResponseHeadersRegex: ^.*$
