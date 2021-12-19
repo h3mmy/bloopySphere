@@ -69,43 +69,23 @@ spec:
             hosts:
               - calibre-web.${XYZ_DOMAIN}
 
-        # callback:
-        #   enabled: true
-        #   ingressClassName: "traefik"
-        #   annotations:
-        #     cert-manager.io/cluster-issuer: letsencrypt-production
-        #     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        #     # traefik.ingress.kubernetes.io/router.middlewares: networking-authentik@kubernetescrd
+      kobo:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: network-rfc1918-ips@kubernetescrd
 
-        #   hosts:
-        #     - host: calibre-web.${XYZ_DOMAIN}
-        #       paths:
-        #         - path: /akprox
-        #           service:
-        #             name: ak-outpost--outpost
-        #             port: 9000
+        hosts:
+          - host: calibre-web.${XYZ_DOMAIN}
+            paths:
+              - path: /kobo/
 
-          # tls:
-          #   - secretName: tls.calibre-web
-          #     hosts:
-          #       - calibre-web.${XYZ_DOMAIN}
-      # kobo:
-      #   enabled: true
-      #   ingressClassName: "traefik"
-      #   annotations:
-      #     cert-manager.io/cluster-issuer: letsencrypt-production
-      #     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      #     traefik.ingress.kubernetes.io/router.middlewares: network-rfc1918-ips@kubernetescrd
-
-      #   hosts:
-      #     - host: calibre-web.${XYZ_DOMAIN}
-      #       paths:
-      #         - path: /kobo/
-
-      #   tls:
-      #     - secretName: tls.calibre-web
-      #       hosts:
-      #         - calibre-web.${XYZ_DOMAIN}
+        tls:
+          - secretName: tls.calibre-web
+            hosts:
+              - calibre-web.${XYZ_DOMAIN}
 
     resources:
       requests:
