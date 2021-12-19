@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: ghcr.io/linuxserver/calibre-web
-      tag: 0.6.14-ls142
+      tag: 0.6.14-ls143
 
     podAnnotations:
       backup.velero.io/backup-volumes: config
@@ -31,7 +31,7 @@ spec:
     env:
       TZ: "${TZ}"
       PGID: "${MEDIA_GID}"
-      DOCKER_MODS: "linuxserver/calibre-web:calibre"
+      # DOCKER_MODS: "linuxserver/calibre-web:calibre"
 
     persistence:
       config:
