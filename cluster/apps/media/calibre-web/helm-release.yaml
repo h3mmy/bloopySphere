@@ -85,10 +85,10 @@ spec:
         #             name: ak-outpost--outpost
         #             port: 9000
 
-          tls:
-            - secretName: tls.calibre-web
-              hosts:
-                - calibre-web.${XYZ_DOMAIN}
+          # tls:
+          #   - secretName: tls.calibre-web
+          #     hosts:
+          #       - calibre-web.${XYZ_DOMAIN}
       # kobo:
       #   enabled: true
       #   ingressClassName: "traefik"
