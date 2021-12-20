@@ -1,0 +1,23 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: secure-headers
+  namespace: networking
+spec:
+  headers:
+    frameDeny: true
+    browserxssfilter: true
+    accessControlAllowMethods:
+      - "GET"
+      - "OPTIONS"
+      - "PUT"
+    accessControlAllowOriginList:
+      - "https://{XYZ_DOMAIN}"
+      - "https://{SECRET_DOMAIN}"
+    accessControlAllowOriginListRegex:
+      - "https://"
+    accessControlMaxAge: 100
+    addVaryHeader: true
+    stsPreload: true
+    contentTypeNosniff: true
+    stsIncludeSubdomains: true
