@@ -33,7 +33,7 @@ spec:
         config:
           region: us-east-1
           s3ForcePathStyle: true
-          s3Url: https://minio.{XYZ_DOMAIN}
+          s3Url: https://minio.${XYZ_DOMAIN}
           publicUrl: https://s3.${XYZ_DOMAIN}
       resticTimeout: 4h
 
