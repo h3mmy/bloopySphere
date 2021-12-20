@@ -14,8 +14,8 @@ spec:
     accessControlAllowOriginList:
       - "https://{XYZ_DOMAIN}"
       - "https://{SECRET_DOMAIN}"
-    accessControlAllowOriginListRegex:
-      - "https://"
+  #  accessControlAllowOriginListRegex:
+   #   - "https://"
     accessControlMaxAge: 100
     addVaryHeader: true
     stsPreload: true
