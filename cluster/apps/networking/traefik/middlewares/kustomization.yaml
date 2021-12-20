@@ -11,3 +11,4 @@ resources:
   - bloopnet-xyz-auth.yaml
   - plex-add-web.yaml
   - calibre-auth.yaml
+  - secure-headers.yaml
