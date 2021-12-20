@@ -55,17 +55,18 @@ spec:
       annotations:
         hajimari.io/enable: "true"
         hajimari.io/icon: "account-lock-outline"
-        hajimari.io/instance: "bloop-quarky,bloop-xyz"
+        hajimari.io/instance: "bloop-xyz,bloop-quarky"
         hajimari.io/appName: "Login Settings"
+        hajimari.io/url: "https://auth.${XYZ_DOMAIN}"
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         # traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare-ips@kubernetescrd"
       hosts:
-        - host: "auth.${SECRET_DOMAIN}"
+        - host: "auth.${XYZ_DOMAIN}"
           paths:
             - path: "/"
               pathType: Prefix
-        - host: "auth.${XYZ_DOMAIN}"
+        - host: "auth.${SECRET_DOMAIN}"
           paths:
             - path: "/"
               pathType: Prefix
