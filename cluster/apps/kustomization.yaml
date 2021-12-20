@@ -11,3 +11,4 @@ resources:
   - media
   - monitoring
   - flux-system
+  - velero
