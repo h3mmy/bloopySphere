@@ -27,3 +27,4 @@ resources:
   - oauth2-proxy-charts.yaml
   - jupyterhub-charts.yaml
   - codecentric-charts.yaml
+  - vmware-tanzu-charts.yaml
