@@ -36,6 +36,7 @@ spec:
         - 65541
         - 65536
         - 65537
+
     service:
       main:
         type: LoadBalancer
@@ -46,6 +47,7 @@ spec:
           traefik.ingress.kubernetes.io/service.serversscheme: https
         port:
           port: 32400
+
     ingress:
       main:
         enabled: true
@@ -70,6 +72,7 @@ spec:
           - hosts:
               - "{{ (index .Values.ingress.main.hosts 0).host }}"
             secretName: "tls.plex"
+
     persistence:
       config:
         enabled: true
@@ -100,8 +103,14 @@ spec:
         existingClaim: nfs-misc-pvc
         mountPath: /DataR
         readOnly: false
+
     podAnnotations:
       backup.velero.io/backup-volumes: config
+      pre.hook.backup.velero.io/container: fsfreeze
+      pre.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--freeze", "/data"]'
+      post.hook.backup.velero.io/container: fsfreeze
+      post.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--unfreeze", "/data"]'
+
     resources:
       requests:
         cpu: 1000m
@@ -109,6 +118,16 @@ spec:
       limits:
         gpu.intel.com/i915: 2
         memory: 4900Mi
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: feature.node.kubernetes.io/custom-intel-gpu
+                  operator: In
+                  values:
+                    - "true"
     addons:
       promtail:
         enabled: true
@@ -127,3 +146,13 @@ spec:
             readOnly: true
         securityContext:
           runAsUser: 0
+
+    additionalContainers:
+      fsfreeze:
+        name: fsfreeze
+        image: ghcr.io/k8s-at-home/fsfreeze:v2.37-r0
+        volumeMounts:
+          - name: config
+            mountPath: /data
+        securityContext:
+          privileged: true
