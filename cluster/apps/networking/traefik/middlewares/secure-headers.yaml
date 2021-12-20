@@ -6,7 +6,7 @@ metadata:
 spec:
   headers:
     frameDeny: true
-    browserxssfilter: true
+    browserXssFilter: true
     accessControlAllowMethods:
       - "GET"
       - "OPTIONS"
