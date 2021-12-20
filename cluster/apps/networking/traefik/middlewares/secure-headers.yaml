@@ -21,3 +21,7 @@ spec:
     stsPreload: true
     contentTypeNosniff: true
     stsIncludeSubdomains: true
+    hostsProxyHeaders:
+      - "X-Forwarded-Host"
+      - "Forwarded"
+    contentSecurityPolicy: "frame-ancestors '*.bloopnet.xac.im:*' '*.xac.im' '*.quarkynet.com' '*.bloopnet.xyz';"
