@@ -172,3 +172,9 @@ spec:
             static_configs:
               - targets:
                   - "minio.storage.svc.cluster.local:9001"
+          - job_name: "coredns"
+            honor_timestamps: true
+            static_configs:
+              - targets:
+                  - "prometheus-coredns.monitoring:9153"
+                  - "kube-dns.kube-system:9153"
