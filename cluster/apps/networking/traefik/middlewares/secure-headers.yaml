@@ -26,4 +26,4 @@ spec:
       - "Forwarded"
     contentSecurityPolicy: "frame-ancestors '*.bloopnet.xac.im:*' '*.xac.im' '*.quarkynet.com' '*.bloopnet.xyz';"
     customResponseHeaders:
-      X-xss-protection: true
+      X-xss-protection: "1"
