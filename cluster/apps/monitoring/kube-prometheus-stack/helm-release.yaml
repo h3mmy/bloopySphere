@@ -164,4 +164,4 @@ spec:
             metrics_path: /minio/v2/metrics/cluster
             static_configs:
               - targets:
-                  - "minio.storage.svc.cluster.local:9000"
+                  - "minio.storage.svc.cluster.local:9001"
