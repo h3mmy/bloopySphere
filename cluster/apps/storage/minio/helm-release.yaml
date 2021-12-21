@@ -43,8 +43,7 @@ spec:
           secretKeyRef:
             name: minio
             key: root-password
-      MINIO_PROMETHEUS_URL: "https://prometheus.monitoring.svc.cluster.local"
-      MINIO_PROMETHEUS_AUTH_TYPE: "public"
+      # MINIO_PROMETHEUS_URL: "https://prometheus.monitoring.svc.cluster.local"
       # MINIO_IDENTITY_OPENID_CONFIG_URL:
       #   valueFrom:
       #     secretKeyRef:
