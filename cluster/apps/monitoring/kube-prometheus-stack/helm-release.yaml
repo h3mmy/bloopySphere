@@ -21,13 +21,13 @@ spec:
     alertmanager:
       config:
         global:
-          slack_api_url: "${DISCORD_ALERT_MANAGER_URL}"
+          slack_api_url: "${DISCORD_ALERT_MANAGER_URL}/slack"
           resolve_timeout: 5m
         receivers:
           - name: "null"
           - name: "discord"
             slack_configs:
-              - channel: "#${DISCORD_ALERTS_CHANNEL}"
+              - channel: "${DISCORD_ALERTS_CHANNEL}"
                 icon_url: "${PROMETHEUS_PROFILE_IMG_URL}"
                 username: "Prometheus"
                 send_resolved: true
