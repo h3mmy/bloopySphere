@@ -12,3 +12,5 @@ resources:
   - monitoring
   - flux-system
   - velero
+  - cert-manager
+  - calico-system
