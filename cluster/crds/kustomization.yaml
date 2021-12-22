@@ -5,4 +5,4 @@ resources:
   - cert-manager
   - traefik
   - rook-ceph
-  # - kube-prometheus-stack
+  - kube-prometheus-stack
