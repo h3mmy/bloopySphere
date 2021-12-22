@@ -49,11 +49,11 @@ spec:
           receiver: "discord"
           routes:
             - receiver: "null"
-              match:
-                alertname: Watchdog
+              matchers:
+                - "alertname=Watchdog"
             - receiver: "discord"
-              match_re:
-                severity: critical
+              matchers:
+                - "severity=critical"
               continue: true
         inhibit_rules:
           - source_match:
@@ -175,8 +175,8 @@ spec:
                 requests:
                   storage: 10Gi
         thanos:
-          image: quay.io/thanos/thanos:v0.23.2
-          version: v0.23.2
+          image: quay.io/thanos/thanos:v0.23.1
+          version: v0.22.0
           objectStorageConfig:
             name: thanos-objstore-secret
             key: objstore.yml
