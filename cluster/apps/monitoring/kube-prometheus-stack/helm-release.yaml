@@ -123,6 +123,16 @@ spec:
             targetLabel: instance
     kubeControllerManager:
       enabled: true
+      serviceMonitor:
+        enabled: true
+        https: true
+        insecureSkipVerify: true
+    kubeScheduler:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        https: true
+        insecureSkipVerify: true
     # Setting this option to 0 disabled CPU limits
     prometheusOperator:
       configReloaderCpu: 0
