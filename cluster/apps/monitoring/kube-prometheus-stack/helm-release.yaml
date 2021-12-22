@@ -121,6 +121,8 @@ spec:
             sourceLabels:
               - node
             targetLabel: instance
+    kubeControllerManager:
+      enabled: true
     # Setting this option to 0 disabled CPU limits
     prometheusOperator:
       configReloaderCpu: 0
@@ -148,6 +150,10 @@ spec:
       prometheusSpec:
         replicas: 1
         replicaExternalLabelName: "replica"
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
         retention: 6h
         enableAdminAPI: true
         walCompression: true
