@@ -6,3 +6,4 @@ resources:
   - thanos
   - loki
   - promtail
+  - grafana
