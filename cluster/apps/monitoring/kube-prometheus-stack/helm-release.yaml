@@ -172,12 +172,19 @@ spec:
             key: objstore.yml
 
         addtionalScrapeConfigs:
-          - job_name: minio
+          # - job_name: minio
+          #   honor_timestamps: true
+          #   metrics_path: /minio/v2/metrics/cluster
+          #   static_configs:
+          #     - targets:
+          #         - "minio.storage.svc.cluster.local:9000"
+          - job_name: minio-job
             honor_timestamps: true
+            bearer_token: ${MINIO_PROMETHEUS_TOKEN}
             metrics_path: /minio/v2/metrics/cluster
+            scheme: https
             static_configs:
-              - targets:
-                  - "minio.storage.svc.cluster.local:9000"
+              - targets: [s3.${XYZ_DOMAIN}]
           - job_name: "coredns"
             honor_timestamps: true
             static_configs:
