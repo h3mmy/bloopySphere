@@ -89,7 +89,7 @@ spec:
           - name: Promeheus-Direct
             type: prometheus
             access: proxy
-            url: http://prometheus-prometheus.monitoring.svc.cluster.local:3100
+            url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
             isDefault: true
     dashboards:
       default:
