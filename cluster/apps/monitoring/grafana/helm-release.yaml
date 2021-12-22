@@ -149,6 +149,11 @@ spec:
       enabled: true
       ingressClassName: "traefik"
       annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-production
+        hajimari.io/instance: "bloop-quarky"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "chart-bar-stacked"
+        hajimari.io/appName: "Status"
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
       hosts:
         - "grafana.${XYZ_DOMAIN}"
