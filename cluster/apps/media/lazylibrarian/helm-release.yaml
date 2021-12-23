@@ -1,0 +1,92 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: lazylibrarian
+  namespace: media-backstage
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: lazylibrarian
+      version: 7.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: linuxserver/lazylibrarian
+      tag: version-1152df82
+      pullPolicy: IfNotPresent
+    env:
+      TZ: "${TZ}"
+      PUID: "1048"
+      PGID: "${MEDIA_GID}"
+    podSecurityContext:
+      supplementalGroups:
+        - 65538
+        - 65537
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          kubernetes.io/ingress.class: "traefik"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "book-search-outline"
+          hajimari.io/appName: "LazyLibrarian"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          # traefik.ingress.kubernetes.io/router.middlewares: "rfc-1918-ips@kubernetescrd"
+        hosts:
+          - host: "lazylib.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "{{ (index .Values.ingress.main.hosts 0).host }}"
+            secretName: "tls.lazylib"
+
+    persistence:
+      config:
+        enabled: true
+        storageClass: "nfs-client"
+        accessMode: ReadWriteOnce
+        size: 1Gi
+      media:
+        enabled: false
+
+    extraVolumes:
+      - name: media
+        persistentVolumeClaim:
+          claimName: nfs-media-pvc
+        mountPath: "/mnt/Data"
+        readOnly: false
+
+    podAnnotations:
+      backup.velero.io/backup-volumes: config
+      pre.hook.backup.velero.io/container: fsfreeze
+      pre.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--freeze", "/data"]'
+      post.hook.backup.velero.io/container: fsfreeze
+      post.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--unfreeze", "/data"]'
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+    additionalContainers:
+      fsfreeze:
+        name: fsfreeze
+        image: ghcr.io/k8s-at-home/fsfreeze:v2.37-r0
+        volumeMounts:
+          - name: config
+            mountPath: /data
+        securityContext:
+          privileged: true
