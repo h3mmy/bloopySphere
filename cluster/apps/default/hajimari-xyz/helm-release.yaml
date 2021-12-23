@@ -41,13 +41,15 @@ spec:
           - networking
           - auth
           - storage
-          - monitoring
           - media
       name: "you"
       customApps:
-        - name: Some External Cluster Service
-          url: http://192.168.1.100:5000
-          icon: test-tube
+        - name: Plex (LAN only)
+          url: http://101.1.0.105:32400/web
+          icon: play-network-outline
+        - name: Plex Requests
+          url: https://requests.quarkynet.com/
+          icon: plex
       groups:
         - name: Communicate
           links:
@@ -114,8 +116,10 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           hajimari.io/enable: "true"
+          hajimari.io/instance: "bloop-quarky"
           hajimari.io/icon: "weather-sunset"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
           - host: "hajimari.${XYZ_DOMAIN}"
             paths:

@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: ghcr.io/k8s-at-home/plex
-      tag: latest
+      tag: v1.25.2.5319-c43dc0277
       imagePullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"
@@ -36,6 +36,7 @@ spec:
         - 65541
         - 65536
         - 65537
+
     service:
       main:
         type: LoadBalancer
@@ -46,6 +47,7 @@ spec:
           traefik.ingress.kubernetes.io/service.serversscheme: https
         port:
           port: 32400
+
     ingress:
       main:
         enabled: true
@@ -53,12 +55,12 @@ spec:
         annotations:
           kubernetes.io/ingress.class: "traefik"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-          hajimari.io/instance: "bloop-xyz"
+          hajimari.io/instance: "bloop-xyz,bloop-quarky"
           hajimari.io/enable: "true"
           hajimari.io/icon: "plex"
           hajimari.io/appName: "Plex"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.tls.options: "networking-plex@kubernetescrd"
+          # traefik.ingress.kubernetes.io/router.tls.options: "networking-plex@kubernetescrd"
           traefik.ingress.kubernetes.io/router.priority: "150"
           # traefik.ingress.kubernetes.io/router.middlewares: "networking-plex-add-web@kubernetescrd"
         hosts:
@@ -70,10 +72,11 @@ spec:
           - hosts:
               - "{{ (index .Values.ingress.main.hosts 0).host }}"
             secretName: "tls.plex"
+
     persistence:
       config:
         enabled: true
-        storageClass: "nfs-client"
+        storageClass: "local-path"
         accessMode: ReadWriteOnce
         size: 20Gi
       transcode:
@@ -100,8 +103,14 @@ spec:
         existingClaim: nfs-misc-pvc
         mountPath: /DataR
         readOnly: false
+
     podAnnotations:
       backup.velero.io/backup-volumes: config
+      pre.hook.backup.velero.io/container: fsfreeze
+      pre.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--freeze", "/data"]'
+      post.hook.backup.velero.io/container: fsfreeze
+      post.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--unfreeze", "/data"]'
+
     resources:
       requests:
         cpu: 1000m
@@ -109,13 +118,23 @@ spec:
       limits:
         gpu.intel.com/i915: 2
         memory: 4900Mi
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: feature.node.kubernetes.io/custom-intel-gpu
+                  operator: In
+                  values:
+                    - "true"
     addons:
       promtail:
         enabled: true
         image:
           repository: grafana/promtail
           tag: 2.4.1
-        loki: http://loki.logs.svc.cluster.local:3100/loki/api/v1/push
+        loki: http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push
         logs:
           - name: promtail/plex
             path: "/config/Library/Application Support/Plex Media Server/Logs/*.log"
@@ -127,3 +146,13 @@ spec:
             readOnly: true
         securityContext:
           runAsUser: 0
+
+    additionalContainers:
+      fsfreeze:
+        name: fsfreeze
+        image: ghcr.io/k8s-at-home/fsfreeze:v2.37-r0
+        volumeMounts:
+          - name: config
+            mountPath: /data
+        securityContext:
+          privileged: true

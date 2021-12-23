@@ -7,6 +7,8 @@ resources:
   - redirect-path.yaml
   - forward-auth.yaml
   - rate-limit.yaml
-  # - external-auth.yaml
-  - xyz-auth.yaml
+  - keycloak-forward-auth.yaml
+  - bloopnet-xyz-auth.yaml
   - plex-add-web.yaml
+  - calibre-auth.yaml
+  - secure-headers.yaml

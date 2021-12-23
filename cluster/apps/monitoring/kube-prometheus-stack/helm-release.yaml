@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      version: 23.2.0
+      version: 25.1.0
       sourceRef:
         kind: HelmRepository
         name: prometheus-community-charts
@@ -21,7 +21,7 @@ spec:
     alertmanager:
       config:
         global:
-          slack_api_url: "${DISCORD_WEBHOOK_URL}"
+          slack_api_url: "${DISCORD_ALERT_MANAGER_URL}/slack"
           resolve_timeout: 5m
         receivers:
           - name: "null"
@@ -49,11 +49,11 @@ spec:
           receiver: "discord"
           routes:
             - receiver: "null"
-              match:
-                alertname: Watchdog
+              matchers:
+                - "alertname=Watchdog"
             - receiver: "discord"
-              match_re:
-                severity: critical
+              matchers:
+                - "severity=critical"
               continue: true
         inhibit_rules:
           - source_match:
@@ -68,6 +68,9 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Alert Manager"
         hosts:
           - "alert-manager.${XYZ_DOMAIN}"
         tls:
@@ -91,10 +94,17 @@ spec:
             sourceLabels:
               - __meta_kubernetes_pod_node_name
             targetLabel: kubernetes_node
+    kubeStateMetrics:
+      enabled: true
     kube-state-metrics:
       fullnameOverride: kube-state-metrics
     prometheus-node-exporter:
       fullnameOverride: node-exporter
+      tolerations:
+        - effect: "NoExecute"
+          operator: "Exists"
+        - effect: "NoSchedule"
+          operator: "Exists"
     grafana:
       enabled: false
       forceDeployDashboards: true
@@ -111,6 +121,24 @@ spec:
             sourceLabels:
               - node
             targetLabel: instance
+    kubeControllerManager:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        https: true
+        insecureSkipVerify: true
+    kubeProxy:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        https: true
+        insecureSkipVerify: true
+    kubeScheduler:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        https: true
+        insecureSkipVerify: true
     # Setting this option to 0 disabled CPU limits
     prometheusOperator:
       configReloaderCpu: 0
@@ -122,6 +150,9 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Prometheus"
         hosts:
           - "prometheus.${XYZ_DOMAIN}"
         tls:
@@ -135,9 +166,15 @@ spec:
       prometheusSpec:
         replicas: 1
         replicaExternalLabelName: "replica"
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
         retention: 6h
         enableAdminAPI: true
         walCompression: true
+        serviceMonitorSelector: {}
+        podMonitorSelector: {}
         storageSpec:
           volumeClaimTemplate:
             spec:
@@ -146,16 +183,30 @@ spec:
                 requests:
                   storage: 10Gi
         thanos:
-          image: quay.io/thanos/thanos:v0.23.1
-          version: v0.22.0
+          image: quay.io/thanos/thanos:v0.24.0
+          version: v0.24.0
           objectStorageConfig:
             name: thanos-objstore-secret
             key: objstore.yml
 
         addtionalScrapeConfigs:
-          - job_name: minio
+          # - job_name: minio
+          #   honor_timestamps: true
+          #   metrics_path: /minio/v2/metrics/cluster
+          #   static_configs:
+          #     - targets:
+          #         - "minio.storage.svc.cluster.local:9000"
+          - job_name: minio-job
             honor_timestamps: true
+            bearer_token: ${MINIO_PROMETHEUS_TOKEN}
             metrics_path: /minio/v2/metrics/cluster
+            scheme: http
             static_configs:
               - targets:
                   - "minio.storage.svc.cluster.local:9000"
+          - job_name: "coredns"
+            honor_timestamps: true
+            static_configs:
+              - targets:
+                  - "prometheus-coredns.monitoring:9153"
+                  - "kube-dns.kube-system:9153"

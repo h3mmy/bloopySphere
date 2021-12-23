@@ -1,0 +1,11 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: calibre-auth
+  namespace: networking
+spec:
+  forwardAuth:
+    address: https://auth.${XYZ_DOMAIN}:9000/akprox/auth/traefik
+    trustForwardHeader: true
+    authResponseHeadersRegex: ^.*$

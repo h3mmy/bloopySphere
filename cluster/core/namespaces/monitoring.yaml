@@ -4,4 +4,3 @@ kind: Namespace
 metadata:
   name: monitoring
   annotations:
-    k10.kasten.io/ignorebackuppolicy: "true"

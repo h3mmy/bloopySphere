@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - media-pv
   - plex
+  - calibre-web

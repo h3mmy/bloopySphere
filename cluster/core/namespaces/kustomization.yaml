@@ -10,3 +10,4 @@ resources:
   - monitoring.yaml
   - media.yaml
   - vpn.yaml
+  - velero.yaml
