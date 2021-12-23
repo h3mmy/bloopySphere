@@ -9,4 +9,5 @@ resources:
   - storage.yaml
   - monitoring.yaml
   - media.yaml
+  - vpn.yaml
   - velero.yaml
