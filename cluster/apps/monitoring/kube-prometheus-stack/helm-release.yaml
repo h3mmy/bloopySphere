@@ -127,6 +127,12 @@ spec:
         enabled: true
         https: true
         insecureSkipVerify: true
+    kubeProxy:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        https: true
+        insecureSkipVerify: true
     kubeScheduler:
       enabled: true
       serviceMonitor:
@@ -168,6 +174,7 @@ spec:
         enableAdminAPI: true
         walCompression: true
         serviceMonitorSelector: {}
+        podMonitorSelector: {}
         storageSpec:
           volumeClaimTemplate:
             spec:
