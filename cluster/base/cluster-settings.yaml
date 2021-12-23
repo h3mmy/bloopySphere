@@ -10,3 +10,10 @@ data:
   NAS_ADDRESS: 192.168.55.55
   LB_PLEX_IP: 10.1.0.105
   PROMETHEUS_PROFILE_IMG_URL: https://avatars3.githubusercontent.com/u/3380462
+  # Network CIDR used for pod IPs
+  NETWORK_K8S_CLUSTER_CIDR: "10.42.0.0/16"
+  # Network CIDR used for service IPs
+  NETWORK_K8S_SERVICE_CIDR: "10.43.0.0/16"
+  NETWORK_MANAGEMENT_CIDR: "10.1.0.0/16"
+  LOCAL_CIDR_1: "192.168.0.0/16"
+  LOCAL_CIDR_2: "10.0.0.0/24"
