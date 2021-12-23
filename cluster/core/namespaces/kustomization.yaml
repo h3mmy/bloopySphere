@@ -11,3 +11,4 @@ resources:
   - media.yaml
   - vpn-gateway.yaml
   - velero.yaml
+  - downloads.yaml

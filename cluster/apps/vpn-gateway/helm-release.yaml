@@ -22,8 +22,7 @@ spec:
       tag: v1.4.0
 
     routed_namespaces:
-      # - downloads
-      - vpn
+      - downloads
 
     publicPorts:
       - hostname: qbittorrent # hostname assigned to the pod
@@ -58,7 +57,7 @@ spec:
       gatewayLabel: setGateway
       gatewayAnnotation: setGateway
       namespaceSelector:
-        label: "vpn-routed-gateway"
+        label: "vpn-gateway-routed-gateway"
 
     livenessProbe:
       exec:
