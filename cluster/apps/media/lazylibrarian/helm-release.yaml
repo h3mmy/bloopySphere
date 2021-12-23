@@ -41,7 +41,7 @@ spec:
           hajimari.io/icon: "book-search-outline"
           hajimari.io/appName: "LazyLibrarian"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc-1918-ips@kubernetescrd"
+          # traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc-1918-ips@kubernetescrd"
         hosts:
           - host: "lazylib.${XYZ_DOMAIN}"
             paths:
