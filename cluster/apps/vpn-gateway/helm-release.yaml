@@ -22,7 +22,8 @@ spec:
       tag: v1.4.0
 
     routed_namespaces:
-      - downloads
+      # - downloads
+      - vpn
 
     publicPorts:
       - hostname: qbittorrent # hostname assigned to the pod
