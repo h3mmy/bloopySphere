@@ -23,14 +23,13 @@ spec:
       replicaLabels:
         - replica
       dnsDiscovery:
-        sidecarsService: kube-prometheus-stack-thanos-discovery
+        sidecarsService: prometheus-thanos-discovery
         sidecarsNamespace: monitoring
       ingress:
         enabled: true
         hostname: "thanos.${XYZ_DOMAIN}"
         ingressClassName: "traefik"
         annotations:
-          kubernetes.io/ingress.class: "traefik"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           hajimari.io/instance: "bloop-quarky"
           hajimari.io/enable: "true"
