@@ -47,10 +47,6 @@ spec:
           hosts:
             - "loki.${XYZ_DOMAIN}"
 
-    service:
-      type: LoadBalancer
-      loadBalancerIP: 1.1.1.1
-
     persistence:
       enabled: false
 
