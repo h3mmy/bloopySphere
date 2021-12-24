@@ -37,7 +37,7 @@ spec:
       tls:
         - secretName: tls.loki
           hosts:
-            - "{{ (index .Values.ingress.hosts 0).host }}"
+            - "{{ (index .Values.main.ingress.hosts 0).host }}"
 
     service:
       type: LoadBalancer
