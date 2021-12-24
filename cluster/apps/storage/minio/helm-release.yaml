@@ -148,15 +148,15 @@ spec:
       prometheus.io/port: 9000
 
 
-    nodeSelector:
-      matchExpressions:
-        - key: kubernetes.io/arch
-          operator: In
-          values:
-            - amd64
-            - i386
-            - i686
-            - x86
+    # nodeSelector:
+    #   matchExpressions:
+    #     - key: kubernetes.io/arch
+    #       operator: In
+    #       values:
+    #         - amd64
+    #         - i386
+    #         - i686
+    #         - x86
 
     resources:
       requests:
