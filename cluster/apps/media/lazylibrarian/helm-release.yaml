@@ -68,12 +68,12 @@ spec:
         mountPath: "/mnt/Data"
         readOnly: false
 
-    podAnnotations:
-      backup.velero.io/backup-volumes: config
-      pre.hook.backup.velero.io/container: fsfreeze
-      pre.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--freeze", "/data"]'
-      post.hook.backup.velero.io/container: fsfreeze
-      post.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--unfreeze", "/data"]'
+    # podAnnotations:
+    #   backup.velero.io/backup-volumes: config
+    #   pre.hook.backup.velero.io/container: fsfreeze
+    #   pre.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--freeze", "/data"]'
+    #   post.hook.backup.velero.io/container: fsfreeze
+    #   post.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--unfreeze", "/data"]'
 
     resources:
       requests:
