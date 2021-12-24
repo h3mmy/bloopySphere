@@ -143,9 +143,9 @@ spec:
 
     podAnnotations:
       secret.reloader.stakater.com/reload: "minio"
-      prometheus.io/scrape: true
+      prometheus.io/scrape: "true"
       prometheus.io/path: /minio/v2/metrics/cluster
-      prometheus.io/port: 9000
+      prometheus.io/port: "9000"
 
 
     # nodeSelector:
