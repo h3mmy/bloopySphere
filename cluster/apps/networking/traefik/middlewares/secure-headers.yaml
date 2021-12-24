@@ -1,3 +1,4 @@
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
@@ -14,8 +15,8 @@ spec:
     accessControlAllowOriginList:
       - "https://{XYZ_DOMAIN}"
       - "https://{SECRET_DOMAIN}"
-  #  accessControlAllowOriginListRegex:
-   #   - "https://"
+    #accessControlAllowOriginListRegex:
+    # -"https://"
     accessControlMaxAge: 100
     addVaryHeader: true
     stsPreload: true
