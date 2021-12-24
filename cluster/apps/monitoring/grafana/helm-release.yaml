@@ -81,7 +81,7 @@ spec:
             type: prometheus
             access: proxy
             url: http://thanos-query.monitoring.svc.cluster.local:9090/
-            # isDefault: true
+            isDefault: true
           - name: Loki
             type: loki
             access: proxy
@@ -90,7 +90,7 @@ spec:
             type: prometheus
             access: proxy
             url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
-            isDefault: true
+            # isDefault: true
     dashboards:
       default:
         # Ref: https://grafana.com/grafana/dashboards/12175
