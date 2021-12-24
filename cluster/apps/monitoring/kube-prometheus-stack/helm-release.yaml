@@ -195,7 +195,14 @@ spec:
             metrics_path: /minio/v2/metrics/cluster
             static_configs:
               - targets:
-                  - "minio.storage:9000"
+                  - "minio.storage.svc.cluster.local:9000"
+          - job_name: minio-2
+            honor_timestamps: true
+            metrics_path: /minio/v2/metrics/cluster
+            scheme: https
+            static_configs:
+              - targets:
+                  - "s3.${XYZ_DOMAIN}"
           - job_name: "coredns"
             honor_timestamps: true
             static_configs:
