@@ -1,0 +1,28 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: qbittorrent-config-v1
+  namespace: downloads
+  annotations:
+    pv.beta.kubernetes.io/gid: "${MEDIA_GID}"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: nfs-client
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: downloads-torrent-pvc
+  namespace: downloads
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: downloads
+  resources:
+    requests:
+      storage: 1Mi

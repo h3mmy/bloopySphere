@@ -15,3 +15,4 @@ resources:
   - cert-manager
   - calico-system
   - vpn-gateway
+  - downloads
