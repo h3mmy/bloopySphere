@@ -5,7 +5,7 @@ metadata:
   name: qbittorrent-config-v1
   namespace: downloads
   annotations:
-    pv.beta.kubernetes.io/gid: "${MEDIA_GID}"
+    pv.beta.kubernetes.io/gid: "65537"
 spec:
   accessModes:
     - ReadWriteOnce
