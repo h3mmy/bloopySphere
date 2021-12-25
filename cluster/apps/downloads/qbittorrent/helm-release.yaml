@@ -28,6 +28,27 @@ spec:
     hostname: qbittorrent
     podAnnotations:
       setGateway: "true"
+    settings:
+      automaticPortSetup: false
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+      bittorrent:
+        enabled: true
+        type: LoadBalancer
+        loadBalancerIP: ${SVC_QBITTORRENT_ADDR}
+        # For BGP mode
+        # externalIPs:
+        #   - "${SVC_QBITTORRENT_ADDR}"
+        ports:
+          bittorrent:
+            enabled: true
+            port: ${VPN_FORWARDED_PORT_1}
+            protocol: TCP
+            targetPort: ${VPN_FORWARDED_PORT_1}
+        externalTrafficPolicy: Local
     ingress:
       main:
         enabled: true
