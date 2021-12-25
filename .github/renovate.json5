@@ -1,29 +1,29 @@
 {
   "enabled": true,
+  "timezone": "America/Detroit"
   "semanticCommits": "enabled",
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dashboard",
+  "commitBody": "Signed-off-by: Zee Aslam <h3mmy@users.noreply.github.com>",
   "suppressNotifications": ["prIgnoreNotification"],
   "rebaseWhen": "conflicted",
+  "commitMessageTopic": "{{depName}}",
+  "commitMessageExtra": "to {{newVersion}}",
+  "commitMessageSuffix": "",
   "helm-values": {
-    "fileMatch": [
-      "cluster/.+/helm-release\\.yaml$"
-    ]
+    "fileMatch": ["./.+\\.yaml$"]
   },
   "kubernetes": {
-    "fileMatch": [
-      "cluster/.+\\.yaml$"
-    ],
+    "fileMatch": ["\\.yaml$"],
     "ignorePaths": [
-      "cluster/base/"
+      "cluster/base/",
+      ".github"
     ],
   },
   "regexManagers": [
     // regexManager to read and process HelmRelease files
     {
-      "fileMatch": [
-        "cluster/.+\\.yaml$"
-      ],
+      "fileMatch": ["./.+\\.yaml$"],
       "matchStrings": [
         // helm releases
         "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n"
@@ -52,11 +52,25 @@
     },
   ],
   "packageRules": [
-    // setup datasources
+    // Setup datasources
     {
-      "matchDatasources": ["helm"],
+      "datasources": ["helm"],
+      "commitMessageTopic": "Helm chart {{depName}}",
+      "semanticCommitScope": "charts",
       "separateMinorPatch": true,
       "ignoreDeprecated": true
+    },
+    {
+      "datasources": ["docker"],
+      "commitMessageTopic": "Docker image {{depName}}",
+      "commitMessageExtra": "to {{#if isSingleVersion}}{{{toVersion}}}{{else}}{{{newValue}}}{{/if}}",
+      "updateTypes": ["major", "minor", "patch"],
+      "enabled": true
+    },
+    {
+      "matchDatasources": ["docker"],
+      "semanticCommitScope": "images",
+      "separateMinorPatch": true
     },
     // global docker datasource settings
     {
@@ -70,47 +84,77 @@
     {
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["major"],
+      "commitMessagePrefix": "feat(images)!: ",
       "labels": ["renovate/image", "dep/major"]
     },
     {
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["minor"],
+      "semanticCommitType": "feat",
       "labels": ["renovate/image", "dep/minor"]
     },
     {
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["patch"],
+      "semanticCommitType": "fix",
       "labels": ["renovate/image", "dep/patch"]
     },
     {
       "matchDatasources": ["git-releases"],
       "matchUpdateTypes": ["major"],
+      "commitMessagePrefix": "feat(images)!: ",
       "labels": ["renovate/image", "dep/major"]
     },
     {
       "matchDatasources": ["git-releases"],
       "matchUpdateTypes": ["minor"],
+      "semanticCommitType": "feat",
       "labels": ["renovate/image", "dep/minor"]
     },
     {
       "matchDatasources": ["git-releases"],
       "matchUpdateTypes": ["patch"],
+      "semanticCommitType": "fix",
       "labels": ["renovate/image", "dep/patch"]
     },
     {
       "matchDatasources": ["helm"],
       "matchUpdateTypes": ["major"],
+      "commitMessagePrefix": "feat(charts)!: ",
       "labels": ["renovate/helm", "dep/major"]
     },
     {
       "matchDatasources": ["helm"],
       "matchUpdateTypes": ["minor"],
+      "semanticCommitType": "feat",
       "labels": ["renovate/helm", "dep/minor"]
     },
     {
       "matchDatasources": ["helm"],
       "matchUpdateTypes": ["patch"],
+      "semanticCommitType": "fix",
       "labels": ["renovate/helm", "dep/patch"]
+    },
+    // Custom versions
+    {
+      "matchDatasources": ["docker"],
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<compatibility>.*)$",
+      "matchPackageNames": ["blakeblackshear/frigate"]
+    },
+    {
+      "matchDatasources": ["docker"],
+      "versioning": "regex:^RELEASE\\.(?<major>\\d+)-(?<minor>\\d+)-(?<patch>\\d+)T.*Z(-(?<compatibility>.*))?$",
+      "matchPackageNames": ["quay.io/minio/minio"]
+    },
+    {
+      "datasources": ["docker"],
+      "versionScheme": "regex:^nightly-0\\.(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
+      "packageNames": ["hotio/readarr"]
+    },
+    {
+      "datasources": ["docker"],
+      "versioning": "loose",
+      "packageNames": ["plexinc/pms-docker"]
     },
     {
       "matchDatasources": [
@@ -136,6 +180,36 @@
       "groupName": "system-upgrade-controller-suite",
       "additionalBranchPrefix": "",
       "separateMinorPatch": true
+    },
+    // Auto-updates
+    {
+      "datasources": ["docker"],
+      "automerge": true,
+      "requiredStatusChecks": null,
+      "schedule": "after 1am and before 5am",
+      "updateTypes": ["minor", "patch"],
+      "packageNames": [
+        "homeassistant/home-assistant",
+        "ghcr.io/k8s-at-home/radarr",
+        "ghcr.io/k8s-at-home/sonarr",
+        "ghcr.io/k8s-at-home/nzbget",
+        "ghcr.io/k8s-at-home/prowlarr",
+        "ghcr.io/k8s-at-home/readarr",
+        "plexinc/pms-docker",
+        "hotio/readarr",
+        "nodered/node-red"
+      ]
+    },
+    {
+      "datasources": ["helm"],
+      "automerge": true,
+      "requiredStatusChecks": null,
+      "schedule": "after 1am and before 5am",
+      "updateTypes": ["minor", "patch"],
+      "packageNames": [
+        "grafana",
+        "thanos"
+      ]
     }
   ]
 }
