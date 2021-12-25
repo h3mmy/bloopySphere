@@ -1,0 +1,80 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: qbittorrent
+  namespace: downloads
+spec:
+  dependsOn:
+    - name: vpn-gateway
+      namespace: vpn-gateway
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: qbittorrent
+      version: 13.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: ghcr.io/k8s-at-home/qbittorrent
+      tag: v4.3.9
+    env:
+      TZ: "${TZ}"
+    hostname: qbittorrent
+    podAnnotations:
+      setGateway: "true"
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          # traefik.ingress.kubernetes.io/router.middlewares: "networking-internal-auth@kubernetescrd"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "cloud-download"
+        hosts:
+          - host: "qbittorrent.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: tls.qbittorrent
+            hosts:
+              - "{{ (index .Values.ingress.main.hosts 0).host }}"
+      api:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+        hosts:
+          - host: "qbittorrent.${XYZ_DOMAIN}"
+            paths:
+              - path: /api
+                pathType: Prefix
+        tls:
+          - secretName: tls.qbittorrent
+            hosts:
+              - "{{ (index .Values.ingress.api.hosts 0).host }}"
+    persistence:
+      config:
+        enabled: true
+        existingClaim: qbittorrent-config-v1
+      downloads:
+        enabled: true
+        existingClaim: downloads-torrent-pvc
+        mountPath: /data/downloads
+    podSecurityContext:
+      supplementalGroups:
+        - 5600
+    resources:
+      requests:
+        cpu: 500m
+        memory: 1000Mi
+      limits:
+        memory: 6000Mi
