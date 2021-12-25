@@ -29,13 +29,6 @@ spec:
       repository: ghcr.io/linuxserver/calibre-web
       tag: 0.6.14-ls144
 
-    # podAnnotations:
-    #   backup.velero.io/backup-volumes: config
-    #   pre.hook.backup.velero.io/container: fsfreeze
-    #   pre.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--freeze", "/data"]'
-    #   post.hook.backup.velero.io/container: fsfreeze
-    #   post.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--unfreeze", "/data"]'
-
     env:
       TZ: "${TZ}"
       PGID: "${MEDIA_GID}"
@@ -102,12 +95,3 @@ spec:
       limits:
         memory: 512Mi
 
-    additionalContainers:
-      fsfreeze:
-        name: fsfreeze
-        image: ghcr.io/k8s-at-home/fsfreeze:v2.37-r0
-        volumeMounts:
-          - name: config
-            mountPath: /data
-        securityContext:
-          privileged: true
