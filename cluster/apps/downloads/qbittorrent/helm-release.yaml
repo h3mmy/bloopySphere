@@ -37,6 +37,7 @@ spec:
           # traefik.ingress.kubernetes.io/router.middlewares: "networking-internal-auth@kubernetescrd"
           hajimari.io/enable: "true"
           hajimari.io/icon: "cloud-download"
+          hajimari.io/instance: "bloop-quarky"
         hosts:
           - host: "qbittorrent.${XYZ_DOMAIN}"
             paths:
