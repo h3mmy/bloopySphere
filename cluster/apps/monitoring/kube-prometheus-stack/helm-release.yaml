@@ -122,17 +122,17 @@ spec:
               - node
             targetLabel: instance
     kubeControllerManager:
-      enabled: true
-      serviceMonitor:
-        enabled: true
-        https: true
-        insecureSkipVerify: true
+      enabled: false
+      # serviceMonitor:
+      #   enabled: true
+      #   https: true
+      #   insecureSkipVerify: true
     kubeProxy:
-      enabled: true
-      serviceMonitor:
-        enabled: true
-        https: true
-        insecureSkipVerify: true
+      enabled: false
+      # serviceMonitor:
+      #   enabled: true
+      #   https: true
+      #   insecureSkipVerify: true
     kubeScheduler:
       enabled: true
       serviceMonitor:
