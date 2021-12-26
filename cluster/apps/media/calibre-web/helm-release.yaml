@@ -62,14 +62,14 @@ spec:
           hajimari.io/appName: "Library"
 
         hosts:
-          - host: calibre-web.${XYZ_DOMAIN}
+          - host: books.${XYZ_DOMAIN}
             paths:
               - path: /
 
         tls:
           - secretName: tls.calibre-web
             hosts:
-              - calibre-web.${XYZ_DOMAIN}
+              - books.${XYZ_DOMAIN}
 
       kobo:
         enabled: true
