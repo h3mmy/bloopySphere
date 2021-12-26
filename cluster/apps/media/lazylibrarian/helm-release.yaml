@@ -64,8 +64,8 @@ spec:
         volumeSpec:
           nfs:
             server: "${NAS_ADDRESS}"
-            path: /volume3/Data/Library
-        mountPath: /Data/Library
+            path: /volume3/Data
+        mountPath: /Data
 
     # extraVolumes:
     #   - name: media
