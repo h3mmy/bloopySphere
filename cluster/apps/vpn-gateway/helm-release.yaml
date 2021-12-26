@@ -94,7 +94,7 @@ spec:
         env:
           TZ: "${TZ}"
           IPTABLES_BACKEND: nft
-          KILLSWITCH: "false"
+          KILLSWITCH: "true"
 
         configFileSecret: vpn-gateway-vpnconfig
 
