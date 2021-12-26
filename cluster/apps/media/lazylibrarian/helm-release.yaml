@@ -59,14 +59,20 @@ spec:
         accessMode: ReadWriteOnce
         size: 1Gi
       media:
-        enabled: false
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume3/Data/Library
+        mountPath: /Data/Library
 
-    extraVolumes:
-      - name: media
-        persistentVolumeClaim:
-          claimName: nfs-media-pvc
-        mountPath: "/mnt/Data"
-        readOnly: false
+    # extraVolumes:
+    #   - name: media
+    #     persistentVolumeClaim:
+    #       claimName: nfs-media-pvc
+    #     mountPath: "/mnt/Data"
+    #     readOnly: false
 
     resources:
       requests:
