@@ -28,6 +28,8 @@ spec:
     hostname: qbittorrent
     podAnnotations:
       setGateway: "true"
+    podLabels:
+      setGateway: "true"
     settings:
       automaticPortSetup: false
     service:

@@ -58,7 +58,7 @@ spec:
       gatewayLabel: setGateway
       gatewayAnnotation: setGateway
       namespaceSelector:
-        label: "vpn-gateway-routed-gateway"
+        label: "routed-gateway"
 
     livenessProbe:
       exec:
