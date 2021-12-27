@@ -1,0 +1,74 @@
+---
+# Project information
+site_name: h3mmy | BloopySphere
+site_description: A repository for some ofmy home infrastructure which mostly adheres to Infrastructure as Code (IaC) and GitOps practices
+site_author: Zee Aslam
+site_url: https://h3mmy.github.io/bloopySphere/
+
+# Repository
+repo_name: h3mmy/bloopySphere
+repo_url: https://github.com/h3mmy/bloopySphere
+edit_uri: "edit/main/docs/"
+
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github-alt
+  language: en
+  features:
+    - navigation.sections
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+  palette:
+    - scheme: default
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+docs_dir: ./docs
+
+# Customization
+extra_css:
+  - _static/custom.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/h3mmy
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/k8s-at-home
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/mindtrapper
+
+# Plugins
+plugins:
+  - search:
+      lang: en
+  - minify:
+      minify_html: true
+  - macros:
+      include_dir: docs/_snippets
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - attr_list
+  - toc:
+      permalink: true
+
+# Navigation structure
+nav:
+  - Introduction: index.md
