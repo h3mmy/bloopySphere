@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "timezone": "America/Detroit"
+  "timezone": "America/Detroit",
   "semanticCommits": "enabled",
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dashboard",
