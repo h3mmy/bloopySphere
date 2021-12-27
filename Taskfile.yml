@@ -7,6 +7,7 @@ vars:
   CLUSTER_DIR: "{{.PROJECT_DIR}}/cluster"
   ANSIBLE_DIR: "{{.PROJECT_DIR}}/provision/ansible"
   TERRAFORM_DIR: "{{.PROJECT_DIR}}/provision/terraform"
+  STATIC_DIR: "{{.PROJECT_DIR}}/static"
 
 env:
   KUBECONFIG: "{{.PROJECT_DIR}}/provision/kubeconfig"
@@ -18,3 +19,4 @@ includes:
   lint: .taskfiles/lint.yml
   pre-commit: .taskfiles/pre-commit.yml
   terraform: .taskfiles/terraform.yml
+  system: .taskfiles/system.yml
