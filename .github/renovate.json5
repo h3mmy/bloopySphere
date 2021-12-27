@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "timezone": "America/Detroit"
+  "timezone": "America/Detroit",
   "semanticCommits": "enabled",
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dashboard",
@@ -18,7 +18,7 @@
     "ignorePaths": [
       "cluster/base/",
       ".github"
-    ],
+    ]
   },
   "regexManagers": [
     // regexManager to read and process HelmRelease files
@@ -49,7 +49,7 @@
         "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*?)\n *tag: v(?<currentValue>.*)\n"
       ],
       "datasourceTemplate": "helm"
-    },
+    }
   ],
   "packageRules": [
     // Setup datasources
