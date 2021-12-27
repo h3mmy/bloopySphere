@@ -22,13 +22,13 @@ spec:
   eventSeverity: error
   eventSources:
     - kind: GitRepository
-      name: '*'
+      name: "*"
     - kind: Kustomization
-      name: '*'
+      name: "*"
     - kind: HelmRepository
-      name: '*'
+      name: "*"
     - kind: HelmRelease
-      name: '*'
+      name: "*"
   exclusionList:
     - "error.*lookup github\\.com"
     - "waiting.*socket"

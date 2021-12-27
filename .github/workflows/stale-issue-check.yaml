@@ -6,7 +6,7 @@ name: 60 Days Stale Check
 
 on:
   schedule:
-    - cron: '40 16 * * *' # Run each day at 16:40 UTC / 8:40 PST
+    - cron: "40 16 * * *" # Run each day at 16:40 UTC / 8:40 PST
 
 permissions:
   issues: write
@@ -20,12 +20,12 @@ jobs:
       - uses: actions/stale@3be940e59b7d1056a280d314c82626effad4c55e
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          stale-issue-message: 'This issue is stale because it has been open 60 days with no activity.'
-          stale-pr-message: 'This PR is stale because it has been open 60 days with no activity.'
+          stale-issue-message: "This issue is stale because it has been open 60 days with no activity."
+          stale-pr-message: "This PR is stale because it has been open 60 days with no activity."
           days-before-stale: 60
           days-before-close: -1
-          only-labels: 'bug,enhancement,triaged,pipeline'
-          stale-issue-label: 'stale'
-          stale-pr-label: 'stale'
-          exempt-pr-labels: 'never-stale,waiting for review'
-          exempt-issue-labels: 'never-stale,help wanted,waiting for review,bot'
+          only-labels: "bug,enhancement,triaged,pipeline"
+          stale-issue-label: "stale"
+          stale-pr-label: "stale"
+          exempt-pr-labels: "never-stale,waiting for review"
+          exempt-issue-labels: "never-stale,help wanted,waiting for review,bot"

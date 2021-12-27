@@ -51,7 +51,8 @@ spec:
             severity: warning
         - alert: MinioNodeDiskUsage
           annotations:
-            description: MinIO node is reporting less than 10% disk space available.
+            description:
+              MinIO node is reporting less than 10% disk space available.
               {{ $value | humanizePercentage }} of disk space available on node {{ $labels.server }}
             summary: MinIO node is low on disk space.
           expr: |

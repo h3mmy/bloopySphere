@@ -60,8 +60,8 @@
   until: apt_install_common is success
 
   #  135  sudo apt install -y gpg-agent wget
- #136  wget -qO - https://repositories.intel.com/graphics/intel-graphics.key | sudo apt-key add -
- # 137  sudo apt-add-repository   'deb [arch=amd64] https://repositories.intel.com/graphics/ubuntu focal main'
+  #136  wget -qO - https://repositories.intel.com/graphics/intel-graphics.key | sudo apt-key add -
+  # 137  sudo apt-add-repository   'deb [arch=amd64] https://repositories.intel.com/graphics/ubuntu focal main'
 
 - name: Copy 20auto-upgrades unattended-upgrades config
   ansible.builtin.blockinfile:

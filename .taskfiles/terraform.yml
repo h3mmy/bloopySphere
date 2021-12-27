@@ -2,7 +2,6 @@
 version: "3"
 
 tasks:
-
   init:gandi:
     desc: Initialize terraform
     dir: provision/terraform/gandi

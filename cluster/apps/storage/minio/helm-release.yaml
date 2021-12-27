@@ -145,7 +145,6 @@ spec:
     podAnnotations:
       secret.reloader.stakater.com/reload: "minio"
 
-
     # nodeSelector:
     #   matchExpressions:
     #     - key: kubernetes.io/arch
