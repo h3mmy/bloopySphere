@@ -22,6 +22,9 @@ sops.asc
 node_modules
 package-lock.json
 
+#inc.
+old_lazylib_config.ini
+
 # TEmporary
 provision/talos/*
 cluster/core/rook-ceph

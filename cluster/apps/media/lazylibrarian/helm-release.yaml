@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: linuxserver/lazylibrarian
-      tag: version-1152df82
+      tag: version-ec898a47
       pullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"
