@@ -41,7 +41,7 @@ spec:
         tls:
           - secretName: tls.overseerr
             hosts:
-              - "{{ (index .Values.ingress.api.hosts 0).host }}"
+              - "{{ (index .Values.ingress.main.hosts 0).host }}"
     persistence:
       config:
         enabled: true
