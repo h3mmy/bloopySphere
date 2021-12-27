@@ -19,6 +19,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: downloads-torrent-pvc
   namespace: downloads
+  annotations:
+    pv.beta.kubernetes.io/gid: "65537"
 spec:
   accessModes:
     - ReadWriteMany
