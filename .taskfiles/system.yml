@@ -1,0 +1,9 @@
+---
+version: "3"
+
+tasks:
+  update-flux:
+    desc: Update Flux CLI
+    cmds:
+      - curl -s https://fluxcd.io/install.sh | sudo bash
+    interactive: true
