@@ -29,6 +29,7 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
         with:
+          file: ${{ env.dockerfile_path }}
           push: true # Will only build if this is not here
           tags: |
             ghcr.io/${{ github.repository_owner }}/${{ env.themeName }}:${{ github.sha }}
