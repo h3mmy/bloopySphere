@@ -8,4 +8,5 @@ spec:
   chain:
     middlewares:
       - name: rfc1918-ips
-      - name: security-ak-outpost-traefik@kubernetescrd
+      - name: chain-no-auth@kubernetescrd
+      - name: bloopnet-xyz-auth@kubernetescrd

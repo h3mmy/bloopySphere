@@ -7,7 +7,5 @@ metadata:
 spec:
   chain:
     middlewares:
-      # Note this requires cloudflare proxy
-      # - name: cloudflare-ips
       - name: auth-ak-outpost-traefik-default-xyz@kubernetescrd
-      - name: secure-headers@kubernetescrd
+      - name: chain-no-auth@kubernetescrd

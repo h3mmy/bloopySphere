@@ -12,3 +12,4 @@ resources:
   - plex-add-web.yaml
   - calibre-auth.yaml
   - secure-headers.yaml
+  - chain-no-auth.yaml
