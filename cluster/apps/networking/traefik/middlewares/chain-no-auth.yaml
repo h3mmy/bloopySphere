@@ -1,0 +1,11 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: chain-no-auth
+  namespace: networking
+spec:
+  chain:
+    middlewares:
+      - name: rate-limit@kubernetescrd
+      - name: secure-headers@kubernetescrd
