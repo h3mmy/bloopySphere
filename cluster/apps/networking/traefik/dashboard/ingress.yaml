@@ -10,6 +10,7 @@ metadata:
     hajimari.io/enable: "true"
     hajimari.io/icon: "transit-connection-variant"
     hajimari.io/instance: "bloop-quarky"
+    hajimari.io/url: "https://traefik.${XYZ_DOMAIN}"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
 spec:
   ingressClassName: "traefik"
