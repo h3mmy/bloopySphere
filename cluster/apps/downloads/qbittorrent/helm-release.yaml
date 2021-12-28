@@ -61,6 +61,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "cloud-download"
           hajimari.io/instance: "bloop-quarky"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
           - host: "qbittorrent.${XYZ_DOMAIN}"
             paths:
@@ -74,6 +75,7 @@ spec:
         enabled: true
         ingressClassName: "traefik"
         annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
         hosts:
