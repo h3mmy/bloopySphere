@@ -80,7 +80,7 @@ spec:
           traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
 
         hosts:
-          - host: calibre-web.${XYZ_DOMAIN}
+          - host: books.${XYZ_DOMAIN}
             paths:
               - path: /kobo/
 
