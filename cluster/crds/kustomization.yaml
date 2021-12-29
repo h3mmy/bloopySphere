@@ -6,3 +6,5 @@ resources:
   - traefik
   - rook-ceph
   - kube-prometheus-stack
+  # - multus
+  # - postgres
