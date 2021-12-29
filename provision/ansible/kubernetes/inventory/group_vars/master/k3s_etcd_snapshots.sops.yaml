@@ -1,0 +1,24 @@
+kind: Secret
+SECRET_MINIO_ACCESS_KEY: null
+SECRET_MINIO_SECRET_KEY: null
+SECRET_MINIO_ADDR: null
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3MkpvenJqMGQzL29SRVFB
+            LzJLOGFycys1bFpiNmdWWm55c0s3VC9OQVFvCks0b2t2VnV1c0xBRTJwbWkxVXRW
+            R3lLOUhraGpiMzBnTllGNG8xVXJ5TTAKLS0tIDFMbFRyOGR4N0xyYnRmcHloZUVQ
+            SHBiWlg2eUlQSWxWWm1ta2FEUXo2Z2sKnrsAnje+GcHwAKCqM4gAN4m/ErExfiWN
+            v6490pDJS+4eHKm9NMwBWc4S7OwHiZZQI/19YavvBhBJu0a3+IaMqg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2021-12-29T17:52:50Z"
+    mac: ENC[AES256_GCM,data:LuV5Hgcz2QXzbLbNHAyPVZKRl3JEDW2EtelSHxVeuK2W1FIxedC3ho7B+Fe9qEYgrlZmQji5F6WhjGV6EfyK9z2/3SBvu6JD4KrD9r/oLdgPit6F67ggcUR4tYpgmueBkHamrFhFypszUQURfNNkXizcJ/oKQJLQv4IkVoiR1sU=,iv:RjTj4h2iQ4eOLFKAOBEG4sZGl6hD96kjR5zr5g1V+zU=,tag:msJ9iZQfosn1mOPqHeSYVA==,type:str]
+    pgp: []
+    unencrypted_regex: ^(kind)$
+    version: 3.7.1

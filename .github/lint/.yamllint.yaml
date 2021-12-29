@@ -2,6 +2,7 @@
 ignore: |
   *.sops.*
   gotk-components.yaml
+  provision/ansible/roles/patrickjahns.promtail/*
 extends: default
 rules:
   truthy:

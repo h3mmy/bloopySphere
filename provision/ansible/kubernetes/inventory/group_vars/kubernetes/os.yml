@@ -1,0 +1,67 @@
+---
+os_timezone: "America/New_York"
+os_ssh_authorized_keys:
+os_packages_install:
+  - apt-transport-https
+  - arptables
+  - ca-certificates
+  - curl
+  - ebtables
+  - gdisk
+  - hdparm
+  - htop
+  - iputils-ping
+  - ipvsadm
+  - lvm2
+  - net-tools
+  - nfs-common
+  - nano
+  - ntpdate
+  - nvme-cli
+  - open-iscsi
+  - psmisc
+  - smartmontools
+  - socat
+  - software-properties-common
+  - unattended-upgrades
+  - unzip
+  - wireguard-tools
+  - linux-oem-20.04
+  - intel-opencl-icd
+  - level-zero
+  - intel-level-zero
+  - libmfx1
+  - intel-media-va-driver-non-free
+  - mesa-utils
+  - libigc-dev
+  - intel-igc-cm
+  - libgdfcl-dev
+  - libigfxcmrt-dev
+  - level-zero-dev
+  - intel-igc-core
+  - intel-gmmlib
+  - intel-igc-opencl
+  - gpg-agent
+  - wget
+  - vainfo
+  - ffmpeg
+  - clinfo
+os_packages_remove:
+  - apparmor
+  - apport
+  - byobu
+  - cloud-init
+  - cloud-guest-utils
+  - cloud-initramfs-copymods
+  - cloud-initramfs-dyn-netconf
+  - friendly-recovery
+  - landscape-common
+  - lxd-agent-loader
+  - ntfs-3g
+  - plymouth
+  - plymouth-theme-ubuntu-text
+  - popularity-contest
+  - snapd
+  - sosreport
+  - ubuntu-advantage-tools
+  - ufw

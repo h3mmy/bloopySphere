@@ -1,0 +1,10 @@
+---
+- name: Restart promtail
+  become: True
+  systemd:
+    name: promtail
+    state: restarted
+    daemon_reload: True
+  tags:
+    - promtail_run
+    - promtail

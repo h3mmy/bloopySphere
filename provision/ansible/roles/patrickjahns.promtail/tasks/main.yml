@@ -1,0 +1,22 @@
+---
+- include: preflight.yml
+  tags:
+    - promtail_install
+    - promtail
+
+- include: install.yml
+  become: True
+  tags:
+    - promtail_install
+    - promtail
+
+- name: Ensure promtail service is started and enabled
+  become: True
+  systemd:
+    daemon_reload: True
+    name: promtail
+    state: started
+    enabled: True
+  tags:
+    - promtail_run
+    - promtail

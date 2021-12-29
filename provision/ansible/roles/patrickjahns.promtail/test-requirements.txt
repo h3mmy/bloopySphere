@@ -1,0 +1,5 @@
+molecule>=3.0.0
+molecule-docker
+docker
+pytest-testinfra
+flake8
