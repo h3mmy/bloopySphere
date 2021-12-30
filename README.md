@@ -40,6 +40,40 @@ This is my home Kubernetes cluster. [Flux](https://github.com/fluxcd/flux2) watc
 
 For more information, head on over to my [docs](https://h3mmy.github.io/bloopySphere/).
 
+List of container images in use cluster-wide
+
+`kubectl get pods --all-namespaces -o go-template --template="{{range .items}}{{range .spec.containers}}{{.image}} {{end}}{{end}}" | sed 's/ /\n/g' | uniq > ./container_images_in_use.txt`
+
+List of container images in use that have arm64 images available (grep -q --> grep -vq for inversion)
+
+`kubectl get po -A -o yaml | grep 'image:' | cut -f2- -d':' | sed 's/^[[:space:]]*//g' | grep '/' | sort -u | xargs -I{} bash -c "docker manifest inspect {} | grep -q arm64 && echo {}" > ./container_images_with_arm64.txt`
+
+Snippet for nodeAffinity for non-ARM pods
+
+`affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: "kubernetes.io/arch"
+                operator: In
+                values:
+                  - amd64
+                  - i386
+                  - i686
+                  - x86`
+
+If using a node-taint for arm nodes[1], this will allow toleration
+
+`tolerations:
+- key: "arch"
+  operator: "Equal"
+  value: "arm64"
+  effect: "NoSchedule"`
+
+[1]While Bootstrapping: `--kubelet-extra-args` `--register-with-taints="arch=arm64:NoSchedule"`
+Else: `kubectl taint no myarmnode arch=arm64:NoSchedule`
+
 ## :handshake:&nbsp; Community
 
 Thanks to all the people who donate their time to the [Kubernetes @Home](https://github.com/k8s-at-home/) community.
