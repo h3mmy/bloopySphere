@@ -83,3 +83,9 @@ spec:
     prometheus:
       serviceMonitor:
         create: false
+
+    tolerations:
+      - key: "arch"
+        operator: "Equal"
+        value: "arm64"
+        effect: "NoSchedule"

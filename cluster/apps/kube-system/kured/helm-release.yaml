@@ -23,8 +23,24 @@ spec:
       endTime: "6:00"
       timeZone: "${TZ}"
       notifyUrl: "${DISCORD_WEBHOOK_URL}"
+
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 60
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
+                    - i386
+                    - i686
+                    - x86
+
     tolerations:
       - operator: "Exists"
         effect: "NoSchedule"
+
     metrics:
       create: true
