@@ -26,7 +26,7 @@ k3s_use_unsupported_config: true
 # this is set to my haproxy address running on my router.
 # If you want to use kube-vip only
 # set this to "{{ kubevip_address }}"
-k3s_registration_address: {{ kubevip_address }}
+k3s_registration_address: "{{ kubevip_address }}"
 
 # /etc/rancher/k3s/config.yaml.d
 k3s_server_config_yaml_d_files:
@@ -35,7 +35,7 @@ k3s_server_config_yaml_d_files:
 # (list) A flat list of templates to deploy on the primary control plane
 # /var/lib/rancher/k3s/server/manifests
 k3s_server_manifests_templates:
-  - "home-dns/home-dns-rbac.yaml.j2"
+  # - "home-dns/home-dns-rbac.yaml.j2"
   - "calico/calico-installation.yaml.j2"
   - "kube-vip/kube-vip-rbac.yaml.j2"
   - "kube-vip/kube-vip-daemonset.yaml.j2"

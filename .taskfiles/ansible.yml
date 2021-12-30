@@ -2,7 +2,7 @@
 version: "3"
 
 env:
-  ANSIBLE_CONFIG: "{{.ANSIBLE_DIR}}/ansible.cfg"
+  ANSIBLE_CONFIG: "{{.ANSIBLE_DIR}}/kubernetes/ansible.cfg"
 
 vars:
   ANSIBLE_PLAYBOOK_DIR: "{{.ANSIBLE_DIR}}/kubernetes/playbooks"
@@ -17,7 +17,7 @@ tasks:
 
   list:
     desc: List all the hosts
-    dir: provision/ansible
+    dir: provision/ansible/kubernetes
     cmds:
       - "ansible all -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml --list-hosts"
 
@@ -50,10 +50,10 @@ tasks:
     desc: Install Kubernetes on the nodes
     dir: provision/ansible
     cmds:
-      - "ansible-playbook --check --diff -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/k3s.yml"
+      - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/k3s.yml"
 
   playbook:k3s-nuke:
-    desc: Install Kubernetes on the nodes
+    desc: Nuke Kubernetes on the nodes
     dir: provision/ansible
     cmds:
       - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/nuke-k3s.yml"
