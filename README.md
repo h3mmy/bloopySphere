@@ -72,7 +72,7 @@ If using a node-taint for arm nodes[1], this will allow toleration
   effect: "NoSchedule"`
 
 [1]While Bootstrapping: `--kubelet-extra-args` `--register-with-taints="arch=arm64:NoSchedule"`
-Else: `kubectl taint no myarmnode arch=arm64:NoSchedule`
+Else: `kubectl taint no barry arch=arm64:NoSchedule`
 
 ## :handshake:&nbsp; Community
 
