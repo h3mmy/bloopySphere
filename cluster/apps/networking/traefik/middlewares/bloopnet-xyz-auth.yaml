@@ -10,7 +10,6 @@ spec:
       # Note this requires cloudflare proxy
       # - name: cloudflare-ips
       - name: auth-ak-outpost-traefik-default-xyz@kubernetescrd
-      - name: chain-no-auth@kubernetescrd
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -21,4 +20,5 @@ spec:
   chain:
     middlewares:
       - name: auth-ak-outpost-bloopnet-xyz@kubernetescrd
-      - name: chain-no-auth@kubernetescrd
+      - name: networking-secure-headers@kubernetescrd
+      - name: networking-rate-limit@kubernetescrd
