@@ -17,16 +17,26 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+
     image:
       repository: ghcr.io/0xerr0r/blocky
       tag: v0.17
+
     controller:
       enabled: true
       type: deployment
       strategy: RollingUpdate
       replicas: 4
+
     env:
       TZ: "${TZ}"
+
+    autoscaling:
+      enabled: true
+      target: blocky
+      minReplicas: 1
+      maxReplicas: 2
+
     service:
       main:
         ports:
@@ -36,7 +46,8 @@ spec:
         enabled: true
         type: LoadBalancer
         externalIPs:
-          - "${SVC_BLOCKY_ADDRESS}"
+          - "${SVC_BLOCKY_ADDRESS_1}"
+          - "${SVC_BLOCKY_ADDRESS_2}"
         ports:
           dns-tcp:
             enabled: true
@@ -47,7 +58,8 @@ spec:
         enabled: true
         type: LoadBalancer
         externalIPs:
-          - "${SVC_BLOCKY_ADDRESS}"
+          - "${SVC_BLOCKY_ADDRESS_1}"
+          - "${SVC_BLOCKY_ADDRESS_2}"
         ports:
           dns-udp:
             enabled: true
@@ -55,51 +67,13 @@ spec:
             protocol: UDP
             targetPort: 53
         externalTrafficPolicy: Local
-
-      config: |
-        upstream:
-          externalResolvers:
-            - tcp+udp:8.8.8.8
-            - tcp+udp:8.8.4.4
-            - tcp+udp:1.1.1.1
-            - tcp-tls:1.0.0.1:853
-            - https://cloudflare-dns.com/dns-query
-        conditional:
-          mapping:
-            local: tcp+udp:kube-dns.svc
-            bigbloop: tcp+udp:192.168.1.1
-            smallbloop: tcp+udp:10.0.0.1
-            bloopycore: tcp+udp:10.1.0.1
-            status.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
-        blocking:
-          blackLists:
-            ads:
-            - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-            - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
-            - http://sysctl.org/cameleon/hosts
-            - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
-            kids:
-            - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts
-            none:
-          whiteLists:
-            ads:
-            - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
-            # - https://raw.githubusercontent.com/h3mmy/bloopySphere/main/blocky/whitelist.txt
-          clientGroupsBlock:
-            default:
-              - ads
-        clientLookup:
-          upstream: tcp+udp:192.168.1.1
-        prometheus:
-          enable: true
-          path: /metrics
-        httpPort: 4000
-        logLevel: info
     prometheus:
       serviceMonitor:
         enabled: true
+
     podAnnotations:
       configmap.reloader.stakater.com/reload: "blocky-config"
+
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
@@ -112,11 +86,50 @@ spec:
                     values:
                       - blocky
               topologyKey: kubernetes.io/hostname
-    nodeSelector:
-      node-role.kubernetes.io/worker: "true"
+
     resources:
       requests:
         memory: 100Mi
         cpu: 100m
       limits:
         memory: 750Mi
+
+    config: |
+      upstream:
+        externalResolvers:
+          - tcp+udp:8.8.8.8
+          - tcp+udp:8.8.4.4
+          - tcp+udp:1.1.1.1
+          - tcp-tls:1.0.0.1:853
+          - https://cloudflare-dns.com/dns-query
+      conditional:
+        mapping:
+          local: tcp+udp:kube-dns.svc
+          bigbloop: tcp+udp:192.168.1.1
+          smallbloop: tcp+udp:10.0.0.1
+          bloopycore: tcp+udp:10.1.0.1
+          status.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
+      blocking:
+        blackLists:
+          ads:
+          - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+          - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+          - http://sysctl.org/cameleon/hosts
+          - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
+          kids:
+          - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts
+          none:
+        whiteLists:
+          ads:
+          - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
+          # - https://raw.githubusercontent.com/h3mmy/bloopySphere/main/blocky/whitelist.txt
+        clientGroupsBlock:
+          default:
+            - ads
+      clientLookup:
+        upstream: tcp+udp:192.168.1.1
+      prometheus:
+        enable: true
+        path: /metrics
+      httpPort: 4000
+      logLevel: info
