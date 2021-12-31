@@ -203,12 +203,17 @@ spec:
             key: objstore.yml
 
         addtionalScrapeConfigs:
-          - job_name: minio
+          - job_name: minio-job
             honor_timestamps: true
             metrics_path: /minio/v2/metrics/cluster
             static_configs:
               - targets:
                   - "minio.storage.svc.cluster.local:9000"
+          - job_name: 'blocky'
+            honor_timestamps: true
+            static_configs:
+              - targets:
+                  - "blocky.networking.svc.cluster.local:4000"
           - job_name: "coredns"
             honor_timestamps: true
             static_configs:
