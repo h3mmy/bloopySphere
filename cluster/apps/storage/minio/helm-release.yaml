@@ -139,25 +139,11 @@ spec:
         tls:
           - secretName: tls.minio
             hosts:
-              - "minio.${XYZ_DOMAIN}"
-              - "s3.${XYZ_DOMAIN}"
+              - "{{ (index .Values.ingress.main.hosts 0).host }}"
+              - "{{ (index .Values.ingress.main.hosts 1).host }}"
 
     podAnnotations:
       secret.reloader.stakater.com/reload: "minio"
-
-    affinity: |
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 60
-            preference:
-              matchExpressions:
-                - key: kubernetes.io/arch
-                  operator: In
-                  values:
-                    - amd64
-                    - i386
-                    - i686
-                    - x86
 
     resources:
       requests:
