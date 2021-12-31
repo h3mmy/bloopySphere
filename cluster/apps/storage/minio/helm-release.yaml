@@ -145,6 +145,19 @@ spec:
     podAnnotations:
       secret.reloader.stakater.com/reload: "minio"
 
+    affinity: |
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "kubernetes.io/arch"
+                    operator: In
+                    values:
+                      - amd64
+                      - i386
+                      - i686
+                      - x86
+
     resources:
       requests:
         memory: 100Mi
