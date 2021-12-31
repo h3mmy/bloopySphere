@@ -54,8 +54,8 @@ spec:
         enabled: true
         type: LoadBalancer
         externalIPs:
-          - "${SVC_BLOCKY_ADDRESS_1}"
-          - "${SVC_BLOCKY_ADDRESS_2}"
+          - "${SVC_BLOCKY_ADDR_1}"
+          - "${SVC_BLOCKY_ADDR_2}"
         ports:
           dns-tcp:
             enabled: true
@@ -66,8 +66,8 @@ spec:
         enabled: true
         type: LoadBalancer
         externalIPs:
-          - "${SVC_BLOCKY_ADDRESS_1}"
-          - "${SVC_BLOCKY_ADDRESS_2}"
+          - "${SVC_BLOCKY_ADDR_1}"
+          - "${SVC_BLOCKY_ADDR_2}"
         ports:
           dns-udp:
             enabled: true
