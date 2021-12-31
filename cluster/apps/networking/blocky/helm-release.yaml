@@ -34,7 +34,7 @@ spec:
       enabled: true
       type: deployment
       strategy: RollingUpdate
-      replicas: 4
+      replicas: 2
 
     env:
       TZ: "${TZ}"
@@ -43,7 +43,7 @@ spec:
       enabled: true
       target: blocky
       minReplicas: 1
-      maxReplicas: 2
+      maxReplicas: 3
 
     service:
       main:
