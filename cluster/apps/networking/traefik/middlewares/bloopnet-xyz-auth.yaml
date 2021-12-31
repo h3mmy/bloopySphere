@@ -21,4 +21,4 @@ spec:
     middlewares:
       - name: auth-ak-outpost-bloopnet-xyz@kubernetescrd
       - name: secure-headers@kubernetescrd
-      - name: basic-rate-limit@kubernetescrd
+      - name: rate-limit@kubernetescrd

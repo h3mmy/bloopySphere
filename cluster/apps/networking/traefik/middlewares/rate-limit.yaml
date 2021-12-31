@@ -2,7 +2,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: basic-rate-limit
+  name: rate-limit
   namespace: networking
 spec:
   rateLimit:
