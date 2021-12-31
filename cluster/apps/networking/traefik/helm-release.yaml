@@ -74,7 +74,7 @@ spec:
           domains:
             - main: "${XYZ_DOMAIN}"
               sans:
-                - "*$.{XYZ_DOMAIN}"
+                - "*.${XYZ_DOMAIN}"
             - bloop: "${SECRET_DOMAIN}"
               sans:
                 - "*.${SECRET_DOMAIN}"
