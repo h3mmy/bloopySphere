@@ -22,4 +22,5 @@ data:
   CALIBRE_WEB_PID: "1061"
   WG_VXLAN_CIDR: "10.6.1.0/24"
   SVC_QBITTORRENT_ADDR: "10.2.0.2"
+  SVC_BLOCKY_ADDR: "10.1.0.111"
   TZ: "America/Detroit"
