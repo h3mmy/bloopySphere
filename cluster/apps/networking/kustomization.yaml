@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - traefik
   - wildcard-certificate
-  - blocky
+  # - blocky
