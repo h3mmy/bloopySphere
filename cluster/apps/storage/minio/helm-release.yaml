@@ -139,8 +139,8 @@ spec:
         tls:
           - secretName: tls.minio
             hosts:
-              - "{{ (index .Values.ingress.main.hosts 0).host }}"
-              - "{{ (index .Values.ingress.main.hosts 1).host }}"
+              - "minio.${XYZ_DOMAIN}"
+              - "s3.${XYZ_DOMAIN}"
 
     podAnnotations:
       secret.reloader.stakater.com/reload: "minio"
