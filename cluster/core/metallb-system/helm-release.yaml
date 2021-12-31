@@ -22,3 +22,9 @@ spec:
           protocol: layer2
           addresses:
             - "${METALLB_LB_RANGE}"
+
+    tolerations:
+      - key: "arch"
+        operator: "Equal"
+        value: "arm64"
+        effect: "NoSchedule"

@@ -9,6 +9,8 @@ spec:
     middlewares:
       # Note this requires cloudflare proxy
       # - name: cloudflare-ips
+      - name: networking-secure-headers@kubernetescrd
+      - name: networking-rate-limit@kubernetescrd
       - name: auth-ak-outpost-traefik-default-xyz@kubernetescrd
 ---
 apiVersion: traefik.containo.us/v1alpha1

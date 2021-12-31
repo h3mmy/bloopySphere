@@ -76,12 +76,17 @@ spec:
       tolerations:
         - key: "node-role.kubernetes.io/master"
           operator: "Exists"
+        - key: "arch"
+          operator: "Equal"
+          value: "arm64"
+          effect: "NoSchedule"
       resources:
         requests:
           memory: 200Mi
           cpu: 15m
         limits:
           memory: 3000Mi
+
 
     resources:
       requests:
