@@ -49,6 +49,11 @@ spec:
         existingClaim: overseerr-config-v1
         mountPath: /app/config
 
+    tolerations:
+      - key: "arch"
+        operator: "Equal"
+        value: "arm64"
+        effect: "NoSchedule"
     # initContainers:
     #   - name: settings-provider
     #     image: busybox:stable
