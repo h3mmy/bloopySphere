@@ -50,25 +50,17 @@ spec:
         ports:
           http:
             port: 4000
-      dns-tcp:
+      dns:
         enabled: true
         type: LoadBalancer
         loadBalancerIP: ${SVC_BLOCKY_ADDR_1}
         ports:
-          dns-tcp:
+          tcp:
             enabled: true
             port: 53
             protocol: TCP
             targetPort: 53
-        externalTrafficPolicy: Local
-        annotations:
-          metallb.universe.tf/allow-shared-ip: blocky
-      dns-udp:
-        enabled: true
-        type: LoadBalancer
-        loadBalancerIP: ${SVC_BLOCKY_ADDR_1}
-        ports:
-          dns-udp:
+          udp:
             enabled: true
             port: 53
             protocol: UDP
@@ -120,29 +112,30 @@ spec:
       conditional:
         mapping:
           local: tcp+udp:kube-dns.svc
-          bigbloop: tcp+udp:192.168.1.1
-          smallbloop: tcp+udp:10.0.0.1
-          bloopycore: tcp+udp:10.1.0.1
+          unifi: tcp+udp:${LOCAL_GATEWAY_MAIN}
+          ${DOMAIN_BIG_BLOOP}: tcp+udp:${LOCAL_GATEWAY_BIG_BLOOP}
+          ${DOMAIN_SMALL_BLOOP}: tcp+udp:${LOCAL_GATEWAY_SMALL_BLOOP}
+          ${DOMAIN_CORE_BLOOP}: tcp+udp:${LOCAL_GATEWAY_CORE_BLOOP}
           status.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
       blocking:
         blackLists:
           ads:
-          - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-          - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
-          - http://sysctl.org/cameleon/hosts
-          - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
-          kids:
-          - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts
+            - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+            - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+            - http://sysctl.org/cameleon/hosts
+            - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
+          special:
+            - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts
           none:
         whiteLists:
           ads:
-          - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
-          # - https://raw.githubusercontent.com/h3mmy/bloopySphere/main/blocky/whitelist.txt
+            - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
+            - https://raw.githubusercontent.com/h3mmy/bloopySphere/main/cluster/apps/networking/blocky/whitelist.txt
         clientGroupsBlock:
           default:
             - ads
       clientLookup:
-        upstream: tcp+udp:192.168.1.1
+        upstream: tcp+udp:${LOCAL_GATEWAY_MAIN}
       prometheus:
         enable: true
         path: /metrics

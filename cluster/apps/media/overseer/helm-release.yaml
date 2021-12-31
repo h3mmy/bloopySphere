@@ -23,6 +23,13 @@ spec:
     env:
       TZ: ${TZ}
       LOG_LEVEL: "info"
+
+    autoscaling:
+      enabled: true
+      target: overseerr
+      minReplicas: 1
+      maxReplicas: 2
+
     ingress:
       main:
         enabled: true
