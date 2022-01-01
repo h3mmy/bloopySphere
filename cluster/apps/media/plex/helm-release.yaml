@@ -119,7 +119,7 @@ spec:
         memory: 1500Mi
       limits:
         gpu.intel.com/i915: 2
-        memory: 4900Mi
+        memory: 9000Mi
 
     affinity:
       nodeAffinity:
