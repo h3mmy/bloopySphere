@@ -80,10 +80,12 @@ spec:
         accessMode: ReadWriteOnce
         size: 20Gi
       transcode:
-        enabled: false
-        existingClaim: nfs-media-pvc
-        subPath: Videos/transcode/
-        readOnly: false
+        enabled: true
+        type: emptyDir
+        accessMode: ReadWriteOnce
+        emptyDir:
+          enabled: true
+          sizeLimit: 10Gi
       tmp:
         enabled: true
         type: emptyDir
