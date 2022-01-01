@@ -40,10 +40,12 @@ spec:
       TZ: "${TZ}"
 
     autoscaling:
-      enabled: true
-      target: blocky
-      minReplicas: 1
-      maxReplicas: 4
+      enabled: false
+      # target: blocky
+      # minReplicas: 1
+      # maxReplicas: 4
+      # targetCPUUtilizationPercentage:  # 80
+      # targetMemoryUtilizationPercentage:  # 80
 
     service:
       main:
