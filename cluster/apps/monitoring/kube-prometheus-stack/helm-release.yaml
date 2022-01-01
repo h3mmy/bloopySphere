@@ -214,6 +214,14 @@ spec:
             static_configs:
               - targets:
                   - "blocky.networking.svc.cluster.local:4000"
+          - job_name: 'uptimerobot'
+            params:
+              script: [uptimerobot]
+            static_configs:
+              - targets:
+                  - "uptimerobot-prometheus.monitoring.svc.cluster.local:9705"
+            scrape_interval: 5m
+            scrape_timeout: 90s
           - job_name: "coredns"
             honor_timestamps: true
             static_configs:
