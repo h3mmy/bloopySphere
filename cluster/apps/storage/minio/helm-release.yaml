@@ -149,7 +149,7 @@ spec:
       nodeAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 100
-            nodeSelectorTerms:
+            preference:
               - matchExpressions:
                   - key: "kubernetes.io/hostname"
                     operator: In
