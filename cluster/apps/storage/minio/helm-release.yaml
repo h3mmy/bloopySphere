@@ -149,14 +149,12 @@ spec:
       nodeAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                  - key: kubernetes.io/hostname
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: "kubernetes.io/hostname"
                     operator: In
                     values:
                       - slowpoke
-              topologyKey: kubernetes.io/hostname
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
