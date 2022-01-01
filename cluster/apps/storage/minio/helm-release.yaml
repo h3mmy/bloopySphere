@@ -150,11 +150,11 @@ spec:
         preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 100
             preference:
-              - matchExpressions:
-                  - key: "kubernetes.io/hostname"
-                    operator: In
-                    values:
-                      - slowpoke
+              matchExpressions:
+                - key: "kubernetes.io/hostname"
+                  operator: In
+                  values:
+                    - slowpoke
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
