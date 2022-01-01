@@ -43,7 +43,7 @@ spec:
       enabled: true
       target: blocky
       minReplicas: 1
-      maxReplicas: 3
+      maxReplicas: 4
 
     service:
       main:

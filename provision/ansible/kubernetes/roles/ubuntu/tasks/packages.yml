@@ -29,22 +29,21 @@
       - software-properties-common
       - unattended-upgrades
       - wireguard-tools
-      - promtail
       - linux-oem-20.04
       - intel-opencl-icd
-      - level-zero
-      - intel-level-zero
-      - libmfx1
-      - intel-media-va-driver-non-free
-      - mesa-utils
-      - libigc-dev
-      - intel-igc-cm
-      - libgdfcl-dev
-      - libigfxcmrt-dev
-      - level-zero-dev
-      - intel-igc-core
-      - intel-gmmlib
-      - intel-igc-opencl
+      # - level-zero
+      # - intel-level-zero
+      # - libmfx1
+      # - intel-media-va-driver-non-free
+      # - mesa-utils
+      # - libigc-dev
+      # - intel-igc-cm
+      # - libgdfcl-dev
+      # - libigfxcmrt-dev
+      # - level-zero-dev
+      # - intel-igc-core
+      # - intel-gmmlib
+      # - intel-igc-opencl
       - gpg-agent
       - wget
       - vainfo
