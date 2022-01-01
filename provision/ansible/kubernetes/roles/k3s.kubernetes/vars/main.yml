@@ -45,12 +45,12 @@ k3s_server_manifests_urls:
   - url: https://docs.projectcalico.org/archive/v3.20/manifests/tigera-operator.yaml
     filename: tigera-operator.yaml
 
-# etcd backups to s3
-k3s_etcd_s3: true
-k3s_etcd_s3_bucket: k3s-etcd
-k3s_etcd_s3_insecure: false
-k3s_etcd_snapshot_schedule_cron: "0 */6 * * *"
-k3s_etcd_snapshot_retention: 28
+# # etcd backups to s3
+# k3s_etcd_s3: true
+# k3s_etcd_s3_bucket: k3s-etcd
+# k3s_etcd_s3_insecure: false
+# k3s_etcd_snapshot_schedule_cron: "0 */6 * * *"
+# k3s_etcd_snapshot_retention: 28
 
 # -- Encapsulation type
 calico_encapsulation: "VXLANCrossSubnet"

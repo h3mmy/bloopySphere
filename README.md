@@ -72,7 +72,17 @@ If using a node-taint for arm nodes[1], this will allow toleration
   effect: "NoSchedule"`
 
 [1]While Bootstrapping: `--kubelet-extra-args` `--register-with-taints="arch=arm64:NoSchedule"`
-Else: `kubectl taint no barry arch=arm64:NoSchedule`
+Else: `kubectl taint no k8s-0 arch=arm64:NoSchedule`
+
+Other useful snippets:
+`kubectl label node k8s-0 node-role.kubernetes.io/worker=worker`
+
+`kubectl apply --kustomize=./cluster/base/flux-system`
+
+`cat ~/.config/sops/age/keys.txt |
+kubectl -n flux-system create secret generic sops-age --from-file=age.agekey=/dev/stdin`
+
+`kubectl  create namespace flux-system --dry-run=client -o yaml | kubectl apply -f -`
 
 ## :handshake:&nbsp; Community
 
