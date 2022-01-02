@@ -84,6 +84,10 @@ spec:
       serviceMonitor:
         create: false
 
+    # Temporary harcoding to pin postgreql
+    nodeSelector:
+      kubernetes.io/hostname: "slowpoke"
+
     tolerations:
       - key: "arch"
         operator: "Equal"
