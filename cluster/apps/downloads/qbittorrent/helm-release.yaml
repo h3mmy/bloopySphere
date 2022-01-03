@@ -25,6 +25,7 @@ spec:
       tag: v4.3.9
     env:
       TZ: "${TZ}"
+      PGID: "${MEDIA_GID}"
     hostname: qbittorrent
     podAnnotations:
       setGateway: "true"
