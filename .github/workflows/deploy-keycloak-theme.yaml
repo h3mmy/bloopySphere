@@ -13,6 +13,7 @@ on:
 env:
   registry: ghcr.io
   themeName: bloopnet_theme
+  dockerfile_path: ./Dockerfiles/keycloak-theme.Dockerfile
 
 jobs:
   Deploy:
