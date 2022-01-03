@@ -14,7 +14,7 @@ env:
   registry: ghcr.io
   imageName: softbarry
   dockerfile_path: ./Dockerfiles
-  dockerfile_name: pihole-keepalived.Dockerfile
+  dockerfile: ./Dockerfiles/pihole-keepalived.Dockerfile
 
 jobs:
   Deploy:
@@ -22,17 +22,19 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
           registry: ${{ env.registry }}
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
         with:
           context: ${{ env.dockerfile_path }}
-          file: ${{ env.dockerfile_name }}
+          file: ${{ env.dockerfile }}
           push: true # Will only build if this is not here
           tags: |
             ghcr.io/${{ github.repository_owner }}/${{ env.imageName }}:${{ github.sha }}
