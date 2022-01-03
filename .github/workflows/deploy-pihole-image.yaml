@@ -13,7 +13,8 @@ on:
 env:
   registry: ghcr.io
   imageName: softbarry
-  dockerfile_path: ./Dockerfiles/pihole-keepalived.Dockerfile
+  dockerfile_path: ./Dockerfiles
+  dockerfile_name: pihole-keepalived.Dockerfile
 
 jobs:
   Deploy:
@@ -30,7 +31,8 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
         with:
-          file: ${{ env.dockerfile_path }}
+          context: ${{ env.dockerfile_path }}
+          file: ${{ env.dockerfile_name }}
           push: true # Will only build if this is not here
           tags: |
             ghcr.io/${{ github.repository_owner }}/${{ env.imageName }}:${{ github.sha }}
