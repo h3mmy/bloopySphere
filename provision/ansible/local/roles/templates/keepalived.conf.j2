@@ -1,0 +1,15 @@
+# {{ pihole_hostname }}.{{ pihole_domain }}
+vrrp_instance ADBLOCK {
+    state BACKUP
+    interface {{ pihole interface }}
+    virtual_router_id 51
+    priority 254
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass {{ PIHOLE_KEEPALIVED_PASSWORD }}
+    }
+    virtual_ipaddress {
+        {{ pihole_vip_address }}/24
+    }
+}
