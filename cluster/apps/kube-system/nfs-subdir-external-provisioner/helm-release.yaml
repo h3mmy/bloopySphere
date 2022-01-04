@@ -25,6 +25,7 @@ spec:
       path: "/volume3/Data/slowpoke-volumes"
       mountOptions:
         - noatime
+        - nodiratime
         - nfsvers=4.1
     storageClass:
       defaultClass: false
