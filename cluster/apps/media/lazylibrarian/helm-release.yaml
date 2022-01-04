@@ -36,7 +36,7 @@ spec:
         ingressClassName: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/instance: "bloop-quarky,bloop-xyz"
           hajimari.io/enable: "true"
           hajimari.io/icon: "book-search-outline"
           hajimari.io/appName: "LazyLibrarian"
