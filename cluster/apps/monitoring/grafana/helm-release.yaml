@@ -187,3 +187,6 @@ spec:
     serviceAccount:
       create: true
       autoMount: true
+
+    nodeSelector:
+      kubernetes.io/hostname: "slowpoke"
