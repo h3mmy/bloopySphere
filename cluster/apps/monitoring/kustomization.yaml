@@ -6,5 +6,5 @@ resources:
   - thanos
   - loki
   - promtail
-  #- grafana
+  - grafana
   - uptimerobot
