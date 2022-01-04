@@ -67,13 +67,17 @@ spec:
                     operator: In
                     values:
                       - overseerr
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - k8s-0
               topologyKey: kubernetes.io/hostname
 
-    tolerations:
-      - key: "arch"
-        operator: "Equal"
-        value: "arm64"
-        effect: "NoSchedule"
+    # tolerations:
+    #   - key: "arch"
+    #     operator: "Equal"
+    #     value: "arm64"
+    #     effect: "NoSchedule"
     # initContainers:
     #   - name: settings-provider
     #     image: busybox:stable
