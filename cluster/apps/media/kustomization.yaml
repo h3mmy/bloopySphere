@@ -5,5 +5,5 @@ resources:
   - media-pv
   - plex
   - calibre-web
-  - lazylibrarian
-  - overseer
+  # - lazylibrarian
+  # - overseer
