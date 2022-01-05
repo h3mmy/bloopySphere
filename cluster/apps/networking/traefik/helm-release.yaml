@@ -78,11 +78,16 @@ spec:
             - bloop: "${SECRET_DOMAIN}"
               sans:
                 - "*.${SECRET_DOMAIN}"
-
       metrics:
         port: 8082
         expose: true
         exposedPort: 8082
+      ldaps:
+        port: 636
+        expose: true
+        exposedPort: 636
+        tls:
+          enabled: true
     tlsOptions:
       default:
         minVersion: VersionTLS12

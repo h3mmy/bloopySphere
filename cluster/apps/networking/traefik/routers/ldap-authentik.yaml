@@ -1,0 +1,13 @@
+---
+kind: IngressRouteTCP
+metadata:
+  name: ldap-authentik-route
+  namespace: networking
+spec:
+  entryPoints:
+    - ldaps
+  routes:
+    - match: HostSNI(`ldap.${XYZ_DOMAIN}`)
+      services:
+        - name: ak-outpost-external-ldap.auth.svc.cluster.local
+          port: 636
