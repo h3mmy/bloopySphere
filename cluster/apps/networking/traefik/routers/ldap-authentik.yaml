@@ -6,7 +6,7 @@ metadata:
   namespace: networking
 spec:
   entryPoints:
-    - ldaps
+    - websecure
   routes:
     - match: HostSNI(`ldap.${XYZ_DOMAIN}`)
       services:
