@@ -13,3 +13,4 @@ resources:
   - velero.yaml
   - downloads.yaml
   - database.yaml
+  - rook-ceph.yaml
