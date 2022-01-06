@@ -208,7 +208,10 @@
       "updateTypes": ["minor", "patch"],
       "packageNames": [
         "grafana",
-        "thanos"
+        "thanos",
+        "overseerr",
+        "blocky",
+        "uptimerobot-prometheus"
       ]
     }
   ]
