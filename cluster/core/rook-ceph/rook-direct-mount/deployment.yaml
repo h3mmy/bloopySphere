@@ -70,7 +70,7 @@ spec:
                 path: mon-endpoints
         - name: nas-data
           nfs:
-            server: "${NAS_ADDR}"
+            server: "${NAS_ADDRESS}"
             path: /volume3/Data
         - name: direct-mount-scripts
           projected:
