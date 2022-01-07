@@ -21,6 +21,11 @@ spec:
     csi:
       enableCephfsDriver: false
       enableCephfsSnapshotter: false
+      pluginTolerations:
+        - key: "arm"
+          operator: "Exists"
+        - key: "node-role.kubernetes.io/master"
+          operator: "Exists"
     resources:
       requests:
         cpu: 100m
