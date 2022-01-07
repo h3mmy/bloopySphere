@@ -37,7 +37,7 @@ spec:
         enabled: true
         urlPrefix: /
         ssl: false
-      mgr:
+      mon:
         count: 1
       storage:
         useAllNodes: false
