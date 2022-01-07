@@ -37,7 +37,7 @@ spec:
         enabled: true
         urlPrefix: /
         ssl: false
-      mgr:
+      mon:
         count: 1
       storage:
         useAllNodes: false
@@ -56,7 +56,7 @@ spec:
         spec:
           failureDomain: host
           replicated:
-            size: 2
+            size: 1
         storageClass:
           enabled: true
           name: ceph-block
