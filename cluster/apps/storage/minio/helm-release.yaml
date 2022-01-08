@@ -26,7 +26,7 @@ spec:
   values:
     image:
       repository: quay.io/minio/minio
-      tag: RELEASE.2022-01-07T01-53-23Z
+      tag: RELEASE.2022-01-08T03-11-54Z
 
     nameOverride: "minio"
 
