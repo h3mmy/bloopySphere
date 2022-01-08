@@ -59,6 +59,7 @@ spec:
       # Traffic to these IPs will be send through the K8S gateway
       # change if your K8S cluster or home network uses a different CIDR
       VPN_LOCAL_CIDRS: "${NETWORK_K8S_CLUSTER_CIDR} ${NETWORK_K8S_SERVICE_CIDR} ${NETWORK_MANAGEMENT_CIDR} ${LOCAL_CIDR_1} ${LOCAL_CIDR_2}"
+      DNS_LOCAL_CIDRS: "local ${DOMAIN_BIG_BLOOP} ${DOMAIN_BIG_BLOOP} ${DOMAIN_CORE_BLOOP}"
 
     webhook:
       image:
@@ -103,6 +104,13 @@ spec:
           TZ: "${TZ}"
           IPTABLES_BACKEND: nft
           KILLSWITCH: "true"
+          # -- A separated list of IPv4 networks that will be excluded from the VPN/killswitch
+          KILLSWITCH_EXCLUDEDNETWORKS_IPV4: "${NETWORK_K8S_CLUSTER_CIDR};${NETWORK_K8S_SERVICE_CIDR};${NETWORK_MANAGEMENT_CIDR}"
+          # -- A separated list of IPv6 networks that will be excluded from the VPN/killswitch
+          # KILLSWITCH_EXCLUDEDNETWORKS_IPV6:
+          # -- The separator that is used to split the KILLSWITCH_EXCLUDEDNETWORKS lists
+          # @default -- ;
+          # SEPARATOR: ;
 
         configFileSecret: vpn-gateway-vpnconfig
 
