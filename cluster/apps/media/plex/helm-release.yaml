@@ -24,7 +24,7 @@ spec:
     env:
       TZ: "${TZ}"
       ADVERTISE_IP: "http://${LB_PLEX_IP}:32400/"
-      ALLOWED_NETWORKS: "10.0.0.0/8,172.16.0.0/16,192.168.0.0/16"
+      ALLOWED_NETWORKS: "${PLEX_NOAUTH_NETWORKS}"
       PLEX_CLAIM: "${SECRET_PLEX_CLAIM}"
     podSecurityContext:
       supplementalGroups:
