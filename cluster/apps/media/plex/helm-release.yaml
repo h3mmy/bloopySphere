@@ -26,7 +26,22 @@ spec:
       ADVERTISE_IP: "http://${LB_PLEX_IP}:32400/"
       ALLOWED_NETWORKS: "${PLEX_NOAUTH_NETWORKS}"
       PLEX_CLAIM: "${SECRET_PLEX_CLAIM}"
+      # https://support.plex.tv/articles/201105343-advanced-hidden-server-settings/
+      PLEX_PREFERENCE_1: "FriendlyName=Slowpoke"
+      PLEX_PREFERENCE_2: "BackgroundTranscodeLowPriority=1"
+      PLEX_PREFERENCE_3: "ManualPortMappingMode=1"
+      PLEX_PREFERENCE_4: "ManualPortMappingPort=32400"
+      # PLEX_PREFERENCE_5: "LanNetworksBandwidth=192.168.0.0/16\,10.0.0.0/8"
+      PLEX_PREFERENCE_6: "TranscoderTempDirectory=/tmp"
+      PLEX_PREFERENCE_7: "GdmEnabled=1"
+      # PLEX_PREFERENCE_8: "TranscoderH264BackgroundPreset=fast"
     podSecurityContext:
+      # Hardware acceleration using an Intel iGPU w/ QuickSync
+      # These IDs below should be matched to your `video` and `render` group on the host
+      # To obtain those IDs run the following grep statement on the host:
+      # $ cat /etc/group | grep "video\|render"
+      # video:x:44:
+      # render:x:109:
       supplementalGroups:
         - 44
         - 109
@@ -114,6 +129,7 @@ spec:
 
     resources:
       requests:
+        gpu.intel.com/i915: 1
         cpu: 1000m
         memory: 1500Mi
       limits:
