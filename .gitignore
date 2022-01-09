@@ -27,3 +27,4 @@ old_lazylib_config.ini
 
 # TEmporary
 provision/talos/*
+nukeRookCeph.sh
