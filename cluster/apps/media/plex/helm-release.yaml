@@ -36,7 +36,7 @@ spec:
       PLEX_PREFERENCE_1: "FriendlyName=Slowpoke"
       PLEX_PREFERENCE_2: "BackgroundTranscodeLowPriority=1"
       PLEX_PREFERENCE_3: "ManualPortMappingMode=1"
-      PLEX_PREFERENCE_4: "ManualPortMappingPort=32400"
+      PLEX_PREFERENCE_4: "ManualPortMappingPort=${PLEX_EXTERNAL_PORT}"
       # PLEX_PREFERENCE_5: "LanNetworksBandwidth=192.168.0.0/16\,10.0.0.0/8"
       PLEX_PREFERENCE_6: "TranscoderTempDirectory=/tmp"
       PLEX_PREFERENCE_7: "GdmEnabled=1"
