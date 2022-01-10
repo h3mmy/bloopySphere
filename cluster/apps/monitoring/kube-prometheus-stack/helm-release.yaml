@@ -16,6 +16,15 @@ spec:
         name: prometheus-community-charts
         namespace: flux-system
       interval: 5m
+  install:
+    crds: CreateReplace
+    disableWait: true
+    remediation:
+      retries: 7
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: 7
   values:
     fullnameOverride: prometheus
     alertmanager:
@@ -56,10 +65,10 @@ spec:
                 - "severity=critical"
               continue: true
         inhibit_rules:
-          - source_match:
-              severity: "critical"
-            target_match:
-              severity: "warning"
+          - source_matchers:
+              - "severity=critical"
+          - target_matchers:
+              - "severity=warning"
             equal: ["alertname", "namespace"]
       ingress:
         enabled: true
@@ -135,11 +144,11 @@ spec:
               - node
             targetLabel: instance
     kubeControllerManager:
-      enabled: false
-      # serviceMonitor:
-      #   enabled: true
-      #   https: true
-      #   insecureSkipVerify: true
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        https: true
+        insecureSkipVerify: true
     kubeProxy:
       enabled: false
       # serviceMonitor:
