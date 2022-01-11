@@ -1,0 +1,68 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: jupyterhub
+  namespace: default
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://jupyterhub.github.io/helm-chart/
+      chart: jupyterhub
+      version: 1.1.4
+      sourceRef:
+        kind: HelmRepository
+        name: jupyterhub-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    hub:
+      db:
+        type: postgres
+        url: "${JHUB_DB_URL}"
+      config:
+        Authenticator:
+          admin_users:
+            - ${JHUB_ADMIN}
+            - ${JHUB_ADMIN2}
+        GoogleOAuthenticator:
+          client_id: ${GOOGLE_JHUB_CLIENT_ID}
+          client_secret: ${GOOGLE_JHUB_CLIENT_SECRET}
+          oauth_callback_url: ${JHUB_OAUTH_CALLBACK}
+          hosted_domain:
+            - ${ALT_AUTH_DOMAIN}
+          login_service: ${ALT_AUTH_DOMAIN}
+        JupyterHub:
+          authenticator_class: google
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: "traefik"
+        hajimari.io/enable: "true"
+        hajimari.io/instance: "bloop-xyz"
+        hajimari.io/icon: "chart-scatter-plot"
+        hajimari.io/appName: "jupyterhub"
+      hosts:
+        - "jhub.${XYZ_DOMAIN}"
+      tls:
+        - secretName:
+          hosts:
+            - "jhub.${XYZ_DOMAIN}"
+    singleuser:
+      storage:
+        capacity: 1Gi
+        static:
+          pvcName: pvc-jupyterhub
+      # Defines the default image
+      image:
+        name: jupyter/scipy-notebook
+        tag: 82ce73789ba4
+      profileList:
+        - display_name: "Minimal environment"
+          description: "To avoid too much bells and whistles: Python."
+          kubespawner_override:
+            image: jupyter/minimal-notebook:82ce73789ba4
+        - display_name: "Datascience environment"
+          description: "If you want the additional bells and whistles: Python, R, and Julia."
+          default: true
