@@ -32,7 +32,7 @@ spec:
     podLabels:
       setGateway: "true"
     settings:
-      automaticPortSetup: true
+      automaticPortSetup: false
     service:
       main:
         ports:
