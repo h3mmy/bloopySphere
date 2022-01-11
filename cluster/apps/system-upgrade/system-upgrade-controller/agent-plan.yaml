@@ -18,7 +18,7 @@ spec:
       - "prepare"
       - "k3s-server"
   upgrade:
-    image: rancher/k3s-upgrad
+    image: rancher/k3s-upgrade
   nodeSelector:
     matchExpressions:
       # - {key: k3s-upgrade, operator: NotIn, values: ["disabled", "false"]}
