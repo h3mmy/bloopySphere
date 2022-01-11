@@ -132,6 +132,10 @@ spec:
               ports:
                 - port: ${VPN_GATEWAY_VPN_PORT}
                   protocol: UDP
+                - port: ${VPN_GATEWAY_VPN_PORT}
+                  protocol: TCP
+                - port: 53
+                  protocol: UDP
             - to:
                 # Allow traffic within K8S - change if your K8S cluster uses a different CIDR
                 - ipBlock:
