@@ -14,4 +14,4 @@ roles:
   - src: xanmanning.k3s
     version: v3.0.1
   - src: patrickjahns.promtail
-    version: 1.14.0
+    version: 1.15.0
