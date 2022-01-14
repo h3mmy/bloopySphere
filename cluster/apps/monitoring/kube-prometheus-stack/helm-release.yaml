@@ -158,10 +158,10 @@ spec:
         insecureSkipVerify: true
     kubeProxy:
       enabled: false
-        serviceMonitor:
-          enabled: true
-          https: true
-          insecureSkipVerify: true
+      serviceMonitor:
+        enabled: true
+        https: true
+        insecureSkipVerify: true
     kubeScheduler:
       enabled: true
         serviceMonitor:
