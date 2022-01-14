@@ -167,7 +167,7 @@ spec:
       enabled: true
       serviceMonitor:
         enabled: true
-        https: true
+        https: false
         insecureSkipVerify: true
     # Setting this option to 0 disabled CPU limits
     prometheusOperator:
