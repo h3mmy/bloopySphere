@@ -96,7 +96,8 @@ spec:
                   storage: 1Gi
     nodeExporter:
       enabled: true
-#      serviceMonitor:
+      serviceMonitor:
+        https: false
 #        relabelings:
 #          - action: replace
 #            regex: (.*)
