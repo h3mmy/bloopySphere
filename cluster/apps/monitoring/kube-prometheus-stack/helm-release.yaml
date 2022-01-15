@@ -98,13 +98,13 @@ spec:
       enabled: true
       serviceMonitor:
         https: false
-#        relabelings:
-#          - action: replace
-#            regex: (.*)
-#            replacement: $1
-#            sourceLabels:
-#              - __meta_kubernetes_pod_node_name
-#            targetLabel: kubernetes_node
+        relabelings:
+          - action: replace
+            regex: (.*)
+            replacement: $1
+            sourceLabels:
+              - __meta_kubernetes_pod_node_name
+            targetLabel: kubernetes_node
     kubeStateMetrics:
       enabled: true
     kube-state-metrics:
@@ -129,6 +129,16 @@ spec:
           operator: "Exists"
         - effect: "NoSchedule"
           operator: "Exists"
+      prometheus:
+        monitor:
+          enabled: true
+          relabelings:
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels:
+                - __meta_kubernetes_pod_node_name
+              targetLabel: kubernetes_node
     grafana:
       enabled: false
       forceDeployDashboards: true
@@ -243,5 +253,4 @@ spec:
             honor_timestamps: true
             static_configs:
               - targets:
-                  - "prometheus-coredns.monitoring:9153"
                   - "kube-dns.kube-system:9153"
