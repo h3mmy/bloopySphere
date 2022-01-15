@@ -59,6 +59,8 @@ spec:
         mode: console
       grafana_net:
         url: https://grafana.net
+      panels:
+        disable_sanitize_html: true
       auth.basic:
         disable_login_form: false
       auth.generic_oauth:
@@ -83,6 +85,7 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/default
+
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -94,12 +97,12 @@ spec:
           - name: Prometheus
             type: prometheus
             access: proxy
-            url: http://thanos-query.monitoring.svc.cluster.local:9090/
+            url: http://thanos-query:9090
             isDefault: true
           - name: Loki
             type: loki
             access: proxy
-            url: http://loki.monitoring.svc.cluster.local:3100
+            url: http://loki:3100
           - name: Promeheus-Direct
             type: prometheus
             access: proxy
@@ -149,6 +152,7 @@ spec:
           gnetId: 13665
           revision: 1
           datasource: Prometheus
+
     sidecar:
       dashboards:
         enabled: true
@@ -156,6 +160,7 @@ spec:
       datasources:
         enabled: true
         searchNamespace: ALL
+
     plugins:
       - natel-discrete-panel
       - pr0ps-trackmap-panel
@@ -163,6 +168,13 @@ spec:
       - vonage-status-panel
       - grafana-worldmap-panel
       - grafana-clock-panel
+      - grafana-singlestat-panel
+      - grafana-polystat-panel
+      - mxswat-separator-panel
+      - farski-blendstat-panel
+
+    imageRenderer:
+      enabled: true
 
     serviceMonitor:
       enabled: true

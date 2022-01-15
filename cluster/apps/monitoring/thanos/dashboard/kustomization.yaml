@@ -5,31 +5,31 @@ namespace: monitoring
 configMapGenerator:
   - name: thanos-bucket-replicate-dashboard
     files:
-      - thanos-bucket-replicate-dashboard.json=https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/bucket_replicate.json
+      - thanos-bucket-replicate.json=https://raw.githubusercontent.com/thanos-io/thanos/main/examples/dashboards/bucket-replicate.json
   - name: thanos-compact-dashboard
     files:
-      - thanos-compact-dashboard.json=https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/compact.json
+      - thanos-compact.json=https://raw.githubusercontent.com/thanos-io/thanos/main/examples/dashboards/compact.json
   - name: thanos-overview-dashboard
     files:
-      - thanos-overview-dashboard.json=https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/overview.json
+      - thanos-overview.json=https://raw.githubusercontent.com/thanos-io/thanos/main/examples/dashboards/overview.json
   - name: thanos-query-dashboard
     files:
-      - thanos-query-dashboard.json=https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/query.json
+      - thanos-query.json=https://raw.githubusercontent.com/thanos-io/thanos/main/examples/dashboards/query.json
   - name: thanos-query-frontend-dashboard
     files:
-      - thanos-query-frontend-dashboard.json=https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/query_frontend.json
+      - thanos-query-frontend.json=https://raw.githubusercontent.com/thanos-io/thanos/main/examples/dashboards/query_frontend.json
   - name: thanos-receive-dashboard
     files:
-      - thanos-receive-dashboard.json=https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/receive.json
+      - thanos-receive.json=https://raw.githubusercontent.com/thanos-io/thanos/main/examples/dashboards/receive.json
   - name: thanos-rule-dashboard
     files:
-      - thanos-rule-dashboard.json=https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/rule.json
+      - thanos-rule.json=https://raw.githubusercontent.com/thanos-io/thanos/main/examples/dashboards/rule.json
   - name: thanos-sidecar-dashboard
     files:
-      - thanos-sidecar-dashboard.json=https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/sidecar.json
+      - thanos-sidecar.json=https://raw.githubusercontent.com/thanos-io/thanos/main/examples/dashboards/sidecar.json
   - name: thanos-store-dashboard
     files:
-      - thanos-store-dashboard.json=https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/store.json
+      - thanos-store.json=https://raw.githubusercontent.com/thanos-io/thanos/main/examples/dashboards/store.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
