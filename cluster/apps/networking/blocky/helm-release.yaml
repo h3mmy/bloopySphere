@@ -78,6 +78,14 @@ spec:
         externalTrafficPolicy: Local
         annotations:
           metallb.universe.tf/allow-shared-ip: blocky
+
+    metrics:
+      enabled: true
+      serviceMonitor:
+        interval: 30s
+        scrapeTimeout: 10s
+      prometheusRule:
+        enabled: true
     prometheus:
       serviceMonitor:
         enabled: true
@@ -103,6 +111,15 @@ spec:
         operator: "Equal"
         value: "arm64"
         effect: "NoSchedule"
+
+    persistence:
+      whitelists:
+        enabled: true
+        mountPath: /app/whitelists
+        type: custom
+        volumeSpec:
+          configMap:
+            name: blocky-whitelist
 
     resources:
       requests:
@@ -140,7 +157,6 @@ spec:
         whiteLists:
           ads:
             - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
-            - https://raw.githubusercontent.com/h3mmy/bloopySphere/main/cluster/apps/networking/blocky/whitelist.txt
         clientGroupsBlock:
           default:
             - ads
