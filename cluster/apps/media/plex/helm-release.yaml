@@ -137,8 +137,9 @@ spec:
       requests:
         cpu: 1000m
         memory: 1500Mi
+        gpu.intel.com/i915: 1
       limits:
-        gpu.intel.com/i915: 2
+        gpu.intel.com/i915: 1
         memory: 9000Mi
 
     affinity:
