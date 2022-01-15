@@ -199,22 +199,28 @@ spec:
           - hosts:
               - "{{ (index .Values.prometheus.ingress.hosts 0) }}"
             secretName: tls.prometheus
+
       thanosService:
         enabled: true
       thanosServiceMonitor:
         enabled: true
+
       prometheusSpec:
         replicas: 1
         replicaExternalLabelName: "replica"
+        ruleSelector: {}
         ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelector: {}
+        serviceMonitorNamespaceSelector: {}
         serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelector: {}
+        podMonitorNamespaceSelector: {}
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         retention: 6h
         enableAdminAPI: true
         walCompression: true
-        serviceMonitorSelector: {}
-        podMonitorSelector: {}
+
         storageSpec:
           volumeClaimTemplate:
             spec:
