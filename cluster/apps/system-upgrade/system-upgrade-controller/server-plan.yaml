@@ -15,8 +15,16 @@ spec:
         operator: In
         values:
           - "true"
-      # - {key: k3os.io/mode, operator: DoesNotExist}
-      # - {key: k3s-upgrade, operator: NotIn, values: ["disabled", "false"]}
+
+      - key: k3os.io/mode
+        operator: DoesNotExist
+
+      - key: k3s-upgrade
+        operator: NotIn
+        values:
+          - "disabled"
+          - "false"
+
       - key: kubernetes.io/arch
         operator: In
         values:

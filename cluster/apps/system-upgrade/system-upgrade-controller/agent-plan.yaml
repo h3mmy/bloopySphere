@@ -17,21 +17,45 @@ spec:
     args:
       - "prepare"
       - "k3s-server"
+
   upgrade:
     image: rancher/k3s-upgrade
+
   nodeSelector:
     matchExpressions:
-      # - {key: k3s-upgrade, operator: NotIn, values: ["disabled", "false"]}
-      # - {key: k3os.io/mode, operator: DoesNotExist}
+      - key: k3s-upgrade
+        operator: NotIn
+        values:
+          - "disabled"
+          - "false"
+
+      - key: k3os.io/mode
+        operator: DoesNotExist
+
       - key: node-role.kubernetes.io/master
         operator: NotIn
-        values: ["true"]
-      # - {key: node-role.kubernetes.io/control-plane, operator: DoesNotExist}
-   # Specify which node taints should be tolerated by pods applying the upgrade.
+        values:
+          - "true"
+      - key: node-role.kubernetes.io/control-plane
+        operator: DoesNotExist
+  # Specify which node taints should be tolerated by pods applying the upgrade.
   # Anything specified here is appended to the default of:
-  # # - {key: node.kubernetes.io/unschedulable, effect: NoSchedule, operator: Exists}
-  # tolerations:
-  #   - {key: kubernetes.io/arch, effect: NoSchedule, operator: Equal, value: amd64}
-  #   - {key: kubernetes.io/arch, effect: NoSchedule, operator: Equal, value: arm64}
-  #   - {key: kubernetes.io/arch, effect: NoSchedule, operator: Equal, value: arm}
-  #   - {key: arm, operator: Exists}
+  # - {key: node.kubernetes.io/unschedulable, effect: NoSchedule, operator: Exists}
+  tolerations:
+    - key: kubernetes.io/arch
+      effect: NoSchedule
+      operator: Equal
+      value: amd64
+
+    - key: kubernetes.io/arch
+      effect: NoSchedule
+      operator: Equal
+      value: arm64
+
+    - key: kubernetes.io/arch
+      effect: NoSchedule
+      operator: Equal
+      value: arm
+
+    - key: arm
+      operator: Exists
