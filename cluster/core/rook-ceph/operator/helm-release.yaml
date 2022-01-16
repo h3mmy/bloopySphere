@@ -16,8 +16,12 @@ spec:
         name: rook-ceph-charts
         namespace: flux-system
   install:
+    remediation:
+      retries: 7
     crds: CreateReplace
   upgrade:
+    remediation:
+      retries: 7
     crds: CreateReplace
   values:
     crds:
