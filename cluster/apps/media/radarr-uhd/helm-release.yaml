@@ -87,7 +87,7 @@ spec:
         volumeSpec:
           nfs:
             server: "${NAS_ADDRESS}"
-            path: /volume3/Data/direct_backups/app/radarr-uhd
+            path: /volume3/Data/Backups/app/radarr-uhd
         mountPath: /config/Backups
         readOnly: false
     resources:
