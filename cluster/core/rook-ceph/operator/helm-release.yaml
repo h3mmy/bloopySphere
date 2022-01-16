@@ -15,9 +15,13 @@ spec:
         kind: HelmRepository
         name: rook-ceph-charts
         namespace: flux-system
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
   values:
     crds:
-      enabled: false
+      enabled: true
     csi:
       enableCephfsDriver: false
       enableCephfsSnapshotter: false
@@ -26,6 +30,8 @@ spec:
           operator: "Exists"
         - key: "node-role.kubernetes.io/master"
           operator: "Exists"
+    monitoring:
+      enabled: true
     resources:
       requests:
         cpu: 100m
