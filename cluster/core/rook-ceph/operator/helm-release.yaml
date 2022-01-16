@@ -18,11 +18,11 @@ spec:
   install:
     remediation:
       retries: 7
-    crds: CreateReplace
+    # crds: CreateReplace
   upgrade:
     remediation:
       retries: 7
-    crds: CreateReplace
+    # crds: CreateReplace
   values:
     crds:
       enabled: false
