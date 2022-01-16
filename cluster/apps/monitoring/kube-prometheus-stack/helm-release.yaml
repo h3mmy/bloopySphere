@@ -266,3 +266,13 @@ spec:
             static_configs:
               - targets:
                   - "kube-dns.kube-system:9153"
+          - job_name: "hass"
+            scrape_interval: 60s
+            metrics_path: /api/prometheus
+            honor_timestamps: true
+            # Long-Lived Access Token
+            authorization:
+              credentials: "${HASS_PROM_TOKEN}"
+            scheme: https
+            static_configs:
+              - targets: ['${HASS_DIRECT}:8123']
