@@ -28,6 +28,17 @@ spec:
       lokiAddress: http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push
       snippets:
         extraScrapeConfigs: |
+          - job_name: journal
+            journal:
+              path: /var/log/journal
+              max_age: 12h
+              labels:
+                job: systemd-journal
+            relabel_configs:
+              - source_labels: ['__journal__systemd_unit']
+                target_label: 'unit'
+              - source_labels: ['__journal__hostname']
+                target_label: 'hostname'
           - job_name: syslog
             syslog:
               listen_address: 0.0.0.0:1514
@@ -35,24 +46,24 @@ spec:
               labels:
                 job: "syslog"
             relabel_configs:
-            - source_labels: ['__syslog_connection_ip_address']
-              target_label: 'ip_address'
-            - source_labels: ['__syslog_message_severity']
-              target_label: 'severity'
-            - source_labels: ['__syslog_message_facility']
-              target_label: 'facility'
-            - source_labels: ['__syslog_message_hostname']
-              target_label: 'host'
-            - source_labels: ['__syslog_message_app_name']
-              target_label: 'app'
-            - source_labels: ['__syslog_message_SRC']
-              target_label: 'source_ip'
-            - source_labels: ['__syslog_message_SPT']
-              target_label: 'source_port'
-            - source_labels: ['__syslog_message_DPT']
-              target_label: 'destination_port'
-            - source_labels: ['__syslog_message_DST']
-              target_label: 'destination_ip'
+              - source_labels: ['__syslog_connection_ip_address']
+                target_label: 'ip_address'
+              - source_labels: ['__syslog_message_severity']
+                target_label: 'severity'
+              - source_labels: ['__syslog_message_facility']
+                target_label: 'facility'
+              - source_labels: ['__syslog_message_hostname']
+                target_label: 'host'
+              - source_labels: ['__syslog_message_app_name']
+                target_label: 'app'
+              - source_labels: ['__syslog_message_SRC']
+                target_label: 'source_ip'
+              - source_labels: ['__syslog_message_SPT']
+                target_label: 'source_port'
+              - source_labels: ['__syslog_message_DPT']
+                target_label: 'destination_port'
+              - source_labels: ['__syslog_message_DST']
+                target_label: 'destination_ip'
     extraPorts:
       syslog:
         name: syslog
@@ -74,6 +85,15 @@ spec:
                     - i386
                     - i686
                     - x86
+
+    extraVolumes:
+      - name: journal
+        hostPath:
+          path: /var/log/journal
+    extraVolumeMounts:
+      - name: journal
+        mountPath: /var/log/journal
+        readOnly: true
 
     tolerations:
       - key: "arch"
