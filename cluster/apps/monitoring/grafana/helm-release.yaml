@@ -112,6 +112,9 @@ spec:
 
     dashboards:
       default:
+        blocky-manual:
+          url: https://raw.githubusercontent.com/0xERR0R/blocky/v0.17/docs/blocky-grafana.json
+          datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/12175
         calico-felix:
           gnetId: 12175
