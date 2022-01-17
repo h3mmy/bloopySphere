@@ -19,7 +19,7 @@ spec:
   values:
     query:
       enabled: true
-      replicaCount: 2
+      replicaCount: 1
       replicaLabels:
         - replica
       dnsDiscovery:

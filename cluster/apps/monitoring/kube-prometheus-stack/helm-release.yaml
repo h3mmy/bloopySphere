@@ -16,6 +16,7 @@ spec:
         name: prometheus-community-charts
         namespace: flux-system
       interval: 5m
+  timeout: 20m
   install:
     crds: CreateReplace
     disableWait: true
@@ -176,14 +177,17 @@ spec:
         https: true
         insecureSkipVerify: true
     kubeScheduler:
-      enabled: false
+      enabled: true
       serviceMonitor:
         enabled: true
-        https: false
+        https: true
         insecureSkipVerify: true
-    # Setting this option to 0 disabled CPU limits
     prometheusOperator:
-      configReloaderCpu: 0
+      createCustomResource: true
+      prometheusConfigReloader:
+        resources:
+          limits:
+            cpu: 200m
     admissionWebhooks:
       certManager:
         enabled: true
@@ -230,7 +234,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: "nfs-client"
+              storageClassName: "rook-ceph"
               resources:
                 requests:
                   storage: 10Gi
@@ -240,6 +244,13 @@ spec:
           objectStorageConfig:
             name: thanos-objstore-secret
             key: objstore.yml
+
+        resources:
+          requests:
+            memory: 2000Mi
+            cpu: 250m
+          limits:
+            memory: 4000Mi
 
         addtionalScrapeConfigs:
           - job_name: minio-job
