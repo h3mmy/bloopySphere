@@ -24,6 +24,10 @@ spec:
       ingressClassName: traefik
       dashboard:
         annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Rook"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         host:
           name: "rook.${XYZ_DOMAIN}"

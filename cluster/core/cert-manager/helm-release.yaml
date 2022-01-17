@@ -44,3 +44,8 @@ spec:
       nameservers:
         - "1.1.1.1"
         - "10.1.0.9"
+    prometheus:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        prometheusInstance: monitoring
