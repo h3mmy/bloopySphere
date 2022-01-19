@@ -177,7 +177,7 @@ spec:
         https: true
         insecureSkipVerify: true
     kubeScheduler:
-      enabled: true
+      enabled: false
       serviceMonitor:
         enabled: true
         https: true
