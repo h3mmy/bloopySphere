@@ -167,3 +167,7 @@ spec:
         path: /metrics
       httpPort: 4000
       logLevel: info
+      queryLog:
+        type: mysql
+        target: ${MARIADB_BLOCKY_USER}:${MARIADB_BLOCKY_PASSWORD}@tcp(mariadb.db:3306)/${MARIADB_BLOCKY_DATABASE}?charset=utf8mb4&parseTime=True&loc=Local
+        logRetentionDays: 7

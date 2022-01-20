@@ -9,6 +9,7 @@ data:
   DOMAIN_BIG_BLOOP: "bigbloop"
   DOMAIN_CORE_BLOOP: "bloopycore"
   DOMAIN_SMALL_BLOOP: "smallbloop"
+  DS_PROMETHEUS: "default"
   LB_PLEX_IP: 10.1.0.105
   LB_PROMTAIL: 10.1.0.103
   LOCAL_CIDR_1: "192.168.0.0/16"
