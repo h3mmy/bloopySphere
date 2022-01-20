@@ -9,7 +9,7 @@ data:
   DOMAIN_BIG_BLOOP: "bigbloop"
   DOMAIN_CORE_BLOOP: "bloopycore"
   DOMAIN_SMALL_BLOOP: "smallbloop"
-  DS_PROMETHEUS: "default"
+  DS_PROMETHEUS: prometheus
   LB_PLEX_IP: 10.1.0.105
   LB_PROMTAIL: 10.1.0.103
   LOCAL_CIDR_1: "192.168.0.0/16"
@@ -38,3 +38,4 @@ data:
   SVC_QBITTORRENT_ADDR: "10.2.0.2"
   TZ: "America/Detroit"
   WG_VXLAN_CIDR: "10.6.1.0/24"
+  VAR_BLOCKY_URL: blocky.networking.svc.cluster.local
