@@ -112,14 +112,14 @@ spec:
             url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
           - name: MariaDB Blocky
             type: mysql
-            url: ${MARIADB_ADDRESS}:3306
+            url: mysql://${MARIADB_ADDRESS}:3306
             database: blocky
             user: ${MARIADB_GRAFANA_USER}
             secureJsonData:
               password: ${MARIADB_GRAFANA_PASSWORD}
           - name: MariaDB Hass
             type: mysql
-            url: ${MARIADB_ADDRESS}:3306
+            url: mysql://${MARIADB_ADDRESS}:3306
             database: hadb
             user: ${MARIADB_GRAFANA_USER}
             secureJsonData:
