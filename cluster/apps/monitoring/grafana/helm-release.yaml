@@ -45,7 +45,7 @@ spec:
       GF_DATE_FORMATS_INTERVAL_MONTH: "MM-YYYY"
       GF_DATE_FORMATS_INTERVAL_YEAR: "YYYY"
       VAR_BLOCKY_URL: "http://blocky.network.svc.cluster.local:4000"
-      DS_PROMETHEUS: prometheus
+      DS_PROMETHEUS: "prometheus"
     adminPassword: "${SECRET_GRAFANA_PASSWORD}"
     grafana.ini:
       server:
@@ -112,14 +112,14 @@ spec:
             url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
           - name: MariaDB Blocky
             type: mysql
-            url: mysql://${MARIADB_ADDRESS}:3306
+            url: ${MARIADB_ADDRESS}:3306
             database: blocky
             user: ${MARIADB_GRAFANA_USER}
             secureJsonData:
               password: ${MARIADB_GRAFANA_PASSWORD}
           - name: MariaDB Hass
             type: mysql
-            url: mysql://${MARIADB_ADDRESS}:3306
+            url: ${MARIADB_ADDRESS}:3306
             database: hadb
             user: ${MARIADB_GRAFANA_USER}
             secureJsonData:
