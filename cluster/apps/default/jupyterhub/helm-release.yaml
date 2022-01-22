@@ -39,7 +39,7 @@ spec:
             - openid
             - profile
             - email
-          # username_key: name
+          username_key: preferred_username
         JupyterHub:
           authenticator_class: generic-oauth
     ingress:
