@@ -31,7 +31,7 @@ spec:
         GenericOAuthenticator:
           client_id: ${JHUB_OAUTH_CLIENT_ID}
           client_secret: ${JHUB_OAUTH_CLIENT_SECRET}
-          oauth_callback_url: "https://{{ (index .Values.ingress.hosts 0).host }}/hub/oauth_callback"
+          oauth_callback_url: "https://jhub.${XYZ_DOMAIN}/hub/oauth_callback"
           authorize_url: "https://auth.${XYZ_DOMAIN}/application/o/authorize/"
           token_url: "https://auth.${XYZ_DOMAIN}/application/o/token/"
           userdata_url: "https://auth.${XYZ_DOMAIN}/application/o/userinfo/"
