@@ -7,5 +7,5 @@ metadata:
 spec:
   chain:
     middlewares:
-      - name: basic-rate-limit@kubernetescrd
-      - name: secure-headers@kubernetescrd
+      - name: networking-basic-rate-limit@kubernetescrd
+      - name: networking-secure-headers@kubernetescrd
