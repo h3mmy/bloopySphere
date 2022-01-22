@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - hajimari-bloop
   - hajimari-xyz
+  - jupyterhub

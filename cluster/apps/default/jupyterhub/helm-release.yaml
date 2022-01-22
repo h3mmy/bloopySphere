@@ -19,22 +19,27 @@ spec:
   values:
     hub:
       db:
-        type: postgres
-        url: "${JHUB_DB_URL}"
+        type: mysql
+        url: "${JUPYTER_DB_URL}"
       config:
         Authenticator:
           admin_users:
             - ${JHUB_ADMIN}
             - ${JHUB_ADMIN2}
-        GoogleOAuthenticator:
-          client_id: ${GOOGLE_JHUB_CLIENT_ID}
-          client_secret: ${GOOGLE_JHUB_CLIENT_SECRET}
-          oauth_callback_url: ${JHUB_OAUTH_CALLBACK}
-          hosted_domain:
-            - ${ALT_AUTH_DOMAIN}
-          login_service: ${ALT_AUTH_DOMAIN}
+        GenericOAuthenticator:
+          client_id: ${JHUB_OAUTH_CLIENT_ID}
+          client_secret: ${JHUB_OAUTH_CLIENT_SECRET}
+          oauth_callback_url: "https://{{ (index .Values.ingress.hosts 0).host }}/hub/oauth_callback"
+          authorize_url: "https://auth.${XYZ_DOMAIN}/application/o/authorize/"
+          token_url: "https://auth.${XYZ_DOMAIN}/application/o/token/"
+          userdata_url: "https://auth.${XYZ_DOMAIN}/application/o/userinfo/"
+          scope:
+            - openid
+            - profile
+            - email
+          # username_key: name
         JupyterHub:
-          authenticator_class: google
+          authenticator_class: generic-oauth
     ingress:
       enabled: true
       annotations:
@@ -46,14 +51,14 @@ spec:
       hosts:
         - "jhub.${XYZ_DOMAIN}"
       tls:
-        - secretName:
+        - secretName: tls.jhub
           hosts:
             - "jhub.${XYZ_DOMAIN}"
     singleuser:
       storage:
-        capacity: 1Gi
-        static:
-          pvcName: pvc-jupyterhub
+        capacity: 2Gi
+        dynamic:
+          storageClass: ceph-block
       # Defines the default image
       image:
         name: jupyter/scipy-notebook
