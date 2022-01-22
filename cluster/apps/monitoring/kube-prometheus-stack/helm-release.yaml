@@ -111,18 +111,18 @@ spec:
     kube-state-metrics:
       fullnameOverride: kube-state-metrics
       affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 60
-            preference:
-              matchExpressions:
-                - key: kubernetes.io/arch
-                  operator: In
-                  values:
-                    - amd64
-                    - i386
-                    - i686
-                    - x86
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 60
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+                      - i386
+                      - i686
+                      - x86
     prometheus-node-exporter:
       fullnameOverride: node-exporter
       tolerations:

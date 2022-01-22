@@ -18,6 +18,8 @@ spec:
       interval: 5m
   values:
     hub:
+      nodeSelector:
+        kubernetes.io/arch: "amd64"
       db:
         type: mysql
         url: "${JUPYTER_DB_URL}"
