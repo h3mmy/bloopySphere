@@ -85,55 +85,55 @@
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["major"],
       "commitMessagePrefix": "feat(images)!: ",
-      "labels": ["renovate/image", "dep/major"]
+      "labels": ["renovate/image", "type/major"]
     },
     {
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["minor"],
       "semanticCommitType": "feat",
-      "labels": ["renovate/image", "dep/minor"]
+      "labels": ["renovate/image", "type/minor"]
     },
     {
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["patch"],
       "semanticCommitType": "fix",
-      "labels": ["renovate/image", "dep/patch"]
+      "labels": ["renovate/image", "type/patch"]
     },
     {
       "matchDatasources": ["git-releases"],
       "matchUpdateTypes": ["major"],
       "commitMessagePrefix": "feat(images)!: ",
-      "labels": ["renovate/image", "dep/major"]
+      "labels": ["renovate/image", "type/major"]
     },
     {
       "matchDatasources": ["git-releases"],
       "matchUpdateTypes": ["minor"],
       "semanticCommitType": "feat",
-      "labels": ["renovate/image", "dep/minor"]
+      "labels": ["renovate/image", "type/minor"]
     },
     {
       "matchDatasources": ["git-releases"],
       "matchUpdateTypes": ["patch"],
       "semanticCommitType": "fix",
-      "labels": ["renovate/image", "dep/patch"]
+      "labels": ["renovate/image", "type/patch"]
     },
     {
       "matchDatasources": ["helm"],
       "matchUpdateTypes": ["major"],
       "commitMessagePrefix": "feat(charts)!: ",
-      "labels": ["renovate/helm", "dep/major"]
+      "labels": ["renovate/helm", "type/major"]
     },
     {
       "matchDatasources": ["helm"],
       "matchUpdateTypes": ["minor"],
       "semanticCommitType": "feat",
-      "labels": ["renovate/helm", "dep/minor"]
+      "labels": ["renovate/helm", "type/minor"]
     },
     {
       "matchDatasources": ["helm"],
       "matchUpdateTypes": ["patch"],
       "semanticCommitType": "fix",
-      "labels": ["renovate/helm", "dep/patch"]
+      "labels": ["renovate/helm", "type/patch"]
     },
     // Custom versions
     {
