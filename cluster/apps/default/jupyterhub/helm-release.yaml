@@ -60,6 +60,9 @@ spec:
           hosts:
             - "jhub.${XYZ_DOMAIN}"
     singleuser:
+      defaultUrl: "/lab"
+      extraEnv:
+        JUPYTERHUB_SINGLEUSER_APP: "jupyter_server.serverapp.ServerApp"
       storage:
         capacity: 2Gi
         dynamic:
