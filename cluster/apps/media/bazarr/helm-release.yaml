@@ -1,0 +1,62 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: bazarr
+  namespace: media
+spec:
+  releaseName: bazarr
+  interval: 10m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: bazarr
+      version: 10.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  values:
+    image:
+      repository: ghcr.io/k8s-at-home/bazarr
+      tag: v1.0.2
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-internal-auth@kubernetescrd
+          hajimari.io/enable: "true"
+          hajimari.io/icon: subtitles
+          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/appName: "bazarr"
+        hosts:
+          - host: bazarr.${XYZ_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - bazarr.${XYZ_DOMAIN}
+            secretName: tls.bazarr
+    persistence:
+      config:
+        enabled: true
+        existingClaim: bazarr-config
+      media:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume3/Data
+        mountPath: /data/nas-media
+    resources:
+      requests:
+        cpu: 200m
+        memory: 400Mi
+      limits:
+        cpu: 500m
+        memory: 600Mi
