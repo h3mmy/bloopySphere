@@ -79,3 +79,19 @@ spec:
         - display_name: "Datascience environment"
           description: "If you want the additional bells and whistles: Python, R, and Julia."
           default: true
+        - display_name: "Spark environment"
+          description: "The Jupyter Stacks spark image!"
+          kubespawner_override:
+            image: jupyter/all-spark-notebook:2343e33dec46
+        - display_name: "Learning Data Science"
+          description: "Datascience Environment with Sample Notebooks"
+          kubespawner_override:
+            image: jupyter/datascience-notebook:2343e33dec46
+            lifecycle_hooks:
+              postStart:
+                exec:
+                  command:
+                    - "sh"
+                    - "-c"
+                    - >
+                      gitpuller https://github.com/data-8/materials-fa17 master materials-fa;
