@@ -18,6 +18,7 @@ spec:
       interval: 5m
   values:
     hub:
+      authenticatePrometheus: false
       nodeSelector:
         kubernetes.io/arch: "amd64"
       db:
