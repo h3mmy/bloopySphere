@@ -3,7 +3,7 @@
     ":enableRenovate",
     "config:base",
     ":semanticCommits",
-    ":dependencyDashboard"
+    ":dependencyDashboard",
     "github>h3mmy/bloopysphere//.github/renovate/autoMerge"
   ],
   "timezone": "America/Detroit",
