@@ -1,8 +1,12 @@
 {
-  "enabled": true,
+  "extends": [
+    ":enableRenovate",
+    "config:base",
+    ":semanticCommits",
+    ":dependencyDashboard"
+    "github>h3mmy/bloopysphere//.github/renovate/autoMerge"
+  ],
   "timezone": "America/Detroit",
-  "semanticCommits": "enabled",
-  "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dashboard",
   "commitBody": "Signed-off-by: Zee Aslam <h3mmy@users.noreply.github.com>",
   "suppressNotifications": ["prIgnoreNotification"],
@@ -10,6 +14,13 @@
   "commitMessageTopic": "{{depName}}",
   "commitMessageExtra": "to {{newVersion}}",
   "commitMessageSuffix": "",
+
+  "platform": "github",
+  "username": "bloopy-boi[bot]",
+  "repositories": ["h3mmy/bloopysphere"],
+  "onboarding": false,
+  "requireConfig": false,
+  "gitAuthor": "bloopy-boi <166688+bloopy-boi[bot]@users.noreply.github.com>",
   "helm-values": {
     "fileMatch": ["./.+\\.yaml$"]
   },
@@ -180,39 +191,6 @@
       "groupName": "system-upgrade-controller-suite",
       "additionalBranchPrefix": "",
       "separateMinorPatch": true
-    },
-    // Auto-updates
-    {
-      "datasources": ["docker"],
-      "automerge": true,
-      "requiredStatusChecks": null,
-      "schedule": "after 1am and before 5am",
-      "updateTypes": ["minor", "patch"],
-      "packageNames": [
-        "homeassistant/home-assistant",
-        "ghcr.io/k8s-at-home/radarr",
-        "ghcr.io/k8s-at-home/sonarr",
-        "ghcr.io/k8s-at-home/nzbget",
-        "ghcr.io/k8s-at-home/prowlarr",
-        "ghcr.io/k8s-at-home/readarr",
-        "plexinc/pms-docker",
-        "hotio/readarr",
-        "nodered/node-red"
-      ]
-    },
-    {
-      "datasources": ["helm"],
-      "automerge": true,
-      "requiredStatusChecks": null,
-      "schedule": "after 1am and before 5am",
-      "updateTypes": ["minor", "patch"],
-      "packageNames": [
-        "grafana",
-        "thanos",
-        "overseerr",
-        "blocky",
-        "uptimerobot-prometheus"
-      ]
     }
   ]
 }
