@@ -11,6 +11,7 @@
     ":rebaseStalePrs",
     ":autoMergePatch",
     ":gomod",
+    "github>h3mmy/bloopysphere//.github/renovate/autoMerge",
     "github>h3mmy/bloopysphere//.github/renovate/autoMerge"
   ],
   "timezone": "America/Detroit",
@@ -89,6 +90,27 @@
         "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*?)\n *tag: v(?<currentValue>.*)\n"
       ],
       "datasourceTemplate": "helm"
+    },
+    // regexManager to read and process kube-prometheus-stack CRDs
+    {
+      "fileMatch": [
+        "cluster/crds/kube-prometheus-stack/.+\\.yaml$"
+      ],
+      "matchStrings": [
+        "registryUrl=(?<registryUrl>.*?)\n *tag: (?<depName>[a-zA-Z-]+)-(?<currentValue>.*)\n"
+      ],
+      "datasourceTemplate": "helm"
+    },
+    // regexManager to read and process External Snapshotter and External DNS CRDs
+    {
+      "fileMatch": [
+        "cluster/crds/external-snapshotter/.+\\.yaml$",
+        "cluster/crds/external-dns/.+\\.yaml$"
+      ],
+      "matchStrings": [
+        "datasource=(?<datasource>.*?)\n *url: https:\/\/github\\.com\/(?<depName>.*?)\\.git\n *ref:\n *tag: (?<currentValue>.*)\n"
+      ],
+      "datasourceTemplate": "github-releases"
     }
   ],
   "packageRules": [
