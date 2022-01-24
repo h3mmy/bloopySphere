@@ -3,7 +3,14 @@
     ":enableRenovate",
     "config:base",
     ":semanticCommits",
-    ":dependencyDashboard"
+    ":dependencyDashboard",
+    ":enablePreCommit",
+    ":disableRateLimiting",
+    ":separatePatchReleases",
+    ":autodetectPinVersions",
+    ":rebaseStalePrs",
+    ":autoMergePatch",
+    ":gomod",
     "github>h3mmy/bloopysphere//.github/renovate/autoMerge"
   ],
   "timezone": "America/Detroit",
@@ -25,12 +32,34 @@
     "fileMatch": ["./.+\\.yaml$"]
   },
   "kubernetes": {
-    "fileMatch": ["\\.yaml$"],
+    "fileMatch": [
+      "cluster/.+\\.yaml$"
+      ],
     "ignorePaths": [
-      "cluster/base/",
-      ".github"
+      "cluster/base/"
     ]
   },
+  "docker-compose": {
+    "fileMatch": [
+      "(^|\/)docker-compose.*\.ya?ml$",
+      "(^|\/)docker-compose.*\.ya?ml\.j2$"
+    ]
+  },
+  "helm-values": {
+    "fileMatch": [
+      "cluster/.+/helm-release\\.yaml$"
+    ]
+  },
+  "helmv3": {
+    "fileMatch": [
+      "charts/.+/Chart\\.yaml$"
+    ]
+  },
+  "flux": {
+    "fileMatch": [
+      "cluster/.+\\.yaml$"
+    ]
+  }
   "regexManagers": [
     // regexManager to read and process HelmRelease files
     {
