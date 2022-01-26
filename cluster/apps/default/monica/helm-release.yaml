@@ -23,6 +23,7 @@ spec:
       tag: 3.6.1-apache
     env:
       TZ: ${TZ}
+      APP_KEY: ${MONICA_APP_KEY}
       APP_URL: https://monica.${XYZ_DOMAIN}
       APP_ENV: production
       DB_HOST: ${MARIADB_ADDRESS}
@@ -37,7 +38,7 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           hajimari.io/enable: "true"
-          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/instance: "bloop-xyz, bloop-quarky"
           hajimari.io/appName: "{{ .Release.Name }}"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           # traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
