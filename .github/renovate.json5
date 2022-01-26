@@ -60,7 +60,7 @@
     "fileMatch": [
       "cluster/.+\\.yaml$"
     ]
-  }
+  },
   "regexManagers": [
     // regexManager to read and process HelmRelease files
     {
