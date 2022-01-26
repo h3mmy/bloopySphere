@@ -4,7 +4,15 @@
     "config:base",
     ":semanticCommits",
     ":dependencyDashboard",
-    "github>h3mmy/bloopysphere//.github/renovate/autoMerge"
+    ":enablePreCommit",
+    ":disableRateLimiting",
+    ":separatePatchReleases",
+    ":autodetectPinVersions",
+    ":rebaseStalePrs",
+    ":autoMergePatch",
+    ":gomod",
+    "github>h3mmy/bloopysphere//.github/renovate/autoMerge",
+    "github>h3mmy/bloopysphere//.github/renovate/labels"
   ],
   "timezone": "America/Detroit",
   "dependencyDashboardTitle": "Renovate Dashboard",
@@ -25,12 +33,34 @@
     "fileMatch": ["./.+\\.yaml$"]
   },
   "kubernetes": {
-    "fileMatch": ["\\.yaml$"],
+    "fileMatch": [
+      "cluster/.+\\.yaml$"
+      ],
     "ignorePaths": [
-      "cluster/base/",
-      ".github"
+      "cluster/base/"
     ]
   },
+  "docker-compose": {
+    "fileMatch": [
+      "(^|\/)docker-compose.*\.ya?ml$",
+      "(^|\/)docker-compose.*\.ya?ml\.j2$"
+    ]
+  },
+  "helm-values": {
+    "fileMatch": [
+      "cluster/.+/helm-release\\.yaml$"
+    ]
+  },
+  "helmv3": {
+    "fileMatch": [
+      "charts/.+/Chart\\.yaml$"
+    ]
+  },
+  "flux": {
+    "fileMatch": [
+      "cluster/.+\\.yaml$"
+    ]
+  }
   "regexManagers": [
     // regexManager to read and process HelmRelease files
     {
@@ -60,6 +90,27 @@
         "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*?)\n *tag: v(?<currentValue>.*)\n"
       ],
       "datasourceTemplate": "helm"
+    },
+    // regexManager to read and process kube-prometheus-stack CRDs
+    {
+      "fileMatch": [
+        "cluster/crds/kube-prometheus-stack/.+\\.yaml$"
+      ],
+      "matchStrings": [
+        "registryUrl=(?<registryUrl>.*?)\n *tag: (?<depName>[a-zA-Z-]+)-(?<currentValue>.*)\n"
+      ],
+      "datasourceTemplate": "helm"
+    },
+    // regexManager to read and process External Snapshotter and External DNS CRDs
+    {
+      "fileMatch": [
+        "cluster/crds/external-snapshotter/.+\\.yaml$",
+        "cluster/crds/external-dns/.+\\.yaml$"
+      ],
+      "matchStrings": [
+        "datasource=(?<datasource>.*?)\n *url: https:\/\/github\\.com\/(?<depName>.*?)\\.git\n *ref:\n *tag: (?<currentValue>.*)\n"
+      ],
+      "datasourceTemplate": "github-releases"
     }
   ],
   "packageRules": [
