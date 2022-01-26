@@ -1,0 +1,70 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: monica
+  namespace: default
+spec:
+  releaseName: monica
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: monica
+      version: 7.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: monica
+      tag: 3.6.1-apache
+    env:
+      TZ: ${TZ}
+      APP_URL: https://monica.${XYZ_DOMAIN}
+      APP_ENV: production
+      DB_HOST: ${MARIADB_ADDRESS}
+      DB_DATABASE: monica
+      DB_USERNAME: monica
+      DB_PASSWORD: ${MONICA_MARIADB_PASSWORD}
+      DEFAULT_MAX_STORAGE_SIZE: 4096
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/enable: "true"
+          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/appName: "{{ .Release.Name }}"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          # traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
+        hosts:
+          - host: monica.${XYZ_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "{{ (index .Values.ingress.main.hosts 0).host }}"
+            secretName: tls.monica
+    podAnnotations:
+      backup.velero.io/backup-volumes: config
+    persistence:
+      config:
+        enabled: true
+        storageClass: "ceph-block"
+        size: 2Gi
+    tolerations:
+      - key: "arm"
+        operator: "Exists"
+    resources:
+      requests:
+        memory: 100Mi
+        cpu: 50m
+      limits:
+        memory: 250Mi
+    mariadb:
+      enabled: false
