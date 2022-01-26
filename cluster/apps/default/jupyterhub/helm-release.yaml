@@ -6,6 +6,7 @@ metadata:
   namespace: default
 spec:
   interval: 5m
+  timeout: 20m
   chart:
     spec:
       # renovate: registryUrl=https://jupyterhub.github.io/helm-chart/
