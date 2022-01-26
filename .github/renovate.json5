@@ -9,7 +9,7 @@
     ":separatePatchReleases",
     ":autodetectPinVersions",
     ":rebaseStalePrs",
-    ":autoMergePatch",
+    ":automergePatch",
     ":gomod",
     "github>h3mmy/bloopysphere//.github/renovate/autoMerge",
     "github>h3mmy/bloopysphere//.github/renovate/labels"
