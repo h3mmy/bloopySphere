@@ -6,6 +6,7 @@ metadata:
   namespace: default
 spec:
   interval: 5m
+  timeout: 20m
   chart:
     spec:
       # renovate: registryUrl=https://jupyterhub.github.io/helm-chart/
@@ -16,6 +17,14 @@ spec:
         name: jupyterhub-charts
         namespace: flux-system
       interval: 5m
+
+  install:
+    remediation:
+      retries: 4
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+
   values:
     hub:
       authenticatePrometheus: false
