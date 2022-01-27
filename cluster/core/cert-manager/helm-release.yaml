@@ -34,7 +34,7 @@ spec:
     cleanupOnFail: true
 
   values:
-    installCRDs: false
+    installCRDs: true
     webhook:
       enabled: true
     extraArgs:
