@@ -210,8 +210,8 @@ spec:
       - mxswat-separator-panel
       - farski-blendstat-panel
 
-    imageRenderer:
-      enabled: true
+    # imageRenderer:
+    #   enabled: true
 
     serviceMonitor:
       enabled: true
