@@ -34,7 +34,7 @@ jobs:
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'workflow_dispatch' }}
           DEFAULT_BRANCH: "${{ env.DEFAULT_BRANCH }}"
           GITHUB_TOKEN: "${{ steps.generate-token.outputs.token }}"
-          GITHUB_RULES_PATH: ".github/lint"
+          LINTER_RULES_PATH: ".github/lint"
           ANSIBLE_CONFIG_FILE: .ansible-lint.yaml
           MARKDOWN_CONFIG_FILE: .markdownlint.yaml
           TERRAFORM_TFLINT_CONFIG_FILE: .tflint.hcl
