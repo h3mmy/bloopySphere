@@ -21,7 +21,7 @@ _... managed with Flux and Renovate_ :robot:
 
 <div align="center">
 
-[![Mozilla HTTP Observatory Grade](https://img.shields.io/mozilla-observatory/grade-score/bloopnet.xyz?publish&style=for-the-badge)]()
+[![Mozilla HTTP Observatory Grade](https://img.shields.io/mozilla-observatory/grade-score/bloopnet.xyz?publish&style=for-the-badge)](https://observatory.mozilla.org/)
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/h3mmy/bloopySphere?style=for-the-badge)]()
 
