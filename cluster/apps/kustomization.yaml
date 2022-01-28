@@ -17,4 +17,4 @@ resources:
   - vpn-gateway
   - downloads
   - rook-ceph
-  - database
+  # - database

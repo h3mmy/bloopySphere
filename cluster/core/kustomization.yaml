@@ -8,3 +8,4 @@ resources:
   - metallb-system
   - system-upgrade
   - rook-ceph
+  - kubegres
