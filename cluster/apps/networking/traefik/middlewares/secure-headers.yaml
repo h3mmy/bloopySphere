@@ -20,6 +20,7 @@ spec:
     accessControlMaxAge: 100
     addVaryHeader: true
     stsPreload: true
+    forceSTSHeader: true
     contentTypeNosniff: true
     stsIncludeSubdomains: true
     hostsProxyHeaders:
