@@ -10,6 +10,7 @@ on: # yamllint disable-line rule:truthy
 env:
   # Currently no way to detect automatically
   DEFAULT_BRANCH: main
+  FILTER_REGEX_EXCLUDE: "static.*"
 
 jobs:
   build:
@@ -35,6 +36,7 @@ jobs:
           DEFAULT_BRANCH: "${{ env.DEFAULT_BRANCH }}"
           GITHUB_TOKEN: "${{ steps.generate-token.outputs.token }}"
           LINTER_RULES_PATH: ".github/lint"
+          FILTER_REGEX_EXCLUDE: "${{ env.FILTER_REGEX_EXCLUDE }}"
           ANSIBLE_CONFIG_FILE: .ansible-lint.yaml
           MARKDOWN_CONFIG_FILE: .markdownlint.yaml
           TERRAFORM_TFLINT_CONFIG_FILE: .tflint.hcl
