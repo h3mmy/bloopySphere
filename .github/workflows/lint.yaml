@@ -10,7 +10,7 @@ on: # yamllint disable-line rule:truthy
 env:
   # Currently no way to detect automatically
   DEFAULT_BRANCH: main
-  FILTER_REGEX_EXCLUDE: "static.*"
+  FILTER_REGEX_EXCLUDE: "(static.*)|(provision\/ansible\/roles.*)"
 
 jobs:
   build:
