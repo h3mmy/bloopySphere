@@ -1,8 +1,13 @@
 ---
 ignore: |
+  charts/
+  .terraform/
   *.sops.*
   gotk-components.yaml
   provision/ansible/roles/patrickjahns.promtail/*
+  .private/
+  .vscode/
+  node_modules/
 extends: default
 rules:
   truthy:

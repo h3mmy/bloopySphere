@@ -1,2 +1,9 @@
 *.sops.*
 gotk-components.yaml
+charts/
+docs/
+.terraform/
+.vscode/
+.private/
+node_modules/
+static/
