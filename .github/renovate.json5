@@ -12,7 +12,8 @@
     ":automergePatch",
     ":gomod",
     "github>h3mmy/bloopysphere//.github/renovate/autoMerge",
-    "github>h3mmy/bloopysphere//.github/renovate/labels"
+    "github>h3mmy/bloopysphere//.github/renovate/labels",
+    "github>h3mmy/bloopysphere//.github/renovate/semanticCommits"
   ],
   "timezone": "America/Detroit",
   "dependencyDashboardTitle": "Renovate Dashboard",
