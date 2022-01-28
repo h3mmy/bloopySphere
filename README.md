@@ -29,7 +29,7 @@ _... managed with Flux and Renovate_ :robot:
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/h3mmy/bloopySphere/Deploy%20Keycloak%20Theme%20to%20GHCR?label=Keycloak%20Theme&style=for-the-badge)]()
 
-[![GitHub Super-Linter](https://github.com/h3mmy/bloopysphere/workflows/Lint/badge.svg?style=for-the-badge)](https://github.com/marketplace/actions/super-linter)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/h3mmy/bloopysphere/Lint?label=Lint&style=for-the-badge)]()
 
 [![Uptime](https://img.shields.io/uptimerobot/ratio/m790142441-faed6f7043db9c588f5e949f?style=for-the-badge)]()
 
