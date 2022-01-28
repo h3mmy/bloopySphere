@@ -39,7 +39,7 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           hajimari.io/enable: "true"
           hajimari.io/instance: "bloop-xyz, bloop-quarky"
-          hajimari.io/appName: "{{ .Release.Name }}"
+          hajimari.io/appName: "{{ .ReleaseName }}"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           # traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
