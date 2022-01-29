@@ -1,0 +1,14 @@
+---
+# These are supported funding model platforms
+
+github: h3mmy
+# patreon: # Nobody needs to see that...
+# open_collective: # Future option
+# ko_fi: # Future option
+# tidelift: # Replace with a single Tidelift platform-name/package-name e.g., npm/babel
+# community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
+# liberapay: # Replace with a single Liberapay username
+issuehunt: h3mmy
+# otechie: # Replace with a single Otechie username
+# lfx_crowdfunding: # Replace with a single LFX Crowdfunding project-name e.g., cloud-foundry
+custom: ['https://www.buymeacoffee.com/h3mmy']
