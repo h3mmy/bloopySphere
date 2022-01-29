@@ -1,5 +1,5 @@
 This is a basic layout for my cluster files
-
+```
 .
 └── cluster/
     ├── apps/
@@ -15,7 +15,7 @@ This is a basic layout for my cluster files
     |   └── ...
     └── crds/
         └── ...
-
+```
 The apps/ dir contains all the apps in the cluster. I have them striated by namespace.
 The base/ dir contains the flux-system and kustomize 'roots' so to speak. This is what 'drives' the gitops of the cluster.
 The core/ dir contains all resources that are prerequisites to namespaces and workloads.
