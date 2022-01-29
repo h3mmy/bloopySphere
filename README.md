@@ -22,16 +22,12 @@ _... managed with Flux and Renovate_ :robot:
 <div align="center">
 
 [![Mozilla HTTP Observatory Grade](https://img.shields.io/mozilla-observatory/grade-score/bloopnet.xyz?publish&style=for-the-badge)](https://observatory.mozilla.org/)
-
-[![GitHub last commit](https://img.shields.io/github/last-commit/h3mmy/bloopySphere?style=for-the-badge)]()
-
-[![GitHub branch checks state](https://img.shields.io/github/checks-status/h3mmy/bloopySphere/main?style=flat-square)]()
-
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/h3mmy/bloopySphere/Deploy%20Keycloak%20Theme%20to%20GHCR?label=Keycloak%20Theme&style=for-the-badge)]()
-
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/h3mmy/bloopysphere/Lint?label=Lint&style=for-the-badge)]()
-
 [![Uptime](https://img.shields.io/uptimerobot/ratio/m790142441-faed6f7043db9c588f5e949f?style=for-the-badge)]()
+[![GitHub last commit](https://img.shields.io/github/last-commit/h3mmy/bloopySphere?style=for-the-badge)](https://github.com/h3mmy/bloopySphere/commits/main)
+
+[![GitHub branch checks state](https://img.shields.io/github/checks-status/h3mmy/bloopySphere/main?style=flat-square)](https://github.com/h3mmy/bloopySphere/actions?query=branch%3Amain)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/h3mmy/bloopySphere/Deploy%20Keycloak%20Theme%20to%20GHCR?label=Keycloak%20Theme&style=for-the-badge)](https://github.com/h3mmy/bloopySphere/actions/workflows/deploy-keycloak-theme.yaml)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/h3mmy/bloopysphere/Lint?label=Lint&style=for-the-badge)](https://github.com/h3mmy/bloopySphere/actions/workflows/lint.yaml)
 
 </div>
 
