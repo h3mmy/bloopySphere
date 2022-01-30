@@ -1,0 +1,14 @@
+{
+    "ignorePatterns": [
+      {
+        "pattern": "^(\\.\\.\\/)+.*",
+        "reason": "Skip relative URL's"
+      }
+    ],
+
+    "aliveStatusCodes": [
+        429,
+        200,
+        201
+    ]
+}
