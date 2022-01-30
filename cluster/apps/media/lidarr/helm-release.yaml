@@ -44,6 +44,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: tls.lidarr
     podSecurityContext:
       supplementalGroups:
         - 100
