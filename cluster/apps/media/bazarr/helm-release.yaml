@@ -20,6 +20,9 @@ spec:
     image:
       repository: ghcr.io/k8s-at-home/bazarr
       tag: v1.0.2
+    env:
+      TZ: ${TZ}
+      PGID: 65537
     ingress:
       main:
         enabled: true
@@ -41,6 +44,13 @@ spec:
           - hosts:
               - bazarr.${XYZ_DOMAIN}
             secretName: tls.bazarr
+    podSecurityContext:
+      supplementalGroups:
+        - 100
+        # Custom Camelus Group(s)
+        - 65541
+        - 65536
+        - 65537
     persistence:
       config:
         enabled: true
