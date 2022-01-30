@@ -1,5 +1,0 @@
----
-- hosts: all
-  any_errors_fatal: true
-  roles:
-    - ansible-role-promtail

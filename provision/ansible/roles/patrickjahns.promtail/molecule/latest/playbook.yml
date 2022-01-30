@@ -1,7 +1,0 @@
----
-- hosts: all
-  any_errors_fatal: true
-  roles:
-    - role: ansible-role-promtail
-      vars:
-        promtail_version: "latest"

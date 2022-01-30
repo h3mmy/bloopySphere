@@ -1,5 +1,0 @@
-molecule==3.5.2
-molecule-docker
-docker
-pytest-testinfra
-flake8
