@@ -3,6 +3,14 @@
       {
         "pattern": "^(\\.\\.\\/)+.*",
         "reason": "Skip relative URL's"
+      },
+      {
+        "pattern": "^(provision/ansible/roles)+.*",
+        "reason": "Skip other peoples things"
+      },
+      {
+        "pattern": "^(provision/ansible/roles)+.*",
+        "reason": "Skip other peoples things"
       }
     ],
 
