@@ -1,0 +1,138 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: tdarr
+  namespace: media
+spec:
+  dependsOn:
+    - name: csi-rbdplugin
+      namespace: rook-ceph
+    - name: traefik
+      namespace: networking
+    - name: node-feature-discovery
+      namespace: kube-system
+  maxHistory: 3
+  interval: 5m
+  suspend: false
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: tdarr
+      version: 4.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: haveagitgat/tdarr
+      tag: 2.00.13
+      pullPolicy: IfNotPresent
+    env:
+      TZ: ${TZ}
+      serverIP: 0.0.0.0
+      ffmpegPath: /usr/bin/ffmpeg
+    podSecurityContext:
+      # Required for passthrough of /dev/dri devices from NFD
+      # https://dgpu-docs.intel.com/installation-guides/ubuntu/ubuntu-focal.html
+      supplementalGroups:
+        - 44
+        - 109
+    node:
+      enabled: true
+      id: node
+      image:
+        repository: haveagitgat/tdarr_node
+        tag: 2.00.13
+        pullPolicy: IfNotPresent
+      resources:
+        requests:
+          gpu.intel.com/i915: 1
+        limits:
+          gpu.intel.com/i915: 1
+    persistence:
+      data:
+        enabled: true
+        mountPath: /app/server
+        existingClaim: tdarr-config-v1
+      shared:
+        enabled: true
+        type: emptyDir
+        mountPath: /shared
+      media:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            path: /volume3/Data
+            server: ${NAS_ADDRESS}
+        mountPath: /Data
+      media-2:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            path: /volume2/Data2
+            server: ${NAS_ADDRESS}
+        mountPath: /Data2
+    service:
+      main:
+        ports:
+          http:
+            port: 8265
+          server:
+            enabled: true
+            protocol: TCP
+            port: 8266
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
+          hajimari.io/enable: "true"
+          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/icon: alpha-t-circle
+          hajimari.io/group: media
+        hosts:
+          - host: &host tdarr.${XYZ_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: tls.tdarr
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: feature.node.kubernetes.io/custom-intel-gpu
+                  operator: In
+                  values:
+                    - "true"
+      # This is not very helpful at the moment due to my limited devices
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - plex
+              namespaceSelector:
+                matchExpressions:
+                  - key: ns
+                    operator: In
+                    values:
+                      - media
+              topologyKey: kubernetes.io/hostname
+              namespaces:
+                - media
+    resources: {}

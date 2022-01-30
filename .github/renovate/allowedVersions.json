@@ -1,0 +1,14 @@
+{
+    "packageRules": [
+      {
+        "matchDatasources": ["docker"],
+        "matchPackageNames": ["influxdb"],
+        "allowedVersions": "<2"
+      },
+      {
+        "matchDatasources": ["helm"],
+        "matchPackageNames": ["grafana"],
+        "allowedVersions": "(6\\.21\\.[^1])"
+      }
+    ]
+  }
