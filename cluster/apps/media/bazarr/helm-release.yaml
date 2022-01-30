@@ -52,7 +52,15 @@ spec:
           nfs:
             server: "${NAS_ADDRESS}"
             path: /volume3/Data
-        mountPath: /data/nas-media
+        mountPath: /Data
+      media-2:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume2/Data2
+        mountPath: /Data2
     resources:
       requests:
         cpu: 200m
