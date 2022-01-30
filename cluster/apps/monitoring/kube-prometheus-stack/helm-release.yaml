@@ -294,4 +294,5 @@ spec:
               credentials: "${HASS_PROM_TOKEN}"
             scheme: https
             static_configs:
-              - targets: ['${HASS_DIRECT}:8123']
+              # - targets: ['${HASS_DIRECT}:8123']
+              - targets: ['home-assistant.${CLASSIC_DOMAIN}:443']
