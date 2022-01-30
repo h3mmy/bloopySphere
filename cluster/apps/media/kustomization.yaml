@@ -9,4 +9,4 @@ resources:
   - overseer
   - radarr-uhd
   - bazarr
-  - lidarr
+  # - lidarr
