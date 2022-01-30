@@ -1,12 +1,12 @@
 # database namespace
 
-This installs CRDS and RBACs
+This installs CRDS and RBACs. Note that this is currently disabled.
 
 ## Zalando postgres operator
 
 [Zalando operator](https://github.com/zalando/postgres-operator) to create highly available databases
 
-* [Operator settings](operator.yaml)
+* [Operator settings](helm-release.yaml)
 
 ## Status of all clusters
 
