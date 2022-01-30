@@ -4,5 +4,13 @@
         "pattern": "^(\\.\\.\\/)+.*",
         "reason": "Skip relative URL's"
       }
+    ],
+
+    "retryOn429": true,
+
+    "aliveStatusCodes": [
+        "429",
+        "200",
+        "201"
     ]
 }
