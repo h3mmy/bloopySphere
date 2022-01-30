@@ -22,6 +22,7 @@ spec:
       tag: v1.0.2
     env:
       TZ: ${TZ}
+      PUID: ${BAZARR_PUID}
       PGID: 65537
     ingress:
       main:

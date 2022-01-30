@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: monica
+  name: &name monica
   namespace: default
 spec:
   releaseName: monica
@@ -39,7 +39,7 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           hajimari.io/enable: "true"
           hajimari.io/instance: "bloop-xyz, bloop-quarky"
-          hajimari.io/appName: "{{ .ReleaseName }}"
+          hajimari.io/appName: *name
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           # traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
