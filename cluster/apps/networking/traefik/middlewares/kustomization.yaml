@@ -13,3 +13,4 @@ resources:
   - calibre-auth.yaml
   - secure-headers.yaml
   - chain-no-auth.yaml
+  - error-pages.yaml

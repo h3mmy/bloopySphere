@@ -57,6 +57,14 @@ spec:
       - "--providers.kubernetesingress.allowexternalnameservices=true"
       - "--providers.kubernetescrd.allowexternalnameservices=true"
       - "--providers.kubernetescrd.allowCrossNamespace=true"
+    additionalContainers:
+      - name: error-pages
+        image: ghcr.io/tarampampam/error-pages
+        env:
+          - name: TEMPLATE_NAME
+            value: 17-dark
+          - name: SHOW_DETAILS
+            value: "true"
     ports:
       traefik:
         expose: true
