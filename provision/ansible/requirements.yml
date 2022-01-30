@@ -12,6 +12,6 @@ collections:
     version: 2.1.1
 roles:
   - src: xanmanning.k3s
-    version: v3.0.1
+    version: v3.1.0
   - src: patrickjahns.promtail
     version: 1.15.0
