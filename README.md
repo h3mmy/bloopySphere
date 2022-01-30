@@ -1,3 +1,4 @@
+#
 <div align="center">
 
 <img src="https://camo.githubusercontent.com/5b298bf6b0596795602bd771c5bddbb963e83e0f/68747470733a2f2f692e696d6775722e636f6d2f7031527a586a512e706e67" align="center" width="144px" height="144px"/>
@@ -16,16 +17,15 @@ _... managed with Flux and Renovate_ :robot:
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=for-the-badge)](https://github.com/pre-commit/pre-commit)
 [![renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?style=for-the-badge&logo=renovatebot&logoColor=white)](https://github.com/renovatebot/renovate)
 
-
 </div>
 
 <div align="center">
 
 [![Mozilla HTTP Observatory Grade](https://img.shields.io/mozilla-observatory/grade-score/bloopnet.xyz?publish&style=for-the-badge)](https://observatory.mozilla.org/)
-[![Uptime](https://img.shields.io/uptimerobot/ratio/m790142441-faed6f7043db9c588f5e949f?style=for-the-badge)]()
+[![Uptime](https://img.shields.io/uptimerobot/ratio/m790142441-faed6f7043db9c588f5e949f?style=for-the-badge)](https://uptimerobot.com)
 [![GitHub last commit](https://img.shields.io/github/last-commit/h3mmy/bloopySphere?style=for-the-badge)](https://github.com/h3mmy/bloopySphere/commits/main)
 
-[![GitHub branch checks state](https://img.shields.io/github/checks-status/h3mmy/bloopySphere/main?style=flat-square)](https://github.com/h3mmy/bloopySphere/actions?query=branch%3Amain)
+[![GitHub branch checks state](https://img.shields.io/github/checks-status/h3mmy/bloopySphere/main?style=for-the-badge)](https://github.com/h3mmy/bloopySphere/actions?query=branch%3Amain)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/h3mmy/bloopySphere/Deploy%20Keycloak%20Theme%20to%20GHCR?label=Keycloak%20Theme&style=for-the-badge)](https://github.com/h3mmy/bloopySphere/actions/workflows/deploy-keycloak-theme.yaml)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/h3mmy/bloopysphere/Lint?label=Lint&style=for-the-badge)](https://github.com/h3mmy/bloopySphere/actions/workflows/lint.yaml)
 
@@ -65,6 +65,7 @@ Snippet for nodeAffinity for non-ARM pods
 If using a node-taint for arm nodes[1], this will allow toleration
 
 `tolerations:
+
 - key: "arch"
   operator: "Equal"
   value: "arm64"
