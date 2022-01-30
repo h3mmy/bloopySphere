@@ -1,6 +1,11 @@
 ---
 # This one is for docs only
 
+# MD003/heading-style/header-style - Heading style
+MD003: false
+  # Heading style
+  # style: "consistent"
+
 # https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
 # MD013/line-length - Line length
 MD013: false
