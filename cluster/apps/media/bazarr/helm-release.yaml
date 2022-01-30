@@ -33,13 +33,13 @@ spec:
           hajimari.io/instance: "bloop-quarky"
           hajimari.io/appName: "bazarr"
         hosts:
-          - host: bazarr.${XYZ_DOMAIN}
+          - host: &host bazarr.${XYZ_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - bazarr.${XYZ_DOMAIN}
+              - *host
             secretName: tls.bazarr
     persistence:
       config:
