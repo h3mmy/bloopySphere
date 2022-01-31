@@ -8,7 +8,7 @@
       {
         "matchDatasources": ["helm"],
         "matchPackageNames": ["grafana"],
-        "allowedVersions": "(6\\.21\\.[^1])"
+        "allowedVersions": "/(6\\.21\\.[^1])/"
       }
     ]
   }
