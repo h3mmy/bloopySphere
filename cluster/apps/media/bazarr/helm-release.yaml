@@ -22,8 +22,6 @@ spec:
       tag: v1.0.2
     env:
       TZ: ${TZ}
-      # PUID: ${BAZARR_PUID}
-      # PGID: 65537
     ingress:
       main:
         enabled: true
@@ -64,6 +62,7 @@ spec:
             server: "${NAS_ADDRESS}"
             path: /volume3/Data
         mountPath: /Data
+        readOnly: false
       media-2:
         enabled: true
         type: custom
@@ -72,6 +71,7 @@ spec:
             server: "${NAS_ADDRESS}"
             path: /volume2/Data2
         mountPath: /Data2
+        readOnly: false
     resources:
       requests:
         cpu: 200m
