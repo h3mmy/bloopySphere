@@ -39,7 +39,7 @@ spec:
           access_key: "${AUTHENTIK_S3_ACCESS_KEY}"
           bucket: "authentik-postgresql-backup"
           secret_key: "${AUTHENTIK_S3_SECRET}"
-          host: "https://s3.${XYZ_DOMAIN}"
+          host: http://s3.minio.storage
       redis:
         host: "authentik-redis-master"
       email:
