@@ -32,6 +32,7 @@ _... managed with Flux and Renovate_ :robot:
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/h3mmy/bloopySphere/Deploy%20Keycloak%20Theme%20to%20GHCR?label=Keycloak%20Theme&style=for-the-badge)](https://github.com/h3mmy/bloopySphere/actions/workflows/deploy-keycloak-theme.yaml)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/h3mmy/bloopysphere/Lint?label=Lint&style=for-the-badge)](https://github.com/h3mmy/bloopySphere/actions/workflows/lint.yaml)
 
+![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/h3mmy/bloopysphere?style=for-the-badge)
 </div>
 
 ---
