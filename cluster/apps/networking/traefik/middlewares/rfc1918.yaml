@@ -19,4 +19,5 @@ metadata:
 spec:
   chain:
     middlewares:
-      - name: rfc1918-ips
+      - name: networking-rfc1918-ips@kubernetescrd
+      - name: networking-error-pages@kubernetescrd

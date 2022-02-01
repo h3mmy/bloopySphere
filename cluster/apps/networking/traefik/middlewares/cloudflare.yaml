@@ -38,4 +38,5 @@ metadata:
 spec:
   chain:
     middlewares:
-      - name: cloudflare-ips
+      - name: networking-cloudflare-ips@kubernetescrd
+      - name: networking-error-pages@kubernetescrd
