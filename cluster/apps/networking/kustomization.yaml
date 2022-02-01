@@ -5,3 +5,4 @@ resources:
   - traefik
   - wildcard-certificate
   - blocky
+  - error-pages
