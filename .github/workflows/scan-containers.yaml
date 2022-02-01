@@ -44,6 +44,7 @@ jobs:
       - name: Detect Containers in Files
         id: containers
         run: |
+          chmod +x .github/scripts/container-parser.sh
           containers=$(.github/scripts/container-parser.sh --file "${{ matrix.file }}")
           echo "${containers}"
           echo ::set-output name=containers::${containers}
