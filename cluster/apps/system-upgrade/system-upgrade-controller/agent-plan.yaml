@@ -62,5 +62,4 @@ spec:
       operator: Exists
 
     - key: arch
-      operator: Equal
-      values: arm64
+      operator: Exists
