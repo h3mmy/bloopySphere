@@ -74,7 +74,7 @@ spec:
         - hosts:
             - "auth.${SECRET_DOMAIN}"
             - "auth.${XYZ_DOMAIN}"
-          secretName: "authentik-tls"
+          secretName: "tls.authentik"
     postgresql:
       enabled: true
       postgresqlPassword: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
