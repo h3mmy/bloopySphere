@@ -21,6 +21,10 @@ spec:
   upgrade:
     image: rancher/k3s-upgrade
 
+  drain:
+    force: true
+    skipWaitForDeleteTimeout: 60
+
   nodeSelector:
     matchExpressions:
       # - key: k3s-upgrade
