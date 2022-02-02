@@ -66,13 +66,8 @@ spec:
           paths:
             - path: "/"
               pathType: Prefix
-        - host: "auth.${SECRET_DOMAIN}"
-          paths:
-            - path: "/"
-              pathType: Prefix
       tls:
         - hosts:
-            - "auth.${SECRET_DOMAIN}"
             - "auth.${XYZ_DOMAIN}"
           secretName: "tls.authentik"
     postgresql:
