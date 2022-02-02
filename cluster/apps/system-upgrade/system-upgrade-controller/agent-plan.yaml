@@ -47,19 +47,22 @@ spec:
   # - {key: node.kubernetes.io/unschedulable, effect: NoSchedule, operator: Exists}
   tolerations:
     - key: kubernetes.io/arch
-      effect: NoSchedule
       operator: Equal
       value: amd64
 
     - key: kubernetes.io/arch
-      effect: NoSchedule
       operator: Equal
       value: arm64
 
     - key: kubernetes.io/arch
-      effect: NoSchedule
       operator: Equal
       value: arm
 
     - key: arm
       operator: Exists
+
+    - key: arch
+      operator: In
+      values:
+        - arm64
+        - amd64
