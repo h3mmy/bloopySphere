@@ -23,21 +23,21 @@ spec:
 
   nodeSelector:
     matchExpressions:
-      - key: k3s-upgrade
-        operator: NotIn
-        values:
-          - "disabled"
-          - "false"
+      # - key: k3s-upgrade
+      #   operator: NotIn
+      #   values:
+      #     - "disabled"
+      #     - "false"
 
-      - key: k3os.io/mode
-        operator: DoesNotExist
+      # - key: k3os.io/mode
+      #   operator: DoesNotExist
 
       - key: node-role.kubernetes.io/master
         operator: NotIn
         values:
           - "true"
-      - key: node-role.kubernetes.io/control-plane
-        operator: DoesNotExist
+      # - key: node-role.kubernetes.io/control-plane
+      #   operator: DoesNotExist
   # Specify which node taints should be tolerated by pods applying the upgrade.
   # Anything specified here is appended to the default of:
   # - {key: node.kubernetes.io/unschedulable, effect: NoSchedule, operator: Exists}
