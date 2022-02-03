@@ -11,7 +11,7 @@ spec:
     - kind: Rule
       match: HostSNI(`${CLASSIC_DOMAIN}`)
       services:
-        - kind: Service
-          name: classic-svc
+        - name: classic-svc
+          passHostHeader: true
   tls:
     passthrough: true
