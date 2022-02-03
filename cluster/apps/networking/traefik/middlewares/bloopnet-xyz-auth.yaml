@@ -12,7 +12,7 @@ spec:
       - name: networking-secure-headers@kubernetescrd
       - name: networking-rate-limit@kubernetescrd
       - name: auth-ak-outpost-traefik-default-xyz@kubernetescrd
-      # - name: networking-error-pages@kubernetescrd
+      - name: networking-error-pages@kubernetescrd
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -25,4 +25,4 @@ spec:
       - name: networking-secure-headers@kubernetescrd
       - name: networking-rate-limit@kubernetescrd
       - name: auth-ak-outpost-bloopnet-xyz@kubernetescrd
-      # - name: networking-error-pages@kubernetescrd
+      - name: networking-error-pages@kubernetescrd
