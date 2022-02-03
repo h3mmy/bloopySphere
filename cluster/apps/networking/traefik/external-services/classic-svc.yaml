@@ -7,3 +7,6 @@ metadata:
 spec:
   externalIPs:
     - ${LB_TRAEFIK_CLASSIC}
+  ports:
+    - 443
+    - 80
