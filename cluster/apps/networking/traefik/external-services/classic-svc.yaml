@@ -14,7 +14,7 @@ spec:
       port: 443
       targetPort: 443
     - port: 80
-      name: https
+      name: http
       protocol: TCP
   externalName: ${LB_TRAEFIK_CLASSIC}
   selector:
