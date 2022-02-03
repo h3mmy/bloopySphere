@@ -8,8 +8,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - kind: Rule
-      match: HostSNI(`${CLASSIC_DOMAIN}`)
+    - match: HostSNI(`${CLASSIC_DOMAIN}`)
       services:
         - name: classic-svc
           passHostHeader: true
