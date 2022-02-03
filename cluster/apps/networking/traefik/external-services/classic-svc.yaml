@@ -2,24 +2,21 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: classic-svc
+  labels:
+    k8s-app: ${CLASSIC_DOMAIN}
+  name: classic-traefik
   namespace: networking
 spec:
+  type: ExternalName
   ports:
-    - port: 443
-      name: http
+    - name: https
       protocol: TCP
+      port: 443
+      targetPort: 443
     - port: 80
       name: https
       protocol: TCP
----
-apiVersion: v1
-kind: Endpoints
-metadata:
-  name: classic-svc
-subsets:
-  - addresses:
-      - ip: ${LB_TRAEFIK_CLASSIC}
-    ports:
-      - port: 443
-      - port: 80
+  externalName: ${LB_TRAEFIK_CLASSIC}
+  selector:
+    app.kubernetes.io/instance: classic-traefik
+    app.kubernetes.io/name: classic-traefik
