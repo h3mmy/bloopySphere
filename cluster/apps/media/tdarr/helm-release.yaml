@@ -17,7 +17,6 @@ spec:
   suspend: false
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: tdarr
       version: 4.3.0
       sourceRef:

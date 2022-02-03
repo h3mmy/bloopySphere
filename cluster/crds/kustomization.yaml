@@ -7,4 +7,3 @@ resources:
   - node-feature-discovery
   - rook-ceph
   # - multus
-  # - postgres

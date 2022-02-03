@@ -9,7 +9,6 @@ spec:
   timeout: 20m
   chart:
     spec:
-      # renovate: registryUrl=https://jupyterhub.github.io/helm-chart/
       chart: jupyterhub
       version: 1.2.0
       sourceRef:

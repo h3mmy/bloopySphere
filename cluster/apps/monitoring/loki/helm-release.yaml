@@ -8,7 +8,6 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://grafana.github.io/helm-charts
       chart: loki
       version: 2.9.1
       sourceRef:
@@ -25,8 +24,6 @@ spec:
       remediateLastFailure: true
 
   values:
-    # image:
-    #   repository: ghcr.io/k8s-at-home/loki
 
     replicas: 1
 
