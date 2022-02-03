@@ -5,8 +5,6 @@ metadata:
   name: classic-svc
   namespace: networking
 spec:
-  externalIPs:
-    - ${LB_TRAEFIK_CLASSIC}
   ports:
     - port: 443
       name: http
@@ -14,3 +12,14 @@ spec:
     - port: 80
       name: https
       protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: classic-svc
+subsets:
+  - addresses:
+      - ip: ${LB_TRAEFIK_CLASSIC}
+    ports:
+      - port: 443
+      - port: 80
