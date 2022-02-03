@@ -7,3 +7,4 @@ resources:
   - dashboard
   - middlewares
   - routers
+  - external-services
