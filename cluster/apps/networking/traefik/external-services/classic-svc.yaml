@@ -8,5 +8,5 @@ spec:
   externalIPs:
     - ${LB_TRAEFIK_CLASSIC}
   ports:
-    - 443
-    - 80
+    - port: 443
+    - port: 80
