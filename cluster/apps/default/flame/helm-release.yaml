@@ -45,6 +45,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: tls.flame
     persistence:
       config:
         enabled: true
