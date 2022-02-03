@@ -9,4 +9,8 @@ spec:
     - ${LB_TRAEFIK_CLASSIC}
   ports:
     - port: 443
+      name: http
+      protocol: TCP
     - port: 80
+      name: https
+      protocol: TCP
