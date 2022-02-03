@@ -8,3 +8,4 @@ resources:
   - nfs-subdir-external-provisioner
   - node-feature-discovery
   - kured
+  - descheduler
