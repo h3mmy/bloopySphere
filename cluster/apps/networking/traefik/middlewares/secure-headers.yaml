@@ -13,8 +13,8 @@ spec:
       - "OPTIONS"
       - "PUT"
     accessControlAllowOriginList:
-      - "https://{XYZ_DOMAIN}"
-      - "https://{SECRET_DOMAIN}"
+      - "https://${XYZ_DOMAIN}"
+      - "https://${SECRET_DOMAIN}"
     #accessControlAllowOriginListRegex:
     # -"https://"
     accessControlMaxAge: 100
