@@ -20,4 +20,4 @@ spec:
   chain:
     middlewares:
       - name: networking-rfc1918-ips@kubernetescrd
-      - name: networking-error-pages@kubernetescrd
+      #- name: networking-error-pages@kubernetescrd
