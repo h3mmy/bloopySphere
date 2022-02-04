@@ -12,5 +12,21 @@ spec:
       services:
         - name: classic-traefik
           port: 443
+    - match: HostSNI(`home-assistant.bloopnet.${CLASSIC_DOMAIN}`)
+      services:
+        - name: classic-traefik
+          port: 443
+    - match: HostSNI(`traefik.bloopnet.${CLASSIC_DOMAIN}`)
+      services:
+        - name: classic-traefik
+          port: 443
+    - match: HostSNI(`ombi.bloopnet.${CLASSIC_DOMAIN}`)
+      services:
+        - name: classic-traefik
+          port: 443
+    - match: HostSNI(`portainer.bloopnet.${CLASSIC_DOMAIN}`)
+      services:
+        - name: classic-traefik
+          port: 443
   tls:
     passthrough: true
