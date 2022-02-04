@@ -10,3 +10,4 @@ resources:
   - radarr-uhd
   - bazarr
   - lidarr
+  - tdarr
