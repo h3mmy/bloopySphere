@@ -51,6 +51,7 @@ spec:
               - "{{ (index .Values.ingress.main.hosts 0).host }}"
       api:
         enabled: true
+        nameSuffix: "api"
         ingressClassName: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
