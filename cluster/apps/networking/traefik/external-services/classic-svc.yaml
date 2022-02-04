@@ -16,6 +16,9 @@ spec:
     - port: 80
       name: http
       protocol: TCP
+    - port: 9001
+      name: http
+      protocol: TCP
   externalName: ${LB_TRAEFIK_CLASSIC}
   selector:
     app.kubernetes.io/instance: classic-traefik
