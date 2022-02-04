@@ -49,24 +49,24 @@ spec:
           - secretName: tls.radarr-uhd
             hosts:
               - "{{ (index .Values.ingress.main.hosts 0).host }}"
-      api:
-        enabled: true
-        nameSuffix: "api"
-        ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.priority: "100"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
-        hosts:
-          - host: "radarr-uhd.${XYZ_DOMAIN}"
-            paths:
-              - path: /api
-                pathType: Prefix
-        tls:
-          - secretName: tls.radarr-uhd
-            hosts:
-              - "{{ (index .Values.ingress.api.hosts 0).host }}"
+      #api:
+     #   enabled: true
+      #  nameSuffix: "api"
+       # ingressClassName: "traefik"
+   #     annotations:
+    #      cert-manager.io/cluster-issuer: "letsencrypt-production"
+   #       traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+     #     traefik.ingress.kubernetes.io/router.priority: "100"
+    #      traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+   #     hosts:
+   #       - host: "radarr-uhd.${XYZ_DOMAIN}"
+      #      paths:
+      #        - path: /api
+      #          pathType: Prefix
+     #   tls:
+   #       - secretName: tls.radarr-uhd
+   #         hosts:
+        #      - "{{ (index .Values.ingress.api.hosts 0).host }}"
 
     podSecurityContext:
       supplementalGroups:
