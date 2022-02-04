@@ -1,0 +1,19 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: radarr-uhd-bypass
+  namespace: networking
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`radarr-uhd.${XYZ_DOMAIN}`) && (Headers(`X-Api-Key`, `${RADARR_UHD_API_KEY}`) || Query(`apikey`, `${RADARR_UHD_API_KEY}`))"
+      priority: 100
+      services:
+        - kind: Service
+          name: radarr-uhd.media
+          port: 7676
+  tls:
+    secretName: "${XYZ_DOMAIN/./-}-tls"
