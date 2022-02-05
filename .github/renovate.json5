@@ -37,7 +37,7 @@
       "cluster/.+\\.yaml$"
       ],
     "ignorePaths": [
-      "cluster/base/"
+      "cluster/.+/gotk-components\\.ya?ml$"
     ]
   },
   "docker-compose": {
