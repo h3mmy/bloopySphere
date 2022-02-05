@@ -9,6 +9,11 @@
     "preview": "astro preview"
   },
   "devDependencies": {
-    "astro": "^0.22.20"
+    "astro": "^0.22.20",
+    "@astrojs/renderer-preact": "^0.4.0",
+    "@astrojs/renderer-react": "^0.4.1",
+    "@astrojs/renderer-solid": "^0.3.1",
+    "@astrojs/renderer-svelte": "^0.3.1",
+    "@astrojs/renderer-vue": "^0.3.0"
   }
 }

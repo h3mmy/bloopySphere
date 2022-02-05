@@ -1,14 +1,18 @@
 ---
 // Component Imports
-import Tour from '../components/Tour.astro';
+import Tour from 'src/components/Tour.astro';
 // You can import components from any supported Framework here!
-
+import PreactCounter from 'src/components/PreactCounter.jsx';
+import ReactCounter from 'src/components/ReactCounter.jsx';
+import SolidCounter from 'src/components/SolidCounter.jsx';
+import SvelteCounter from 'src/components/SvelteCounter.svelte';
+import VueCounter from 'src/components/VueCounter.vue';
 
 // Component Script:
 // You can write any JavaScript/TypeScript that you'd like here.
 // It will run during the build, but never in the browser.
 // All variables are available to use in the HTML template below.
-let title = 'My Astro Site';
+let title = 'BloopySphere Leaf';
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
@@ -56,6 +60,15 @@ let title = 'My Astro Site';
 
         -->
 
+        <PreactCounter client:visible />
+
+        <ReactCounter client:visible />
+
+        <SolidCounter client:visible />
+
+        <SvelteCounter client:visible />
+
+        <VueCounter client:visible />
     </main>
 </body>
 </html>
