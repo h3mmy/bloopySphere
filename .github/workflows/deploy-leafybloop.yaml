@@ -18,5 +18,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Invoke deployment hook
-        uses: shell
-        run: curl -X POST {{ secrets.LEAFYBLOOP_DEPLOY_WEBHOOK }}
+        run: |
+          curl -X POST {{ secrets.LEAFYBLOOP_DEPLOY_WEBHOOK }}
