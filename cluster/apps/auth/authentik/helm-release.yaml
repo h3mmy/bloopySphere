@@ -78,6 +78,7 @@ spec:
     prometheus:
       serviceMonitor:
         create: false
+    volumeMount:
 
     # Temporary harcoding to pin postgreql
     nodeSelector:
