@@ -17,7 +17,7 @@ configMapGenerator:
       - thanos-query.json=https://raw.githubusercontent.com/thanos-io/thanos/main/examples/dashboards/query.json
   - name: thanos-query-frontend-dashboard
     files:
-      - thanos-query-frontend.json=https://raw.githubusercontent.com/thanos-io/thanos/main/examples/dashboards/query_frontend.json
+      - thanos-query-frontend.json=https://raw.githubusercontent.com/thanos-io/thanos/main/examples/dashboards/query-frontend.json
   - name: thanos-receive-dashboard
     files:
       - thanos-receive.json=https://raw.githubusercontent.com/thanos-io/thanos/main/examples/dashboards/receive.json
