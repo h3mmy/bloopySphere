@@ -6,8 +6,6 @@ metadata:
   namespace: media
 spec:
   dependsOn:
-    - name: csi-rbdplugin
-      namespace: rook-ceph
     - name: traefik
       namespace: networking
     - name: node-feature-discovery
