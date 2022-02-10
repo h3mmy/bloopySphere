@@ -24,7 +24,7 @@ spec:
     env:
       TZ: "${TZ}"
       UP_UNIFI_DEFAULT_ROLE: "bloopnet-controller"
-      UP_UNIFI_DEFAULT_URL: "http://${LOCAL_GATEWAY_BIG_BLOOP}"
+      UP_UNIFI_DEFAULT_URL: "https://${LOCAL_GATEWAY_BIG_BLOOP}"
       UP_UNIFI_DEFAULT_VERIFY_SSL: false
       UP_UNIFI_DEFAULT_USER: "unifipoller"
       UP_UNIFI_DEFAULT_PASS: "${UNIFI_POLLER_PASS}"
