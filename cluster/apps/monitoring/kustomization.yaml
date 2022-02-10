@@ -8,3 +8,4 @@ resources:
   - promtail
   - grafana
   - uptimerobot
+  - unifi-poller
