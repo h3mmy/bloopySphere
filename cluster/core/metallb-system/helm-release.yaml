@@ -22,6 +22,7 @@ spec:
           protocol: layer2
           addresses:
             - "${METALLB_LB_RANGE}"
+            - "${METALLB_LB_IP6_RANGE}"
 
     tolerations:
       - key: "arch"
