@@ -130,12 +130,13 @@ spec:
 
     config: |
       upstream:
-        upstreamTimeout: 5
-        externalResolvers:
+        default:
           - tcp+udp:8.8.8.8
           - tcp+udp:8.8.4.4
           - tcp+udp:1.1.1.1
           - https://cloudflare-dns.com/dns-query
+      upstreamTimeout: 5
+      bootstrapDns: 1.1.1.1:53
       conditional:
         mapping:
           # local: tcp+udp:kube-dns.svc
@@ -150,6 +151,7 @@ spec:
           ${XYZ_DOMAIN}: ${METALLB_TRAEFIK_ADDR}
           ${SECRET_DOMAIN}: ${METALLB_TRAEFIK_ADDR}
       blocking:
+        failStartOnListError: true
         blackLists:
           ads:
             - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
