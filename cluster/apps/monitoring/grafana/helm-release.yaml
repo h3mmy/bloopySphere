@@ -221,7 +221,7 @@ spec:
     #   enabled: true
 
     serviceMonitor:
-      enabled: true
+      enabled: false
 
     ingress:
       enabled: true
