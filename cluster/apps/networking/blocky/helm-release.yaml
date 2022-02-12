@@ -130,6 +130,7 @@ spec:
 
     config: |
       upstream:
+        upstreamTimeout: 5
         externalResolvers:
           - tcp+udp:8.8.8.8
           - tcp+udp:8.8.4.4
@@ -170,7 +171,7 @@ spec:
         enable: true
         path: /metrics
       httpPort: 4000
-      logLevel: info
+      logLevel: debug
       queryLog:
         type: mysql
         target: ${MARIADB_BLOCKY_USER}:${MARIADB_BLOCKY_PASSWORD}@tcp(${MARIADB_ADDRESS}:3306)/${MARIADB_BLOCKY_DATABASE}?charset=utf8mb4&parseTime=True&loc=Local
