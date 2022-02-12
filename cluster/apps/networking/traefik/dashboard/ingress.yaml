@@ -12,13 +12,14 @@ metadata:
     hajimari.io/instance: "bloop-quarky"
     hajimari.io/url: "https://traefik.${XYZ_DOMAIN}"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    external-dns.alpha.kubernetes.io/hostname: *host
+    external-dns.alpha.kubernetes.io/hostname: ipv4.${XYZ_DOMAIN}
+    external-dns/is-public: "true"
 spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
         - "traefik.${SECRET_DOMAIN}"
-        - &host "traefik.${XYZ_DOMAIN}"
+        - "traefik.${XYZ_DOMAIN}"
       secretName: "traefik-dashboard-tls"
   rules:
     - host: "traefik.${SECRET_DOMAIN}"
