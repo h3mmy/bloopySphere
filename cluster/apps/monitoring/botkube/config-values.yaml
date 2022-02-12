@@ -207,17 +207,12 @@ config:
     enabled: false
     # cert:                                       # SSL Certificate file e.g certs/my-cert.crt
 
-  # Setting to support multiple clusters
   settings:
-    # Cluster name to differentiate incoming messages
-    clustername: ${CLUSTER_NAME}
-    # Kubectl executor configs
+    clustername: bloopnet
     kubectl:
-      # Set true to enable kubectl commands execution
-      enabled: false
-      # List of allowed commands
+      enabled: true
+      restrictAccess: true
       commands:
-        # method which are allowed
         verbs:
           [
             "api-resources",
@@ -231,7 +226,6 @@ config:
             "top",
             "auth",
           ]
-        # resource configuration which is allowed
         resources:
           [
             "deployments",
@@ -242,10 +236,6 @@ config:
             "storageclasses",
             "nodes",
           ]
-      # set Namespace to execute BotKube kubectl commands by default
-      defaultNamespace: default
-      # Set true to enable commands execution from configured channel only
-      restrictAccess: false
     # Set true to enable config watcher
     configwatcher: true
     # Set false to disable upgrade notification
