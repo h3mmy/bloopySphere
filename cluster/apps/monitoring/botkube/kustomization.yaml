@@ -4,5 +4,9 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - config-values.yaml
+configurations:
   - kustomize-config.yaml
-  - secrets.sops.yaml
+configMapGenerator:
+  - name: botkube-config-values
+    files:
+      - values.yaml=config-values.yaml
