@@ -137,7 +137,7 @@ spec:
           - https://cloudflare-dns.com/dns-query
       conditional:
         mapping:
-          local: tcp+udp:kube-dns.svc
+          # local: tcp+udp:kube-dns.svc
           unifi: tcp+udp:${LOCAL_GATEWAY_MAIN}
           ${DOMAIN_BIG_BLOOP}: tcp+udp:${LOCAL_GATEWAY_BIG_BLOOP}
           ${DOMAIN_SMALL_BLOOP}: tcp+udp:${LOCAL_GATEWAY_SMALL_BLOOP}
