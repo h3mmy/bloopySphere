@@ -28,9 +28,9 @@ k3s_server:
   disable-cloud-controller: true
   write-kubeconfig-mode: "644"
   # Network CIDR to use for pod IPs (Ipv6 link-local)
-  cluster-cidr: "10.42.0.0/16,fdcf:f7c1:1987::/48"
+  cluster-cidr: "10.42.0.0/16,fdcf:f7c1:1987::/112"
   # Network CIDR to use for service IPs (Ipv6 link-local)
-  service-cidr: "10.43.0.0/16,fdcd:c7cd:1619::/48"
+  service-cidr: "10.43.0.0/16,fdcf:f7c1:1619::/112"
   kubelet-arg:
     # Enables the kubelet to gracefully evict pods during a node shutdown
     - "feature-gates=GracefulNodeShutdown=true"
@@ -39,6 +39,7 @@ k3s_server:
     - "feature-gates=ReadWriteOncePod=true"
   # Required to monitor kube-controller-manager with kube-prometheus-stack
   kube-controller-manager-arg:
+    - "node-cidr-mask-size-ipv6=112"
     - "bind-address=0.0.0.0"
     - "feature-gates=EphemeralContainers=true"
     - "feature-gates=MixedProtocolLBService=true"
