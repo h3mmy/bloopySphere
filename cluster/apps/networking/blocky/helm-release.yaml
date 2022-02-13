@@ -55,7 +55,7 @@ spec:
       dns-tcp:
         enabled: true
         type: LoadBalancer
-        loadBalancerIP: ${SVC_BLOCKY_ADDR_1}
+        loadBalancerIP: ${SVC_BLOCKY_ADDR_V4}
         ports:
           dns-tcp:
             enabled: true
@@ -68,7 +68,7 @@ spec:
       dns-udp:
         enabled: true
         type: LoadBalancer
-        loadBalancerIP: ${SVC_BLOCKY_ADDR_1}
+        loadBalancerIP: ${SVC_BLOCKY_ADDR_V4}
         ports:
           dns-udp:
             enabled: true
