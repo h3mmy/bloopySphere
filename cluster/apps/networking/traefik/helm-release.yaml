@@ -30,9 +30,10 @@ spec:
       type: LoadBalancer
       spec:
         ipFamilyPolicy: PreferDualStack
-        loadBalancerIPs:
-          - "${METALLB_TRAEFIK_ADDR}"
-          - "${LB_V6_TRAEFIK}"
+        # loadBalancerIPs:
+        #   - "${METALLB_TRAEFIK_ADDR}"
+        #   - "${LB_V6_TRAEFIK}"
+        loadBalancerIP: ${METALLB_TRAEFIK_ADDR}
         externalTrafficPolicy: Local
     logs:
       general:
