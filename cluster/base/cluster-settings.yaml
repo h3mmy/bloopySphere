@@ -6,6 +6,8 @@ metadata:
   namespace: flux-system
 data:
   CALIBRE_WEB_PID: "1061"
+  CALICO_NODE_CIDR: "10.1.0.0/24"
+  CALICO_NODE_CIDR_IPV6: "2601:0404:c580:1c72::/106"
   DOMAIN_BIG_BLOOP: "bigbloop"
   DOMAIN_CORE_BLOOP: "bloopycore"
   DOMAIN_SMALL_BLOOP: "smallbloop"
