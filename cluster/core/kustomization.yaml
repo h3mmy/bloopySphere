@@ -9,4 +9,4 @@ resources:
   - system-upgrade
   - rook-ceph
   - kubegres
-  - tigera-operator
+  # - tigera-operator
