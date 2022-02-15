@@ -30,3 +30,4 @@ old_lazylib_config.ini
 provision/talos/*
 nukeRookCeph.sh
 fix-crd.sh
+ddns_data.json
