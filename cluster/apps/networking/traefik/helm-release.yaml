@@ -103,6 +103,8 @@ spec:
     pilot:
       enabled: false
     experimental:
+      http3:
+        enabled: true
       plugins:
         enabled: false
     resources:
