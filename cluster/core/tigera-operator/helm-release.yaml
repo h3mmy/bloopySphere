@@ -57,8 +57,8 @@ spec:
             natOutgoing: Enabled
             nodeSelector: all()
         nodeAddressAutodetectionV4:
-        cidrs:
-          - "${CALICO_NODE_CIDR}"
+          cidrs:
+            - "${CALICO_NODE_CIDR}"
         nodeAddressAutodetectionV6:
           cidrs:
             - "${CALICO_NODE_CIDR_IPV6}"
