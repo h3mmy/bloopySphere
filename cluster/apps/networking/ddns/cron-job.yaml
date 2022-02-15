@@ -2,10 +2,10 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  namespace: network
   name: cloudflare-ddns
+  namespace: networking
 spec:
-  schedule: "0/30 * * * *"
+  schedule: "15 1,13 * * *"
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 3
   concurrencyPolicy: Forbid

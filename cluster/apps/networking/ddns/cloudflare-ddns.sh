@@ -5,11 +5,14 @@ set -o errexit
 # Alternate ones include
 # ipv4.icanhazip.com or ipv6.icanhazip.com
 # https://ifconfig.co with the -4 flag
-IP4=$(curl -s https://1.1.1.1/cdn-cgi/trace)
-IP6=$(curl -s https://[2606:4700:4700::1111]/cdn-cgi/trace)
+IP4=$(dig +short txt ch whoami.cloudflare @1.1.1.1)
+IP6_PREFIX=$(dig +short txt ch whoami.cloudflare @2606:4700:4700::1111 | cut -d ':' -f1-4)
+
+#IP4_HTTP=$(curl -s https://1.1.1.1/cdn-cgi/trace)
+#IP6_PREFIX_HTTP=$(curl -s "https://[2606:4700:4700::1111]/cdn-cgi/trace" | cut -d ':' -f1-4)
 
 
-for domain in $(jq -r '.[] | @base64' ./ddns_data.json ); do
+for domain in $(jq -r '.[] | @base64' ./ddns_data.json); do
     _jq() {
         echo "${domain}" | base64 --decode | jq -r "$1"
     }
@@ -40,35 +43,38 @@ for domain in $(jq -r '.[] | @base64' ./ddns_data.json ); do
     )
     old_ip4=$(echo "${record4}" | sed -n 's/.*"content":"\([^"]*\).*/\1/p')
     if [ "${IP4}" = "${old_ip4}" ]; then
-        printf "%s - Success - IP Address '%s' has not changed for '%s' in zone '%s'\n" "$(date -u)" "${IP4}" "${RECORD}" "${ZONE}"
-        continue
-    fi
-
-    record4_identifier=$(echo "${record4}" | sed -n 's/.*"id":"\([^"]*\).*/\1/p')
-    update4=$(
-        curl -s -X PUT \
-            "https://api.cloudflare.com/client/v4/zones/${zone_identifier}/dns_records/${record4_identifier}" \
-            -H "Authorization: Bearer ${TOKEN}" \
-            -H "Content-Type: application/json" \
-            --data "{\"id\":\"${zone_identifier}\",\"type\":\"A\",\"proxied\":true,\"name\":\"${RECORD_4}\",\"content\":\"${IP4}\"}"
-    )
-
-    if echo "${update4}" | grep -q '\"success\":false'; then
-        printf "%s - Yikes - Updating IP Address '%s' has failed for '%s' in zone '%s'\n" "$(date -u)" "${IP4}" "${RECORD_4}" "${ZONE}"
-        exit 1
+        printf "%s - Success - IP Address '%s' has not changed for '%s' in zone '%s'\n" "$(date -u)" "${IP4}" "${RECORD_4}" "${ZONE}"
     else
-        printf "%s - Success - IP Address '%s' has been updated for '%s' in zone '%s'\n" "$(date -u)" "${IP4}" "${RECORD_4}" "${ZONE}"
+        record4_identifier=$(echo "${record4}" | sed -n 's/.*"id":"\([^"]*\).*/\1/p')
+        update4=$(
+            curl -s -X PUT \
+                "https://api.cloudflare.com/client/v4/zones/${zone_identifier}/dns_records/${record4_identifier}" \
+                -H "Authorization: Bearer ${TOKEN}" \
+                -H "Content-Type: application/json" \
+                --data "{\"id\":\"${zone_identifier}\",\"type\":\"A\",\"proxied\":true,\"name\":\"${RECORD_4}\",\"content\":\"${IP4}\"}"
+        )
+
+        if echo "${update4}" | grep -q '\"success\":false'; then
+            printf "%s - Yikes - Updating IP Address '%s' has failed for '%s' in zone '%s'\n" "$(date -u)" "${IP4}" "${RECORD_4}" "${ZONE}"
+            exit 1
+        else
+            printf "%s - Success - IP Address '%s' has been updated for '%s' in zone '%s'\n" "$(date -u)" "${IP4}" "${RECORD_4}" "${ZONE}"
+        fi
     fi
 
+    # IPv6
     record6=$(
         curl -s -X GET \
-            "https://api.cloudflare.com/client/v4/zones/${zone_identifier}/dns_records?name=${RECORD_6}&type=A" \
+            "https://api.cloudflare.com/client/v4/zones/${zone_identifier}/dns_records?name=${RECORD_6}&type=AAAA" \
             -H "Authorization: Bearer ${TOKEN}" \
             -H "Content-Type: application/json"
     )
-    old_ip6=$(echo "${record6}" | sed -n 's/.*"content":"\([^"]*\).*/\1/p')
-    if [ "${IP6}" = "${old_ip6}" ]; then
-        printf "%s - Success - IP Address '%s' has not changed for '%s' in zone '%s'\n" "$(date -u)" "${IP6}" "${RECORD_6}" "${ZONE}"
+    # We only check if the prefix has changed and retain the postfix/suffix/device-id
+    # the suffix is set by my internal network policies
+    old_IP6_PREFIX=$(echo "${record6}" | sed -n 's/.*"content":"\([^"]*\).*/\1/p' | cut -d ':' -f1-4)
+    IP6_POSTFIX=$(echo "${record6}" | sed -n 's/.*"content":"\([^"]*\).*/\1/p' | cut -d ':' -f5-8)
+    if [ "${IP6_PREFIX}" = "${old_IP6_PREFIX}" ]; then
+        printf "%s - Success - IP Address '%s' has not changed for '%s' in zone '%s'\n" "$(date -u)" "${IP6_PREFIX}" "${RECORD_6}" "${ZONE}"
         continue
     fi
 
@@ -78,13 +84,13 @@ for domain in $(jq -r '.[] | @base64' ./ddns_data.json ); do
             "https://api.cloudflare.com/client/v4/zones/${zone_identifier}/dns_records/${record6_identifier}" \
             -H "Authorization: Bearer ${TOKEN}" \
             -H "Content-Type: application/json" \
-            --data "{\"id\":\"${zone_identifier}\",\"type\":\"A\",\"proxied\":true,\"name\":\"${RECORD_6}\",\"content\":\"${IP6}\"}"
+            --data "{\"id\":\"${zone_identifier}\",\"type\":\"AAAA\",\"proxied\":true,\"name\":\"${RECORD_6}\",\"content\":\"${IP6_PREFIX}${IP6_POSTFIX}\"}"
     )
 
     if echo "${update6}" | grep -q '\"success\":false'; then
-        printf "%s - Yikes - Updating IP Address '%s' has failed for '%s' in zone '%s'\n" "$(date -u)" "${IP4}" "${RECORD_6}" "${ZONE}"
+        printf "%s - Yikes - Updating IP Address '%s' has failed for '%s' in zone '%s'\n" "$(date -u)" "${IP6_PREFIX}${IP6_POSTFIX}" "${RECORD_6}" "${ZONE}"
         exit 1
     else
-        printf "%s - Success - IP Address '%s' has been updated for '%s' in zone '%s'\n" "$(date -u)" "${IP4}" "${RECORD_6}" "${ZONE}"
+        printf "%s - Success - IP Address '%s' has been updated for '%s' in zone '%s'\n" "$(date -u)" "${IP6_PREFIX}${IP6_POSTFIX}" "${RECORD_6}" "${ZONE}"
     fi
 done
