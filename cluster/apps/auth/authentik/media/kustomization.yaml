@@ -8,3 +8,5 @@ configMapGenerator:
       - generated_3.png
 generatorOptions:
   disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
