@@ -6,3 +6,4 @@ resources:
   - wildcard-certificate
   - blocky
   - error-pages
+  - ddns
