@@ -81,7 +81,6 @@ spec:
     volumeMounts:
       - name: background-image-1
         mountPath: /media/sound_wave.svg
-        subPath: /media/sound_wave.svg
         readOnly: true
     volumes:
       - name: background-image-1
