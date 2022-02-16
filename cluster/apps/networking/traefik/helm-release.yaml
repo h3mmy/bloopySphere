@@ -36,13 +36,13 @@ spec:
         #   - "${LB_V6_TRAEFIK}"
         loadBalancerIP: ${METALLB_TRAEFIK_ADDR}
         externalTrafficPolicy: Local
-      ipFamilyPolicy: PreferDualStack
-      ipFamilies:
-        - "IPv4"
-        - "IPv6"
-      externalIPs:
-        - ${METALLB_TRAEFIK_ADDR}
-        - ${LB_V6_TRAEFIK}
+      # ipFamilyPolicy: PreferDualStack
+      # ipFamilies:
+      #   - "IPv4"
+      #   - "IPv6"
+      # externalIPs:
+      #   - ${METALLB_TRAEFIK_ADDR}
+      #   - ${LB_V6_TRAEFIK}
     logs:
       general:
         format: json
