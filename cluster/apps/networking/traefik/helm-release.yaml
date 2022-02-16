@@ -29,6 +29,8 @@ spec:
       enabled: true
       type: LoadBalancer
       spec:
+        # Gotta wait for kubernetes 1.24
+        # See https://github.com/kubernetes/enhancements/pull/1992
         # loadBalancerIPs:
         #   - "${METALLB_TRAEFIK_ADDR}"
         #   - "${LB_V6_TRAEFIK}"
@@ -39,6 +41,7 @@ spec:
         - "IPv4"
         - "IPv6"
       externalIPs:
+        - ${METALLB_TRAEFIK_ADDR}
         - ${LB_V6_TRAEFIK}
     logs:
       general:
