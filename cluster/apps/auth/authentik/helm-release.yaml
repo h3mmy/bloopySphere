@@ -78,7 +78,16 @@ spec:
     prometheus:
       serviceMonitor:
         create: false
-    volumeMount:
+    volumes:
+      - name: background-image-1
+        projected:
+          defaultMode: 0775
+          sources:
+            - configMap:
+                name: background-image-1
+                items:
+                  - key: generated_3.png
+                    path: background.png
 
     # Temporary harcoding to pin postgreql
     nodeSelector:
