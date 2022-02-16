@@ -9,7 +9,6 @@ spec:
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 3
   concurrencyPolicy: Forbid
-  ttlSecondsAfterFinished: 100
   jobTemplate:
     metadata:
       annotations:
