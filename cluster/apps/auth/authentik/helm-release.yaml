@@ -21,6 +21,13 @@ spec:
     - name: cert-manager
       namespace: cert-manager
 
+  install:
+    remediation:
+      retries: 4
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+
   values:
     fullnameOverride: authentik
     image:
