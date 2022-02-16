@@ -55,7 +55,9 @@ spec:
       dns-tcp:
         enabled: true
         type: LoadBalancer
-        loadBalancerIPs: ${SVC_BLOCKY_ADDR_V4}
+        # v1.24 will have loadBalancerIPs
+        # see https://github.com/kubernetes/enhancements/pull/1992
+        loadBalancerIP: ${SVC_BLOCKY_ADDR_V4}
         ports:
           dns-tcp:
             enabled: true
@@ -68,6 +70,7 @@ spec:
           - "IPv4"
           - "IPv6"
         externalIPs:
+          - ${SVC_BLOCKY_ADDR_V4}
           - ${SVC_BLOCKY_ADDR_V6}
         annotations:
           metallb.universe.tf/allow-shared-ip: blocky
@@ -87,6 +90,7 @@ spec:
           - "IPv4"
           - "IPv6"
         externalIPs:
+          - ${SVC_BLOCKY_ADDR_V4}
           - ${SVC_BLOCKY_ADDR_V6}
         annotations:
           metallb.universe.tf/allow-shared-ip: blocky
