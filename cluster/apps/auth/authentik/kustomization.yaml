@@ -6,6 +6,6 @@ resources:
 configMapGenerator:
   - name: background-image-2
     files:
-      - generated_3.png=generated_3.png
+      - generated_3.png
 generatorOptions:
   disableNameSuffixHash: true

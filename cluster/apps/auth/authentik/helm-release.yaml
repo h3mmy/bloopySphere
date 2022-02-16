@@ -78,6 +78,9 @@ spec:
     prometheus:
       serviceMonitor:
         create: false
+    volumeMounts:
+      - name: background-image-1
+        mountPath: /media
     volumes:
       - name: background-image-1
         projected:
