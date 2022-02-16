@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: auth
 resources:
   - helm-release.yaml
+  - generated_3.png
 configMapGenerator:
   - name: background-image-1
     files:
