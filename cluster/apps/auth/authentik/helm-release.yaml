@@ -87,7 +87,7 @@ spec:
                 name: background-image-1
                 items:
                   - key: generated_3.png
-                    path: background.png
+                    path: generated_3.png
 
     # Temporary harcoding to pin postgreql
     nodeSelector:

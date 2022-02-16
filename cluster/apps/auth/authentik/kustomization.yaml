@@ -4,8 +4,8 @@ kind: Kustomization
 resources:
   - helm-release.yaml
 configMapGenerator:
-  - name: background-image-1
+  - name: background-image-2
     files:
-      - background.png=generated_3.png
+      - generated_3.png=generated_3.png
 generatorOptions:
   disableNameSuffixHash: true
