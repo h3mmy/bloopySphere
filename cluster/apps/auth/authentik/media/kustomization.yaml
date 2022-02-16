@@ -5,7 +5,7 @@ namespace: auth
 configMapGenerator:
   - name: background-image-1
     files:
-      - generated_3.png
+      - generated_3-min.png
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
