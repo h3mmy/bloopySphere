@@ -80,7 +80,9 @@ spec:
         create: false
     volumeMounts:
       - name: background-image-1
-        mountPath: /media
+        mountPath: /media/generated_3.png
+        subPath: /media/generated_3.png
+        readOnly: true
     volumes:
       - name: background-image-1
         projected:
