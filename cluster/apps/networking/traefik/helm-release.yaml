@@ -36,7 +36,7 @@ spec:
         #   - "${LB_V6_TRAEFIK}"
         loadBalancerIP: ${METALLB_TRAEFIK_ADDR}
         externalTrafficPolicy: Local
-      # ipFamilyPolicy: PreferDualStack
+      ipFamilyPolicy: SingleStack
       # ipFamilies:
       #   - "IPv4"
       #   - "IPv6"
@@ -46,7 +46,7 @@ spec:
     logs:
       general:
         format: json
-        level: DEBUG
+        level: INFO
       access:
         enabled: true
         format: json
