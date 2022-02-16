@@ -78,21 +78,21 @@ spec:
     prometheus:
       serviceMonitor:
         create: false
-    # volumeMounts:
-    #   - name: background-image-1
-    #     mountPath: /media/generated_3.png
-    #     subPath: /media/generated_3.png
-    #     readOnly: true
-    # volumes:
-    #   - name: background-image-1
-    #     projected:
-    #       defaultMode: 0775
-    #       sources:
-    #         - configMap:
-    #             name: background-image-1
-    #             items:
-    #               - key: generated_3.png
-    #                 path: generated_3.png
+    volumeMounts:
+      - name: background-image-1
+        mountPath: /media/sound_wave.svg
+        subPath: /media/sound_wave.svg
+        readOnly: true
+    volumes:
+      - name: background-image-1
+        projected:
+          defaultMode: 0775
+          sources:
+            - configMap:
+                name: background-image-1
+                items:
+                  - key: sound_wave.svg
+                    path: sound_wave.svg
 
     # Temporary harcoding to pin postgreql
     nodeSelector:

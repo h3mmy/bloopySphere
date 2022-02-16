@@ -5,7 +5,7 @@ namespace: auth
 configMapGenerator:
   - name: background-image-1
     files:
-      - generated_3-min.png
+      - sound_wave.svg
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
