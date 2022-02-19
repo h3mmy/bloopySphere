@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - error-pages.yaml
   - classic-traefik.yaml
-  - hass-db.yaml
+  # - hass-db.yaml
