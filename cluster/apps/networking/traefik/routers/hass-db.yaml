@@ -1,0 +1,14 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: hass-db-route
+  namespace: networking
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: HostSNI(`hadb.${XYZ_DOMAIN}`)
+      services:
+        - name: ha-postgres.home.svc.cluster.local
+          port: 5432
