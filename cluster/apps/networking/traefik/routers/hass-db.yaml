@@ -10,5 +10,5 @@ spec:
   routes:
     - match: HostSNI(`hadb.${XYZ_DOMAIN}`)
       services:
-        - name: ha-postgres.home.svc.cluster.local
+        - name: ha-postgres
           port: 5432
