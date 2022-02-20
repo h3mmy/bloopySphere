@@ -9,11 +9,13 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`radarr-uhd.${XYZ_DOMAIN}`) && (Headers(`X-Api-Key`, `${RADARR_UHD_API_KEY}`) || Query(`apikey`, `${RADARR_UHD_API_KEY}`))"
+      match: Host(`radarr-uhd.${XYZ_DOMAIN}`) && (Headers(`X-Api-Key`, `${RADARR_UHD_API_KEY}`) || Query(`apikey`, `${RADARR_UHD_API_KEY}`))
       priority: 100
       services:
         - kind: Service
           name: radarr-uhd
           port: 7878
+      middlewares:
+        - name: networking-rfc1918@kubernetescrd
   tls:
     secretName: "${XYZ_DOMAIN/./-}-tls"
