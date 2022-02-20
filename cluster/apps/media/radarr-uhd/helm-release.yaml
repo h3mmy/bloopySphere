@@ -22,6 +22,9 @@ spec:
   upgrade:
     remediation:
       remediateLastFailure: true
+  dependsOn:
+    name: nfs-media-pvc
+    namespace: media
   values:
     image:
       repository: ghcr.io/k8s-at-home/radarr-nightly
@@ -96,11 +99,8 @@ spec:
         enabled: true
         existingClaim: radarr-uhd-config-v1
       media:
-        type: custom
-        volumeSpec:
-          nfs:
-            server: "${NAS_ADDRESS}"
-            path: /volume3/Data
+        enabled: true
+        existingClaim: nfs-media-pvc
         mountPath: /Data
         readOnly: false
       backup:
