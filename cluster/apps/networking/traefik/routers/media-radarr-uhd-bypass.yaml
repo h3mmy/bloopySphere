@@ -13,7 +13,7 @@ spec:
       priority: 100
       services:
         - kind: Service
-          name: radarr-uhd.media
+          name: radarr-uhd
           port: 7878
   tls:
     secretName: "${XYZ_DOMAIN/./-}-tls"
