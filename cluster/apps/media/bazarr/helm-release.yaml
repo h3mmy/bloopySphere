@@ -56,20 +56,12 @@ spec:
         existingClaim: bazarr-config
       media:
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: "${NAS_ADDRESS}"
-            path: /volume3/Data
+        existingClaim: nfs-media-pvc
         mountPath: /Data
         readOnly: false
       media-2:
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: "${NAS_ADDRESS}"
-            path: /volume2/Data2
+        existingClaim: nfs-media-2-pvc
         mountPath: /Data2
         readOnly: false
     resources:

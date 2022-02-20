@@ -90,12 +90,9 @@ spec:
         existingClaim: lidarr-config-v1
       media:
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: "${NAS_ADDRESS}"
-            path: /volume3/Data
+        existingClaim: nfs-media-pvc
         mountPath: /Data
+        readOnly: false
       backup:
         enabled: true
         type: custom

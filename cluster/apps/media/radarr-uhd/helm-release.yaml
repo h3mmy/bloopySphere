@@ -100,6 +100,11 @@ spec:
         existingClaim: nfs-media-pvc
         mountPath: /Data
         readOnly: false
+      media-2:
+        enabled: true
+        existingClaim: nfs-media-2-pvc
+        mountPath: /Data2
+        readOnly: false
       backup:
         enabled: true
         type: custom
