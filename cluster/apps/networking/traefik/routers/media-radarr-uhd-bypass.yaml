@@ -3,7 +3,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: radarr-uhd-bypass
-  namespace: networking
+  namespace: media
 spec:
   entryPoints:
     - websecure
@@ -14,6 +14,6 @@ spec:
       services:
         - kind: Service
           name: radarr-uhd.media
-          port: 7676
+          port: 7878
   tls:
     secretName: "${XYZ_DOMAIN/./-}-tls"
