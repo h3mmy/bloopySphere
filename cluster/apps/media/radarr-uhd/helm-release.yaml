@@ -102,6 +102,7 @@ spec:
             server: "${NAS_ADDRESS}"
             path: /volume3/Data
         mountPath: /Data
+        readOnly: false
       backup:
         enabled: true
         type: custom

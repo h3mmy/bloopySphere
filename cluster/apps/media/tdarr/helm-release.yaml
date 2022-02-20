@@ -71,6 +71,7 @@ spec:
             path: /volume3/Data
             server: ${NAS_ADDRESS}
         mountPath: /Data
+        readOnly: false
       media-2:
         enabled: true
         type: custom
@@ -79,6 +80,7 @@ spec:
             path: /volume2/Data2
             server: ${NAS_ADDRESS}
         mountPath: /Data2
+        readOnly: false
     service:
       main:
         ports:
