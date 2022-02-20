@@ -46,11 +46,11 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-              - path: /outpost.goauthentik.io
-                pathType: Prefix
-                backend:
-                  serviceName: ak-outpost-${XYZ_DOMAIN/./-}-outpost
-                  servicePort: 9000
+              # - path: /outpost.goauthentik.io
+              #   pathType: Prefix
+              #   backend:
+              #     serviceName: ak-outpost-${XYZ_DOMAIN/./-}-outpost
+              #     servicePort: 9000
         tls:
           - secretName: tls.radarr-uhd
             hosts:
@@ -62,7 +62,7 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.priority: "100"
+          # traefik.ingress.kubernetes.io/router.priority: "100"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
         hosts:
           - host: "radarr-uhd.${XYZ_DOMAIN}"
