@@ -38,36 +38,41 @@ spec:
           hajimari.io/icon: "filmstrip"
           hajimari.io/instance: "bloop-xyz,bloop-quarky"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+          # traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
           # traefik.ingress.kubernetes.io/router.priority: "99"
-          # traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
           - host: "radarr-uhd.${XYZ_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
+              - path: /outpost.goauthentik.io
+                pathType: Prefix
+                backend:
+                  serviceName: ak-outpost-${XYZ_DOMAIN/./-}-outpost
+                  servicePort: 9000
         tls:
           - secretName: tls.radarr-uhd
             hosts:
               - "{{ (index .Values.ingress.main.hosts 0).host }}"
-      #api:
-     #   enabled: true
-      #  nameSuffix: "api"
-       # ingressClassName: "traefik"
-   #     annotations:
-    #      cert-manager.io/cluster-issuer: "letsencrypt-production"
-   #       traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-     #     traefik.ingress.kubernetes.io/router.priority: "100"
-    #      traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
-   #     hosts:
-   #       - host: "radarr-uhd.${XYZ_DOMAIN}"
-      #      paths:
-      #        - path: /api
-      #          pathType: Prefix
-     #   tls:
-   #       - secretName: tls.radarr-uhd
-   #         hosts:
-        #      - "{{ (index .Values.ingress.api.hosts 0).host }}"
+      api:
+        enabled: true
+        nameSuffix: "api"
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.priority: "100"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+        hosts:
+          - host: "radarr-uhd.${XYZ_DOMAIN}"
+            paths:
+              - path: /api
+                pathType: Prefix
+        tls:
+          - secretName: tls.radarr-uhd
+            hosts:
+              - "{{ (index .Values.ingress.api.hosts 0).host }}"
 
     podSecurityContext:
       supplementalGroups:
