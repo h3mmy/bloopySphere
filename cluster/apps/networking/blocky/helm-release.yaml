@@ -57,7 +57,7 @@ spec:
         type: LoadBalancer
         # v1.24 will have loadBalancerIPs
         # see https://github.com/kubernetes/enhancements/pull/1992
-        loadBalancerIP: ${SVC_BLOCKY_ADDR_V4}
+        # loadBalancerIP: ${SVC_BLOCKY_ADDR_V4}
         ports:
           dns-tcp:
             enabled: true
@@ -85,7 +85,7 @@ spec:
             protocol: UDP
             targetPort: 53
         externalTrafficPolicy: Local
-        loadBalancerIP: ${SVC_BLOCKY_ADDR_V4}
+        # loadBalancerIP: ${SVC_BLOCKY_ADDR_V4}
         ipFamilyPolicy: PreferDualStack
         ipFamilies:
           - "IPv4"
