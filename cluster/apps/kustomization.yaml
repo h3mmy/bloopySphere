@@ -12,8 +12,8 @@ resources:
   - monitoring
   - flux-system
   - velero
-  - cert-manager
-  - calico-system
+  # - cert-manager
+  # - calico-system
   - vpn-gateway
   - downloads
   - rook-ceph
