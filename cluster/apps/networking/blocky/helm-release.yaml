@@ -66,8 +66,8 @@ spec:
             targetPort: 53
         externalTrafficPolicy: Local
         ipFamilyPolicy: SingleStack
-        # ipFamilies:
-        #   - "IPv4"
+        ipFamilies:
+          - "IPv4"
         #   - "IPv6"
         # externalIPs:
         #   - ${SVC_BLOCKY_ADDR_V4}
@@ -87,8 +87,8 @@ spec:
         externalTrafficPolicy: Local
         loadBalancerIP: ${SVC_BLOCKY_ADDR_V4}
         ipFamilyPolicy: SingleStack
-        # ipFamilies:
-        #   - "IPv4"
+        ipFamilies:
+          - "IPv4"
         #   - "IPv6"
         # externalIPs:
         #   - ${SVC_BLOCKY_ADDR_V4}
