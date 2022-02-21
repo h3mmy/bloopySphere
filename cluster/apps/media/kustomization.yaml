@@ -11,3 +11,4 @@ resources:
   - bazarr
   # - lidarr
   - tdarr
+  - sonarr-uhd
