@@ -7,5 +7,5 @@ resources:
   - node-feature-discovery
   - rook-ceph
   - external-dns
-  - system-upgrade
+  # - system-upgrade
   # - multus
