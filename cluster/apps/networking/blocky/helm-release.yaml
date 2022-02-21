@@ -65,7 +65,7 @@ spec:
             protocol: TCP
             targetPort: 53
         externalTrafficPolicy: Local
-        # ipFamilyPolicy: RequireDualStack
+        ipFamilyPolicy: SingleStack
         # ipFamilies:
         #   - "IPv4"
         #   - "IPv6"
@@ -86,7 +86,7 @@ spec:
             targetPort: 53
         externalTrafficPolicy: Local
         loadBalancerIP: ${SVC_BLOCKY_ADDR_V4}
-        # ipFamilyPolicy: RequireDualStack
+        ipFamilyPolicy: SingleStack
         # ipFamilies:
         #   - "IPv4"
         #   - "IPv6"
