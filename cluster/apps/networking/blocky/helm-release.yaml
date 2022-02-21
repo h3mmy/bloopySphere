@@ -57,7 +57,7 @@ spec:
         type: LoadBalancer
         # v1.24 will have loadBalancerIPs
         # see https://github.com/kubernetes/enhancements/pull/1992
-        # loadBalancerIP: ${SVC_BLOCKY_ADDR_V4}
+        loadBalancerIP: ${SVC_BLOCKY_ADDR_V4}
         ports:
           dns-tcp:
             enabled: true
@@ -65,7 +65,7 @@ spec:
             protocol: TCP
             targetPort: 53
         externalTrafficPolicy: Local
-        ipFamilyPolicy: RequireDualStack
+        # ipFamilyPolicy: RequireDualStack
         # ipFamilies:
         #   - "IPv4"
         #   - "IPv6"
@@ -73,7 +73,7 @@ spec:
         #   - ${SVC_BLOCKY_ADDR_V4}
         #   - ${SVC_BLOCKY_ADDR_V6}
         annotations:
-          metallb.universe.tf/loadBalancerIPs: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
+          # metallb.universe.tf/loadBalancerIPs: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
           metallb.universe.tf/allow-shared-ip: blocky
       dns-udp:
         enabled: true
@@ -85,7 +85,8 @@ spec:
             protocol: UDP
             targetPort: 53
         externalTrafficPolicy: Local
-        ipFamilyPolicy: RequireDualStack
+        loadBalancerIP: ${SVC_BLOCKY_ADDR_V4}
+        # ipFamilyPolicy: RequireDualStack
         # ipFamilies:
         #   - "IPv4"
         #   - "IPv6"
@@ -93,7 +94,7 @@ spec:
         #   - ${SVC_BLOCKY_ADDR_V4}
         #   - ${SVC_BLOCKY_ADDR_V6}
         annotations:
-          metallb.universe.tf/loadBalancerIPs: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
+          # metallb.universe.tf/loadBalancerIPs: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
           metallb.universe.tf/allow-shared-ip: blocky
 
     metrics:
