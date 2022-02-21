@@ -5,3 +5,4 @@ resources:
   - error-pages.yaml
   - classic-traefik.yaml
   - media-radarr-uhd-bypass.yaml
+  - media-sonarr-uhd-bypass.yaml
