@@ -55,7 +55,7 @@ for domain in $(jq -r '.[] | @base64' ./ddns_data.json); do
         )
 
         if echo "${update4}" | grep -q '\"success\":false'; then
-            printf "%s - Yikes - Updating IP Address '%s' has failed for '%s' in zone '%s'\n" "$(date -u)" "${IP4}" "${RECORD_4}" "${ZONE}"
+            printf "%s - Yikes - Updating IP Address '%s' has failed for '%s' in zone '%s' oldip=%s\n" "$(date -u)" "${IP4}" "${RECORD_4}" "${ZONE}" "${old_ip4}"
             exit 1
         else
             printf "%s - Success - IP Address '%s' has been updated for '%s' in zone '%s'\n" "$(date -u)" "${IP4}" "${RECORD_4}" "${ZONE}"

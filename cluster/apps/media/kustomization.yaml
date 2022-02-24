@@ -9,6 +9,6 @@ resources:
   - overseer
   - radarr-uhd
   - bazarr
-  # - lidarr
+  - lidarr
   - tdarr
   - sonarr-uhd
