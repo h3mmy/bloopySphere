@@ -183,7 +183,7 @@ spec:
         enable: true
         path: /metrics
       httpPort: 4000
-      logLevel: debug
+      logLevel: info
       queryLog:
         type: mysql
         target: ${MARIADB_BLOCKY_USER}:${MARIADB_BLOCKY_PASSWORD}@tcp(${MARIADB_ADDRESS}:3306)/${MARIADB_BLOCKY_DATABASE}?charset=utf8mb4&parseTime=True&loc=Local
