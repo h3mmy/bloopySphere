@@ -35,28 +35,10 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "music-box"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.priority: "99"
+          traefik.ingress.kubernetes.io/router.priority: "10"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
           - host: &host "lidarr.${XYZ_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - *host
-            secretName: tls.lidarr
-      api:
-        enabled: true
-        nameSuffix: "api"
-        ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.priority: "100"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
-        hosts:
-          - host: *host
             paths:
               - path: /
                 pathType: Prefix
