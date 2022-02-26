@@ -5,7 +5,7 @@ metadata:
   name: sonarr-uhd
   namespace: media
 spec:
-  interval: 5m
+  interval: 8m
   chart:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
