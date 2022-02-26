@@ -5,8 +5,8 @@ set -o errexit
 # Alternate ones include
 # ipv4.icanhazip.com or ipv6.icanhazip.com
 # https://ifconfig.co with the -4 flag
-IP4=$(dig +short txt ch whoami.cloudflare @1.1.1.1)
-IP6_PREFIX=$(dig +short txt ch whoami.cloudflare @2606:4700:4700::1111 | cut -d ':' -f1-4)
+IP4=$(dig +short txt ch whoami.cloudflare @1.1.1.1 | tr -d '"')
+IP6_PREFIX=$(dig +short txt ch whoami.cloudflare @2606:4700:4700::1111 | cut -d ':' -f1-4 | tr -d '"')
 
 #IP4_HTTP=$(curl -s https://1.1.1.1/cdn-cgi/trace)
 #IP6_PREFIX_HTTP=$(curl -s "https://[2606:4700:4700::1111]/cdn-cgi/trace" | cut -d ':' -f1-4)
