@@ -1,8 +1,8 @@
 #!/bin/bash
 KIND=Installation
 NAME=default
-RELEASE=tigera-operator
-NAMESPACE=tigera-operator
+RELEASE=cert-manager
+NAMESPACE=cert-manager
 echo "Using following values..."
 echo Kind: $KIND
 echo NAME: $NAME
