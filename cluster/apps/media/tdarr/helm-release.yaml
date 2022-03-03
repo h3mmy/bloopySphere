@@ -72,14 +72,10 @@ spec:
             server: ${NAS_ADDRESS}
         mountPath: /volume3/Data
         readOnly: false
-    extraVolumeMounts:
-      - name: media-2
-        type: custom
-        volumeSpec:
-          nfs:
-            path: /volume2/Data2
-            server: ${NAS_ADDRESS}
-        mountPath: /volume2/Data2
+      media2:
+        enabled: true
+        existingClaim: nfs-media-2-pvc
+        mountPath: /volume3/Data2
         readOnly: false
     service:
       main:
