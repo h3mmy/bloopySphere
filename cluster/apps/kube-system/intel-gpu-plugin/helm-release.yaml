@@ -24,6 +24,8 @@ spec:
     args:
       - -shared-dev-num
       - "2"
+      - -allocation-policy
+      - "packed"
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
