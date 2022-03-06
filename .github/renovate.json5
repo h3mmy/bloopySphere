@@ -127,14 +127,14 @@
       "matchPackageNames": ["quay.io/minio/minio"]
     },
     {
-      "datasources": ["docker"],
+      "matchDatasources": ["docker"],
       "versionScheme": "regex:^nightly-0\\.(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
-      "packageNames": ["hotio/readarr"]
+      "matchPackageNames": ["hotio/readarr"]
     },
     {
-      "datasources": ["docker"],
+      "matchDatasources": ["docker"],
       "versioning": "loose",
-      "packageNames": ["plexinc/pms-docker"]
+      "matchPackageNames": ["plexinc/pms-docker"]
     },
     {
       "matchDatasources": [
