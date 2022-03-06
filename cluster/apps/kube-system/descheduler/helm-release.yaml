@@ -22,6 +22,13 @@ spec:
     kind: Deployment
     deschedulerPolicy:
       strategies:
+        RemovePodsHavingTooManyRestarts:
+          enabled: true
+          params:
+            podsHavingTooManyRestarts:
+              podRestartThreshold: 100
+              includingInitContainers: true
+              nodeFit: true
         RemoveDuplicates:
           enabled: false
         RemovePodsViolatingNodeAffinity:
