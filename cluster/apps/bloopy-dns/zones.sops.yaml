@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bloopy-dns-zones
+  namespace: bloopy-dns
+data:

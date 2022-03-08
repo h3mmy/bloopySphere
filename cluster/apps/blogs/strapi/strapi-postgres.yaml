@@ -1,0 +1,24 @@
+---
+apiVersion: kubegres.reactive-tech.io/v1
+kind: Kubegres
+metadata:
+  name: strapi-postgres
+  namespace: blog
+spec:
+  dependsOn:
+    - name: strapi-db-backup
+    - namespace: blog
+  replicas: 1
+  image: docker.io/library/postgres:14.2
+  database:
+    size: 5Gi
+    storageClassName: ceph-block
+  backup:
+    schedule: "0 */1 * * *"
+    pvcName: strapi-db-backup
+    volumeMount: /var/lib/backup
+  env:
+    - name: POSTGRES_PASSWORD
+      value: ${STRAPI_POSTGRES_PASSWORD}
+    - name: POSTGRES_REPLICATION_PASSWORD
+      value: ${STRAPI_POSTGRES_PASSWORD}

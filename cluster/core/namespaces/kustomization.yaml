@@ -16,3 +16,4 @@ resources:
   - rook-ceph.yaml
   - home.yaml
   - bloopy-dns.yaml
+  - blogs.yaml

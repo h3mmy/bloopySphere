@@ -13,3 +13,25 @@ spec:
   sourceRef:
     kind: GitRepository
     name: kubegres
+  patches:
+    - patch: |-
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: not-used
+        spec:
+          replicas: 1
+          template:
+            spec:
+              containers:
+                - name: manager
+                  resources:
+                    requests:
+                      cpu: 400m
+                      memory: 20Mi
+                    limits:
+                      cpu: 800m
+                      memory: 60Mi
+      target:
+        kind: Deployment
+        labelSelector: control-plane=controller-manager
