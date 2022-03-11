@@ -17,6 +17,15 @@ spec:
         namespace: flux-system
   dependsOn:
     - name: rook-ceph
+  install:
+    remediation:
+      retries: 7
+    # crds: CreateReplace
+  upgrade:
+    remediation:
+      retries: 7
+      remediateLastFailure: true # remediate the last failure, when no retries remain
+    # crds: CreateReplace
   values:
     monitoring:
       enabled: true
