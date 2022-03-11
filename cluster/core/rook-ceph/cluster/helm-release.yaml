@@ -49,9 +49,9 @@ spec:
         urlPrefix: /
         ssl: false
       mon:
-        count: 1
+        count: 2
       mgr:
-        count: 1
+        count: 2
       healthCheck:
         livenessProbe:
           mon:
