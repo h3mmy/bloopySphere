@@ -25,7 +25,7 @@ spec:
     crds: CreateReplace
   values:
     crds:
-      enabled: false
+      enabled: true
     csi:
       enableCephfsDriver: false
       enableCephfsSnapshotter: false

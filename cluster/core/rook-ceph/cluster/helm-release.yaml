@@ -59,16 +59,6 @@ spec:
         ssl: false
       mon:
         count: 3
-      mgr:
-        count: 1
-      healthCheck:
-        livenessProbe:
-          mon:
-            disabled: false
-            timeoutSeconds: 5
-          mgr:
-            disabled: false
-            timeoutSeconds: 5
       storage:
         useAllNodes: false
         useAllDevices: false
