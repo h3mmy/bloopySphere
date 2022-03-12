@@ -93,9 +93,9 @@ spec:
             devices:
               - name: "${NODE_0_DEVICE_0}"
               - name: "${NODE_0_DEVICE_1}"
-          # - name: "${NODE_1_NAME}"
-          #   devices:
-          #     - name: "${NODE_1_DEVICE_0}"
+          - name: "${NODE_1_NAME}"
+            devices:
+              - name: "${NODE_1_DEVICE_0}"
     cephBlockPools:
       - name: ceph-blockpool
         spec:
