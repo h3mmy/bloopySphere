@@ -30,3 +30,4 @@ old_lazylib_config.ini
 provision/talos/*
 nukeRookCeph.sh
 ddns_data.json
+*.bakup.yaml
