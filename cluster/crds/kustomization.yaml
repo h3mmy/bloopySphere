@@ -5,6 +5,6 @@ resources:
   - traefik
   - kube-prometheus-stack
   - node-feature-discovery
-  - rook-ceph
+  # - rook-ceph
   - external-dns
   # - multus
