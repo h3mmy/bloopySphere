@@ -7,6 +7,6 @@ resources:
   - kube-system
   - metallb-system
   - system-upgrade
-  # - rook-ceph
+  - rook-ceph
   - kubegres
   - tigera-operator
