@@ -18,5 +18,6 @@ resources:
   - downloads
   - rook-ceph
   - home
+  - kasten-io
   # - blog
   # - database
