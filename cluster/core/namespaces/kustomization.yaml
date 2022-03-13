@@ -17,3 +17,4 @@ resources:
   - home.yaml
   - bloopy-dns.yaml
   - blogs.yaml
+  - kasten-io.yaml
