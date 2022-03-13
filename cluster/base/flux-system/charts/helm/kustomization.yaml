@@ -29,3 +29,4 @@ resources:
   - jupyterhub-charts.yaml
   - codecentric-charts.yaml
   - vmware-tanzu-charts.yaml
+  - kasten-charts.yaml
