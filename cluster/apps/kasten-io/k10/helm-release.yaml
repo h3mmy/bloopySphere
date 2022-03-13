@@ -58,10 +58,14 @@ spec:
       class: traefik
       host: &host k10.${XYZ_DOMAIN}
       annotations:
+        hajimari.io/appName: K10
+        hajimari.io/instance: "bloop-quarky"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "server"
         cert-manager.io/cluster-issuer: letsencrypt-production
         external-dns.alpha.kubernetes.io/target: ingress.${XYZ_DOMAIN}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: network-rfc1918-ips@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: networking-bloopnet-xyz-auth@kubernetescrd
       urlPath: k10
       hosts:
         - *host
