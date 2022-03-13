@@ -64,6 +64,15 @@ spec:
         existingClaim: nfs-media-2-pvc
         mountPath: /Data2
         readOnly: false
+      backup:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume3/Data/Backups/app/bazarr
+        mountPath: /config/Backups
+        readOnly: false
     resources:
       requests:
         cpu: 200m
