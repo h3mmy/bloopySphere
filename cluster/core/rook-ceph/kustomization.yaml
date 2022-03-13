@@ -6,3 +6,4 @@ resources:
   - operator
   - rbac
   - rook-direct-mount
+  - snapshot-controller
