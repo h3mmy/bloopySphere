@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - monitoring
   - helm-release.yaml
-  - profiles
+  # - profiles
