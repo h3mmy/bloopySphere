@@ -45,6 +45,7 @@ spec:
         clientSecret: ${KASTEN_OIDC_CLIENT_SECRET}
         scopes: "openid profile email"
         providerURL: https://auth.${XYZ_DOMAIN}
+        redirectURL: https://k10.${XYZ_DOMAIN}/k10/auth-svc/v0/oidc/redirect
 
     # Specifically for logs visibility
     clusterName: k8s
