@@ -62,6 +62,7 @@ spec:
         nodeAddressAutodetectionV6:
           cidrs:
             - "${CALICO_NODE_CIDR_IPV6}"
+        containerIPForwarding: Enabled
       nodeMetricsPort: 9091
       typhaMetricsPort: 9093
 
