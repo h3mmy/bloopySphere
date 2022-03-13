@@ -123,11 +123,11 @@ spec:
         spec:
           metadataPool:
             replicated:
-              size: 2
+              size: 1
           dataPools:
             - failureDomain: host
               replicated:
-                size: 2
+                size: 1
           metadataServer:
             activeCount: 1
             activeStandby: true
