@@ -50,10 +50,10 @@ spec:
         livenessProbe:
           mon:
             probe:
-              timeoutSeconds: 5
+              timeoutSeconds: 10
           mgr:
             probe:
-              timeoutSeconds: 5
+              timeoutSeconds: 10
           osd:
             probe:
               timeoutSeconds: 5
@@ -61,10 +61,10 @@ spec:
         startupProbe:
           mon:
             probe:
-              timeoutSeconds: 5
+              timeoutSeconds: 10
           mgr:
             probe:
-              timeoutSeconds: 5
+              timeoutSeconds: 10
           osd:
             probe:
               timeoutSeconds: 5
