@@ -47,6 +47,10 @@ spec:
               - "rook.${XYZ_DOMAIN}"
     cephClusterSpec:
       healthCheck:
+        daemonHealth:
+          mon:
+            disabled: false
+            interval: 60s
         livenessProbe:
           mon:
             probe:
