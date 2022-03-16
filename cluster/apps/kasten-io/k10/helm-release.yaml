@@ -55,6 +55,7 @@ spec:
 
     ingress:
       create: true
+      ingressClassName: traefik
       class: traefik
       host: &host k10.${XYZ_DOMAIN}
       annotations:
@@ -63,7 +64,7 @@ spec:
         hajimari.io/enable: "true"
         hajimari.io/icon: "server"
         cert-manager.io/cluster-issuer: letsencrypt-production
-        external-dns.alpha.kubernetes.io/target: ingress.${XYZ_DOMAIN}
+        # external-dns.alpha.kubernetes.io/target: ingress.${XYZ_DOMAIN}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
       urlPath: k10
