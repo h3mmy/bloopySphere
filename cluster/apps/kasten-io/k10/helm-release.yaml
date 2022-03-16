@@ -65,7 +65,7 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt-production
         external-dns.alpha.kubernetes.io/target: ingress.${XYZ_DOMAIN}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: networking-bloopnet-xyz-auth@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
       urlPath: k10
       pathType: Prefix
       hosts:
