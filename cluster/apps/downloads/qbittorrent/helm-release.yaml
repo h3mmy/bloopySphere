@@ -11,7 +11,6 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: qbittorrent
       version: 13.2.0
       sourceRef:
@@ -99,6 +98,8 @@ spec:
     podSecurityContext:
       supplementalGroups:
         - 5600
+        - 65539
+        - 65537
     resources:
       requests:
         cpu: 500m
