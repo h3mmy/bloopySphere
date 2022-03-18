@@ -17,7 +17,7 @@ resources:
   - vpn-gateway
   - downloads
   - rook-ceph
-  - home
-  - kasten-io
+  # - home
+  # - kasten-io
   # - blog
   # - database
