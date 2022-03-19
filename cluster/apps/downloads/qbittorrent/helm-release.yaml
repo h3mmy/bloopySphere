@@ -32,16 +32,22 @@ spec:
     image:
       repository: ghcr.io/k8s-at-home/qbittorrent
       tag: v4.4.1
+
     env:
       TZ: "${TZ}"
       PGID: "${MEDIA_GID}"
+
     hostname: qbittorrent
+
     podAnnotations:
       setGateway: "true"
+
     podLabels:
       setGateway: "true"
+
     settings:
       automaticPortSetup: false
+
     service:
       main:
         ports:
@@ -61,6 +67,7 @@ spec:
             protocol: TCP
             targetPort: ${VPN_FORWARDED_PORT_1}
         externalTrafficPolicy: Local
+
     ingress:
       main:
         enabled: true
@@ -97,6 +104,7 @@ spec:
           - secretName: tls.qbittorrent
             hosts:
               - "{{ (index .Values.ingress.api.hosts 0).host }}"
+
     persistence:
       config:
         enabled: true
@@ -105,17 +113,20 @@ spec:
         enabled: true
         existingClaim: downloads-torrent-pvc
         mountPath: /data/downloads
+
     podSecurityContext:
       supplementalGroups:
         - 5600
         - 65539
         - 65537
+
     resources:
       requests:
-        cpu: 500m
+        cpu: "0.3"
         memory: 1000Mi
       limits:
         memory: 6000Mi
+
     metrics:
       enabled: true
       prometheusRule:
