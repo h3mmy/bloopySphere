@@ -8,6 +8,8 @@ spec:
   dependsOn:
     - name: vpn-gateway
       namespace: vpn-gateway
+    - name: downloads-torrent-pvc
+      namespace: downloads
   interval: 5m
   chart:
     spec:
