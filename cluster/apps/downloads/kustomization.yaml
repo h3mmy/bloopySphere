@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - qbittorrent
   - downloads-pv
-  - tools
+  # - tools
