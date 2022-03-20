@@ -48,12 +48,12 @@ spec:
     DNS: 172.16.0.1
 
     settings:
-      NOT_ROUTED_TO_GATEWAY_CIDRS: "${NETWORK_K8S_CLUSTER_CIDR} ${NETWORK_K8S_SERVICE_CIDR} ${NETWORK_MANAGEMENT_CIDR}"
+      NOT_ROUTED_TO_GATEWAY_CIDRS: "10.42.0.0/16 ${NETWORK_K8S_CLUSTER_CIDR} ${NETWORK_K8S_SERVICE_CIDR} ${NETWORK_MANAGEMENT_CIDR}"
       # tun0 for openvpn, wg0 for wireguard
       VPN_INTERFACE: wg0
       # VXLAN_IP_NETWORK: ${WG_VXLAN_CIDR}
       # Prevent non VPN traffic to leave the gateway
-      VPN_BLOCK_OTHER_TRAFFIC: false
+      VPN_BLOCK_OTHER_TRAFFIC: true
       # If VPN_BLOCK_OTHER_TRAFFIC is true, allow VPN traffic over this port
       VPN_TRAFFIC_PORT: ${VPN_GATEWAY_VPN_PORT}
       # Traffic to these IPs will be send through the K8S gateway
