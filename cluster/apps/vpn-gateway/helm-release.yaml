@@ -19,10 +19,10 @@ spec:
 
   install:
     remediation:
-      retries: 3
+      retries: 5
   upgrade:
     remediation:
-      retries: 3
+      retries: 5
 
   values:
     image:
@@ -45,7 +45,7 @@ spec:
             port: ${VPN_FORWARDED_PORT_1}
 
     # Default VPN_VXLAN DNS
-    # DNS: 172.16.0.1
+    DNS: 172.16.0.1
 
     settings:
       NOT_ROUTED_TO_GATEWAY_CIDRS: "172.16.0.0/12 ${NETWORK_K8S_CLUSTER_CIDR} ${NETWORK_K8S_SERVICE_CIDR} ${NETWORK_MANAGEMENT_CIDR}"
