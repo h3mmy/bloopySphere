@@ -53,7 +53,7 @@ spec:
       VPN_INTERFACE: wg0
       # VXLAN_IP_NETWORK: ${WG_VXLAN_CIDR}
       # Prevent non VPN traffic to leave the gateway
-      VPN_BLOCK_OTHER_TRAFFIC: true
+      VPN_BLOCK_OTHER_TRAFFIC: false
       # If VPN_BLOCK_OTHER_TRAFFIC is true, allow VPN traffic over this port
       VPN_TRAFFIC_PORT: ${VPN_GATEWAY_VPN_PORT}
       # Traffic to these IPs will be send through the K8S gateway
