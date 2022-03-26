@@ -97,11 +97,11 @@ spec:
           description: "Datascience Environment with Sample Notebooks"
           kubespawner_override:
             image: jupyter/datascience-notebook:2343e33dec46
-            lifecycle_hooks:
-              postStart:
-                exec:
-                  command:
-                    - "sh"
-                    - "-c"
-                    - >
-                      gitpuller https://github.com/data-8/materials-fa17 master materials-fa;
+            # lifecycle_hooks:
+            #   postStart:
+            #     exec:
+            #       command:
+            #         - "sh"
+            #         - "-c"
+            #         - >
+            #           gitpuller https://github.com/data-8/materials-fa17 master materials-fa;
