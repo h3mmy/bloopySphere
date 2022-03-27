@@ -91,6 +91,12 @@ spec:
               sans:
                 - "*.${SECRET_DOMAIN}"
           stores: networking-default@kubernetescrd
+      dns-tls:
+        address: ":853"
+      dns-quic:
+        address: ":8853"
+        http3:
+          advertisedPort: 8853
       metrics:
         port: 8082
         expose: true

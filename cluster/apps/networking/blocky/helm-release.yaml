@@ -101,6 +101,24 @@ spec:
           metallb.universe.tf/loadBalancerIPs: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
           metallb.universe.tf/allow-shared-ip: blocky
 
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure, dns-tls
+          traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
+
+        hosts:
+          - host: &host blocky.${XYZ_DOMAIN}
+            paths:
+              - path: /
+
+        tls:
+          - secretName: tls.blocky
+            hosts:
+              - *host
 
     metrics:
       enabled: true
