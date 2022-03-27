@@ -135,7 +135,7 @@ spec:
 
     podAnnotations:
       configmap.reloader.stakater.com/reload: blocky-config
-      secret.reloader.stakater.com/reload: blocky-cert
+      secret.reloader.stakater.com/reload: tls.blocky
 
     affinity:
       podAntiAffinity:
@@ -232,8 +232,8 @@ spec:
       httpPort: 4000
       httpsPort: 443
       tlsPort: 853
-      certFile: /certs/tls.key
-      keyFile: /certs/tls.cert
+      certFile: /certs/tls.crt
+      keyFile: /certs/tls.key
       logLevel: info
       queryLog:
         type: mysql
