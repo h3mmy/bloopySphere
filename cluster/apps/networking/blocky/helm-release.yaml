@@ -108,6 +108,7 @@ spec:
         ingressClassName: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
+          cert-manager.io/ip-sans: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure, dns-tls
           traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
 
@@ -163,6 +164,10 @@ spec:
         volumeSpec:
           configMap:
             name: blocky-whitelist
+      certs:
+        enabled: true
+        type: secret
+        name: tls.blocky
 
     probes:
       startup:
@@ -227,6 +232,8 @@ spec:
       httpPort: 4000
       httpsPort: 443
       tlsPort: 853
+      certFile: /certs/tls.key
+      keyFile: /certs/tls.cert
       logLevel: info
       queryLog:
         type: mysql
