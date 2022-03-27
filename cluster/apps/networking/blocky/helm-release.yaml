@@ -164,6 +164,11 @@ spec:
           configMap:
             name: blocky-whitelist
 
+    probes:
+      startup:
+        spec:
+          initialDelaySeconds: 30
+
     resources:
       requests:
         memory: 100Mi
