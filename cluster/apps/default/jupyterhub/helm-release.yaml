@@ -30,6 +30,7 @@ spec:
       authenticatePrometheus: false
       nodeSelector:
         kubernetes.io/arch: "amd64"
+        kubernetes.io/hostname: slowpoke
       db:
         type: mysql
         url: "${JUPYTER_DB_URL}"
