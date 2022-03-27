@@ -22,6 +22,7 @@ spec:
       retries: 3
   upgrade:
     remediation:
+      remediateLastFailure: true
       retries: 5
 
   values:
@@ -213,6 +214,8 @@ spec:
             - ads
       clientLookup:
         upstream: tcp+udp:${LOCAL_GATEWAY_MAIN}
+      caching:
+        prefetching: true
       prometheus:
         enable: true
         path: /metrics
