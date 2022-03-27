@@ -52,7 +52,7 @@ spec:
         ports:
           http:
             port: 4000
-      dns-tcp:
+      dns:
         enabled: true
         type: LoadBalancer
         # v1.24 will have loadBalancerIPs
@@ -63,23 +63,21 @@ spec:
             port: 53
             protocol: TCP
             targetPort: 53
-        externalTrafficPolicy: Local
-        ipFamilyPolicy: PreferDualStack
-        ipFamilies:
-          - "IPv4"
-          - "IPv6"
-        annotations:
-          metallb.universe.tf/loadBalancerIPs: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
-          metallb.universe.tf/allow-shared-ip: blocky
-      dns-udp:
-        enabled: true
-        type: LoadBalancer
-        ports:
+          dns-tls:
+            enabled: true
+            port: 853
+            protocol: TCP
+            targetPort: 853
           dns-udp:
             enabled: true
             port: 53
             protocol: UDP
             targetPort: 53
+          dns-https:
+            enabled: true
+            port: 443
+            protocol: TCP
+            targetPort: 443
         externalTrafficPolicy: Local
         ipFamilyPolicy: PreferDualStack
         ipFamilies:
@@ -88,6 +86,7 @@ spec:
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
           metallb.universe.tf/allow-shared-ip: blocky
+
 
     metrics:
       enabled: true
