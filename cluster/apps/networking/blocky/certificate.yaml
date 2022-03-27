@@ -1,0 +1,18 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: blocky-cert
+  namespace: networking
+spec:
+  secretName: blocky-cert
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  privateKey:
+    algorithm: ECDSA
+    size: 384
+  commonName: blocky.${XYZ_DOMAIN}
+  dnsNames:
+    - "*.blocky.${XYZ_DOMAIN}"
+    - blocky.${XYZ_DOMAIN}

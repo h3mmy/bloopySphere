@@ -114,7 +114,8 @@ spec:
         enabled: true
 
     podAnnotations:
-      configmap.reloader.stakater.com/reload: "blocky-config"
+      configmap.reloader.stakater.com/reload: blocky-config
+      secret.reloader.stakater.com/reload: blocky-cert
 
     affinity:
       podAntiAffinity:
@@ -157,6 +158,8 @@ spec:
           - tcp+udp:8.8.8.8
           - tcp+udp:8.8.4.4
           - tcp+udp:1.1.1.1
+          - tcp-tls:one.one.one.one
+          - tcp-tls:dns.google
           - https://cloudflare-dns.com/dns-query
       upstreamTimeout: 5
       bootstrapDns: 1.1.1.1:53
@@ -196,6 +199,8 @@ spec:
         enable: true
         path: /metrics
       httpPort: 4000
+      httpsPort: 443
+      tlsPort: 853
       logLevel: info
       queryLog:
         type: mysql
