@@ -39,6 +39,7 @@ spec:
           admin_users:
             - ${JHUB_ADMIN}
             - ${JHUB_ADMIN2}
+            - ${JHUB_ADMIN3}
         GenericOAuthenticator:
           client_id: ${JHUB_OAUTH_CLIENT_ID}
           client_secret: ${JHUB_OAUTH_CLIENT_SECRET}
