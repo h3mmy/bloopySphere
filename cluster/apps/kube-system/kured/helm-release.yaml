@@ -23,6 +23,8 @@ spec:
       endTime: "6:00"
       timeZone: "${TZ}"
       notifyUrl: "${DISCORD_WEBHOOK_URL}"
+      messageTemplateDrain: "⏳ Draining node %s"
+      messageTemplateReboot: "♻️ Rebooted node %s"
 
     nodeSelector:
       kubernetes.io/arch: "amd64"
