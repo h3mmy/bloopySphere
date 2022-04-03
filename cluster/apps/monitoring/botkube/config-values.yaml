@@ -2,127 +2,127 @@
 config:
   ## Resources you want to watch
   resources:
-    - name: v1/pods
-      namespaces:
-        include:
-          - all
-        ignore:
-          - kasten-io
-      events:
-        - create
-        - delete
-        - error
+    # - name: v1/pods
+    #   namespaces:
+    #     include:
+    #       - all
+    #     ignore:
+    #       - kasten-io
+    #   events:
+    #     - create
+    #     - delete
+    #     - error
 
-    - name: v1/services
-      namespaces:
-        include:
-          - all
-        ignore:
-          - kasten-io
-          - networking
-      events:
-        - create
-        - delete
-        - error
+    # - name: v1/services
+    #   namespaces:
+    #     include:
+    #       - all
+    #     ignore:
+    #       - kasten-io
+    #       - networking
+    #   events:
+    #     - create
+    #     - delete
+    #     - error
 
-    - name: apps/v1/deployments
-      namespaces:
-        include:
-          - all
-        ignore:
-          -
-      events:
-        - create
-        - update
-        - delete
-        - error
-      updateSetting:
-        includeDiff: true
-        fields:
-          - spec.template.spec.containers[*].image
-          - status.availableReplicas
+    # - name: apps/v1/deployments
+    #   namespaces:
+    #     include:
+    #       - all
+    #     ignore:
+    #       -
+    #   events:
+    #     - create
+    #     - update
+    #     - delete
+    #     - error
+    #   updateSetting:
+    #     includeDiff: true
+    #     fields:
+    #       - spec.template.spec.containers[*].image
+    #       - status.availableReplicas
 
-    - name: apps/v1/statefulsets
-      namespaces:
-        include:
-          - all
-        ignore:
-          -
-      events:
-        - create
-        - update
-        - delete
-        - error
-      updateSetting:
-        includeDiff: true
-        fields:
-          - spec.template.spec.containers[*].image
-          - status.readyReplicas
+    # - name: apps/v1/statefulsets
+    #   namespaces:
+    #     include:
+    #       - all
+    #     ignore:
+    #       -
+    #   events:
+    #     - create
+    #     - update
+    #     - delete
+    #     - error
+    #   updateSetting:
+    #     includeDiff: true
+    #     fields:
+    #       - spec.template.spec.containers[*].image
+    #       - status.readyReplicas
 
-    - name: networking.k8s.io/v1beta1/ingresses
-      namespaces:
-        include:
-          - all
-        ignore:
-          -
-      events:
-        - create
-        - delete
-        - error
+    # - name: networking.k8s.io/v1beta1/ingresses
+    #   namespaces:
+    #     include:
+    #       - all
+    #     ignore:
+    #       -
+    #   events:
+    #     - create
+    #     - delete
+    #     - error
 
-    - name: v1/nodes
-      namespaces:
-        include:
-          - all
-        ignore:
-          -
-      events:
-        - create
-        - delete
-        - error
-    - name: v1/namespaces
-      namespaces:
-        include:
-          - all
-        ignore:
-          -
-      events:
-        - create
-        - delete
-        - error
+    # - name: v1/nodes
+    #   namespaces:
+    #     include:
+    #       - all
+    #     ignore:
+    #       -
+    #   events:
+    #     - create
+    #     - delete
+    #     - error
+    # - name: v1/namespaces
+    #   namespaces:
+    #     include:
+    #       - all
+    #     ignore:
+    #       -
+    #   events:
+    #     - create
+    #     - delete
+    #     - error
 
-    - name: v1/persistentvolumes
-      namespaces:
-        include:
-          - all
-        ignore:
-          -
-      events:
-        - create
-        - delete
-        - error
+    # - name: v1/persistentvolumes
+    #   namespaces:
+    #     include:
+    #       - all
+    #     ignore:
+    #       -
+    #   events:
+    #     - create
+    #     - delete
+    #     - error
 
-    - name: v1/persistentvolumeclaims
-      namespaces:
-        include:
-          - all
-        ignore:
-          - kasten-io
-      events:
-        - create
-        - delete
-        - error
+    # - name: v1/persistentvolumeclaims
+    #   namespaces:
+    #     include:
+    #       - all
+    #     ignore:
+    #       - kasten-io
+    #   events:
+    #     - create
+    #     - delete
+    #     - error
 
-    - name: v1/configmaps
-      namespaces:
-        include:
-          - all
-        ignore:
-          -
-      events:
-        - create
-        - delete
-        - error
+    # - name: v1/configmaps
+    #   namespaces:
+    #     include:
+    #       - all
+    #     ignore:
+    #       -
+    #   events:
+    #     - create
+    #     - delete
+    #     - error
 
     - name: apps/v1/daemonsets
       namespaces:
