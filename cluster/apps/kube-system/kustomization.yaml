@@ -7,5 +7,5 @@ resources:
   - intel-gpu-plugin
   - nfs-subdir-external-provisioner
   - node-feature-discovery
-  - kured
+#  - kured
   - descheduler
