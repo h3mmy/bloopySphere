@@ -28,6 +28,11 @@ spec:
     securityContext:
       privileged: true
 
+    tolerations:
+      - key: "kubernetes.io/arch"
+        operator: "Equal"
+        value: "arm64"
+
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
