@@ -79,7 +79,7 @@ If using a node-taint for arm nodes[1], this will allow toleration
 Else: `kubectl taint no k8s-0 arch=arm64:NoSchedule`
 
 Other useful snippets:
-`kubectl label node k8s-0 node-role.kubernetes.io/worker=worker`
+`kubectl label node k8s-0 node-role.kubernetes.io/worker=true`
 
 `kubectl apply --kustomize=./cluster/base/flux-system`
 
