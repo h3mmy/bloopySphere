@@ -29,7 +29,7 @@ spec:
       privileged: true
 
     tolerations:
-      - key: "kubernetes.io/arch"
+      - key: "arch"
         operator: "Equal"
         value: "arm64"
 
