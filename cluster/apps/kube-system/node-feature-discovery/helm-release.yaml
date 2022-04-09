@@ -65,7 +65,7 @@ spec:
               - "vendor"
               - "device"
           custom:
- ​           - ​name​: ​"​ups​.cp1500" 
+ ​           - ​name: "ups​.cp1500"
  ​             ​matchOn​: 
  ​               - ​usbId​: 
  ​                   ​class​: ​["03"] 
