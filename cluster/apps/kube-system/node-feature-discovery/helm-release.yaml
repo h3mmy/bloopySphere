@@ -15,7 +15,14 @@ spec:
         kind: HelmRepository
         name: node-feature-discovery-charts
         namespace: flux-system
+  install:
+    createNamespace: true
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
   values:
+    nodeFeatureRule:
+      createCRD: true
     master:
       tolerations:
         - key: "node-role.kubernetes.io/master"
