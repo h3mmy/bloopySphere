@@ -37,8 +37,10 @@ spec:
       nodeSelector:
         node-role.kubernetes.io/master: "true"
       tolerations:
-        - key: arm
-          operator: Exists
+        - key: "arch"
+          operator: "Equal"
+          value: "arm64"
+          effect: "NoSchedule"
         - key: "node-role.kubernetes.io/master"
           operator: "Exists"
         - effect: "NoExecute"
