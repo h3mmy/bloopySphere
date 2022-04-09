@@ -21,8 +21,13 @@ spec:
     image:
       repository: ghcr.io/k8s-at-home/network-ups-tools
       tag: v2.7.4-2479-g86a32237
+
+    env:
+      TZ: "${TZ}"
+
     securityContext:
       privileged: true
+
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -70,12 +75,29 @@ spec:
           [monmaster]
             password = secret
             upsmon master
+
     resources:
       requests:
         memory: 64Mi
         cpu: 25m
       limits:
         memory: 128Mi
+
+    metrics:
+      enabled: true
+      serviceMonitor:
+        interval: 15s
+        scrapeTimeout: 10s
+      prometheusRule:
+        enabled: true
+      exporter:
+        image:
+          repository: hon95/prometheus-nut-exporter
+          tag: 1.1.1
+
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: "network-ups-tools-config"
+
     # persistence:
     #   ups:
     #     enabled: true
