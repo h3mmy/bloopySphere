@@ -43,8 +43,8 @@ spec:
     worker:
       annotations:
         configmap.reloader.stakater.com/reload: "node-feature-discovery-worker-conf"
-      nodeSelector:
-        node-role.kubernetes.io/worker: "true"
+      # nodeSelector:
+      #   node-role.kubernetes.io/worker: "true"
       tolerations:
         - key: "kubernetes.io/arch"
           operator: "Equal"
