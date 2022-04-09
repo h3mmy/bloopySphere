@@ -65,12 +65,12 @@ spec:
               - "vendor"
               - "device"
           custom:
- ​           - ​name: "ups​.cp1500"
- ​             ​matchOn​: 
- ​               - ​usbId​: 
- ​                   ​class​: ​["03"] 
- ​                   ​vendor​: ​["0764"] 
- ​                   device​: ​["0501"]
+            - name: "ups.cp1500"
+              matchOn:
+                - usbId:
+                  class: ["03"]
+                  vendor: ["0764"]
+                  device: ["0501"]
             - name: "zwave"
               matchOn:
                 - usbId:
