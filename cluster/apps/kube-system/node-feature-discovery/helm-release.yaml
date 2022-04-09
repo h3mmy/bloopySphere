@@ -24,6 +24,8 @@ spec:
     nodeFeatureRule:
       createCRD: true
     master:
+      nodeSelector:
+        node-role.kubernetes.io/master: "true"
       tolerations:
         - key: "node-role.kubernetes.io/master"
           operator: "Equal"
@@ -42,7 +44,7 @@ spec:
       annotations:
         configmap.reloader.stakater.com/reload: "node-feature-discovery-worker-conf"
       nodeSelector:
-        node-role.kubernetes.io/master: "true"
+        node-role.kubernetes.io/worker: "true"
       tolerations:
         - key: "kubernetes.io/arch"
           operator: "Equal"
