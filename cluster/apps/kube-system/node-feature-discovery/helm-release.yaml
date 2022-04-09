@@ -36,6 +36,15 @@ spec:
         configmap.reloader.stakater.com/reload: "node-feature-discovery-worker-conf"
       nodeSelector:
         node-role.kubernetes.io/master: "true"
+      tolerations:
+        - key: arm
+          operator: Exists
+        - key: "node-role.kubernetes.io/master"
+          operator: "Exists"
+        - effect: "NoExecute"
+          operator: "Exists"
+        - effect: "NoSchedule"
+          operator: "Exists"
       config:
         core:
           sources:
