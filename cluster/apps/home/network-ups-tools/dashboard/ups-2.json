@@ -1,7 +1,7 @@
 {
     "__inputs": [
       {
-        "name": "DS_PROMETHEUS",
+        "name": "${DS_PROMETHEUS}",
         "label": "Prometheus",
         "description": "",
         "type": "datasource",
@@ -1180,8 +1180,8 @@
       ]
     },
     "timezone": "",
-    "title": "Prometheus NUT Exporter",
+    "title": "UPS Dashboard",
     "uid": "80-PUnWMk",
     "version": 15,
-    "description": "Example dashboard for HON95's Prometheus NUT Exporter."
+    "description": "Dashboard for Prometheus NUT Exporter."
   }
