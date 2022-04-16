@@ -20,7 +20,7 @@ spec:
     createNamespace: true
   values:
     image:
-      repository: ghcr.io/k8s-at-home/lidarr-nightly
+      repository: ghcr.io/k8s-at-home/lidarr
       tag: v1.0.0.2551
     env:
       TZ: "${TZ}"
@@ -41,6 +41,21 @@ spec:
           - host: &host "lidarr.${XYZ_DOMAIN}"
             paths:
               - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: tls.lidarr
+      api:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+        hosts:
+          - host: *host
+            paths:
+              - path: /api
                 pathType: Prefix
         tls:
           - hosts:
@@ -81,7 +96,7 @@ spec:
         volumeSpec:
           nfs:
             server: "${NAS_ADDRESS}"
-            path: /volume3/Data/Backups/
+            path: /volume3/Data/Backups/app/lidarr
         mountPath: /config/Backups
         readOnly: false
     resources:
