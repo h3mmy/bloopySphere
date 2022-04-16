@@ -121,9 +121,9 @@ spec:
     resources:
       requests:
         cpu: "0.3"
-        memory: 1000Mi
+        memory: 500Mi
       limits:
-        memory: 6000Mi
+        memory: 2500Mi
 
     metrics:
       enabled: true
