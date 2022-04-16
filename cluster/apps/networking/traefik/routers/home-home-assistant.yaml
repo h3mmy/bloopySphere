@@ -1,0 +1,23 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: home-assistant
+  namespace: home
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    hajimari.io/appName: "home-assistant"
+    hajimari.io/instance: "bloop-xyz"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "home-assistant"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: HostSNI(`home-assistant.${XYZ_DOMAIN}`)
+      services:
+        - name: home-assistant
+          port: 8123
+      middlewares:
+        - name: chain-no-auth
+          namespace: networking
