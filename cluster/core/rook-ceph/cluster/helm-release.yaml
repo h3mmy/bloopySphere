@@ -85,13 +85,20 @@ spec:
       resources:
         mgr:
           requests:
+            # @default cpu 600m
             cpu: 300m
         mgr-sidecar:
+          # @default cpu 600m
           requests:
             cpu: 100m
         mon:
           requests:
+            # @default cpu 1000m
             cpu: 200m
+        osd:
+          requests:
+            # @default cpu 3000m
+            cpu: 600m
       dashboard:
         enabled: true
         urlPrefix: /
