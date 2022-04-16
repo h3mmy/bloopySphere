@@ -14,7 +14,8 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: HostSNI(`home-assistant.${XYZ_DOMAIN}`)
+    - kind: Rule
+      match: HostSNI(`home-assistant.${XYZ_DOMAIN}`)
       services:
         - name: home-assistant
           port: 8123
