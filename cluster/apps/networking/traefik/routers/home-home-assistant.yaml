@@ -15,7 +15,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: HostSNI(`home-assistant.${XYZ_DOMAIN}`)
+      match: Host(`home-assistant.${XYZ_DOMAIN}`)
       services:
         - name: home-assistant
           port: 8123
