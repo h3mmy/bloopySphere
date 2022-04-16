@@ -21,7 +21,7 @@ spec:
   values:
     resources:
       requests:
-        cpu: 200m
+        cpu: 100m
         memory: 256Mi
     kind: Deployment
     deschedulerPolicy:

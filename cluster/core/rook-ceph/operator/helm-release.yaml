@@ -29,6 +29,22 @@ spec:
     csi:
       enableCephfsDriver: false
       enableCephfsSnapshotter: false
+      provisionerTolerations:
+        - key: "arm"
+          operator: "Exists"
+        - key: "node-role.kubernetes.io/master"
+          operator: "Exists"
+      rbdProvisionerTolerations:
+        - key: "arm"
+          operator: "Exists"
+        - key: "node-role.kubernetes.io/master"
+          operator: "Exists"
+      csiRBDProvisionerResource:
+        requests:
+          cpu: 200m
+      csiRBDPluginResource:
+        requests:
+          cpu: 150m
       pluginTolerations:
         - key: "arm"
           operator: "Exists"
