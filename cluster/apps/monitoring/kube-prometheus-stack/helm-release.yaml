@@ -186,6 +186,8 @@ spec:
       createCustomResource: true
       prometheusConfigReloader:
         resources:
+          requests:
+            cpu: 50m
           limits:
             cpu: 200m
     admissionWebhooks:
