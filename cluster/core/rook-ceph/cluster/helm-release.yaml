@@ -82,6 +82,16 @@ spec:
               operator: Exists
             - effect: NoExecute
               operator: Exists
+      resources:
+        mgr:
+          requests:
+            cpu: 300m
+        mgr-sidecar:
+          requests:
+            cpu: 100m
+        mon:
+          requests:
+            cpu: 200m
       dashboard:
         enabled: true
         urlPrefix: /
