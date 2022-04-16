@@ -99,6 +99,10 @@ spec:
           requests:
             # @default cpu 3000m
             cpu: 600m
+        prepareosd:
+          requests:
+            # @default cpu 3000m
+            cpu: 200m
       dashboard:
         enabled: true
         urlPrefix: /
