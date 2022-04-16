@@ -35,6 +35,7 @@ spec:
         - key: "node-role.kubernetes.io/master"
           operator: "Exists"
     monitoring:
+      createPrometheusRules: true
       enabled: true
     resources:
       requests:

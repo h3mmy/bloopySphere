@@ -28,6 +28,7 @@ spec:
     # crds: CreateReplace
   values:
     monitoring:
+      createPrometheusRules: true
       enabled: true
     ingress:
       ingressClassName: traefik
