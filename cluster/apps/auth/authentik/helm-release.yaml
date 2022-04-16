@@ -73,7 +73,7 @@ spec:
           paths:
             - path: "/"
               pathType: Prefix
-        - host: &bloop "auth.${XYZ_DOMAIN}"
+        - host: &bloop "auth.${SECRET_DOMAIN}"
           paths:
             - path: "/"
               pathType: Prefix
