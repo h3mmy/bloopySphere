@@ -69,13 +69,18 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth@kubernetescrd"
       hosts:
-        - host: "auth.${XYZ_DOMAIN}"
+        - host: &host "auth.${XYZ_DOMAIN}"
+          paths:
+            - path: "/"
+              pathType: Prefix
+        - host: &bloop "auth.${XYZ_DOMAIN}"
           paths:
             - path: "/"
               pathType: Prefix
       tls:
         - hosts:
-            - "auth.${XYZ_DOMAIN}"
+            - *host
+            - *bloop
           secretName: "tls.authentik"
     postgresql:
       enabled: true
