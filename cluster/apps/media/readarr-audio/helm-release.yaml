@@ -60,6 +60,7 @@ spec:
       config:
         enabled: true
         existingClaim: readarr-audio-config-v1
+        readOnly: false
       media:
         enabled: true
         existingClaim: nfs-media-pvc
