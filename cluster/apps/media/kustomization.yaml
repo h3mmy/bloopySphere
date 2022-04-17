@@ -12,3 +12,4 @@ resources:
   - lidarr
   - tdarr
   - sonarr-uhd
+  - readarr
