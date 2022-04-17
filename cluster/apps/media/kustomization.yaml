@@ -12,4 +12,4 @@ resources:
   # - lidarr
   - tdarr
   - sonarr-uhd
-  - readarr-audio
+  # - readarr-audio
