@@ -23,6 +23,7 @@ spec:
     remediation:
       retries: 4
       remediateLastFailure: true
+
   values:
     image:
       repository: ghcr.io/k8s-at-home/lidarr
@@ -66,11 +67,16 @@ spec:
           - hosts:
               - *host
             secretName: tls.lidarr
+
     podSecurityContext:
       supplementalGroups:
         - 100
-        # Custom Group
+        - 568
+        # Custom Camelus Group(s)
+        - 65541
+        - 65536
         - 65537
+
     metrics:
       enabled: true
       serviceMonitor:

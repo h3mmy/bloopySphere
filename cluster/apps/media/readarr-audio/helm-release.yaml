@@ -63,6 +63,16 @@ spec:
           - hosts:
               - *host
             secretName: tls.readarr-audio
+
+    podSecurityContext:
+      supplementalGroups:
+        - 100
+        - 568
+        # Custom Camelus Group(s)
+        - 65541
+        - 65536
+        - 65537
+
     persistence:
       config:
         enabled: true
@@ -87,6 +97,7 @@ spec:
             path: /volume3/Data/Backups/app/readarr-audio
         mountPath: /config/Backups
         readOnly: false
+
     resources:
       requests:
         cpu: 50m
