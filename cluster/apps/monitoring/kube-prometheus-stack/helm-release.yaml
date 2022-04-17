@@ -280,7 +280,7 @@ spec:
             static_configs:
               - targets:
                   - "proxy-api.svc.cluster.local:8001"
-          - job_name: "hass"
+          - job_name: "home-assistant"
             scrape_interval: 60s
             metrics_path: /api/prometheus
             honor_timestamps: true
