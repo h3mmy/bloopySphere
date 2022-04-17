@@ -115,8 +115,8 @@ spec:
         cpu: 100m
       limits:
         memory: 1500Mi
-    tolerations:
-      - key: "arch"
-        operator: "Equal"
-        value: "arm64"
-        effect: "NoSchedule"
+    # tolerations:
+   #   - key: "arch"
+    #    operator: "Equal"
+   #     value: "arm64"
+   #     effect: "NoSchedule"
