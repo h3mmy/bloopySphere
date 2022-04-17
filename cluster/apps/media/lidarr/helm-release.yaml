@@ -41,7 +41,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "music-box"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.priority: "10"
+          # traefik.ingress.kubernetes.io/router.priority: "10"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
           - host: &host "lidarr.${XYZ_DOMAIN}"
@@ -67,6 +67,10 @@ spec:
           - hosts:
               - *host
             secretName: tls.lidarr
+
+    securityContext:
+      runAsUser: 0
+      runAsGroup: 0
 
     podSecurityContext:
       supplementalGroups:
