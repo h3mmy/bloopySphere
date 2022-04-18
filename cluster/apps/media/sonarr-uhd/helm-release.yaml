@@ -21,7 +21,7 @@ spec:
       retries: 5
   upgrade:
     remediation:
-      retries: 11
+      retries: 6
       remediateLastFailure: true
   values:
     image:
