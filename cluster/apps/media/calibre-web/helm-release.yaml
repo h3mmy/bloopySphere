@@ -23,10 +23,6 @@ spec:
   upgrade:
     remediation:
       remediateLastFailure: true
-  rollback:
-    enable: true
-    retry: true
-    maxRetries: 5
 
   values:
     image:
