@@ -1,0 +1,22 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: books-opds
+  namespace: media
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`books.${XYZ_DOMAIN}`) && PathPrefix(`/opds`)
+      priority: 100
+      services:
+        - kind: Service
+          name: calibre-web
+          port: 8083
+      middlewares:
+        - name: networking-rfc1918@kubernetescrd
+        - name: networking-secure-headers@kubernetescrd
+  tls:
+    secretName: "${XYZ_DOMAIN/./-}-tls"
