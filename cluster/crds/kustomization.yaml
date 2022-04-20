@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - traefik
   - kube-prometheus-stack
-  # - node-feature-discovery
   - external-snapshotter
   - external-dns
   # - multus
