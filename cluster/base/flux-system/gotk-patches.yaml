@@ -6,6 +6,9 @@ metadata:
   name: source-controller
   namespace: flux-system
 spec:
+  selector:
+    matchLabels:
+      app: source-controller
   template:
     spec:
       containers:
