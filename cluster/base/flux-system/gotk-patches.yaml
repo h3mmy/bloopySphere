@@ -12,7 +12,15 @@ spec:
         - name: manager
           resources:
             limits:
+              cpu: 1
               memory: 2Gi
+          args:
+            ## Helm cache with up to 10 items, i.e. 10 indexes.
+            - --helm-cache-max-size=10
+            ## TTL of an index is 1 hour.
+            - --helm-cache-ttl=1h
+            ## Purge expired index every 10 minutes.
+            - --helm-cache-purge-interval=10m
 ---
 # Delete the allow-egress NetworkPolicy
 $patch: delete
