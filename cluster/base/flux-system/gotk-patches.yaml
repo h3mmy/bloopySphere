@@ -6,9 +6,6 @@ metadata:
   name: source-controller
   namespace: flux-system
 spec:
-  selector:
-    matchLabels:
-      app: source-controller
   template:
     spec:
       containers:
@@ -17,40 +14,121 @@ spec:
             limits:
               cpu: 1
               memory: 2Gi
-          # args:
-          #   - --watch-all-namespaces
-          #   - --log-level=info
-          #   - --log-encoding=json
-          #   - --enable-leader-election
-          #   - --storage-path=/data
-          #   - --storage-adv-addr=source-controller.$(RUNTIME_NAMESPACE).svc.cluster.local.
-          #   ## Helm cache with up to 10 items, i.e. 10 indexes.
-          #   - --helm-cache-max-size=10
-          #   ## TTL of an index is 1 hour.
-          #   - --helm-cache-ttl=1h
-          #   ## Purge expired index every 10 minutes.
-          #   - --helm-cache-purge-interval=10m
+          args:
+            - --watch-all-namespaces
+            - --log-level=info
+            - --log-encoding=json
+            - --enable-leader-election
+            - --storage-path=/data
+            - --storage-adv-addr=source-controller.flux-system.svc.cluster.local.
+            ## Helm cache with up to 10 items, i.e. 10 indexes.
+            - --helm-cache-max-size=10
+            ## TTL of an index is 1 hour.
+            - --helm-cache-ttl=1h
+            ## Purge expired index every 10 minutes.
+            - --helm-cache-purge-interval=10m
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - "amd64"
 ---
-# Delete the allow-egress NetworkPolicy
-$patch: delete
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: allow-egress
+  name: helm-controller
   namespace: flux-system
+spec:
+  template:
+    spec:
+      containers:
+        - name: manager
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - "amd64"
 ---
-# Delete the allow-scraping NetworkPolicy
-$patch: delete
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: allow-scraping
+  name: kustomize-controller
   namespace: flux-system
+spec:
+  template:
+    spec:
+      containers:
+        - name: manager
+          resources:
+            limits:
+              cpu: 1
+              memory: 512Mi
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - "amd64"
 ---
-# Delete the allow-webhooks NetworkPolicy
-$patch: delete
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: allow-webhooks
+  name: notification-controller
   namespace: flux-system
+spec:
+  template:
+    spec:
+      containers:
+        - name: manager
+          resources:
+            limits:
+              cpu: 1
+              memory: 512Mi
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - "amd64"
+# ---
+# # Delete the allow-egress NetworkPolicy
+# $patch: delete
+# apiVersion: networking.k8s.io/v1
+# kind: NetworkPolicy
+# metadata:
+#   name: allow-egress
+#   namespace: flux-system
+# ---
+# # Delete the allow-scraping NetworkPolicy
+# $patch: delete
+# apiVersion: networking.k8s.io/v1
+# kind: NetworkPolicy
+# metadata:
+#   name: allow-scraping
+#   namespace: flux-system
+# ---
+# # Delete the allow-webhooks NetworkPolicy
+# $patch: delete
+# apiVersion: networking.k8s.io/v1
+# kind: NetworkPolicy
+# metadata:
+#   name: allow-webhooks
+#   namespace: flux-system
