@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       # This is a common chart for manual config
-      chart: /charts/kah-common
+      chart: ./charts/kah-common
       sourceRef:
         kind: GitRepository
         name: flux-system
