@@ -32,6 +32,7 @@ spec:
       TZ: ${TZ}
       serverIP: 0.0.0.0
       ffmpegPath: /usr/bin/ffmpeg
+      PGID: 65537
     podSecurityContext:
       # Required for passthrough of /dev/dri devices from NFD
       # https://dgpu-docs.intel.com/installation-guides/ubuntu/ubuntu-focal.html
@@ -49,6 +50,8 @@ spec:
         repository: haveagitgat/tdarr_node
         tag: 2.00.18
         pullPolicy: IfNotPresent
+      env:
+        PGID: 65537
       resources:
         requests:
           gpu.intel.com/i915: 1
