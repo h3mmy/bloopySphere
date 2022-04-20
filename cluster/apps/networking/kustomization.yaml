@@ -7,3 +7,4 @@ resources:
   - blocky
   - error-pages
   - ddns
+  - k8s-gateway
