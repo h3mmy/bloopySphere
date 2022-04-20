@@ -31,3 +31,4 @@ resources:
   - codecentric-charts.yaml
   - vmware-tanzu-charts.yaml
   - kasten-charts.yaml
+  - k8s-gateway-charts.yaml
