@@ -21,8 +21,8 @@ spec:
             - --enable-leader-election
             - --storage-path=/data
             - --storage-adv-addr=source-controller.flux-system.svc.cluster.local.
-            ## Helm cache with up to 10 items, i.e. 10 indexes.
-            - --helm-cache-max-size=10
+            ## Helm cache with up to x items, i.e. x indexes.
+            - --helm-cache-max-size=3000
             ## TTL of an index is 1 hour.
             - --helm-cache-ttl=1h
             ## Purge expired index every 10 minutes.
