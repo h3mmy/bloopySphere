@@ -34,5 +34,6 @@ spec:
       operator: "Exists"
   drain:
     force: true
+    disableEviction: true
   upgrade:
     image: rancher/k3s-upgrade
