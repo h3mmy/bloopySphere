@@ -27,11 +27,11 @@ spec:
 
   nodeSelector:
     matchExpressions:
-      # - key: k3s-upgrade
-      #   operator: NotIn
-      #   values:
-      #     - "disabled"
-      #     - "false"
+      - key: k3s-upgrade
+        operator: NotIn
+        values:
+          - "disabled"
+          - "false"
 
       # - key: k3os.io/mode
       #   operator: DoesNotExist
