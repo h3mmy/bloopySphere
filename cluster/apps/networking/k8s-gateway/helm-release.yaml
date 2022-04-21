@@ -15,6 +15,13 @@ spec:
         name: k8s-gateway
         namespace: flux-system
       interval: 5m
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 6
+      remediateLastFailure: true
   values:
     fullnameOverride: k8s-gateway
     domain: ${XYZ_DOMAIN}

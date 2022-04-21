@@ -34,6 +34,6 @@ spec:
       operator: "Exists"
   drain:
     force: true
-    disableEviction: true
+    disableEviction: true # Keep until rook-ceph is tamed
   upgrade:
     image: rancher/k3s-upgrade
