@@ -6,4 +6,5 @@ resources:
   - kube-prometheus-stack
   - external-snapshotter
   - external-dns
+  - system-upgrade-controller
   # - multus

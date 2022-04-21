@@ -15,6 +15,6 @@ resources:
   - database.yaml
   - rook-ceph.yaml
   - home.yaml
-  - bloopy-dns.yaml
   - blogs.yaml
   - kasten-io.yaml
+  - system-upgrade.yaml
