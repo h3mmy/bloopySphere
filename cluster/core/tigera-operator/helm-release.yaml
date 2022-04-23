@@ -96,3 +96,8 @@ spec:
     calicoctl:
       image: docker.io/calico/ctl
       tag: v3.22.2
+
+    # Config required to fix RKE2 issue #1541
+    # Also see https://docs.rke2.io/known_issues/#calico-with-vxlan-encapsulation
+    felixConfiguration:
+      featureDetectOverride: "ChecksumOffloadBroken=true"
