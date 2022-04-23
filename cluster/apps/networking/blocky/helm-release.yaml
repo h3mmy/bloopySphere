@@ -43,7 +43,7 @@ spec:
     autoscaling:
       enabled: true
       target: blocky
-      minReplicas: 1
+      minReplicas: 2
       maxReplicas: 4
       targetCPUUtilizationPercentage: 80
       targetMemoryUtilizationPercentage: 80
@@ -180,6 +180,7 @@ spec:
         cpu: 100m
       limits:
         memory: 750Mi
+        cpu: 250m
 
     config: |
       upstream:
