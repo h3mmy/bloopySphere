@@ -49,6 +49,7 @@ spec:
     cephClusterSpec:
       cephVersion:
         image: quay.io/ceph/ceph:v17.2.0
+
       healthCheck:
         daemonHealth:
           mon:
@@ -64,7 +65,6 @@ spec:
           osd:
             probe:
               timeoutSeconds: 5
-
         startupProbe:
           mon:
             probe:
@@ -77,6 +77,7 @@ spec:
               timeoutSeconds: 5
       mgr:
         count: 2
+
       placement:
         all:
           tolerations:
@@ -84,6 +85,7 @@ spec:
               operator: Exists
             - effect: NoExecute
               operator: Exists
+
       resources:
         mgr:
           requests:
@@ -114,12 +116,15 @@ spec:
           requests:
             cpu: 50m
             memory: 200Mi
+
       dashboard:
         enabled: true
         urlPrefix: /
         ssl: false
+
       mon:
         count: 3
+
       storage:
         useAllNodes: false
         useAllDevices: false
@@ -133,6 +138,26 @@ spec:
           - name: "${NODE_1_NAME}"
             devices:
               - name: "${NODE_1_DEVICE_0}"
+
+        # The section for configuring management of daemon disruptions during upgrade or fencing.
+      disruptionManagement:
+        # If true, the operator will create and manage PodDisruptionBudgets for OSD, Mon, RGW, and MDS daemons. OSD PDBs are managed dynamically
+        # via the strategy outlined in the [design](https://github.com/rook/rook/blob/master/design/ceph/ceph-managed-disruptionbudgets.md). The operator will
+        # block eviction of OSDs by default and unblock them safely when drains are detected.
+        managePodBudgets: true
+        # A duration in minutes that determines how long an entire failureDomain like `region/zone/host` will be held in `noout` (in addition to the
+        # default DOWN/OUT interval) when it is draining. This is only relevant when  `managePodBudgets` is `true`. The default value is `30` minutes.
+        osdMaintenanceTimeout: 40
+        # A duration in minutes that the operator will wait for the placement groups to become healthy (active+clean) after a drain was completed and OSDs came back up.
+        # Operator will continue with the next drain if the timeout exceeds. It only works if `managePodBudgets` is `true`.
+        # No values or 0 means that the operator will wait until the placement groups are healthy before unblocking the next drain.
+        pgHealthCheckTimeout: 0
+        # If true, the operator will create and manage MachineDisruptionBudgets to ensure OSDs are only fenced when the cluster is healthy.
+        # Only available on OpenShift.
+        manageMachineDisruptionBudgets: false
+        # Namespace in which to watch for the MachineDisruptionBudgets.
+        machineDisruptionBudgetNamespace: openshift-machine-api
+
     cephBlockPools:
       - name: ceph-blockpool
         spec:
@@ -155,6 +180,7 @@ spec:
             csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
             csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
             csi.storage.k8s.io/fstype: ext4
+
     cephFileSystems: []
       #- name: ceph-filesystem
       #  spec:
