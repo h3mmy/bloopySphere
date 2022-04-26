@@ -29,8 +29,12 @@ spec:
     hub:
       authenticatePrometheus: false
       nodeSelector:
-        kubernetes.io/arch: "amd64"
-        kubernetes.io/hostname: slowpoke
+        matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: NotIn
+            values:
+              - "k8s-0"
+              - "k8s-1"
       db:
         type: mysql
         url: "${JUPYTER_DB_URL}"

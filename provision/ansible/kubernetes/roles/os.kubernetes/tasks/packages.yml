@@ -9,6 +9,7 @@
       APT::Install-Suggests "false";
       APT::Get::Install-Recommends "false";
       APT::Get::Install-Suggests "false";
+
 - name: Upgrade all system packages
   ansible.builtin.apt:
     upgrade: full
@@ -40,15 +41,12 @@
   ansible.builtin.package_facts:
     manager: auto
 
-- name: Remove packages
+- name: Remove snapd
   block:
     - name: Check if snap is installed
       ansible.builtin.debug:
         msg: "snapd is installed"
       register: snapd_check
-      when:
-        - "'snapd' in os_packages_remove"
-        - "'snapd' in ansible_facts.packages"
     - name: Remove snap packages
       ansible.builtin.command: snap remove {{ item }}
       loop:
@@ -57,14 +55,7 @@
         - core20
         - snapd
       when:
-        - "'snapd' in os_packages_remove"
-        - "'snapd' in ansible_facts.packages"
         - snapd_check.failed is defined
-    - name: Remove packages
-      ansible.builtin.apt:
-        name: "{{ os_packages_remove }}"
-        state: absent
-        autoremove: true
     - name: Remove files
       ansible.builtin.file:
         state: absent
@@ -76,12 +67,13 @@
         - "/var/lib/snapd"
         - "/var/cache/snapd"
         - "/usr/lib/snapd"
-        - "/etc/cloud"
-        - "/var/lib/cloud"
-      when:
-        - "'snapd' in os_packages_remove"
-        - "'cloud-init' in os_packages_remove"
   when:
-    - os_packages_remove is defined
-    - os_packages_remove is iterable
-    - os_packages_remove | length > 0
+    - "'snapd' in os_packages_remove"
+    - "'snapd' in ansible_facts.packages"
+  ignore_errors: true
+
+- name: Remove packages
+  ansible.builtin.apt:
+    name: "{{ os_packages_remove | default([]) }}"
+    state: absent
+    autoremove: true

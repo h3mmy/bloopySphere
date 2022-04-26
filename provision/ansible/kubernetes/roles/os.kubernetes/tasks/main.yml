@@ -19,9 +19,9 @@
   tags:
     - filesystem
 
-- import_tasks: security.yml
-  tags:
-    - security
+# - import_tasks: security.yml
+#   tags:
+#     - security
 
 - import_tasks: unattended-upgrades.yml
   tags:

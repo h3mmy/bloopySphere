@@ -1,4 +1,8 @@
----
+- name: Install unattended-upgrades
+  ansible.builtin.apt:
+    name: unattended-upgrades
+    update_cache: true
+
 - block:
     - name: Copy 20auto-upgrades unattended-upgrades config
       ansible.builtin.blockinfile:
@@ -10,6 +14,7 @@
           APT::Periodic::Download-Upgradeable-Packages "1";
           APT::Periodic::AutocleanInterval "7";
           APT::Periodic::Unattended-Upgrade "1";
+
     - name: Copy 50unattended-upgrades unattended-upgrades config
       ansible.builtin.blockinfile:
         path: /etc/apt/apt.conf.d/50unattended-upgrades

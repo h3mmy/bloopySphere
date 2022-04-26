@@ -1,5 +1,5 @@
 ---
-os_timezone: "America/New_York"
+os_timezone: "America/Detroit"
 os_ssh_authorized_keys:
 os_packages_install:
   - apt-transport-https
@@ -26,21 +26,9 @@ os_packages_install:
   - unattended-upgrades
   - unzip
   - wireguard-tools
-  - linux-oem-20.04
-  - intel-opencl-icd
-  - level-zero
-  - intel-level-zero
-  - libmfx1
-  - intel-media-va-driver-non-free
   - mesa-utils
-  - libigc-dev
-  - intel-igc-cm
-  - libgdfcl-dev
-  - libigfxcmrt-dev
-  - level-zero-dev
-  - intel-igc-core
-  - intel-gmmlib
-  - intel-igc-opencl
+  # - libigc-dev
+  # - libigfxcmrt-dev
   - gpg-agent
   - wget
   - vainfo

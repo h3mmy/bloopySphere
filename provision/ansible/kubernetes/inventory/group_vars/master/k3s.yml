@@ -28,39 +28,43 @@ k3s_server:
   disable-cloud-controller: true
   write-kubeconfig-mode: "644"
   # Network CIDR to use for pod IPs (Ipv6 link-local)
-  cluster-cidr: "10.42.0.0/16,fd0d:b917:e7b6:42::/112"
+  cluster-cidr: "10.42.0.0/16,fd0d:b917:e7b6:42::/116"
   # Network CIDR to use for service IPs (Ipv6 link-local)
-  service-cidr: "10.43.0.0/16,fd0d:b917:e7b6:43::/112"
+  service-cidr: "10.43.0.0/16,fd0d:b917:e7b6:43::/116"
   kubelet-arg:
-    # Enables the kubelet to gracefully evict pods during a node shutdown
-    - "feature-gates=GracefulNodeShutdown=true"
-    # Allow k8s services to contain TCP and UDP on the same port
-    - "feature-gates=MixedProtocolLBService=true"
-    - "feature-gates=ReadWriteOncePod=true"
-  # Required to monitor kube-controller-manager with kube-prometheus-stack
+     # Enable Alpha/Beta features
+    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    # Allow pods to be rescheduled quicker in the case of a node failure
+    # https://github.com/k3s-io/k3s/issues/1264
+    - "node-status-update-frequency=4s"
   kube-controller-manager-arg:
-    - "node-cidr-mask-size-ipv6=112"
+    - "node-cidr-mask-size-ipv6=116"
+    # Required to monitor kube-proxy with kube-prometheus-stack
     - "bind-address=0.0.0.0"
-    - "feature-gates=EphemeralContainers=true"
-    - "feature-gates=MixedProtocolLBService=true"
-    - "feature-gates=ReadWriteOncePod=true"
-  # Required to monitor kube-proxy with kube-prometheus-stack
+    # Enable Alpha/Beta features
+    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    # Allow pods to be rescheduled quicker in the case of a node failure
+    # https://github.com/k3s-io/k3s/issues/1264
+    - "node-monitor-period=4s"
+    - "node-monitor-grace-period=16s"
+    - "pod-eviction-timeout=20s"
   kube-proxy-arg:
-    - "feature-gates=EphemeralContainers=true"
-    - "feature-gates=MixedProtocolLBService=true"
-    - "feature-gates=ReadWriteOncePod=true"
+    # Enable Alpha/Beta features
+    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    # Required to monitor component with kube-prometheus-stack
     - "metrics-bind-address=0.0.0.0"
-  # Required to monitor kube-scheduler with kube-prometheus-stack
   kube-scheduler-arg:
-    - "feature-gates=EphemeralContainers=true"
-    - "feature-gates=MixedProtocolLBService=true"
-    - "feature-gates=ReadWriteOncePod=true"
+    # Enable Alpha/Beta features
+    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    # Required to monitor component with kube-prometheus-stack
     - "bind-address=0.0.0.0"
-  # Required to monitor etcd with kube-prometheus-stack
   etcd-expose-metrics: true
-  # Required for HAProxy health-checks
   kube-apiserver-arg:
-    - "feature-gates=EphemeralContainers=true"
-    - "feature-gates=MixedProtocolLBService=true"
-    - "feature-gates=ReadWriteOncePod=true"
+    # Enable Alpha/Beta features
+    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    # Required for HAProxy health-checks
     - "anonymous-auth=true"
+    # Allow pods to be rescheduled quicker in the case of a node failure
+    # https://github.com/k3s-io/k3s/issues/1264
+    - "default-not-ready-toleration-seconds=20"
+    - "default-unreachable-toleration-seconds=20"

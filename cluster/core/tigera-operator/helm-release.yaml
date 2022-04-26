@@ -92,7 +92,12 @@ spec:
       version: v1.25.0
       registry: quay.io
       nodeSelector:
-        kubernetes.io/hostname: slowpoke
+        matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: NotIn
+            values:
+              - "k8s-0"
+              - "k8s-1"
     calicoctl:
       image: docker.io/calico/ctl
       tag: v3.22.2

@@ -34,24 +34,11 @@ tasks:
     cmds:
       - "ansible master -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml --one-line -a 'rm /var/lib/rancher/k3s/server/manifests/*' --become"
 
-  playbook:ubuntu-prepare:
-    desc: Prepare all the k8s nodes for running k3s
-    dir: provision/ansible
-    cmds:
-      - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/ubuntu-prepare.yml"
-
   playbook:os-v1:
     desc: Prepare all the k8s nodes for running k3s
     dir: provision/ansible
     cmds:
       - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/os.yml"
-
-
-  playbook:ubuntu-upgrade:
-    desc: Upgrade all the k8s nodes operating system
-    dir: provision/ansible
-    cmds:
-      - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/ubuntu-upgrade.yml"
 
   playbook:k3s-install:
     desc: Install Kubernetes on the nodes

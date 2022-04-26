@@ -9,6 +9,7 @@ kubeconfig
 .decrypted~*.yaml
 .config.env
 .config.live.env
+.config.api.env
 # Ansible
 xanmanning.k3s*
 patrickjahns.promtail*
