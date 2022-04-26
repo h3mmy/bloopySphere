@@ -32,10 +32,14 @@ spec:
       provisionerTolerations:
         - key: "arm"
           operator: "Exists"
+        - key: "arm64"
+          operator: "Exists"
         - key: "node-role.kubernetes.io/master"
           operator: "Exists"
       rbdProvisionerTolerations:
         - key: "arm"
+          operator: "Exists"
+        - key: "arm64"
           operator: "Exists"
         - key: "node-role.kubernetes.io/master"
           operator: "Exists"
