@@ -71,11 +71,17 @@ spec:
           hosts:
             - "jhub.${XYZ_DOMAIN}"
     singleuser:
+      cpu:
+        limit: 4
+        guarantee: 0.05
+      memory:
+        limit: 8G
+        guarantee: 512M
       defaultUrl: "/lab"
       extraEnv:
         JUPYTERHUB_SINGLEUSER_APP: "jupyter_server.serverapp.ServerApp"
       storage:
-        capacity: 2Gi
+        capacity: 15Gi
         dynamic:
           storageClass: ceph-block
       # Defines the default image
