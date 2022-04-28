@@ -47,8 +47,8 @@ spec:
             hosts:
               - "rook.${XYZ_DOMAIN}"
     cephClusterSpec:
-   #   cephVersion:
-      #  image: quay.io/ceph/ceph:v17.2.0
+      cephVersion:
+        image: quay.io/ceph/ceph:v17.2.0
 
       healthCheck:
         daemonHealth:
