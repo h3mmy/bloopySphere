@@ -47,6 +47,7 @@ spec:
             hosts:
               - "rook.${XYZ_DOMAIN}"
     cephClusterSpec:
+      continueUpgradeAfterChecksEvenIfNotHealthy: true
       cephVersion:
         image: quay.io/ceph/ceph:v17.2.0
 
