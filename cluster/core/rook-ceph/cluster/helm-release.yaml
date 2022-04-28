@@ -115,7 +115,7 @@ spec:
         crashcollector:
           requests:
             cpu: 50m
-            memory: 200Mi
+            memory: 50Mi
 
       dashboard:
         enabled: true
