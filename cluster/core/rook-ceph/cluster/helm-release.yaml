@@ -47,8 +47,8 @@ spec:
             hosts:
               - "rook.${XYZ_DOMAIN}"
     cephClusterSpec:
-      cephVersion:
-        image: quay.io/ceph/ceph:v17.2.0
+   #   cephVersion:
+      #  image: quay.io/ceph/ceph:v17.2.0
 
       healthCheck:
         daemonHealth:
@@ -115,7 +115,7 @@ spec:
         crashcollector:
           requests:
             cpu: 50m
-            memory: 200Mi
+            memory: 50Mi
 
       dashboard:
         enabled: true
