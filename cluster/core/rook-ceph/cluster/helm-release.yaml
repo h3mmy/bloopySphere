@@ -112,7 +112,7 @@ spec:
           requests:
             # @default cpu 3000m
             cpu: 100m
-            memory: 256Mi
+            memory: 50Mi
         crashcollector:
           requests:
             cpu: 50m
