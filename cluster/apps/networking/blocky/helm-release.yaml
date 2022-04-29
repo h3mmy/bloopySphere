@@ -224,6 +224,10 @@ spec:
         clientGroupsBlock:
           default:
             - ads
+          ${LOCAL_GATEWAY_SMALL_BLOOP}/24:
+            - ads
+            - special
+
       clientLookup:
         upstream: tcp+udp:${LOCAL_GATEWAY_MAIN}
       caching:
