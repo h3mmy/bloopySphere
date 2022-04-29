@@ -1,0 +1,21 @@
+---
+apiVersion: kubegres.reactive-tech.io/v1
+kind: Kubegres
+metadata:
+  name: authentik-postgres
+  namespace: auth
+spec:
+  replicas: 1
+  image: docker.io/library/postgres:14.2
+  database:
+    size: 10Gi
+    storageClassName: ceph-block
+  backup:
+    schedule: "0 */1 * * *"
+    pvcName: authentik-db-backup
+    volumeMount: /var/lib/backup
+  env:
+    - name: POSTGRES_PASSWORD
+      value: ${AUTHENTIK_KUBEGRES_PASSWORD}
+    - name: POSTGRES_REPLICATION_PASSWORD
+      value: ${AUTHENTIK_KUBEGRES_PASSWORD}
