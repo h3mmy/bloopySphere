@@ -40,9 +40,9 @@ spec:
         IP: 10 # must be an integer between 2 and VXLAN_GATEWAY_FIRST_DYNAMIC_IP (20 by default)
         ports:
           - type: udp
-            port: ${VPN_FORWARDED_PORT_1}
+            port: ${VPN_GATEWAY_VPN_PORT}
           - type: tcp
-            port: ${VPN_FORWARDED_PORT_1}
+            port: ${VPN_GATEWAY_VPN_PORT}
 
     # Default VPN_VXLAN DNS
     DNS: 172.16.0.1
