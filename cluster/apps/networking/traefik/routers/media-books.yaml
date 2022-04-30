@@ -19,4 +19,4 @@ spec:
         - name: networking-rfc1918@kubernetescrd
         - name: networking-secure-headers@kubernetescrd
   tls:
-    secretName: "${XYZ_DOMAIN/./-}-tls"
+    secretName: "tls.calibre-web"
