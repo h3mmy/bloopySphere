@@ -31,7 +31,7 @@ spec:
     hostsProxyHeaders:
       - "X-Forwarded-Host"
       - "Forwarded"
-    contentSecurityPolicy: "frame-ancestors 'self' *.bloopnet.xac.im:* *.xac.im *.quarkynet.com *.bloopnet.xyz; default-src https:" # script-src 'self' code.iconify.design cdnjs.cloudflare.com; object-src 'self'; require-trusted-types-for 'script';"
+    contentSecurityPolicy: "frame-ancestors 'self' *.bloopnet.xac.im:* *.xac.im *.quarkynet.com *.bloopnet.xyz;" # script-src 'self' code.iconify.design cdnjs.cloudflare.com; object-src 'self'; require-trusted-types-for 'script';"
     customResponseHeaders:
       X-xss-protection: "1"
       X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex,"
