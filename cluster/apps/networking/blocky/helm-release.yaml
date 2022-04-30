@@ -205,7 +205,7 @@ spec:
       customDNS:
         mapping:
           ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_TRAEFIK_CLASSIC}
-          ${SECRET_DOMAIN}: ${METALLB_TRAEFIK_ADDR}
+          ${SECRET_DOMAIN}: ${LB_V4_TRAEFIK}
       blocking:
         blockType: nxDomain
         failStartOnListError: true
