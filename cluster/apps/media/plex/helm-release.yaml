@@ -66,6 +66,7 @@ spec:
         annotations:
           metallb.universe.tf/allow-shared-ip: plex
           traefik.ingress.kubernetes.io/service.serversscheme: https
+          coredns.io/hostname: plex
         port:
           port: 32400
 
