@@ -61,9 +61,9 @@ spec:
         ports:
           bittorrent:
             enabled: true
-            port: ${VPN_GATEWAY_VPN_PORT}
+            port: ${VPN_FORWARDED_PORT_1}
             protocol: TCP
-            targetPort: ${VPN_GATEWAY_VPN_PORT}
+            targetPort: ${VPN_FORWARDED_PORT_1}
         externalTrafficPolicy: Local
 
     ingress:
@@ -125,14 +125,14 @@ spec:
       limits:
         memory: 2500Mi
 
-    # metrics:
-    #   enabled: true
-    #   prometheusRule:
-    #     enabled: true
-    #   exporter:
-    #     image:
-    #       repository: esanchezm/prometheus-qbittorrent-exporter
-    #       tag: v1.2.0
-    #     env:
-    #       user: "${QB_USER}"
-    #       password: "${QB_PASSWORD}"
+    metrics:
+      enabled: true
+      prometheusRule:
+        enabled: true
+      exporter:
+        image:
+          repository: esanchezm/prometheus-qbittorrent-exporter
+          tag: v1.2.0
+        env:
+          user: "${QB_USER}"
+          password: "${QB_PASSWORD}"
