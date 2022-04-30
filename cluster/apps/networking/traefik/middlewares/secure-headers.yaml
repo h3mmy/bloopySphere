@@ -12,13 +12,14 @@ spec:
       - "GET"
       - "OPTIONS"
       - "PUT"
-    # accessControlAllowOriginList:
-    #   - "https://${XYZ_DOMAIN}"
-    #   - "https://${SECRET_DOMAIN}"
-    accessControlAllowOriginListRegex:
-      - "https://(.*)?${XYZ_DOMAIN_REV}([^\\s\\x60!()\\[\\]{};:'\\x22.,<>?«»“”‘’]*)"
-      - "https://(.*)?${SECRET_DOMAIN_REV}([^\\s\\x60!()\\[\\]{};:'\\x22.,<>?«»“”‘’]*)"
-      - "https://(.*)?${CLASSIC_DOMAIN_REV}([^\\s\\x60!()\\[\\]{};:'\\x22.,<>?«»“”‘’]*)"
+    accessControlAllowOriginList:
+      - "https://${XYZ_DOMAIN}"
+      - "https://auth.${XYZ_DOMAIN}"
+      - "https://${SECRET_DOMAIN}"
+    # accessControlAllowOriginListRegex:
+    #   - "https://(.*)?${XYZ_DOMAIN_REV}([^\\s\\x60!()\\[\\]{};:'\\x22.,<>?«»“”‘’]*)"
+    #   - "https://(.*)?${SECRET_DOMAIN_REV}([^\\s\\x60!()\\[\\]{};:'\\x22.,<>?«»“”‘’]*)"
+    #   - "https://(.*)?${CLASSIC_DOMAIN_REV}([^\\s\\x60!()\\[\\]{};:'\\x22.,<>?«»“”‘’]*)"
     accessControlMaxAge: 100
     addVaryHeader: true
     stsPreload: true
