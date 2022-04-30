@@ -16,9 +16,9 @@ spec:
     #   - "https://${XYZ_DOMAIN}"
     #   - "https://${SECRET_DOMAIN}"
     accessControlAllowOriginListRegex:
-      - "https://(.*)?${XYZ_DOMAIN}([^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]*)"
-      - "https://(.*)?${SECRET_DOMAIN}([^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]*)"
-      - "https://(.*)?${CLASSIC_DOMAIN}([^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]*)"
+      - "https://(.*)?${XYZ_DOMAIN_REV}([^\\s\x60!()\\[\\]{};:'\".,<>?«»“”‘’]*)"
+      - "https://(.*)?${SECRET_DOMAIN_REV}([^\\s\x60!()\\[\\]{};:'\".,<>?«»“”‘’]*)"
+      - "https://(.*)?${CLASSIC_DOMAIN_REV}([^\\s\x60!()\\[\\]{};:'\".,<>?«»“”‘’]*)"
     accessControlMaxAge: 100
     addVaryHeader: true
     stsPreload: true
