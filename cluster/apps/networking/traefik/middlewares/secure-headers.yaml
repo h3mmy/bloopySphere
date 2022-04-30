@@ -12,22 +12,25 @@ spec:
       - "GET"
       - "OPTIONS"
       - "PUT"
-    accessControlAllowOriginList:
-      - "https://${XYZ_DOMAIN}"
-      - "https://${SECRET_DOMAIN}"
-    #accessControlAllowOriginListRegex:
-    # -"https://"
+    # accessControlAllowOriginList:
+    #   - "https://${XYZ_DOMAIN}"
+    #   - "https://${SECRET_DOMAIN}"
+    accessControlAllowOriginListRegex:
+      - "https://(.*)?${XYZ_DOMAIN}([^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]*)"
+      - "https://(.*)?${SECRET_DOMAIN}([^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]*)"
+      - "https://(.*)?${CLASSIC_DOMAIN}([^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]*)"
     accessControlMaxAge: 100
     addVaryHeader: true
     stsPreload: true
     forceSTSHeader: true
     contentTypeNosniff: true
     stsIncludeSubdomains: true
+    # 2y as recommended by mozilla
     stsSeconds: 63072000
     hostsProxyHeaders:
       - "X-Forwarded-Host"
       - "Forwarded"
-    contentSecurityPolicy: "frame-ancestors 'self' *.bloopnet.xac.im:* *.xac.im *.quarkynet.com *.bloopnet.xyz;" # script-src 'self' code.iconify.design cdnjs.cloudflare.com; object-src 'self'; require-trusted-types-for 'script';"
+    contentSecurityPolicy: "frame-ancestors 'self' *.bloopnet.xac.im:* *.xac.im *.quarkynet.com *.bloopnet.xyz; default-src https:" # script-src 'self' code.iconify.design cdnjs.cloudflare.com; object-src 'self'; require-trusted-types-for 'script';"
     customResponseHeaders:
       X-xss-protection: "1"
       X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex,"
