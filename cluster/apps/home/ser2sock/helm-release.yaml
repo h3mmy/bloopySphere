@@ -41,7 +41,7 @@ spec:
         enabled: true
         type: hostPath
         mountPath: /dev/ttyUSB0
-        hostPath: /dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_DO00DPTS-if00-port0
+        hostPath: /dev/serial/by-id/${USB_ZWAVE_ID}
         # hostPathType: CharDevice
     resources:
       requests:
