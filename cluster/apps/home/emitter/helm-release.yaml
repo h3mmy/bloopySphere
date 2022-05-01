@@ -28,8 +28,8 @@ spec:
       app: emitter
       role: broker
     env:
-      # - name: EMITTER_LICENSE
-      #   value: "..." # <- Provide license
+      - name: EMITTER_LICENSE
+        value: "${EMITTER_LICENSE}" # <- Provide license
       - name: EMITTER_CLUSTER_SEED
         value: "emitter" # or "broker-0.broker.home.svc.cluster.local"
       - name: EMITTER_CLUSTER_ADVERTISE
