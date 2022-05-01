@@ -44,7 +44,7 @@ spec:
         existingClaim: emitter-config-v1
     service:
       main:
-        nameOverride: broker-loadBalancer
+        nameOverride: broker-loadbalancer
         type: LoadBalancer
         ports:
           http:
