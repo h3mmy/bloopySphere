@@ -6,5 +6,6 @@ resources:
   - gotk-sync.yaml
   - charts
   - git-repos
+  - image-repos
 patchesStrategicMerge:
   - gotk-patches.yaml
