@@ -76,7 +76,7 @@ spec:
               - path: /
                 pathType: Prefix
             service:
-              name: broker-loadBalancer
+              name: broker-loadbalancer
         tls:
           - secretName: tls.emitter
             hosts:
