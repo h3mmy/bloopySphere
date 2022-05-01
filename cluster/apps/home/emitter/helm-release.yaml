@@ -29,7 +29,11 @@ spec:
       role: broker
     env:
       - name: EMITTER_LICENSE
-        value: "${EMITTER_LICENSE}" # <- Provide license
+        value: "${EMITTER_LICENSE}"
+      - name: EMITTER_TLS_HOST
+        value: &host mqtt.${XYZ_DOMAIN}
+      - name: EMITTER_TLS_LISTEN
+        value: 443
       - name: EMITTER_CLUSTER_SEED
         value: "emitter" # or "broker-0.broker.home.svc.cluster.local"
       - name: EMITTER_CLUSTER_ADVERTISE
@@ -51,10 +55,10 @@ spec:
         nameOverride: broker-loadbalancer
         type: LoadBalancer
         ports:
-          http:
+          tcp:
             port: 80
             targetPort: 8080
-          https:
+          tcp-tls:
             port: 443
             targetPort: 443
 
@@ -75,7 +79,7 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
         hosts:
-          - host: &host mqtt.${XYZ_DOMAIN}
+          - host: *host
             paths:
               - path: /
                 pathType: Prefix
