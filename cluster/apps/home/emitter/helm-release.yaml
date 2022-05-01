@@ -37,11 +37,15 @@ spec:
       # Values are 'inmemory'(@default) or 'ssd'
       - name: EMITTER_STORAGE_PROVIDER
         value: "ssd"
-    persistence:
-      config:
-        enabled: true
+
+    volumeClaimTemplates:
+      - name: data
         mountPath: /data
-        existingClaim: emitter-config-v1
+        accessMode: "ReadWriteOnce"
+        size: 10Gi
+        storageClass: ceph-block
+        reclaimPolicy: Retain
+
     service:
       main:
         nameOverride: broker-loadbalancer
