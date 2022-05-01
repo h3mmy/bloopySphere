@@ -33,7 +33,7 @@ spec:
       - name: EMITTER_TLS_HOST
         value: &host mqtt.${XYZ_DOMAIN}
       - name: EMITTER_TLS_LISTEN
-        value: 443
+        value: "443"
       - name: EMITTER_CLUSTER_SEED
         value: "emitter" # or "broker-0.broker.home.svc.cluster.local"
       - name: EMITTER_CLUSTER_ADVERTISE
@@ -55,7 +55,7 @@ spec:
         nameOverride: broker-loadbalancer
         type: LoadBalancer
         ports:
-          tcp:
+          http:
             port: 80
             targetPort: 8080
           tcp-tls:
