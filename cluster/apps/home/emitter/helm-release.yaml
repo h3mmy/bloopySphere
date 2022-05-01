@@ -50,6 +50,7 @@ spec:
             targetPort: 4000
 
       broker-loadbalancer:
+        primary: true
         type: LoadBalancer
         ports:
           http:
