@@ -9,6 +9,7 @@ spec:
   chart:
     spec:
       chart: kah-common-chart
+      version: 4.4.0
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -43,15 +44,7 @@ spec:
         existingClaim: emitter-config-v1
     service:
       main:
-        nameOverride: dns
-        clusterIP: None # Headless service
-        ports: # No port is actually needed
-          headless:
-            port: 4000
-            targetPort: 4000
-
-      broker-loadbalancer:
-        primary: true
+        nameOverride: broker-loadBalancer
         type: LoadBalancer
         ports:
           http:
@@ -60,6 +53,14 @@ spec:
           https:
             port: 443
             targetPort: 443
+
+      dns:
+        nameOverride: dns
+        clusterIP: None # Headless service
+        ports: # No port is actually needed
+          headless:
+            port: 4000
+            targetPort: 4000
 
     ingress:
       main:
