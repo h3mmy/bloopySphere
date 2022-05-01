@@ -58,7 +58,7 @@ spec:
           http:
             port: 80
             targetPort: 8080
-          tcp-tls:
+          https:
             port: 443
             targetPort: 443
 
