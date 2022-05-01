@@ -46,7 +46,8 @@ spec:
         nameOverride: dns
         clusterIP: None # Headless service
         ports: # No port is actually needed
-          - port: 4000
+          headless:
+            port: 4000
             targetPort: 4000
 
       broker-loadbalancer:
