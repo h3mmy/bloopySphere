@@ -6,9 +6,9 @@ metadata:
   namespace: home
 spec:
   entryPoints:
-    - websocket-secure
+    - websocket
   routes:
-    - match: HostSNI(`zwave.${XYZ_DOMAIN}`)
+    - match: HostSNI(`*`)
       services:
         - name: zwavejs2mqtt
           port: 3000
