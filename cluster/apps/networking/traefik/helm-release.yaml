@@ -99,13 +99,17 @@ spec:
         tls:
           enabled: true
           options: default
-      wss:
+      websocket-secure:
         port: 8883
         expose: true
         exposedPort: 8883
         tls:
           enabled: true
           options: default
+      websocket:
+        port: 1883
+        expose: true
+        exposedPort: 1883
       metrics:
         port: 8082
         expose: true
