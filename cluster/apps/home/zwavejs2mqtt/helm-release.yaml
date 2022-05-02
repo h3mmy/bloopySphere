@@ -31,6 +31,12 @@ spec:
           websocket:
             enabled: true
             port: 3000
+      lbws:
+        type: LoadBalancer
+        ports:
+          websocket:
+            enabled: true
+            port: 3000
     ingress:
       main:
         enabled: true
