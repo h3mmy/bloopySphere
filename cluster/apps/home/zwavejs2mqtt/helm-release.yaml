@@ -65,6 +65,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: tls.zwavejs2mqtt
       # websocket:
       #   enabled: true
       #   ingressClassName: traefik
