@@ -99,7 +99,7 @@ spec:
         tls:
           enabled: true
           options: default
-      websocket-secure:
+      websocket-tls:
         port: 8883
         expose: true
         exposedPort: 8883
