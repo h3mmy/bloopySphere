@@ -32,3 +32,4 @@ provision/talos/*
 nukeRookCeph.sh
 ddns_data.json
 *.bakup.yaml
+zwavejs2mqtt-store.zip

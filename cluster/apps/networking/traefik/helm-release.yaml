@@ -99,6 +99,13 @@ spec:
         tls:
           enabled: true
           options: default
+      wss:
+        port: 8883
+        expose: true
+        exposedPort: 8883
+        tls:
+          enabled: true
+          options: default
       metrics:
         port: 8082
         expose: true
