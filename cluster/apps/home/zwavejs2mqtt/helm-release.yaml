@@ -32,6 +32,8 @@ spec:
             enabled: true
             port: 3000
       lbws:
+        enabled: true
+        nameOverride: websockets-zwave-lb
         type: LoadBalancer
         ports:
           websocket:
