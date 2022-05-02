@@ -25,17 +25,24 @@ spec:
       TZ: "${TZ}"
     service:
       main:
+        ports:
+          http:
+            port: 8091
+      websock:
+        enabled: true
         type: LoadBalancer
         externalTrafficPolicy: Local
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${LB_V4_ZWAVEJS}"
           metallb.universe.tf/allow-shared-ip: zwavejs
+          traefik.ingress.kubernetes.io/service.serversscheme: tcp
         ports:
-          http:
-            port: 8091
           websocket:
             enabled: true
             port: 3000
+            protocol: TCP
+            targetPort: 3000
+
     ingress:
       main:
         enabled: true
