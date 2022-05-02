@@ -63,9 +63,9 @@ spec:
         hostPath: /dev/serial/by-id/${USB_ZWAVE_ID}
         hostPathType: CharDevice
     affinity:
-      nodeAffinity:
+      podAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
+          podAffinityTerms:
             labelSelector:
               matchExpressions:
                 - key: app.kubernetes.io/name
