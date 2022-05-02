@@ -65,8 +65,7 @@ spec:
     affinity:
       podAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
-          podAffinityTerms:
-            labelSelector:
+          - labelSelector:
               matchExpressions:
                 - key: app.kubernetes.io/name
                   operator: In
