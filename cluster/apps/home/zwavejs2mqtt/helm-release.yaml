@@ -25,6 +25,7 @@ spec:
       TZ: "${TZ}"
     service:
       main:
+        type: LoadBalancer
         annotations:
           traefik.ingress.kubernetes.io/service.serversscheme: tcp
         ports:
