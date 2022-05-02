@@ -25,6 +25,8 @@ spec:
       TZ: "${TZ}"
     service:
       main:
+        annotations:
+          traefik.ingress.kubernetes.io/service.serversscheme: tcp
         ports:
           http:
             port: 8091

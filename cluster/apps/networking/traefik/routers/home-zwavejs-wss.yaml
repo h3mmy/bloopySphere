@@ -2,15 +2,15 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRouteTCP
 metadata:
-  name: zwave-ws
+  name: zwave-wss
   namespace: home
 spec:
   entryPoints:
-    - websocket
+    - websocket-tls
   routes:
-    - match: HostSNI(`*`)
+    - match: HostSNI(`zwave-wss.${XYZ_DOMAIN}`)
       services:
-        - name: zwavejs2mqtt
+        - name: zwavejs2mqtt-websock
           port: 3000
       middlewares:
         - name: networking-rfc1918-tcp@kubernetescrd
