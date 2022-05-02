@@ -8,7 +8,7 @@ spec:
   entryPoints:
     - wss
   routes:
-    - match: HostSNI(`zwave.${XYZ_DOMAIN}`)
+    - match: HostSNI(`zwave-wss.${XYZ_DOMAIN}`)
       services:
         - name: zwavejs2mqtt
           port: 3000

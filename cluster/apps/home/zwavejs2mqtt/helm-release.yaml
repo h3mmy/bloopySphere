@@ -31,25 +31,18 @@ spec:
           websocket:
             enabled: true
             port: 3000
-      lbws:
-        enabled: true
-        nameOverride: websockets-zwave-lb
-        type: LoadBalancer
-        ports:
-          websocket:
-            enabled: true
-            port: 3000
     ingress:
       main:
         enabled: true
         ingressClassName: "traefik"
-        hajimari.io/appName: "zwaveJS"
-        hajimari.io/instance: "bloop-quarky"
-        hajimari.io/enable: "true"
-        hajimari.io/icon: "server"
-        cert-manager.io/cluster-issuer: letsencrypt-production
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
+        annotations:
+          hajimari.io/appName: "zwaveJS"
+          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "server"
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
         hosts:
           - host: &host "zwave.${XYZ_DOMAIN}"
             paths:
@@ -58,6 +51,18 @@ spec:
         tls:
           - hosts:
               - *host
+      # websocket:
+      #   enabled: true
+      #   ingressClassName: traefik
+      #   annotations:
+      #     traefik.ingress.kubernetes.io/router.entrypoints: wss
+      #     traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918-tcp@kubernetescrd
+      #   hosts:
+      #     - host: *host
+      #       paths:
+      #         - path: /
+      #           pathType: Prefix
+
     securityContext:
       privileged: true
     persistence:
