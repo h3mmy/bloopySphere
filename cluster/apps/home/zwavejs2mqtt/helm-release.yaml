@@ -27,7 +27,7 @@ spec:
       main:
         type: LoadBalancer
         annotations:
-          traefik.ingress.kubernetes.io/service.serversscheme: tcp
+          traefik.ingress.kubernetes.io/service.serversscheme: http
         ports:
           http:
             port: 8091
