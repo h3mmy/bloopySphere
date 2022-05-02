@@ -65,7 +65,7 @@ spec:
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
-          podAffinityTerm:
+          nodeSelectorTerms:
             labelSelector:
               matchExpressions:
                 - key: app.kubernetes.io/name
