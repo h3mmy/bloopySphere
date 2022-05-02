@@ -10,7 +10,7 @@ collections:
     version: 2.3.0
 roles:
   - src: xanmanning.k3s
-    version: v3.1.1
+    version: v3.1.2
   - src: patrickjahns.promtail
     version: 1.16.0
   - src: geerlingguy.pip
