@@ -57,11 +57,11 @@ spec:
         enabled: true
         existingClaim: zwavejs2mqtt-config-v1
         mountPath: "/usr/src/app/store"
-      usb:
-        enabled: true
-        type: hostPath
-        hostPath: /dev/serial/by-id/${USB_ZWAVE_ID}
-        hostPathType: CharDevice
+      # usb:
+      #   enabled: true
+      #   type: hostPath
+      #   hostPath: /dev/serial/by-id/${USB_ZWAVE_ID}
+      #   hostPathType: CharDevice
     affinity:
       podAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
