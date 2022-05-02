@@ -21,3 +21,17 @@ spec:
     middlewares:
       - name: networking-rfc1918-ips@kubernetescrd
       - name: networking-error-pages@kubernetescrd
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: MiddlewareTCP
+metadata:
+  name: rfc1918-tcp
+  namespace: networking
+spec:
+  ipWhiteList:
+    sourceRange:
+      - 10.0.0.0/8
+      - 172.16.0.0/12
+      - 192.168.0.0/16
+      - "fc00::/7"
+      - "${CALICO_NODE_CIDR_IPV6}"
