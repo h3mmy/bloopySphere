@@ -41,7 +41,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "server"
           cert-manager.io/cluster-issuer: letsencrypt-production
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure, websocket
           traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
         hosts:
           - host: &host "zwave.${XYZ_DOMAIN}"
