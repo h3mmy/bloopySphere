@@ -7,4 +7,4 @@ resources:
   - media-radarr-uhd-bypass.yaml
   - media-sonarr-uhd-bypass.yaml
   - home-home-assistant.yaml
-  - home-zwavejs-ws.yaml
+  - home-zwavejs-wss.yaml
