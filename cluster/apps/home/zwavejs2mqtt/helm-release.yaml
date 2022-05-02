@@ -25,6 +25,11 @@ spec:
       TZ: "${TZ}"
     service:
       main:
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${LB_V4_ZWAVEJS}"
+          metallb.universe.tf/allow-shared-ip: zwavejs
         ports:
           http:
             port: 8091
@@ -41,7 +46,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "server"
           cert-manager.io/cluster-issuer: letsencrypt-production
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure, websocket
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
         hosts:
           - host: &host "zwave.${XYZ_DOMAIN}"
