@@ -1,0 +1,88 @@
+---
+apiVersion: apps.emqx.io/v1beta2
+kind: EmqxBroker
+metadata:
+  name: emqx
+spec:
+  serviceAccountName: "emqx"
+  image: emqx/emqx:4.3.11
+  replicas: 3
+  labels:
+    cluster: emqx
+  storage:
+    storageClassName: ceph-block
+    resources:
+      requests:
+        storage: 1Gi
+    accessModes:
+      - ReadWriteOnce
+  emqxTemplate:
+    listener:
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-production
+      type: ClusterIP
+      ports:
+        mqtt: 1883
+        mqtts: 8883
+        ws: 8083
+        wss: 8084
+        dashboard: 18083
+        api: 8081
+    acl:
+      - permission: allow
+        username: "dashboard"
+        action: subscribe
+        topics:
+          filter:
+            - "$SYS/#"
+            - "#"
+      - permission: allow
+        ipaddress: "127.0.0.1"
+        topics:
+          filter:
+            - "$SYS/#"
+          equal:
+            - "#"
+      - permission: deny
+        action: subscribe
+        topics:
+          filter:
+            - "$SYS/#"
+          equal:
+            - "#"
+      - permission: allow
+    plugins:
+      - name: emqx_management
+        enable: true
+      - name: emqx_recon
+        enable: true
+      - name: emqx_retainer
+        enable: true
+      - name: emqx_dashboard
+        enable: true
+      - name: emqx_telemetry
+        enable: false
+      - name: emqx_rule_engine
+        enable: true
+      - name: emqx_bridge_mqtt
+        enable: false
+      - name: emqx_prometheus
+        enable: true
+      - name: emqx_auth_mnesia
+        enable: true
+    modules:
+      - name: emqx_mod_acl_internal
+        enable: true
+      - name: emqx_mod_presence
+        enable: true
+      - name: emqx_mod_rewrite
+        enable: false
+      - name: emqx_mod_delayed
+        enable: false
+      - name: emqx_mod_topic_metrics
+        enable: true
+      - name: emqx_mod_subscription
+        enable: false
+    env:
+      - name: EMQX_PROMETHEUS__PUSH__GATEWAY__SERVER
+        value: ${push_gateway_url}:9091
