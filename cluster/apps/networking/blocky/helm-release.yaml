@@ -205,7 +205,9 @@ spec:
       customDNS:
         mapping:
           ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_TRAEFIK_CLASSIC}
-          ${SECRET_DOMAIN}: ${LB_V4_TRAEFIK}
+          ${SECRET_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+          ${XYZ_DOMAIN}: ${LB_V6_TRAEFIK}
+          mqtt.${XYZ_DOMAIN}: ${LB_V6_TRAEFIK}
       blocking:
         blockType: nxDomain
         failStartOnListError: true
