@@ -31,13 +31,13 @@ spec:
       port: 53
       annotations:
       # This helm chart refuses to respect values. Will need to raise an issue
-        # metallb.universe.tf/loadBalancerIPs: "${LB_V4_K8S_GATEWAY}, ${LB_V6_K8S_GATEWAY}"
-        metallb.universe.tf/loadBalancerIPs: "${LB_V4_K8S_GATEWAY}"
+        metallb.universe.tf/loadBalancerIPs: "${LB_V4_K8S_GATEWAY}, ${LB_V6_K8S_GATEWAY}"
+        # metallb.universe.tf/loadBalancerIPs: "${LB_V4_K8S_GATEWAY}"
       externalTrafficPolicy: Local
-      # ipFamilyPolicy: PreferDualStack
-      # ipFamilies:
-      #   - "IPv4"
-      #   - "IPv6"
+      ipFamilyPolicy: PreferDualStack
+      ipFamilies:
+        - "IPv4"
+        - "IPv6"
     # Increase replicaCount and set an anti-affinity if you wish to scale this
     replicaCount: 1
     affinity:
