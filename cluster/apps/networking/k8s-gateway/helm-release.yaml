@@ -30,7 +30,6 @@ spec:
       type: LoadBalancer
       port: 53
       annotations:
-      # This helm chart refuses to respect values. Will need to raise an issue
         metallb.universe.tf/loadBalancerIPs: "${LB_V4_K8S_GATEWAY}, ${LB_V6_K8S_GATEWAY}"
         # metallb.universe.tf/loadBalancerIPs: "${LB_V4_K8S_GATEWAY}"
       externalTrafficPolicy: Local
