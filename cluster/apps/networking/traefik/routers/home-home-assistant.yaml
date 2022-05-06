@@ -16,13 +16,14 @@ metadata:
 spec:
   rules:
     - host: &host home-assistant.${XYZ_DOMAIN}
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: home-assistant
-              port: 8123
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: home-assistant
+                port: 8123
   tls:
     - secretName: tls.home-assistant
       hosts:
