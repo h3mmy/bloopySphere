@@ -23,7 +23,8 @@ spec:
             backend:
               service:
                 name: home-assistant
-                port: 8123
+                port:
+                  number: 8123
   tls:
     - secretName: tls.home-assistant
       hosts:
