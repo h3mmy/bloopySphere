@@ -1,26 +1,29 @@
 ---
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
   name: home-assistant
   namespace: home
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-production"
-    hajimari.io/appName: "home-assistant"
-    hajimari.io/instance: "bloop-xyz"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    hajimari.io/appName: home-assistant
+    hajimari.io/instance: bloop-xyz
     hajimari.io/enable: "true"
-    hajimari.io/icon: "home-assistant"
+    hajimari.io/icon: home-assistant
+
 spec:
-  entryPoints:
-    - websecure
-  routes:
-    - kind: Rule
-      match: Host(`home-assistant.${XYZ_DOMAIN}`)
-      services:
-        - name: home-assistant
-          port: 8123
-      middlewares:
-        - name: chain-no-auth
-          namespace: networking
+  rules:
+    - host: &host home-assistant.${XYZ_DOMAIN}
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: home-assistant
+              port: 8123
   tls:
-    secretName: tls.home-assistant
+    - secretName: tls.home-assistant
+      hosts:
+        - *host
