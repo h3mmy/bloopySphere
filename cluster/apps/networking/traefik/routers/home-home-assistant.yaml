@@ -22,3 +22,5 @@ spec:
       middlewares:
         - name: chain-no-auth
           namespace: networking
+  tls:
+    secretName: tls.home-assistant
