@@ -34,15 +34,14 @@ spec:
         # loadBalancerIPs:
         #   - "${LB_V4_TRAEFIK}"
         #   - "${LB_V6_TRAEFIK}"
-        loadBalancerIP: ${LB_V4_TRAEFIK}
         externalTrafficPolicy: Local
-      ipFamilyPolicy: SingleStack
-      # ipFamilies:
-      #   - "IPv4"
-      #   - "IPv6"
-      # externalIPs:
-      #   - ${LB_V4_TRAEFIK}
-      #   - ${LB_V6_TRAEFIK}
+      ipFamilyPolicy: PreferDualStack
+      ipFamilies:
+        - "IPv4"
+        - "IPv6"
+      annotations:
+        metallb.universe.tf/loadBalancerIPs: "${LB_V4_TRAEFIK}, ${LB_V6_TRAEFIK}"
+        metallb.universe.tf/allow-shared-ip: traefik
     logs:
       general:
         format: json
