@@ -84,5 +84,6 @@ spec:
       - name: emqx_mod_subscription
         enable: false
     env:
-      - name: EMQX_PROMETHEUS__PUSH__GATEWAY__SERVER
-        value: ${push_gateway_url}:9091
+      # - name: EMQX_PROMETHEUS__PUSH__GATEWAY__SERVER
+      #   value: ${push_gateway_url}:9091
+      EMQX_ADMIN_PASSWORD: ${EMQX_ADMIN_PASSWORD}
