@@ -17,6 +17,10 @@ spec:
         storage: 1Gi
     accessModes:
       - ReadWriteOnce
+  env:
+    # - name: EMQX_PROMETHEUS__PUSH__GATEWAY__SERVER
+    #   value: ${push_gateway_url}:9091
+    EMQX_ADMIN_PASSWORD: ${EMQX_ADMIN_PASSWORD}
   emqxTemplate:
     listener:
       annotations:
@@ -84,7 +88,3 @@ spec:
         enable: true
       - name: emqx_mod_subscription
         enable: false
-    env:
-      # - name: EMQX_PROMETHEUS__PUSH__GATEWAY__SERVER
-      #   value: ${push_gateway_url}:9091
-      EMQX_ADMIN_PASSWORD: ${EMQX_ADMIN_PASSWORD}
