@@ -20,7 +20,8 @@ spec:
   env:
     # - name: EMQX_PROMETHEUS__PUSH__GATEWAY__SERVER
     #   value: ${push_gateway_url}:9091
-    EMQX_ADMIN_PASSWORD: ${EMQX_ADMIN_PASSWORD}
+    - name: EMQX_ADMIN_PASSWORD
+      value: ${EMQX_ADMIN_PASSWORD}
   emqxTemplate:
     listener:
       annotations:
