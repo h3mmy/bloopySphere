@@ -206,6 +206,9 @@ spec:
         mapping:
           ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_TRAEFIK_CLASSIC}
           ${SECRET_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+          emqx.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+          mqtt.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+          wss.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
       blocking:
         blockType: nxDomain
         failStartOnListError: true
