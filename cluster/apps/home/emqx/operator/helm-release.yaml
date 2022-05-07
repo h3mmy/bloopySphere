@@ -16,29 +16,23 @@ spec:
         name: emqx-charts
         namespace: flux-system
       interval: 5m
+
+  install:
+    crds: CreateReplace
+    disableWait: true
+    remediation:
+      retries: 7
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: 7
+
   values:
     installCRDs: true
     replicaCount: 1
     image:
       repository: emqx/emqx-operator-controller
       pullPolicy: IfNotPresent
-      # Overrides the image tag whose default is the chart appVersion.
-      tag: ""
-
-    imagePullSecrets: []
-    nameOverride: ""
-    fullnameOverride: ""
-
-    serviceAccount:
-      # Specifies whether a service account should be created
-      create: true
-      # Annotations to add to the service account
-      annotations: {}
-      # The name of the service account to use.
-      # If not set and create is true, a name is generated using the fullname template
-      name: ""
-
-    podAnnotations: {}
 
     resources:
       limits:
@@ -47,10 +41,6 @@ spec:
       requests:
         cpu: 100m
         memory: 30Mi
-
-    nodeSelector: {}
-
-    tolerations: []
 
     cert-manager:
       # I have cert-manager independent of this HelmRelease
