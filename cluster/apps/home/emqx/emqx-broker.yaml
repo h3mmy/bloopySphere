@@ -22,24 +22,41 @@ spec:
     #   value: ${push_gateway_url}:9091
     - name: EMQX_ADMIN_PASSWORD
       value: ${EMQX_ADMIN_PASSWORD}
-    - name: EMQX_AUTH__LDAP__SERVERS
-      value: ak-outpost-ldap-outpost.auth.svc.cluster.local
-    - name: EMQX_AUTH__LDAP__PORT
-      value: "389"
-    - name: EMQX_AUTH__LDAP__BIND_DN
-      value: ${EMQX_BIND_DN}
-    - name: EMQX_AUTH__LDAP__BIND_PASSWORD
-      value: ${EMQX_BIND_PASSWORD}
-    - name: EMQX_AUTH__LDAP__TIMEOUT
-      value: 30s
-    - name: EMQX_AUTH__LDAP__DEVICE_DN
-      value:
-    - name: EMQX_AUTH__LDAP__MATCH_OBJECTCLASS
-      value: user
-    - name: EMQX_AUTH__LDAP__USERNAME__ATTRIBUTETYPE
-      value: cn
-    - name: EMQX_AUTH__LDAP__PASSWORD__ATTRIBUTETYPE
-      value: password
+    - name: EMQX_AUTH__USER__1__USERNAME
+      value: ${EMQX_USER_1_USERNAME}
+    - name: EMQX_AUTH__USER__1__PASSWORD
+      value: ${EMQX_USER_1_PASSWORD}
+    - name: EMQX_AUTH__USER__2__USERNAME
+      value: ${EMQX_USER_2_USERNAME}
+    - name: EMQX_AUTH__USER__2__PASSWORD
+      value: ${EMQX_USER_2_PASSWORD}
+    - name: EMQX_AUTH__USER__3__USERNAME
+      value: ${EMQX_USER_3_USERNAME}
+    - name: EMQX_AUTH__USER__3__PASSWORD
+      value: ${EMQX_USER_3_PASSWORD}
+    - name: EMQX_AUTH__USER__4__USERNAME
+      value: ${EMQX_USER_4_USERNAME}
+    - name: EMQX_AUTH__USER__4__PASSWORD
+      value: ${EMQX_USER_4_PASSWORD}
+    # - name: EMQX_AUTH__LDAP__SERVERS
+    #   value: ak-outpost-ldap-outpost.auth.svc.cluster.local
+    # - name: EMQX_AUTH__LDAP__PORT
+    #   value: "389"
+    # - name: EMQX_AUTH__LDAP__BIND_DN
+    #   value: ${EMQX_BIND_DN}
+    # - name: EMQX_AUTH__LDAP__BIND_PASSWORD
+    #   value: ${EMQX_BIND_PASSWORD}
+    # - name: EMQX_AUTH__LDAP__TIMEOUT
+    #   value: 30s
+    # - name: EMQX_AUTH__LDAP__DEVICE_DN
+    #   value:
+    # - name: EMQX_AUTH__LDAP__MATCH_OBJECTCLASS
+    #   value: user
+    # - name: EMQX_AUTH__LDAP__USERNAME__ATTRIBUTETYPE
+    #   value: cn
+    # - name: EMQX_AUTH__LDAP__PASSWORD__ATTRIBUTETYPE
+    #   value: password
+
 
   emqxTemplate:
     listener:
