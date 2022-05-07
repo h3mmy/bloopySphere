@@ -2,25 +2,54 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRouteTCP
 metadata:
-  name: emqx
+  name: emqx-wss
   namespace: networking
 spec:
   entryPoints:
-    - websecure
     - wss
-    - mqtts
   routes:
-    - match: HostSNI(`emqx.${XYZ_DOMAIN}`)
-      services:
-        - name: emqx.home
-          port: 18083
-    - match: HostSNI(`mqtt.${XYZ_DOMAIN}`)
-      services:
-        - name: emqx.home
-          port: 1883
     - match: HostSNI(`emqx-ws.${XYZ_DOMAIN}`)
       services:
         - name: emqx.home
           port: 8083
+      middlewares:
+        - name: networking-rfc1918-tcp@kubernetescrd
+  tls:
+    secretName: tls.${XYZ_DOMAIN/./-}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: emqx-mqtt
+  namespace: networking
+spec:
+  entryPoints:
+    - mqtts
+  routes:
+    - match: HostSNI(`mqtt.${XYZ_DOMAIN}`)
+      services:
+        - name: emqx.home
+          port: 1883
+      middlewares:
+        - name: networking-rfc1918-tcp@kubernetescrd
+  tls:
+    secretName: tls.${XYZ_DOMAIN/./-}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: emqx-dashboard
+  namespace: networking
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`emqx.${XYZ_DOMAIN}`)
+      kind: Rule
+      services:
+        - name: emqx.home
+          port: 18083
+      middlewares:
+        - name: networking-rfc1918@kubernetescrd
   tls:
     secretName: tls.${XYZ_DOMAIN/./-}
