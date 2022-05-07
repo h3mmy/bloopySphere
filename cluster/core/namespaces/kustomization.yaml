@@ -18,3 +18,4 @@ resources:
   - blogs.yaml
   - kasten-io.yaml
   - system-upgrade.yaml
+  - emqx-operator-system.yaml
