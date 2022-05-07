@@ -25,7 +25,7 @@ spec:
     - name: EMQX_AUTH__LDAP__SERVERS
       value: ak-outpost-ldap-outpost.auth.svc.cluster.local
     - name: EMQX_AUTH__LDAP__PORT
-      value: 389
+      value: "389"
     - name: EMQX_AUTH__LDAP__BIND_DN
       value: ${EMQX_BIND_DN}
     - name: EMQX_AUTH__LDAP__BIND_PASSWORD
