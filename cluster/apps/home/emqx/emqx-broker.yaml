@@ -22,6 +22,25 @@ spec:
     #   value: ${push_gateway_url}:9091
     - name: EMQX_ADMIN_PASSWORD
       value: ${EMQX_ADMIN_PASSWORD}
+    - name: EMQX_AUTH__LDAP__SERVERS
+      value: ak-outpost-ldap-outpost.auth.svc.cluster.local
+    - name: EMQX_AUTH__LDAP__PORT
+      value: 389
+    - name: EMQX_AUTH__LDAP__BIND_DN
+      value: ${EMQX_BIND_DN}
+    - name: EMQX_AUTH__LDAP__BIND_PASSWORD
+      value: ${EMQX_BIND_PASSWORD}
+    - name: EMQX_AUTH__LDAP__TIMEOUT
+      value: 30s
+    - name: EMQX_AUTH__LDAP__DEVICE_DN
+      value:
+    - name: EMQX_AUTH__LDAP__MATCH_OBJECTCLASS
+      value: user
+    - name: EMQX_AUTH__LDAP__USERNAME__ATTRIBUTETYPE
+      value: cn
+    - name: EMQX_AUTH__LDAP__PASSWORD__ATTRIBUTETYPE
+      value: password
+
   emqxTemplate:
     listener:
       annotations:
