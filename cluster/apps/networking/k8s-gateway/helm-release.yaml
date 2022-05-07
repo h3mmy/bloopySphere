@@ -24,6 +24,10 @@ spec:
       remediateLastFailure: true
   values:
     fullnameOverride: k8s-gateway
+    fallthrough:
+      enabled: true
+      zones:
+        - ${XYZ_DOMAIN}
     domain: ${XYZ_DOMAIN}
     ttl: 1
     service:
