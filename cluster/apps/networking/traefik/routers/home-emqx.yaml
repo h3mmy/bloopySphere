@@ -1,0 +1,26 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: emqx
+  namespace: networking
+spec:
+  entryPoints:
+    - websecure
+    - wss
+    - mqtts
+  routes:
+    - match: HostSNI(`emqx.${XYZ_DOMAIN}`)
+      services:
+        - name: emqx.home
+          port: 18083
+    - match: HostSNI(`mqtt.${XYZ_DOMAIN}`)
+      services:
+        - name: emqx.home
+          port: 1883
+    - match: HostSNI(`emqx-ws.${XYZ_DOMAIN}`)
+      services:
+        - name: emqx.home
+          port: 8083
+  tls:
+    secretName: tls.${XYZ_DOMAIN/./-}
