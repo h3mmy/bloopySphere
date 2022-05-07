@@ -99,13 +99,20 @@ spec:
         tls:
           enabled: true
           options: default
-      # websocket-tls:
-      #   port: 3083
-      #   expose: true
-      #   exposedPort: 3003
-      #   tls:
-      #     enabled: true
-      #     options: default
+      wss:
+        port: 8284
+        expose: true
+        exposedPort: 8084
+        tls:
+          enabled: true
+          options: default
+      mqtts:
+        port: 8183
+        expose: true
+        exposedPort: 8883
+        tls:
+          enabled: true
+          options: default
       metrics:
         port: 8082
         expose: true
