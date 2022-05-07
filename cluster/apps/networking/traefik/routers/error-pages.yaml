@@ -16,4 +16,4 @@ spec:
           name: error-pages
           port: 8080
   tls:
-    secretName: "${XYZ_DOMAIN/./-}-tls"
+    secretName: "tls.${XYZ_DOMAIN/./-}"
