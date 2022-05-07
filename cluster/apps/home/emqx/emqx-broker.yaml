@@ -3,6 +3,7 @@ apiVersion: apps.emqx.io/v1beta2
 kind: EmqxBroker
 metadata:
   name: emqx
+  namespace: home
 spec:
   serviceAccountName: "emqx"
   image: emqx/emqx:4.4.3
