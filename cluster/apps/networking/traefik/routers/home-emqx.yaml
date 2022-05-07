@@ -3,15 +3,14 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRouteTCP
 metadata:
   name: emqx-wss
-  namespace: networking
+  namespace: home
 spec:
   entryPoints:
     - wss
   routes:
     - match: HostSNI(`emqx-ws.${XYZ_DOMAIN}`)
       services:
-        - name: emqx.home
-          kind: Service
+        - name: emqx
           port: 8083
       middlewares:
         - name: networking-rfc1918-tcp@kubernetescrd
@@ -22,15 +21,14 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRouteTCP
 metadata:
   name: emqx-mqtt
-  namespace: networking
+  namespace: home
 spec:
   entryPoints:
     - mqtts
   routes:
     - match: HostSNI(`mqtt.${XYZ_DOMAIN}`)
       services:
-        - name: emqx.home
-          kind: Service
+        - name: emqx
           port: 1883
       middlewares:
         - name: networking-rfc1918-tcp@kubernetescrd
