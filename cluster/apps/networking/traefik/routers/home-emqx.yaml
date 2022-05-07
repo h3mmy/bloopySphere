@@ -10,7 +10,7 @@ spec:
   routes:
     - match: HostSNI(`emqx-ws.${XYZ_DOMAIN}`)
       services:
-        - name: emqx.home
+        - name: home-emqx@kubernetescrd
           port: 8083
       middlewares:
         - name: networking-rfc1918-tcp@kubernetescrd
@@ -28,7 +28,7 @@ spec:
   routes:
     - match: HostSNI(`mqtt.${XYZ_DOMAIN}`)
       services:
-        - name: emqx.home
+        - name: home-emqx@kubernetescrd
           port: 1883
       middlewares:
         - name: networking-rfc1918-tcp@kubernetescrd
@@ -47,7 +47,7 @@ spec:
     - match: Host(`emqx.${XYZ_DOMAIN}`)
       kind: Rule
       services:
-        - name: emqx.home
+        - name: home-emqx@kubernetescrd
           port: 18083
       middlewares:
         - name: networking-rfc1918@kubernetescrd
