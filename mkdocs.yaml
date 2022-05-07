@@ -1,7 +1,7 @@
 ---
 # Project information
 site_name: h3mmy | BloopySphere
-site_description: A repository for some ofmy home infrastructure which mostly adheres to Infrastructure as Code (IaC) and GitOps practices
+site_description: A repository for some of my home infrastructure which mostly adheres to Infrastructure as Code (IaC) and GitOps practices
 site_author: Zee Aslam
 site_url: https://h3mmy.github.io/bloopySphere/
 
