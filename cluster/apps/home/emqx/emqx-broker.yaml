@@ -18,8 +18,8 @@ spec:
     accessModes:
       - ReadWriteOnce
   env:
-    # - name: EMQX_PROMETHEUS__PUSH__GATEWAY__SERVER
-    #   value: ${push_gateway_url}:9091
+    - name: EMQX_PROMETHEUS__PUSH__GATEWAY__SERVER
+      value: "http://127.0.0.1:9091"
     - name: EMQX_ADMIN_PASSWORD
       value: ${EMQX_ADMIN_PASSWORD}
     - name: EMQX_AUTH__USER__1__USERNAME
