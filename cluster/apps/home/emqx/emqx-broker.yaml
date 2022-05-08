@@ -53,6 +53,12 @@ spec:
       value: ${EMQX_USER_4_PASSWORD}
     - name: EMQX_AUTH__USER__5__PASSWORD
       value: ${EMQX_USER_5_PASSWORD}
+    - name: EMQX_AUTH__USER__5__USERNAME
+      value: ${EMQX_USER_5_USERNAME}
+    - name: EMQX_AUTH__USER__6__USERNAME
+      value: ${EMQX_METRICS_USER}
+    - name: EMQX_AUTH__USER__6__PASSWORD
+      value: ${EMQX_METRICS_PASSWORD}
     # - name: EMQX_AUTH__LDAP__SERVERS
     #   value: ak-outpost-ldap-outpost.auth.svc.cluster.local
     # - name: EMQX_AUTH__LDAP__PORT
