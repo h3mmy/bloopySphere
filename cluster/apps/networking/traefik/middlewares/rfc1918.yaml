@@ -12,6 +12,8 @@ spec:
       - 192.168.0.0/16
       - "fc00::/7"
       - "${CALICO_NODE_CIDR_IPV6}"
+      - "${CIDR_V6_SN_1}"
+      - "${CIDR_V6_SN_2}"
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -37,3 +39,5 @@ spec:
       - 192.168.0.0/16
       - "fc00::/7"
       - "${CALICO_NODE_CIDR_IPV6}"
+      - "${CIDR_V6_SN_1}"
+      - "${CIDR_V6_SN_2}"
