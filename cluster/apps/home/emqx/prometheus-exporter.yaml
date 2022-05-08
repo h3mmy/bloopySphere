@@ -30,7 +30,7 @@ spec:
       EMQ_PASSWORD: ${EMQX_METRICS_PASSWORD}
     args:
       - --emq.api-version=v4
-      - --emq.node=emqx
+      - --emq.node="http://emqx:8081"
     tolerations:
       - key: "arch"
         operator: "Equal"
