@@ -12,7 +12,7 @@ k3s_server:
     # Should be the same as kube-vip address
     - "{{ k3s_registration_address }}"
     - "{{ ansible_default_ipv6.address }}"
-  # Disable Docker - this will use the default containers CRI
+  # Disable Docker - this will use the default containerd CRI
   docker: false
   flannel-backend: "none" # This needs to be in quotes
   disable:
