@@ -27,7 +27,8 @@ spec:
       EMQ_PASSWORD: ${EMQX_METRICS_PASSWORD}
     args:
       - --emq.api-version=v4
-      - --emq.node="http://emqx:8081"
+      - --emq.uri="http://emqx:8081"
+      - --emq.node="emqx@emqx"
     tolerations:
       - key: "arch"
         operator: "Equal"
