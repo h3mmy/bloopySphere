@@ -17,6 +17,10 @@ spec:
       interval: 5m
   timeout: 20m
   values:
+    vpa:
+      enabled: true
+      updater:
+        enabled: true
     dashboard:
       replicaCount: 1
       ingress:
