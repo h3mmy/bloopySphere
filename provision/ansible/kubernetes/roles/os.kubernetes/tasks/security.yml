@@ -9,7 +9,7 @@
   register: apparmor_status
   changed_when: apparmor_status.rc != 0
 
-- name: Check if mitigations is disabled
+- name: Check if mitigations are disabled
   ansible.builtin.shell: set -o pipefail && grep "GRUB_CMDLINE_LINUX=" /etc/default/grub | grep -c "mitigations=off"
   register: mitigations_status
   changed_when: mitigations_status.rc != 0

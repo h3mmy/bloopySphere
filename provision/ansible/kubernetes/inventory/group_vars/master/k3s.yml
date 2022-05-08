@@ -12,7 +12,7 @@ k3s_server:
     # Should be the same as kube-vip address
     - "{{ k3s_registration_address }}"
     - "{{ ansible_default_ipv6.address }}"
-  # Disable Docker - this will use the default containerd CRI
+  # Disable Docker - this will use the default containers CRI
   docker: false
   flannel-backend: "none" # This needs to be in quotes
   disable:
@@ -32,7 +32,7 @@ k3s_server:
   # Network CIDR to use for service IPs (Ipv6 link-local)
   service-cidr: "10.43.0.0/16,fd0d:b917:e7b6:43::/116"
   kubelet-arg:
-     # Enable Alpha/Beta features
+    # Enable Alpha/Beta features
     - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
     # Allow pods to be rescheduled quicker in the case of a node failure
     # https://github.com/k3s-io/k3s/issues/1264
