@@ -9,4 +9,5 @@ resources:
   - grafana
   - uptimerobot
   - unifi-poller
+  - goldilocks
  # - botkube
