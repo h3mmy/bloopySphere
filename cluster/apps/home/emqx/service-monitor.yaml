@@ -5,11 +5,11 @@ metadata:
   name: emqx-metrics
   namespace: home
   labels:
-    k8s-app: emqx
+    app.kubernetes.io/name: emqx
 spec:
   selector:
     matchLabels:
-      k8s-app: emqx
+      app.kubernetes.io/name: emqx
   endpoints:
     - port: "9091"
       path: /api/v4/emqx_prometheus

@@ -5,10 +5,10 @@ metadata:
   namespace: home
   name: emqx-metrics
   labels:
-    k8s-app: emqx
+    app.kubernetes.io/name: emqx
 spec:
   selector:
-    k8s-app: emqx
+    app.kubernetes.io/name: emqx
   ports:
     - name: http-metrics
       port: 9091
