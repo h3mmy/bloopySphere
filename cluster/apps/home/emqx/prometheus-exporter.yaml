@@ -8,7 +8,7 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: kah-common
+      chart: kah-common-chart
       version: 4.4.1
       sourceRef:
         kind: HelmRepository
