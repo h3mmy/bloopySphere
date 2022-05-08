@@ -296,11 +296,3 @@ spec:
             static_configs:
               - targets: ['home-assistant.home.svc.cluster.local:8123']
               # - targets: ['home-assistant.${CLASSIC_DOMAIN}:443']
-          # EMQX Pushgateway monitoring
-          - job_name: 'emqx-pushgateway'
-            scrape_interval: 60s
-            honor_labels: true
-            metrics_path: /api/v4/emqx_prometheus
-            static_configs:
-              # pushgateway fill in according to the actual situation
-              - targets: ['emqx.home.svc.cluster.local:8081']
