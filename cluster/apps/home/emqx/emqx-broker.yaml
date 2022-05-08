@@ -7,9 +7,10 @@ metadata:
 spec:
   serviceAccountName: "emqx"
   image: emqx/emqx:4.4.3
-  replicas: 3
+  replicas: 2
   labels:
     cluster: emqx
+    app.kubernetes.io/name: emqx
   storage:
     storageClassName: ceph-block
     resources:
@@ -17,6 +18,20 @@ spec:
         storage: 1Gi
     accessModes:
       - ReadWriteOnce
+
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - emqx
+            topologyKey: kubernetes.io/hostname
+
   env:
     - name: EMQX_PROMETHEUS__PUSH__GATEWAY__SERVER
       value: "http://127.0.0.1:9091"
