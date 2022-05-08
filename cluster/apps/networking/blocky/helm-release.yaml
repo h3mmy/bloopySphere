@@ -180,7 +180,7 @@ spec:
         cpu: 100m
       limits:
         memory: 750Mi
-        cpu: 500m
+        cpu: 1000m
 
     config: |
       upstream:
