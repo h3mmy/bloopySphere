@@ -5,3 +5,4 @@ metadata:
   name: system-upgrade
   labels:
     k10.kasten.io/ignorebackuppolicy: "true"
+    goldilocks.fairwinds.com/enabled: "true"

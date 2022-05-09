@@ -29,6 +29,7 @@ spec:
       enabled: false
       updater:
         enabled: false
+
     dashboard:
       replicaCount: 1
       ingress:

@@ -4,4 +4,5 @@ kind: Namespace
 metadata:
   labels:
     control-plane: controller-manager
+    goldilocks.fairwinds.com/enabled: "true"
   name: emqx-operator-system
