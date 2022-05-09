@@ -14,3 +14,4 @@ resources:
   - secure-headers.yaml
   - chain-no-auth.yaml
   - error-pages.yaml
+  - chain-no-epages.yaml

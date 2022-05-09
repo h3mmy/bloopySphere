@@ -35,10 +35,13 @@ spec:
         enabled: true
         ingressClassName: "traefik"
         annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/instance: bloop-quarky
+          hajimari.io/icon: graph
           cert-manager.io/cluster-issuer: letsencrypt-production
-          external-dns.alpha.kubernetes.io/target: ingress.${XYZ_DOMAIN}
+          # external-dns.alpha.kubernetes.io/target: ingress.${XYZ_DOMAIN}
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-epages@kubernetescrd"
 
         hosts:
           - host: &host "goldilocks.${XYZ_DOMAIN}"
