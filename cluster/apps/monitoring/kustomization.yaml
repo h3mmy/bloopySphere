@@ -10,4 +10,5 @@ resources:
   - uptimerobot
   - unifi-poller
   - goldilocks
+  - vertical-pod-autoscaler
  # - botkube
