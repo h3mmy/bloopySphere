@@ -17,6 +17,14 @@ spec:
       interval: 5m
   timeout: 20m
   values:
+    controller:
+      resources:
+        requests:
+          cpu: 32m
+          memory: 64Mi
+        limits:
+          cpu: 100m
+          memory: 512Mi
     vpa:
       enabled: false
       updater:
