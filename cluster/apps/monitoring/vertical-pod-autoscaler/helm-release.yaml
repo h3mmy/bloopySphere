@@ -41,6 +41,6 @@ spec:
           http://thanos-query.monitoring.svc.cluster.local:9090
 
     updater:
-      enabled: true
+      enabled: false
     admissionController:
       enabled: false
