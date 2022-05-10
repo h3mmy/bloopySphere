@@ -24,12 +24,18 @@ spec:
       tag: "3.6.8"
     env:
       # - NODE_ENV=production
-      - DATABASE_CLIENT=postgres
-      - DATABASE_HOST=strapi-postgres
-      - DATABASE_PORT=5432
-      - DATABASE_NAME=postgres
-      - DATABASE_USERNAME=postgres
-      - DATABASE_PASSWORD=${STRAPI_POSTGRES_PASSWORD}
+      - name: DATABASE_CLIENT
+        value: postgres
+      - name: DATABASE_HOST
+        value: strapi-postgres
+      - name: DATABASE_PORT
+        value: 5432
+      - name: DATABASE_NAME
+        value: postgres
+      - name: DATABASE_USERNAME
+        value: postgres
+      - name: DATABASE_PASSWORD
+        value: ${STRAPI_POSTGRES_PASSWORD}
     persistence:
       config:
         enabled: true
