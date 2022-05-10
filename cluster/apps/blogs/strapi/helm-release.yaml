@@ -18,10 +18,6 @@ spec:
   dependsOn:
     - name: traefik
       namespace: networking
-    - name: strapi-postgres
-      namespace: blogs
-    - name: strapi-config-v1
-      namespace: blogs
   values:
     image:
       repository: strapi/strapi
