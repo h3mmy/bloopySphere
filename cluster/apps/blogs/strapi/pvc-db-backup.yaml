@@ -2,8 +2,8 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: hass-db-backup
-  namespace: home
+  name: strapi-db-backup
+  namespace: blogs
 spec:
   storageClassName: "nfs-client"
   accessModes:
