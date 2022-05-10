@@ -11,4 +11,5 @@ resources:
   - unifi-poller
   - goldilocks
   - vertical-pod-autoscaler
+  - vector
  # - botkube
