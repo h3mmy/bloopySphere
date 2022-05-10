@@ -79,7 +79,7 @@ spec:
           type: vector
           inputs:
             - kubernetes_logs
-          address: "vector-aggregator:6010"
+          address: "vector-aggregator:6000"
           version: "2"
         # loki_journal_sink:
         #   type: vector

@@ -65,7 +65,7 @@ spec:
       # Sources
       sources:
         kubernetes_logs:
-          address: 0.0.0.0:6010
+          address: 0.0.0.0:6000
           type: vector
           version: "2"
         # journal_logs:
