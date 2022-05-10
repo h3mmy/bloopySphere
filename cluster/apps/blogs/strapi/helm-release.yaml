@@ -22,8 +22,6 @@ spec:
     image:
       repository: strapi/strapi
       tag: 3.6.8
-    controller:
-      replicas: 1
     nameOverride: strapi
     env:
       # - NODE_ENV=production
@@ -46,6 +44,26 @@ spec:
         ports:
           http:
             port: 1337
+    ingress:
+      main:
+        enabled: "true"
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/enable: "true"
+          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/icon: "blog"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth@kubernetescrd"
+        hosts:
+          - host: &host "blogs.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: "tls.strapi"
     resources:
       requests:
         memory: 100Mi
