@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: strapi
-  namespace: blog
+  namespace: blogs
 spec:
   interval: 5m
   chart:
@@ -18,9 +18,9 @@ spec:
     - name: traefik
       namespace: networking
     - name: strapi-postgres
-      namespace: blog
+      namespace: blogs
     - name: strapi-config-v1
-      namespace: blog
+      namespace: blogs
   values:
     image:
       repository: strapi/strapi
