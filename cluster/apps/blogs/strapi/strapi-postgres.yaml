@@ -5,9 +5,6 @@ metadata:
   name: strapi-postgres
   namespace: blogs
 spec:
-  dependsOn:
-    - name: strapi-db-backup
-    - namespace: blogs
   replicas: 1
   image: docker.io/library/postgres:14.2
   database:
