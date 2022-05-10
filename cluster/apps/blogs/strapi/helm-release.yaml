@@ -21,7 +21,7 @@ spec:
   values:
     image:
       repository: strapi/strapi
-      tag: 3.6.8
+      tag: "3.6.8"
     nameOverride: strapi
     env:
       # - NODE_ENV=production
