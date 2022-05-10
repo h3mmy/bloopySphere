@@ -34,3 +34,4 @@ resources:
   - kasten-charts.yaml
   - k8s-gateway-charts.yaml
   - emberstack-charts.yaml
+  - vector-charts.yaml
