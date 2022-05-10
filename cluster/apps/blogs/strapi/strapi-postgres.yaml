@@ -3,11 +3,11 @@ apiVersion: kubegres.reactive-tech.io/v1
 kind: Kubegres
 metadata:
   name: strapi-postgres
-  namespace: blog
+  namespace: blogs
 spec:
   dependsOn:
     - name: strapi-db-backup
-    - namespace: blog
+    - namespace: blogs
   replicas: 1
   image: docker.io/library/postgres:14.2
   database:
