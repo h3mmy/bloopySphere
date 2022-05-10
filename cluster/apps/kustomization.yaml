@@ -19,5 +19,5 @@ resources:
   - rook-ceph
   - home
   # - kasten-io
-  # - blog
+  - blogs
   # - database
