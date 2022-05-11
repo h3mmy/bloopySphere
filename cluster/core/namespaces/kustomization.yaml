@@ -8,6 +8,7 @@ resources:
   - networking.yaml
   - storage.yaml
   - monitoring.yaml
+  - tigera-operator.yaml
   - media.yaml
   - vpn-gateway.yaml
   - velero.yaml
