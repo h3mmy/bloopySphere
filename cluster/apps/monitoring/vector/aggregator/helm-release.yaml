@@ -77,8 +77,8 @@ spec:
         #   type: syslog
         #   mode: "udp"
         #   max_length: 102_400
-        # vector_metrics:
-        #   type: internal_metrics
+        vector_metrics:
+          type: internal_metrics
 
       # Transforms
       transforms:
