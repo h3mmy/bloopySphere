@@ -55,6 +55,7 @@ spec:
             nodeSelector: all()
           - blockSize: 116
             cidr: ${NETWORK_K8S_CLUSTER_CIDR_V6}
+            encapsulation: VXLANCrossSubnet
             natOutgoing: Enabled
             nodeSelector: all()
         nodeAddressAutodetectionV4:
@@ -89,7 +90,7 @@ spec:
     # Configuration for the tigera operator images to deploy.
     tigeraOperator:
       image: tigera/operator
-      version: v1.25.7
+      version: v1.27.0
       registry: quay.io
       nodeSelector:
         matchExpressions:
