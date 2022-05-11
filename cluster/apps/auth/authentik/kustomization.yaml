@@ -5,3 +5,4 @@ namespace: auth
 resources:
   - helm-release.yaml
   - media
+  - pvc-backup.yaml
