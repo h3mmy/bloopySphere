@@ -117,7 +117,7 @@ spec:
           type: loki
           inputs:
             - kubernetes_logs
-          endpoint: http://loki.system-monitoring:3100
+          endpoint: http://loki:3100
           encoding:
             codec: json
           batch:
@@ -144,7 +144,7 @@ spec:
           type: loki
           inputs:
             - udm_logs_xform
-          endpoint: http://loki.system-monitoring:3100
+          endpoint: http://loki:3100
           batch:
             max_bytes: 1048576
           out_of_order_action: rewrite_timestamp
