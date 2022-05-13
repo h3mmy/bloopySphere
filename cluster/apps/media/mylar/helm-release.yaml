@@ -33,7 +33,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: ipv4.${XYZ_DOMAIN}
           external-dns/is-public: "true"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: network-bloopnet-xyz-auth@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: networking-bloopnet-xyz-auth@kubernetescrd
         hosts:
           - host: &host mylar.${XYZ_DOMAIN}
             paths:
