@@ -65,9 +65,9 @@ spec:
 
       # Sources
       sources:
-        # journal_logs:
-        #   type: journald
-        #   journal_directory: /var/log/journal
+        journal_logs:
+          type: journald
+          journal_directory: /var/log/journal
         kubernetes_logs:
           type: kubernetes_logs
         vector_metrics:
@@ -81,12 +81,12 @@ spec:
             - kubernetes_logs
           address: "vector-aggregator:6000"
           version: "2"
-        # loki_journal_sink:
-        #   type: vector
-        #   inputs:
-        #     - journal_logs
-        #   address: vector-aggregator:6000
-        #   version: "2"
+        loki_journal_sink:
+          type: vector
+          inputs:
+            - journal_logs
+          address: vector-aggregator:6010
+          version: "2"
         prometheus_sink:
           type: prometheus_exporter
           inputs:
