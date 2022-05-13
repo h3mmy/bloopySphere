@@ -38,7 +38,7 @@ spec:
         docker_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
       secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
       postgresql:
-        host: "authentik-postgresql"
+        host: "authentik-postgres"
         name: "authentik"
         user: "authentik"
         password: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
@@ -83,8 +83,8 @@ spec:
             - *bloop
           secretName: "tls.authentik"
     postgresql:
-      enabled: true
-      postgresqlPassword: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
+      enabled: false
+      # postgresqlPassword: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
     redis:
       enabled: true
     prometheus:
