@@ -83,8 +83,8 @@ spec:
             - *bloop
           secretName: "tls.authentik"
     postgresql:
-      enabled: true
-      postgresqlPassword: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
+      enabled: false
+      # postgresqlPassword: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
     redis:
       enabled: true
     prometheus:
