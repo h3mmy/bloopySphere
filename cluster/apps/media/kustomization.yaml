@@ -13,3 +13,4 @@ resources:
   - tdarr
   - sonarr-uhd
   - readarr-audio
+  - mylar
