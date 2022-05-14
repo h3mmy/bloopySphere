@@ -33,6 +33,8 @@ spec:
             topologyKey: kubernetes.io/hostname
 
   env:
+    - name: EMQX_PROMETHEUS__PUSH__GATEWAY__SERVER
+      value: pushgateway.monitoring:9091
     - name: EMQX_ADMIN_PASSWORD
       value: ${EMQX_ADMIN_PASSWORD}
     - name: EMQX_AUTH__USER__1__USERNAME

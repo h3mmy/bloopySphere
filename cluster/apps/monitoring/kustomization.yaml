@@ -5,7 +5,7 @@ resources:
   - kube-prometheus-stack
   - thanos
   - loki
-  # - promtail
+  - pushgateway
   - grafana
   - uptimerobot
   - unifi-poller
@@ -13,4 +13,3 @@ resources:
   - vertical-pod-autoscaler
   - vector
   - node-problem-detector
- # - botkube
