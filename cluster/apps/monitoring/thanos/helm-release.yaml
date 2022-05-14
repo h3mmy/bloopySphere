@@ -30,7 +30,7 @@ spec:
         hostname: "thanos.${XYZ_DOMAIN}"
         ingressClassName: "traefik"
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          cert-manager.io/cluster-issuer: letsencrypt-production
           hajimari.io/instance: "bloop-quarky"
           hajimari.io/enable: "true"
           hajimari.io/appName: "Thanos"
@@ -51,20 +51,81 @@ spec:
 
     bucketweb:
       enabled: true
+      # replicaCount: 2
+      # podAntiAffinityPreset: hard
+      ingress:
+        enabled: true
+        hostname: &host "thanos-bucketweb.${XYZ_DOMAIN}"
+        ingressClassName: traefik
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+        tls: true
+        extraTls:
+          - hosts:
+              - *host
 
     compactor:
       enabled: true
+      ingress:
+        enabled: true
+        hostname: &host "thanos-compactor.${XYZ_DOMAIN}"
+        ingressClassName: traefik
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+        tls: true
+        extraTls:
+          - hosts:
+              - *host
       persistence:
         enabled: false
 
     storegateway:
       enabled: true
+      ingress:
+        enabled: true
+        hostname: &host "thanos-storegateway.${XYZ_DOMAIN}"
+        ingressClassName: traefik
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+        tls: true
+        extraTls:
+          - hosts:
+              - *host
       persistence:
         enabled: true
         size: 20Gi
 
     ruler:
-      enabled: false
+      enabled: true
+      # replicaCount: 3
+      # podAntiAffinityPreset: hard
+      dnsDiscovery:
+        enabled: true
+      alertmanagers:
+        - http://kube-prometheus-stack-alertmanager.monitoring:9093
+      clusterName: ${CLUSTER_NAME}
+      extraFlags:
+        - "--web.prefix-header=X-Forwarded-Prefix"
+      config: |-
+        groups:
+          - name: "PrometheusWatcher"
+            rules:
+              - alert: "PrometheusDown"
+                expr: absent(up{job="kube-prometheus-stack-prometheus"})
+      ingress:
+        enabled: true
+        hostname: &host "thanos-ruler.${XYZ_DOMAIN}"
+        ingressClassName: traefik
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+        tls: true
+        extraTls:
+          - hosts:
+              - *host
+      persistence:
+        enabled: true
+        storageClass: "ceph-block"
+        size: 250Mi
 
     metrics:
       enabled: true

@@ -213,6 +213,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: tls.thanos-sidecar
       thanosService:
         enabled: true
       thanosServiceMonitor:
