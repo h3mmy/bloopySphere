@@ -131,6 +131,12 @@ spec:
             user: ${MARIADB_GRAFANA_USER}
             secureJsonData:
               password: ${MARIADB_GRAFANA_PASSWORD}
+          - name: AlertManager
+            type: alertmanager
+            access: proxy
+            url: http://alertmanager-operated:9093
+            jsonData:
+              implementation: "prometheus"
 
     dashboards:
       default:
@@ -191,6 +197,24 @@ spec:
           gnetId: 11312
           revision: 8
           datasource: Prometheus
+        lidarr:
+          url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/lidarr.json
+          datasource: Prometheus
+        radarr:
+          url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/radarr.json
+          datasource: Prometheus
+        sonarr:
+          url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/sonarr.json
+          datasource: Prometheus
+        qbittorrent:
+          url: https://raw.githubusercontent.com/esanchezm/prometheus-qbittorrent-exporter/master/grafana/dashboard.json
+          datasource: Prometheus
+        cert-manager:
+          url: https://raw.githubusercontent.com/jr0dd/grafana-dashboards/main/cert-manager.json
+          datasource: Prometheus
+        metallb:
+          url: https://raw.githubusercontent.com/jr0dd/grafana-dashboards/main/metallb.json
+          datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/13665
         speedtest:
           gnetId: 13665
@@ -201,6 +225,10 @@ spec:
       dashboards:
         enabled: true
         searchNamespace: ALL
+        folderAnnotation: grafana_folder
+        multicluster: true
+        provider:
+          foldersFromFilesStructure: true
       datasources:
         enabled: true
         searchNamespace: ALL
@@ -245,6 +273,3 @@ spec:
     serviceAccount:
       create: true
       autoMount: true
-
-    nodeSelector:
-      kubernetes.io/hostname: "slowpoke"
