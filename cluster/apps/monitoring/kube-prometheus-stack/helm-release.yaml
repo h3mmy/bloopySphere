@@ -60,7 +60,7 @@ spec:
             sourceLabels:
               - __meta_kubernetes_pod_node_name
             targetLabel: kubernetes_node
-      prometheus-node-exporter:
+    prometheus-node-exporter:
       fullnameOverride: node-exporter
       tolerations:
         - effect: "NoExecute"
