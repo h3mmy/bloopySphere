@@ -84,7 +84,6 @@ spec:
           secretName: "tls.authentik"
     postgresql:
       enabled: false
-      # postgresqlPassword: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
     redis:
       enabled: true
     prometheus:
@@ -105,12 +104,19 @@ spec:
                   - key: sound_wave.svg
                     path: sound_wave.svg
 
-    # Temporary harcoding to pin postgreql
-    nodeSelector:
-      kubernetes.io/hostname: "slowpoke"
-
-    tolerations:
-      - key: "arch"
-        operator: "Equal"
-        value: "arm64"
-        effect: "NoSchedule"
+    # The redis sub-chart does not have arm support
+    # Authentik helm applies this to all it's pieces. No mix-and-match like with keycloak
+    # May have to stop with the keycloak comparisons. Keycloak is far superior for customizability (imo)
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 60
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
+                    - i386
+                    - i686
+                    - x86
