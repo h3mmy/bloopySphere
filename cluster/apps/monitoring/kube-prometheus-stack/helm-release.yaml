@@ -60,16 +60,20 @@ spec:
           routes:
             - receiver: "null"
               matchers:
-                - "alertname=Watchdog"
+                - alertname =~ InfoInhibitor|Watchdog
             - receiver: "discord"
               matchers:
-                - "severity=critical"
+                - severity = critical
+              continue: true
+            - receiver: "discord"
+              matchers:
+                - alertname = "UPSOnBaterry"
               continue: true
         inhibit_rules:
           - source_matchers:
-              - "severity=critical"
+              - severity = critical
           - target_matchers:
-              - "severity=warning"
+              - severity = warning
             equal: ["alertname", "namespace"]
       ingress:
         enabled: true
@@ -88,6 +92,8 @@ spec:
               - "{{ (index .Values.alertmanager.ingress.hosts 0) }}"
             secretName: "tls.alert-manager"
       alertmanagerSpec:
+        replicas: 2
+        podAntiAffinity: hard
         storage:
           volumeClaimTemplate:
             spec:
@@ -95,21 +101,22 @@ spec:
               resources:
                 requests:
                   storage: 1Gi
-    nodeExporter:
-      enabled: true
-      serviceMonitor:
-        https: false
-        relabelings:
-          - action: replace
-            regex: (.*)
-            replacement: $1
-            sourceLabels:
-              - __meta_kubernetes_pod_node_name
-            targetLabel: kubernetes_node
     kubeStateMetrics:
       enabled: true
     kube-state-metrics:
       fullnameOverride: kube-state-metrics
+      metricLabelsAllowlist:
+        - persistentvolumeclaims=[*]
+      prometheus:
+        monitor:
+          enabled: true
+          relabelings:
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels:
+                - __meta_kubernetes_pod_node_name
+              targetLabel: kubernetes_node
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -123,23 +130,6 @@ spec:
                       - i386
                       - i686
                       - x86
-    prometheus-node-exporter:
-      fullnameOverride: node-exporter
-      tolerations:
-        - effect: "NoExecute"
-          operator: "Exists"
-        - effect: "NoSchedule"
-          operator: "Exists"
-      prometheus:
-        monitor:
-          enabled: true
-          relabelings:
-            - action: replace
-              regex: (.*)
-              replacement: $1
-              sourceLabels:
-                - __meta_kubernetes_pod_node_name
-              targetLabel: kubernetes_node
     grafana:
       enabled: false
       forceDeployDashboards: true
@@ -191,9 +181,9 @@ spec:
       enabled: true
       service:
         ipFamilyPolicy: PreferDualStack
-      ipFamilies:
-        - "IPv4"
-        - "IPv6"
+        ipFamilies:
+          - "IPv4"
+          - "IPv6"
       ingress:
         enabled: true
         pathType: Prefix
@@ -211,6 +201,17 @@ spec:
               - "{{ (index .Values.prometheus.ingress.hosts 0) }}"
             secretName: tls.prometheus
 
+      thanosIngress:
+        enabled: true
+        pathType: Prefix
+        ingressClassName: traefik
+        annotations:
+          traefik.ingress.kubernetes.io/service.serversscheme: h2c
+        hosts:
+          - &host "thanos-sidecar.${XYZ_DOMAIN}"
+        tls:
+          - hosts:
+              - *host
       thanosService:
         enabled: true
       thanosServiceMonitor:
@@ -222,20 +223,22 @@ spec:
             memory: 500Mi
             cpu: 250m
           limits:
-            memory: 4000Mi
-        replicas: 2
-        replicaExternalLabelName: "replica"
-        ruleSelector: {}
-        ruleSelectorNilUsesHelmValues: false
-        serviceMonitorSelector: {}
-        serviceMonitorNamespaceSelector: {}
-        serviceMonitorSelectorNilUsesHelmValues: false
-        podMonitorSelector: {}
+            memory: 8000Mi
+        enableAdminAPI: true
+        podAntiAffinity: hard
         podMonitorNamespaceSelector: {}
+        podMonitorSelector: {}
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
+        replicaExternalLabelName: "replica"
+        replicas: 2
         retention: 6h
-        enableAdminAPI: true
+        retentionSize: 8GB
+        ruleSelector: {}
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorNamespaceSelector: {}
+        serviceMonitorSelector: {}
+        serviceMonitorSelectorNilUsesHelmValues: false
         walCompression: true
 
         storageSpec:
@@ -247,7 +250,8 @@ spec:
                   storage: 15Gi
         thanos:
           image: quay.io/thanos/thanos:v0.26.0
-          version: v0.24.0
+          # renovate: datasource=docker depName=quay.io/thanos/thanos
+          version: v0.26.0
           objectStorageConfig:
             name: thanos-objstore-secret
             key: objstore.yml
