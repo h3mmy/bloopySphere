@@ -1,0 +1,73 @@
+alertmanager:
+  config:
+    global:
+      slack_api_url: "${DISCORD_ALERT_MANAGER_URL}/slack"
+      resolve_timeout: 5m
+    receivers:
+      - name: "null"
+      - name: "discord"
+        slack_configs:
+          - channel: "${DISCORD_ALERTS_CHANNEL}"
+            icon_url: "${PROMETHEUS_PROFILE_IMG_URL}"
+            username: "Prometheus"
+            send_resolved: true
+            title: |-
+              [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
+            text: >-
+              {{ range .Alerts -}}
+                **Alert:** {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
+              **Description:** {{ if ne .Annotations.description ""}}{{ .Annotations.description }}{{else}}N/A{{ end }}
+              **Details:**
+                {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+                {{ end }}
+              {{ end }}
+    route:
+      group_by: ["alertname", "job"]
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 6h
+      receiver: "discord"
+      routes:
+        - receiver: "null"
+          matchers:
+            - alertname =~ InfoInhibitor|Watchdog
+        - receiver: "discord"
+          matchers:
+            - severity = critical
+          continue: true
+        - receiver: "discord"
+          matchers:
+            - alertname = "UPSOnBaterry"
+          continue: true
+    inhibit_rules:
+      - source_matchers:
+          - severity = critical
+      - target_matchers:
+          - severity = warning
+        equal: ["alertname", "namespace"]
+  ingress:
+    enabled: true
+    pathType: Prefix
+    ingressClassName: "traefik"
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-production
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      hajimari.io/instance: "bloop-quarky"
+      hajimari.io/enable: "true"
+      hajimari.io/appName: "Alert Manager"
+    hosts:
+      - "alert-manager.${XYZ_DOMAIN}"
+    tls:
+      - hosts:
+          - "{{ (index .Values.alertmanager.ingress.hosts 0) }}"
+        secretName: "tls.alert-manager"
+  alertmanagerSpec:
+    replicas: 2
+    podAntiAffinity: hard
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: "nfs-client"
+          resources:
+            requests:
+              storage: 1Gi
