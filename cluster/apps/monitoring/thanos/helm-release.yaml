@@ -63,6 +63,7 @@ spec:
         extraTls:
           - hosts:
               - *host
+            secretName: tls.thanos-bucketweb
 
     compactor:
       enabled: true
@@ -76,6 +77,8 @@ spec:
         extraTls:
           - hosts:
               - *host
+            secretName: tls.thanos-compactor
+
       persistence:
         enabled: false
 
@@ -91,6 +94,7 @@ spec:
         extraTls:
           - hosts:
               - *host
+            secretName: tls.thanos-storegateway
       persistence:
         enabled: true
         size: 20Gi
@@ -122,6 +126,7 @@ spec:
         extraTls:
           - hosts:
               - *host
+            secretName: tls.thanos-ruler
       persistence:
         enabled: true
         storageClass: "ceph-block"
