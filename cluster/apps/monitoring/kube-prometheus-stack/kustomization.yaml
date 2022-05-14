@@ -13,3 +13,5 @@ configMapGenerator:
   - name: alertmanager-values
     files:
       - values.yaml=alertmanager-values.yaml
+generatorOptions:
+  disableNameSuffixHash: true
