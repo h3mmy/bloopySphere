@@ -206,6 +206,7 @@ spec:
         pathType: Prefix
         ingressClassName: traefik
         annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
           traefik.ingress.kubernetes.io/service.serversscheme: h2c
         hosts:
           - &host "thanos-sidecar.${XYZ_DOMAIN}"
