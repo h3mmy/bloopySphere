@@ -12,5 +12,5 @@ resources:
   - goldilocks
   - vertical-pod-autoscaler
   - vector
-  #- node-problem-detector
+  - node-problem-detector
  # - botkube
