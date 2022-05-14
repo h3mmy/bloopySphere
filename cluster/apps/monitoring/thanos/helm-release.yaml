@@ -59,6 +59,8 @@ spec:
         ingressClassName: traefik
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
+          traefik.ingress.kubernetes.io/service.serversscheme: h2c
+          traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
         tls: true
         extraTls:
           - hosts:
@@ -73,6 +75,8 @@ spec:
         ingressClassName: traefik
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
+          traefik.ingress.kubernetes.io/service.serversscheme: h2c
+          traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
         tls: true
         extraTls:
           - hosts:
@@ -90,6 +94,8 @@ spec:
         ingressClassName: traefik
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
+          traefik.ingress.kubernetes.io/service.serversscheme: h2c
+          traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
         tls: true
         extraTls:
           - hosts:
@@ -122,6 +128,8 @@ spec:
         ingressClassName: traefik
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
+          traefik.ingress.kubernetes.io/service.serversscheme: h2c
+          traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
         tls: true
         extraTls:
           - hosts:
