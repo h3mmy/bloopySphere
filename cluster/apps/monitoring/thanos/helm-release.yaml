@@ -37,13 +37,13 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
         hosts:
-          - host: "thanos.${XYZ_DOMAIN}"
+          - host: &host "thanos.${XYZ_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - "{{ (index .Values.ingress.hosts 0).host }}"
+              - *host
             secretName: "tls.thanos"
 
     queryFrontend:
@@ -55,7 +55,7 @@ spec:
       # podAntiAffinityPreset: hard
       ingress:
         enabled: true
-        hostname: &host "thanos-bucketweb.${XYZ_DOMAIN}"
+        hostname: &hostbweb "thanos-bucketweb.${XYZ_DOMAIN}"
         ingressClassName: traefik
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
@@ -64,14 +64,14 @@ spec:
         tls: true
         extraTls:
           - hosts:
-              - *host
+              - *hostbweb
             secretName: tls.thanos-bucketweb
 
     compactor:
       enabled: true
       ingress:
         enabled: true
-        hostname: &host "thanos-compactor.${XYZ_DOMAIN}"
+        hostname: &hostcompact "thanos-compactor.${XYZ_DOMAIN}"
         ingressClassName: traefik
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
@@ -80,7 +80,7 @@ spec:
         tls: true
         extraTls:
           - hosts:
-              - *host
+              - *hostcompact
             secretName: tls.thanos-compactor
 
       persistence:
@@ -90,7 +90,7 @@ spec:
       enabled: true
       ingress:
         enabled: true
-        hostname: &host "thanos-storegateway.${XYZ_DOMAIN}"
+        hostname: &hostgateway "thanos-storegateway.${XYZ_DOMAIN}"
         ingressClassName: traefik
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
@@ -99,7 +99,7 @@ spec:
         tls: true
         extraTls:
           - hosts:
-              - *host
+              - *hostgateway
             secretName: tls.thanos-storegateway
       persistence:
         enabled: true
@@ -124,7 +124,7 @@ spec:
                 expr: absent(up{job="kube-prometheus-stack-prometheus"})
       ingress:
         enabled: true
-        hostname: &host "thanos-ruler.${XYZ_DOMAIN}"
+        hostname: &hostruler "thanos-ruler.${XYZ_DOMAIN}"
         ingressClassName: traefik
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
@@ -133,7 +133,7 @@ spec:
         tls: true
         extraTls:
           - hosts:
-              - *host
+              - *hostruler
             secretName: tls.thanos-ruler
       persistence:
         enabled: true

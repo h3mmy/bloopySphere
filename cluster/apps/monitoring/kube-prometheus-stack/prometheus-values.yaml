@@ -16,10 +16,10 @@ prometheus:
       hajimari.io/enable: "true"
       hajimari.io/appName: "Prometheus"
     hosts:
-      - "prometheus.${XYZ_DOMAIN}"
+      - &promhost "prometheus.${XYZ_DOMAIN}"
     tls:
       - hosts:
-          - "{{ (index .Values.prometheus.ingress.hosts 0) }}"
+          - *promhost
         secretName: tls.prometheus
 
   thanosIngress:

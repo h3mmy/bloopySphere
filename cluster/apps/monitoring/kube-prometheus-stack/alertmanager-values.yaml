@@ -56,10 +56,10 @@ alertmanager:
       hajimari.io/enable: "true"
       hajimari.io/appName: "Alert Manager"
     hosts:
-      - "alert-manager.${XYZ_DOMAIN}"
+      - &alerthost "alert-manager.${XYZ_DOMAIN}"
     tls:
       - hosts:
-          - "{{ (index .Values.alertmanager.ingress.hosts 0) }}"
+          - *alerthost
         secretName: "tls.alert-manager"
   alertmanagerSpec:
     replicas: 2
