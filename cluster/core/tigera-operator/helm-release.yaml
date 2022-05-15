@@ -50,7 +50,7 @@ spec:
         bgp: Disabled
         ipPools:
           - blockSize: 20
-            cidr: ${NETWORK_CALICO_BLOCK_1}
+            cidr: ${NETWORK_K8S_CLUSTER_CIDR}
             encapsulation: VXLANCrossSubnet
             natOutgoing: Enabled
             nodeSelector: all()
