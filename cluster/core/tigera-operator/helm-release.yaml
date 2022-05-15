@@ -54,18 +54,8 @@ spec:
             encapsulation: VXLANCrossSubnet
             natOutgoing: Enabled
             nodeSelector: all()
-          - blockSize: 20
-            cidr: ${NETWORK_CALICO_BLOCK_2}
-            encapsulation: VXLANCrossSubnet
-            natOutgoing: Enabled
-            nodeSelector: all()
           - blockSize: 116
             cidr: ${NETWORK_CALICO_V6_BLOCK_1}
-            encapsulation: VXLANCrossSubnet
-            natOutgoing: Enabled
-            nodeSelector: all()
-          - blockSize: 116
-            cidr: ${NETWORK_CALICO_V6_BLOCK_2}
             encapsulation: VXLANCrossSubnet
             natOutgoing: Enabled
             nodeSelector: all()
