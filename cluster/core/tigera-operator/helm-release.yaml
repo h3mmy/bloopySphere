@@ -48,12 +48,12 @@ spec:
         # Note: The ipPools section cannot be modified post-install.
         bgp: Disabled
         ipPools:
-          - blockSize: 20
+          - blockSize: 16
             cidr: ${NETWORK_K8S_CLUSTER_CIDR}
             encapsulation: VXLANCrossSubnet
             natOutgoing: Enabled
             nodeSelector: all()
-          - blockSize: 116
+          - blockSize: 112
             cidr: ${NETWORK_K8S_CLUSTER_CIDR_V6}
             encapsulation: VXLANCrossSubnet
             natOutgoing: Enabled
