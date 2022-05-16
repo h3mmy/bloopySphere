@@ -158,7 +158,15 @@ spec:
             allowUiUpdates: true
             options:
               path: /var/lib/grafana/dashboards/thanos
-
+          - name: users
+            orgId: 1
+            folder: users
+            type: file
+            updateIntervalSeconds: 10
+            disableDeletion: false
+            allowUiUpdates: true
+            options:
+              path: /var/lib/grafana/dashboards/users
     datasources:
       datasources.yaml:
         apiVersion: 1
