@@ -15,4 +15,5 @@ generatorOptions:
     kustomize.toolkit.fluxcd.io/substitute: disabled
     grafana_folder: Flux
   labels:
+    grafana_folder: Flux
     grafana_dashboard: "true"

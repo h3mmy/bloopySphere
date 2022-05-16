@@ -146,26 +146,28 @@ spec:
         blocky-query:
           url: https://raw.githubusercontent.com/0xERR0R/blocky/development/docs/blocky-query-grafana.json
           datasource: MariaDB Blocky
-        # Ref: https://grafana.com/grafana/dashboards/12175
-        calico-felix:
-          gnetId: 12175
-          revision: 5
-          datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/2842
-        ceph-cluster:
-          gnetId: 2842
-          revision: 14
-          datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/5336
-        ceph-osd:
-          gnetId: 5336
-          revision: 5
-          datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/5342
-        ceph-pools:
-          gnetId: 5342
-          revision: 5
-          datasource: Prometheus
+        calico:
+          # Ref: https://grafana.com/grafana/dashboards/12175
+          calico-felix:
+            gnetId: 12175
+            revision: 5
+            datasource: Prometheus
+        ceph:
+          # Ref: https://grafana.com/grafana/dashboards/2842
+          ceph-cluster:
+            gnetId: 2842
+            revision: 14
+            datasource: Prometheus
+          # Ref: https://grafana.com/grafana/dashboards/5336
+          ceph-osd:
+            gnetId: 5336
+            revision: 5
+            datasource: Prometheus
+          # Ref: https://grafana.com/grafana/dashboards/5342
+          ceph-pools:
+            gnetId: 5342
+            revision: 5
+            datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/15513
         cert-manager:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
@@ -175,33 +177,34 @@ spec:
           gnetId: 13502
           revision: 10
           datasource: Prometheus
-        flux-cluster:
-          url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/cluster.json
-          datasource: Prometheus
-        flux-control-plane:
-          url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/control-plane.json
-          datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/11315
-        unifi-client-insights:
-          gnetId: 11315
-          revision: 8
-          datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/11311
-        unifi-network-sites:
-          gnetId: 11311
-          revision: 4
-          datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/11314
-        unifi-uap-insights:
-          gnetId: 11314
-          revision: 9
-          datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/11312
-        unifi-usw-insights:
-          gnetId: 11312
-          revision: 8
-          datasource: Prometheus
-        arr:
+        # flux-cluster:
+        #   url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/cluster.json
+        #   datasource: Prometheus
+        # flux-control-plane:
+        #   url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/control-plane.json
+        #   datasource: Prometheus
+        networking:
+          # Ref: https://grafana.com/grafana/dashboards/11315
+          unifi-client-insights:
+            gnetId: 11315
+            revision: 8
+            datasource: Prometheus
+          # Ref: https://grafana.com/grafana/dashboards/11311
+          unifi-network-sites:
+            gnetId: 11311
+            revision: 4
+            datasource: Prometheus
+          # Ref: https://grafana.com/grafana/dashboards/11314
+          unifi-uap-insights:
+            gnetId: 11314
+            revision: 9
+            datasource: Prometheus
+          # Ref: https://grafana.com/grafana/dashboards/11312
+          unifi-usw-insights:
+            gnetId: 11312
+            revision: 8
+            datasource: Prometheus
+        media:
           lidarr:
             url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/lidarr.json
             datasource: Prometheus
@@ -211,9 +214,9 @@ spec:
           sonarr:
             url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/sonarr.json
             datasource: Prometheus
-        qbittorrent:
-          url: https://raw.githubusercontent.com/esanchezm/prometheus-qbittorrent-exporter/master/grafana/dashboard.json
-          datasource: Prometheus
+          # qbittorrent:
+          #   url: https://raw.githubusercontent.com/esanchezm/prometheus-qbittorrent-exporter/master/grafana/dashboard.json
+          #   datasource: Prometheus
         metallb:
           url: https://raw.githubusercontent.com/jr0dd/grafana-dashboards/main/metallb.json
           datasource: Prometheus
