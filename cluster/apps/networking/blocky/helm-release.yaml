@@ -50,6 +50,7 @@ spec:
 
     service:
       main:
+        enabled: true
         ports:
           http:
             port: 4000
@@ -202,6 +203,7 @@ spec:
           ${DOMAIN_SMALL_BLOOP}: tcp+udp:${LOCAL_GATEWAY_SMALL_BLOOP}
           ${DOMAIN_CORE_BLOOP}: tcp+udp:${LOCAL_GATEWAY_CORE_BLOOP}
           status.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
+          tyg3r.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
       customDNS:
         mapping:
           ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_TRAEFIK_CLASSIC}
