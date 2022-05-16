@@ -24,6 +24,16 @@ spec:
             - "${METALLB_LB_RANGE}"
             - "${METALLB_LB_IP6_RANGE}"
 
+    prometheus:
+      scrapeAnnotations: false
+      metricsPort: 7472
+      serviceAccount: prometheus-prometheus
+      namespace: monitoring
+      podMonitor:
+        enabled: true
+      prometheusRule:
+        enabled: true
+
     speaker:
       livenessProbe:
         enabled: true
