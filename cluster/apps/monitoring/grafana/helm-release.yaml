@@ -302,7 +302,8 @@ spec:
             gnetId: 14837
             revision: 2
             datasource: Prometheus
-
+    imageRenderer:
+      enabled: true
     sidecar:
       dashboards:
         enabled: true
@@ -328,9 +329,6 @@ spec:
       - grafana-polystat-panel
       - mxswat-separator-panel
       - farski-blendstat-panel
-
-    # imageRenderer:
-    #   enabled: true
 
     serviceMonitor:
       enabled: false
