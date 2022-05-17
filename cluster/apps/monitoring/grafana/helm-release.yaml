@@ -31,9 +31,11 @@ spec:
       configmap.reloader.stakater.com/reload: "grafana"
 
     persistence:
-      enabled: false
-      inMemory:
-        enabled: true
+      enabled: true
+      storageClassName: "nfs-client"
+      size: 10Gi
+      accessModes:
+        - ReadWriteOnce
 
     env:
       GF_EXPLORE_ENABLED: true
@@ -221,71 +223,38 @@ spec:
             gnetId: 12175
             revision: 5
             datasource: Prometheus
-        storage:
-          # Ref: https://grafana.com/grafana/dashboards/2842
-          ceph-cluster:
-            gnetId: 2842
-            revision: 14
-            datasource: Prometheus
-          # Ref: https://grafana.com/grafana/dashboards/5336
-          ceph-osd:
-            gnetId: 5336
-            revision: 5
-            datasource: Prometheus
-          # Ref: https://grafana.com/grafana/dashboards/5342
-          ceph-pools:
-            gnetId: 5342
-            revision: 5
-            datasource: Prometheus
-          # Ref: https://grafana.com/grafana/dashboards/13502
-          minio:
-            gnetId: 13502
-            revision: 10
-            datasource: Prometheus
+      storage:
+        # Ref: https://grafana.com/grafana/dashboards/2842
+        ceph-cluster:
+          gnetId: 2842
+          revision: 14
+          datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/5336
+        ceph-osd:
+          gnetId: 5336
+          revision: 5
+          datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/5342
+        ceph-pools:
+          gnetId: 5342
+          revision: 5
+          datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/13502
+        minio:
+          gnetId: 13502
+          revision: 10
+          datasource: Prometheus
         # flux-cluster:
         #   url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/cluster.json
         #   datasource: Prometheus
         # flux-control-plane:
         #   url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/control-plane.json
         #   datasource: Prometheus
-        networking:
-          # Ref: https://grafana.com/grafana/dashboards/15513
-          cert-manager:
-            url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
-            datasource: Prometheus
-          # Ref: https://grafana.com/grafana/dashboards/11315
-          unifi-client-insights:
-            gnetId: 11315
-            revision: 8
-            datasource: Prometheus
-          # Ref: https://grafana.com/grafana/dashboards/11311
-          unifi-network-sites:
-            gnetId: 11311
-            revision: 4
-            datasource: Prometheus
-          # Ref: https://grafana.com/grafana/dashboards/11314
-          unifi-uap-insights:
-            gnetId: 11314
-            revision: 9
-            datasource: Prometheus
-          # Ref: https://grafana.com/grafana/dashboards/11312
-          unifi-usw-insights:
-            gnetId: 11312
-            revision: 8
-            datasource: Prometheus
-        media:
-          lidarr:
-            url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/lidarr.json
-            datasource: Prometheus
-          radarr:
-            url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/radarr.json
-            datasource: Prometheus
-          sonarr:
-            url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/sonarr.json
-            datasource: Prometheus
-          # qbittorrent:
-          #   url: https://raw.githubusercontent.com/esanchezm/prometheus-qbittorrent-exporter/master/grafana/dashboard.json
-          #   datasource: Prometheus
+      networking:
+        # Ref: https://grafana.com/grafana/dashboards/15513
+        cert-manager:
+          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
+          datasource: Prometheus
         metallb:
           url: https://raw.githubusercontent.com/jr0dd/grafana-dashboards/main/metallb.json
           datasource: Prometheus
@@ -294,12 +263,45 @@ spec:
           gnetId: 13665
           revision: 1
           datasource: Prometheus
-        users:
-          # Ref: https://grafana.com/grafana/dashboards/14837
-          authentik:
-            gnetId: 14837
-            revision: 2
-            datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/11315
+        unifi-client-insights:
+          gnetId: 11315
+          revision: 8
+          datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/11311
+        unifi-network-sites:
+          gnetId: 11311
+          revision: 4
+          datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/11314
+        unifi-uap-insights:
+          gnetId: 11314
+          revision: 9
+          datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/11312
+        unifi-usw-insights:
+          gnetId: 11312
+          revision: 8
+          datasource: Prometheus
+      media:
+        lidarr:
+          url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/lidarr.json
+          datasource: Prometheus
+        radarr:
+          url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/radarr.json
+          datasource: Prometheus
+        sonarr:
+          url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/sonarr.json
+          datasource: Prometheus
+        # qbittorrent:
+        #   url: https://raw.githubusercontent.com/esanchezm/prometheus-qbittorrent-exporter/master/grafana/dashboard.json
+        #   datasource: Prometheus
+      users:
+        # Ref: https://grafana.com/grafana/dashboards/14837
+        authentik:
+          gnetId: 14837
+          revision: 2
+          datasource: Prometheus
     imageRenderer:
       enabled: true
     sidecar:
@@ -315,6 +317,7 @@ spec:
       datasources:
         enabled: true
         searchNamespace: ALL
+        label: grafana_datasource
 
     plugins:
       - natel-discrete-panel
