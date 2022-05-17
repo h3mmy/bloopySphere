@@ -31,11 +31,9 @@ spec:
       configmap.reloader.stakater.com/reload: "grafana"
 
     persistence:
-      enabled: true
-      storageClassName: "nfs-client"
-      size: 10Gi
-      accessModes:
-        - ReadWriteOnce
+      enabled: false
+      inMemory:
+        enabled: true
 
     env:
       GF_EXPLORE_ENABLED: true
