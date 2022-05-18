@@ -25,10 +25,7 @@ spec:
       LOG_LEVEL: "info"
 
     autoscaling:
-      enabled: true
-      target: overseerr
-      minReplicas: 1
-      maxReplicas: 2
+      enabled: false
 
     ingress:
       main:
