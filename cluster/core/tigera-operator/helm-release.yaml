@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://projectcalico.docs.tigera.io/charts
       chart: tigera-operator
-      version: v3.23.0
+      version: v3.23.1
       sourceRef:
         kind: HelmRepository
         name: calico-charts
@@ -101,7 +101,7 @@ spec:
               - "k8s-0"
     calicoctl:
       image: docker.io/calico/ctl
-      tag: v3.23.0
+      tag: v3.23.1
 
     # Config required to fix RKE2 issue #1541
     # Also see https://docs.rke2.io/known_issues/#calico-with-vxlan-encapsulation
