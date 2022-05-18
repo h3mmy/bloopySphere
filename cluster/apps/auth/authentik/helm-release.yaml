@@ -87,8 +87,10 @@ spec:
     redis:
       enabled: true
     prometheus:
+      rules:
+        create: true
       serviceMonitor:
-        create: false
+        create: true
     volumeMounts:
       - name: background-image-1
         mountPath: /media/sound_wave.svg
