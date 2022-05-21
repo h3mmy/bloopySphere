@@ -65,13 +65,20 @@ spec:
       # See https://github.com/networkupstools/nut/tree/master/conf for config sample files
       files:
         ups.conf: |
-          [ups]
+          [ups.cp1500]
             driver = usbhid-ups
             port = auto
             desc = "CyberPower CP1500 AVR UPS"
             vendorid = 0764
             productid = 0501
             serial = ${UPS_SERIAL_0}
+          [ups.cp900]
+            driver = usbhid-ups
+            port = auto
+            desc = "CyberPower CP900 AVR2"
+            vendorid = 0764
+            productid = 0601
+            serial = ${UPS_SERIAL_4}
         upsmon.conf: |
           DEADTIME 25
           MAXAGE 25
