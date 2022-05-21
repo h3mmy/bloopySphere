@@ -42,6 +42,10 @@ spec:
                   operator: In
                   values:
                     - "true"
+                - key: feature.node.kubernetes.io/custom-ups.cp900
+                  operator: In
+                  values:
+                    - "true"
     service:
       main:
         annotations:
