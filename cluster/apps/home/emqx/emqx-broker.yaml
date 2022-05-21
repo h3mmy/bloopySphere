@@ -147,4 +147,4 @@ spec:
       - name: emqx_mod_topic_metrics
         enable: true
       - name: emqx_mod_subscription
-        enable: false
+        enable: true
