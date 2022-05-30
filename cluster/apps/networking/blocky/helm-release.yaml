@@ -188,7 +188,7 @@ spec:
         default:
           # - tcp+udp:8.8.8.8
           # - tcp+udp:8.8.4.4
-          # - tcp+udp:1.1.1.1
+          - tcp+udp:1.1.1.1
           - tcp-tls:one.one.one.one
           - tcp-tls:dns.google
           - https://cloudflare-dns.com/dns-query
@@ -212,7 +212,7 @@ spec:
           mqtt.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
           wss.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
       blocking:
-        blockType: zeroIp
+        blockType: nxDomain
         failStartOnListError: true
         blackLists:
           ads:
