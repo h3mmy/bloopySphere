@@ -212,7 +212,7 @@ spec:
           mqtt.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
           wss.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
       blocking:
-        blockType: nxDomain
+        blockType: zeroIp
         failStartOnListError: true
         blackLists:
           ads:
