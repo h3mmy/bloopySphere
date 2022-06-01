@@ -18,6 +18,10 @@ spec:
       interval: 5m
   install:
     createNamespace: true
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+      retries: 4
   values:
     resources:
       requests:
