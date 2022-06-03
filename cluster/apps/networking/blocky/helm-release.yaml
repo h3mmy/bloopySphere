@@ -222,6 +222,8 @@ spec:
             - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
           special:
             - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts
+          doh:
+            - https://gist.githubusercontent.com/ckuethe/f71185f604be9cde370e702aa179fc2e/raw/53fe52046836ac3009e9505b7b8b8b5de42d84e3/doh-blocklist.txt
           none:
         whiteLists:
           ads:
@@ -229,6 +231,9 @@ spec:
         clientGroupsBlock:
           default:
             - ads
+          ${LOCAL_GATEWAY_BIG_BLOOP}/16:
+            - ads
+            - doh
           ${LOCAL_GATEWAY_SMALL_BLOOP}/24:
             - ads
             - special
