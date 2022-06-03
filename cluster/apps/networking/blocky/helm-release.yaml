@@ -204,6 +204,10 @@ spec:
           ${DOMAIN_CORE_BLOOP}: tcp+udp:${LOCAL_GATEWAY_CORE_BLOOP}
           status.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
           tyg3r.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
+          # DoH canary domains. Forward to pihole for NODATA or NXDOMAIN
+          use-application-dns.net: tcp+udp: 10.1.0.10
+          mask.icloud.com: tcp+udp: 10.1.0.10
+          mask-h2.icloud.com: tcp+udp: 10.1.0.10
       customDNS:
         mapping:
           ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_TRAEFIK_CLASSIC}
@@ -223,6 +227,7 @@ spec:
           special:
             - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts
           doh:
+            - https://raw.githubusercontent.com/Sekhan/TheGreatWall/master/TheGreatWall.txt
             - https://gist.githubusercontent.com/ckuethe/f71185f604be9cde370e702aa179fc2e/raw/53fe52046836ac3009e9505b7b8b8b5de42d84e3/doh-blocklist.txt
           none:
         whiteLists:
@@ -237,6 +242,7 @@ spec:
           ${LOCAL_GATEWAY_SMALL_BLOOP}/24:
             - ads
             - special
+            - doh
 
       clientLookup:
         upstream: tcp+udp:${LOCAL_GATEWAY_MAIN}
