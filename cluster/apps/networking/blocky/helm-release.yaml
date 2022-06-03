@@ -205,9 +205,9 @@ spec:
           status.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
           tyg3r.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
           # DoH canary domains. Forward to pihole for NODATA or NXDOMAIN
-          use-application-dns.net: tcp+udp: 10.1.0.10
-          mask.icloud.com: tcp+udp: 10.1.0.10
-          mask-h2.icloud.com: tcp+udp: 10.1.0.10
+          use-application-dns.net: tcp+udp:10.1.0.10
+          mask.icloud.com: tcp+udp:10.1.0.10
+          mask-h2.icloud.com: tcp+udp:10.1.0.10
       customDNS:
         mapping:
           ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_TRAEFIK_CLASSIC}
