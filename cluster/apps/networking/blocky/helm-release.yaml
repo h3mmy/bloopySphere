@@ -215,6 +215,7 @@ spec:
           emqx.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
           mqtt.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
           wss.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+          dns.${XYZ_DOMAIN}: ${SVC_BLOCKY_ADDR_V4},${SVC_BLOCKY_ADDR_V6}
       blocking:
         blockType: zeroIp
         failStartOnListError: true
