@@ -11,7 +11,7 @@ spec:
   jobLabel: home-assistant
   selector:
     matchLabels:
-      app.kubernetes.io/name: home-assistant
+      k8s-app: home-assistant
   namespaceSelector:
     matchNames:
       - home
@@ -19,6 +19,7 @@ spec:
   endpoints:
     - port: "8123"
       interval: 60s
+      honorTimestamps: true
       path: /api/prometheus
       authorization:
         credentials:
