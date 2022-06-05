@@ -38,14 +38,14 @@ spec:
     webhook:
       enabled: true
     extraArgs:
-      - --dns01-recursive-nameservers=1.1.1.1:53,10.1.0.9:53
+      - --dns01-recursive-nameservers=1.1.1.1:53,1.1.0.0:53
     #  - --dns01-recursive-nameservers-only
     replicaCount: 1
     podDnsPolicy: "None"
     podDnsConfig:
       nameservers:
         - "1.1.1.1"
-        - "10.1.0.9"
+        - "1.1.0.0"
     prometheus:
       enabled: true
       serviceMonitor:
