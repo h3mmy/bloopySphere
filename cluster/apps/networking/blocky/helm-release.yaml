@@ -110,18 +110,34 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
           cert-manager.io/ip-sans: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure, dns-tls
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure, dns-tls"
           traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
 
         hosts:
           - host: &host blocky.${XYZ_DOMAIN}
             paths:
               - path: /
+          - host: &dot dns.${XYZ_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                backend:
+                  service:
+                    name: blocky-dns-tcp
+          - host: &dotstar "*.dns.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                backend:
+                  service:
+                    name: blocky-dns-tcp
 
         tls:
           - secretName: tls.blocky
             hosts:
               - *host
+              - *dot
+              - *dotstar
 
     metrics:
       enabled: true
