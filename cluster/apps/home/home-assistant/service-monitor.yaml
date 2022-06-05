@@ -21,4 +21,6 @@ spec:
       interval: 60s
       path: /api/prometheus
       authorization:
-        credentials: "${HASS_PROM_TOKEN}"
+        credentials:
+          key: token
+          name: home-assistant-prometheus-token

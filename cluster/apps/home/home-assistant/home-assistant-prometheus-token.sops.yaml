@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: home-assistant-prometheus-token
+    namespace: home
+stringData:
+    token: ENC[AES256_GCM,data:z+fK8/TyqDjMyW3q0/h9UwKYX/KiiiKNIpKv1chkeo17RvmZ0cql4clwgZ1NoM4mNiswqSM07nPIXrZSBKZ/4OqHmINLPjMeN70BktKgl7T/gP948+cI60Tm0mtJiBQD3QI9lDN03No8ftNHm2wlpQx3JLSGzmy9QmfawJ1Vc6zOUz+o/1CRF4L2Kkk1ZfVJKOF0hpoiwxedB+u6jXjmDaN752WBu1g7VINA7GCrY9i2fgtsud5M,iv:6oX/6xdZwbE8dimtDNILfWbWXzxZoWCbZxCuk2E0mCM=,tag:TGpBGe/QF1rRX9bfPlV2Dg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0Z01XeXI3eWFWWFdVTElW
+            NXVTaWx0ZThOaU40SFdTcUhObEZWNldxTWlnCnhMeEVwamsySnhDYThVVEZKQ2p1
+            L3VZTHZhS25hWFl6VTloL0pGSUJLUk0KLS0tIExVUWNZc2NuN29TaGNVQmIyaXpi
+            cTM3K1J1VEwyK0NMNVpGL3h0U1VHaTQKlgtvygH3/Ta5joHyMonGVRl0BAsb84Ci
+            ML3zO97zkGpklT2QHWr01CVYj9aqSLo6c7T//MpP4oPlpVD22QFIDw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2022-06-05T20:31:41Z"
+    mac: ENC[AES256_GCM,data:M9BiY1VyhTp22aXNrNUVmiiu7W8ZuF85+5P7c+ythUUmhB0ypvO72yu1XI16EsCqFp/cxq/mSx+6r12OW2+FV2KRxUiAF6txZFU+Elm0kyBnjFgYxBqIeoiNPwyXnCekhW8cCd85J4nGsiGH95+ic18Seg04AQhFElGqZ82h3qA=,iv:0itsItQ/Lu9heDpnntQ2AAk/j5E9/CITPRF3WFDGSt8=,tag:WHZHdQtcogq+f9u1gJmoAA==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.1
