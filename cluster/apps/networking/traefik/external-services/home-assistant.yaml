@@ -4,6 +4,7 @@ kind: Service
 metadata:
   labels:
     k8s-app: home-assistant
+    app.kubernetes.io/name: home-assistant
   name: home-assistant
   namespace: home
 spec:
@@ -17,3 +18,4 @@ spec:
   selector:
     app.kubernetes.io/instance: home-assistant
     app.kubernetes.io/name: home-assistant
+    k8s-app: home-assistant
