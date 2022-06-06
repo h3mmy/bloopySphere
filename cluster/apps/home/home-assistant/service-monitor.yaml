@@ -21,6 +21,12 @@ spec:
       interval: 60s
       honorTimestamps: true
       path: /api/prometheus
+      relabelings:
+        - sourceLabels: [__address__]
+          targetLabel: __address__
+          regex: (.*)
+          replacement: "${HASS_DIRECT}:8123"
+          action: replace
       authorization:
         credentials:
           key: token
