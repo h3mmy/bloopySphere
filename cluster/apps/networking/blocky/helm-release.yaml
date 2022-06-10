@@ -159,6 +159,9 @@ spec:
         value: "arm64"
         effect: "NoSchedule"
 
+    redis:
+      enabled: true
+
     persistence:
       whitelists:
         enabled: true
@@ -275,3 +278,8 @@ spec:
         type: mysql
         target: ${MARIADB_BLOCKY_USER}:${MARIADB_BLOCKY_PASSWORD}@tcp(${MARIADB_ADDRESS}:3306)/${MARIADB_BLOCKY_DATABASE}?charset=utf8mb4&parseTime=True&loc=Local
         logRetentionDays: 7
+      redis:
+        database: 2
+        address: blocky-redis-headless:6379
+        connectionAttempts: 10
+        connectionCooldown: 3s
