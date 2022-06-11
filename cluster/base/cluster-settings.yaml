@@ -5,6 +5,7 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
+  BOT_COMMIT_NAME: bloopyboi
   CALIBRE_WEB_PID: "1061"
   CALICO_NODE_CIDR: "10.1.0.0/24"
   CLUSTER_NAME: bloopySphere

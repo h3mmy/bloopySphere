@@ -5,3 +5,4 @@ resources:
   - notifications
   - monitoring
   - dashboard
+  - image-update-automation.yaml
