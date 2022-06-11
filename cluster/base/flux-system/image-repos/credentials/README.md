@@ -13,7 +13,7 @@ metadata:
     namespace: flux-system
 type: kubernetes.io/dockerconfigjson
 stringData:
-  .dockerconfigjson: '{"auths":{"<repo_url>":{"auth":"<auth>"}}}'
+  .dockerconfigjson: '{"auths":{"<registry_url>":{"auth":"<auth>"}}}'
 ```
 4. Encrypt with SOPS
 `sops -i -e /path/to/<secret_name>.sops.yaml`
