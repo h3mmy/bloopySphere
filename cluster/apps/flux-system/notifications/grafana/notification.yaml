@@ -17,7 +17,7 @@ apiVersion: notification.toolkit.fluxcd.io/v1beta1
 kind: Provider
 metadata:
   name: grafana
-  namespace: monitoring
+  namespace: flux-system
 spec:
   type: grafana
   address: "http://grafana.monitoring/api/annotations"
