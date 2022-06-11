@@ -1,0 +1,40 @@
+---
+kind: Job
+metadata:
+  name: ensure-grafana-token
+  namespace: flux-system
+  annotations:
+    botkube.io/disable: "true"
+spec:
+  template:
+    spec:
+      containers:
+        - name: grafana-token
+          image: ghcr.io/k8s-at-home/kubectl:v1.24.1
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: ${TZ}
+          workingDir: /scripts
+          volumeMounts:
+            - name: grafana-auth
+              mountPath: /scripts/grafana-auth.sh
+              subPath: cloudflare-ddns.sh
+              readOnly: true
+            - name: tmp
+              mountPath: /tmp
+
+      volumes:
+        - name: grafana-auth
+          projected:
+            defaultMode: 0775
+            sources:
+              - configMap:
+                  name: grafana-auth-script
+                  items:
+                    - key: grafana-auth.sh
+                      path: grafana-auth.sh
+        - name: tmp
+          emptyDir: {}
+      restartPolicy: Never
+  backoffLimit: 4

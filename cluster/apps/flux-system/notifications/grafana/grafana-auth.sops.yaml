@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: grafana-auth-flux
+    namespace: flux-system
+stringData:
+    oauth_user: ENC[AES256_GCM,data:HLfaMwMKiJMg6vCf76SiqE9ooDR/,iv:hm1JeEcA6n/bk7TgM/Ob/BU94fs+ym4hqzrJrYVU5ew=,tag:xYb18b2CfDFLmoJoe4fa7g==,type:str]
+    oauth_password: ENC[AES256_GCM,data:s14knhRAjD4221PJx8bsVdnX+hv+nMoA9QDLxJJDOQxYv86XV7AjXQ6eYWfpPNynf/wyE3GYwA/8cXA651NQ3OYSsSj0AJVc2uxpNsvqF7cDLvp5iJYXARh+1TslZ1zBmYkQBhJ3SDM/O3Z3qYG4/QQuGMV03FVfHnO//H9J7zI=,iv:9dp2Y9WjIFmS2ulIkicOpGW6kij7CfZ04T6e7olwuOc=,tag:2v/fW/u0SIOac85BLbgO5Q==,type:str]
+    token: ENC[AES256_GCM,data:3Mbf2jy1Eh7vs5id+qevp9v3hzrlpjJvOUKy+CdPi7DF+2d52EMBwSyEnrNLA75kJFt/1bMV+sCwnxrChEYq1UudHkHW+9xBf5YEs/SUeuNdCqfUKUb5ADdE3WIgOj4jNVlZv8kmUBA=,iv:SYvLBEVkpkeb1+GUMVj6HFOjWrM9X9IVRewoJEav3lY=,tag:4H2mzqddU1Y5ltqjnXKs/w==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBjT2FaVTRtL2UvZ1dIQlQw
+            UVltZzdpZkRkV0VSQ2M1aVBaNkxYOWdmbEF3CnN3S0NKRXlIa3hPRExpL1J0MmlO
+            ZkJib1FXS2NhZ0FZMXpFWElYV1VVd0UKLS0tIGhOb1ZLQzFkQ1ZLTlg5bitOeGwx
+            M2pWR0lJNXV2MVFOcWFzM2xaOWtNVE0KiPoBzMMtW3xvEp5IkdV1gdIIfzKTSyT8
+            ywk2HpZk4nQ2IMogoET56shwFY2iH+D1ZUuYhOtuxgtx11fKyda50Q==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2022-06-11T15:46:27Z"
+    mac: ENC[AES256_GCM,data:vZoCYEF9KDlcrsj306e8j7hompupmQ0lXnWC1l2YFdwRxQgpWlvQUADeOczRucXkT+TPBABvUl6mrnSdzWeP9VIr3cUJSW1uydzO8cOnW64cxAq+gadcDOv5Vqe1HY84ooh36n7Y8+Dg4MK19eHm2d1b8suQz1Yo43RqCoB6S8o=,iv:GiEfgQ8EqtPjOK2iFbKl6gNc6CoQCumNiWtEveynX2E=,tag:nI3TnS15hCI+pT9ZFNI6sA==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.1

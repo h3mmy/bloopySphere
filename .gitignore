@@ -34,3 +34,4 @@ ddns_data.json
 *.bakup.yaml
 zwavejs2mqtt-store.zip
 *.sql
+test.sh
