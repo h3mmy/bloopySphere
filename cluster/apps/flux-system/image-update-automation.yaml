@@ -37,7 +37,7 @@ spec:
         - {{.}}
         {{ end -}}
     push:
-      branch: automated-image-updates-{{ Status.observedGeneration }}
+      branch: automated-image-updates-{{ .Status.observedGeneration }}
   update:
     path: /cluster
     strategy: Setters
