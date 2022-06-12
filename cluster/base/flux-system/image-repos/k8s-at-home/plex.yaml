@@ -21,7 +21,6 @@ spec:
   imageRepositoryRef:
     name: plex
     namespace: flux-system
-  policy:
-    filterTags:
-      pattern: '^v(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)\.(?P<mod>\d+)-(?P<hash>[\d\w]+)$'
-      extract: '$major.$minor.$patch.$mod'
+  filterTags:
+    pattern: '^v(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)\.(?P<mod>\d+)-(?P<hash>[\d\w]+)$'
+    extract: '$major.$minor.$patch.$mod'
