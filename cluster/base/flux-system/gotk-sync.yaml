@@ -9,6 +9,8 @@ spec:
   ref:
     branch: main
   url: https://github.com/h3mmy/bloopySphere
+  secretRef:
+    name: flux-system
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
