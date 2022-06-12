@@ -19,7 +19,7 @@ spec:
         name: ${BOT_COMMIT_NAME}
       messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
     push:
-      branch: flux-test
+      branch: main
   update:
     path: /cluster
     strategy: Setters
