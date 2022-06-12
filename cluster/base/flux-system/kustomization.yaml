@@ -7,6 +7,5 @@ resources:
   - charts
   - git-repos
   - image-repos
-  - deploy-key.sops.yaml
 patchesStrategicMerge:
   - gotk-patches.yaml

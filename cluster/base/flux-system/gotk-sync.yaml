@@ -8,7 +8,7 @@ spec:
   interval: 1m0s
   ref:
     branch: main
-  url: https://github.com/h3mmy/bloopySphere
+  url: ssh://git@github.com/h3mmy/bloopySphere.git
   secretRef:
     name: flux-system
 ---
