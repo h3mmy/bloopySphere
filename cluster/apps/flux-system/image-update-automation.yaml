@@ -37,7 +37,7 @@ spec:
         - {{.}}
         {{ end -}}
     push:
-      branch: automated-image-updates
+      branch: auto-update/images
   update:
     path: /cluster
     strategy: Setters
