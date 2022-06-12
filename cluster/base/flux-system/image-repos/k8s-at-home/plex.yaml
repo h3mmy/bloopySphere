@@ -23,6 +23,7 @@ spec:
     namespace: flux-system
   filterTags:
     pattern: '^v(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)\.(?P<mod>\d+)-(?P<hash>[\d\w]+)$'
-    extract: '$major.$minor.$patch.$mod'
+    extract: "$major.$minor.$patch.$mod"
   policy:
-    semver: ^1.2.5
+    semver:
+      range: ">=1.2.5"
