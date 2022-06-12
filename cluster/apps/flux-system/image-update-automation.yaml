@@ -17,9 +17,27 @@ spec:
       author:
         email: ${BOT_COMMIT_NAME}@users.noreply.github.com
         name: ${BOT_COMMIT_NAME}
-      messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
+      messageTemplate: |
+        Automated image update
+
+        Automation name: {{ .AutomationObject }}
+
+        Files:
+        {{ range $filename, $_ := .Updated.Files -}}
+        - {{ $filename }}
+        {{ end -}}
+
+        Objects:
+        {{ range $resource, $_ := .Updated.Objects -}}
+        - {{ $resource.Kind }} {{ $resource.Name }}
+        {{ end -}}
+
+        Images:
+        {{ range .Updated.Images -}}
+        - {{.}}
+        {{ end -}}
     push:
-      branch: main
+      branch: automated-image-updates-{{ Status.observedGeneration }}
   update:
     path: /cluster
     strategy: Setters
