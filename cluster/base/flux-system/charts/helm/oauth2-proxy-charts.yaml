@@ -5,6 +5,6 @@ metadata:
   name: oauth2-proxy-charts
   namespace: flux-system
 spec:
-  interval: 30m
+  interval: 90m
   url: https://oauth2-proxy.github.io/manifests
   timeout: 2m

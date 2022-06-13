@@ -5,6 +5,6 @@ metadata:
   name: cdr-charts
   namespace: flux-system
 spec:
-  interval: 30m
+  interval: 90m
   url: https://code-server-boilerplates.github.io/charts
   timeout: 2m
