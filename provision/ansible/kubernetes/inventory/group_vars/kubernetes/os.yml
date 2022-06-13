@@ -35,7 +35,6 @@ os_packages_install:
   - ffmpeg
   - clinfo
 os_packages_remove:
-  - apparmor
   - apport
   - byobu
   - cloud-init
