@@ -16,7 +16,7 @@ _... managed with Flux and Renovate_ :robot:
 
 <div align="center">
 
-[![k3s](https://img.shields.io/badge/k3s-v1.23.3-brightgreen?style=for-the-badge&logo=kubernetes&logoColor=white)](https://k3s.io/)
+[![k3s](https://img.shields.io/badge/k3s-v1.24.1-brightgreen?style=for-the-badge&logo=kubernetes&logoColor=white)](https://k3s.io/)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=for-the-badge)](https://github.com/pre-commit/pre-commit)
 [![renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?style=for-the-badge&logo=renovatebot&logoColor=white)](https://github.com/renovatebot/renovate)
 
@@ -42,7 +42,7 @@ _... managed with Flux and Renovate_ :robot:
 This is my home Kubernetes cluster. [Flux](https://github.com/fluxcd/flux2) watches this Git repository and makes the changes to my cluster based on the manifests in the [cluster](./cluster/) directory. [Renovate](https://github.com/renovatebot/renovate) also watches this Git repository and creates pull requests when it finds updates to Docker images, Helm charts, and other dependencies.
 
 ~~For more information, head on over to my [docs](https://h3mmy.github.io/bloopySphere/).~~
-I have nested README files that should be visible as you browse the repo. 
+I have nested README files that should be visible as you browse the repo.
 
 List of container images in use cluster-wide
 
