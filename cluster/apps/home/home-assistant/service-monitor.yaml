@@ -22,7 +22,8 @@ spec:
       honorTimestamps: true
       path: /api/prometheus
       relabelings:
-        - sourceLabels: [__address__]
+        - sourceLabels:
+            - __meta_kubernetes_endpoints_name
           targetLabel: __address__
           regex: (.*)
           replacement: "${HASS_DIRECT}:8123"
@@ -31,3 +32,21 @@ spec:
         credentials:
           key: token
           name: home-assistant-prometheus-token
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: home-assistant
+  namespace: home
+  labels:
+    app.kubernetes.io/name: home-assistant
+    k8s-app: home-assistant
+subsets:
+  - addresses:
+      # Doesn't actually matter what goes here as it will get replaced by the serviceMonitor
+      - ip: ${HASS_DIRECT}
+        nodeName: home-assistant
+    ports:
+      - name: http
+        protocol: TCP
+        port: 8123
