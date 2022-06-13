@@ -4,7 +4,10 @@
 2. Encode to base64 (we'll call this `<auth>`)
 `echo -n <username>:<token> | base64`
 3. Construct .dockerconfigjson Secret
-```
+4. Encrypt with SOPS
+`sops -i -e /path/to/<secret_name>.sops.yaml`
+
+```yaml
 ---
 apiVersion: v1
 kind: Secret
@@ -15,5 +18,3 @@ type: kubernetes.io/dockerconfigjson
 stringData:
   .dockerconfigjson: '{"auths":{"<registry_url>":{"auth":"<auth>"}}}'
 ```
-4. Encrypt with SOPS
-`sops -i -e /path/to/<secret_name>.sops.yaml`
