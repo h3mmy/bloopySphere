@@ -54,7 +54,7 @@ spec:
         ports:
           http:
             port: 4000
-      dns-tcp:
+      dns:
         enabled: true
         type: LoadBalancer
         # v1.24 will have loadBalancerIPs
@@ -75,33 +75,44 @@ spec:
             port: 443
             protocol: TCP
             targetPort: 443
-        externalTrafficPolicy: Local
-        ipFamilyPolicy: PreferDualStack
-        ipFamilies:
-          - "IPv4"
-          - "IPv6"
-        annotations:
-          metallb.universe.tf/loadBalancerIPs: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
-          metallb.universe.tf/allow-shared-ip: blocky
-      dns-udp:
-        enabled: true
-        type: LoadBalancer
-        # v1.24 will have loadBalancerIPs
-        # see https://github.com/kubernetes/enhancements/pull/1992
-        ports:
           dns-udp:
             enabled: true
             port: 53
             protocol: UDP
             targetPort: 53
         externalTrafficPolicy: Local
+        loadBalancerIPs:
+          - ${SVC_BLOCKY_ADDR_V4}
+          - ${SVC_BLOCKY_ADDR_V6}
         ipFamilyPolicy: PreferDualStack
         ipFamilies:
           - "IPv4"
           - "IPv6"
         annotations:
-          metallb.universe.tf/loadBalancerIPs: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
+          # metallb.universe.tf/loadBalancerIPs: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
           metallb.universe.tf/allow-shared-ip: blocky
+      # dns-udp:
+      #   enabled: true
+      #   type: LoadBalancer
+      #   # v1.24 will have loadBalancerIPs
+      #   # see https://github.com/kubernetes/enhancements/pull/1992
+      #   ports:
+      #     dns-udp:
+      #       enabled: true
+      #       port: 53
+      #       protocol: UDP
+      #       targetPort: 53
+      #   externalTrafficPolicy: Local
+      #   loadBalancerIPs:
+      #     - ${SVC_BLOCKY_ADDR_V4}
+      #     - ${SVC_BLOCKY_ADDR_V6}
+      #   ipFamilyPolicy: PreferDualStack
+      #   ipFamilies:
+      #     - "IPv4"
+      #     - "IPv6"
+      #   annotations:
+      #     # metallb.universe.tf/loadBalancerIPs: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
+      #     metallb.universe.tf/allow-shared-ip: blocky
 
     ingress:
       main:
@@ -276,4 +287,3 @@ spec:
         type: mysql
         target: ${MARIADB_BLOCKY_USER}:${MARIADB_BLOCKY_PASSWORD}@tcp(${MARIADB_ADDRESS}:3306)/${MARIADB_BLOCKY_DATABASE}?charset=utf8mb4&parseTime=True&loc=Local
         logRetentionDays: 7
-   
