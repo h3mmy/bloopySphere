@@ -89,7 +89,7 @@ spec:
           - "IPv4"
           - "IPv6"
         annotations:
-          # metallb.universe.tf/loadBalancerIPs: "${LB_V4_BLOCKY}, ${SVC_BLOCKY_ADDR_V6}"
+          metallb.universe.tf/loadBalancerIPs: "${LB_V4_BLOCKY}, ${SVC_BLOCKY_ADDR_V6}"
           metallb.universe.tf/allow-shared-ip: blocky
       # dns-udp:
       #   enabled: true
