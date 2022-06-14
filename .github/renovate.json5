@@ -81,46 +81,28 @@
       ],
       "datasourceTemplate": "helm"
     },
-    // regexManager to read and process cert-manager CRD's
     {
-      "fileMatch": [
-        "cluster/crds/cert-manager/.+\\.yaml$"
-      ],
+      "description": "Process CRD dependencies",
+      "fileMatch": ["cluster/crds/.+\\.ya?ml$"],
       "matchStrings": [
-        "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*?)\n.*\\/(?<currentValue>.*?)\\/"
+        // GitRepository and Flux Kustomization where 'Git release/tag' matches 'Helm' version
+        "registryUrl=(?<registryUrl>\\S+) chart=(?<depName>\\S+)\n.*?(?<currentValue>[^-\\s]*)\n",
+        // Kustomization where 'GitHub release artifact URL' matches 'Docker image' version
+        "datasource=(?<datasource>\\S+) image=(?<depName>\\S+)\n.*?-\\s(.*?)\/(?<currentValue>[^/]+)\/[^/]+\n"
       ],
-      "datasourceTemplate": "helm"
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}helm{{/if}}"
     },
-    // regexManager to read and process Traefik CRD's
     {
+      "description": "Process various other dependencies",
       "fileMatch": [
-        "cluster/crds/traefik/.+\\.yaml$"
+        "provision/ansible/.+\\.ya?ml$",
+        "cluster/.+\\.ya?ml$"
       ],
       "matchStrings": [
-        "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*?)\n *tag: v(?<currentValue>.*)\n"
+        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
       ],
-      "datasourceTemplate": "helm"
-    },
-    // regexManager to read and process kube-prometheus-stack CRDs
-    {
-      "fileMatch": [
-        "cluster/crds/kube-prometheus-stack/.+\\.yaml$"
-      ],
-      "matchStrings": [
-        "registryUrl=(?<registryUrl>.*?)\n *tag: (?<depName>[a-zA-Z-]+)-(?<currentValue>.*)\n"
-      ],
-      "datasourceTemplate": "helm"
-    },
-    // regexManager to read and process External Snapshotter and External DNS CRDs
-    {
-      "fileMatch": [
-        "cluster/crds/external-snapshotter/.+\\.yaml$",
-        "cluster/crds/external-dns/.+\\.yaml$"
-      ],
-      "matchStrings": [
-        "datasource=(?<datasource>.*?)\n *url: https:\/\/github\\.com\/(?<depName>.*?)\\.git\n *ref:\n *tag: (?<currentValue>.*)\n"
-      ],
-      "datasourceTemplate": "github-releases"
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
   ],
   "packageRules": [
@@ -144,7 +126,7 @@
     {
       "matchDatasources": ["docker"],
       "versioning": "loose",
-      "matchPackageNames": ["plexinc/pms-docker"]
+      "matchPackageNames": ["plexinc/pms-docker", "k8s-at-home/plex"]
     },
     {
       "matchDatasources": [
