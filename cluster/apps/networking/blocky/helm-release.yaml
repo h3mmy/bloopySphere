@@ -82,7 +82,7 @@ spec:
             targetPort: 53
         externalTrafficPolicy: Local
         loadBalancerIPs:
-          - ${SVC_BLOCKY_ADDR_V4}
+          - ${LB_V4_BLOCKY}
           - ${SVC_BLOCKY_ADDR_V6}
         ipFamilyPolicy: PreferDualStack
         ipFamilies:
