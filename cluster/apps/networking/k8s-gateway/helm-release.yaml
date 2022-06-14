@@ -32,9 +32,12 @@ spec:
       type: LoadBalancer
       port: 53
       annotations:
-        metallb.universe.tf/loadBalancerIPs: "${LB_V4_K8S_GATEWAY}, ${LB_V6_K8S_GATEWAY}"
+        # metallb.universe.tf/loadBalancerIPs: "${LB_V4_K8S_GATEWAY}, ${LB_V6_K8S_GATEWAY}"
         # metallb.universe.tf/loadBalancerIPs: "${LB_V4_K8S_GATEWAY}"
       externalTrafficPolicy: Local
+      loadBalancerIPs:
+        - ${LB_V4_K8S_GATEWAY}
+        - ${LB_V6_K8S_GATEWAY}
       ipFamilyPolicy: PreferDualStack
       ipFamilies:
         - "IPv4"
