@@ -28,13 +28,11 @@ spec:
     service:
       enabled: true
       type: LoadBalancer
-      spec:
-        # Gotta wait for kubernetes 1.24
-        # See https://github.com/kubernetes/enhancements/pull/1992
-        loadBalancerIPs:
-          - "${LB_V4_TRAEFIK}"
-          - "${LB_V6_TRAEFIK}"
-        externalTrafficPolicy: Local
+      # See https://github.com/kubernetes/enhancements/pull/1992
+      loadBalancerIPs:
+        - "${LB_V4_TRAEFIK}"
+        - "${LB_V6_TRAEFIK}"
+      externalTrafficPolicy: Local
       ipFamilyPolicy: PreferDualStack
       ipFamilies:
         - "IPv4"
