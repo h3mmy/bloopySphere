@@ -1,5 +1,5 @@
 ---
-apiVersion: apps.emqx.io/v1beta2
+apiVersion: apps.emqx.io/v1beta3
 kind: EmqxBroker
 metadata:
   name: emqx
@@ -86,28 +86,33 @@ spec:
         dashboard: 18083
         api: 8081
     acl:
-      - permission: allow
-        username: "dashboard"
-        action: subscribe
-        topics:
-          filter:
-            - "$SYS/#"
-            - "#"
-      - permission: allow
-        ipaddress: "127.0.0.1"
-        topics:
-          filter:
-            - "$SYS/#"
-          equal:
-            - "#"
-      - permission: deny
-        action: subscribe
-        topics:
-          filter:
-            - "$SYS/#"
-          equal:
-            - "#"
-      - permission: allow
+      # v1beta2 -> v1beta3 screwed this up and also the kustomization won't reconcile due to creationTimestamp being a non-field
+      - '{allow, {user, "dashboard"}, subscribe, ["$SYS/#"]}.'
+      - '{allow, {ipaddr, "127.0.0.1"}, pubsub, ["$SYS/#", "#"]}.'
+      - '{deny, all, subscribe, ["$SYS/#", {eq, "#"}]}.'
+      - '{allow, all}.'
+      # - permission: allow
+      #   username: "dashboard"
+      #   action: subscribe
+      #   topics:
+      #     filter:
+      #       - "$SYS/#"
+      #       - "#"
+      # - permission: allow
+      #   ipaddress: "127.0.0.1"
+      #   topics:
+      #     filter:
+      #       - "$SYS/#"
+      #     equal:
+      #       - "#"
+      # - permission: deny
+      #   action: subscribe
+      #   topics:
+      #     filter:
+      #       - "$SYS/#"
+      #     equal:
+      #       - "#"
+      # - permission: allow
     plugins:
       - name: emqx_management
         enable: true

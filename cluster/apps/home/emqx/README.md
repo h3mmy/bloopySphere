@@ -2,7 +2,7 @@
 
 Depends on `/cluster/core/emqx-operator` as management of CRDS is delegated to it. See [emqx/emqx-operator](https://github.com/emqx/emqx-operator).
 
-Reference for the EmqxBroker can be found [here](https://docs.emqx.com/en/emqx-operator/latest/reference/emqxBroker.html#emqxbrokerspec)
+Reference for the EmqxBroker can be found [here](https://github.com/emqx/emqx-operator/tree/main/docs/en_US/reference)
 
 ## Configuration
 
