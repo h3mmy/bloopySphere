@@ -32,6 +32,7 @@ spec:
     replicaCount: 1
     image:
       repository: emqx/emqx-operator-controller
+      tag: "1.2.0"
       pullPolicy: IfNotPresent
 
     resources:
