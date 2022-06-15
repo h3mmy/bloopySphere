@@ -1,0 +1,42 @@
+---
+# Configuration file for MegaLinter
+# See all available variables at https://megalinter.github.io/configuration/ and in linters documentation
+ENABLE_LINTERS: [
+  "ACTION_ACTIONLINT",
+  "ANSIBLE_ANSIBLE_LINT",
+  "COPYPASTE_JSCPD",
+  "CREDENTIALS_SECRETLINT",
+  "GIT_GIT_DIFF",
+  "KUBERNETES_KUBEVAL",
+  "MARKDOWN_MARKDOWNLINT",
+  "PYTHON_PYLINT",
+  "PYTHON_FLAKE8",
+  "TERRAFORM_TERRAFORM_FMT",
+  "YAML_PRETTIER",
+  "YAML_YAMLLINT"
+]
+PRINT_ALPACA: false
+KUBERNETES_KUBEVAL_ARGUMENTS: --ignore-missing-schemas
+KUBERNETES_KUBEVAL_FILTER_REGEX_INCLUDE: "(k8s/clusters|k8s/global|cluster/.*ya?ml)"
+MARKDOWN_MARKDOWNLINT_CONFIG_FILE: .github/lint/markdownlint.config.yaml
+MARKDOWN_MARKDOWNLINT_RULES_PATH: .github/
+# PYTHON_FLAKE8_CONFIG_FILE: .github/lint/.flake8
+YAML_YAMLLINT_CONFIG_FILE: .github/lint/.yamllint.yaml
+YAML_PRETTIER_FILTER_REGEX_EXCLUDE: "(.*\\.sops\\.ya?ml)"
+ANSIBLE_DIRECTORY: provision/ansible
+ANSIBLE_ANSIBLE_LINT_CONFIG_FILE: .github/lint/.ansible-lint
+KUBERNETES_DIRECTORY: cluster
+TERRAFORM_TFLINT_CONFIG_FILE: .github/lint/.tflint.hcl
+FILTER_REGEX_EXCLUDE: '(\.automation/test|\.automation/generated|\.github/workflows|docs/javascripts|docs/overrides|docs/json-schemas|flavors|clj-kondo|TEMPLATES)'
+JSON_JSONLINT_FILTER_REGEX_EXCLUDE: '(\.vscode/)'
+YAML_V8R_FILTER_REGEX_EXCLUDE: '(descriptors|templates/\.mega-linter\.yml|\.codecov\.yml)'
+BASH_FILTER_REGEX_EXCLUDE: "(lib)"
+MARKDOWN_FILTER_REGEX_EXCLUDE: '(license\.md)'
+MARKDOWN_MARKDOWN_LINK_CHECK_DISABLE_ERRORS: true
+SPELL_MISSPELL_FILTER_REGEX_EXCLUDE: '(\.automation/generated|docs/descriptors)'
+DOCKERFILE_HADOLINT_ARGUMENTS: "--ignore DL3003 --ignore DL3007 --ignore DL3013 --ignore DL3016 --ignore DL3018 --ignore DL3028 --ignore DL4001 --ignore DL4006 --ignore SC2015 --ignore SC2016 --ignore SC2039 --ignore SC2086 --ignore SC1091"
+PYTHON_BANDIT_DISABLE_ERRORS: true
+SHOW_ELAPSED_TIME: true
+FILEIO_REPORTER: true
+JSON_REPORTER: true
+GITHUB_STATUS_REPORTER: false

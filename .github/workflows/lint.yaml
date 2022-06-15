@@ -7,10 +7,20 @@ on: # yamllint disable-line rule:truthy
     branches:
       - main
 
-env:
-  # Currently no way to detect automatically
-  DEFAULT_BRANCH: main
-  FILTER_REGEX_EXCLUDE: (static.*)|(provision\/ansible\/roles.*)
+env: # Comment env block if you do not want to apply fixes
+  # Apply linter fixes configuration
+  APPLY_FIXES: all # When active, APPLY_FIXES must also be defined as environment variable (in github/workflows/mega-linter.yml or other CI tool)
+  APPLY_FIXES_EVENT: pull_request # Decide which event triggers application of fixes in a commit or a PR (pull_request, push, all)
+  APPLY_FIXES_MODE: pull_request # If APPLY_FIXES is used, defines if the fixes are directly committed (commit) or posted in a PR (pull_request)
+  MEGALINTER_CONFIG: .github/lint/.mega-linter.yaml
+
+#   # Currently no way to detect automatically
+#   DEFAULT_BRANCH: main
+#   FILTER_REGEX_EXCLUDE: (static.*)|(provision\/ansible\/roles.*)
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -29,16 +39,58 @@ jobs:
           app_id: "${{ secrets.APP_ID }}"
           private_key: "${{ secrets.APP_PRIVATE_KEY }}"
 
+      # - name: Lint
+      #   uses: github/super-linter/slim@v4
+      #   env:
+      #     VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'workflow_dispatch' }}
+      #     DEFAULT_BRANCH: "${{ env.DEFAULT_BRANCH }}"
+      #     GITHUB_TOKEN: "${{ steps.generate-token.outputs.token }}"
+      #     LINTER_RULES_PATH: ".github/lint"
+      #     FILTER_REGEX_EXCLUDE: "${{ env.FILTER_REGEX_EXCLUDE }}"
+      #     ANSIBLE_CONFIG_FILE: .ansible-lint.yaml
+      #     MARKDOWN_CONFIG_FILE: .markdownlint.yaml
+      #     TERRAFORM_TFLINT_CONFIG_FILE: .tflint.hcl
+      #     YAML_CONFIG_FILE: .yamllint.yaml
+      #     KUBERNETES_KUBEVAL_OPTIONS: --ignore-missing-schemas
+
       - name: Lint
-        uses: github/super-linter/slim@v4
+        uses: megalinter/megalinter/flavors/terraform@v5
         env:
-          VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'workflow_dispatch' }}
-          DEFAULT_BRANCH: "${{ env.DEFAULT_BRANCH }}"
           GITHUB_TOKEN: "${{ steps.generate-token.outputs.token }}"
-          LINTER_RULES_PATH: ".github/lint"
-          FILTER_REGEX_EXCLUDE: "${{ env.FILTER_REGEX_EXCLUDE }}"
-          ANSIBLE_CONFIG_FILE: .ansible-lint.yaml
-          MARKDOWN_CONFIG_FILE: .markdownlint.yaml
-          TERRAFORM_TFLINT_CONFIG_FILE: .tflint.hcl
-          YAML_CONFIG_FILE: .yamllint.yaml
-          KUBERNETES_KUBEVAL_OPTIONS: --ignore-missing-schemas
+          MEGALINTER_CONFIG: ${{ env.MEGALINTER_CONFIG }}
+          VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'workflow_dispatch' }}
+      - name: Archive production artifacts
+        if: ${{ success() }} || ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: MegaLinter reports
+          path: |
+            report
+            mega-linter.log
+
+      # Create pull request if applicable (for now works only on PR from same repository, not from forks)
+      - name: Create Pull Request with applied fixes
+        id: cpr
+        if: steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT == 'all' || env.APPLY_FIXES_EVENT == github.event_name) && env.APPLY_FIXES_MODE == 'pull_request' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          commit-message: "[MegaLinter] Apply linters automatic fixes"
+          title: "[MegaLinter] Apply linters automatic fixes"
+          labels: bot
+      - name: Create PR output
+        if: steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT == 'all' || env.APPLY_FIXES_EVENT == github.event_name) && env.APPLY_FIXES_MODE == 'pull_request' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+
+      # Push new commit if applicable (for now works only on PR from same repository, not from forks)
+      - name: Prepare commit
+        if: steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT == 'all' || env.APPLY_FIXES_EVENT == github.event_name) && env.APPLY_FIXES_MODE == 'commit' && github.ref != 'refs/heads/main' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
+        run: sudo chown -Rc $UID .git/
+      - name: Commit and push applied linter fixes
+        if: steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT == 'all' || env.APPLY_FIXES_EVENT == github.event_name) && env.APPLY_FIXES_MODE == 'commit' && github.ref != 'refs/heads/main' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: ${{ github.event.pull_request.head.ref || github.head_ref || github.ref }}
+          commit_message: "[MegaLinter] Apply linters fixes"
