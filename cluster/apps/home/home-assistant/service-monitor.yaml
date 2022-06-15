@@ -23,7 +23,7 @@ spec:
       path: /api/prometheus
       relabelings:
         - sourceLabels:
-            - __meta_kubernetes_endpoints_name
+            - __address__
           targetLabel: __address__
           regex: (.*)
           replacement: "${HASS_DIRECT}:8123"
