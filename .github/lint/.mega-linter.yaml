@@ -17,7 +17,8 @@ ENABLE_LINTERS: [
 ]
 PRINT_ALPACA: false
 KUBERNETES_KUBEVAL_ARGUMENTS: --ignore-missing-schemas
-KUBERNETES_KUBEVAL_FILTER_REGEX_INCLUDE: "(k8s/clusters|k8s/global|cluster/(?!gotk-patches).*ya?ml)"
+KUBERNETES_KUBEVAL_FILTER_REGEX_INCLUDE: "(k8s/clusters|k8s/global|cluster/.*ya?ml)"
+KUBERNETES_KUBEVAL_FILTER_REGEX_EXCLUDE: "gotk-patches.ya?ml"
 MARKDOWN_MARKDOWNLINT_CONFIG_FILE: .github/lint/markdownlint.config.yaml
 MARKDOWN_MARKDOWNLINT_RULES_PATH: .github/
 # PYTHON_FLAKE8_CONFIG_FILE: .github/lint/.flake8
