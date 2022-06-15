@@ -17,12 +17,11 @@ ENABLE_LINTERS: [
 ]
 PRINT_ALPACA: false
 KUBERNETES_KUBEVAL_ARGUMENTS: --ignore-missing-schemas
-KUBERNETES_KUBEVAL_FILTER_REGEX_INCLUDE: "(k8s/clusters|k8s/global|cluster/.*ya?ml)"
+KUBERNETES_KUBEVAL_FILTER_REGEX_INCLUDE: "(k8s/clusters|k8s/global|cluster/(?!gotk-patches).*ya?ml)"
 MARKDOWN_MARKDOWNLINT_CONFIG_FILE: .github/lint/markdownlint.config.yaml
 MARKDOWN_MARKDOWNLINT_RULES_PATH: .github/
 # PYTHON_FLAKE8_CONFIG_FILE: .github/lint/.flake8
 YAML_YAMLLINT_CONFIG_FILE: .github/lint/.yamllint.yaml
-YAML_PRETTIER_FILTER_REGEX_EXCLUDE: "(.*\\.sops\\.ya?ml)"
 ANSIBLE_DIRECTORY: provision/ansible
 ANSIBLE_ANSIBLE_LINT_CONFIG_FILE: .github/lint/.ansible-lint
 KUBERNETES_DIRECTORY: cluster

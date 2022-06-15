@@ -1,3 +1,6 @@
 # .ansible-lint
 warn_list:
   - unnamed-task
+mock_roles:
+  - os.kubernetes
+  - k3s.kubernetes
