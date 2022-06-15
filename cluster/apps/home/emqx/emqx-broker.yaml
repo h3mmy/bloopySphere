@@ -11,14 +11,6 @@ spec:
   labels:
     cluster: emqx
     app.kubernetes.io/name: emqx
-  storage:
-    storageClassName: ceph-block
-    resources:
-      requests:
-        storage: 1Gi
-    accessModes:
-      - ReadWriteOnce
-
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
