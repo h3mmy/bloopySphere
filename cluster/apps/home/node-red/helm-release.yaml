@@ -1,0 +1,66 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app node-red
+  namespace: home
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: kah-common-chart
+      version: 1.1.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+  values:
+    global:
+      nameOverride: *app
+    image:
+      repository: ghcr.io/k8s-at-home/node-red
+      tag: v2.2.2
+    env:
+      TZ: "${TZ}"
+      FLOWS: flows.json
+      NODE_RED_ENABLE_PROJECTS: "true"
+      NODE_RED_ENABLE_SAFE_MODE: "false"
+    service:
+      main:
+        ports:
+          http:
+            port: 1880
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          hajimari.io/appName: "Node-RED"
+          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "graph-outline"
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-rfc-1918@kubernetescrd
+        hosts:
+          - host: &host "{{ .Release.Name }}.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        existingClaim: node-red-config-v1
+        mountPath: "/data"
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+      limits:
+        memory: 500Mi
