@@ -4,6 +4,11 @@
         "matchDatasources": ["docker"],
         "matchPackageNames": ["influxdb"],
         "allowedVersions": "<2"
+      },
+      {
+        "matchDatasources": ["docker"],
+        "matchPackageNames": ["emqx-operator-controller"],
+        "allowedVersions": "<1.2.0"
       }
     ]
   }

@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://repos.emqx.io/charts
       chart: emqx-operator
-      version: 1.0.6
+      version: 1.0.4
       sourceRef:
         kind: HelmRepository
         name: emqx-charts
@@ -30,7 +30,7 @@ spec:
     replicaCount: 1
     image:
       repository: emqx/emqx-operator-controller
-      #tag: "1.2.0"
+      tag: "1.1.6"
       pullPolicy: IfNotPresent
 
     resources:
