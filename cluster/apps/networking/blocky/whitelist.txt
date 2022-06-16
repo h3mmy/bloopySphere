@@ -40,3 +40,5 @@ freegeoip.app
 moneroworld.com
 getmonero.org
 click.e.progressive.com
+mobile.pipe.aria.microsoft.com
+microsoft.com
