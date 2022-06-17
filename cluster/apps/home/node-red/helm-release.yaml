@@ -82,6 +82,10 @@ spec:
         enabled: true
         existingClaim: node-red-config-v1
         mountPath: "/data"
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
     podAnnotations:
       backup.velero.io/backup-volumes: config
     resources:
