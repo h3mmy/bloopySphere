@@ -8,16 +8,40 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: kah-common-chart
-      version: 1.1.2
+      chart: node-red
+      version: 10.1.2
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
         namespace: flux-system
-      interval: 15m
+      interval: 5m
   install:
     createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+      remediateLastFailure: true
+    cleanupOnFail: true
+
   values:
+    initContainers:
+      npm-update:
+        image: node:18-alpine
+        command:
+          - /bin/sh
+          - -c
+          - |
+            if [[ -f /data/package.json ]]; then
+                npm install --save $(npm outdated | cut -d' ' -f 1 | sed '1d' | xargs -I '$' echo '$@latest' | xargs echo);
+            else
+                echo "Skipping npm updates, no package.json found.";
+            fi
+        workingDir: /data
+        volumeMounts:
+          - name: config
+            mountPath: /data
     global:
       nameOverride: *app
     image:
@@ -58,6 +82,8 @@ spec:
         enabled: true
         existingClaim: node-red-config-v1
         mountPath: "/data"
+    podAnnotations:
+      backup.velero.io/backup-volumes: config
     resources:
       requests:
         cpu: 100m
