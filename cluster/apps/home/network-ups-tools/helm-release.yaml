@@ -51,10 +51,6 @@ spec:
                   operator: In
                   values:
                     - "true"
-                # - key: feature.node.kubernetes.io/custom-ups.cp900
-                #   operator: In
-                #   values:
-                #     - "true"
     service:
       main:
         annotations:
@@ -88,13 +84,6 @@ spec:
             vendorid = 0764
             productid = 0601
             serial = ${UPS_SERIAL_1}
-          [ups.cp900]
-            driver = usbhid-ups
-            port = auto
-            desc = "CyberPower CP900 AVR2"
-            vendorid = 0764
-            productid = 0601
-            serial = ${UPS_SERIAL_4}
         upsmon.conf: |
           DEADTIME 25
           MAXAGE 25
