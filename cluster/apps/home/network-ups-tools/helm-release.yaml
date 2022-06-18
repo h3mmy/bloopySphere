@@ -40,7 +40,7 @@ spec:
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
-          # Node Selector Terms are ORed (https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#nodeselectorrequirement-v1-core)
+          # Node Selector Terms are supposedly ORed (https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#nodeselectorrequirement-v1-core)
           nodeSelectorTerms:
             - matchExpressions:
                 - key: feature.node.kubernetes.io/custom-ups.cp1500
@@ -51,10 +51,10 @@ spec:
                   operator: In
                   values:
                     - "true"
-                - key: feature.node.kubernetes.io/custom-ups.cp900
-                  operator: In
-                  values:
-                    - "true"
+                # - key: feature.node.kubernetes.io/custom-ups.cp900
+                #   operator: In
+                #   values:
+                #     - "true"
     service:
       main:
         annotations:
