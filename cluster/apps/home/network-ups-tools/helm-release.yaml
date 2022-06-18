@@ -18,6 +18,10 @@ spec:
       interval: 5m
 
   values:
+    # Future plans
+    # controller:
+    #   type: daemonset
+
     image:
       repository: ghcr.io/k8s-at-home/network-ups-tools
       tag: v2.7.4-2479-g86a32237
@@ -36,9 +40,14 @@ spec:
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
+          # Node Selector Terms are ORed (https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#nodeselectorrequirement-v1-core)
           nodeSelectorTerms:
             - matchExpressions:
                 - key: feature.node.kubernetes.io/custom-ups.cp1500
+                  operator: In
+                  values:
+                    - "true"
+                - key: feature.node.kubernetes.io/custom-ups.cp1500lcd
                   operator: In
                   values:
                     - "true"
@@ -72,6 +81,13 @@ spec:
             vendorid = 0764
             productid = 0501
             serial = ${UPS_SERIAL_0}
+          [ups.cp1500lcd]
+            driver = usbhid-ups
+            port = auto
+            desc = "CyberPower PR1500LCDRT2U UPS"
+            vendorid = 0764
+            productid = 0601
+            serial = ${UPS_SERIAL_1}
           [ups.cp900]
             driver = usbhid-ups
             port = auto
@@ -118,8 +134,8 @@ spec:
         type: hostPath
         # -- The path of the usb ups on the host.
         # -- This will need to be changed every single time it is switched on nodes
-        hostPath: /dev/bus/usb/001/003
+        hostPath: /dev/bus/usb/001/004
         hostPathType: CharDevice
         # -- Optional path for ups to mount in the container.
-        mountPath: /dev/bus/usb/001/003
+        mountPath: /dev/bus/usb/001/004
         readOnly: false

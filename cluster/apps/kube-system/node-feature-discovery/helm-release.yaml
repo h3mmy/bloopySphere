@@ -82,12 +82,21 @@ spec:
                     class: ["03"]
                     vendor: ["0764"]
                     device: ["0501"]
+                    serial: ["${UPS_SERIAL_0}"]
+            - name: "ups.cp1500lcd"
+              matchOn:
+                - usbId:
+                    class: ["03"]
+                    vendor: ["0764"]
+                    device: ["0601"]
+                    serial: ["${UPS_SERIAL_1}"]
             - name: "ups.cp900"
               matchOn:
                 - usbId:
                     class: ["03"]
                     vendor: ["0764"]
                     device: ["0601"]
+                    serial: ["${UPS_SERIAL_4}"]
             - name: "usb.zwave"
               matchOn:
                 - usbId:
