@@ -46,36 +46,36 @@ spec:
       MINIO_PROMETHEUS_AUTH_TYPE: "public"
       MINIO_PROMETHEUS_URL: "http://prometheus-prometheus.monitoring.svc.cluster.local:9090"
       MINIO_PROMETHEUS_JOB_ID: "minio"
-      # MINIO_IDENTITY_OPENID_CONFIG_URL:
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: minio
-      #       key: openid-config-url
-      # MINIO_IDENTITY_OPENID_CLIENT_ID:
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: minio
-      #       key: openid-config-client-id
-      # MINIO_IDENTITY_OPENID_CLIENT_SECRET:
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: minio
-      #       key: openid-config-client-secret
-      # MINIO_IDENTITY_OPENID_CLAIM_NAME:
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: minio
-      #       key: openid-config-claim-name
-      # MINIO_IDENTITY_OPENID_SCOPES:
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: minio
-      #       key: openid-config-scopes
-      # MINIO_IDENTITY_OPENID_REDIRECT_URI:
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: minio
-      #       key: openid-config-callback-uri
+      MINIO_IDENTITY_OPENID_CONFIG_URL:
+        valueFrom:
+          secretKeyRef:
+            name: minio
+            key: openid-config-url
+      MINIO_IDENTITY_OPENID_CLIENT_ID:
+        valueFrom:
+          secretKeyRef:
+            name: minio
+            key: openid-config-client-id
+      MINIO_IDENTITY_OPENID_CLIENT_SECRET:
+        valueFrom:
+          secretKeyRef:
+            name: minio
+            key: openid-config-client-secret
+      MINIO_IDENTITY_OPENID_CLAIM_NAME:
+        valueFrom:
+          secretKeyRef:
+            name: minio
+            key: openid-config-claim-name
+      MINIO_IDENTITY_OPENID_SCOPES:
+        valueFrom:
+          secretKeyRef:
+            name: minio
+            key: openid-config-scopes
+      MINIO_IDENTITY_OPENID_REDIRECT_URI:
+        valueFrom:
+          secretKeyRef:
+            name: minio
+            key: openid-config-callback-uri
 
     args:
       - server
