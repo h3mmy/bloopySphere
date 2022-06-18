@@ -137,5 +137,5 @@ spec:
         hostPath: /dev/bus/usb/001/004
         hostPathType: CharDevice
         # -- Optional path for ups to mount in the container.
-        mountPath: /dev/bus/usb/001/004
+        mountPath: /dev/bus/usb/001/001
         readOnly: false
