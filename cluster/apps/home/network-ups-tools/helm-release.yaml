@@ -134,8 +134,8 @@ spec:
         type: hostPath
         # -- The path of the usb ups on the host.
         # -- This will need to be changed every single time it is switched on nodes
-        hostPath: /dev/bus/usb
-        # hostPathType: CharDevice
+        hostPath: /dev/bus/usb/001/004
+        hostPathType: CharDevice
         # -- Optional path for ups to mount in the container.
-        mountPath: /dev/bus/usb
+        mountPath: /dev/bus/usb/001/004
         readOnly: false
