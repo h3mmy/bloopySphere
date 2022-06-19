@@ -17,7 +17,6 @@ patrickjahns.promtail*
 .terraform
 .terraform.tfstate*
 terraform.tfstate*
-oke/terraform.tfvars
 provision/terraform/oci/oke/terraform.tfvars
 # Sops
 sops.asc
