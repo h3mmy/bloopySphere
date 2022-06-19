@@ -4,8 +4,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: qbittorrent-config-v1
   namespace: downloads
-  labels:
-    k10.kasten.io/backup: "true"
   annotations:
     pv.beta.kubernetes.io/gid: "65537"
 
