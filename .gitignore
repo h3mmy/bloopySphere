@@ -17,6 +17,7 @@ patrickjahns.promtail*
 .terraform
 .terraform.tfstate*
 terraform.tfstate*
+provision/terraform/oci/oke/terraform.tfvars
 # Sops
 sops.asc
 *.agekey
