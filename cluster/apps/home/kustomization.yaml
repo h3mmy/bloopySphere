@@ -6,5 +6,5 @@ resources:
   - zwavejs2mqtt
   - ser2sock
   - network-ups-tools
-  - emqx
+  # - emqx
   - node-red
