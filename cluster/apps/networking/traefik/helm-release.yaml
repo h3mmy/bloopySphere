@@ -111,7 +111,7 @@ spec:
           enabled: true
           options: default
       ldaps:
-        port: 636
+        port: 3636
         expose: true
         exposedPort: 636
         tls:
