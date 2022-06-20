@@ -89,6 +89,19 @@ spec:
           source: |
             # Standardize 'app' index
             .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+        filter_traefik_logs:
+          type: filter
+          inputs:
+            - kubernetes_logs_remap
+          condition:
+            - type: vrl
+              source: .custom_app_name == traefik
+        traefik_logs:
+          type: remap
+          inputs:
+            - filter_traefik_logs
+          source: |
+            . = parse_json!(.message)
         udm_logs_xform:
           type: "remap"
           inputs:
@@ -116,7 +129,7 @@ spec:
         loki_kubernetes:
           type: loki
           inputs:
-            - kubernetes_logs
+            - kubernetes_logs_remap
           endpoint: http://loki:3100
           encoding:
             codec: json
@@ -127,7 +140,7 @@ spec:
           remove_timestamp: true
           labels:
             app: >-
-              {{`{{ kubernetes.pod_labels.app\.kubernetes\.io/name }}`}}
+              {{`{{ custom_app_name }}`}}
             container: >-
               {{`{{ kubernetes.container_name }}`}}
             filename: >-
@@ -140,12 +153,23 @@ spec:
               {{`{{ kubernetes.pod_node_name }}`}}
             pod: >-
               {{`{{ kubernetes.pod_name }}`}}
-            ips: >-
-              {{`{{ kubernetes.pod_ips }}`}}
-            message: >-
-              {{`{{ message }}`}}
+        loki_traefik:
+          type: loki
+          inputs:
+            - traefik_logs
+          endpoint: http://loki:3100
+          encoding:
+            codec: json
+          batch:
+            max_bytes: 2049000
+          out_of_order_action: rewrite_timestamp
+          remove_label_fields: true
+          remove_timestamp: true
+          labels:
+            downstream_status: >-
+              {{`{{ DownStreamStatus }}`}}
             requestHost: >-
-              {{`{{ message.requesthost }}`}}
+              {{`{{ RequestHost }}`}}
         loki_udm:
           type: loki
           inputs:
