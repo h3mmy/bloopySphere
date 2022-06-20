@@ -1,0 +1,16 @@
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Receiver
+metadata:
+  name: bloopyboi
+  namespace: flux-system
+spec:
+  type: gitlab
+  events:
+    - "Tag Push Hook"
+    - "Push Hook"
+  secretRef:
+    name: webhook-token
+  resources:
+    - kind: ImageRepository
+      name: bloopyboi

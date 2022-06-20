@@ -1,0 +1,19 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: webhook-receiver
+  namespace: flux-system
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`notify.${XYZ_DOMAIN}`) && Headers(`X-Gitlab-Token`, `${GITLAB_WEBHOOK_TOKEN}`)
+      services:
+        - name: webhook-receiver
+          port: 80
+      middlewares:
+        - name: chain-no-auth@kubernetescrd
+  tls:
+    secretName: tls.${XYZ_DOMAIN/./-}
