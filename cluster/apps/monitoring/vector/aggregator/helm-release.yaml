@@ -143,7 +143,9 @@ spec:
             ips: >-
               {{`{{ kubernetes.pod_ips }}`}}
             message: >-
-              {{`{{ kubernetes.message }}`}}
+              {{`{{ message }}`}}
+            requestHost: >-
+              {{`{{ message.requesthost }}`}}
         loki_udm:
           type: loki
           inputs:
