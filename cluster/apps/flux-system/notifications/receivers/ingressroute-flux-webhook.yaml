@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`notify.${XYZ_DOMAIN}`) && (Headers(`X-Gitlab-Token`, `${GITLAB_WEBHOOK_TOKEN}`) || Headers(`X-Hub-Signature`, `${GITHUB_WEBHOOK_TOKEN}`))
+      match: Host(`notify.${XYZ_DOMAIN}`) && (Headers(`X-Gitlab-Token`, `${GITLAB_WEBHOOK_TOKEN}`) || Headers(`X-Hub-Signature-256`, `${GITHUB_WEBHOOK_TOKEN_SIGNATURE_256}`))
       services:
         - name: webhook-receiver
           port: 80
