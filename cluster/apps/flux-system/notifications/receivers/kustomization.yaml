@@ -5,3 +5,8 @@ resources:
   - webhook-token.sops.yaml
   - bloopyboi.yaml
   - ingressroute-flux-webhook.yaml
+  - flux-system.yaml
+secretGenerator:
+  - name: github-webhook-token
+    literals:
+      - token=${GITHUB_WEBHOOK_TOKEN}
