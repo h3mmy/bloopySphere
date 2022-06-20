@@ -93,9 +93,7 @@ spec:
           type: filter
           inputs:
             - kubernetes_logs_remap
-          condition:
-            - type: vrl
-              source: .custom_app_name == traefik
+          condition: ".custom_app_name == traefik"
         traefik_logs:
           type: remap
           inputs:
