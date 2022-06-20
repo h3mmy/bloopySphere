@@ -71,7 +71,7 @@ spec:
       - "--providers.kubernetescrd.allowCrossNamespace=true"
     ports:
       traefik:
-        expose: false
+        expose: true
       web:
         address: 80
         http:
