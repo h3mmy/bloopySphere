@@ -8,5 +8,8 @@ resources:
   - flux-system.yaml
 secretGenerator:
   - name: github-webhook-token
+    namespace: flux-system
     literals:
       - token=${GITHUB_WEBHOOK_TOKEN}
+generatorOptions:
+  disableNameSuffixHash: true
