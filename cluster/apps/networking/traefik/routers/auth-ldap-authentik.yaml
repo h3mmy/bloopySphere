@@ -18,10 +18,21 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ak-outpost-external-ldap.auth.svc.cluster.local
+                name: ak-outpost-ldap-outpost.auth
+                port:
+                  number: 389
+    - host: &shost ldaps.${XYZ_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ak-outpost-ldap-outpost.auth
                 port:
                   number: 636
   tls:
     - secretName: tls.ldap-bloopnet
       hosts:
         - *host
+        - *shost
