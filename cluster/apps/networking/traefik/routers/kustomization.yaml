@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - error-pages.yaml
   - classic-traefik.yaml
-#  - media-books.yaml
+  - auth-ldap-authentik.yaml
   - media-radarr-uhd-bypass.yaml
   - media-sonarr-uhd-bypass.yaml
   - media-lidarr-bypass.yaml
