@@ -140,6 +140,10 @@ spec:
               {{`{{ kubernetes.pod_node_name }}`}}
             pod: >-
               {{`{{ kubernetes.pod_name }}`}}
+            ips: >-
+              {{`{{ kubernetes.pod_ips }}`}}
+            message: >-
+              {{`{{ kubernetes.message }}`}}
         loki_udm:
           type: loki
           inputs:
