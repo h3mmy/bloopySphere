@@ -18,7 +18,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ak-outpost-ldap-outpost.auth
+                name: ak-outpost-ldap-outpost
                 port:
                   number: 389
     - host: &shost ldaps.${XYZ_DOMAIN}
@@ -28,7 +28,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ak-outpost-ldap-outpost.auth
+                name: ak-outpost-ldap-outpost
                 port:
                   number: 636
   tls:
