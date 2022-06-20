@@ -14,7 +14,7 @@ spec:
       services:
         - kind: Service
           name: lidarr
-          port: 7878
+          port: 8686
       middlewares:
         - name: networking-rfc1918@kubernetescrd
   tls:
