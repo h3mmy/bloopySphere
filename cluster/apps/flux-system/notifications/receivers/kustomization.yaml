@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - webhook-token.sops.yaml
+  - github-webhook-token.sops.yaml
+  - bloopyboi.yaml
+  - ingressroute-flux-webhook.yaml
+  - flux-system.yaml
+# secretGenerator:
+#   - name: github-webhook-token
+#     namespace: flux-system
+#     literals:
+#       - token=${GITHUB_WEBHOOK_TOKEN}
+# generatorOptions:
+#   disableNameSuffixHash: true

@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://grafana.github.io/helm-charts
       chart: grafana
-      version: 6.30.2
+      version: 6.30.3
       sourceRef:
         kind: HelmRepository
         name: grafana-charts
@@ -51,7 +51,7 @@ spec:
       GF_DATE_FORMATS_INTERVAL_DAY: "DD/MM"
       GF_DATE_FORMATS_INTERVAL_MONTH: "MM-YYYY"
       GF_DATE_FORMATS_INTERVAL_YEAR: "YYYY"
-      VAR_BLOCKY_URL: "http://blocky.network.svc.cluster.local:4000"
+      VAR_BLOCKY_URL: "http://blocky.networking.svc.cluster.local:4000"
       DS_PROMETHEUS: "prometheus"
     adminPassword: "${SECRET_GRAFANA_PASSWORD}"
     grafana.ini:
@@ -224,21 +224,21 @@ spec:
             revision: 5
             datasource: Prometheus
       storage:
-        # Ref: https://grafana.com/grafana/dashboards/2842
-        ceph-cluster:
-          gnetId: 2842
-          revision: 14
-          datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/5336
-        ceph-osd:
-          gnetId: 5336
-          revision: 5
-          datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/5342
-        ceph-pools:
-          gnetId: 5342
-          revision: 5
-          datasource: Prometheus
+        # # Ref: https://grafana.com/grafana/dashboards/2842
+        # ceph-cluster:
+        #   gnetId: 2842
+        #   revision: 14
+        #   datasource: Prometheus
+        # # Ref: https://grafana.com/grafana/dashboards/5336
+        # ceph-osd:
+        #   gnetId: 5336
+        #   revision: 5
+        #   datasource: Prometheus
+        # # Ref: https://grafana.com/grafana/dashboards/5342
+        # ceph-pools:
+        #   gnetId: 5342
+        #   revision: 5
+        #   datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/13502
         minio:
           gnetId: 13502

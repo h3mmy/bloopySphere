@@ -17,6 +17,6 @@ resources:
   - rook-ceph.yaml
   - home.yaml
   - blogs.yaml
-  - kasten-io.yaml
+  # - kasten-io.yaml
   - system-upgrade.yaml
   - emqx-operator-system.yaml

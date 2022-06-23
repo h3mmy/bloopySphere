@@ -1,14 +1,38 @@
 ---
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRouteTCP
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: ldap-authentik-route
+  name: ldap-authentik-ingress
   namespace: auth
+  annotations:
+    traefik.ingress.kubernetes.io/service.serversscheme: tcp
+    traefik.ingress.kubernetes.io/router.entrypoints: ldaps
+    traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
+    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
-  entryPoints:
-    - websecure
-  routes:
-    - match: HostSNI(`ldap.${XYZ_DOMAIN}`)
-      services:
-        - name: ak-outpost-external-ldap.auth.svc.cluster.local
-          port: 636
+  rules:
+    - host: &host ldap.${XYZ_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ak-outpost-ldap-outpost
+                port:
+                  number: 389
+    - host: &shost ldaps.${XYZ_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ak-outpost-ldap-outpost
+                port:
+                  number: 636
+  tls:
+    - secretName: tls.ldap-bloopnet
+      hosts:
+        - *host
+        - *shost

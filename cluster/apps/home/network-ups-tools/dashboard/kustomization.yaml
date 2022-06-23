@@ -13,5 +13,7 @@ generatorOptions:
   disableNameSuffixHash: true
   annotations:
     kustomize.toolkit.fluxcd.io/substitute: disabled
+    grafana_folder: power
   labels:
     grafana_dashboard: "true"
+    grafana_folder: power

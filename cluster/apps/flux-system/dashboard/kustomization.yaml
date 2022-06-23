@@ -13,7 +13,7 @@ generatorOptions:
   disableNameSuffixHash: true
   annotations:
     kustomize.toolkit.fluxcd.io/substitute: disabled
-    grafana_folder: Flux
+    grafana_folder: flux
   labels:
-    grafana_folder: Flux
+    grafana_folder: flux
     grafana_dashboard: "true"

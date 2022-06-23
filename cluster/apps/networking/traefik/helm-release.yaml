@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: traefik
+  name: &name traefik
   namespace: networking
 spec:
   interval: 5m
@@ -25,6 +25,8 @@ spec:
     deployment:
       kind: Deployment
       replicas: 2
+    podSecurityPolicy:
+      enabled: true
     service:
       enabled: true
       type: LoadBalancer
@@ -110,6 +112,13 @@ spec:
         tls:
           enabled: true
           options: default
+      ldaps:
+        port: 8636
+        expose: true
+        exposedPort: 636
+        tls:
+          enabled: true
+          options: default
       metrics:
         port: 8082
         expose: true
@@ -124,14 +133,27 @@ spec:
         maxVersion: VersionTLS13
     pilot:
       enabled: false
+
     experimental:
       http3:
         enabled: true
       plugins:
         enabled: false
+
     resources:
       requests:
         memory: 100Mi
         cpu: 100m
       limits:
         memory: 600Mi
+
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - *name
+            topologyKey: kubernetes.io/hostname
