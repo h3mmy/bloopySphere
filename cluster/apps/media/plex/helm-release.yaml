@@ -24,7 +24,7 @@ spec:
   values:
     image:
       repository: ghcr.io/k8s-at-home/plex # {"$imagepolicy": "flux-system:plex:name"}
-      tag: v1.27.0.5897-3940636f2 # {"$imagepolicy": "flux-system:plex:tag"}
+      tag: v1.27.1.5916-6b0e31a64 # {"$imagepolicy": "flux-system:plex:tag"}
       imagePullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"
