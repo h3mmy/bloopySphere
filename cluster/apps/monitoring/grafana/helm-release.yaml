@@ -217,12 +217,12 @@ spec:
         blocky-query:
           url: https://raw.githubusercontent.com/0xERR0R/blocky/development/docs/blocky-query-grafana.json
           datasource: MariaDB Blocky
-        calico:
-          # Ref: https://grafana.com/grafana/dashboards/12175
-          calico-felix:
-            gnetId: 12175
-            revision: 5
-            datasource: Prometheus
+      calico:
+        # Ref: https://grafana.com/grafana/dashboards/12175
+        calico-felix:
+          gnetId: 12175
+          revision: 5
+          datasource: Prometheus
       storage:
         # # Ref: https://grafana.com/grafana/dashboards/2842
         # ceph-cluster:
