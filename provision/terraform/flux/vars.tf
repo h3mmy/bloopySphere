@@ -31,3 +31,9 @@ variable "target_path" {
   default     = "staging-cluster"
   description = "flux sync target path"
 }
+
+variable "kubeconfig_path" {
+  type         = string
+  default      = "~/.kube/config"
+  description  = "Path to kubeconfig"
+}
