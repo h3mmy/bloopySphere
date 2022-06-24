@@ -82,6 +82,15 @@
       "datasourceTemplate": "helm"
     },
     {
+    description: "Raw GitHub URL Regex manager",
+    fileMatch: ["cluster/.+\\.ya?ml$", "k8s/.+\\.ya?ml$"],
+    matchStrings: [
+      "https:\\/\\/raw.githubusercontent.com\\/(?<depName>[\\w\\d\\-_]+\\/[\\w\\d\\-_]+)\\/(?<currentValue>[\\w\\d\\.\\-_]+)\\/.*",
+    ],
+    datasourceTemplate: "github-releases",
+    versioningTemplate: "semver",
+  },
+    {
       "description": "Process CRD dependencies",
       "fileMatch": ["cluster/crds/.+\\.ya?ml$"],
       "matchStrings": [
