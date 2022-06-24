@@ -1,0 +1,1296 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 93,
+    "iteration": 1628091905619,
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": false,
+        "title": "Github",
+        "tooltip": "",
+        "type": "link",
+        "url": "https://github.com/0xERR0R/blocky/"
+      }
+    ],
+    "panels": [
+      {
+        "datasource": "Prometheus",
+        "description": "Enable od disable blocking",
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 0,
+          "y": 0
+        },
+        "id": 4,
+        "options": {
+          "content": "<style>\n\n.blocky_btn {\n    border: none;\n  cursor: pointer; \n    padding: 12px;\n  font-size: 16px;\n  min-width: 100px\n}\n\n.blocky_greenbtn { \n  background-color: #4CAF50;\n  color: white;\n}\n\n.blocky_redbtn { \n  background-color: #AF504C;\n  color: white;\n}\n\n\n.blocky_alert {\n  font-size: 14px\n}\n</style>\n<div class=\"blocky_alert blocky_alert-warning fade in\">\n  <a href=\"#\" class=\"close\" data-dismiss=\"blocky_alert\" aria-label=\"close\" style=\"text-decoration:none\">&times;</a>Done!\n</div>\n<div>\n   <button class=\"blocky_btn blocky_greenbtn\" onclick=\"blocky_status_enable()\">On</button>\n   <button class=\"blocky_btn blocky_redbtn\" onclick=\"blocky_status_disable5m()\">Off 5m</button>\n   <button class=\"blocky_btn blocky_redbtn\" onclick=\"blocky_status_disable30m()\">Off 30m</button>\n<div>\n\n\n<script type=\"text/javascript\">\n\nfunction blocky_status_disable() {\n  blocky_status_switch(false, 0)\n}\n\nfunction blocky_status_disable5m() {\n  blocky_status_switch(false, 5*60)\n}\n\nfunction blocky_status_disable30m() {\n  blocky_status_switch(false, 30*60)\n}\n\nfunction blocky_status_enable() {\n  blocky_status_switch(true, 0)\n}\n\nfunction blocky_status_switch(enable, duration) {\n  var url = '$blocky_url';\n  op = enable ? 'enable' : 'disable?duration='+duration+\"s\"\n  $.get(url + '/api/blocking/'+op, function(data) {\n    showAlert()\n  })\n   .fail(function() {\n    alert( \"error\" );\n  })\n}\n\nvar showAlert = function() {\n\t// first show the alert\n  $('.blocky_alert').show().fadeTo(500, 1);\n  \n  // Now set a timeout to hide it\n  window.setTimeout(function() {\n    $(\".blocky_alert\").fadeTo(500, 0).slideUp(500, function() {\n      $(this).hide();\n    });\n  }, 3000);\n}\n\n// start with the alert hidden\n$('.blocky_alert').hide();\n\n</script>",
+          "mode": "html"
+        },
+        "pluginVersion": "8.0.5",
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Blocking status",
+        "transparent": true,
+        "type": "text"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "description": "current service state",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "index": 0,
+                    "text": "down"
+                  }
+                },
+                "type": "value"
+              },
+              {
+                "options": {
+                  "from": 1,
+                  "result": {
+                    "color": "semi-dark-green",
+                    "index": 1,
+                    "text": "up"
+                  },
+                  "to": 99999
+                },
+                "type": "range"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#d44a3a",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 1
+                },
+                {
+                  "color": "semi-dark-green",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 2,
+          "x": 4,
+          "y": 0
+        },
+        "id": 6,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.0.5",
+        "targets": [
+          {
+            "expr": "sum(up{job=\"blocky\"})",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "State",
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "description": "Is blocking enabled?",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "text": "off"
+                  },
+                  "1": {
+                    "text": "on"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#d44a3a",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 1
+                },
+                {
+                  "color": "#299c46",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 2,
+          "x": 6,
+          "y": 0
+        },
+        "id": 10,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "value"
+        },
+        "pluginVersion": "8.0.5",
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "blocky_blocking_enabled",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Blocking",
+        "transformations": [
+          {
+            "id": "seriesToRows",
+            "options": {}
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "description": "Number of occured errors",
+        "fieldConfig": {
+          "defaults": {
+            "decimals": 0,
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                },
+                {
+                  "color": "light-red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 8,
+          "y": 0
+        },
+        "id": 12,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.0.5",
+        "targets": [
+          {
+            "expr": "sum(increase(blocky_error_total[$__range]))",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Error count",
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "description": "Percentage of blocked queries",
+        "fieldConfig": {
+          "defaults": {
+            "decimals": 2,
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 1,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 11,
+          "y": 0
+        },
+        "id": 14,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.0.5",
+        "targets": [
+          {
+            "expr": "sum(increase(blocky_response_total{response_type=\"BLOCKED\"}[$__range])) / sum(increase(blocky_query_total[$__range])) ",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Queries blocked",
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "Prometheus",
+        "description": "",
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 9,
+          "w": 10,
+          "x": 14,
+          "y": 0
+        },
+        "hiddenSeries": false,
+        "id": 16,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": false,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "8.0.5",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "sum(rate(blocky_query_total[5m])) * 60",
+            "format": "time_series",
+            "instant": false,
+            "interval": "",
+            "legendFormat": " ",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Request rate",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "transparent": true,
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:540",
+            "format": "short",
+            "label": "avg requests / min",
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "$$hashKey": "object:541",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "description": "Average query response time for all query types",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "semi-dark-blue",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 4,
+          "x": 0,
+          "y": 4
+        },
+        "id": 42,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.0.5",
+        "targets": [
+          {
+            "expr": "sum(increase(blocky_request_duration_ms_sum[$__range])) / sum(increase(blocky_request_duration_ms_count[$__range]))",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Avg response time",
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "description": "Number of all queries. Shows the last value",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "semi-dark-blue",
+              "mode": "fixed"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 4,
+          "x": 4,
+          "y": 4
+        },
+        "hideTimeOverride": true,
+        "id": 22,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "value"
+        },
+        "pluginVersion": "8.0.5",
+        "targets": [
+          {
+            "expr": "ceil(sum(increase(blocky_query_total[$__range]))) ",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Query Count Total",
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "description": "Number of blacklist entries",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "semi-dark-blue",
+              "mode": "fixed"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 3,
+          "x": 8,
+          "y": 4
+        },
+        "id": 20,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.0.5",
+        "targets": [
+          {
+            "expr": "sum(blocky_blacklist_cache) / sum(up{job=\"blocky\"})",
+            "instant": false,
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Blacklist entries total",
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "decimals": 2,
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 3,
+          "x": 11,
+          "y": 4
+        },
+        "id": 18,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.0.5",
+        "targets": [
+          {
+            "expr": "sum(go_memstats_sys_bytes{job=\"blocky\"})/sum(up{job=\"blocky\"})",
+            "instant": false,
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Memory allocated",
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "cards": {
+          "cardPadding": null,
+          "cardRound": null
+        },
+        "color": {
+          "cardColor": "#96D98D",
+          "colorScale": "sqrt",
+          "colorScheme": "interpolateYlOrBr",
+          "exponent": 0.5,
+          "mode": "opacity"
+        },
+        "dataFormat": "tsbuckets",
+        "datasource": "Prometheus",
+        "description": "",
+        "gridPos": {
+          "h": 11,
+          "w": 11,
+          "x": 0,
+          "y": 9
+        },
+        "heatmap": {},
+        "hideZeroBuckets": false,
+        "highlightCards": true,
+        "id": 24,
+        "legend": {
+          "show": true
+        },
+        "reverseYBuckets": false,
+        "targets": [
+          {
+            "expr": "sum(increase(blocky_request_duration_ms_bucket{response_type=\"RESOLVED\"}[$__range])) by (le)",
+            "format": "heatmap",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "{{le}}",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "request duration (upstream)",
+        "tooltip": {
+          "show": true,
+          "showHistogram": false
+        },
+        "transparent": true,
+        "type": "heatmap",
+        "xAxis": {
+          "show": true
+        },
+        "xBucketNumber": null,
+        "xBucketSize": null,
+        "yAxis": {
+          "decimals": null,
+          "format": "ms",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true,
+          "splitFactor": null
+        },
+        "yBucketBound": "auto",
+        "yBucketNumber": null,
+        "yBucketSize": null
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "decimals": 0,
+            "mappings": [],
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 6,
+          "x": 11,
+          "y": 9
+        },
+        "id": 36,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 3,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "table",
+            "placement": "right",
+            "values": [
+              "value",
+              "percent"
+            ]
+          },
+          "pieType": "donut",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "tooltip": {
+            "mode": "single"
+          }
+        },
+        "targets": [
+          {
+            "expr": " sort_desc(sum by (reason) (ceil(increase(blocky_response_total[$__range]))))",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "{{reason}}",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Response Reasons",
+        "transparent": true,
+        "type": "piechart"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "decimals": 0,
+            "mappings": [],
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 5,
+          "x": 18,
+          "y": 9
+        },
+        "id": 38,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 3,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "table",
+            "placement": "right",
+            "values": [
+              "value",
+              "percent"
+            ]
+          },
+          "pieType": "donut",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "tooltip": {
+            "mode": "single"
+          }
+        },
+        "pluginVersion": "6.6.2",
+        "targets": [
+          {
+            "expr": "sort_desc(sum by (client) (ceil(increase(blocky_query_total[$__range]))))",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "{{ client }}",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Query per Client",
+        "transparent": true,
+        "type": "piechart"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "decimals": 0,
+            "mappings": [],
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 5,
+          "x": 0,
+          "y": 20
+        },
+        "id": 30,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 3,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "table",
+            "placement": "right",
+            "values": [
+              "value",
+              "percent"
+            ]
+          },
+          "pieType": "donut",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "tooltip": {
+            "mode": "single"
+          }
+        },
+        "pluginVersion": "6.6.2",
+        "targets": [
+          {
+            "expr": " sort_desc(sum by (type) (ceil(increase(blocky_query_total[$__range]))))",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "{{ type }}",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Query by type",
+        "transparent": true,
+        "type": "piechart"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "decimals": 0,
+            "mappings": [],
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 5,
+          "x": 6,
+          "y": 20
+        },
+        "id": 32,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 3,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "table",
+            "placement": "right",
+            "values": [
+              "value"
+            ]
+          },
+          "pieType": "donut",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "tooltip": {
+            "mode": "single"
+          }
+        },
+        "pluginVersion": "6.6.2",
+        "targets": [
+          {
+            "expr": "topk(1, blocky_blacklist_cache) by (group)",
+            "instant": true,
+            "legendFormat": "{{ group }}",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Blacklist by group",
+        "transparent": true,
+        "type": "piechart"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "decimals": 0,
+            "mappings": [],
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 6,
+          "x": 11,
+          "y": 20
+        },
+        "id": 34,
+        "interval": "",
+        "links": [],
+        "maxDataPoints": 3,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "table",
+            "placement": "right",
+            "values": [
+              "value",
+              "percent"
+            ]
+          },
+          "pieType": "donut",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "tooltip": {
+            "mode": "single"
+          }
+        },
+        "targets": [
+          {
+            "expr": " sort_desc(sum by (response_type) (ceil(increase(blocky_response_total[$__range]))))",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "{{response_type}}",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Response Type",
+        "transparent": true,
+        "type": "piechart"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "decimals": 0,
+            "mappings": [],
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 5,
+          "x": 18,
+          "y": 20
+        },
+        "id": 40,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 3,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "table",
+            "placement": "right",
+            "values": [
+              "value",
+              "percent"
+            ]
+          },
+          "pieType": "donut",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "tooltip": {
+            "mode": "single"
+          }
+        },
+        "targets": [
+          {
+            "expr": " sort_desc(sum by (response_code) (ceil(increase(blocky_response_total[$__range]))))",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "{{response_code}}",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Response status",
+        "transparent": true,
+        "type": "piechart"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 30,
+    "style": "dark",
+    "tags": [
+      "Blocky",
+      "DNS",
+      "Networking",
+      "Security"
+    ],
+    "templating": {
+      "list": [
+        {
+          "description": null,
+          "error": null,
+          "hide": 2,
+          "label": null,
+          "name": "blocky_url",
+          "query": "https://blocky.networking",
+          "skipUrlSync": false,
+          "type": "constant"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-24h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Blocky",
+    "uid": "vEIa8Pm7z",
+    "version": 17
+  }
