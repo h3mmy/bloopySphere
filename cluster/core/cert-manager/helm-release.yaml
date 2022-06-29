@@ -50,4 +50,4 @@ spec:
       enabled: true
       serviceMonitor:
         enabled: true
-        prometheusInstance: monitoring
+        # prometheusInstance: monitoring
