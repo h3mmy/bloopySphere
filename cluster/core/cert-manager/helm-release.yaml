@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: cert-manager
-  namespace: cert-manager
+  namespace: &namespace cert-manager
 spec:
   interval: 5m
   chart:
@@ -37,6 +37,11 @@ spec:
     installCRDs: false
     webhook:
       enabled: true
+    podSecurityPolicy:
+      enabled: true
+    startupapicheck:
+      enabled: true
+    
     extraArgs:
       - --dns01-recursive-nameservers=1.1.1.1:53,1.1.0.0:53
     #  - --dns01-recursive-nameservers-only
@@ -50,4 +55,5 @@ spec:
       enabled: true
       serviceMonitor:
         enabled: true
-        prometheusInstance: monitoring
+        namespace: *namespace
+        # prometheusInstance: monitoring
