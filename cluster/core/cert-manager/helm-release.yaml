@@ -37,6 +37,11 @@ spec:
     installCRDs: true
     webhook:
       enabled: true
+    podSecurityPolicy:
+      enabled: true
+    startupapicheck:
+      enabled: true
+    
     extraArgs:
       - --dns01-recursive-nameservers=1.1.1.1:53,1.1.0.0:53
     #  - --dns01-recursive-nameservers-only
