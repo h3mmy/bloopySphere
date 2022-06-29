@@ -18,4 +18,5 @@ resources:
   - rook-ceph
   - home
   - blogs
+  - cert-manager
   # - database

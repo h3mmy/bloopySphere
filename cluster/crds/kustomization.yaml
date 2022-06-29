@@ -7,4 +7,5 @@ resources:
   - external-snapshotter
   - external-dns
   - system-upgrade-controller
+  - cert-manager
   # - multus

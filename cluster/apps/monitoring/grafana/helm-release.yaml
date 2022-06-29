@@ -252,9 +252,9 @@ spec:
         #   datasource: Prometheus
       networking:
         # Ref: https://grafana.com/grafana/dashboards/15513
-        cert-manager:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
-          datasource: Prometheus
+        # cert-manager:
+        #   url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
+        #   datasource: Prometheus
         metallb:
           url: https://raw.githubusercontent.com/jr0dd/grafana-dashboards/main/metallb.json
           datasource: Prometheus
