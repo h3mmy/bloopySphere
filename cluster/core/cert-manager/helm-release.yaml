@@ -57,4 +57,4 @@ spec:
         enabled: true
         namespace: *namespace
         honorLabels: true
-        # prometheusInstance: monitoring
+        prometheusInstance: monitoring
