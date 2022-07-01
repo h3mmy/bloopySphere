@@ -52,7 +52,7 @@ spec:
         - "1.1.1.1"
         - "1.1.0.0"
     prometheus:
-      enabled: false
+      enabled: true
       serviceMonitor:
         enabled: false
         namespace: *namespace
