@@ -18,10 +18,12 @@ spec:
       interval: 5m
 
   install:
+    crds: CreateReplace
     disableWait: true
     remediation:
       retries: 7
   upgrade:
+    crds: CreateReplace
     remediation:
       retries: 7
 
@@ -35,7 +37,7 @@ spec:
 
     resources:
       limits:
-        cpu: 100m
+        cpu: 110m
         memory: 100Mi
       requests:
         cpu: 100m
