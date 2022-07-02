@@ -9,4 +9,3 @@ resources:
   - rook-ceph
   - kubegres
   - tigera-operator
-  - emqx-operator
