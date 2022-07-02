@@ -3,15 +3,15 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: home
 configMapGenerator:
-  - name: emqx-monitoring-dashboard
+  - name: emqx-grafana-dashboard
     files:
-      - emqx-monitoring-dashboard.json=https://raw.githubusercontent.com/emqx/emqx-prometheus/master/grafana_template/EMQ_Dashboard.json
-  - name: emqx-monitoring-summary
+      - emqx-grafana-dashboard.json=https://raw.githubusercontent.com/emqx/emqx-prometheus/master/grafana_template/EMQ_Dashboard.json
+  - name: emqx-grafana-summary
     files:
-      - emqx-monitoring-summary.json=https://raw.githubusercontent.com/emqx/emqx-prometheus/raw/master/grafana_template/EMQ.json
-  - name: emqx-monitoring-erlang-vm
+      - emqx-grafana-summary.json=https://raw.githubusercontent.com/emqx/emqx-prometheus/master/grafana_template/EMQ.json
+  - name: emqx-grafana-erlang-vm
     files:
-      - emqx-monitoring-erlang-vm.json=https://raw.githubusercontent.com/emqx/emqx-prometheus/raw/master/grafana_template/ErlangVM.json
+      - emqx-grafana-erlang-vm.json=https://raw.githubusercontent.com/emqx/emqx-prometheus/master/grafana_template/ErlangVM.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
