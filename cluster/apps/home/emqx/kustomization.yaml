@@ -4,5 +4,5 @@ kind: Kustomization
 resources:
   # - emqx-broker.yaml
   # - prometheus-exporter.yaml
-  - dashboard
-  # - helm-release.yaml
+  # - dashboard
+  - helm-release.yaml
