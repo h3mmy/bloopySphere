@@ -5,7 +5,7 @@ namespace: home
 configMapGenerator:
   - name: emqx-monitoring-dashboard
     files:
-      - emqx-monitoring-dashboard.json=https://raw.githubusercontent.com/emqx/emqx-prometheus/raw/master/grafana_template/EMQ_Dashboard.json
+      - emqx-monitoring-dashboard.json=https://raw.githubusercontent.com/emqx/emqx-prometheus/master/grafana_template/EMQ_Dashboard.json
   - name: emqx-monitoring-summary
     files:
       - emqx-monitoring-summary.json=https://raw.githubusercontent.com/emqx/emqx-prometheus/raw/master/grafana_template/EMQ.json
