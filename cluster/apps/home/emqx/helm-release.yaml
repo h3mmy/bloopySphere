@@ -66,6 +66,7 @@ spec:
       {emqx_mod_topic_metrics, true}.
     metrics:
       enabled: true
+      type: prometheus
     persistence:
       enabled: false
     affinity:
