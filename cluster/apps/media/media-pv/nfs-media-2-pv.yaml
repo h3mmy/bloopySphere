@@ -13,7 +13,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: 192.168.55.55
-    path: "/volume2/Data2"
+    path: "/volume3/Data2"
   mountOptions:
     - nfsvers=4.1
     - tcp
