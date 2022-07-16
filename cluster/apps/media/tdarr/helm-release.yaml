@@ -78,7 +78,7 @@ spec:
       media2:
         enabled: true
         existingClaim: nfs-media-2-pvc
-        mountPath: /volume3/Data2
+        mountPath: /volume1/Data2
         readOnly: false
     service:
       main:
