@@ -60,7 +60,6 @@
 
 - name: flux/upgrade
   color: ededed
-  description:
 
 # Renovate
 - name: renovate/ansible
