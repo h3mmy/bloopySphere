@@ -40,7 +40,8 @@
           "overseerr",
           "blocky",
           "uptimerobot-prometheus",
-          "kube-prometheus-stack"
+          "kube-prometheus-stack",
+          "redis"
         ]
       },
       {
