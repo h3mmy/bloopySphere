@@ -77,7 +77,11 @@ spec:
         readOnly: false
       media2:
         enabled: true
-        existingClaim: nfs-media-2-pvc
+        type: custom
+        volumeSpec:
+          nfs:
+            path: /volume1/Data2
+            server: ${NAS_ADDRESS}
         mountPath: /volume1/Data2
         readOnly: false
     service:

@@ -10,7 +10,7 @@ resources:
   - radarr-uhd
   - bazarr
   # - lidarr
-  - tdarr
+  # - tdarr
   - sonarr-uhd
   - readarr-audio
   - mylar

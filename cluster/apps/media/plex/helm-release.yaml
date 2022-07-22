@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: plex
-      version: 6.3.3
+      version: 6.3.4
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -150,7 +150,7 @@ spec:
         enabled: true
         image:
           repository: grafana/promtail
-          tag: 2.6.0
+          tag: 2.6.1
         loki: http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push
         logs:
           - name: promtail/plex
