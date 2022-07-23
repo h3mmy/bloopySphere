@@ -2,13 +2,10 @@
 # Semantic Type
 - name: type/major
   color: ededed
-  description:
 - name: type/minor
   color: ededed
-  description:
 - name: type/patch
   color: ededed
-  description:
 
 # Uncategorized
 - name: chore
