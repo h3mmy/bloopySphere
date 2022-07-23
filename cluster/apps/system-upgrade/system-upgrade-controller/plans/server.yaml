@@ -7,7 +7,7 @@ metadata:
 spec:
   serviceAccountName: system-upgrade
   concurrency: 1
-  # renovate: datasource=github-releases
+  # renovate: datasource=github-releases  depName=k3s-io/k3s
   version: v1.24.3+k3s1
   cordon: true
   nodeSelector:
