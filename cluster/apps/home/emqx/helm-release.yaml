@@ -44,6 +44,8 @@ spec:
       EMQX_AUTH__USER__5__USERNAME: ${EMQX_USER_5_USERNAME}
       EMQX_AUTH__USER__6__USERNAME: ${EMQX_METRICS_USER}
       EMQX_AUTH__USER__6__PASSWORD: ${EMQX_METRICS_PASSWORD}
+      EMQX_AUTH__USER__7__USERNAME: ${EMQX_USER_6_USERNAME}
+      EMQX_AUTH__USER__7__PASSWORD: ${EMQX_USER_6_PASSWORD}
     emqxAclConfig: >
       {allow, {user, "dashboard"}, subscribe, ["$SYS/#"]}.
       {allow, {ipaddr, "127.0.0.1"}, pubsub, ["$SYS/#", "#"]}.
