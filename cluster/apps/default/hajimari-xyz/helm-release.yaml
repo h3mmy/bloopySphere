@@ -53,6 +53,7 @@ spec:
         - name: Tyg3r Blog
           url: "https://tyg3r.${XYZ_DOMAIN}"
           icon: post
+        - name: "https://readarr.${SECRET_DOMAIN}"
       groups:
         - name: Design
           links:

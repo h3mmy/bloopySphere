@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://grafana.github.io/helm-charts
       chart: grafana
-      version: 6.31.1
+      version: 6.32.9
       sourceRef:
         kind: HelmRepository
         name: grafana-charts
@@ -217,7 +217,6 @@ spec:
         blocky-query:
           url: https://raw.githubusercontent.com/0xERR0R/blocky/development/docs/blocky-query-grafana.json
           datasource: MariaDB Blocky
-      calico:
         # Ref: https://grafana.com/grafana/dashboards/12175
         calico-felix:
           gnetId: 12175
@@ -252,9 +251,9 @@ spec:
         #   datasource: Prometheus
       networking:
         # Ref: https://grafana.com/grafana/dashboards/15513
-        cert-manager:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
-          datasource: Prometheus
+        # cert-manager:
+        #   url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
+        #   datasource: Prometheus
         metallb:
           url: https://raw.githubusercontent.com/jr0dd/grafana-dashboards/main/metallb.json
           datasource: Prometheus

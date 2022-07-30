@@ -1,9 +1,9 @@
 ---
 collections:
   - name: community.general
-    version: 5.2.0
+    version: 5.3.0
   - name: community.sops
-    version: 1.2.2
+    version: 1.2.3
   - name: ansible.posix
     version: 1.4.0
   - name: kubernetes.core
@@ -12,7 +12,7 @@ roles:
   - src: xanmanning.k3s
     version: v3.2.0
   - src: patrickjahns.promtail
-    version: 1.16.0
+    version: 1.18.0
   - src: geerlingguy.pip
     version: 2.1.0
   - src: geerlingguy.docker

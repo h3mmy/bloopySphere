@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: ghcr.io/k8s-at-home/bazarr
-      tag: v1.0.4
+      tag: v1.1.0
     env:
       TZ: ${TZ}
     ingress:
@@ -65,7 +65,11 @@ spec:
         readOnly: false
       media-2:
         enabled: true
-        existingClaim: nfs-media-2-pvc
+        type: custom
+        volumeSpec:
+          nfs:
+            path: /volume1/Data2
+            server: ${NAS_ADDRESS}
         mountPath: /Data2
         readOnly: false
       backup:

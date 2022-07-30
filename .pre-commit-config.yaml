@@ -3,7 +3,7 @@ fail_fast: false
 repos:
 
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.26.3
+    rev: v1.27.1
     hooks:
       - args:
           - --config-file
@@ -18,7 +18,7 @@ repos:
       - id: mixed-line-ending
 
   - repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.2.0
+    rev: v1.3.0
     hooks:
       - id: remove-crlf
       - id: remove-tabs

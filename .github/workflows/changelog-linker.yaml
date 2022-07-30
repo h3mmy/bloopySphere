@@ -1,0 +1,70 @@
+---
+name: Changelog Linker
+
+on: # yamllint disable-line rule:truthy
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+
+env:
+  # Currently no way to detect automatically
+  DEFAULT_BRANCH: main
+  BOT_USERNAME: "bloopy-boi[bot]"
+
+jobs:
+  # detect-file-changes:
+  #   if: contains(github.event.pull_request.labels.*.name, 'renovate')
+  #   name: Detect File Changes
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #     - name: Generate Token
+  #       uses: tibdex/github-app-token@v1
+  #       id: generate-token
+  #       with:
+  #         app_id: ${{ secrets.APP_ID }}
+  #         private_key: ${{ secrets.APP_PRIVATE_KEY }}
+  #     - name: Checkout default branch
+  #       uses: actions/checkout@v3
+  #       with:
+  #         ref: "${{ env.DEFAULT_BRANCH }}"
+  #         path: default
+
+  get-custom-release-notes:
+    if: contains(github.event.pull_request.title, 'authentik')
+    name: Get Release Notes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Token
+        uses: tibdex/github-app-token@v1
+        id: generate-token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+      - uses: actions-ecosystem/action-regex-match@v2
+        id: regex-match
+        with:
+          text: ${{ github.event.pull_request.title }}
+          regex: '^.*to v?(?<major>[\d]+)\.(?<minor>[\d]+).(?<patch>[\d]+).*$'
+      - name: Find Comment
+        uses: peter-evans/find-comment@v2
+        id: find-comment
+        with:
+          issue-number: "${{ github.event.pull_request.number }}"
+          comment-author: "${{ env.BOT_USERNAME }}"
+          body-includes: "External Release Notes"
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          token: "${{ steps.generate-token.outputs.token }}"
+          comment-id: "${{ steps.find-comment.outputs.comment-id }}"
+          issue-number: "${{ github.event.pull_request.number }}"
+          body: |
+            External Release Notes
+            Object: Authentik
+            URL: https://goauthentik.io/docs/releases/${{ steps.regex-match.group1 }}.${{ steps.regex-match.group2 }}
+          edit-mode: replace

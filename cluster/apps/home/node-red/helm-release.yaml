@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: node-red
-      version: 10.1.2
+      version: 10.2.0
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -46,7 +46,7 @@ spec:
       nameOverride: *app
     image:
       repository: ghcr.io/k8s-at-home/node-red
-      tag: v2.2.2
+      tag: v3.0.1
     env:
       TZ: "${TZ}"
       FLOWS: flows.json
@@ -77,6 +77,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: tls.node-red
     persistence:
       config:
         enabled: true

@@ -26,7 +26,7 @@ spec:
   values:
     image:
       repository: ghcr.io/k8s-at-home/radarr-nightly
-      tag: v4.2.0.6379
+      tag: v4.2.1.6450
     env:
       TZ: "${TZ}"
     ingress:
@@ -72,7 +72,7 @@ spec:
       exporter:
         image:
           repository: ghcr.io/onedr0p/exportarr
-          tag: v1.0.0
+          tag: v1.1.0
         env:
           port: 9794
           additionalMetrics: true
