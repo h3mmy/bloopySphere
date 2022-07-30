@@ -6,6 +6,8 @@
     mode: "0440"
 
 - name: Add additional user SSH public keys
+  tags:
+    - ssh
   ansible.posix.authorized_key:
     user: "{{ ansible_user }}"
     key: "{{ item }}"
