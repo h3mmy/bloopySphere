@@ -5,6 +5,7 @@ timezone: "America/Detroit"
 os_ssh_authorized_keys:
   - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHsbHLw1GQzJ3GvaFgQhggr8kkzEQ5MLowJIMHmHInPE JuiceSSH"
   - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL/lJato/VZB2FM5hEV0ajq18fLitptwrKWcJw4qtzQB Barry"
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJYfYVH53Vizb8g90EpfYiVbfrK2bdbx03F++dn9SDc9 zee@ipad"
   - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBUXlJc4gKdwtQgglwT6h0pNt4Kq5c1ZGpwih/msj1bU h3mmy@Nitro-5"
   - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIv4TK4F2CFq5ujJrXHx4g7x83OWl+9OnVV7ZvTMOfKa h3mmy@Nitro-5"
   - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGbB9pnsw8aY4bgLpcCHvn0VtvUQf85hkAjO93MVT6dH h3mmy@Nitro-5"

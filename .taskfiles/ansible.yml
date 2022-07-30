@@ -40,6 +40,12 @@ tasks:
     cmds:
       - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/os.yml"
 
+  playbook:os-ssh:
+    desc: Update SSH Keys for all the k8s nodes
+    dir: provision/ansible
+    cmds:
+      - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/os.yml --tags ssh"
+
   playbook:k3s-install:
     desc: Install Kubernetes on the nodes
     dir: provision/ansible
