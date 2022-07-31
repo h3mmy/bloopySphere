@@ -31,7 +31,8 @@ resources:
   - jupyterhub-charts.yaml
   - codecentric-charts.yaml
   - vmware-tanzu-charts.yaml
-  - kasten-charts.yaml
+  # - kasten-charts.yaml
   - k8s-gateway-charts.yaml
   - emberstack-charts.yaml
   - vector-charts.yaml
+  - mysql-charts.yaml

@@ -7,4 +7,5 @@ resources:
   - external-snapshotter
   - external-dns
   - cert-manager
+  - mysql-crds
   # - multus

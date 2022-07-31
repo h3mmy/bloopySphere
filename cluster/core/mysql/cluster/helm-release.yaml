@@ -1,0 +1,36 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: mysql-cluster
+  namespace: database
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://mysql.github.io/mysql-operator/ chart=mysql-innodbcluster
+      chart: mysql-innodbcluster
+      version: "2.0.5"
+      sourceRef:
+        kind: HelmRepository
+        name: mysql-charts
+        namespace: flux-system
+
+  install:
+    crds: Create
+    remediation: # perform remediation when helm install fails
+      retries: 5
+
+  upgrade:
+    crds: CreateReplace
+    remediation: # perform remediation when helm upgrade fails
+      retries: 5
+      remediateLastFailure: true # remediate the last failure, when no retries remain
+    cleanupOnFail: true
+
+  rollback:
+    timeout: 10m
+    recreate: true
+    cleanupOnFail: true
+
+  values:
