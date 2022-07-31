@@ -30,6 +30,7 @@ spec:
     emqxConfig:
       EMQX_ALLOW_ANONYMOUS: "false"
       EMQX_CLUSTER__DISCOVERY_STRATEGY: k8s
+      EMQX_DASHBOARD__DEFAULT_USERNAME: admin
       EMQX_DASHBOARD__DEFAULT_PASSWORD: ${EMQX_ADMIN_PASSWORD}
       EMQX_AUTH__USER__1__USERNAME: ${EMQX_USER_1_USERNAME}
       EMQX_AUTH__USER__1__PASSWORD: ${EMQX_USER_1_PASSWORD}
@@ -45,11 +46,11 @@ spec:
       EMQX_AUTH__USER__6__PASSWORD: ${EMQX_USER_6_PASSWORD}
       EMQX_LOADED_MODULES: "emqx_mod_presence,emqx_mod_subscription,emqx_mod_topic_metrics"
       EMQX_LOADED_PLUGINS: "emqx_management,emqx_recon,emqx_retainer,emqx_dashboard,emqx_rule_engine,emqx_prometheus,emqx_auth_mnesia"
-    emqxAclConfig: >
-      {allow, {user, "dashboard"}, subscribe, ["$SYS/#"]}.
-      {allow, {ipaddr, "127.0.0.1"}, pubsub, ["$SYS/#", "#"]}.
-      {allow, all, subscribe, ["$SYS/#", {eq, "#"}]}.
-      {allow, all}.
+    # emqxAclConfig: >
+    #   {allow, {user, "dashboard"}, subscribe, ["$SYS/#"]}.
+    #   {allow, {ipaddr, "127.0.0.1"}, pubsub, ["$SYS/#", "#"]}.
+    #   {allow, all, subscribe, ["$SYS/#", {eq, "#"}]}.
+    #   {allow, all}.
     metrics:
       enabled: true
       type: prometheus
