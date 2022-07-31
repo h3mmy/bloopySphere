@@ -24,7 +24,7 @@ MARKDOWN_MARKDOWNLINT_RULES_PATH: .github/
 # PYTHON_FLAKE8_CONFIG_FILE: .github/lint/.flake8
 YAML_YAMLLINT_CONFIG_FILE: .github/lint/.yamllint.yaml
 YAML_YAMLLINT_FILTER_REGEX_EXCLUDE: "(gotk-patches.ya?ml)"
-ANSIBLE_DIRECTORY: provision/ansible
+ANSIBLE_DIRECTORY: provision/ansible/kubernetes
 ANSIBLE_ANSIBLE_LINT_CONFIG_FILE: .github/lint/.ansible-lint.yaml
 KUBERNETES_DIRECTORY: cluster
 TERRAFORM_TFLINT_CONFIG_FILE: .github/lint/.tflint.hcl

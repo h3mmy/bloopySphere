@@ -57,4 +57,4 @@ spec:
         enabled: false
         namespace: *namespace
         honorLabels: true
-        prometheusInstance: monitoring
+        prometheusInstance: kube-prometheus-stack
