@@ -10,6 +10,12 @@ spec:
   router:
     instances: 1
   tlsUseSelfSigned: true
+  datadirVolumeClaimTemplate:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 5Gi
   backupProfiles:
     - name: myfancyprofile  # Embedded backup profile
       dumpInstance:         # MySQL Shell Dump
@@ -17,7 +23,7 @@ spec:
         #   excludeTables: "[world.country]" # Example to exclude one table
         storage:
           persistentVolumeClaim:
-            claimName: myexample-pvc # store to this pre-existing PVC
+            claimName: ghost-db-backup
         backupSchedules:
           - name: mygreatschedule
             schedule: "0 0 * * *" # Daily, at midnight

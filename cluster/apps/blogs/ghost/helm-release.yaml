@@ -41,7 +41,7 @@ spec:
       tag: "5.5.0"
     env:
       TZ: "${TZ}"
-      url: &host "https://tyg3r-blog.${XYZ_DOMAIN}"
+      url: "https://tyg3r-blog.${XYZ_DOMAIN}"
       database__client: mysql
       database__connection__host: ghost-mysql
       database__connection__database: ghost
@@ -56,7 +56,7 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
         hosts:
-          - host: *host
+          - host: &host tyg3r-blog.${XYZ_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
