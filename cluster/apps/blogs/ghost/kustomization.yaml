@@ -6,4 +6,4 @@ resources:
   - pvc-config.yaml
   - ghost-secrets.sops.yaml
   - ghost-mysql.yaml
-  # - helm-release.yaml
+  - helm-release.yaml
