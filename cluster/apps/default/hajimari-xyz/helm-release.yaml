@@ -51,7 +51,7 @@ spec:
           url: "https://discord.gg/${DISCORD_SERVER_INVITE_CODE}"
           icon: discord
         - name: Tyg3r Blog
-          url: "https://tyg3r.${XYZ_DOMAIN}"
+          url: "https://tyg3r-blog.${XYZ_DOMAIN}"
           icon: post
         - name: "https://readarr.${SECRET_DOMAIN}"
       groups:
