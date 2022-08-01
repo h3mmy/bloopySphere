@@ -11,6 +11,7 @@ spec:
     instances: 1
   tlsUseSelfSigned: true
   datadirVolumeClaimTemplate:
+    storageClassName: ceph-block
     accessModes:
       - ReadWriteOnce
     resources:
