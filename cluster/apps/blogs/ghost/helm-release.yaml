@@ -1,0 +1,72 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app ghost
+  namespace: blogs
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: ghost
+      version: 2.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+
+  install:
+    remediation:
+      retries: 4
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+
+  valuesFrom:
+    - targetPath: env.database__connection__password
+      kind: Secret
+      name: ghost-secrets
+      valuesKey: rootPassword
+    - targetPath: env.database__connection__user
+      kind: Secret
+      name: ghost-secrets
+      valuesKey: rootUser
+
+  values:
+    global:
+      nameOverride: *app
+    image:
+      reposistory: ghost
+      tag: "5.5.0"
+    env:
+      TZ: "${TZ}"
+      url: &host "https://tyg3r-blog.${XYZ_DOMAIN}"
+      database__client: mysql
+      database__connection__host: ghost-mysql
+      database__connection__database: ghost
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "ghost"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+        hosts:
+          - host: *host
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: tls.tyg3r-blog
+    persistence:
+      content:
+        enabled: true
+        existingClaim: ghost-config-v1
+    mariadb:
+      enable: false

@@ -1,0 +1,25 @@
+---
+apiVersion: mysql.oracle.com/v2
+kind: InnoDBCluster
+metadata:
+  name: ghost-mysql
+  namespace: blogs
+spec:
+  secretName: ghost-secrets
+  instances: 3
+  router:
+    instances: 1
+  tlsUseSelfSigned: true
+  backupProfiles:
+    - name: myfancyprofile  # Embedded backup profile
+      dumpInstance:         # MySQL Shell Dump
+        # dumpOptions:
+        #   excludeTables: "[world.country]" # Example to exclude one table
+        storage:
+          persistentVolumeClaim:
+            claimName: myexample-pvc # store to this pre-existing PVC
+        backupSchedules:
+          - name: mygreatschedule
+            schedule: "0 0 * * *" # Daily, at midnight
+            backupProfileName: myfancyprofile # reference the desired backupProfiles's name
+            enabled: true # backup schedules can be temporarily disabled
