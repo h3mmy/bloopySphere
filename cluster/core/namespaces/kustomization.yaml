@@ -18,4 +18,4 @@ resources:
   - home.yaml
   - blogs.yaml
   - emqx-operator-system.yaml
-  - mysql-operatro.yaml
+  - mysql-operator.yaml
