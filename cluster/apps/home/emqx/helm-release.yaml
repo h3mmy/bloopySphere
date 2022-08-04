@@ -27,23 +27,20 @@ spec:
       repository: public.ecr.aws/emqx/emqx
     replicaCount: 3
     recreatePods: true
+    envFromSecret: emqx-secrets
     emqxConfig:
+      EMQX_AUTHENTICATION__ENABLE: "true"
+      EMQX_AUTHENTICATION__MECHANISM: password_based
+      EMQX_AUTHENTICATION__BACKEND: postgresql
+      EMQX_AUTHENTICATION__DATABASE: mqtt
+      EMQX_AUTHENTICATION__USERNAME: postgres
+      EMQX_AUTHENTICATION__SERVER: "emqx-db:5432"
+      EMQX_AUTHENTICATION__PASSWORD_HASH_ALGORITHM__NAME: bcrypt
       EMQX_ALLOW_ANONYMOUS: "false"
+      EMQX_AUTHENTICATION__QUERY: ${EMQX_PSQL_QUERY_STRING}
       EMQX_CLUSTER__DISCOVERY_STRATEGY: k8s
       EMQX_DASHBOARD__DEFAULT_USERNAME: admin
       EMQX_DASHBOARD__DEFAULT_PASSWORD: ${EMQX_ADMIN_PASSWORD}
-      EMQX_AUTH__USER__1__USERNAME: ${EMQX_USER_1_USERNAME}
-      EMQX_AUTH__USER__1__PASSWORD: ${EMQX_USER_1_PASSWORD}
-      EMQX_AUTH__USER__2__USERNAME: ${EMQX_USER_2_USERNAME}
-      EMQX_AUTH__USER__2__PASSWORD: ${EMQX_USER_2_PASSWORD}
-      EMQX_AUTH__USER__3__USERNAME: ${EMQX_USER_3_USERNAME}
-      EMQX_AUTH__USER__3__PASSWORD: ${EMQX_USER_3_PASSWORD}
-      EMQX_AUTH__USER__4__USERNAME: ${EMQX_USER_4_USERNAME}
-      EMQX_AUTH__USER__4__PASSWORD: ${EMQX_USER_4_PASSWORD}
-      EMQX_AUTH__USER__5__PASSWORD: ${EMQX_USER_5_PASSWORD}
-      EMQX_AUTH__USER__5__USERNAME: ${EMQX_USER_5_USERNAME}
-      EMQX_AUTH__USER__6__USERNAME: ${EMQX_USER_6_USERNAME}
-      EMQX_AUTH__USER__6__PASSWORD: ${EMQX_USER_6_PASSWORD}
       EMQX_LOADED_MODULES: "emqx_mod_presence,emqx_mod_subscription,emqx_mod_topic_metrics"
       EMQX_LOADED_PLUGINS: "emqx_management,emqx_recon,emqx_retainer,emqx_dashboard,emqx_rule_engine,emqx_prometheus,emqx_auth_mnesia"
     # emqxAclConfig: >
