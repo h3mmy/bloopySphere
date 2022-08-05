@@ -1,0 +1,32 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: keycloak-crd-source
+  namespace: flux-system
+spec:
+  interval: 30m
+  url: https://github.com/keycloak/keycloak.git
+  ref:
+    tag: "19.0.1"
+  ignore: |
+    # exclude all
+    /*
+    # path to crds
+    !/kubernetes/
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: keycloak-crds
+  namespace: flux-system
+spec:
+  interval: 30m
+  prune: false
+  sourceRef:
+    kind: GitRepository
+    name: keycloak-crd-source
+  healthChecks:
+    - apiVersion: keycloaks.k8s.keycloak.org/v1
+      kind: CustomResourceDefinition
+      name: ingressroutes.traefik.containo.us
