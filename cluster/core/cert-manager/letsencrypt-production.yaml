@@ -20,3 +20,4 @@ spec:
           dnsZones:
             - ${SECRET_DOMAIN}
             - ${XYZ_DOMAIN}
+            - ${TGR_DOMAIN}
