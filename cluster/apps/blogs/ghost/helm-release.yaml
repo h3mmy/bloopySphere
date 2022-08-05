@@ -41,7 +41,7 @@ spec:
       tag: "5.5.0"
     env:
       TZ: "${TZ}"
-      url: "https://tyg3r-blog.${XYZ_DOMAIN}"
+      url: "https://tyg3r.${TGR_DOMAIN}"
       database__client: mysql
       database__connection__host: ghost-mysql
       database__connection__database: ghost
