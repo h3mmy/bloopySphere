@@ -54,16 +54,21 @@ spec:
           hajimari.io/icon: "ghost"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth@kubernetescrd"
         hosts:
-          - host: &host tyg3r-blog.${XYZ_DOMAIN}
+          - host: &host tyg3r.${XYZ_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+          - host: &host2 ${TGR_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
+              - *host2
               - *host
-            secretName: tls.tyg3r-blog
+            secretName: tls.tyg3r-xyz
     persistence:
       content:
         enabled: true

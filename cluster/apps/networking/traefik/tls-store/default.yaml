@@ -5,5 +5,8 @@ metadata:
   name: default
   namespace: networking
 spec:
+  certificates:
+    - secretName: tls.${TGR_DOMAIN/./-}
+    - secretName: tls.${SECRET_DOMAIN/./-}
   defaultCertificate:
     secretName: "tls.${XYZ_DOMAIN/./-}"

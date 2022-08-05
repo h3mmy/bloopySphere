@@ -90,6 +90,9 @@ spec:
             - bloop: "${SECRET_DOMAIN}"
               sans:
                 - "*.${SECRET_DOMAIN}"
+            - tyg3r: "${TGR_DOMAIN}"
+              sans:
+                - "*.${TGR_DOMAIN}"
           stores: networking-default@kubernetescrd
       dns-tls:
         port: 8853
