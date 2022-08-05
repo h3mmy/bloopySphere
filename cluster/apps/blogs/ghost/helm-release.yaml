@@ -42,6 +42,7 @@ spec:
     env:
       TZ: "${TZ}"
       url: "https://tyg3r.${TGR_DOMAIN}"
+      admin__url: "https://tyg3r.${XYZ_DOMAIN}"
       database__client: mysql
       database__connection__host: ghost-mysql
       database__connection__database: ghost
@@ -56,10 +57,6 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth@kubernetescrd"
         hosts:
-          - host: &host tyg3r.${XYZ_DOMAIN}
-            paths:
-              - path: /
-                pathType: Prefix
           - host: &host2 ${TGR_DOMAIN}
             paths:
               - path: /
@@ -67,6 +64,23 @@ spec:
         tls:
           - hosts:
               - *host2
+            secretName: tls.tyg3r-tgr
+      admin:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "ghost"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
+        hosts:
+          - host: &host tyg3r.${XYZ_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
               - *host
             secretName: tls.tyg3r-xyz
     persistence:
