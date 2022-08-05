@@ -217,7 +217,6 @@ spec:
           ${DOMAIN_SMALL_BLOOP}: tcp+udp:${LOCAL_GATEWAY_SMALL_BLOOP}
           ${DOMAIN_CORE_BLOOP}: tcp+udp:${LOCAL_GATEWAY_CORE_BLOOP}
           status.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
-          tyg3r.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
           # DoH canary domains. Forward to pihole for NODATA or NXDOMAIN
           use-application-dns.net: tcp+udp:10.1.0.10
           mask.icloud.com: tcp+udp:10.1.0.10
@@ -226,6 +225,7 @@ spec:
         mapping:
           ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_TRAEFIK_CLASSIC}
           ${SECRET_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+          ${TGR_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
           emqx.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
           home-assistant.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
           mqtt.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
