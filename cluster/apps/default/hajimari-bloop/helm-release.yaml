@@ -51,7 +51,7 @@ spec:
         - name: Discord Server
           url: "https://discord.gg/${DISCORD_SERVER_INVITE_CODE}"
           icon: discord
-        - name: Tyg3r Blog
+        - name: Tyg3r Blog Admin Panel
           url: "https://tyg3r.${XYZ_DOMAIN}"
           icon: post
       groups:

@@ -1,0 +1,36 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: linkerd-crds
+  namespace: linkerd
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://helm.linkerd.io/edge chart=linkerd-crds
+      chart: linkerd-crds
+      version: 1.3.0-edge
+      sourceRef:
+        kind: HelmRepository
+        name: linkerd-charts
+        namespace: flux-system
+
+  install:
+    crds: Create
+    remediation: # perform remediation when helm install fails
+      retries: 5
+
+  upgrade:
+    crds: CreateReplace
+    remediation: # perform remediation when helm upgrade fails
+      retries: 5
+      remediateLastFailure: true # remediate the last failure, when no retries remain
+    cleanupOnFail: true
+
+  rollback:
+    timeout: 10m
+    recreate: true
+    cleanupOnFail: true
+
+  values: {}
