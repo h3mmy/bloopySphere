@@ -53,6 +53,7 @@ spec:
       targetPath: identity.issuer.tls.keyPEM
 
   values:
+    installNamespace: false
     controllerImage: cr.l5d.io/linkerd/controller
     controllerReplicas: 1
     identity:

@@ -5,7 +5,7 @@ resources:
   - media-pv
   - plex
   - calibre-web
-  - lazylibrarian
+  # - lazylibrarian
   - overseer
   - radarr-uhd
   - bazarr
