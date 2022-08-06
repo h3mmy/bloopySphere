@@ -29,10 +29,16 @@ spec:
       remediateLastFailure: true
 
   values:
+    podAnnotations:
+      linkerd.io/inject: enabled
     fullnameOverride: authentik
     image:
       repository: ghcr.io/goauthentik/server
       tag: 2022.7.3
+    geoip:
+      enabled: true
+      accountId: "${MAXMIND_ACCOUNT_ID}"
+      licenseKey: "${MAXMIND_LICENSE_KEY}"
     authentik:
       outposts:
         docker_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
@@ -86,6 +92,8 @@ spec:
       enabled: false
     redis:
       enabled: true
+      podAnnotations:
+        linkerd.io/inject: enabled
     prometheus:
       rules:
         create: true
