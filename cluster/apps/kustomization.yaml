@@ -19,4 +19,5 @@ resources:
   - home
   - blogs
   - cert-manager
+  - linkerd
   # - database
