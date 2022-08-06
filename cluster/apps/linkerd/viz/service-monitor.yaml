@@ -6,7 +6,7 @@ metadata:
     k8s-app: linkerd-prometheus
     release: monitoring
   name: linkerd-federate
-  namespace: linkerd
+  namespace: linkerd-viz
 spec:
   endpoints:
     - interval: 30s

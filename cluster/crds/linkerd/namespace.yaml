@@ -5,6 +5,7 @@ metadata:
   name: linkerd
   labels:
     goldilocks.fairwinds.com/enabled: "true"
+    config.linkerd.io/admission-webhooks: disabled
 ---
 apiVersion: v1
 kind: Namespace
