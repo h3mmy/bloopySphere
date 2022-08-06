@@ -34,9 +34,16 @@ spec:
     cleanupOnFail: true
 
   values:
+    podAnnotations:
+      linkerd.io/inject: enabled
     installCRDs: false
     webhook:
       enabled: true
+      podAnnotations:
+        linkerd.io/inject: enabled
+    cainjector:
+      podAnnotations:
+        linkerd.io/inject: enabled
     podSecurityPolicy:
       enabled: true
     startupapicheck:
@@ -58,3 +65,5 @@ spec:
         namespace: *namespace
         honorLabels: true
         prometheusInstance: kube-prometheus-stack
+        labels:
+          release: kube-prometheus-stack
