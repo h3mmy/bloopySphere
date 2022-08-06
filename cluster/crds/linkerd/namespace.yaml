@@ -5,3 +5,10 @@ metadata:
   name: linkerd
   labels:
     goldilocks.fairwinds.com/enabled: "true"
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: linkerd-viz
+  labels:
+    goldilocks.fairwinds.com/enabled: "true"
