@@ -8,4 +8,4 @@ resources:
   - external-dns
   - cert-manager
   - mysql-crds
-  # - multus
+  - linkerd

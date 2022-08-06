@@ -10,3 +10,4 @@ resources:
   - kubegres
   - tigera-operator
   - mysql
+  - linkerd

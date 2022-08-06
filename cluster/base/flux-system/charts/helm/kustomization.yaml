@@ -35,3 +35,4 @@ resources:
   - emberstack-charts.yaml
   - vector-charts.yaml
   - mysql-charts.yaml
+  - linkerd-charts.yaml
