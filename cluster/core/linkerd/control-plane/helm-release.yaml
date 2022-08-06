@@ -57,8 +57,6 @@ spec:
     controllerImage: cr.l5d.io/linkerd/controller
     controllerReplicas: 1
     identity:
-      # -- If the linkerd-identity-trust-roots ConfigMap has already been created
-      externalCA: true
       issuer:
         scheme: kubernetes.io/tls
     # -- Kubernetes DNS Domain name to use
