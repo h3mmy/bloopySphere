@@ -19,5 +19,5 @@ resources:
   - home
   - blogs
   - cert-manager
-  - linkerd
+  # - linkerd
   # - database
