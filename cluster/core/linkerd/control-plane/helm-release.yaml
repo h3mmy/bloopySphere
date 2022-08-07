@@ -54,7 +54,7 @@ spec:
     # By default, all private networks are specified so that resolution works in
     # typical Kubernetes environments.
     # Note for IPv6 https://github.com/linkerd/linkerd2/issues/3849
-    clusterNetworks: "${NETWORK_K8S_CLUSTER_CIDR},${NETWORK_K8S_SERVICE_CIDR},${NETWORK_K8S_CLUSTER_CIDR_V6},${NETWORK_K8S_SERVICE_CIDR_V6}"
+    clusterNetworks: "${NETWORK_K8S_CLUSTER_CIDR},${NETWORK_K8S_SERVICE_CIDR},${NETWORK_K8S_CLUSTER_CIDR_V6},${NETWORK_K8S_SERVICE_CIDR_V6},${CIDR_V6_SN_1},${CIDR_V6_SN_2}"
     # -- Docker image pull policy
     imagePullPolicy: IfNotPresent
     # -- Log level for the control plane components
@@ -81,6 +81,18 @@ spec:
     # and the proxy-init container when injecting the proxy;
     # requires the linkerd-cni plugin to already be installed
     cniEnabled: true
+
+    policyController:
+      # -- The default allow policy to use when no `Server` selects a pod.  One of: "all-authenticated",
+      # "all-unauthenticated", "cluster-authenticated", "cluster-unauthenticated", "deny"
+      # @default -- "all-unauthenticated"
+      defaultAllowPolicy: "all-unauthenticated"
+
+      probeNetworks:
+        - 0.0.0.0/0
+
+    proxyInit:
+      iptablesMode: nft
 
     # proxy configuration
     proxy:
