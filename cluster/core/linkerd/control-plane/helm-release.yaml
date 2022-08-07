@@ -57,6 +57,7 @@ spec:
     controllerImage: cr.l5d.io/linkerd/controller
     controllerReplicas: 1
     identity:
+      externalCA: true
       issuer:
         scheme: kubernetes.io/tls
     # -- Kubernetes DNS Domain name to use

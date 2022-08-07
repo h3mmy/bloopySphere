@@ -5,5 +5,5 @@ resources:
   - letsencrypt-production.yaml
   - letsencrypt-staging.yaml
   - secret.sops.yaml
-  - linkerd-trust-anchor.sops.yaml
+  - linkerd-trust-roots.sops.yaml
   - linkerd.yaml
