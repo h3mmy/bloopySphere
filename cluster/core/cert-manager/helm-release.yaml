@@ -65,5 +65,3 @@ spec:
         namespace: *namespace
         honorLabels: true
         prometheusInstance: kube-prometheus-stack
-        labels:
-          release: kube-prometheus-stack
