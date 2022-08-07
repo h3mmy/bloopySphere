@@ -38,19 +38,19 @@ spec:
     recreate: true
     cleanupOnFail: true
 
-  valuesFrom:
-    - kind: Secret
-      name: linkerd-trust-anchor
-      valuesKey: tls.crt
-      targetPath: identityTrustAnchorsPEM
-    - kind: Secret
-      name: linkerd-identity-issuer
-      valuesKey: tls.crt
-      targetPath: identity.issuer.tls.crtPEM
-    - kind: Secret
-      name: linkerd-identity-issuer
-      valuesKey: tls.key
-      targetPath: identity.issuer.tls.keyPEM
+  # valuesFrom:
+  #   - kind: Secret
+  #     name: linkerd-trust-anchor
+  #     valuesKey: tls.crt
+  #     targetPath: identityTrustAnchorsPEM
+  #   - kind: Secret
+  #     name: linkerd-identity-issuer
+  #     valuesKey: tls.crt
+  #     targetPath: identity.issuer.tls.crtPEM
+  #   - kind: Secret
+  #     name: linkerd-identity-issuer
+  #     valuesKey: tls.key
+  #     targetPath: identity.issuer.tls.keyPEM
 
   values:
     installNamespace: false
