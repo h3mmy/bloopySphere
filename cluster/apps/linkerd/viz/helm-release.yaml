@@ -44,7 +44,7 @@ spec:
           limit: 100Mi
           request: 50Mi
     dashboard:
-      enforcedHostRegexp: "^linkerd.${XYZ_DOMAIN}$"
+      enforcedHostRegexp: "^linkerd.${XYZ_DOMAIN_REV}$"
       resources:
         cpu:
           limit: 50m
