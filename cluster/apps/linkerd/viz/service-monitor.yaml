@@ -26,7 +26,7 @@ spec:
   jobLabel: app
   namespaceSelector:
     matchNames:
-      - linkerd
+      - linkerd-viz
   selector:
     matchLabels:
       component: prometheus
