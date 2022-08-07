@@ -150,7 +150,7 @@ spec:
     podAnnotations:
       configmap.reloader.stakater.com/reload: blocky-config
       secret.reloader.stakater.com/reload: tls.blocky
-      linkerd.io/inject: enabled
+      # linkerd.io/inject: enabled
 
     affinity:
       podAntiAffinity:
