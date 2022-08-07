@@ -95,12 +95,14 @@ spec:
 
     proxyInit:
       iptablesMode: nft
+      # -- Default set of outbound ports to skip via iptables
+      # - Galera (4567,4568)
+      ignoreOutboundPorts: "4567,4568,6443"
 
     # proxy configuration
     proxy:
       # -- Enable service profiles for non-Kubernetes services
       enableExternalProfiles: true
-
       # -- Default set of opaque ports
       # - SMTP (25,587) server-first
       # - MYSQL (3306) server-first
