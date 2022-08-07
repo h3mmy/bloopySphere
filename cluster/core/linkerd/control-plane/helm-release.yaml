@@ -97,6 +97,7 @@ spec:
       iptablesMode: nft
       # -- Default set of outbound ports to skip via iptables
       # - Galera (4567,4568)
+      # k3s issue https://github.com/linkerd/linkerd2/issues/7970
       ignoreOutboundPorts: "4567,4568,6443"
 
     # proxy configuration

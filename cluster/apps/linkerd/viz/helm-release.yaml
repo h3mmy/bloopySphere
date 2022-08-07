@@ -26,6 +26,7 @@ spec:
     jaegerUrl: ""
     # metrics API configuration
     metricsAPI:
+      logLevel: debug
       resources:
         cpu:
           limit: 20m
