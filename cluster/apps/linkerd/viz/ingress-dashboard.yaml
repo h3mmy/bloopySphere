@@ -8,6 +8,7 @@ metadata:
     ingress.kubernetes.io/custom-request-headers: l5d-dst-override:web.linkerd-viz.svc.cluster.local:8084
     traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
 spec:
   ingressClassName: traefik
   rules:
