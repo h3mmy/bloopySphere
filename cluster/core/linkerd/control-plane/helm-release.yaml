@@ -85,7 +85,7 @@ spec:
     # proxy configuration
     proxy:
       # -- Enable service profiles for non-Kubernetes services
-      enableExternalProfiles: false
+      enableExternalProfiles: true
 
       # -- Default set of opaque ports
       # - SMTP (25,587) server-first
