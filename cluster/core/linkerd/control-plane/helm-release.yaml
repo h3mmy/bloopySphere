@@ -8,7 +8,6 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://helm.linkerd.io/edge chart=linkerd-control-plane
       chart: linkerd-control-plane
       version: 1.3.0-edge
       sourceRef:
@@ -37,20 +36,6 @@ spec:
     timeout: 10m
     recreate: true
     cleanupOnFail: true
-
-  # valuesFrom:
-  #   - kind: Secret
-  #     name: linkerd-trust-anchor
-  #     valuesKey: tls.crt
-  #     targetPath: identityTrustAnchorsPEM
-  #   - kind: Secret
-  #     name: linkerd-identity-issuer
-  #     valuesKey: tls.crt
-  #     targetPath: identity.issuer.tls.crtPEM
-  #   - kind: Secret
-  #     name: linkerd-identity-issuer
-  #     valuesKey: tls.key
-  #     targetPath: identity.issuer.tls.keyPEM
 
   values:
     installNamespace: false
