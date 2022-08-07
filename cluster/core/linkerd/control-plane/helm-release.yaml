@@ -41,6 +41,8 @@ spec:
     installNamespace: false
     controllerImage: cr.l5d.io/linkerd/controller
     controllerReplicas: 1
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: "linkerd-identity-trust-roots"
     identity:
       externalCA: true
       issuer:
