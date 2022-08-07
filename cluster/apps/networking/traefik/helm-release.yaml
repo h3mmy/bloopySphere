@@ -25,8 +25,8 @@ spec:
     deployment:
       kind: Deployment
       replicas: 2
-      podAnnotations:
-        linkerd.io/inject: ingress
+      # podAnnotations:
+      #   linkerd.io/inject: ingress
     podSecurityPolicy:
       enabled: true
     service:
