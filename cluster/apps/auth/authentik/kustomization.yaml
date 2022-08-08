@@ -7,3 +7,5 @@ resources:
   - media
   - pvc-backup.yaml
   - authentik-postgres-db.yaml
+patchesStrategicMerge:
+  - postgres-db-backup-patches.yaml

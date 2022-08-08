@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-authentik-postgres
+  namespace: auth
+spec:
+  jobTemplate:
+    metadata:
+      annotations:
+        linkerd.io/inject: disabled
+    spec:
+      template:
+        metadata:
+          annotations:
+            linkerd.io/inject: disabled
