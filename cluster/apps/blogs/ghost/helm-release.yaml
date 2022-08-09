@@ -54,6 +54,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "ghost"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
+          cert-manager.io/uri-sans: "www.${TGR_DOMAIN}"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth@kubernetescrd"
         hosts:
