@@ -7,3 +7,4 @@ resources:
   - media
   - pvc-backup.yaml
   - authentik-postgres-db.yaml
+  - sp-authentik.yaml
