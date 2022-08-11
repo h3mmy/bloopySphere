@@ -24,10 +24,11 @@ spec:
       remediateLastFailure: true
 
   values:
-    secretName: ghost-secrets
+    serverVersion: "8.0.30"
     serverInstances: 3
     routerInstances: 1
-    tlsUseSelfSigned: true
+    tls:
+      useSelfSigned: true
     datadirVolumeClaimTemplate:
       storageClassName: ceph-block
       accessModes:
