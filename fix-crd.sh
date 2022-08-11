@@ -1,9 +1,10 @@
 #!/bin/bash
 KIND=CustomResourceDefinition
-RELEASE=rook-ceph
-NAMESPACE=rook-ceph
+RELEASE=ghost-mysql
+NAMESPACE=blogs
 
-for CRD in objectbuckets.objectbucket.io volumes.rook.io objectbucketclaims.objectbucket.io cephobjectzones.ceph.rook.io cephrbdmirrors.ceph.rook.io cephobjectzonegroups.ceph.rook.io cephobjectstoreusers.ceph.rook.io cephblockpools.ceph.rook.io cephobjectstores.ceph.rook.io cephobjectrealms.ceph.rook.io cephnfses.ceph.rook.io cephclients.ceph.rook.io cephfilesystemsubvolumegroups.ceph.rook.io cephfilesystemmirrors.ceph.rook.io cephclusters.ceph.rook.io cephbucketnotifications.ceph.rook.io cephbuckettopics.ceph.rook.io cephfilesystems.ceph.rook.io; do
+# for CRD in objectbuckets.objectbucket.io volumes.rook.io objectbucketclaims.objectbucket.io cephobjectzones.ceph.rook.io cephrbdmirrors.ceph.rook.io cephobjectzonegroups.ceph.rook.io cephobjectstoreusers.ceph.rook.io cephblockpools.ceph.rook.io cephobjectstores.ceph.rook.io cephobjectrealms.ceph.rook.io cephnfses.ceph.rook.io cephclients.ceph.rook.io cephfilesystemsubvolumegroups.ceph.rook.io cephfilesystemmirrors.ceph.rook.io cephclusters.ceph.rook.io cephbucketnotifications.ceph.rook.io cephbuckettopics.ceph.rook.io cephfilesystems.ceph.rook.io; do
+for CRD in innodbclusters.mysql.oracle.com; do
   # echo "Using following values..." \
   # echo Kind: $KIND \
   # echo NAME: $CRD \
