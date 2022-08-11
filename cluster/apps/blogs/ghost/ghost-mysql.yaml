@@ -1,32 +1,65 @@
 ---
-apiVersion: mysql.oracle.com/v2
-kind: InnoDBCluster
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
 metadata:
   name: ghost-mysql
   namespace: blogs
 spec:
-  secretName: ghost-secrets
-  instances: 3
-  router:
-    instances: 1
-  tlsUseSelfSigned: true
-  datadirVolumeClaimTemplate:
-    storageClassName: ceph-block
-    accessModes:
-      - ReadWriteOnce
-    resources:
-      requests:
-        storage: 8Gi
-  backupProfiles:
-    - name: myfancyprofile  # Embedded backup profile
-      dumpInstance:         # MySQL Shell Dump
-        # dumpOptions:
-        #   excludeTables: "[world.country]" # Example to exclude one table
-        storage:
-          persistentVolumeClaim:
-            claimName: ghost-db-backup
-        backupSchedules:
-          - name: mygreatschedule
-            schedule: "0 0 * * *" # Daily, at midnight
-            backupProfileName: myfancyprofile # reference the desired backupProfiles's name
-            enabled: true # backup schedules can be temporarily disabled
+  interval: 5m
+  chart:
+    spec:
+      chart: mysql-innodbcluster
+      version: "2.0.5"
+      sourceRef:
+        kind: HelmRepository
+        name: mysql-charts
+        namespace: flux-system
+      interval: 5m
+
+  install:
+    remediation:
+      retries: 4
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+
+  values:
+    secretName: ghost-secrets
+    serverInstances: 3
+    routerInstances: 1
+    tlsUseSelfSigned: true
+    datadirVolumeClaimTemplate:
+      storageClassName: ceph-block
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 8Gi
+
+    backupProfiles:
+      - name: ghost-mysql-backup-pvc  # Embedded backup profile
+        dumpInstance:         # MySQL Shell Dump
+          # dumpOptions:
+          #   excludeTables: "[world.country]" # Example to exclude one table
+          storage:
+            persistentVolumeClaim:
+              claimName: ghost-db-backup
+    backupSchedules:
+      - name: mygreatschedule
+        schedule: "0 0 * * *" # Daily, at midnight
+        backupProfileName: ghost-mysql-backup-pvc # reference the desired backupProfiles's name
+        enabled: true # backup schedules can be temporarily disabled
+
+  valuesFrom:
+    - targetPath: credentials.root.user
+      kind: Secret
+      name: ghost-secrets
+      valuesKey: rootUser
+    - targetPath: credentials.root.password
+      kind: Secret
+      name: ghost-secrets
+      valuesKey: rootPassword
+    - targetPath: credentials.root.host
+      kind: Secret
+      name: ghost-secrets
+      valuesKey: rootHost

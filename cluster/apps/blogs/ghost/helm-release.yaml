@@ -16,6 +16,10 @@ spec:
         namespace: flux-system
       interval: 5m
 
+  dependsOn:
+    - name: ghost-mysql
+      namespace: blogs
+
   install:
     remediation:
       retries: 4
