@@ -6,7 +6,7 @@ metadata:
   namespace: blogs
 spec:
   secretName: ghost-secrets
-  instances: 3
+  instances: 1
   router:
     instances: 1
   tlsUseSelfSigned: true
@@ -16,7 +16,7 @@ spec:
       - ReadWriteOnce
     resources:
       requests:
-        storage: 5Gi
+        storage: 8Gi
   backupProfiles:
     - name: myfancyprofile  # Embedded backup profile
       dumpInstance:         # MySQL Shell Dump
