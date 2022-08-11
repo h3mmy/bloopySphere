@@ -5,5 +5,5 @@ resources:
   - pvc-db-backup.yaml
   - pvc-config.yaml
   - ghost-secrets.sops.yaml
-  - ghost-mysql.yaml
+  # - ghost-mysql.yaml
   - helm-release.yaml
