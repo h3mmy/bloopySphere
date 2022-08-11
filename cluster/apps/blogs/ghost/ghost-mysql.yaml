@@ -6,7 +6,7 @@ metadata:
   namespace: blogs
 spec:
   secretName: ghost-secrets
-  instances: 1
+  instances: 3
   router:
     instances: 1
   tlsUseSelfSigned: true
