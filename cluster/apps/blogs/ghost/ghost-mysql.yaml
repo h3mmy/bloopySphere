@@ -60,7 +60,3 @@ spec:
       kind: Secret
       name: ghost-secrets
       valuesKey: rootPassword
-    - targetPath: credentials.root.host
-      kind: Secret
-      name: ghost-secrets
-      valuesKey: rootHost
