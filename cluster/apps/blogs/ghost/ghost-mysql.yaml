@@ -31,8 +31,7 @@ spec:
       useSelfSigned: true
     datadirVolumeClaimTemplate:
       storageClassName: ceph-block
-      accessModes:
-        - ReadWriteOnce
+      accessModes: ReadWriteOnce
       resources:
         requests:
           storage: 5Gi
