@@ -34,7 +34,7 @@ spec:
       accessModes: ReadWriteOnce
       resources:
         requests:
-          storage: 5Gi
+          storage: 6Gi
 
     backupProfiles:
       - name: ghost-mysql-backup-pvc  # Embedded backup profile
