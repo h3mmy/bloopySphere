@@ -91,28 +91,6 @@ spec:
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${LB_V4_BLOCKY}, ${SVC_BLOCKY_ADDR_V6}"
           metallb.universe.tf/allow-shared-ip: blocky
-      # dns-udp:
-      #   enabled: true
-      #   type: LoadBalancer
-      #   # v1.24 will have loadBalancerIPs
-      #   # see https://github.com/kubernetes/enhancements/pull/1992
-      #   ports:
-      #     dns-udp:
-      #       enabled: true
-      #       port: 53
-      #       protocol: UDP
-      #       targetPort: 53
-      #   externalTrafficPolicy: Local
-      #   loadBalancerIPs:
-      #     - ${SVC_BLOCKY_ADDR_V4}
-      #     - ${SVC_BLOCKY_ADDR_V6}
-      #   ipFamilyPolicy: PreferDualStack
-      #   ipFamilies:
-      #     - "IPv4"
-      #     - "IPv6"
-      #   annotations:
-      #     # metallb.universe.tf/loadBalancerIPs: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
-      #     metallb.universe.tf/allow-shared-ip: blocky
 
     ingress:
       main:

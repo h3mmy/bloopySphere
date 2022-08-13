@@ -6,8 +6,8 @@ metadata:
   namespace: linkerd
 spec:
   secretName: linkerd-identity-issuer
-  duration: 48h
-  renewBefore: 25h
+  duration: 7d
+  renewBefore: 48h
   issuerRef:
     name: linkerd-trust-anchor
     kind: ClusterIssuer

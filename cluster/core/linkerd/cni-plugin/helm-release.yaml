@@ -9,10 +9,10 @@ spec:
   chart:
     spec:
       chart: linkerd2-cni
-      version: 30.2.0-edge
+      version: 30.2.1-edge
       sourceRef:
         kind: HelmRepository
-        name: linkerd-charts
+        name: linkerd-edge-charts
         namespace: flux-system
 
   dependsOn:

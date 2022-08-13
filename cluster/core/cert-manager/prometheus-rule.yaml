@@ -11,7 +11,7 @@ spec:
         - alert: CertManagerAbsent
           expr: |
             absent(up{job="cert-manager"})
-          for: 10m
+          for: 30m
           labels:
             severity: critical
           annotations:
