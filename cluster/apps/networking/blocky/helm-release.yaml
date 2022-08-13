@@ -257,17 +257,6 @@ spec:
       prometheus:
         enable: true
         path: /metrics
-        rules:
-          - alert: BlockyDisabled
-            annotations:
-              description: Blocky's ad blocking has been disabled for 15min.
-                Please re-enable protection.
-              summary: Blocky is disabled.
-            expr: |
-              blocky_blocking_enabled == 0
-            for: 15m
-            labels:
-              severity: critical
       httpPort: 4000
       httpsPort: 443
       tlsPort: 853
