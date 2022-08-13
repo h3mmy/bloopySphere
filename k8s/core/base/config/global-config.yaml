@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: global-config
+  namespace: flux-system
+data:
+  DEFAULT_HELM_REPO_INTERVAL: 45m
+  DEFAULT_HELM_REPO_TIMEOUT: 3m
