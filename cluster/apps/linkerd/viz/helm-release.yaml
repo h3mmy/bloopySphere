@@ -12,7 +12,7 @@ spec:
       version: 30.2.9-edge
       sourceRef:
         kind: HelmRepository
-        name: linkerd-charts
+        name: linkerd-edge-charts
         namespace: flux-system
   timeout: 10m0s
   dependsOn:
