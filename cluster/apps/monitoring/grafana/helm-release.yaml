@@ -71,7 +71,7 @@ spec:
       panels:
         disable_sanitize_html: true
       auth.basic:
-        disable_login_form: false
+        disable_login_form: true
       auth.generic_oauth:
         enabled: true
         name: ${CLUSTER_NAME}
