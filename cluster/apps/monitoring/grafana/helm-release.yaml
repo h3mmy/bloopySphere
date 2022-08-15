@@ -214,9 +214,6 @@ spec:
         # blocky:
         #   url: https://raw.githubusercontent.com/0xERR0R/blocky/development/docs/blocky-grafana.json
         #   datasource: Prometheus
-        blocky-query:
-          url: https://raw.githubusercontent.com/0xERR0R/blocky/development/docs/blocky-query-grafana.json
-          datasource: MariaDB Blocky
         # Ref: https://grafana.com/grafana/dashboards/12175
         calico-felix:
           gnetId: 12175
@@ -250,6 +247,9 @@ spec:
         #   url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/control-plane.json
         #   datasource: Prometheus
       networking:
+        blocky-query:
+          url: https://raw.githubusercontent.com/0xERR0R/blocky/development/docs/blocky-query-grafana.json
+          datasource: MariaDB Blocky
         # Ref: https://grafana.com/grafana/dashboards/15513
         # cert-manager:
         #   url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
