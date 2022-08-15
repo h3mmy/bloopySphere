@@ -61,7 +61,7 @@ spec:
     prometheus:
       enabled: true
       serviceMonitor:
-        enabled: false
+        enabled: true
         namespace: *namespace
         honorLabels: true
         prometheusInstance: kube-prometheus-stack
