@@ -22,6 +22,7 @@ spec:
       retries: 5
 
   upgrade:
+    disableWait: false
     crds: CreateReplace
     remediation: # perform remediation when helm upgrade fails
       retries: 5

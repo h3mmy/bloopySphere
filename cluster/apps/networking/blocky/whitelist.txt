@@ -42,3 +42,6 @@ getmonero.org
 click.e.progressive.com
 mobile.pipe.aria.microsoft.com
 microsoft.com
+cse.google.com
+smartlock.google.com
+csi.google.com

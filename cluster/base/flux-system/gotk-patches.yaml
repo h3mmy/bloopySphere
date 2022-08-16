@@ -49,8 +49,8 @@ spec:
         - name: manager
           resources:
             limits:
-              cpu: 1
-              memory: 1Gi
+              cpu: 1200m
+              memory: 1500Mi
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -73,8 +73,8 @@ spec:
         - name: manager
           resources:
             limits:
-              cpu: 1
-              memory: 512Mi
+              cpu: 1200m
+              memory: 750Mi
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -97,7 +97,7 @@ spec:
         - name: manager
           resources:
             limits:
-              cpu: 1
+              cpu: 1000m
               memory: 512Mi
       affinity:
         nodeAffinity:
