@@ -15,6 +15,7 @@ spec:
         kind: HelmRepository
         name: jetstack-charts
         namespace: flux-system
+      reconcileStrategy: Revision
 
   install:
     crds: Create
@@ -22,7 +23,7 @@ spec:
       retries: 5
 
   upgrade:
-    disableWait: false
+    force: true
     crds: CreateReplace
     remediation: # perform remediation when helm upgrade fails
       retries: 5
