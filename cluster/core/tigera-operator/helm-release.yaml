@@ -90,7 +90,7 @@ spec:
     # Configuration for the tigera operator images to deploy.
     tigeraOperator:
       image: tigera/operator
-      version: v1.27.0
+      version: v1.28.0
       registry: quay.io
       nodeSelector:
         matchExpressions:
