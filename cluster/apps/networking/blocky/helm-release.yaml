@@ -254,6 +254,11 @@ spec:
         #     - 192.168.178.29
       caching:
         prefetching: true
+      redis:
+        address: blocky-redis-master.networking:6379
+        password: ${BLOCKY_REDIS_PASSWORD}
+        database: 2
+        required: true
       prometheus:
         enable: true
         path: /metrics
