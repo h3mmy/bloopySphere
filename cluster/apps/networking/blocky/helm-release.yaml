@@ -25,6 +25,10 @@ spec:
       remediateLastFailure: true
       retries: 7
 
+  dependsOn:
+    - name: blocky-redis
+      namespace: networking
+
   values:
 
     image:
