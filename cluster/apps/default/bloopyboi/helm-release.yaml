@@ -27,3 +27,13 @@ spec:
     image:
       repository: bloopyboi
       tag: v0.2.2
+
+  valuesFrom:
+    - kind: Secret
+      name: bloopyboi-secrets
+      targetPath: bloopyboi.botToken
+      valuesKey: botToken
+    - kind: Secret
+      name: bloopyboi-secrets
+      targetPath: bloopyboi.appId
+      valuesKey: appId
