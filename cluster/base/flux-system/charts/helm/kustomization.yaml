@@ -36,3 +36,4 @@ resources:
   - vector-charts.yaml
   - mysql-charts.yaml
   - linkerd-charts.yaml
+  - bloopy-charts.yaml
