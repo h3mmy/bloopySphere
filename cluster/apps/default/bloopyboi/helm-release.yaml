@@ -25,8 +25,8 @@ spec:
 
   values:
     image:
-      repository: bloopyboi
-      tag: v0.2.2
+      repository: bloopyboi # {"$imagepolicy": "flux-system:bloopyboi:name"}
+      tag: v0.2.2           # {"$imagepolicy": "flux-system:bloopyboi:tag"}
 
   valuesFrom:
     - kind: Secret
