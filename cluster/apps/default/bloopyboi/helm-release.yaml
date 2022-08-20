@@ -25,7 +25,7 @@ spec:
 
   values:
     image:
-      repository: bloopyboi # {"$imagepolicy": "flux-system:bloopyboi:name"}
+      repository: registry.gitlab.com/h3mmy/bloopyboi # {"$imagepolicy": "flux-system:bloopyboi:name"}
       tag: v0.2.2           # {"$imagepolicy": "flux-system:bloopyboi:tag"}
 
   valuesFrom:
