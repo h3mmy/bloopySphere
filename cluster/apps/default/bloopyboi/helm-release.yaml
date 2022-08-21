@@ -21,6 +21,8 @@ spec:
     remediation:
       remediateLastFailure: true
   values:
+    env:
+      TZ: ${TZ}
     image:
       repository: registry.gitlab.com/h3mmy/bloopyboi # {"$imagepolicy": "flux-system:bloopyboi:name"}
       tag: v0.3.0 # {"$imagepolicy": "flux-system:bloopyboi:tag"}
