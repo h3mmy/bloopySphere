@@ -26,7 +26,7 @@ spec:
   values:
     image:
       repository: ghcr.io/k8s-at-home/radarr-nightly
-      tag: v4.2.2.6503
+      tag: v4.2.3.6520
     env:
       TZ: "${TZ}"
     ingress:
