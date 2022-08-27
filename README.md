@@ -45,6 +45,8 @@ This is my home Kubernetes cluster. [Flux](https://github.com/fluxcd/flux2) watc
 ~~For more information, head on over to my [docs](https://h3mmy.github.io/bloopySphere/).~~
 I have nested README files that should be visible as you browse the repo.
 
+My [Gitlab](https://gitlab.com/h3mmy) has more of my projects 
+
 List of container images in use cluster-wide
 
 `kubectl get pods --all-namespaces -o go-template --template="{{range .items}}{{range .spec.containers}}{{.image}} {{end}}{{end}}" | sed 's/ /\n/g' | uniq > ./container_images_in_use.txt`
