@@ -90,7 +90,7 @@ spec:
     # Configuration for the tigera operator images to deploy.
     tigeraOperator:
       image: tigera/operator
-      version: v1.28.0
+      version: v1.28.1
       registry: quay.io
       nodeSelector:
         matchExpressions:
@@ -100,7 +100,7 @@ spec:
               - "k8s-0"
     calicoctl:
       image: docker.io/calico/ctl
-      tag: v3.24.0
+      tag: v3.24.1
 
     # Config required to fix RKE2 issue #1541
     # Also see https://docs.rke2.io/known_issues/#calico-with-vxlan-encapsulation
