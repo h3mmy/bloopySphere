@@ -5,7 +5,7 @@ metadata:
   name: traefik-crd-source
   namespace: flux-system
 spec:
-  interval: 30m
+  interval: 60m
   url: https://github.com/traefik/traefik-helm-chart.git
   ref:
     # renovate: registryUrl=https://helm.traefik.io/traefik chart=traefik
