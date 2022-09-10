@@ -14,14 +14,6 @@ spec:
   cordon: true
   nodeSelector:
     matchExpressions:
-      - key: node-role.kubernetes.io/master
-        operator: In
-        values:
-          - "true"
-
-      - key: k3os.io/mode
-        operator: DoesNotExist
-
       - key: k3s-upgrade
         operator: NotIn
         values:

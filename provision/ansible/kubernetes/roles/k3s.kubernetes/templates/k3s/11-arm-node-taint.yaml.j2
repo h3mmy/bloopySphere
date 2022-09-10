@@ -1,5 +1,5 @@
 # Experiment
 {% if k3s_arch_lookup[ansible_architecture].arch in ['arm64','aarch64'] %}
 k3s_agent:
-    node-taint: "arch=arm64:NoSchedule"
+    node-taint: "kubernetes.io/arch=arm64:NoSchedule"
 {% endif %}

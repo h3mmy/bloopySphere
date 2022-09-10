@@ -23,7 +23,7 @@ spec:
     env:
       UPTIMEROBOT_API_KEY: ${UPTIMEROBOT_API_KEY}
     tolerations:
-      - key: "arch"
+      - key: "kubernetes.io/arch"
         operator: "Equal"
         value: "arm64"
         effect: "NoSchedule"

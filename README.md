@@ -45,7 +45,7 @@ This is my home Kubernetes cluster. [Flux](https://github.com/fluxcd/flux2) watc
 ~~For more information, head on over to my [docs](https://h3mmy.github.io/bloopySphere/).~~
 I have nested README files that should be visible as you browse the repo.
 
-My [Gitlab](https://gitlab.com/h3mmy) has more of my projects 
+My [Gitlab](https://gitlab.com/h3mmy) has more of my projects
 
 List of container images in use cluster-wide
 
@@ -79,8 +79,8 @@ If using a node-taint for arm nodes[1], this will allow toleration
   value: "arm64"
   effect: "NoSchedule"`
 
-[1]While Bootstrapping: `--kubelet-extra-args` `--register-with-taints="arch=arm64:NoSchedule"`
-Else: `kubectl taint no k8s-0 arch=arm64:NoSchedule`
+[1]While Bootstrapping: `--kubelet-extra-args` `--register-with-taints="kubernetes.io/arch=arm64:NoSchedule"`
+Else: `kubectl taint no k8s-0 kubernetes.io/arch=arm64:NoSchedule`
 
 Other useful snippets:
 `kubectl label node k8s-0 node-role.kubernetes.io/worker=true`
