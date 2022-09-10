@@ -37,9 +37,7 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
       hosts:
-        - host: "loki.${XYZ_DOMAIN}"
-          paths:
-            - /
+        - "loki.${XYZ_DOMAIN}"
       tls:
         - secretName: tls.loki
           hosts:

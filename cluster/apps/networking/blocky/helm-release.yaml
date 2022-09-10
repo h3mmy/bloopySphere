@@ -259,7 +259,7 @@ spec:
       caching:
         prefetching: true
       redis:
-        address: blocky-redis-master.networking:6379
+        address: blocky-redis-master:6379
         password: ${BLOCKY_REDIS_PASSWORD}
         database: 2
         required: true
