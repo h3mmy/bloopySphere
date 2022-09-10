@@ -26,24 +26,31 @@ spec:
 
   values:
 
-    ingress:
+    gateway:
       enabled: true
-      ingressClassName: "traefik"
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
-        hajimari.io/instance: "bloop-quarky"
-        hajimari.io/enable: "true"
-        hajimari.io/appName: "Loki"
-        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
-      hosts:
-        - "loki.${XYZ_DOMAIN}"
-      tls:
-        - secretName: tls.loki
-          hosts:
-            - "loki.${XYZ_DOMAIN}"
+      replicas: 1
+      ingress:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Loki"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+        hosts:
+          - host: &host "loki.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: tls.loki
+            hosts:
+              - *host
 
     write:
+      replicas: 1
       persistence:
         size: 10Gi
         storageClass: ceph-block
