@@ -49,7 +49,19 @@ spec:
         schedule: "0 0 * * *" # Daily, at midnight
         backupProfileName: ghost-mysql-backup-pvc # reference the desired backupProfiles's name
         enabled: true # backup schedules can be temporarily disabled
-
+    podSpec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - mysql-innodbcluster-mysql-server
+                topologyKey: kubernetes.io/hostname
   valuesFrom:
     - targetPath: credentials.root.user
       kind: Secret
