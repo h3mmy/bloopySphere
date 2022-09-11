@@ -117,7 +117,7 @@ spec:
           ingestion_rate_mb: 16
           ingestion_burst_size_mb: 24
         common:
-          path_prefix: /data/loki
+          path_prefix: /loki
           replication_factor: 1
           storage:
             s3:
