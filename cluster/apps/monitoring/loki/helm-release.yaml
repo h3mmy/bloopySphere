@@ -86,6 +86,12 @@ spec:
                     - loki
             topologyKey: "kubernetes.io/hostname"
     loki:
+      storage_config:
+        boltdb_shipper:
+          active_index_directory: /data/loki/index
+          cache_location: /data/loki/index_cache
+          resync_interval: 5s
+          shared_store: s3
       schemaConfig:
         configs:
           - from: "2022-01-11"
@@ -119,11 +125,6 @@ spec:
               endpoint: "minio.storage.svc.cluster.local:9000"
               s3forcepathstyle: true
               insecure: true
-            # boltdb_shipper:
-            #   active_index_directory: /data/loki/index
-            #   cache_location: /data/loki/index_cache
-            #   resync_interval: 5s
-            #   shared_store: s3
           ring:
             kvstore:
               store: memberlist
