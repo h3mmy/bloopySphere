@@ -1,6 +1,7 @@
 # Notes
 
 ## In Use
+
 * kube-prometheus-stack
 * uptimerobot
 * vector
@@ -13,5 +14,7 @@
 * goldilocks
 
 ## Disabled Entries
+
 * botkube
 * promtail
+* pushgateway
