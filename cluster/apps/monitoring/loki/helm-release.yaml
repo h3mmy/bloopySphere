@@ -109,7 +109,7 @@ spec:
           grpc_listen_port: 9095
         memberlist:
           join_members:
-            - loki-headless.monitoring.svc.cluster.local:7946
+            - loki-memberlist
         limits_config:
           enforce_metric_name: false
           reject_old_samples: true
