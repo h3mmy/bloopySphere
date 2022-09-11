@@ -33,7 +33,6 @@ spec:
       db:
         type: mysql
         url: "${JUPYTER_DB_URL}"
-        upgrade: true
       config:
         Authenticator:
           admin_users:
