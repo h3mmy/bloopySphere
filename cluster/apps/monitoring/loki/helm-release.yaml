@@ -129,8 +129,10 @@ spec:
               store: memberlist
         ruler:
           storage:
-            s3:
-              bucketnames: loki-ruler
+            type: local
+            local:
+              directory: /rules
+          rule_path: /tmp/scratch
           enable_alertmanager_v2: true
           alertmanager_url: http://prometheus-alertmanager:9093
           ring:
