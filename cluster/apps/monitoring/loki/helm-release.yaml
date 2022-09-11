@@ -88,8 +88,8 @@ spec:
     loki:
       storage_config:
         boltdb_shipper:
-          active_index_directory: /loki/index
-          cache_location: /loki/index_cache
+          active_index_directory: /var/loki/index
+          cache_location: /var/loki/index_cache
           resync_interval: 5s
           shared_store: s3
       schemaConfig:
@@ -117,7 +117,7 @@ spec:
           ingestion_rate_mb: 16
           ingestion_burst_size_mb: 24
         common:
-          path_prefix: /loki
+          path_prefix: /var/loki
           replication_factor: 1
           storage:
             s3:
@@ -145,7 +145,7 @@ spec:
             kvstore:
               store: memberlist
         compactor:
-          working_directory: /loki/boltdb-shipper-compactor
+          working_directory: /var/loki/boltdb-shipper-compactor
           shared_store: s3
           compaction_interval: 5m
           retention_enabled: true
