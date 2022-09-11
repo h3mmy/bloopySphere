@@ -86,6 +86,15 @@ spec:
                     - loki
             topologyKey: "kubernetes.io/hostname"
     loki:
+      schemaConfig:
+        configs:
+          - from: 2022-01-11
+            store: boltdb-shipper
+            object_store: s3
+            schema: v12
+            index:
+              prefix: loki_index_
+              period: 24h
       structuredConfig:
         auth_enabled: false
         server:
@@ -101,32 +110,20 @@ spec:
           reject_old_samples_max_age: 168h
           ingestion_rate_mb: 16
           ingestion_burst_size_mb: 24
-        # schema_config:
-        #   configs:
-        #     - from: ""
-        #       store: boltdb-shipper
-        #       object_store: s3
-        #       schema: v12
-        #       index:
-        #         prefix: loki_index_
-        #         period: 24h
         common:
           path_prefix: /data/loki
           replication_factor: 1
           storage:
-            bucketNames:
-              chunks: loki
-              ruler: loki-ruler
-              admin: loki
             s3:
+              bucketnames: loki
               endpoint: "minio.storage.svc.cluster.local:9000"
               s3forcepathstyle: true
               insecure: true
-            boltdb_shipper:
-              active_index_directory: /data/loki/index
-              cache_location: /data/loki/index_cache
-              resync_interval: 5s
-              shared_store: s3
+            # boltdb_shipper:
+            #   active_index_directory: /data/loki/index
+            #   cache_location: /data/loki/index_cache
+            #   resync_interval: 5s
+            #   shared_store: s3
           ring:
             kvstore:
               store: memberlist
@@ -145,7 +142,7 @@ spec:
             kvstore:
               store: memberlist
         compactor:
-          working_directory: /var/loki/boltdb-shipper-compactor
+          working_directory: /data/loki/boltdb-shipper-compactor
           shared_store: s3
           compaction_interval: 5m
           retention_enabled: true
@@ -163,6 +160,12 @@ spec:
           chunk_retain_period: 30s
 
     monitoring:
+      dashboards:
+        enabled: true
+        annotations:
+          grafana_folder: loki
+        labels:
+          grafana_dashboard: "1"
       serviceMonitor:
         enabled: true
       selfMonitoring:
