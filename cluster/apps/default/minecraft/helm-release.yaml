@@ -80,9 +80,9 @@ spec:
       overrideServerProperties: true
       memory: 4096M
        # A comma-separated list of player names to whitelist.
-      # whitelist:
+      whitelist: ${MC_1_OPS}
       # A comma-separated list of player names who should be admins.
-      # ops:
+      ops: ${MC_1_OPS}
       # Allows players to travel to the Nether.
       allowNether: true
       # Allows server to announce when a player gets an achievement.
