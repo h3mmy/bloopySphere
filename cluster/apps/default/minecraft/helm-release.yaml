@@ -64,7 +64,7 @@ spec:
       version: "LATEST"
       # This can be one of "VANILLA", "FORGE", "SPIGOT", "BUKKIT", "PAPER", "FTBA", "SPONGEVANILLA", "CURSEFORGE"
       type: PAPER
-      paperDownloadUrl: https://api.papermc.io/v2/projects/paper/versions/1.19.2/builds/127/downloads/paper-1.19.2-127.jar
+      paperDownloadUrl: https://api.papermc.io/v2/projects/paper/versions/1.19.2/builds/142/downloads/paper-1.19.2-142.jar
       jvmOpts: >-
         -Xms4G -Xmx4G
         -XX:+UseG1GC -XX:+ParallelRefProcEnabled
@@ -134,7 +134,7 @@ spec:
       # A list of VanillaTweaks Share Codes to download. (https://vanillatweaks.net/share#wUq1iz => "wUq1iz")
       vanillaTweaksShareCodes: []
       # Optional URI to a resource pack. The player may choose to use it.
-      resourcePackUrl: "https://transfer.sh/YOcKJ2/epic-adventures-119.zip"
+      resourcePackUrl: "https://download.mc-packs.net/pack/679d8f1cf33259a3c0bb86253ce13411d9469cad.zip"
       # Optional SHA-1 digest of the resource pack, in lowercase hexadecimal.
       # It is recommended to specify this, because it is used to verify the integrity of the resource pack.
       resourcePackSha: 679d8f1cf33259a3c0bb86253ce13411d9469cad
