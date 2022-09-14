@@ -134,7 +134,7 @@ spec:
       # A list of VanillaTweaks Share Codes to download. (https://vanillatweaks.net/share#wUq1iz => "wUq1iz")
       vanillaTweaksShareCodes: []
       # Optional URI to a resource pack. The player may choose to use it.
-      # resourcePackUrl:
+      resourcePackUrl: "https://www.curseforge.com/minecraft/texture-packs/epic-adventures/download/3954445"
       # Optional SHA-1 digest of the resource pack, in lowercase hexadecimal.
       # It is recommended to specify this, because it is used to verify the integrity of the resource pack.
       # resourcePackSha:
