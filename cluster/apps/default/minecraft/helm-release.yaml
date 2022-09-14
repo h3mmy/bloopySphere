@@ -124,7 +124,7 @@ spec:
       # generatorSettings:
       worldSaveName: world-2
       # If set, this URL will be downloaded at startup and used as a starting point
-      downloadWorldUrl: https://transfer.sh/7B9lTr/get/bloop-world-2.zip
+      downloadWorldUrl: https://transfer.sh/7B9lTr/bloop-world-2.zip
       # force re-download of server file
       forceReDownload: false
       # If set, the modpack at this URL will be downloaded at startup
