@@ -6,7 +6,7 @@ metadata:
   namespace: home
 spec:
   serviceAccountName: "emqx"
-  image: emqx/emqx:5.0.7
+  image: emqx/emqx:5.0.8
   replicas: 2
   labels:
     cluster: emqx
