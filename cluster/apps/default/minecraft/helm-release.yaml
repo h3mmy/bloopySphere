@@ -82,7 +82,8 @@ spec:
       # 74354 Lockette https://www.spigotmc.org/resources/lockettepro-for-1-14-1-15-1-16.74354/
       # 8631 coreprotect https://www.spigotmc.org/resources/coreprotect.8631/
       # 39534 dynmap-structures https://www.spigotmc.org/resources/dynmap-structures.39534/
-      SPIGET_RESOURCES: "274,39534"
+      # 81534 chunky https://www.spigotmc.org/resources/chunky.81534/
+      SPIGET_RESOURCES: "274,39534,81534"
     minecraftServer:
       eula: "TRUE"
       version: "LATEST"
