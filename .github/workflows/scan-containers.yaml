@@ -2,12 +2,13 @@
 name: Scan Containers
 
 on: # yamllint disable-line rule:truthy
-  pull_request:
-    branches:
-      - main
-    paths:
-      - "cluster/**.yaml"
-      - "provision/ansible/**.yml.j2"
+  workflow_dispatch:
+  # pull_request:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - "cluster/**.yaml"
+  #     - "provision/ansible/**.yml.j2"
 
 jobs:
   detect-file-changes:
