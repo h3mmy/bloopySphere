@@ -25,7 +25,13 @@ spec:
       dataDir:
         enabled: true
         existingClaim: minecraft-data-v1
-    # extraVolumes:
+    extraVolumes:
+      - volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume3/Data/Backups/app/mcsv-world-2
+        mountPath: &backupdir /backups
+        readOnly: false
     #   - volumeMounts:
     #       - name: mcsv-world-2-patches
     #         mountPath: /mnt/patches/patchset-paper.json
@@ -164,7 +170,15 @@ spec:
       serviceType: LoadBalancer
       icon: https://www.freeiconspng.com/uploads/minecraft-server-icon-23.png
       rcon:
-        enabled: false
+        enabled: true
+        password: ${MC_WORLD_2_RCON_PASSWORD}
+      mcbackup:
+        enabled: true
+        image:
+          repository: itzg/mc-backup
+          pullPolicy: IfNotPresent
+        backupMethod: tar
+        destDir: *backupdir
       extraPorts:
         - name: map
           containerPort: 8123
