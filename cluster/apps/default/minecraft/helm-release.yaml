@@ -25,6 +25,21 @@ spec:
       dataDir:
         enabled: true
         existingClaim: minecraft-data-v1
+    extraVolumes:
+      - volumeMounts:
+          - name: mcsv-world-2-patches
+            mountPath: /mnt/patches/patchset-paper.json
+            readOnly: true
+        volumes:
+          - name: mcsv-world-2-patches
+            projected:
+              defaultMode: 0775
+              sources:
+                - configMap:
+                    name: mcsv-world-2-patches
+                    items:
+                      - key: patchset-paper.json
+                        path: patchset-paper.json
     resources:
       requests:
         memory: 6Gi
@@ -50,15 +65,18 @@ spec:
     podAnnotations:
       backup.velero.io/backup-volumes: datadir
     serviceAnnotations:
-      mc-router.itzg.me/externalServerName: "minecraft.${XYZ_DOMAIN}"
+      mc-router.itzg.me/externalServerName: &mchost minecraft.${XYZ_DOMAIN}
+      coredns.io/hostname: *mchost
     extraEnv:
       TZ: ${TZ}
       MODS: "https://github.com/EssentialsX/Essentials/releases/download/2.19.7/EssentialsX-2.19.7.jar"
       ENABLE_AUTOPAUSE: FALSE
+      # PATCH_DEFINITIONS: /mnt/patches
       # 274 Dynmap https://www.spigotmc.org/resources/dynmap%C2%AE.274/
       # 74354 Lockette https://www.spigotmc.org/resources/lockettepro-for-1-14-1-15-1-16.74354/
       # 8631 coreprotect https://www.spigotmc.org/resources/coreprotect.8631/
-      SPIGET_RESOURCES: "274"
+      # 39534 dynmap-structures https://www.spigotmc.org/resources/dynmap-structures.39534/
+      SPIGET_RESOURCES: "274,39534"
     minecraftServer:
       eula: "TRUE"
       version: "LATEST"
