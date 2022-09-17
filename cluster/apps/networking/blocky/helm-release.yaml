@@ -48,7 +48,7 @@ spec:
       enabled: true
       target: blocky
       minReplicas: 2
-      maxReplicas: 4
+      maxReplicas: 3
       targetCPUUtilizationPercentage: 85
       targetMemoryUtilizationPercentage: 85
 
@@ -174,11 +174,11 @@ spec:
 
     resources:
       requests:
-        memory: 100Mi
-        cpu: 100m
+        memory: 200Mi
+        cpu: 200m
       limits:
-        memory: 750Mi
-        cpu: 1000m
+        memory: 950Mi
+        cpu: 1500m
 
     config: |
       upstream:
