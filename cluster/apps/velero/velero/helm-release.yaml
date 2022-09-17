@@ -53,6 +53,15 @@ spec:
         schedule: "0 6 * * *"
         template:
           ttl: "168h"
+      mcsv-minecraft-4-hours:
+        schedule: "30 0/4 * * *"
+        template:
+          labelSelector:
+            matchLabels:
+              app: mcsv-minecraft
+          ttl: "120h"
+          includedNamespaces:
+            - default
 
     metrics:
       enabled: true

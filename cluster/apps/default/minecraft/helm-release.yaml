@@ -25,21 +25,21 @@ spec:
       dataDir:
         enabled: true
         existingClaim: minecraft-data-v1
-    extraVolumes:
-      - volumeMounts:
-          - name: mcsv-world-2-patches
-            mountPath: /mnt/patches/patchset-paper.json
-            readOnly: true
-        volumes:
-          - name: mcsv-world-2-patches
-            projected:
-              defaultMode: 0775
-              sources:
-                - configMap:
-                    name: mcsv-world-2-patches
-                    items:
-                      - key: patchset-paper.json
-                        path: patchset-paper.json
+    # extraVolumes:
+    #   - volumeMounts:
+    #       - name: mcsv-world-2-patches
+    #         mountPath: /mnt/patches/patchset-paper.json
+    #         readOnly: true
+    #     volumes:
+    #       - name: mcsv-world-2-patches
+    #         projected:
+    #           defaultMode: 0775
+    #           sources:
+    #             - configMap:
+    #                 name: mcsv-world-2-patches
+    #                 items:
+    #                   - key: patchset-paper.json
+    #                     path: patchset-paper.json
     resources:
       requests:
         memory: 6Gi
