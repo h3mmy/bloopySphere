@@ -25,7 +25,7 @@ spec:
       TZ: ${TZ}
     image:
       repository: registry.gitlab.com/h3mmy/bloopyboi # {"$imagepolicy": "flux-system:bloopyboi:name"}
-      tag: v0.3.7 # {"$imagepolicy": "flux-system:bloopyboi:tag"}
+      tag: v0.3.8 # {"$imagepolicy": "flux-system:bloopyboi:tag"}
   valuesFrom:
     - kind: Secret
       name: bloopyboi-secrets
