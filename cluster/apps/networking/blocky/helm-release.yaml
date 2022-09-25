@@ -135,6 +135,19 @@ spec:
       # linkerd.io/inject: enabled
 
     affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 80
+            nodeAffinityTerm:
+              labelSelector:
+                - matchExpressions:
+                    - key: kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
+                        - i386
+                        - i686
+                        - x86
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 100

@@ -25,7 +25,7 @@ resources:
   - rook-ceph-charts.yaml
   - stakater-charts.yaml
   - traefik-charts.yaml
-  - weaveworks-kured-charts.yaml
+  - kubereboot-charts.yaml
   - cdr-charts.yaml
   - oauth2-proxy-charts.yaml
   - jupyterhub-charts.yaml
