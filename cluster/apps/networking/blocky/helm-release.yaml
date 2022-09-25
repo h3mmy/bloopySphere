@@ -139,14 +139,14 @@ spec:
         preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 80
             preference:
-              - matchExpressions:
-                  - key: kubernetes.io/arch
-                    operator: In
-                    values:
-                      - amd64
-                      - i386
-                      - i686
-                      - x86
+              matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
+                    - i386
+                    - i686
+                    - x86
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 100
