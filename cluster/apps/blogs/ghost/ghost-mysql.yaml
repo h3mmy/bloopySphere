@@ -27,7 +27,7 @@ spec:
   values:
     serverVersion: "8.0.30"
     serverInstances: 3
-    routerInstances: 1
+    routerInstances: 2
     tls:
       useSelfSigned: true
     datadirVolumeClaimTemplate:
