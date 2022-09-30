@@ -56,7 +56,6 @@ spec:
           host: http://s3.minio.storage
       redis:
         host: "authentik-redis-master"
-        persistence: false
       email:
         host: "smtp.sendgrid.net"
         port: 587
@@ -94,6 +93,8 @@ spec:
       enabled: false
     redis:
       enabled: true
+      persistence:
+        enabled: false
       podAnnotations:
         linkerd.io/inject: enabled
     prometheus:
