@@ -20,6 +20,8 @@ spec:
   dependsOn:
     - name: cert-manager
       namespace: cert-manager
+    - name: authentik-redis
+      namespace: auth
 
   install:
     remediation:
@@ -56,6 +58,7 @@ spec:
           host: http://s3.minio.storage
       redis:
         host: "authentik-redis-master"
+        password: ${AUTHENTIK_REDIS_PASSWORD}
       email:
         host: "smtp.sendgrid.net"
         port: 587
@@ -92,11 +95,7 @@ spec:
     postgresql:
       enabled: false
     redis:
-      enabled: true
-      persistence:
-        enabled: false
-      podAnnotations:
-        linkerd.io/inject: enabled
+      enabled: false
     prometheus:
       rules:
         create: true
