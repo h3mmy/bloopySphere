@@ -159,11 +159,12 @@ spec:
       # A list of VanillaTweaks Share Codes to download. (https://vanillatweaks.net/share#wUq1iz => "wUq1iz")
       vanillaTweaksShareCodes: []
       # Optional URI to a resource pack. The player may choose to use it.
-      # "https://download.mc-packs.net/pack/679d8f1cf33259a3c0bb86253ce13411d9469cad.zip"
-      resourcePackUrl: "https://database.faithfulpack.net/packs/32x-Java/August%202022/Faithful%2032x%20-%201.19.2.zip"
+      # mc1: "https://download.mc-packs.net/pack/679d8f1cf33259a3c0bb86253ce13411d9469cad.zip"
+      resourcePackUrl: "https://download.mc-packs.net/pack/53fcb49d17d0bb816e4a52cdaef9b545a8c654e5.zip"
       # Optional SHA-1 digest of the resource pack, in lowercase hexadecimal.
       # It is recommended to specify this, because it is used to verify the integrity of the resource pack.
-      resourcePackSha: 679d8f1cf33259a3c0bb86253ce13411d9469cad
+      # mc-1: 679d8f1cf33259a3c0bb86253ce13411d9469cad
+      resourcePackSha: 53fcb49d17d0bb816e4a52cdaef9b545a8c654e5
       # When true, players will be prompted for a response and will be disconnected if they decline the required pack
       resourcePackEnforce: false
       # Check accounts against Minecraft account service.
