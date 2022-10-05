@@ -31,7 +31,7 @@ spec:
   values:
     image:
       repository: ghcr.io/toboshii/hajimari
-      tag: v0.3.0
+      tag: v0.3.1
     hajimari:
       defaultEnable: false
       instanceName: "bloop-quarky"
