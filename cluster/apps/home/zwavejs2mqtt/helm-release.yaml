@@ -19,8 +19,8 @@ spec:
     createNamespace: true
   values:
     image:
-      repository: ghcr.io/zwave-js/zwavejs2mqtt
-      tag: 7.2.0
+      repository: ghcr.io/zwave-js/zwave-js-ui
+      tag: 8.1.0
     env:
       TZ: "${TZ}"
     service:
