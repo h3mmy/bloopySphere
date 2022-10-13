@@ -8,8 +8,8 @@ spec:
   interval: 60m
   url: https://github.com/traefik/traefik-helm-chart.git
   ref:
-    # renovate: registryUrl=https://helm.traefik.io/traefik chart=traefik versioning=prettyNewVersion
-    tag: 14.0.2
+    # renovate: registryUrl=https://helm.traefik.io/traefik chart=traefik
+    tag: v15.0.0
   ignore: |
     # exclude all
     /*
