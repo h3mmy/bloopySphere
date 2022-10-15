@@ -102,6 +102,16 @@
       ],
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}helm{{/if}}"
     },
+    // regexManager to read and process Traefik CRD's
+    {
+      "fileMatch": [
+        "cluster/crds/traefik/.+\\.yaml$"
+      ],
+      "matchStrings": [
+        "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*?)\n *tag: v(?<currentValue>.*)\n",
+      ],
+      "datasourceTemplate": "helm"
+    },
     {
       "description": "Process various other dependencies",
       "fileMatch": [
