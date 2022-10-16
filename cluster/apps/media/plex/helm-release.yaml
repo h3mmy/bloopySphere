@@ -122,6 +122,11 @@ spec:
         existingClaim: nfs-misc-pvc
         mountPath: /DataR
         readOnly: false
+      ceph-media-pvc:
+        enabled: true
+        existingClaim: ceph-media-pvc
+        readOnly: false
+        mountPath: /DataE
     podAnnotations:
       backup.velero.io/backup-volumes: config
       # pre.hook.backup.velero.io/container: fsfreeze
