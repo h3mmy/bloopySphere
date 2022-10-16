@@ -107,21 +107,21 @@ spec:
         enabled: true
         type: emptyDir
         medium: Memory
-      nfs-media-pvc:
-        enabled: true
-        existingClaim: nfs-media-pvc
-        mountPath: /Data
-        readOnly: false
-      nfs-media-2-pvc:
-        enabled: true
-        existingClaim: nfs-media-2-pvc
-        mountPath: /Data2
-        readOnly: false
-      nfs-misc-pvc:
-        enabled: true
-        existingClaim: nfs-misc-pvc
-        mountPath: /DataR
-        readOnly: false
+      # nfs-media-pvc:
+      #   enabled: true
+      #   existingClaim: nfs-media-pvc
+      #   mountPath: /Data
+      #   readOnly: false
+      # nfs-media-2-pvc:
+      #   enabled: true
+      #   existingClaim: nfs-media-2-pvc
+      #   mountPath: /Data2
+      #   readOnly: false
+      # nfs-misc-pvc:
+      #   enabled: true
+      #   existingClaim: nfs-misc-pvc
+      #   mountPath: /DataR
+      #   readOnly: false
       ceph-media-pvc:
         enabled: true
         existingClaim: ceph-media-pvc
