@@ -96,15 +96,15 @@ spec:
         existingClaim: ceph-media-pvc
         readOnly: false
         mountPath: /DataE
-      backup:
-        enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: "${NAS_ADDRESS}"
-            path: /volume3/Data/Backups/app/sonarr-uhd
-        mountPath: /config/Backups
-        readOnly: false
+      # backup:
+      #   enabled: true
+      #   type: custom
+      #   volumeSpec:
+      #     nfs:
+      #       server: "${NAS_ADDRESS}"
+      #       path: /volume3/Data/Backups/app/sonarr-uhd
+      #   mountPath: /config/Backups
+      #   readOnly: false
     resources:
       requests:
         memory: 250Mi
