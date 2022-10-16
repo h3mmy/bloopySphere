@@ -124,7 +124,7 @@ spec:
       #   readOnly: false
       ceph-media-pvc:
         enabled: true
-        existingClaim: ceph-media-pvc
+        existingClaim: ceph-media-v1
         readOnly: false
         mountPath: /DataE
     podAnnotations:
