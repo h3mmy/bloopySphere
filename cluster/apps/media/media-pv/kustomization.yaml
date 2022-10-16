@@ -5,3 +5,4 @@ resources:
   - nfs-media-pv.yaml
   - nfs-media-2-pv.yaml
   - nfs-misc-pv.yaml
+  - ceph-media-pvc.yaml
