@@ -39,7 +39,7 @@ spec:
           hajimari.io/icon: "television-classic"
           hajimari.io/instance: "bloop-xyz,bloop-quarky"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          # traefik.ingress.kubernetes.io/router.priority: "10"
+          traefik.ingress.kubernetes.io/router.priority: "99"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
           - host: "sonarr-uhd.${XYZ_DOMAIN}"
