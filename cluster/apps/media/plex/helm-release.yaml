@@ -20,6 +20,7 @@ spec:
       retries: 4
   upgrade:
     remediation:
+      retries: 3
       remediateLastFailure: true
   values:
     image:
@@ -39,7 +40,6 @@ spec:
       # PLEX_PREFERENCE_5: "LanNetworksBandwidth=192.168.0.0/16\,10.0.0.0/8"
       PLEX_PREFERENCE_6: "TranscoderTempDirectory=/tmp"
       PLEX_PREFERENCE_7: "GdmEnabled=1"
-      # PLEX_PREFERENCE_8: "TranscoderH264BackgroundPreset=fast"
     podSecurityContext:
       # Hardware acceleration using an Intel iGPU w/ QuickSync
       # These IDs below should be matched to your `video` and `render` group on the host
