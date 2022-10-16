@@ -91,6 +91,11 @@ spec:
         existingClaim: nfs-media-2-pvc
         mountPath: /Data2
         readOnly: false
+      ceph-media-pvc:
+        enabled: true
+        existingClaim: ceph-media-pvc
+        readOnly: false
+        mountPath: /DataE
       backup:
         enabled: true
         type: custom
