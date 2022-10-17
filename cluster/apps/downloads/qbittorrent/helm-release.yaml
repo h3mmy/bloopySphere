@@ -111,7 +111,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: qbittorrent-config-v1
+        existingClaim: qbittorrent-config-v2
       downloads:
         enabled: true
         existingClaim: downloads-torrent-pvc
