@@ -7,6 +7,7 @@ resources:
   - auth-ldap-authentik.yaml
   - media-radarr-uhd-bypass.yaml
   - media-sonarr-uhd-bypass.yaml
+  - media-sonarr-uhd-fix.yaml
   - media-lidarr-bypass.yaml
   - home-home-assistant.yaml
   - home-emqx.yaml
