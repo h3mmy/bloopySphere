@@ -37,3 +37,4 @@ ddns_data.json
 zwavejs2mqtt-store.zip
 *.sql
 test.sh
+container_list_backup

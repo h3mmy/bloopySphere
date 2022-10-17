@@ -6,7 +6,7 @@ resources:
   - plex
   # - calibre-web
   # - lazylibrarian
-  - overseer
+  # - overseer
   # - radarr-uhd
   # - bazarr
   # - lidarr
