@@ -62,12 +62,12 @@ alertmanager:
           - *alerthost
         secretName: "tls.alert-manager"
   alertmanagerSpec:
-    replicas: 2
+    replicas: 1
     podAntiAffinity: hard
     storage:
       volumeClaimTemplate:
         spec:
-          storageClassName: "nfs-client"
+          storageClassName: "ceph-block"
           resources:
             requests:
               storage: 1Gi
