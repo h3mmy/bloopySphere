@@ -5,6 +5,7 @@ resources:
   - redis
   - helm-release.yaml
   - dashboard
+  - db-blocky-query.yaml
 namespace: networking
 configMapGenerator:
   - name: blocky-whitelist
