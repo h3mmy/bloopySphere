@@ -11,6 +11,6 @@ resources:
   # - bazarr
   # - lidarr
   # - tdarr
-  - sonarr-uhd
+  # - sonarr-uhd
   # - readarr-audio
   # - mylar
