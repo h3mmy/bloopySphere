@@ -81,30 +81,25 @@ spec:
       config:
         enabled: true
         existingClaim: sonarr-uhd-config-v1
-      # media:
-      #   enabled: true
-      #   existingClaim: nfs-media-pvc
-      #   mountPath: /Data
-      #   readOnly: false
-      # media-2:
-      #   enabled: true
-      #   existingClaim: nfs-media-2-pvc
-      #   mountPath: /Data2
-      #   readOnly: false
-      ceph-media-pvc:
+      media:
         enabled: true
-        existingClaim: ceph-media-v1
+        existingClaim: nfs-media-pvc
+        mountPath: /Data
         readOnly: false
-        mountPath: /DataE
-      # backup:
-      #   enabled: true
-      #   type: custom
-      #   volumeSpec:
-      #     nfs:
-      #       server: "${NAS_ADDRESS}"
-      #       path: /volume3/Data/Backups/app/sonarr-uhd
-      #   mountPath: /config/Backups
-      #   readOnly: false
+      media-2:
+        enabled: true
+        existingClaim: nfs-media-2-pvc
+        mountPath: /Data2
+        readOnly: false
+      backup:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume3/Data/Backups/app/sonarr-uhd
+        mountPath: /config/Backups
+        readOnly: false
     resources:
       requests:
         memory: 250Mi
