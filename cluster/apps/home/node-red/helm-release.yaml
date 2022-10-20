@@ -28,7 +28,7 @@ spec:
   values:
     initContainers:
       npm-update:
-        image: node:18-alpine
+        image: node:19-alpine
         command:
           - /bin/sh
           - -c
