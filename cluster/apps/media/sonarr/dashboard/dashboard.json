@@ -15,8 +15,8 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
-    "id": 272,
-    "iteration": 1617623062689,
+    "id": 273,
+    "iteration": 1617623061759,
     "links": [],
     "panels": [
       {
@@ -56,7 +56,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "rgb(255, 194, 48)",
+                  "color": "rgb(33, 147, 181)",
                   "value": null
                 }
               ]
@@ -87,7 +87,7 @@
         "pluginVersion": "7.5.2",
         "targets": [
           {
-            "expr": "radarr_system_status{job=\"$instance\"}",
+            "expr": "sonarr_system_status{job=\"$instance\"}",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -118,7 +118,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "rgb(255, 194, 48)",
+                  "color": "rgb(33, 147, 181)",
                   "value": null
                 }
               ]
@@ -150,7 +150,7 @@
         "pluginVersion": "7.5.2",
         "targets": [
           {
-            "expr": "radarr_movie_missing_total{job=\"$instance\"}",
+            "expr": "sonarr_episode_missing_total{job=\"$instance\"}",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -161,7 +161,7 @@
         ],
         "timeFrom": null,
         "timeShift": null,
-        "title": "missing",
+        "title": "missing ep",
         "type": "stat"
       },
       {
@@ -183,7 +183,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "rgb(255, 194, 48)",
+                  "color": "rgb(33, 147, 181)",
                   "value": null
                 }
               ]
@@ -215,7 +215,7 @@
         "pluginVersion": "7.5.2",
         "targets": [
           {
-            "expr": "radarr_queue_total{job=\"$instance\"}",
+            "expr": "sonarr_queue_total{job=\"$instance\"}",
             "format": "time_series",
             "hide": false,
             "instant": true,
@@ -248,7 +248,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "rgb(255, 194, 48)",
+                  "color": "rgb(33, 147, 181)",
                   "value": null
                 }
               ]
@@ -280,7 +280,7 @@
         "pluginVersion": "7.5.2",
         "targets": [
           {
-            "expr": "radarr_system_health_issues{job=\"$instance\"}",
+            "expr": "sonarr_system_health_issues{job=\"$instance\"}",
             "format": "time_series",
             "hide": false,
             "instant": true,
@@ -313,7 +313,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "rgb(255, 194, 48)",
+                  "color": "rgb(33, 147, 181)",
                   "value": null
                 }
               ]
@@ -345,7 +345,7 @@
         "pluginVersion": "7.5.2",
         "targets": [
           {
-            "expr": "radarr_movie_total{job=\"$instance\"}",
+            "expr": "sonarr_series_total{job=\"$instance\"}",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -356,135 +356,7 @@
         ],
         "timeFrom": null,
         "timeShift": null,
-        "title": "movies",
-        "type": "stat"
-      },
-      {
-        "datasource": "Prometheus",
-        "fieldConfig": {
-          "defaults": {
-            "mappings": [
-              {
-                "from": "",
-                "id": 1,
-                "text": "0",
-                "to": "",
-                "type": 1,
-                "value": "null"
-              }
-            ],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "rgb(255, 194, 48)",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "locale"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 7,
-          "x": 7,
-          "y": 4
-        },
-        "id": 3,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": ["last"],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "7.5.2",
-        "targets": [
-          {
-            "expr": "radarr_movie_wanted_total{job=\"$instance\"}",
-            "format": "time_series",
-            "instant": true,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A"
-          }
-        ],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "wanted",
-        "type": "stat"
-      },
-      {
-        "datasource": "Prometheus",
-        "fieldConfig": {
-          "defaults": {
-            "decimals": 0,
-            "mappings": [
-              {
-                "from": "",
-                "id": 1,
-                "operator": "",
-                "text": "0",
-                "to": "",
-                "type": 1,
-                "value": "null"
-              }
-            ],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "rgb(255, 194, 48)",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "locale"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 4,
-          "x": 14,
-          "y": 4
-        },
-        "id": 8,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": ["last"],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "7.5.2",
-        "targets": [
-          {
-            "expr": "sum(increase(radarr_movie_downloaded_total{job=\"$instance\"}[30d]))",
-            "format": "time_series",
-            "instant": true,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A"
-          }
-        ],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "d/l past month",
+        "title": "series",
         "type": "stat"
       },
       {
@@ -506,72 +378,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "rgb(255, 194, 48)",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "locale"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 7,
-          "x": 0,
-          "y": 8
-        },
-        "id": 17,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": ["lastNotNull"],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "7.5.2",
-        "targets": [
-          {
-            "expr": "radarr_movie_monitored_total{job=\"$instance\"}",
-            "format": "time_series",
-            "instant": true,
-            "interval": "",
-            "intervalFactor": 1,
-            "legendFormat": "",
-            "refId": "A"
-          }
-        ],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "monitored",
-        "type": "stat"
-      },
-      {
-        "datasource": "Prometheus",
-        "fieldConfig": {
-          "defaults": {
-            "mappings": [
-              {
-                "from": "",
-                "id": 1,
-                "operator": "",
-                "text": "0",
-                "to": "",
-                "type": 1,
-                "value": "null"
-              }
-            ],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "rgb(255, 194, 48)",
+                  "color": "rgb(33, 147, 181)",
                   "value": null
                 }
               ]
@@ -584,7 +391,7 @@
           "h": 4,
           "w": 7,
           "x": 7,
-          "y": 8
+          "y": 4
         },
         "id": 10,
         "options": {
@@ -603,7 +410,7 @@
         "pluginVersion": "7.5.2",
         "targets": [
           {
-            "expr": "radarr_movie_filesize_total{job=\"$instance\"}",
+            "expr": "sonarr_series_filesize_bytes{job=\"$instance\"}",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -637,7 +444,137 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "rgb(255, 194, 48)",
+                  "color": "rgb(33, 147, 181)",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "locale"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 14,
+          "y": 4
+        },
+        "id": 8,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": ["last"],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.5.2",
+        "targets": [
+          {
+            "expr": "sum(increase(sonarr_episode_downloaded_total{job=\"$instance\"}[30d]))",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "d/l past month",
+        "type": "stat"
+      },
+      {
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "from": "",
+                "id": 1,
+                "operator": "",
+                "text": "0",
+                "to": "",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgb(33, 147, 181)",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "locale"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 7,
+          "x": 0,
+          "y": 8
+        },
+        "id": 17,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": ["lastNotNull"],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.5.2",
+        "targets": [
+          {
+            "expr": "sonarr_series_monitored_total{job=\"$instance\"}",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "monitored",
+        "type": "stat"
+      },
+      {
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "decimals": 0,
+            "mappings": [
+              {
+                "from": "",
+                "id": 1,
+                "operator": "",
+                "text": "0",
+                "to": "",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgb(33, 147, 181)",
                   "value": null
                 }
               ]
@@ -669,7 +606,7 @@
         "pluginVersion": "7.5.2",
         "targets": [
           {
-            "expr": "sum(increase(radarr_movie_downloaded_total{job=\"$instance\"}[7d]))",
+            "expr": "sum(increase(sonarr_episode_downloaded_total{job=\"$instance\"}[7d]))",
             "format": "table",
             "instant": true,
             "interval": "",
@@ -695,7 +632,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "rgb(255, 194, 48)",
+                  "color": "rgb(33, 147, 181)",
                   "value": null
                 }
               ]
@@ -727,7 +664,7 @@
         "pluginVersion": "7.5.2",
         "targets": [
           {
-            "expr": "sort_desc(sum(radarr_movie_quality_total{job=\"$instance\"}) by (quality))",
+            "expr": "sort_desc(sum(sonarr_episode_quality_total{job=\"$instance\"}) by (quality))",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -762,7 +699,7 @@
         },
         "targets": [
           {
-            "expr": "{app_kubernetes_io_name=\"radarr\"} !~ \"Sending HTTP request to http://localhost:7878\"",
+            "expr": "{app_kubernetes_io_name=\"sonarr\"} !~ \"Sending HTTP request to http://localhost:8989\"",
             "refId": "A"
           }
         ],
@@ -781,12 +718,12 @@
         {
           "allValue": null,
           "current": {
-            "selected": false,
-            "text": "media/radarr-uhd",
-            "value": "media/radarr-uhd"
+            "selected": true,
+            "text": "media/sonarr",
+            "value": "media/sonarr"
           },
           "datasource": null,
-          "definition": "label_values(radarr_system_status, job)",
+          "definition": "label_values(sonarr_system_status, job)",
           "description": null,
           "error": null,
           "hide": 0,
@@ -797,12 +734,12 @@
           "options": [
             {
               "selected": true,
-              "text": "media/radarr-uhd",
-              "value": "media/radarr-uhd"
+              "text": "media/sonarr",
+              "value": "media/sonarr"
             }
           ],
           "query": {
-            "query": "label_values(radarr_system_status, job)",
+            "query": "label_values(sonarr_system_status, job)",
             "refId": "StandardVariableQuery"
           },
           "refresh": 0,
@@ -823,7 +760,7 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "Radarr UHD",
-    "uid": "A8iPssjZk2",
-    "version": 18
+    "title": "Sonarr",
+    "uid": "A8iPssjZd2",
+    "version": 8
   }

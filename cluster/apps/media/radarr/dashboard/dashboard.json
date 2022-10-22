@@ -782,8 +782,8 @@
           "allValue": null,
           "current": {
             "selected": false,
-            "text": "media/radarr-uhd",
-            "value": "media/radarr-uhd"
+            "text": "media/radarr",
+            "value": "media/radarr"
           },
           "datasource": null,
           "definition": "label_values(radarr_system_status, job)",
@@ -797,8 +797,8 @@
           "options": [
             {
               "selected": true,
-              "text": "media/radarr-uhd",
-              "value": "media/radarr-uhd"
+              "text": "media/radarr",
+              "value": "media/radarr"
             }
           ],
           "query": {
@@ -823,7 +823,7 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "Radarr UHD",
+    "title": "Radarr",
     "uid": "A8iPssjZk2",
     "version": 18
   }

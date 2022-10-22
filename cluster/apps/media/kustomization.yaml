@@ -14,3 +14,5 @@ resources:
   # - sonarr-uhd
   # - readarr-audio
   # - mylar
+  - sonarr
+  - radarr
