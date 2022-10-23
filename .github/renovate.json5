@@ -17,7 +17,7 @@
     "github>h3mmy/bloopysphere//.github/renovate/autoMerge",
     "github>h3mmy/bloopysphere//.github/renovate/labels.json5",
     "github>h3mmy/bloopysphere//.github/renovate/groups.json5",
-    "github>h3mmy/bloopysphere//.github/renovate/disabledDatasources.json5"
+    "github>h3mmy/bloopysphere//.github/renovate/disabledDatasources.json5",
     "github>h3mmy/bloopysphere//.github/renovate/semanticCommits"
   ],
   "timezone": "America/Detroit",
