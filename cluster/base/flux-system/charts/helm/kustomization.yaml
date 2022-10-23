@@ -37,3 +37,4 @@ resources:
   - mysql-charts.yaml
   - linkerd-charts.yaml
   - bloopy-charts.yaml
+  - bjw-s-charts.yaml

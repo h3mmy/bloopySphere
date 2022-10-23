@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - media-pv
   - plex
+  - calibre
   # - calibre-web
   # - lazylibrarian
   # - overseer
