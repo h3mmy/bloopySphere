@@ -283,7 +283,7 @@ spec:
       tlsPort: 853
       certFile: /certs/tls.crt
       keyFile: /certs/tls.key
-      logLevel: debug
+      logLevel: info
       # optional: write query information (question, answer, client, duration etc.) to daily csv file
       queryLog:
         # optional one of: mysql, postgresql, csv, csv-client. If empty, log to console
