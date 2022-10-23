@@ -5,7 +5,7 @@ resources:
   - db-blocky-query.yaml
 namespace: networking
 configMapGenerator:
-  - name: primary_init_script.sh
+  - name: blocky-postgres-conf
     files:
       - primary_init_script.sh
 generatorOptions:
