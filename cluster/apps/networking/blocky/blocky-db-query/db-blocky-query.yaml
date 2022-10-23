@@ -10,7 +10,7 @@ spec:
   replicas: 1
   image: docker.io/library/postgres:15
   database:
-    size: 10Gi
+    size: 5Gi
     storageClassName: ceph-block
   # backup:
   #   schedule: "0 */1 * * *"
