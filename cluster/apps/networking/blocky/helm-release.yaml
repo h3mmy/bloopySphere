@@ -28,8 +28,6 @@ spec:
   dependsOn:
     - name: blocky-redis
       namespace: networking
-    - name: blocky-postgres
-      namespace: networking
 
   values:
 
