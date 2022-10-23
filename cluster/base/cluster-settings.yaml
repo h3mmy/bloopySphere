@@ -6,6 +6,8 @@ metadata:
   namespace: flux-system
 data:
   BOT_COMMIT_NAME: bloopyboi
+  BLOCKY_QUERY_DB_NAME: blocky_log_db
+  BLOCKY_QUERY_DB_USER: blocky
   CALIBRE_WEB_PID: "1061"
   CALICO_NODE_CIDR: "10.1.0.0/24"
   CLUSTER_NAME: bloopySphere
