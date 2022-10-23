@@ -47,7 +47,7 @@ spec:
               - path: /
                 pathType: Prefix
         tls:
-          - secretName: tls.radarr-uhd
+          - secretName: tls.radarr
             hosts:
               - "{{ (index .Values.ingress.main.hosts 0).host }}"
 

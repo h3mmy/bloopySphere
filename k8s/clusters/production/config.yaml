@@ -15,7 +15,7 @@ spec:
   wait: true
   sourceRef:
     kind: GitRepository
-    name: home-ops
+    name: bloopysphere
   decryption:
     provider: sops
     secretRef:

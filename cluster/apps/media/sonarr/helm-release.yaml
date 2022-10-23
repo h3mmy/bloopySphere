@@ -47,7 +47,7 @@ spec:
               - path: /
                 pathType: Prefix
         tls:
-          - secretName: tls.sonarr-uhd
+          - secretName: tls.sonarr
             hosts:
               - "{{ (index .Values.ingress.main.hosts 0).host }}"
 
