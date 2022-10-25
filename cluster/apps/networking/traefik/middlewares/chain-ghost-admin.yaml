@@ -7,5 +7,5 @@ metadata:
 spec:
   chain:
     middlewares:
-      - name: networking-bloopnet-xyz-auth@kubernetescrd
       - name: ghost-admin-add-prefix@kubernetescrd
+      - name: networking-bloopnet-xyz-auth@kubernetescrd
