@@ -69,10 +69,10 @@ spec:
             items:
               - key: data
                 path: mon-endpoints
-        - name: nas-data
-          nfs:
-            server: "${NAS_ADDRESS}"
-            path: /volume3/Data
+        # - name: nas-data
+        #   nfs:
+        #     server: "${NAS_ADDRESS}"
+        #     path: /volume3/Data
         - name: direct-mount-scripts
           projected:
             defaultMode: 0775
