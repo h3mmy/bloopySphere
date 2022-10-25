@@ -47,8 +47,8 @@ spec:
               name: libmodules
             - name: mon-endpoint-volume
               mountPath: /etc/rook
-            - name: nas-data
-              mountPath: /mnt/nas-data
+            # - name: nas-data
+            #   mountPath: /mnt/nas-data
             - name: direct-mount-scripts
               mountPath: /scripts
       # if hostNetwork: false, the "rbd map" command hangs, see https://github.com/rook/rook/issues/2021
