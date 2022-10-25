@@ -15,3 +15,5 @@ resources:
   - chain-no-auth.yaml
   - error-pages.yaml
   - chain-no-epages.yaml
+  - ghost-admin-add-prefix.yaml
+  - chain-ghost-admin.yaml

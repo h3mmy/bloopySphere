@@ -1,0 +1,9 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: ghost-admin-add-prefix
+  namespace: networking
+spec:
+  addPrefix:
+    prefix: "/ghost"
