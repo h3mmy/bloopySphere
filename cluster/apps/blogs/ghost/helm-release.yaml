@@ -92,7 +92,7 @@ spec:
           hajimari.io/icon: "ghost"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-ghost-admin-add-prefix@kubernetescrd"
         hosts:
           - host: &host tyg3r.${XYZ_DOMAIN}
             paths:
