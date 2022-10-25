@@ -9,7 +9,8 @@ collections:
   - name: kubernetes.core
     version: 2.3.2
 roles:
-  - src: xanmanning.k3s
+  - name: xanmanning.k3s
+    src: https://github.com/PyratLabs/ansible-role-k3s.git
     version: v3.3.0
   - src: patrickjahns.promtail
     version: 1.18.0
