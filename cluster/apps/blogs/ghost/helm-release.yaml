@@ -42,6 +42,7 @@ spec:
       nameOverride: *app
     image:
       reposistory: ghost
+      # renovate: datasource=docker depName=ghost
       tag: "5.20.0"
     env:
       TZ: "${TZ}"
@@ -108,3 +109,8 @@ spec:
         existingClaim: ghost-config-v1
     mariadb:
       enable: false
+
+    # debug
+    addons:
+      netshoot:
+        enabled: true
