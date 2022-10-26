@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - media-pv
   - plex
-  - calibre
+  # - calibre
   # - calibre-web
   # - lazylibrarian
   # - overseer
@@ -15,5 +15,5 @@ resources:
   # - sonarr-uhd
   # - readarr-audio
   # - mylar
-  - sonarr
-  - radarr
+  # - sonarr
+  # - radarr
