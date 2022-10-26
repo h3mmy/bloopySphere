@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: linkerd-viz
-      version: 30.2.9-edge
+      version: 30.4.1-edge
       sourceRef:
         kind: HelmRepository
         name: linkerd-edge-charts
