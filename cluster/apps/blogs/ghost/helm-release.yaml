@@ -42,7 +42,7 @@ spec:
       nameOverride: *app
     image:
       reposistory: ghost
-      tag: "5.5.0"
+      tag: "5.20.0"
     env:
       TZ: "${TZ}"
       url: "https://${TGR_DOMAIN}"
