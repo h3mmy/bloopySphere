@@ -8,7 +8,7 @@ resources:
   - system-upgrade
   - storage
   - auth
-  - media
+  # - media
   - monitoring
   - flux-system
   - velero
