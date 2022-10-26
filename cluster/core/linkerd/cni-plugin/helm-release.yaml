@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: linkerd2-cni
-      version: 30.3.1-edge
+      version: 30.4.1-edge
       sourceRef:
         kind: HelmRepository
         name: linkerd-edge-charts
