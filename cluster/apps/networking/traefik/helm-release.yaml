@@ -83,7 +83,7 @@ spec:
               scheme: https
       websecure:
         http3:
-          enabled: true
+          enabled: false
         tls:
           enabled: true
           options: default
