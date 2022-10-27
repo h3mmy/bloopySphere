@@ -112,16 +112,16 @@ spec:
         existingClaim: nfs-media-pvc
         mountPath: /Data
         readOnly: false
-      nfs-media-2-pvc:
-        enabled: true
-        existingClaim: nfs-media-2-pvc
-        mountPath: /Data2
-        readOnly: false
-      nfs-misc-pvc:
-        enabled: true
-        existingClaim: nfs-misc-pvc
-        mountPath: /DataR
-        readOnly: false
+      # nfs-media-2-pvc:
+      #   enabled: true
+      #   existingClaim: nfs-media-2-pvc
+      #   mountPath: /Data2
+      #   readOnly: false
+      # nfs-misc-pvc:
+      #   enabled: true
+      #   existingClaim: nfs-misc-pvc
+      #   mountPath: /DataR
+      #   readOnly: false
     podAnnotations:
       backup.velero.io/backup-volumes: config
       # pre.hook.backup.velero.io/container: fsfreeze
