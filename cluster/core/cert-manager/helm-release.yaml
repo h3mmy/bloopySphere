@@ -47,7 +47,7 @@ spec:
       podAnnotations:
         linkerd.io/inject: enabled
     podSecurityPolicy:
-      enabled: true
+      enabled: false
     startupapicheck:
       enabled: true
 

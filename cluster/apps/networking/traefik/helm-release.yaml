@@ -28,7 +28,7 @@ spec:
       # podAnnotations:
       #   linkerd.io/inject: ingress
     podSecurityPolicy:
-      enabled: true
+      enabled: false
     service:
       enabled: true
       type: LoadBalancer
