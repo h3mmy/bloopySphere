@@ -82,6 +82,8 @@ spec:
               to: websecure
               scheme: https
       websecure:
+        http3:
+          enabled: true
         tls:
           enabled: true
           options: default
@@ -140,8 +142,6 @@ spec:
       enabled: false
 
     experimental:
-      http3:
-        enabled: true
       plugins:
         enabled: false
 
