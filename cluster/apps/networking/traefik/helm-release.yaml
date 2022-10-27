@@ -83,6 +83,8 @@ spec:
               scheme: https
       websecure:
         http3:
+          # Have to disable for now
+          # https://github.com/kubernetes/kubernetes/issues/47249
           enabled: false
         tls:
           enabled: true
