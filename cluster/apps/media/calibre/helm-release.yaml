@@ -72,7 +72,7 @@ spec:
           hajimari.io/icon: "book-open-page-variant"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
           - host: &host "{{ .Release.Name }}.${XYZ_DOMAIN}"
             paths:
