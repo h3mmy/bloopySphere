@@ -22,7 +22,7 @@ spec:
     name: plex
     namespace: flux-system
   filterTags:
-    pattern: '^v(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)\.(?P<mod>\d+)-(?P<hash>[\d\w]+)$'
+    pattern: '^(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)\.(?P<mod>\d+)-(?P<hash>[\d\w]+)@(?P<sha>[\d\w]+)$'
     extract: "$major$minor$patch$mod"
   policy:
     numerical:
