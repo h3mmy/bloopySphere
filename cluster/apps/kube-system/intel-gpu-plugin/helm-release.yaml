@@ -38,6 +38,36 @@ spec:
       - "2"
       - -allocation-policy
       - "packed"
+
+    service:
+      main:
+        enabled: false
+
+    ingress:
+      main:
+        enabled: false
+
+    persistence:
+      devfs:
+        enabled: true
+        type: hostPath
+        hostPath: /dev/dri
+        hostPathType: Directory
+        readOnly: true
+
+      sysfs:
+        enabled: true
+        type: hostPath
+        hostPath: /sys/class/drm
+        hostPathType: Directory
+        readOnly: true
+
+      kubeletsockets:
+        enabled: true
+        type: hostPath
+        hostPathType: Directory
+        hostPath: /var/lib/kubelet/device-plugins
+
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
