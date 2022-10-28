@@ -22,14 +22,23 @@ spec:
     remediation:
       retries: 5
   values:
+    initContainers:
+      update-volume-permission:
+        image: busybox@sha256:6bdd92bf5240be1b5f3bf71324f5e371fe59f0e153b27fa1f1620f78ba16963c
+        command: ["sh", "-c", "chown -R 1000:1000 /config"]
+        volumeMounts:
+          - name: config
+            mountPath: /config
+        securityContext:
+          runAsUser: 0
     image:
       repository: ghcr.io/linuxserver/calibre
       tag: version-v6.7.1
 
     env:
       TZ: "${TZ}"
-      PUID: "568"
-      PGID: "1000"
+      PUID: "1000"
+      PGID: "65537"
 
     service:
       main:
@@ -45,6 +54,14 @@ spec:
             protocol: TCP
             targetPort: 8081
         type: ClusterIP
+
+    probes:
+      startup:
+        enabled: false
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
 
     ingress:
       main:
