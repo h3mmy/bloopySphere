@@ -42,9 +42,16 @@ spec:
 
     service:
       main:
+        externalTrafficPolicy: Local
         ports:
           http:
             port: 8080
+        # ipFamilyPolicy: PreferDualStack
+        # ipFamilies:
+        #   - "IPv4"
+        #   - "IPv6"
+        annotations:
+          metallb.universe.tf/allow-shared-ip: calibre
       webserver:
         enabled: true
         ports:
