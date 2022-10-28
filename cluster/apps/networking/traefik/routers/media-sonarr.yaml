@@ -1,0 +1,21 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: sonarr-hd-fix
+  namespace: media
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`sonarr.${XYZ_DOMAIN}`)
+      priority: 98
+      services:
+        - kind: Service
+          name: sonarr
+          port: 8989
+      middlewares:
+        - name: networking-bloopnet-xyz-auth@kubernetescrd
+  tls:
+    secretName: "tls.sonarr"
