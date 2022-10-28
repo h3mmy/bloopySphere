@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  image: ghcr.io/k8s-at-home/plex
+  image: ghcr.io/onedr0p/plex
   # accessFrom:
   #   namespaceSelectors:
   #     - matchLabels:
@@ -29,4 +29,3 @@ spec:
       order: asc
     # semver:
     #   range: ">=1.2.5"
- 
