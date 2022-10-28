@@ -36,7 +36,7 @@ spec:
       TZ: "${TZ}"
       ADVERTISE_IP: "http://${LB_PLEX_IP}:32400/,https://plex.${XYZ_DOMAIN}/"
       ALLOWED_NETWORKS: "${PLEX_NOAUTH_NETWORKS}"
-      PLEX_CLAIM: "${SECRET_PLEX_CLAIM}"
+      # PLEX_CLAIM: "${SECRET_PLEX_CLAIM}"
       # https://support.plex.tv/articles/201105343-advanced-hidden-server-settings/
       PLEX_PREFERENCE_1: "FriendlyName=Slowpoke"
       PLEX_PREFERENCE_2: "BackgroundTranscodeLowPriority=1"
