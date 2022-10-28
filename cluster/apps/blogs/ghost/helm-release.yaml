@@ -108,10 +108,3 @@ spec:
       content:
         enabled: true
         existingClaim: ghost-config-v1
-    mariadb:
-      enable: false
-
-    # debug
-    addons:
-      netshoot:
-        enabled: true
