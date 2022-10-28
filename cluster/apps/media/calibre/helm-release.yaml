@@ -42,7 +42,6 @@ spec:
 
     service:
       main:
-        externalTrafficPolicy: Local
         ports:
           http:
             port: 8080
