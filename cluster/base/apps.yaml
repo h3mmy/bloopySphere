@@ -9,6 +9,7 @@ spec:
   interval: 10m0s
   dependsOn:
     - name: core
+    - name: config
   path: ./cluster/apps
   prune: true
   sourceRef:

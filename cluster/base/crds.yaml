@@ -7,6 +7,8 @@ metadata:
 spec:
   timeout: 5m0s
   interval: 10m0s
+  dependsOn:
+    - name: config
   path: ./cluster/crds
   prune: false
   sourceRef:
