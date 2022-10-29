@@ -17,7 +17,7 @@ spec:
         namespace: flux-system
       interval: 5m
   valuesFrom:
-    - Kind: Secret
+    - kind: Secret
       name: kured-secrets
       valuesKey: discord-notify-url
       targetPath: configuration.notifyUrl
