@@ -92,12 +92,12 @@ spec:
           requests:
             # @default cpu 600m
             cpu: 200m
-            memory: 100Mi
+            memory: 200Mi
         mgr-sidecar:
           # @default cpu 600m
           requests:
             cpu: 50m
-            memory: 50Mi
+            memory: 150Mi
         mon:
           requests:
             # @default cpu 1000m
