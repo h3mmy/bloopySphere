@@ -20,4 +20,4 @@ resources:
   - blogs
   - cert-manager
   - linkerd
-  # - database
+  - kyverno
