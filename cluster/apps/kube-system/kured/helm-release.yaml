@@ -16,6 +16,11 @@ spec:
         name: kubereboot-charts
         namespace: flux-system
       interval: 5m
+  valuesFrom:
+    - Kind: Secret
+      name: kured-secrets
+      valuesKey: discord-notify-url
+      targetPath: configuration.notifyUrl
   values:
     updateStrategy: RollingUpdate
     configuration:
@@ -27,7 +32,8 @@ spec:
       forceReboot: true
       drainTimeout: 300s
       period: 1h5m0s
-      notifyUrl: "${DISCORD_WEBHOOK_URL}"
+      # https://containrrr.dev/shoutrrr/v0.5/services/overview/
+      # notifyUrl: "${DISCORD_WEBHOOK_URL}"
       messageTemplateDrain: "⏳ Draining node %s"
       messageTemplateReboot: "♻️ Rebooted node %s"
 
