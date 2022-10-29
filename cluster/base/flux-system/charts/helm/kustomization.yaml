@@ -38,3 +38,4 @@ resources:
   - linkerd-charts.yaml
   - bloopy-charts.yaml
   - bjw-s-charts.yaml
+  - kyverno-charts.yaml
