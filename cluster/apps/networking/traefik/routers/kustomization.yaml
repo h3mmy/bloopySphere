@@ -5,10 +5,7 @@ resources:
   - error-pages.yaml
   - classic-traefik.yaml
   - auth-ldap-authentik.yaml
-  - media-radarr-uhd-bypass.yaml
-  - media-sonarr-uhd-bypass.yaml
-  - media-sonarr-uhd-fix.yaml
-  - media-lidarr-bypass.yaml
+  # - media-lidarr-bypass.yaml
   - home-home-assistant.yaml
   - home-emqx.yaml
   # - home-zwavejs-wss.yaml

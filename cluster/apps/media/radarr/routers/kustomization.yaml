@@ -1,0 +1,8 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - media-radarr-fix.yaml
+  - media-radarr-uhd-fix.yaml
+  - media-radarr-bypass.yaml
+  - media-radarr-uhd-bypass.yaml
