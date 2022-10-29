@@ -12,10 +12,6 @@ spec:
       services:
         - name: classic-traefik
           port: 443
-    - match: HostSNI(`home-assistant.bloopnet.${CLASSIC_DOMAIN}`)
-      services:
-        - name: classic-traefik
-          port: 443
     - match: HostSNI(`traefik.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
@@ -33,10 +29,6 @@ spec:
         - name: classic-traefik
           port: 443
     - match: HostSNI(`jackett.bloopnet.${CLASSIC_DOMAIN}`)
-      services:
-        - name: classic-traefik
-          port: 443
-    - match: HostSNI(`plex.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
           port: 443
@@ -88,9 +80,5 @@ spec:
       services:
         - name: classic-traefik
           port: 443
-    - match: HostSNI(`mqtt.bloopnet.${CLASSIC_DOMAIN}`)
-      services:
-        - name: classic-traefik
-          port: 9001
   tls:
     passthrough: true
