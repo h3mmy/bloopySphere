@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.traefik.io/traefik
       chart: traefik
-      version: 10.24.0
+      version: 18.1.0
       sourceRef:
         kind: HelmRepository
         name: traefik-charts
@@ -21,12 +21,14 @@ spec:
       namespace: cert-manager
   values:
     image:
-      name: ghcr.io/k8s-at-home/traefik
+      name: traefik
     deployment:
       kind: Deployment
       replicas: 2
+      # podAnnotations:
+      #   linkerd.io/inject: ingress
     podSecurityPolicy:
-      enabled: true
+      enabled: false
     service:
       enabled: true
       type: LoadBalancer
@@ -80,6 +82,10 @@ spec:
               to: websecure
               scheme: https
       websecure:
+        http3:
+          # Have to disable for now
+          # https://github.com/kubernetes/kubernetes/issues/47249
+          enabled: false
         tls:
           enabled: true
           options: default
@@ -90,6 +96,9 @@ spec:
             - bloop: "${SECRET_DOMAIN}"
               sans:
                 - "*.${SECRET_DOMAIN}"
+            - tyg3r: "${TGR_DOMAIN}"
+              sans:
+                - "*.${TGR_DOMAIN}"
           stores: networking-default@kubernetescrd
       dns-tls:
         port: 8853
@@ -135,8 +144,6 @@ spec:
       enabled: false
 
     experimental:
-      http3:
-        enabled: true
       plugins:
         enabled: false
 

@@ -12,7 +12,7 @@ spec:
   chart:
     spec:
       chart: vector
-      version: 0.14.0
+      version: 0.16.3
       sourceRef:
         kind: HelmRepository
         name: vector-charts
@@ -45,7 +45,7 @@ spec:
     tolerations:
       - key: node-role.kubernetes.io/master
         effect: NoSchedule
-      - key: "arch"
+      - key: "kubernetes.io/arch"
         operator: "Equal"
         value: "arm64"
         effect: "NoSchedule"

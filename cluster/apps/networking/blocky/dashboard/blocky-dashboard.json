@@ -1278,7 +1278,7 @@
           "hide": 2,
           "label": null,
           "name": "blocky_url",
-          "query": "https://blocky.networking",
+          "query": "http://blocky.networking.svc.cluster.local:4000",
           "skipUrlSync": false,
           "type": "constant"
         }

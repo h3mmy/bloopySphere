@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: blocky
-      version: 10.4.0
+      version: 10.5.2
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -24,6 +24,10 @@ spec:
     remediation:
       remediateLastFailure: true
       retries: 7
+
+  dependsOn:
+    - name: blocky-redis
+      namespace: networking
 
   values:
 
@@ -44,9 +48,9 @@ spec:
       enabled: true
       target: blocky
       minReplicas: 2
-      maxReplicas: 4
-      targetCPUUtilizationPercentage: 80
-      targetMemoryUtilizationPercentage: 80
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 85
+      targetMemoryUtilizationPercentage: 85
 
     service:
       main:
@@ -91,28 +95,6 @@ spec:
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${LB_V4_BLOCKY}, ${SVC_BLOCKY_ADDR_V6}"
           metallb.universe.tf/allow-shared-ip: blocky
-      # dns-udp:
-      #   enabled: true
-      #   type: LoadBalancer
-      #   # v1.24 will have loadBalancerIPs
-      #   # see https://github.com/kubernetes/enhancements/pull/1992
-      #   ports:
-      #     dns-udp:
-      #       enabled: true
-      #       port: 53
-      #       protocol: UDP
-      #       targetPort: 53
-      #   externalTrafficPolicy: Local
-      #   loadBalancerIPs:
-      #     - ${SVC_BLOCKY_ADDR_V4}
-      #     - ${SVC_BLOCKY_ADDR_V6}
-      #   ipFamilyPolicy: PreferDualStack
-      #   ipFamilies:
-      #     - "IPv4"
-      #     - "IPv6"
-      #   annotations:
-      #     # metallb.universe.tf/loadBalancerIPs: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
-      #     metallb.universe.tf/allow-shared-ip: blocky
 
     ingress:
       main:
@@ -150,8 +132,21 @@ spec:
     podAnnotations:
       configmap.reloader.stakater.com/reload: blocky-config
       secret.reloader.stakater.com/reload: tls.blocky
+      # linkerd.io/inject: enabled
 
     affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 80
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
+                    - i386
+                    - i686
+                    - x86
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 100
@@ -165,7 +160,7 @@ spec:
               topologyKey: kubernetes.io/hostname
 
     tolerations:
-      - key: "arch"
+      - key: "kubernetes.io/arch"
         operator: "Equal"
         value: "arm64"
         effect: "NoSchedule"
@@ -191,11 +186,11 @@ spec:
 
     resources:
       requests:
-        memory: 100Mi
-        cpu: 100m
+        memory: 200Mi
+        cpu: 200m
       limits:
-        memory: 750Mi
-        cpu: 1000m
+        memory: 950Mi
+        cpu: 1500m
 
     config: |
       upstream:
@@ -217,7 +212,6 @@ spec:
           ${DOMAIN_SMALL_BLOOP}: tcp+udp:${LOCAL_GATEWAY_SMALL_BLOOP}
           ${DOMAIN_CORE_BLOOP}: tcp+udp:${LOCAL_GATEWAY_CORE_BLOOP}
           status.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
-          tyg3r.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
           # DoH canary domains. Forward to pihole for NODATA or NXDOMAIN
           use-application-dns.net: tcp+udp:10.1.0.10
           mask.icloud.com: tcp+udp:10.1.0.10
@@ -226,6 +220,7 @@ spec:
         mapping:
           ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_TRAEFIK_CLASSIC}
           ${SECRET_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+          ${TGR_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
           emqx.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
           home-assistant.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
           mqtt.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
@@ -275,6 +270,11 @@ spec:
         #     - 192.168.178.29
       caching:
         prefetching: true
+      redis:
+        address: blocky-redis-master:6379
+        password: ${BLOCKY_REDIS_PASSWORD}
+        database: 2
+        required: true
       prometheus:
         enable: true
         path: /metrics
@@ -284,7 +284,20 @@ spec:
       certFile: /certs/tls.crt
       keyFile: /certs/tls.key
       logLevel: info
+      # optional: write query information (question, answer, client, duration etc.) to daily csv file
       queryLog:
-        type: mysql
-        target: ${MARIADB_BLOCKY_USER}:${MARIADB_BLOCKY_PASSWORD}@tcp(${MARIADB_ADDRESS}:3306)/${MARIADB_BLOCKY_DATABASE}?charset=utf8mb4&parseTime=True&loc=Local
+        # optional one of: mysql, postgresql, csv, csv-client. If empty, log to console
+        type: postgresql
+        # directory (should be mounted as volume in docker) for csv, db connection string for mysql/postgresql
+        #mysql target: db_user:db_password@tcp(db_host_or_ip:3306)/db_name?charset=utf8mb4&parseTime=True&loc=Local
+        target: "postgres://blocky:${BLOCKY_KUBEGRES_PASSWORD}@blocky-postgres:5432/blocky_log"
+        # if > 0, deletes log files which are older than ... days
         logRetentionDays: 7
+        # optional: Max attempts to create specific query log writer, default: 3
+        creationAttempts: 1
+        # optional: Time between the creation attempts, default: 2s
+        creationCooldown: 2s
+      # queryLog:
+      #   type: mysql
+      #   target: ${MARIADB_BLOCKY_USER}:${MARIADB_BLOCKY_PASSWORD}@tcp(${MARIADB_ADDRESS}:3306)/${MARIADB_BLOCKY_DATABASE}?charset=utf8mb4&parseTime=True&loc=Local
+      #   logRetentionDays: 7

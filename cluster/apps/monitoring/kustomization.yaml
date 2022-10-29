@@ -5,7 +5,7 @@ resources:
   - kube-prometheus-stack
   - thanos
   - loki
-  - pushgateway
+  # - pushgateway
   - grafana
   - uptimerobot
   - unifi-poller

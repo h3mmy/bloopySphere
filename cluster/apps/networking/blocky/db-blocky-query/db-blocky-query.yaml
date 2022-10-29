@@ -1,0 +1,30 @@
+---
+apiVersion: kubegres.reactive-tech.io/v1
+kind: Kubegres
+metadata:
+  name: blocky-postgres
+  namespace: networking
+  annotations:
+    config.alpha.linkerd.io/proxy-wait-before-exit-seconds: "20"
+spec:
+  customConfig: blocky-postgres-conf
+  replicas: 1
+  image: docker.io/library/postgres:15
+  database:
+    size: 5Gi
+    storageClassName: ceph-block
+  # backup:
+  #   schedule: "0 */1 * * *"
+  #   pvcName: blocky-db-backup
+  #   volumeMount: /var/lib/backup
+  env:
+    - name: POSTGRES_PASSWORD
+      value: ${BLOCKY_KUBEGRES_PASSWORD}
+    - name: POSTGRES_REPLICATION_PASSWORD
+      value: ${BLOCKY_KUBEGRES_PASSWORD}
+    - name: BLOCKY_QUERY_DB_NAME
+      value: ${BLOCKY_QUERY_DB_NAME}
+    - name: BLOCKY_QUERY_DB_PASSWORD
+      value: ${BLOCKY_QUERY_DB_PASSWORD}
+    - name: BLOCKY_DB_USER
+      value: ${BLOCKY_QUERY_DB_USER}

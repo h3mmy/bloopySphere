@@ -8,11 +8,11 @@ spec:
   chart:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: plex
-      version: 6.3.4
+      chart: app-template
+      version: 0.2.2
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
       interval: 5m
   install:
@@ -20,17 +20,23 @@ spec:
       retries: 4
   upgrade:
     remediation:
+      retries: 3
       remediateLastFailure: true
+  dependsOn:
+    - name: intel-gpu-plugin
+      namespace: kube-system
+    - name: node-feature-discovery
+      namespace: kube-system
   values:
     image:
-      repository: ghcr.io/k8s-at-home/plex # {"$imagepolicy": "flux-system:plex:name"}
-      tag: v1.27.2.5929-a806c5905 # {"$imagepolicy": "flux-system:plex:tag"}
+      repository: ghcr.io/onedr0p/plex # {"$imagepolicy": "flux-system:plex:name"}
+      tag: "1.29.1.6316-f4cdfea9c" # {"$imagepolicy": "flux-system:plex:tag"}
       imagePullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"
       ADVERTISE_IP: "http://${LB_PLEX_IP}:32400/,https://plex.${XYZ_DOMAIN}/"
       ALLOWED_NETWORKS: "${PLEX_NOAUTH_NETWORKS}"
-      PLEX_CLAIM: "${SECRET_PLEX_CLAIM}"
+      # PLEX_CLAIM: "${SECRET_PLEX_CLAIM}"
       # https://support.plex.tv/articles/201105343-advanced-hidden-server-settings/
       PLEX_PREFERENCE_1: "FriendlyName=Slowpoke"
       PLEX_PREFERENCE_2: "BackgroundTranscodeLowPriority=1"
@@ -39,8 +45,11 @@ spec:
       # PLEX_PREFERENCE_5: "LanNetworksBandwidth=192.168.0.0/16\,10.0.0.0/8"
       PLEX_PREFERENCE_6: "TranscoderTempDirectory=/tmp"
       PLEX_PREFERENCE_7: "GdmEnabled=1"
-      # PLEX_PREFERENCE_8: "TranscoderH264BackgroundPreset=fast"
     podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
       # Hardware acceleration using an Intel iGPU w/ QuickSync
       # These IDs below should be matched to your `video` and `render` group on the host
       # To obtain those IDs run the following grep statement on the host:
@@ -59,14 +68,16 @@ spec:
     service:
       main:
         type: LoadBalancer
-        loadBalancerIP: ${LB_PLEX_IP}
+        loadBalancerIPs:
+          - ${LB_PLEX_IP}
         externalTrafficPolicy: Local
         annotations:
           metallb.universe.tf/allow-shared-ip: plex
           traefik.ingress.kubernetes.io/service.serversscheme: https
           coredns.io/hostname: plex
-        port:
-          port: 32400
+        ports:
+          http:
+            port: 32400
     ingress:
       main:
         enabled: true
@@ -112,16 +123,16 @@ spec:
         existingClaim: nfs-media-pvc
         mountPath: /Data
         readOnly: false
-      nfs-media-2-pvc:
-        enabled: true
-        existingClaim: nfs-media-2-pvc
-        mountPath: /Data2
-        readOnly: false
-      nfs-misc-pvc:
-        enabled: true
-        existingClaim: nfs-misc-pvc
-        mountPath: /DataR
-        readOnly: false
+      # nfs-media-2-pvc:
+      #   enabled: true
+      #   existingClaim: nfs-media-2-pvc
+      #   mountPath: /Data2
+      #   readOnly: false
+      # nfs-misc-pvc:
+      #   enabled: true
+      #   existingClaim: nfs-misc-pvc
+      #   mountPath: /DataR
+      #   readOnly: false
     podAnnotations:
       backup.velero.io/backup-volumes: config
       # pre.hook.backup.velero.io/container: fsfreeze

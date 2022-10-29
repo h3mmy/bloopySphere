@@ -1,0 +1,22 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: linkerd-charts
+  namespace: flux-system
+spec:
+  interval: ${DEFAULT_HELM_REPO_INTERVAL}
+  # Using the stable release channel. https://linkerd.io/
+  url: https://helm.linkerd.io/
+  timeout: ${DEFAULT_HELM_REPO_TIMEOUT}
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: linkerd-edge-charts
+  namespace: flux-system
+spec:
+  interval: ${DEFAULT_HELM_REPO_INTERVAL}
+  # Using the edge release channel. https://linkerd.io/edge/
+  url: https://helm.linkerd.io/edge
+  timeout: ${DEFAULT_HELM_REPO_TIMEOUT}

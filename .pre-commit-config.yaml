@@ -1,9 +1,8 @@
 ---
 fail_fast: false
 repos:
-
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.27.1
+    rev: v1.28.0
     hooks:
       - args:
           - --config-file
@@ -18,7 +17,7 @@ repos:
       - id: mixed-line-ending
 
   - repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.3.0
+    rev: v1.3.1
     hooks:
       - id: remove-crlf
       - id: remove-tabs
@@ -27,7 +26,7 @@ repos:
     rev: 0.2.0
     hooks:
       - id: fix-smartquotes
-        exclude: '^cluster/apps/networking/traefik/middlewares/secure-headers.yaml$'
+        exclude: "^cluster/apps/networking/traefik/middlewares/secure-headers.yaml$"
 
   - repo: https://github.com/k8s-at-home/sops-pre-commit
     rev: v2.1.1
@@ -37,9 +36,10 @@ repos:
     rev: v0.2.0
     hooks:
       - id: check-flux-helm-values
+        exclude: "^cluster/core/cert-manager/cert-manager-trust/helm-release.yaml$"
 
   # - repo: https://github.com/koalaman/shellcheck-precommit
   #   rev: v0.7.2
   #   hooks:
   #     - id: shellcheck
-      # args: ["--severity=warning"]  # Optionally only show errors and warnings
+  # args: ["--severity=warning"]  # Optionally only show errors and warnings

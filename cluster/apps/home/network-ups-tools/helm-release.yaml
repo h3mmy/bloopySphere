@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: network-ups-tools
-      version: 6.3.3
+      version: 6.4.2
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -33,7 +33,7 @@ spec:
       privileged: true
 
     tolerations:
-      - key: "arch"
+      - key: "kubernetes.io/arch"
         operator: "Equal"
         value: "arm64"
 
@@ -105,7 +105,7 @@ spec:
     metrics:
       enabled: true
       serviceMonitor:
-        interval: 5m
+        interval: 10m
         scrapeTimeout: 3m
       prometheusRule:
         enabled: true

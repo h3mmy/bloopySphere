@@ -1,0 +1,149 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: calibre-web
+  namespace: media
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+      interval: 5m
+
+  install:
+    remediation:
+      retries: 4
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+
+  values:
+    image:
+      repository: ghcr.io/bjw-s/calibre-web
+      tag: 0.6.19@sha256:e9536e29cfeaaa481abb5ca492dca28b8b36ac544c7c533cd42528e327f25abe
+
+    env:
+      TZ: "${TZ}"
+      PGID: "${MEDIA_GID}"
+      PUID: "${CALIBRE_WEB_PID}"
+      fsGroup: "${MEDIA_GID}"
+      fsGroupChangePolicy: "OnRootMismatch"
+
+    enableServiceLinks: false
+
+    service:
+      main:
+        ports:
+          http:
+            port: 8083
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: calibre-web-config
+      media:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume3/Data/Library
+        mountPath: /data/nas-media
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-secure-headers@kubernetescrd,auth-ak-outpost-books-auth@kubernetescrd
+          hajimari.io/instance: "bloop-xyz"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "bookshelf"
+          hajimari.io/appName: "Library"
+
+        hosts:
+          - host: books.${XYZ_DOMAIN}
+            paths:
+              - path: /
+
+        tls:
+          - secretName: tls.calibre-web
+            hosts:
+              - books.${XYZ_DOMAIN}
+
+      kobo:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
+
+        hosts:
+          - host: books.${XYZ_DOMAIN}
+            paths:
+              - path: /kobo/
+
+        tls:
+          - secretName: tls.calibre-web
+            hosts:
+              - calibre-web.${XYZ_DOMAIN}
+
+    tolerations:
+      - key: "kubernetes.io/arch"
+        operator: "Equal"
+        value: "arm64"
+        effect: "NoSchedule"
+
+    # affinity:
+    #   podAntiAffinity:
+    #     preferredDuringSchedulingIgnoredDuringExecution:
+    #       - weight: 100
+    #         podAffinityTerm:
+    #           labelSelector:
+    #             matchExpressions:
+    #               - key: app.kubernetes.io/name
+    #                 operator: In
+    #                 values:
+    #                   - calibre-web
+    #           topologyKey: kubernetes.io/hostname
+
+    resources:
+      requests:
+        memory: 256Mi
+      limits:
+        memory: 512Mi
+
+    # probes:
+    #   liveness:
+    #     enabled: true
+    #     custom: true
+    #     spec:
+    #       initialDelaySeconds: 5
+    #       periodSeconds: 10
+    #       timeoutSeconds: 2
+    #       failureThreshold: 3
+    #   readiness:
+    #     enabled: true
+    #     custom: true
+    #     spec:
+    #       initialDelaySeconds: 5
+    #       periodSeconds: 10
+    #       timeoutSeconds: 2
+    #       failureThreshold: 3
+    #   startup:
+    #     enabled: true
+    #     custom: true
+    #     spec:
+    #       initialDelaySeconds: 5
+    #       timeoutSeconds: 2
+    #       periodSeconds: 5
+    #       failureThreshold: 30

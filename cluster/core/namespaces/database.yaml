@@ -5,3 +5,4 @@ metadata:
   name: database
   labels:
     goldilocks.fairwinds.com/enabled: "true"
+    linkerd.io/inject: enabled

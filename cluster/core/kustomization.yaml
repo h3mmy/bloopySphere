@@ -9,3 +9,5 @@ resources:
   - rook-ceph
   - kubegres
   - tigera-operator
+  - mysql
+  - linkerd

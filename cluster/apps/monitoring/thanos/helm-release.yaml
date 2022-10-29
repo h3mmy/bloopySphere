@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: thanos
-      version: 11.1.3
+      version: 11.5.5
       sourceRef:
         kind: HelmRepository
         name: bitnami-charts
@@ -106,39 +106,39 @@ spec:
         size: 20Gi
 
     ruler:
-      enabled: true
+      enabled: false
       # replicaCount: 3
       # podAntiAffinityPreset: hard
-      dnsDiscovery:
-        enabled: true
-      alertmanagers:
-        - http://kube-prometheus-stack-alertmanager.monitoring:9093
-      clusterName: ${CLUSTER_NAME}
-      extraFlags:
-        - "--web.prefix-header=X-Forwarded-Prefix"
-      config: |-
-        groups:
-          - name: "PrometheusWatcher"
-            rules:
-              - alert: "PrometheusDown"
-                expr: absent(up{job="kube-prometheus-stack-prometheus"})
-      ingress:
-        enabled: true
-        hostname: &hostruler "thanos-ruler.${XYZ_DOMAIN}"
-        ingressClassName: traefik
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-production
-          traefik.ingress.kubernetes.io/service.serversscheme: h2c
-          traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
-        tls: true
-        extraTls:
-          - hosts:
-              - *hostruler
-            secretName: tls.thanos-ruler
-      persistence:
-        enabled: true
-        storageClass: "ceph-block"
-        size: 250Mi
+      # dnsDiscovery:
+      #   enabled: true
+      # alertmanagers:
+      #   - http://kube-prometheus-stack-alertmanager.monitoring:9093
+      # clusterName: ${CLUSTER_NAME}
+      # extraFlags:
+      #   - "--web.prefix-header=X-Forwarded-Prefix"
+      # config: |-
+      #   groups:
+      #     - name: "PrometheusWatcher"
+      #       rules:
+      #         - alert: "PrometheusDown"
+      #           expr: absent(up{job="kube-prometheus-stack-prometheus"})
+      # ingress:
+      #   enabled: true
+      #   hostname: &hostruler "thanos-ruler.${XYZ_DOMAIN}"
+      #   ingressClassName: traefik
+      #   annotations:
+      #     cert-manager.io/cluster-issuer: letsencrypt-production
+      #     traefik.ingress.kubernetes.io/service.serversscheme: h2c
+      #     traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
+      #   tls: true
+      #   extraTls:
+      #     - hosts:
+      #         - *hostruler
+      #       secretName: tls.thanos-ruler
+      # persistence:
+      #   enabled: true
+      #   storageClass: "ceph-block"
+      #   size: 250Mi
 
     metrics:
       enabled: true

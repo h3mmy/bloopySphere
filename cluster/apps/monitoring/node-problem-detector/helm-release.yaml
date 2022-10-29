@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: node-problem-detector
-      version: 2.2.2
+      version: 2.3.0
       sourceRef:
         kind: HelmRepository
         name: deliveryhero-charts
@@ -18,6 +18,9 @@ spec:
   install:
     createNamespace: true
   values:
+    image:
+      repository: k8s.gcr.io/node-problem-detector/node-problem-detector
+      tag: v0.8.12
     metrics:
       enabled: true
       serviceMonitor:

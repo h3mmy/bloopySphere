@@ -1,0 +1,10 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: stakater-charts
+  namespace: flux-system
+spec:
+  interval: ${DEFAULT_HELM_REPO_INTERVAL}
+  url: https://stakater.github.io/stakater-charts
+  timeout: ${DEFAULT_HELM_REPO_TIMEOUT}

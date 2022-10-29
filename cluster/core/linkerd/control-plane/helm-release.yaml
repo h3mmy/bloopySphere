@@ -1,0 +1,115 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: linkerd-control-plane
+  namespace: linkerd
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: linkerd-control-plane
+      version: 1.10.1-edge
+      sourceRef:
+        kind: HelmRepository
+        name: linkerd-edge-charts
+        namespace: flux-system
+
+  dependsOn:
+    - name: cert-manager
+      namespace: cert-manager
+    - name: linkerd-cni-plugin
+      namespace: linkerd-cni
+
+  install:
+    remediation: # perform remediation when helm install fails
+      retries: 5
+
+  upgrade:
+    crds: CreateReplace
+    remediation: # perform remediation when helm upgrade fails
+      retries: 5
+      remediateLastFailure: true # remediate the last failure, when no retries remain
+    cleanupOnFail: true
+
+  rollback:
+    timeout: 10m
+    recreate: true
+    cleanupOnFail: true
+
+  values:
+    installNamespace: false
+    controllerImage: cr.l5d.io/linkerd/controller
+    controllerReplicas: 1
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: "linkerd-identity-trust-roots"
+    identity:
+      externalCA: true
+      issuer:
+        scheme: kubernetes.io/tls
+    # -- Kubernetes DNS Domain name to use
+    clusterDomain: cluster.local
+
+    # -- The cluster networks for which service discovery is performed. This should
+    # include the pod and service networks, but need not include the node network.
+    #
+    # By default, all private networks are specified so that resolution works in
+    # typical Kubernetes environments.
+    # Note for IPv6 https://github.com/linkerd/linkerd2/issues/3849
+    clusterNetworks: "${NETWORK_K8S_CLUSTER_CIDR},${NETWORK_K8S_SERVICE_CIDR},${NETWORK_K8S_CLUSTER_CIDR_V6},${NETWORK_K8S_SERVICE_CIDR_V6},${CIDR_V6_SN_1},${CIDR_V6_SN_2}"
+    # -- Docker image pull policy
+    imagePullPolicy: IfNotPresent
+    # -- Log level for the control plane components
+    controllerLogLevel: info
+    # -- Log format for the control plane components
+    controllerLogFormat: plain
+    # -- default kubernetes deployment strategy
+    deploymentStrategy:
+      rollingUpdate:
+        maxUnavailable: 25%
+        maxSurge: 25%
+    # -- enables the use of EndpointSlice informers for the destination service;
+    # enableEndpointSlices should be set to true only if EndpointSlice K8s feature
+    # gate is on
+    enableEndpointSlices: true
+    # -- enables pod anti affinity creation on deployments for high availability
+    enablePodAntiAffinity: true
+    # -- enables the use of pprof endpoints on control plane component's admin
+    # servers
+    enablePprof: false
+    # -- enables the creation of pod disruption budgets for control plane components
+    enablePodDisruptionBudget: false
+    # -- enabling this omits the NET_ADMIN capability in the PSP
+    # and the proxy-init container when injecting the proxy;
+    # requires the linkerd-cni plugin to already be installed
+    cniEnabled: true
+
+    policyController:
+      # -- The default allow policy to use when no `Server` selects a pod.  One of: "all-authenticated",
+      # "all-unauthenticated", "cluster-authenticated", "cluster-unauthenticated", "deny"
+      # @default -- "all-unauthenticated"
+      defaultAllowPolicy: "all-unauthenticated"
+
+      probeNetworks:
+        - 0.0.0.0/0
+
+    proxyInit:
+      iptablesMode: nft
+      # -- Default set of outbound ports to skip via iptables
+      # - Galera (4567,4568)
+      # k3s issue https://github.com/linkerd/linkerd2/issues/7970
+      ignoreOutboundPorts: "4567,4568,6443"
+
+    # proxy configuration
+    proxy:
+      # -- Enable service profiles for non-Kubernetes services
+      enableExternalProfiles: true
+      # -- Default set of opaque ports
+      # - SMTP (25,587) server-first
+      # - MYSQL (3306) server-first
+      # - Galera (4444) server-first
+      # - PostgreSQL (5432) server-first
+      # - Redis (6379) server-first
+      # - ElasticSearch (9300) server-first
+      # - Memcached (11211) clients do not issue any preamble, which breaks detection
+      opaquePorts: "25,587,3306,4444,5432,6379,9300,11211"

@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.goauthentik.io/
       chart: authentik
-      version: 2022.7.3
+      version: 2022.10.0
       sourceRef:
         kind: HelmRepository
         name: authentik-charts
@@ -20,19 +20,28 @@ spec:
   dependsOn:
     - name: cert-manager
       namespace: cert-manager
+    - name: authentik-redis
+      namespace: auth
 
   install:
     remediation:
       retries: 4
   upgrade:
     remediation:
+      retries: 4
       remediateLastFailure: true
 
   values:
+    podAnnotations:
+      linkerd.io/inject: enabled
     fullnameOverride: authentik
     image:
       repository: ghcr.io/goauthentik/server
-      tag: 2022.7.3
+      tag: 2022.10.0
+    geoip:
+      enabled: true
+      accountId: "${MAXMIND_ACCOUNT_ID}"
+      licenseKey: "${MAXMIND_LICENSE_KEY}"
     authentik:
       outposts:
         docker_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
@@ -49,6 +58,7 @@ spec:
           host: http://s3.minio.storage
       redis:
         host: "authentik-redis-master"
+        password: ${AUTHENTIK_REDIS_PASSWORD}
       email:
         host: "smtp.sendgrid.net"
         port: 587
@@ -85,7 +95,7 @@ spec:
     postgresql:
       enabled: false
     redis:
-      enabled: true
+      enabled: false
     prometheus:
       rules:
         create: true

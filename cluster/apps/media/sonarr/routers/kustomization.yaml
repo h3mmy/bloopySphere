@@ -1,0 +1,8 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - media-sonarr-fix.yaml
+  - media-sonarr-uhd-fix.yaml
+  - media-sonarr-bypass.yaml
+  - media-sonarr-uhd-bypass.yaml

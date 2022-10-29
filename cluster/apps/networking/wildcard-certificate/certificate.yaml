@@ -9,7 +9,7 @@ spec:
     annotations:
       reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
       reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
-      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "home,flux-system,auth"
+      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "home,flux-system,auth,blogs,linkerd,linkerd-viz"
   secretName: "tls.${XYZ_DOMAIN/./-}"
   issuerRef:
     name: letsencrypt-production
@@ -20,3 +20,5 @@ spec:
     - "*.${XYZ_DOMAIN}"
     - "${SECRET_DOMAIN}"
     - "*.${SECRET_DOMAIN}"
+    - "${TGR_DOMAIN}"
+    - "*.${TGR_DOMAIN}"

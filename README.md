@@ -16,7 +16,7 @@ _... managed with Flux and Renovate_ :robot:
 <!-- markdownlint-disable-next-line -->
 <div align="center">
 
-[![k3s](https://img.shields.io/badge/k3s-v1.24.1-brightgreen?style=for-the-badge&logo=kubernetes&logoColor=white)](https://k3s.io/)
+[![k3s](https://img.shields.io/badge/k3s-v1.24.6-brightgreen?style=for-the-badge&logo=kubernetes&logoColor=white)](https://k3s.io/)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=for-the-badge)](https://github.com/pre-commit/pre-commit)
 [![renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?style=for-the-badge&logo=renovatebot&logoColor=white)](https://github.com/renovatebot/renovate)
 
@@ -44,6 +44,8 @@ This is my home Kubernetes cluster. [Flux](https://github.com/fluxcd/flux2) watc
 
 ~~For more information, head on over to my [docs](https://h3mmy.github.io/bloopySphere/).~~
 I have nested README files that should be visible as you browse the repo.
+
+My [Gitlab](https://gitlab.com/h3mmy) has more of my projects
 
 List of container images in use cluster-wide
 
@@ -77,8 +79,8 @@ If using a node-taint for arm nodes[1], this will allow toleration
   value: "arm64"
   effect: "NoSchedule"`
 
-[1]While Bootstrapping: `--kubelet-extra-args` `--register-with-taints="arch=arm64:NoSchedule"`
-Else: `kubectl taint no k8s-0 arch=arm64:NoSchedule`
+[1]While Bootstrapping: `--kubelet-extra-args` `--register-with-taints="kubernetes.io/arch=arm64:NoSchedule"`
+Else: `kubectl taint no k8s-0 kubernetes.io/arch=arm64:NoSchedule`
 
 Other useful snippets:
 `kubectl label node k8s-0 node-role.kubernetes.io/worker=true`

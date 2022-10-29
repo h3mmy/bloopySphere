@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://grafana.github.io/helm-charts
       chart: grafana
-      version: 6.32.9
+      version: 6.43.1
       sourceRef:
         kind: HelmRepository
         name: grafana-charts
@@ -71,7 +71,7 @@ spec:
       panels:
         disable_sanitize_html: true
       auth.basic:
-        disable_login_form: false
+        disable_login_form: true
       auth.generic_oauth:
         enabled: true
         name: ${CLUSTER_NAME}
@@ -183,18 +183,18 @@ spec:
           - name: Loki
             type: loki
             access: proxy
-            url: http://loki:3100
+            url: http://loki-gateway:80
           - name: Promeheus-Direct
             type: prometheus
             access: proxy
             url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
-          - name: MariaDB Blocky
-            type: mysql
-            url: ${MARIADB_ADDRESS}:3306
-            database: blocky
-            user: ${MARIADB_GRAFANA_USER}
+          - name: Blocky-Query
+            type: postgres
+            url: blocky-postgres.networking:5432
+            database: blocky_log
+            user: blocky
             secureJsonData:
-              password: ${MARIADB_GRAFANA_PASSWORD}
+              password: ${BLOCKY_KUBEGRES_PASSWORD}
           - name: MariaDB Hass
             type: mysql
             url: ${MARIADB_ADDRESS}:3306
@@ -214,9 +214,6 @@ spec:
         # blocky:
         #   url: https://raw.githubusercontent.com/0xERR0R/blocky/development/docs/blocky-grafana.json
         #   datasource: Prometheus
-        blocky-query:
-          url: https://raw.githubusercontent.com/0xERR0R/blocky/development/docs/blocky-query-grafana.json
-          datasource: MariaDB Blocky
         # Ref: https://grafana.com/grafana/dashboards/12175
         calico-felix:
           gnetId: 12175
@@ -250,6 +247,9 @@ spec:
         #   url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/control-plane.json
         #   datasource: Prometheus
       networking:
+        blocky-query:
+          url: https://raw.githubusercontent.com/0xERR0R/blocky/development/docs/blocky-query-grafana.json
+          datasource: MariaDB Blocky
         # Ref: https://grafana.com/grafana/dashboards/15513
         # cert-manager:
         #   url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json

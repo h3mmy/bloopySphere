@@ -6,12 +6,15 @@ metadata:
   namespace: flux-system
 data:
   BOT_COMMIT_NAME: bloopyboi
+  BLOCKY_QUERY_DB_NAME: blocky_log_db
+  BLOCKY_QUERY_DB_USER: blocky
   CALIBRE_WEB_PID: "1061"
   CALICO_NODE_CIDR: "10.1.0.0/24"
   CLUSTER_NAME: bloopySphere
   DOMAIN_BIG_BLOOP: "bigbloop"
   DOMAIN_CORE_BLOOP: "bloopycore"
   DOMAIN_SMALL_BLOOP: "smallbloop"
+  EMQX_PSQL_QUERY_STRING: "SELECT password_hash, salt, is_superuser FROM users where username = ${username} LIMIT 1"
   LB_PLEX_IP: 10.1.0.105
   LB_PROMTAIL: 10.1.0.103
   LB_TRAEFIK_CLASSIC: 10.1.0.50
@@ -26,6 +29,7 @@ data:
   LOCAL_GATEWAY_CORE_BLOOP: "10.1.0.1"
   LOCAL_GATEWAY_MAIN: "192.168.1.1"
   LOCAL_GATEWAY_SMALL_BLOOP: "10.0.0.1"
+  LOCAL_GATEWAY_BGP: "192.168.100.251"
   MEDIA_GID: "65537"
   METALLB_LB_RANGE: 10.1.0.100-10.5.0.255
   NAS_ADDRESS: 192.168.55.55
@@ -44,11 +48,12 @@ data:
   NETWORK_K8S_SERVICE_CIDR: "10.43.0.0/16"
   NETWORK_K8S_SERVICE_CIDR_V6: "fd0d:b917:e7b6:43::/112"
   NETWORK_MANAGEMENT_CIDR: "10.1.0.0/16"
+  NETWORK_BGP_BLOCK_V4: "10.10.0.0/16"
   NODE_0_NAME: "slowpoke"
   NODE_0_DEVICE_0: "sda"
   NODE_0_DEVICE_1: "sdb"
-  NODE_1_DEVICE_0: "sdb"
-  NODE_1_NAME: "k8s-1"
+  NODE_1_DEVICE_0: "/dev/disk/by-id/scsi-SSabrent__0000000000000000"
+  NODE_1_NAME: "k8s-3"
   NODE_2_NAME: "k8s-2"
   NODE_2_DEVICE_0: "nvme0n1"
   NODE_3_NAME: "k8s-0"

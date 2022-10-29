@@ -10,11 +10,12 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.jetstack.io/
       chart: cert-manager
-      version: v1.9.1
+      version: v1.10.0
       sourceRef:
         kind: HelmRepository
         name: jetstack-charts
         namespace: flux-system
+      reconcileStrategy: Revision
 
   install:
     crds: Create
@@ -22,6 +23,7 @@ spec:
       retries: 5
 
   upgrade:
+    force: true
     crds: CreateReplace
     remediation: # perform remediation when helm upgrade fails
       retries: 5
@@ -34,11 +36,18 @@ spec:
     cleanupOnFail: true
 
   values:
+    podAnnotations:
+      linkerd.io/inject: enabled
     installCRDs: false
     webhook:
       enabled: true
+      podAnnotations:
+        linkerd.io/inject: enabled
+    cainjector:
+      podAnnotations:
+        linkerd.io/inject: enabled
     podSecurityPolicy:
-      enabled: true
+      enabled: false
     startupapicheck:
       enabled: true
 
@@ -54,7 +63,7 @@ spec:
     prometheus:
       enabled: true
       serviceMonitor:
-        enabled: false
+        enabled: true
         namespace: *namespace
         honorLabels: true
-        prometheusInstance: monitoring
+        prometheusInstance: kube-prometheus-stack

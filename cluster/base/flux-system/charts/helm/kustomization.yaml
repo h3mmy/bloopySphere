@@ -25,13 +25,16 @@ resources:
   - rook-ceph-charts.yaml
   - stakater-charts.yaml
   - traefik-charts.yaml
-  - weaveworks-kured-charts.yaml
+  - kubereboot-charts.yaml
   - cdr-charts.yaml
   - oauth2-proxy-charts.yaml
   - jupyterhub-charts.yaml
   - codecentric-charts.yaml
   - vmware-tanzu-charts.yaml
-  - kasten-charts.yaml
   - k8s-gateway-charts.yaml
   - emberstack-charts.yaml
   - vector-charts.yaml
+  - mysql-charts.yaml
+  - linkerd-charts.yaml
+  - bloopy-charts.yaml
+  - bjw-s-charts.yaml

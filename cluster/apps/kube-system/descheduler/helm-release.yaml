@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://kubernetes-sigs.github.io/descheduler
       chart: descheduler
-      version: 0.24.1
+      version: 0.25.2
       sourceRef:
         kind: HelmRepository
         name: descheduler-charts
@@ -34,7 +34,7 @@ spec:
           enabled: true
           params:
             podsHavingTooManyRestarts:
-              podRestartThreshold: 100
+              podRestartThreshold: 80
               includingInitContainers: true
               nodeFit: true
         RemoveDuplicates:

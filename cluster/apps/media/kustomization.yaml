@@ -4,13 +4,14 @@ kind: Kustomization
 resources:
   - media-pv
   - plex
-  - calibre-web
-  - lazylibrarian
-  - overseer
-  - radarr-uhd
-  - bazarr
+  - ./books/calibre
+  # - ./books/calibre-web
+  # - ./books/lazylibrarian
+  # - ./books/readarr-audio
+  # - ./books/mylar
+  # - bazarr
   # - lidarr
-  - tdarr
-  - sonarr-uhd
-  - readarr-audio
-  - mylar
+  # - tdarr
+  # - sonarr
+  # - radarr
+  # - overseer

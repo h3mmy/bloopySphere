@@ -1,0 +1,17 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: mysql-crd-source
+  namespace: flux-system
+spec:
+  interval: 30m
+  url: https://github.com/mysql/mysql-operator.git
+  ref:
+    # renovate: registryUrl=https://mysql.github.io/mysql-operator/ chart=mysql-operator
+    tag: 8.0.30-2.0.5
+  ignore: |
+    # exclude all
+    /*
+    # path to crds
+    !/deploy/deploy-crds.yaml

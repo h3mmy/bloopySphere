@@ -26,8 +26,8 @@ jobs:
         name: pull-request
         with:
           destination_branch: ${{ env.DEPLOY_BRANCH }}
-          pr_title: "Deploy Updates ${{ github.ref }}"
-          pr_body: "*An automated PR* for testing"
+          pr_title: "Update ${{ github.branch_name }}"
+          pr_body: "*An automated PR* via flu-IUA"
           pr_reviewer: ${{ github.repository_owner }}
           pr_draft: false
           github_token: ${{ steps.generate-token.outputs.token }}

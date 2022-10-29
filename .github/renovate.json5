@@ -17,6 +17,7 @@
     "github>h3mmy/bloopysphere//.github/renovate/autoMerge",
     "github>h3mmy/bloopysphere//.github/renovate/labels.json5",
     "github>h3mmy/bloopysphere//.github/renovate/groups.json5",
+    "github>h3mmy/bloopysphere//.github/renovate/disabledDatasources.json5",
     "github>h3mmy/bloopysphere//.github/renovate/semanticCommits"
   ],
   "timezone": "America/Detroit",
@@ -83,14 +84,17 @@
       "datasourceTemplate": "helm"
     },
     {
-    description: "Raw GitHub URL Regex manager",
-    fileMatch: ["cluster/.+\\.ya?ml$", "k8s/.+\\.ya?ml$"],
-    matchStrings: [
-      "https:\\/\\/raw.githubusercontent.com\\/(?<depName>[\\w\\d\\-_]+\\/[\\w\\d\\-_]+)\\/(?<currentValue>[\\w\\d\\.\\-_]+)\\/.*",
-    ],
-    datasourceTemplate: "github-releases",
-    versioningTemplate: "semver",
-  },
+      "description": ["Raw GitHub URL Regex manager"],
+      "fileMatch": [
+        "infrastructure/.+\\.ya?ml$",
+        "kubernetes/.+\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "https:\\/\\/raw.githubusercontent.com\\/(?<depName>[\\w\\d\\-_]+\\/[\\w\\d\\-_]+)\\/(?<currentValue>[\\w\\d\\.\\-_]+)\\/.*",
+      ],
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
+    },
     {
       "description": "Process CRD dependencies",
       "fileMatch": ["cluster/crds/.+\\.ya?ml$"],
@@ -101,6 +105,16 @@
         "datasource=(?<datasource>\\S+) image=(?<depName>\\S+)\n.*?-\\s(.*?)\/(?<currentValue>[^/]+)\/[^/]+\n"
       ],
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}helm{{/if}}"
+    },
+    // regexManager to read and process Traefik CRD's
+    {
+      "fileMatch": [
+        "cluster/crds/traefik/.+\\.yaml$"
+      ],
+      "matchStrings": [
+        "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*?)\n *tag: v(?<currentValue>.*)\n",
+      ],
+      "datasourceTemplate": "helm"
     },
     {
       "description": "Process various other dependencies",
@@ -134,9 +148,9 @@
       "matchPackageNames": ["hotio/readarr"]
     },
     {
-      "matchDatasources": ["docker"],
+      "matchDatasources": ["docker", "git-releases"],
       "versioning": "loose",
-      "matchPackageNames": ["plexinc/pms-docker", "k8s-at-home/plex"]
+      "matchPackageNames": ["plexinc/pms-docker", "k8s-at-home/plex","ghcr.io/onedr0p/plex", "ghcr.io/onedr0p/qbittorrent"]
     },
     {
       "matchDatasources": [

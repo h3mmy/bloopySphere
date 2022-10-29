@@ -5,6 +5,7 @@ metadata:
   name: core
   namespace: flux-system
 spec:
+  timeout: 5m0s
   interval: 10m0s
   dependsOn:
     - name: crds

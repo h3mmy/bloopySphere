@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://hajimari.io
       chart: hajimari
-      version: 1.2.0
+      version: 2.0.2
       sourceRef:
         kind: HelmRepository
         name: hajimari-charts
@@ -31,7 +31,7 @@ spec:
   values:
     image:
       repository: ghcr.io/toboshii/hajimari
-      tag: v0.2.0
+      tag: v0.3.1
     hajimari:
       defaultEnable: false
       instanceName: "bloop-xyz"
@@ -51,7 +51,7 @@ spec:
           url: "https://discord.gg/${DISCORD_SERVER_INVITE_CODE}"
           icon: discord
         - name: Tyg3r Blog
-          url: "https://tyg3r.${XYZ_DOMAIN}"
+          url: "https://${TGR_DOMAIN}"
           icon: post
         - name: "https://readarr.${SECRET_DOMAIN}"
       groups:

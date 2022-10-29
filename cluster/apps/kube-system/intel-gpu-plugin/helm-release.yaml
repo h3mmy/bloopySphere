@@ -8,24 +8,66 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: intel-gpu-plugin
-      version: 4.3.2
+      chart: app-template
+      version: 0.2.2
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
       interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  dependsOn:
+    - name: node-feature-discovery
+      namespace: kube-system
   values:
+    controller:
+      type: daemonset
+      strategy: RollingUpdate
     image:
       repository: intel/intel-gpu-plugin
-      tag: "0.24.0"
+      tag: "0.25.0"
       pullPolicy: IfNotPresent
     args:
       - -shared-dev-num
       - "2"
       - -allocation-policy
       - "packed"
+
+    service:
+      main:
+        enabled: false
+
+    ingress:
+      main:
+        enabled: false
+
+    persistence:
+      devfs:
+        enabled: true
+        type: hostPath
+        hostPath: /dev/dri
+        hostPathType: Directory
+        readOnly: true
+
+      sysfs:
+        enabled: true
+        type: hostPath
+        hostPath: /sys/class/drm
+        hostPathType: Directory
+        readOnly: true
+
+      kubeletsockets:
+        enabled: true
+        type: hostPath
+        hostPathType: Directory
+        hostPath: /var/lib/kubelet/device-plugins
+
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:

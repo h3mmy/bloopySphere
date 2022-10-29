@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  image: ghcr.io/k8s-at-home/plex
+  image: ghcr.io/onedr0p/plex
   # accessFrom:
   #   namespaceSelectors:
   #     - matchLabels:
@@ -22,11 +22,10 @@ spec:
     name: plex
     namespace: flux-system
   filterTags:
-    pattern: '^v(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)\.(?P<mod>\d+)-(?P<hash>[\d\w]+)$'
+    pattern: '^(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)\.(?P<mod>\d+)-(?P<hash>[\d\w]+)@(?P<sha>[\d\w]+)$'
     extract: "$major$minor$patch$mod"
   policy:
     numerical:
       order: asc
     # semver:
     #   range: ">=1.2.5"
- 

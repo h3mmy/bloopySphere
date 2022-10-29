@@ -1,0 +1,21 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: radarr-bypass
+  namespace: media
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`radarr.${XYZ_DOMAIN}`) && (Headers(`X-Api-Key`, `${RADARR_API_KEY}`) || Query(`apikey`, `${RADARR_API_KEY}`))
+      priority: 98
+      services:
+        - kind: Service
+          name: radarr
+          port: 7878
+      middlewares:
+        - name: networking-bloopnet-xyz-auth@kubernetescrd
+  tls:
+    secretName: "tls.radarr"

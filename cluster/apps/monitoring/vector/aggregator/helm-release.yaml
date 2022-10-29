@@ -12,7 +12,7 @@ spec:
   chart:
     spec:
       chart: vector
-      version: 0.14.0
+      version: 0.16.3
       sourceRef:
         kind: HelmRepository
         name: vector-charts
@@ -23,7 +23,7 @@ spec:
   values:
     image:
       repository: timberio/vector
-      tag: 0.23.0-debian
+      tag: 0.24.2-debian
     role: "Stateless-Aggregator"
 
     podMonitor:

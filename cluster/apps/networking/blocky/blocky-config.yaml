@@ -2,70 +2,89 @@ upstream:
   default:
     # - tcp+udp:8.8.8.8
     # - tcp+udp:8.8.4.4
-    # - tcp+udp:1.1.1.1
+    - tcp+udp:1.1.1.1
     - tcp-tls:one.one.one.one
     - tcp-tls:dns.google
     - https://cloudflare-dns.com/dns-query
-upstreamTimeout: 5
-bootstrapDns: 1.1.1.1:53
-conditional:
-  mapping:
-    # local: tcp+udp:kube-dns.svc
-    unifi: tcp+udp:${LOCAL_GATEWAY_MAIN}
-    ${XYZ_DOMAIN}: tcp+udp:${LB_V4_K8S_GATEWAY}
-    ${DOMAIN_BIG_BLOOP}: tcp+udp:${LOCAL_GATEWAY_BIG_BLOOP}
-    ${DOMAIN_SMALL_BLOOP}: tcp+udp:${LOCAL_GATEWAY_SMALL_BLOOP}
-    ${DOMAIN_CORE_BLOOP}: tcp+udp:${LOCAL_GATEWAY_CORE_BLOOP}
-    status.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
-customDNS:
-  mapping:
-    ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_TRAEFIK_CLASSIC}
-    ${SECRET_DOMAIN}: ${LB_V4_TRAEFIK}
-blocking:
-  blockType: nxDomain
-  failStartOnListError: true
-  blackLists:
-    ads:
-      - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-      - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
-      - http://sysctl.org/cameleon/hosts
-      - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
-    special:
-      - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts
-    none:
-  whiteLists:
-    ads:
-      - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
-  clientGroupsBlock:
-    default:
-      - ads
-    ${LOCAL_GATEWAY_SMALL_BLOOP}/24:
-      - ads
-      - special
+  upstreamTimeout: 5
+  bootstrapDns: 1.1.1.1:53
+  conditional:
+    mapping:
+      # local: tcp+udp:kube-dns.svc
+      unifi: tcp+udp:${LOCAL_GATEWAY_MAIN}
+      ${XYZ_DOMAIN}: tcp+udp:${LB_V4_K8S_GATEWAY},tcp+udp:${LB_V6_K8S_GATEWAY}
+      ${DOMAIN_BIG_BLOOP}: tcp+udp:${LOCAL_GATEWAY_BIG_BLOOP}
+      ${DOMAIN_SMALL_BLOOP}: tcp+udp:${LOCAL_GATEWAY_SMALL_BLOOP}
+      ${DOMAIN_CORE_BLOOP}: tcp+udp:${LOCAL_GATEWAY_CORE_BLOOP}
+      status.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
+      # DoH canary domains. Forward to pihole for NODATA or NXDOMAIN
+      use-application-dns.net: tcp+udp:10.1.0.10
+      mask.icloud.com: tcp+udp:10.1.0.10
+      mask-h2.icloud.com: tcp+udp:10.1.0.10
+  customDNS:
+    mapping:
+      ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_TRAEFIK_CLASSIC}
+      ${SECRET_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+      ${TGR_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+      emqx.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+      home-assistant.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+      mqtt.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+      wss.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+      dns.${XYZ_DOMAIN}: ${SVC_BLOCKY_ADDR_V4},${SVC_BLOCKY_ADDR_V6}
+  blocking:
+    blockType: zeroIp
+    failStartOnListError: true
+    blackLists:
+      ads:
+        - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+        - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+        - http://sysctl.org/cameleon/hosts
+        - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
+      special:
+        - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts
+      doh:
+        - https://raw.githubusercontent.com/Sekhan/TheGreatWall/master/TheGreatWall.txt
+        - https://gist.githubusercontent.com/ckuethe/f71185f604be9cde370e702aa179fc2e/raw/53fe52046836ac3009e9505b7b8b8b5de42d84e3/doh-blocklist.txt
+      none:
+    whiteLists:
+      ads:
+        - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
+      doh:
+        - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
+    clientGroupsBlock:
+      default:
+        - ads
+      ${LOCAL_GATEWAY_BIG_BLOOP}/16:
+        - ads
+        - doh
+      ${LOCAL_GATEWAY_SMALL_BLOOP}/24:
+        - ads
+        - special
+        - doh
 
-clientLookup:
-  upstream: tcp+udp:${LOCAL_GATEWAY_MAIN}
-  # optional: some routers return multiple names for client (host name and user defined name). Define which single name should be used.
-  # Example: take second name if present, if not take first name
-  singleNameOrder:
-    - 2
-    - 1
-  # optional: custom mapping of client name to IP addresses. Useful if reverse DNS does not work properly or just to have custom client names.
-  # clients:
-  #   laptop:
-  #     - 192.168.178.29
-caching:
-  prefetching: true
-prometheus:
-  enable: true
-  path: /metrics
-httpPort: 4000
-httpsPort: 443
-tlsPort: 853
-certFile: /certs/tls.crt
-keyFile: /certs/tls.key
-logLevel: info
-queryLog:
-  type: mysql
-  target: ${MARIADB_BLOCKY_USER}:${MARIADB_BLOCKY_PASSWORD}@tcp(${MARIADB_ADDRESS}:3306)/${MARIADB_BLOCKY_DATABASE}?charset=utf8mb4&parseTime=True&loc=Local
-  logRetentionDays: 7
+  clientLookup:
+    upstream: tcp+udp:${LOCAL_GATEWAY_MAIN}
+    # optional: some routers return multiple names for client (host name and user defined name). Define which single name should be used.
+    # Example: take second name if present, if not take first name
+    singleNameOrder:
+      - 2
+      - 1
+    # optional: custom mapping of client name to IP addresses. Useful if reverse DNS does not work properly or just to have custom client names.
+    # clients:
+    #   laptop:
+    #     - 192.168.178.29
+  caching:
+    prefetching: true
+  prometheus:
+    enable: true
+    path: /metrics
+  httpPort: 4000
+  httpsPort: 443
+  tlsPort: 853
+  certFile: /certs/tls.crt
+  keyFile: /certs/tls.key
+  logLevel: info
+  queryLog:
+    type: mysql
+    target: ${MARIADB_BLOCKY_USER}:${MARIADB_BLOCKY_PASSWORD}@tcp(${MARIADB_ADDRESS}:3306)/${MARIADB_BLOCKY_DATABASE}?charset=utf8mb4&parseTime=True&loc=Local
+    logRetentionDays: 7

@@ -1,0 +1,110 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app ghost
+  namespace: blogs
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: ghost
+      version: 2.1.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+
+  dependsOn:
+    - name: ghost-mysql
+      namespace: blogs
+
+  install:
+    remediation:
+      retries: 4
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+
+  valuesFrom:
+    - targetPath: env.database__connection__password
+      kind: Secret
+      name: ghost-secrets
+      valuesKey: rootPassword
+    - targetPath: env.database__connection__user
+      kind: Secret
+      name: ghost-secrets
+      valuesKey: rootUser
+
+  values:
+    global:
+      nameOverride: *app
+    image:
+      reposistory: ghost
+      # renovate: datasource=docker depName=ghost
+      tag: "5.20.0"
+    env:
+      TZ: "${TZ}"
+      url: "https://${TGR_DOMAIN}"
+      admin__url: "https://tyg3r.${XYZ_DOMAIN}"
+      database__client: mysql
+      database__connection__host: ghost-mysql
+      database__connection__database: ghost
+      mail__transport: SMTP
+      mail__from: ${MAIILGUN_FROM_EMAIL}
+      mail__options__service: Mailgun
+      mail__options__host: smtp.mailgun.org
+      mail__options__port: 587
+      mail__options__secure: true
+      mail__options__auth__user: postmaster@mail.${TGR_DOMAIN}
+      mail__options__auth__pass: ${MAILGUN_SMTP_PASSWORD}
+      # mail__api_key: ${MAILGUN_API_KEY}
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "ghost"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          cert-manager.io/uri-sans: &host3 www.${TGR_DOMAIN}
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth@kubernetescrd"
+        hosts:
+          - host: &host2 ${TGR_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+          - host: *host3
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host2
+              - *host3
+            secretName: tls.tyg3r-tgr
+      admin:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "ghost"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          # Once authentik gets itself together this can go back to networking-bloopnet-xyz-auth@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: networking-bloopnet-xyz-auth@kubernetescrd
+        hosts:
+          - host: &host tyg3r.${XYZ_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: tls.tyg3r-xyz
+    persistence:
+      content:
+        enabled: true
+        existingClaim: ghost-config-v1

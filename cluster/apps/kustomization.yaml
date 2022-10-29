@@ -14,9 +14,10 @@ resources:
   - velero
   - calico-system
   - vpn-gateway
-  - downloads
+  # - downloads
   - rook-ceph
   - home
   - blogs
   - cert-manager
+  - linkerd
   # - database

@@ -1,0 +1,55 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: linkerd-cni-plugin
+  namespace: linkerd-cni
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: linkerd2-cni
+      version: 30.4.1-edge
+      sourceRef:
+        kind: HelmRepository
+        name: linkerd-edge-charts
+        namespace: flux-system
+
+  dependsOn:
+    - name: cert-manager
+      namespace: cert-manager
+    - name: tigera-operator
+      namespace: tigera-operator
+
+  install:
+    remediation: # perform remediation when helm install fails
+      retries: 5
+
+  upgrade:
+    crds: CreateReplace
+    remediation: # perform remediation when helm upgrade fails
+      retries: 5
+      remediateLastFailure: true # remediate the last failure, when no retries remain
+    cleanupOnFail: true
+
+  rollback:
+    timeout: 10m
+    recreate: true
+    cleanupOnFail: true
+
+  values:
+    extraInitContainers:
+      - name: wait-for-calico
+        image: busybox:1.35
+        command:
+          - /bin/sh
+          - -xc
+          - |
+            for i in $(seq 1 180); do
+              test -f /host/etc/cni/net.d/10-calico.conflist && exit 0
+              sleep 1
+            done
+            exit 1
+        volumeMounts:
+          - mountPath: /host/etc/cni/net.d
+            name: cni-net-dir

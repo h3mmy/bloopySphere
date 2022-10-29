@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://grafana.github.io/helm-charts
       chart: loki
-      version: 2.13.3
+      version: 3.3.0
       sourceRef:
         kind: HelmRepository
         name: grafana-charts
@@ -25,33 +25,52 @@ spec:
       remediateLastFailure: true
 
   values:
-
-    replicas: 1
-
-    ingress:
+    write:
+      replicas: 1
+      persistence:
+        size: 5Gi
+        storageClass: ceph-block
+    read:
+      replicas: 1
+      extraVolumeMounts:
+        - name: loki-rules
+          mountPath: /rules/fake
+        - name: loki-rules-tmp
+          mountPath: /tmp/scratch
+        - name: loki-tmp
+          mountPath: /tmp/loki-tmp
+      extraVolumes:
+        - name: loki-rules
+          emptyDir: {}
+        - name: loki-rules-tmp
+          emptyDir: {}
+        - name: loki-tmp
+          emptyDir: {}
+      persistence:
+        size: 5Gi
+        storageClass: ceph-block
+    gateway:
       enabled: true
-      ingressClassName: "traefik"
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
-        hajimari.io/instance: "bloop-quarky"
-        hajimari.io/enable: "true"
-        hajimari.io/appName: "Loki"
-        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
-      hosts:
-        - host: "loki.${XYZ_DOMAIN}"
-          paths:
-            - /
-      tls:
-        - secretName: tls.loki
-          hosts:
-            - "loki.${XYZ_DOMAIN}"
-
-    persistence:
-      enabled: false
-
-    serviceMonitor:
-      enabled: true
+      replicas: 1
+      ingress:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/instance: "bloop-quarky"
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Loki"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+        hosts:
+          - host: &host "loki.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: tls.loki
+            hosts:
+              - *host
 
     tolerations:
       - key: "arm"
@@ -66,210 +85,250 @@ spec:
                   values:
                     - loki
             topologyKey: "kubernetes.io/hostname"
-
-    config:
-      distributor:
-        ring:
-          kvstore:
-            store: memberlist
-      ingester:
-        lifecycler:
+    loki:
+      storage_config:
+        boltdb_shipper:
+          active_index_directory: /var/loki/index
+          cache_location: /var/loki/index_cache
+          resync_interval: 5s
+          shared_store: s3
+      schemaConfig:
+        configs:
+          - from: "2022-01-11"
+            store: boltdb-shipper
+            object_store: s3
+            schema: v12
+            index:
+              prefix: loki_index_
+              period: 24h
+      structuredConfig:
+        auth_enabled: false
+        server:
+          log_level: info
+          http_listen_port: 3100
+          grpc_listen_port: 9095
+        memberlist:
+          join_members:
+            - loki-memberlist
+        limits_config:
+          enforce_metric_name: false
+          reject_old_samples: true
+          reject_old_samples_max_age: 168h
+          ingestion_rate_mb: 16
+          ingestion_burst_size_mb: 24
+        common:
+          path_prefix: /var/loki
+          replication_factor: 1
+          storage:
+            s3:
+              bucketnames: loki
+              endpoint: "minio.storage.svc.cluster.local:9000"
+              s3forcepathstyle: true
+              insecure: true
           ring:
             kvstore:
               store: memberlist
-            replication_factor: 1
-          final_sleep: 0s
-        chunk_idle_period: 5m
-        chunk_retain_period: 30s
-      memberlist:
-        abort_if_cluster_join_fails: false
-        bind_port: 7946
-        join_members:
-          - loki-headless.monitoring.svc.cluster.local:7946
-        max_join_backoff: 1m
-        max_join_retries: 10
-        min_join_backoff: 1s
-      compactor:
-        working_directory: /data/compactor
-        shared_store: s3
-        compaction_interval: 5m
-      limits_config:
-        enforce_metric_name: false
-        reject_old_samples: true
-        reject_old_samples_max_age: 168h
-        ingestion_rate_mb: 16
-        ingestion_burst_size_mb: 24
-      storage_config:
-        aws:
-          bucketnames: loki
-          endpoint: "minio.storage.svc.cluster.local:9000"
-          s3forcepathstyle: true
-          insecure: true
-        boltdb_shipper:
-          active_index_directory: /data/loki/index
-          cache_location: /data/loki/index_cache
-          resync_interval: 5s
+        ruler:
+          storage:
+            type: local
+            local:
+              directory: /rules
+          rule_path: /tmp/scratch
+          enable_alertmanager_v2: true
+          alertmanager_url: http://prometheus-alertmanager:9093
+          ring:
+            kvstore:
+              store: inmemory
+          enable_api: true
+        distributor:
+          ring:
+            kvstore:
+              store: memberlist
+        compactor:
+          working_directory: /var/loki/boltdb-shipper-compactor
           shared_store: s3
-      ruler:
-        storage:
-          type: local
-          local:
-            directory: /rules
-        rule_path: /tmp/scratch
-        alertmanager_url: http://prometheus-alertmanager:9093
-        ring:
-          kvstore:
-            store: inmemory
-        enable_api: true
+          compaction_interval: 5m
+          retention_enabled: true
+          retention_delete_delay: 2h
+          retention_delete_worker_count: 150
+        ingester:
+          max_chunk_age: 1h
+          lifecycler:
+            ring:
+              kvstore:
+                store: memberlist
+              replication_factor: 1
+            final_sleep: 0s
+          chunk_idle_period: 5m
+          chunk_retain_period: 30s
 
-    alerting_groups:
-      #
-      # SMART Failures
-      #
-      - name: smart-failure
-        rules:
-          - alert: SmartFailures
-            expr: |
-              sum by (hostname) (count_over_time({hostname=~".+"} |~ "(?i).*smartd.*(error|fail).*"[2m])) > 0
-            for: 10s
-            labels:
-              severity: critical
-              category: logs
-            annotations:
-              # TODO: Figure out how to use hostname in summary
-              summary: "SMART has reported failures"
-      #
-      # zigbee2mqtt
-      #
-      - name: zigbee2mqtt
-        rules:
-          - alert: ZigbeeUnableToReachMQTT
-            expr: |
-              sum(count_over_time({app="zigbee2mqtt"} |~ "(?i)not connected to mqtt server"[2m])) > 0
-            for: 10s
-            labels:
-              severity: critical
-              category: logs
-            annotations:
-              summary: "Zigbee2mqtt is unable to reach MQTT"
-      #
-      # zwavejs2mqtt
-      #
-      - name: zwavejs2mqtt
-        rules:
-          - alert: ZwaveUnableToReachMQTT
-            expr: |
-              sum(count_over_time({app="zwavejs2mqtt"} |~ "(?i)error while connecting mqtt"[2m])) > 0
-            for: 10s
-            labels:
-              severity: critical
-              category: logs
-            annotations:
-              summary: "Zwavejs2mqtt is unable to reach MQTT"
-      #
-      # frigate
-      #
-      - name: frigate
-        rules:
-          - alert: FrigateUnableToReachMQTT
-            expr: |
-              sum(count_over_time({app="frigate"} |~ "(?i)unable to connect to mqtt server"[2m])) > 0
-            for: 10s
-            labels:
-              severity: critical
-              category: logs
-            annotations:
-              summary: "Frigate is unable to reach MQTT"
-      #
-      # *arr applications
-      #
-      - name: arr
-        rules:
-          - alert: ArrDatabaseIsLocked
-            expr: |
-              sum by (app) (count_over_time({app=~".*arr"} |~ "(?i)database is locked"[2m])) > 0
-            for: 10s
-            labels:
-              severity: critical
-              category: logs
-            annotations:
-              # TODO: Figure out how to use hostname in summary
-              summary: "An arr app is experiencing locked database issues"
-          - alert: ArrDatabaseIsMalformed
-            expr: |
-              sum by (app) (count_over_time({app=~".*arr"} |~ "(?i)database disk image is malformed"[2m])) > 0
-            for: 10s
-            labels:
-              severity: critical
-              category: logs
-            annotations:
-              # TODO: Figure out how to use hostname in summary
-              summary: "An arr app is experiencing malformed database disk image issues"
-      #
-      # home-assistant
-      #
-      - name: home-assistant
-        rules:
-          - alert: HomeAssistantUnableToReachPostgresql
-            expr: |
-              sum by (app) (count_over_time({app="home-assistant"} |~ "(?i)error in database connectivity"[2m])) > 0
-            for: 10s
-            labels:
-              severity: critical
-              category: logs
-            annotations:
-              summary: "Home Assistant is unable to connect to postgresql"
-      #
-      # vaultwarden
-      #
-      - name: vaultwarden
-        rules:
-          - alert: VaultwardenUnableToReachPostgresql
-            expr: |
-              sum by (app) (count_over_time({app="vaultwarden"} |~ "(?i)could not connect to server"[2m])) > 0
-            for: 10s
-            labels:
-              severity: critical
-              category: logs
-            annotations:
-              summary: "Vaultwarden is unable to connect to postgresql"
-      #
-      # valetudo
-      #
-      - name: valetudo
-        rules:
-          - alert: ValetudoUnableToReachMQTT
-            expr: |
-              sum by (hostname) (count_over_time({hostname="valetudo"} |~ "(?i).*error.*mqtt.*"[2m])) > 0
-            for: 10s
-            labels:
-              severity: critical
-              category: logs
-            annotations:
-              summary: "Valetudo is unable to connect to mqtt"
-      #
-      # node-red
-      #
-      - name: node-red
-        rules:
-          - alert: NodeRedUnableToReachHomeAssistant
-            expr: |
-              sum by (app) (count_over_time({app="node-red"} |~ "(?i)home assistant.*connecting to undefined"[2m])) > 0
-            for: 10s
-            labels:
-              severity: critical
-              category: logs
-            annotations:
-              summary: "Node-Red is unable to connect to Home Assistant"
+    monitoring:
+      dashboards:
+        enabled: true
+        annotations:
+          grafana_folder: loki
+        labels:
+          grafana_dashboard: "1"
+      serviceMonitor:
+        enabled: true
+      selfMonitoring:
+        enabled: true
+        grafanaAgent:
+          installOperator: false
+      rules:
+        enabled: true
+        alerting: true
+      alerts:
+        enabled: true
+        # additionalGroups:
+        #   #
+        #   # SMART Failures
+        #   #
+        #   - name: smart-failure
+        #     rules:
+        #       - alert: SmartFailures
+        #         expr: |
+        #           sum by (hostname) (count_over_time({hostname=~".+"} |~ "(?i).*smartd.*(error|fail).*"[2m])) > 0
+        #         for: 10s
+        #         labels:
+        #           severity: critical
+        #           category: logs
+        #         annotations:
+        #           # TODO: Figure out how to use hostname in summary
+        #           summary: "SMART has reported failures"
+        #   #
+        #   # zigbee2mqtt
+        #   #
+        #   - name: zigbee2mqtt
+        #     rules:
+        #       - alert: ZigbeeUnableToReachMQTT
+        #         expr: |
+        #           sum(count_over_time({app="zigbee2mqtt"} |~ "(?i)not connected to mqtt server"[2m])) > 0
+        #         for: 10s
+        #         labels:
+        #           severity: critical
+        #           category: logs
+        #         annotations:
+        #           summary: "Zigbee2mqtt is unable to reach MQTT"
+        #   #
+        #   # zwavejs2mqtt
+        #   #
+        #   - name: zwavejs2mqtt
+        #     rules:
+        #       - alert: ZwaveUnableToReachMQTT
+        #         expr: |
+        #           sum(count_over_time({app="zwavejs2mqtt"} |~ "(?i)error while connecting mqtt"[2m])) > 0
+        #         for: 10s
+        #         labels:
+        #           severity: critical
+        #           category: logs
+        #         annotations:
+        #           summary: "Zwavejs2mqtt is unable to reach MQTT"
+        #   #
+        #   # frigate
+        #   #
+        #   - name: frigate
+        #     rules:
+        #       - alert: FrigateUnableToReachMQTT
+        #         expr: |
+        #           sum(count_over_time({app="frigate"} |~ "(?i)unable to connect to mqtt server"[2m])) > 0
+        #         for: 10s
+        #         labels:
+        #           severity: critical
+        #           category: logs
+        #         annotations:
+        #           summary: "Frigate is unable to reach MQTT"
+        #   #
+        #   # *arr applications
+        #   #
+        #   - name: arr
+        #     rules:
+        #       - alert: ArrDatabaseIsLocked
+        #         expr: |
+        #           sum by (app) (count_over_time({app=~".*arr"} |~ "(?i)database is locked"[2m])) > 0
+        #         for: 10s
+        #         labels:
+        #           severity: critical
+        #           category: logs
+        #         annotations:
+        #           # TODO: Figure out how to use hostname in summary
+        #           summary: "An arr app is experiencing locked database issues"
+        #       - alert: ArrDatabaseIsMalformed
+        #         expr: |
+        #           sum by (app) (count_over_time({app=~".*arr"} |~ "(?i)database disk image is malformed"[2m])) > 0
+        #         for: 10s
+        #         labels:
+        #           severity: critical
+        #           category: logs
+        #         annotations:
+        #           # TODO: Figure out how to use hostname in summary
+        #           summary: "An arr app is experiencing malformed database disk image issues"
+        #   #
+        #   # home-assistant
+        #   #
+        #   - name: home-assistant
+        #     rules:
+        #       - alert: HomeAssistantUnableToReachPostgresql
+        #         expr: |
+        #           sum by (app) (count_over_time({app="home-assistant"} |~ "(?i)error in database connectivity"[2m])) > 0
+        #         for: 10s
+        #         labels:
+        #           severity: critical
+        #           category: logs
+        #         annotations:
+        #           summary: "Home Assistant is unable to connect to postgresql"
+        #   #
+        #   # vaultwarden
+        #   #
+        #   - name: vaultwarden
+        #     rules:
+        #       - alert: VaultwardenUnableToReachPostgresql
+        #         expr: |
+        #           sum by (app) (count_over_time({app="vaultwarden"} |~ "(?i)could not connect to server"[2m])) > 0
+        #         for: 10s
+        #         labels:
+        #           severity: critical
+        #           category: logs
+        #         annotations:
+        #           summary: "Vaultwarden is unable to connect to postgresql"
+        #   #
+        #   # valetudo
+        #   #
+        #   - name: valetudo
+        #     rules:
+        #       - alert: ValetudoUnableToReachMQTT
+        #         expr: |
+        #           sum by (hostname) (count_over_time({hostname="valetudo"} |~ "(?i).*error.*mqtt.*"[2m])) > 0
+        #         for: 10s
+        #         labels:
+        #           severity: critical
+        #           category: logs
+        #         annotations:
+        #           summary: "Valetudo is unable to connect to mqtt"
+        #   #
+        #   # node-red
+        #   #
+        #   - name: node-red
+        #     rules:
+        #       - alert: NodeRedUnableToReachHomeAssistant
+        #         expr: |
+        #           sum by (app) (count_over_time({app="node-red"} |~ "(?i)home assistant.*connecting to undefined"[2m])) > 0
+        #         for: 10s
+        #         labels:
+        #           severity: critical
+        #           category: logs
+        #         annotations:
+        #           summary: "Node-Red is unable to connect to Home Assistant"
+
 
   valuesFrom:
     - kind: Secret
       name: loki-s3
       valuesKey: minio_access_key
-      targetPath: config.storage_config.aws.access_key_id
+      targetPath: loki.structuredConfig.common.storage.s3.access_key_id
       optional: false
     - kind: Secret
       name: loki-s3
       valuesKey: minio_secret_key
-      targetPath: config.storage_config.aws.secret_access_key
+      targetPath: loki.structuredConfig.common.storage.s3.secret_access_key
       optional: false

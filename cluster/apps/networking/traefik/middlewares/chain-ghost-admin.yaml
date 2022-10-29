@@ -1,0 +1,11 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: ghost-admin
+  namespace: networking
+spec:
+  chain:
+    middlewares:
+      - name: ghost-admin-add-prefix@kubernetescrd
+      - name: networking-bloopnet-xyz-auth@kubernetescrd

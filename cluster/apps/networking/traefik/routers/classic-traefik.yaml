@@ -44,10 +44,6 @@ spec:
       services:
         - name: classic-traefik
           port: 443
-    - match: HostSNI(`zwave.bloopnet.${CLASSIC_DOMAIN}`)
-      services:
-        - name: classic-traefik
-          port: 443
     - match: HostSNI(`sonarr.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik

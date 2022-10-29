@@ -1,0 +1,48 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: grafana-agent-operator-charts-source
+  namespace: flux-system
+spec:
+  interval: 30m
+  url: ssh://git@github.com/grafana/helm-charts.git
+  secretRef:
+    name: flux-system
+  ref:
+    # renovate: registryUrl=https://github.com/grafana/helm-charts.git chart=grafana-agent-operator
+    tag: grafana-agent-operator-0.2.4
+  ignore: |
+    # exclude all
+    /*
+    # include deploy crds dir
+    !/charts/agent-operator/crds/monitoring.grafana.com*
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: grafana-agent-operator-crds
+  namespace: flux-system
+spec:
+  interval: 15m
+  prune: false
+  wait: true
+  sourceRef:
+    kind: GitRepository
+    name: grafana-agent-operator-charts-source
+  healthChecks:
+    - apiVersion: apiextensions.k8s.io/v1
+      kind: CustomResourceDefinition
+      name: grafanaagents.monitoring.grafana.com
+    - apiVersion: apiextensions.k8s.io/v1
+      kind: CustomResourceDefinition
+      name: integrations.monitoring.grafana.com
+    - apiVersion: apiextensions.k8s.io/v1
+      kind: CustomResourceDefinition
+      name: logsinstances.monitoring.grafana.com
+    - apiVersion: apiextensions.k8s.io/v1
+      kind: CustomResourceDefinition
+      name: metricsinstances.monitoring.grafana.com
+    - apiVersion: apiextensions.k8s.io/v1
+      kind: CustomResourceDefinition
+      name: podlogs.monitoring.grafana.com

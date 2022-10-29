@@ -9,7 +9,7 @@ spec:
   url: https://github.com/prometheus-community/helm-charts.git
   ref:
     # renovate: registryUrl=https://prometheus-community.github.io/helm-charts chart=kube-prometheus-stack
-    tag: kube-prometheus-stack-38.0.3
+    tag: kube-prometheus-stack-41.7.0
   ignore: |
     # exclude all
     /*
@@ -28,3 +28,10 @@ spec:
   sourceRef:
     kind: GitRepository
     name: kube-prometheus-stack-source
+  healthChecks:
+    - apiVersion: apiextensions.k8s.io/v1
+      kind: CustomResourceDefinition
+      name: servicemonitors.monitoring.coreos.com
+    - apiVersion: apiextensions.k8s.io/v1
+      kind: CustomResourceDefinition
+      name: prometheusrules.monitoring.coreos.com

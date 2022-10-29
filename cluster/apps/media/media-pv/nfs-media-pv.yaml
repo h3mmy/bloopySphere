@@ -12,7 +12,7 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 192.168.55.55
+    server: ${NAS_ADDRESS}
     path: "/volume3/Data"
   mountOptions:
     - nfsvers=4.1

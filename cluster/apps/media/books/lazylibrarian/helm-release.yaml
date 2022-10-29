@@ -1,0 +1,80 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: lazylibrarian
+  namespace: media
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: lazylibrarian
+      version: 7.4.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: linuxserver/lazylibrarian
+      tag: version-ec898a47
+      pullPolicy: IfNotPresent
+    env:
+      TZ: "${TZ}"
+      PUID: "1048"
+      PGID: "${MEDIA_GID}"
+    podSecurityContext:
+      supplementalGroups:
+        - 65538
+        - 65537
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/instance: "bloop-quarky,bloop-xyz"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "book-search-outline"
+          hajimari.io/appName: "LazyLibrarian"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          # traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc-1918-ips@kubernetescrd"
+        hosts:
+          - host: "lazylib.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "{{ (index .Values.ingress.main.hosts 0).host }}"
+            secretName: "tls.lazylib"
+
+    persistence:
+      config:
+        enabled: true
+        storageClass: "nfs-client"
+        accessMode: ReadWriteOnce
+        size: 1Gi
+      media:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume3/Data
+        mountPath: /Data
+
+    # extraVolumes:
+    #   - name: media
+    #     persistentVolumeClaim:
+    #       claimName: nfs-media-pvc
+    #     mountPath: "/mnt/Data"
+    #     readOnly: false
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi

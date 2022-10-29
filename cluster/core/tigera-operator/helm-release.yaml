@@ -8,9 +8,8 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://projectcalico.docs.tigera.io/charts
       chart: tigera-operator
-      version: v3.23.3
+      version: &tag v3.24.3
       sourceRef:
         kind: HelmRepository
         name: calico-charts
@@ -91,7 +90,7 @@ spec:
     # Configuration for the tigera operator images to deploy.
     tigeraOperator:
       image: tigera/operator
-      version: v1.27.0
+      version: v1.28.1
       registry: quay.io
       nodeSelector:
         matchExpressions:
@@ -101,7 +100,7 @@ spec:
               - "k8s-0"
     calicoctl:
       image: docker.io/calico/ctl
-      tag: v3.23.3
+      tag: *tag
 
     # Config required to fix RKE2 issue #1541
     # Also see https://docs.rke2.io/known_issues/#calico-with-vxlan-encapsulation

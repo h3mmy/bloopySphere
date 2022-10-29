@@ -1,0 +1,58 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: linkerd-viz
+  namespace: linkerd-viz
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: linkerd-viz
+      version: 30.4.1-edge
+      sourceRef:
+        kind: HelmRepository
+        name: linkerd-edge-charts
+        namespace: flux-system
+  timeout: 10m0s
+  dependsOn:
+    - name: linkerd-control-plane
+      namespace: linkerd
+  values:
+    nodeSelector:
+      kubernetes.io/arch: amd64
+    prometheusUrl: "prometheus-prometheus.monitoring.svc:9090"
+    grafanaUrl: "grafana.monitoring.svc:80"
+    jaegerUrl: ""
+    # metrics API configuration
+    metricsAPI:
+      logLevel: info
+    tap:
+      resources:
+        cpu:
+          limit: 50m
+          request: 10m
+        memory:
+          limit: 100Mi
+          request: 50Mi
+    tapInjector:
+      resources:
+        cpu:
+          limit: 50m
+          request: 10m
+        memory:
+          limit: 100Mi
+          request: 50Mi
+    dashboard:
+      enforcedHostRegexp: "^linkerd.${XYZ_DOMAIN_REV}$"
+      resources:
+        cpu:
+          limit: 50m
+          request: 10m
+        memory:
+          limit: 100Mi
+          request: 50Mi
+    grafana:
+      enabled: false
+    prometheus:
+      enabled: true

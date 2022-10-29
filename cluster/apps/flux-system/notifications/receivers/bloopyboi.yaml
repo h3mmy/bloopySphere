@@ -9,6 +9,8 @@ spec:
   events:
     - "Tag Push Hook"
     - "Push Hook"
+    - "Release Hook"
+    - "Deployment Hook"
   secretRef:
     name: webhook-token
   resources:
