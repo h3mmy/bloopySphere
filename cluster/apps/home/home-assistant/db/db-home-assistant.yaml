@@ -5,7 +5,7 @@ metadata:
   name: db-home-assistant
   namespace: home
 spec:
-  customConfig: ha-postgres-conf
+  customConfig: hass-postgres-conf
   replicas: 1
   image: docker.io/library/postgres:15
   database:
