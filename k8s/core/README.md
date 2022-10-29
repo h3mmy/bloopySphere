@@ -1,1 +1,0 @@
-The core/ dir contains all resources that are prerequisites to namespaces and workloads, this includes resources: CRDs, certain applications like Istio and Gatekeeper that must exist prior to other workloads, and crossplane resources that provisions infrastructure.

@@ -9,7 +9,3 @@ Folder containing SOPS encrypted credentials
 ## Gitlab
 
 Folder containing repositories in the gitlab domain
-
-## k8s-at-home
-
-Folder containing repositories in the k8s@home domain
