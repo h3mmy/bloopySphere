@@ -213,7 +213,7 @@ spec:
         serviceMonitor:
           additionalLabels:
             foo: bar
-          namespace: "another-namespace"
+          namespace: "networking"
           namespaceSelector: {}
           metricRelabelings:
             - sourceLabels: [__name__]
@@ -234,7 +234,7 @@ spec:
           honorLabels: true
         prometheusRule:
           additionalLabels: {}
-          namespace: "another-namespace"
+          namespace: "networking"
           rules:
             - alert: TraefikDown
               expr: up{job="traefik"} == 0

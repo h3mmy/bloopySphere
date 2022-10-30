@@ -8,4 +8,5 @@ resources:
   # - media-lidarr-bypass.yaml
   - home-home-assistant.yaml
   - home-emqx.yaml
+  - home-hass-db.yaml
   # - home-zwavejs-wss.yaml
