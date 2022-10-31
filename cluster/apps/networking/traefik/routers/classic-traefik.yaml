@@ -56,10 +56,6 @@ spec:
       services:
         - name: classic-traefik
           port: 8443
-    - match: HostSNI(`sabnzbd.bloopnet.${CLASSIC_DOMAIN}`)
-      services:
-        - name: classic-traefik
-          port: 8443
     - match: HostSNI(`wishlist.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
