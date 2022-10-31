@@ -29,6 +29,13 @@ spec:
       tag: v3.0.9.1555
     env:
       TZ: "${TZ}"
+      SONARR__PORT: &port 8989
+      SONARR__APPLICATION_URL: https://sonarr.${XYZ_DOMAIN}
+    service:
+      main:
+        ports:
+          http:
+            port: *port
     ingress:
       main:
         enabled: true
@@ -42,14 +49,14 @@ spec:
           traefik.ingress.kubernetes.io/router.priority: "99"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
-          - host: "sonarr.${XYZ_DOMAIN}"
+          - host: &host "sonarr.${XYZ_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - secretName: tls.sonarr
             hosts:
-              - "{{ (index .Values.ingress.main.hosts 0).host }}"
+              - host
 
     securityContext:
       runAsUser: 0

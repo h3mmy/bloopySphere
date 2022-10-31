@@ -29,6 +29,13 @@ spec:
       tag: v4.3.1.6695
     env:
       TZ: "${TZ}"
+      RADARR__PORT: &port 7878
+      RADARR__APPLICATION_URL: https://radarr.${XYZ_DOMAIN}
+    service:
+      main:
+        ports:
+          http:
+            port: *port
     ingress:
       main:
         enabled: true
