@@ -1,0 +1,21 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: tautulli-uhd-fix
+  namespace: media
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`tautulli-uhd.${XYZ_DOMAIN}`)
+      priority: 98
+      services:
+        - kind: Service
+          name: tautulli-uhd
+          port: 8181
+      middlewares:
+        - name: networking-bloopnet-xyz-auth@kubernetescrd
+  tls:
+    secretName: "tls.tautulli-uhd"
