@@ -97,8 +97,8 @@ spec:
         enabled: true
         type: nfs
         server: ${NAS_ADDRESS}
-        path: /volume3/Data
-        mountPath: /Data
+        path: /volume3/Data/Downloads/Usenet
+        mountPath: /Downloads
       incomplete:
         enabled: true
         type: emptyDir
