@@ -11,74 +11,74 @@ spec:
     - match: HostSNI(`bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`traefik.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`ombi.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`portainer.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`oauth.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`jackett.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`tautulli.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`sonarr.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`radarr.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`readarr.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`hydra.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`pihole.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`sabnzbd.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`wishlist.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`heimdall.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`calibre.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`calibre-server.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
     - match: HostSNI(`prowlarr.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
-          port: 443
+          port: 8443
   tls:
     passthrough: true
