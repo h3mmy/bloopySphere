@@ -12,6 +12,6 @@ resources:
   # - bazarr
   # - lidarr
   # - tdarr
-  # - sonarr
-  # - radarr
+  - sonarr
+  - radarr
   # - overseer
