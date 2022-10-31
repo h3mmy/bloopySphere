@@ -56,7 +56,7 @@ spec:
           hajimari.io/instance: "bloop-quarky"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
           - host: &host "{{ .Release.Name }}.${XYZ_DOMAIN}"
             paths:
@@ -74,14 +74,14 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
         hosts:
-          - host: "{{ .Release.Name }}.${XYZ_DOMAIN}"
+          - host: *host
             paths:
               - path: /api
                 pathType: Prefix
         tls:
           - secretName: tls.sabnzbd
             hosts:
-              - "{{ (index .Values.ingress.api.hosts 0).host }}"
+              - *host
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
