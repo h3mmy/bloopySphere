@@ -112,3 +112,15 @@ spec:
               matchOn:
                 - usbId:
                     vendor: ["1a6e", "18d1"]
+            - name: "zwave"
+              matchOn:
+                - usbId:
+                    class: ["02"]
+                    vendor: ["0658"]
+                    device: ["0200"]
+            - name: "zigbee"
+              matchOn:
+                - usbId:
+                    class: ["ff"]
+                    vendor: ["1a86"]
+                    device: ["7523"]
