@@ -51,6 +51,9 @@ spec:
         enabled: true
         ingressClassName: traefik
         annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "cloud-download"
+          hajimari.io/instance: "bloop-quarky"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
@@ -63,6 +66,22 @@ spec:
           - hosts:
               - *host
             secretName: tls.sabnzbd
+      api:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+        hosts:
+          - host: "{{ .Release.Name }}.${XYZ_DOMAIN}"
+            paths:
+              - path: /api
+                pathType: Prefix
+        tls:
+          - secretName: tls.sabnzbd
+            hosts:
+              - "{{ (index .Values.ingress.api.hosts 0).host }}"
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
