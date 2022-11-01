@@ -42,14 +42,14 @@ spec:
           traefik.ingress.kubernetes.io/router.priority: "99"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
-          - host: "sonarr-uhd.${XYZ_DOMAIN}"
+          - host: &host "sonarr-uhd.${XYZ_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - secretName: tls.sonarr-uhd
             hosts:
-              - "{{ (index .Values.ingress.main.hosts 0).host }}"
+              - *host
 
     securityContext:
       runAsUser: 0

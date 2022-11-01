@@ -56,7 +56,7 @@ spec:
         tls:
           - secretName: tls.sonarr
             hosts:
-              - host
+              - *host
 
     securityContext:
       runAsUser: 0
