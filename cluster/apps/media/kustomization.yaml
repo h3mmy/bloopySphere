@@ -5,7 +5,7 @@ resources:
   - media-pv
   - plex
   - ./books/calibre
-  # - ./books/calibre-web
+  - ./books/calibre-web
   # - ./books/lazylibrarian
   # - ./books/readarr-audio
   # - ./books/mylar
@@ -14,4 +14,4 @@ resources:
   # - tdarr
   - sonarr
   - radarr
-  # - overseer
+  - overseer
