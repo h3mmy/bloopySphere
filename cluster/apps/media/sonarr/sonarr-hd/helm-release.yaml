@@ -90,12 +90,20 @@ spec:
         existingClaim: sonarr-config-v1
       media:
         enabled: true
-        existingClaim: nfs-media-pvc
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume3/Data
         mountPath: /Data
         readOnly: false
       media-2:
         enabled: true
-        existingClaim: nfs-media-2-pvc
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume1/Data2
         mountPath: /Data2
         readOnly: false
       backup:
