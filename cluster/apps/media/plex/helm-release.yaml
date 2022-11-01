@@ -175,6 +175,19 @@ spec:
         securityContext:
           runAsUser: 0
 
+    additionalContainers:
+      git-sync:
+        name: git-sync
+        image: willdockerhub/git-sync:v3.3.0
+        imagePullPolicy: IfNotPresent
+        args:
+          - "--repo=${PLEX_PLUGIN_REPO}"
+          - "--branch=main"
+          - "--username=h3mmy"
+          - "--password=${PLEX_GITSYNC_GITHUB_TOKEN}"
+          - "--root=/config/Library/Application Support/Plex Media Server/Plug-ins"
+          - "--wait=30"
+
 # additionalContainers:
 #   fsfreeze:
 #     name: fsfreeze
