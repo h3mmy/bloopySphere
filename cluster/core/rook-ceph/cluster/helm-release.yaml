@@ -97,7 +97,7 @@ spec:
           # @default cpu 600m
           requests:
             cpu: 50m
-            memory: 150Mi
+            memory: 50Mi
         mon:
           requests:
             # @default cpu 1000m
