@@ -102,7 +102,7 @@ spec:
               - *hostgateway
             secretName: tls.thanos-storegateway
       persistence:
-        storageClass: "ceph-block"
+        storageClass: "nfs-client"
         enabled: true
         size: 20Gi
 
