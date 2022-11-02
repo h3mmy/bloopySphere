@@ -89,6 +89,10 @@ spec:
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
         - 100
+        # Custom Camelus Group(s)
+        - 65541
+        - 65536
+        - 65537
     persistence:
       config:
         enabled: true
