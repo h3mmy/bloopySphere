@@ -26,7 +26,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/sonarr-develop
-      tag: "4.0.0.142"
+      tag: "3.0.9.1555"
     env:
       TZ: "${TZ}"
       PGID: ${MEDIA_GID}
@@ -60,10 +60,15 @@ spec:
             hosts:
               - *host
 
+    securityContext:
+      runAsUser: 568
+      runAsGroup: 568
+
     podSecurityContext:
       fsGroup: "${MEDIA_GID}"
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
+        - 568
         - 100
         # Custom Camelus Group(s)
         - 65541
