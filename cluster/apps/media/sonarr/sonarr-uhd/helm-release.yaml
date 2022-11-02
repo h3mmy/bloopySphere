@@ -29,6 +29,7 @@ spec:
       tag: v3.0.9.1555
     env:
       TZ: "${TZ}"
+      PGID: "${MEDIA_GID}"
     ingress:
       main:
         enabled: true
@@ -54,6 +55,8 @@ spec:
     securityContext:
       runAsUser: 0
       runAsGroup: 0
+      fsGroup: "${MEDIA_GID}"
+      fsGroupChangePolicy: "OnRootMismatch"
 
     podSecurityContext:
       supplementalGroups:

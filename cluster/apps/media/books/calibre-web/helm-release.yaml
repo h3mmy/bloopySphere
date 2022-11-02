@@ -32,6 +32,8 @@ spec:
       TZ: "${TZ}"
       PGID: "${MEDIA_GID}"
       PUID: "${CALIBRE_WEB_PID}"
+
+    podSecurityContext:
       fsGroup: "${MEDIA_GID}"
       fsGroupChangePolicy: "OnRootMismatch"
 
