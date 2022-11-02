@@ -29,7 +29,8 @@ spec:
       tag: v3.0.9.1555
     env:
       TZ: "${TZ}"
-      PGID: "${MEDIA_GID}"
+      PGID: ${MEDIA_GID}
+      PUID: ${SONARR_PUID}
       SONARR__PORT: &port 8989
       SONARR__APPLICATION_URL: https://sonarr.${XYZ_DOMAIN}
     service:
