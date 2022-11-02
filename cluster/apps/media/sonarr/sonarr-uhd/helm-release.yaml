@@ -30,6 +30,7 @@ spec:
     env:
       TZ: "${TZ}"
       PGID: "${MEDIA_GID}"
+      SONARR__AUTHENTICATION_METHOD: None
     ingress:
       main:
         enabled: true
@@ -53,8 +54,8 @@ spec:
               - *host
 
     securityContext:
-      runAsUser: 0
-      runAsGroup: 0
+      runAsUser: 568
+      runAsGroup: 568
 
     podSecurityContext:
       fsGroup: "${MEDIA_GID}"
