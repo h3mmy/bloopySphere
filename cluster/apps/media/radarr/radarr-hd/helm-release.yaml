@@ -62,10 +62,10 @@ spec:
     securityContext:
       runAsUser: 0
       runAsGroup: 0
-      fsGroup: "${MEDIA_GID}"
-      fsGroupChangePolicy: "OnRootMismatch"
 
     podSecurityContext:
+      fsGroup: "${MEDIA_GID}"
+      fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
         - 100
         # Custom Camelus Group(s)
