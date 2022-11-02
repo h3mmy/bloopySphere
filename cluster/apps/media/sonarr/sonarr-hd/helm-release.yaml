@@ -33,6 +33,7 @@ spec:
       PUID: ${SONARR_PUID}
       SONARR__PORT: &port 8989
       SONARR__APPLICATION_URL: https://sonarr.${XYZ_DOMAIN}
+      SONARR__AUTHENTICATION_METHOD: None
     service:
       main:
         ports:
