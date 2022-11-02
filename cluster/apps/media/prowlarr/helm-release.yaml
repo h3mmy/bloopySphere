@@ -64,16 +64,16 @@ spec:
           auth.home.arpa/enabled: "true"
           hajimari.io/icon: "cloud-search"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.priority: "10"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
-          - host: &host radarr.${XYZ_DOMAIN}
+          - host: &host prowlarr.${XYZ_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
               - *host
+            secretName: tls.prowlarr
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
