@@ -26,7 +26,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/sonarr-develop
-      tag: v4.0.0.142
+      tag: "4.0.0.142"
     env:
       TZ: "${TZ}"
       PGID: "${MEDIA_GID}"
