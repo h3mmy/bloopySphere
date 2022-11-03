@@ -38,7 +38,7 @@ spec:
   values:
     podAnnotations:
       linkerd.io/inject: enabled
-    installCRDs: false
+    installCRDs: true
     webhook:
       enabled: true
       podAnnotations:
@@ -48,8 +48,6 @@ spec:
         linkerd.io/inject: enabled
     podSecurityPolicy:
       enabled: false
-    startupapicheck:
-      enabled: true
 
     extraArgs:
       - --dns01-recursive-nameservers=1.1.1.1:53,1.1.0.0:53
