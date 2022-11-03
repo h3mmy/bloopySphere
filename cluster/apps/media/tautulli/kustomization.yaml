@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - routers
   - tautulli-hd
-  - tautulli-uhd
+  # - tautulli-uhd

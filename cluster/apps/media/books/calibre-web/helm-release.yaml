@@ -23,6 +23,10 @@ spec:
     remediation:
       remediateLastFailure: true
 
+  dependsOn:
+    - name: calibre
+      namespace: media
+
   values:
     image:
       repository: ghcr.io/bjw-s/calibre-web

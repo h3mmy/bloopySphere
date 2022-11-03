@@ -9,10 +9,11 @@ resources:
   # - ./books/lazylibrarian
   # - ./books/readarr-audio
   # - ./books/mylar
-  # - bazarr
+  - ./bazarr
   # - lidarr
   # - tdarr
   - ./sonarr
   - ./radarr
   - ./overseer
   - ./prowlarr
+  - ./tautulli
