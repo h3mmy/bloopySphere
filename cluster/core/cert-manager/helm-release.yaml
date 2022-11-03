@@ -17,6 +17,10 @@ spec:
         namespace: flux-system
       reconcileStrategy: Revision
 
+  dependsOn:
+    - name: kube-prometheus-stack
+      namespace: monitoring
+
   install:
     crds: Create
     remediation: # perform remediation when helm install fails
@@ -64,4 +68,6 @@ spec:
         enabled: true
         namespace: *namespace
         honorLabels: true
+        labels:
+          custom.check/existence: true
         prometheusInstance: kube-prometheus-stack
