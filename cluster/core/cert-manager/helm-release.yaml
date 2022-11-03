@@ -64,10 +64,8 @@ spec:
         - "1.1.0.0"
     prometheus:
       enabled: true
-      serviceMonitor:
+      servicemonitor:
         enabled: true
         namespace: *namespace
         honorLabels: true
-        labels:
-          custom.check/existence: true
         prometheusInstance: kube-prometheus-stack
