@@ -63,6 +63,8 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           auth.home.arpa/enabled: "true"
           hajimari.io/icon: "cloud-search"
+          hajimari.io/enable: "true"
+          hajimari.io/instance: "bloop-quarky"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
