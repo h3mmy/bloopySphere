@@ -23,8 +23,8 @@ spec:
     #   type: daemonset
 
     image:
-      repository: ghcr.io/k8s-at-home/network-ups-tools
-      tag: v2.7.4-2479-g86a32237
+      repository: ghcr.io/onedr0p/network-ups-tools
+      tag: 2.7.4-2479-g86a32237
 
     env:
       TZ: "${TZ}"
