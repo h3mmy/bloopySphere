@@ -1,17 +1,14 @@
 ---
-apiVersion: v1
 kind: PersistentVolumeClaim
+apiVersion: v1
 metadata:
-  name: calibre-web-config
-  namespace: media
-  annotations:
-    pv.beta.kubernetes.io/gid: "65537"
+  name: kopia-snapshots
+  namespace: kube-system
 spec:
+  volumeName: snapshots
   accessModes:
     - ReadWriteOnce
-
   resources:
     requests:
-      storage: 512Mi
-
+      storage: 80Gi
   storageClassName: nfs-client
