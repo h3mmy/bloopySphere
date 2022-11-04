@@ -7,7 +7,8 @@ resources:
   - ./books/calibre
   - ./books/calibre-web
   # - ./books/lazylibrarian
-  # - ./books/readarr-audio
+  - ./books/readarr-audio
+  - ./books/readarr
   # - ./books/mylar
   - ./bazarr
   # - lidarr

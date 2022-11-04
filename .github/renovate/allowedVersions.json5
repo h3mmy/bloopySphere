@@ -1,0 +1,39 @@
+{
+    "packageRules": [
+      {
+        "matchDatasources": ["docker"],
+        "matchPackageNames": ["influxdb"],
+        "allowedVersions": "<2"
+      },
+      {
+        "matchDatasources": ["docker"],
+        "matchPackageNames": ["ghcr.io/linuxserver/calibre-web"],
+        "allowedVersions": "<1",
+      },
+      {
+        "matchDatasources": ["docker"],
+        "matchPackageNames": ["ghcr.io/linuxserver/calibre"],
+        "allowedVersions": "<=6.5.0",
+      },
+      {
+        "matchDatasources": ["docker"],
+        "matchPackageNames": ["ghcr.io/onedr0p/sonarr-develop"],
+        "allowedVersions": "<4",
+      },
+      {
+        "matchDatasources": ["docker"],
+        "matchPackageNames": ["calibre"],
+        "allowedVersions": "<=2"
+      },
+      {
+        "matchDatasources": ["helm"],
+        "matchPackageNames": ["emqx-operator"],
+        "allowedVersions": "<=1.0.4"
+      },
+      {
+        "matchDatasources": ["helm"],
+        "matchPackageNames": ["metallb"],
+        "allowedVersions": "<0.13.0"
+      }
+    ]
+  }
