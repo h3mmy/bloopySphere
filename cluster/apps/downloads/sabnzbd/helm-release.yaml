@@ -106,6 +106,15 @@ spec:
       incomplete:
         enabled: true
         type: emptyDir
+      backup:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume3/Data/Backups/app/sabnzbd
+        mountPath: /config/Backups
+        readOnly: false
     resources:
       requests:
         cpu: 10m
