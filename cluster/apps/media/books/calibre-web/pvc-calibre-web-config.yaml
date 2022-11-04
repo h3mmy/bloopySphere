@@ -5,7 +5,7 @@ metadata:
   name: calibre-web-config
   namespace: media
   annotations:
-    pv.beta.kubernetes.io/gid: "${MEDIA_GID}"
+    pv.beta.kubernetes.io/gid: ${MEDIA_GID}
 spec:
   accessModes:
     - ReadWriteOnce
