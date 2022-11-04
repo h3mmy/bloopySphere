@@ -21,8 +21,11 @@ spec:
       strategy: RollingUpdate
 
     image:
-      repository: ghcr.io/jr0dd/network-ups-tools
-      tag: v2.8.0@sha256:77f93d419b26c2a9eec6db212a70e38b1bd922ab7d5e80cca75ebfd1268e37ba
+      repository: ghcr.io/k8s-at-home/network-ups-tools
+      tag: v2.7.4-2479-g86a32237@sha256:cbd5d4cc12454121ee9cd3587053c4de313575ee367ffcad07b2fc92a1e8be8c
+      # no arm64 yet
+      # repository: ghcr.io/jr0dd/network-ups-tools
+      # tag: v2.8.0@sha256:77f93d419b26c2a9eec6db212a70e38b1bd922ab7d5e80cca75ebfd1268e37ba
 
     env:
       TZ: "${TZ}"
