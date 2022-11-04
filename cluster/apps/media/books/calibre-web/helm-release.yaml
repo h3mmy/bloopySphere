@@ -103,11 +103,11 @@ spec:
             hosts:
               - calibre-web.${XYZ_DOMAIN}
 
-    tolerations:
-      - key: "kubernetes.io/arch"
-        operator: "Equal"
-        value: "arm64"
-        effect: "NoSchedule"
+    # tolerations:
+    #   - key: "kubernetes.io/arch"
+    #     operator: "Equal"
+    #     value: "arm64"
+    #     effect: "NoSchedule"
 
     # affinity:
     #   podAntiAffinity:
