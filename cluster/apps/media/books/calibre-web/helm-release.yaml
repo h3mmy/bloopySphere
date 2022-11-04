@@ -37,9 +37,20 @@ spec:
       PGID: "${MEDIA_GID}"
       PUID: "${CALIBRE_WEB_PID}"
 
+    securityContext:
+      runAsUser: 0
+      runAsGroup: 0
+
     podSecurityContext:
       fsGroup: "${MEDIA_GID}"
       fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 100
+        - 568
+        # Custom Camelus Group(s)
+        - 65541
+        - 65536
+        - 65537
 
     enableServiceLinks: false
 

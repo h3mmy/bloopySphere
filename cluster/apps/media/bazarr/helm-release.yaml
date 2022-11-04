@@ -50,9 +50,13 @@ spec:
           - hosts:
               - *host
             secretName: tls.bazarr
+    securityContext:
+      runAsUser: 0
+      runAsGroup: 0
     podSecurityContext:
       supplementalGroups:
         - 100
+        - 568
         # Custom Camelus Group(s)
         - 65541
         - 65536
