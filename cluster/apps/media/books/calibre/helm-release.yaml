@@ -87,6 +87,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: tls.calibre
 
     persistence:
       config:
