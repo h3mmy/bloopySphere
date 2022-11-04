@@ -8,29 +8,68 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: network-ups-tools
-      version: 6.4.2
+      chart: app-template
+      version: 1.0.1
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
       interval: 5m
 
   values:
-    # Future plans
-    # controller:
-    #   type: daemonset
+    controller:
+      strategy: RollingUpdate
 
     image:
-      repository: ghcr.io/onedr0p/network-ups-tools
-      tag: 2.7.4-2479-g86a32237
+      repository: ghcr.io/jr0dd/network-ups-tools
+      tag: v2.8.0@sha256:77f93d419b26c2a9eec6db212a70e38b1bd922ab7d5e80cca75ebfd1268e37ba
 
     env:
       TZ: "${TZ}"
 
+    service:
+      main:
+        ports:
+          http:
+            port: 3493
+            protocol: TCP
+        type: LoadBalancer
+        # loadBalancerIPs:
+        #   - ${SVC_EXPORTERS_ADDR_V4}
+        #   - ${SVC_EXPORTERS_ADDR_V6}
+        # externalTrafficPolicy: Local
+        # ipFamilyPolicy: PreferDualStack
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${LB_NUT}"
+          external-dns.alpha.kubernetes.io/hostname: "exporters.${XYZ_DOMAIN}"
+      metrics:
+        enabled: true
+        ports:
+          metrics:
+            enabled: true
+            port: 9199
+            protocol: TCP
+
     securityContext:
       privileged: true
+
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: &config network-ups-tools-config
+        mountPath: /etc/nut
+        defaultMode: 256
+      ups:
+        enabled: true
+        type: hostPath
+        # -- The path of the usb ups on the host.
+        # -- This will need to be changed every single time it is switched on nodes
+        hostPath: /dev/bus/usb/001/004
+        hostPathType: CharDevice
+        # -- Optional path for ups to mount in the container.
+        mountPath: /dev/bus/usb/001/001
+        readOnly: false
 
     tolerations:
       - key: "kubernetes.io/arch"
@@ -51,49 +90,47 @@ spec:
                   operator: In
                   values:
                     - "true"
-    service:
-      main:
-        annotations:
-          metallb.universe.tf/loadBalancerIPs: "${LB_NUT}"
-        ports:
-          http:
-            enabled: false
-          server:
-            enabled: true
-            protocol: TCP
-            port: 3493
-    # The main configuration files for network-ups-tools
-    config:
-      # If set to 'values', the configuration will be read from these values.
-      # Otherwise you have to mount a volume to /etc/nut containing the configuration files.
-      mode: values
-      # See https://github.com/networkupstools/nut/tree/master/conf for config sample files
-      files:
-        ups.conf: |
-          [ups.cp1500]
-            driver = usbhid-ups
-            port = auto
-            desc = "CyberPower CP1500 AVR UPS"
-            vendorid = 0764
-            productid = 0501
-            serial = ${UPS_SERIAL_0}
-          [ups.cp1500lcd]
-            driver = usbhid-ups
-            port = auto
-            desc = "CyberPower PR1500LCDRT2U UPS"
-            vendorid = 0764
-            productid = 0601
-            serial = ${UPS_SERIAL_1}
-        upsmon.conf: |
-          DEADTIME 25
-          MAXAGE 25
-        upsd.users: |
-          [monuser]
-            password = secret
-            upsmon slave
-          [monmaster]
-            password = secret
-            upsmon master
+    configMaps:
+      config:
+        enabled: true
+        # See https://github.com/networkupstools/nut/tree/master/conf for config sample files
+        data:
+          nut.conf: |-
+            MODE=netserver
+          upsd.conf: |-
+            MAXAGE 20
+            LISTEN 0.0.0.0
+            LISTEN ::
+          ups.conf: |
+            [ups.cp1500]
+              driver = usbhid-ups
+              port = auto
+              desc = "CyberPower CP1500 AVR UPS"
+              vendorid = 0764
+              productid = 0501
+              serial = ${UPS_SERIAL_0}
+            [ups.cp1500lcd]
+              driver = usbhid-ups
+              port = auto
+              desc = "CyberPower PR1500LCDRT2U UPS"
+              vendorid = 0764
+              productid = 0601
+              serial = ${UPS_SERIAL_1}
+          upsmon.conf: |
+            DEADTIME 25
+            MAXAGE 25
+            SHUTDOWNCMD "/sbin/shutdown -h +0"
+            POWERDOWNFLAG /etc/killpower
+            POLLFREQ 15
+            POLLFREQALERT 5
+            HOSTSYNC 15
+          upsd.users: |
+            [monuser]
+              password = secret
+              upsmon slave
+            [monmaster]
+              password = secret
+              upsmon master
 
     resources:
       requests:
@@ -102,29 +139,10 @@ spec:
       limits:
         memory: 128Mi
 
-    metrics:
-      enabled: true
-      serviceMonitor:
-        interval: 10m
-        scrapeTimeout: 3m
-      prometheusRule:
-        enabled: true
-      exporter:
-        image:
-          repository: mcfio/prometheus-nut-exporter
-          tag: 1.1.1
-
     podAnnotations:
       configmap.reloader.stakater.com/reload: "network-ups-tools-config"
 
-    persistence:
-      ups:
-        enabled: true
-        type: hostPath
-        # -- The path of the usb ups on the host.
-        # -- This will need to be changed every single time it is switched on nodes
-        hostPath: /dev/bus/usb/001/004
-        hostPathType: CharDevice
-        # -- Optional path for ups to mount in the container.
-        mountPath: /dev/bus/usb/001/001
-        readOnly: false
+    additionalContainers:
+      exporter:
+        name: exporter
+        image: ghcr.io/druggeri/nut_exporter:2.4.2
