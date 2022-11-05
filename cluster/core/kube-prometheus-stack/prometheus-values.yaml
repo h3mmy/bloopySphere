@@ -122,4 +122,6 @@ prometheus:
         scheme: http
         static_configs:
           - targets:
-              - home-assistant.home:8123
+              - home-assistant.home.svc.cluster.local:8123
+            labels:
+              app.kubernetes.io/name: home-assistant
