@@ -10,7 +10,7 @@ spec:
   routes:
     - kind: Rule
       match: Host(`tautulli.${XYZ_DOMAIN}`) && (Headers(`X-Api-Key`, `${TAUTULLI_API_KEY}`) || Query(`apikey`, `${TAUTULLI_API_KEY}`))
-      priority: 9
+      priority: 100
       services:
         - kind: Service
           name: tautulli

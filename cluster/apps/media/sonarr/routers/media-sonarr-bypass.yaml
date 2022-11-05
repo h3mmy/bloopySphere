@@ -10,7 +10,7 @@ spec:
   routes:
     - kind: Rule
       match: Host(`sonarr.${XYZ_DOMAIN}`) && (Headers(`X-Api-Key`, `${SONARR_API_KEY}`) || Query(`apikey`, `${SONARR_API_KEY}`))
-      priority: 9
+      priority: 100
       services:
         - kind: Service
           name: sonarr

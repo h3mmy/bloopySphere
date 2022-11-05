@@ -10,7 +10,7 @@ spec:
   routes:
     - kind: Rule
       match: Host(`radarr.${XYZ_DOMAIN}`) && (Headers(`X-Api-Key`, `${RADARR_API_KEY}`) || Query(`apikey`, `${RADARR_API_KEY}`))
-      priority: 98
+      priority: 100
       services:
         - kind: Service
           name: radarr
