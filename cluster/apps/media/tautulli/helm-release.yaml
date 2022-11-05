@@ -40,6 +40,7 @@ spec:
         enabled: true
         ingressClassName: traefik
         annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
           hajimari.io/enable: "true"
           hajimari.io/icon: "scale"
           hajimari.io/instance: "bloop-quarky"
@@ -55,6 +56,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: tls.tautulli
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
