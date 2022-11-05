@@ -13,7 +13,7 @@
       {
         "matchDatasources": ["docker"],
         "matchPackageNames": ["ghcr.io/linuxserver/calibre"],
-        "allowedVersions": "<=6.5.0",
+        "allowedVersions": "<=6.4.0",
       },
       {
         "matchDatasources": ["docker"],
