@@ -16,6 +16,6 @@ spec:
           name: tautulli
           port: 8181
       middlewares:
-        - name: networking-bloopnet-xyz-auth@kubernetescrd
+        - name: networking-rfc1918@kubernetescrd
   tls:
     secretName: "tls.tautulli"

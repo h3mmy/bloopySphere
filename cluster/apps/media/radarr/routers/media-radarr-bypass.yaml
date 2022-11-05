@@ -16,6 +16,6 @@ spec:
           name: radarr
           port: 7878
       middlewares:
-        - name: networking-bloopnet-xyz-auth@kubernetescrd
+        - name: networking-rfc1918h@kubernetescrd
   tls:
     secretName: "tls.radarr"
