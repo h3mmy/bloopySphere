@@ -45,6 +45,7 @@ spec:
           hajimari.io/instance: "bloop-quarky"
           external-dns.home.arpa/enabled: "true"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.priority: "99"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
           - host: &host "{{ .Release.Name }}.${XYZ_DOMAIN}"
@@ -63,6 +64,15 @@ spec:
       config:
         enabled: true
         existingClaim: *app
+      backup:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume3/Data/Backups/app/tautulli
+        mountPath: /config/backups
+        readOnly: false
     resources:
       requests:
         cpu: 10m
