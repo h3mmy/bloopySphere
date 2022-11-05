@@ -78,9 +78,11 @@ spec:
         existingClaim: readarr-config-v1
       media:
         enabled: true
-        type: nfs
-        server: "${NAS_ADDRESS}"
-        path: /Data
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume3/Data
         mountPath: /Data
       backup:
         enabled: true
