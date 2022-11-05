@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: &app camelus-plexii
+  namespace: networking
+  labels:
+    k8s-app: *app
+    app.kubernetes.io/name: *app
+spec:
+  type: ExternalName
+  ports:
+    - port: 5000
+      targetPort: 5000
+      name: http
+      protocol: TCP
+    - port: 5001
+      targetPort: 5001
+      name: https
+      protocol: TCP
+  externalName: ${NAS_ADDRESS}
+  selector:
+    app.kubernetes.io/instance: *app
+    app.kubernetes.io/name: *app
+    k8s-app: *app

@@ -28,26 +28,6 @@ spec:
       services:
         - name: classic-traefik
           port: 8443
-    - match: HostSNI(`jackett.bloopnet.${CLASSIC_DOMAIN}`)
-      services:
-        - name: classic-traefik
-          port: 8443
-    - match: HostSNI(`tautulli.bloopnet.${CLASSIC_DOMAIN}`)
-      services:
-        - name: classic-traefik
-          port: 8443
-    - match: HostSNI(`sonarr.bloopnet.${CLASSIC_DOMAIN}`)
-      services:
-        - name: classic-traefik
-          port: 8443
-    - match: HostSNI(`radarr.bloopnet.${CLASSIC_DOMAIN}`)
-      services:
-        - name: classic-traefik
-          port: 8443
-    - match: HostSNI(`readarr.bloopnet.${CLASSIC_DOMAIN}`)
-      services:
-        - name: classic-traefik
-          port: 8443
     - match: HostSNI(`hydra.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
@@ -61,18 +41,6 @@ spec:
         - name: classic-traefik
           port: 8443
     - match: HostSNI(`heimdall.bloopnet.${CLASSIC_DOMAIN}`)
-      services:
-        - name: classic-traefik
-          port: 8443
-    - match: HostSNI(`calibre.bloopnet.${CLASSIC_DOMAIN}`)
-      services:
-        - name: classic-traefik
-          port: 8443
-    - match: HostSNI(`calibre-server.bloopnet.${CLASSIC_DOMAIN}`)
-      services:
-        - name: classic-traefik
-          port: 8443
-    - match: HostSNI(`prowlarr.bloopnet.${CLASSIC_DOMAIN}`)
       services:
         - name: classic-traefik
           port: 8443
