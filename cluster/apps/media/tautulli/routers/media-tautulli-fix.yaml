@@ -10,7 +10,7 @@ spec:
   routes:
     - kind: Rule
       match: Host(`tautulli.${XYZ_DOMAIN}`)
-      priority: 98
+      priority: 99
       services:
         - kind: Service
           name: tautulli
