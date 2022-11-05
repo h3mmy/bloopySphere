@@ -1,0 +1,94 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app kavita
+  namespace: media
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.0.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    image:
+      repository: kizaing/kavita
+      tag: 0.6.0
+    env:
+      TZ: "${TZ}"
+
+    service:
+      main:
+        ports:
+          http:
+            port: 5000
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          external-dns.home.arpa/enabled: "true"
+          auth.home.arpa/enabled: "true"
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-bloopnet-xyz-auth@kubernetescrd
+          hajimari.io/instance: "bloop-xyz"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "bookshelf-outline"
+          hajimari.io/appName: "Kavita"
+        hosts:
+          - host: &host "{{ .Release.Name }}.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: tls.kavita
+
+    podSecurityContext:
+      fsGroup: "${MEDIA_GID}"
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 100
+        - 568
+        # Custom Camelus Group(s)
+        - 65541
+        - 65536
+        - 65537
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: kavita-config-v1
+        mountPath: /kavita/config
+      media:
+        enabled: true
+        type: nfs
+        server: "${NAS_ADDRESS}"
+        path: /volume3/Data
+        mountPath: /Data
+      backups:
+        enabled: true
+        type: nfs
+        server: "${NAS_ADDRESS}"
+        path: /volume3/Data/Backups/app/kavita
+        mountPath: /kavita/config/backups
+
+    resources:
+      requests:
+        cpu: 20m
+        memory: 100Mi
+      # limits:
+      # memory: 200Mi
