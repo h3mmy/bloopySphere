@@ -65,12 +65,15 @@ spec:
               - *host
             secretName: tls.whisparr
     podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
+      fsGroup: "${MEDIA_GID}"
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
         - 100
+        - 568
+        # Custom Camelus Group(s)
+        - 65541
+        - 65536
+        - 65537
     volumeClaimTemplates:
       - name: config
         mountPath: /config
