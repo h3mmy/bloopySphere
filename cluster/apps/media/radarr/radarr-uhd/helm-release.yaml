@@ -40,7 +40,7 @@ spec:
           hajimari.io/icon: "filmstrip"
           hajimari.io/instance: "bloop-quarky"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.priority: "10"
+          traefik.ingress.kubernetes.io/router.priority: "99"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
           - host: &host "radarr-uhd.${XYZ_DOMAIN}"
