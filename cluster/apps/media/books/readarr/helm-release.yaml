@@ -30,6 +30,7 @@ spec:
       tag: 0.1.1.1459@sha256:4a08269baab6374168e3f2a9b9249e9ae7ac1265799558be67f7566d10b1d83c
     env:
       TZ: "${TZ}"
+      PGID: ${MEDIA_GID}
       READARR__INSTANCE_NAME: Readarr
       READARR__PORT: &port 80
       READARR__LOG_LEVEL: info
@@ -64,10 +65,11 @@ spec:
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
-      fsGroup: 568
+      fsGroup: "${MEDIA_GID}"
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
         - 100
+        - 568
         # Custom Camelus Group(s)
         - 65541
         - 65536
