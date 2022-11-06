@@ -10,7 +10,7 @@
 # external (no auth):
 #   - traefik.ingress.kubernetes.io/router.middlewares: "traefik-system-external@kubernetescrd"
 # external-auth:
-#   - traefik.ingress.kubernetes.io/router.middlewares: "traefik-system-external-auth@kubernetescrd"
+#   - traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
 ---
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy

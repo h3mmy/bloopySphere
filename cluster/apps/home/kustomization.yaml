@@ -8,3 +8,4 @@ resources:
   - network-ups-tools
   - emqx
   - node-red
+  - n8n
