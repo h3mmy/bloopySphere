@@ -34,10 +34,10 @@ I am using "password_based" authentication via postgresql (See [Documentation](h
 The "Authentication Query" is qhat emqx uses to get the users
 
 ```sql
-SELECT password_hash, salt, is_superuser FROM users where username = ${username} LIMIT 1
+SELECT password_hash, salt, is_superuser FROM mqtt_user WHERE username = ${username} LIMIT 1
 ```
 
-To "Add" a new user, the query would look like this. Note this is using a sha256 hash, whereas I personally am using bcrypt
+To "Add" a new user, the query would look like this. Note this is using a sha256 hash
 
 ```sql
 INSERT INTO mqtt_user(username, password_hash, salt, is_superuser) VALUES ('user123', 'bede90386d450cea8b77b822f8887065e4e5abf132c2f9dccfcc7fbd4cba5e35', 'salt', true);

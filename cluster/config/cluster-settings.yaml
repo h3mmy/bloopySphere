@@ -14,7 +14,7 @@ data:
   DOMAIN_BIG_BLOOP: "bigbloop"
   DOMAIN_CORE_BLOOP: "bloopycore"
   DOMAIN_SMALL_BLOOP: "smallbloop"
-  EMQX_PSQL_QUERY_STRING: "SELECT password_hash, salt, is_superuser FROM users where username = ${username} LIMIT 1"
+  EMQX_PSQL_QUERY_STRING: "SELECT password_hash, salt, is_superuser FROM mqtt_user WHERE username = ${username} LIMIT 1"
   LB_PLEX_IP: 10.1.0.105
   LB_PROMTAIL: 10.1.0.103
   LB_TRAEFIK_CLASSIC: 10.1.0.50
