@@ -5,6 +5,7 @@ metadata:
   name: emqx-db
   namespace: home
 spec:
+  customConfig: emqx-postgres-conf
   replicas: 1
   image: docker.io/library/postgres:15
   database:
