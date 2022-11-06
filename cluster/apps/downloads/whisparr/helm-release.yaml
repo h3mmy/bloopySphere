@@ -32,7 +32,8 @@ spec:
       tag: 0.1.0.53@sha256:a4557769999bd3c4e173b403a227775cd1bd42feadc87a56bad5fc7c5f183c23
     env:
       TZ: "${TZ}"
-      PGID: "${MEDIA_GID}"
+      PGID: ${MEDIA_GID}
+      PUID: ${SONARR_PUID}
       WHISPARR__INSTANCE_NAME: Whisparr
       WHISPARR__PORT: &port 80
       WHISPARR__LOG_LEVEL: info
@@ -66,8 +67,6 @@ spec:
               - *host
             secretName: tls.whisparr
     podSecurityContext:
-      runAsUser: 0
-      runAsGroup: 0
       fsGroup: ${MEDIA_GID}
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
