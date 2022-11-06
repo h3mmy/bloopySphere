@@ -12,7 +12,7 @@ echo "$dt - Running: psql -v ON_ERROR_STOP=1 --username $POSTGRES_USER --dbname 
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
 CREATE DATABASE $customDatabaseName;
 CREATE USER $customUserName WITH PASSWORD '$N8N_DB_PASSWORD';
-GRANT ALL PRIVILEGES ON DATABASE "$customDatabaseName" to $customUserName;
+GRANT ALL PRIVILEGES ON DATABASE $customDatabaseName to $customUserName;
 ALTER DATABASE $customDatabaseName OWNER TO $customUserName
 EOSQL
 
