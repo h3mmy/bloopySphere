@@ -5,7 +5,7 @@ metadata:
   name: n8n-postgres
   namespace: home
   annotations:
-    config.alpha.linkerd.io/proxy-wait-before-exit-seconds: "20"
+    config.alpha.linkerd.io/proxy-wait-before-exit-seconds: "21"
 spec:
   customConfig: n8n-postgres-conf
   replicas: 1
