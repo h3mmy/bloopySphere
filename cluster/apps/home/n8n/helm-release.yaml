@@ -31,15 +31,16 @@ spec:
 
     env:
       GENERIC_TIMEZONE: ${TZ}
-      N8N_PROTOCOL: "https"
-      N8N_PORT: &port 443
+      N8N_PORT: &port 80
       N8N_HOST: &host "n8n.${XYZ_DOMAIN}"
       N8N_LOG_LEVEL: info
       N8N_LOG_OUTPUT: console
-
-    envFrom:
-      - secretRef:
-          name: n8n-secrets
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_DATABASE: ${N8N_DB_NAME}
+      DB_POSTGRESDB_HOST: n8n-postgres
+      DB_POSTGRESDB_USER: ${N8N_DB_USER}
+      DB_POSTGRESDB_PASSWORD: ${N8N_DB_PASSWORD}
+      DB_POSTGRESDB_PORT: 5432
 
     service:
       main:

@@ -1,0 +1,30 @@
+---
+apiVersion: kubegres.reactive-tech.io/v1
+kind: Kubegres
+metadata:
+  name: n8n-postgres
+  namespace: home
+  annotations:
+    config.alpha.linkerd.io/proxy-wait-before-exit-seconds: "20"
+spec:
+  customConfig: n8n-postgres-conf
+  replicas: 1
+  image: docker.io/library/postgres:15
+  database:
+    size: 5Gi
+    storageClassName: ceph-block
+  backup:
+    schedule: "0 */1 * * *"
+    pvcName: n8n-db-backup
+    volumeMount: /var/lib/backup
+  env:
+    - name: POSTGRES_PASSWORD
+      value: ${N8N_KUBEGRES_PASSWORD}
+    - name: POSTGRES_REPLICATION_PASSWORD
+      value: ${N8N_KUBEGRES_PASSWORD}
+    - name: N8N_DB_NAME
+      value: ${N8N_DB_NAME}
+    - name: N8N_DB_PASSWORD
+      value: ${N8N_DB_PASSWORD}
+    - name: N8N_DB_USER
+      value: ${N8N_DB_USER}
