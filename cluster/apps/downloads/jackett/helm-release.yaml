@@ -15,10 +15,13 @@ spec:
         name: bjw-s-charts
         namespace: flux-system
       interval: 15m
+  dependsOn:
+    - name: vpn-gateway
+      namespace: vpn-gateway
   values:
     image:
       repository: ghcr.io/onedr0p/jackett
-      tag: 0.20.2203
+      tag: 0.20.2210
     env:
       TZ: ${TZ}
     service:
@@ -59,11 +62,19 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 10
+
+    podAnnotations:
+      setGateway: "true"
+
+    podLabels:
+      setGateway: "true"
+
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
       fsGroup: 568
       fsGroupChangePolicy: "OnRootMismatch"
+
     persistence:
       config:
         enabled: true

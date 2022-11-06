@@ -2,8 +2,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - qbittorrent
-  - downloads-pv
-  - sabnzbd
-  - jackett
-  - whisparr
+  - db-n8n
+  - secrets.sops.yaml
+  - pvc-config.yaml
+  - helm-release.yaml
