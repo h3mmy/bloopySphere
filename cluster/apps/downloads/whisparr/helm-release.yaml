@@ -66,7 +66,8 @@ spec:
               - *host
             secretName: tls.whisparr
     podSecurityContext:
-      runAsUser: 1041
+      runAsUser: 0
+      runAsGroup: 0
       fsGroup: ${MEDIA_GID}
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
