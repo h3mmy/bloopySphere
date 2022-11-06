@@ -26,3 +26,21 @@ Mapping rules from environment variable name to config key
 * Prefix `EMQX_` is removed
 * Upper case letters are mapped to lower case letters
 * Double underscore `__` is mapped to `.`
+
+### Authentication
+
+I am using "password_based" authentication via postgresql (See [Documentation](https://www.emqx.io/docs/en/v5.0/security/authn/postgresql.html)). I strongly prefer not having a scattering of auth methods and once I have keycloak revamped and re-enabled I'll be using that. Authentik lacks the amount of customization I need. Theoretically, you can have a sops file with a user list, and have a job with a short postgres script to keep it in sync with the db.
+
+The "Authentication Query" is qhat emqx uses to get the users
+
+```sql
+SELECT password_hash, salt, is_superuser FROM users where username = ${username} LIMIT 1
+```
+
+To "Add" a new user, the query would look like this. Note this is using a sha256 hash, whereas I personally am using bcrypt
+
+```sql
+INSERT INTO mqtt_user(username, password_hash, salt, is_superuser) VALUES ('user123', 'bede90386d450cea8b77b822f8887065e4e5abf132c2f9dccfcc7fbd4cba5e35', 'salt', true);
+```
+
+You can do this manually, or set up a job to reconcile against a sops file, or other automation. I haven't settled on a preferred approach yet. I've been busy. If you want to try something, feel free to tag me in a discussion, or PR.
