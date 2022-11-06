@@ -33,7 +33,6 @@ spec:
     env:
       TZ: "${TZ}"
       PGID: "${MEDIA_GID}"
-      PUID: "1041"
       WHISPARR__INSTANCE_NAME: Whisparr
       WHISPARR__PORT: &port 80
       WHISPARR__LOG_LEVEL: info
@@ -67,7 +66,7 @@ spec:
               - *host
             secretName: tls.whisparr
     podSecurityContext:
-      fsGroup: "${MEDIA_GID}"
+      fsGroup: ${MEDIA_GID}
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
         - 100
