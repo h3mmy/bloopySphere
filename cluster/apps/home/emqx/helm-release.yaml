@@ -23,6 +23,8 @@ spec:
   upgrade:
     remediation:
       retries: 5
+      remediateLastFailure: true # remediate the last failure, when no retries remain
+    cleanupOnFail: true
   values:
     image:
       repository: emqx/emqx
