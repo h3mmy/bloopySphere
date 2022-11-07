@@ -1,13 +1,41 @@
 ---
-apiVersion: apps.emqx.io/v1beta2
-kind: EmqxBroker
+apiVersion: apps.emqx.io/v2alpha1
+kind: EMQX
 metadata:
   name: emqx
   namespace: home
 spec:
   serviceAccountName: "emqx"
   image: emqx/emqx:5.0.9
-  replicas: 2
+  imagePullPolicy: IfNotPresent
+  # imagePullSecrets:
+  #   - name: fake-secrets
+  bootstrapConfig: |
+    node {
+      cookie = emqxsecretcookie
+      data_dir = "data"
+      etc_dir = "etc"
+    }
+    cluster {
+      discovery_strategy = dns
+      dns {
+        record_type = srv
+        name:"emqx-headless.home.svc.cluster.local"
+      }
+    }
+    dashboard {
+      listeners.http {
+          bind: 18083
+      }
+      default_username: "admin"
+      default_password: "example"
+    }
+    listeners.tcp.default {
+      bind = "0.0.0.0:1883"
+      max_connections = 1024000
+    }
+    sysmon.vm.long_schedule = disabled
+  replicas: 3
   labels:
     cluster: emqx
     app.kubernetes.io/name: emqx

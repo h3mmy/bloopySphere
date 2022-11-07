@@ -13,7 +13,7 @@ spec:
       version: 5.0.9
       sourceRef:
         kind: GitRepository
-        name: emqx-charts
+        name: emqx-chart
         namespace: flux-system
       interval: 15m
   install:
