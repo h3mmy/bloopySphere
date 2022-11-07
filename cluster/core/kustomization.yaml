@@ -12,4 +12,4 @@ resources:
   - tigera-operator
   - mysql
   - linkerd
-  - ./emqx/emqx-chart.yaml
+  # - ./emqx/emqx-chart.yaml
