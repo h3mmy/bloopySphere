@@ -1,0 +1,11 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: internal-only-auth
+  namespace: networking
+spec:
+  chain:
+    middlewares:
+      - name: networking-rfc1918-ips@kubernetescrd
+      - name: networking-bloopnet-xyz-auth@kubernetescrd

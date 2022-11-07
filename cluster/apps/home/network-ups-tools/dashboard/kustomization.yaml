@@ -3,12 +3,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: home
 configMapGenerator:
-  # - name: ups-dashboard-1
-  #   files:
-  #     - ups-1.json
-  - name: ups-dashboard-2
+  - name: ups-dashboard-1
     files:
-      - ups-2.json
+      - ups-1.json
+  # - name: ups-dashboard-2
+  #   files:
+  #     - ups-2.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:

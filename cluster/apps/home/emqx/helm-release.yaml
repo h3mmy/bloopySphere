@@ -8,6 +8,7 @@ spec:
   interval: 15m
   chart:
     spec:
+      # renovate: registryUrl=https://repos.emqx.io/charts
       chart: emqx
       version: 5.0.3
       sourceRef:
@@ -22,20 +23,23 @@ spec:
   upgrade:
     remediation:
       retries: 5
+      remediateLastFailure: true # remediate the last failure, when no retries remain
+    cleanupOnFail: true
   values:
     image:
-      repository: public.ecr.aws/emqx/emqx
+      repository: emqx/emqx
     replicaCount: 3
     recreatePods: true
     envFromSecret: emqx-secrets
     emqxConfig:
-      EMQX_AUTHENTICATION__ENABLE: "true"
+      EMQX_AUTHENTICATION__ENABLE: "false"
       EMQX_AUTHENTICATION__MECHANISM: password_based
       EMQX_AUTHENTICATION__BACKEND: postgresql
-      EMQX_AUTHENTICATION__DATABASE: mqtt
+      EMQX_AUTHENTICATION__DATABASE: ${EMQX_DB_NAME}
       EMQX_AUTHENTICATION__USERNAME: postgres
-      EMQX_AUTHENTICATION__SERVER: "emqx-db:5432"
-      EMQX_AUTHENTICATION__PASSWORD_HASH_ALGORITHM__NAME: bcrypt
+      EMQX_AUTHENTICATION__SERVER: emqx-db:5432
+      EMQX_AUTHENTICATION__PASSWORD_HASH_ALGORITHM__NAME: sha256
+      EMQX_AUTHENTICATION__PASSWORD_HASH_ALGORITHM__SALT_POSITION: prefix
       EMQX_ALLOW_ANONYMOUS: "false"
       EMQX_AUTHENTICATION__QUERY: ${EMQX_PSQL_QUERY_STRING}
       EMQX_CLUSTER__DISCOVERY_STRATEGY: k8s
@@ -70,4 +74,4 @@ spec:
         cpu: 10m
         memory: 150Mi
       limits:
-        memory: 512Mi
+        memory: 2Gi

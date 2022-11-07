@@ -6,9 +6,12 @@ metadata:
   namespace: home
 spec:
   entryPoints:
-    - websecure
+    - postgres
   routes:
-    - match: HostSNI(`hadb.${XYZ_DOMAIN}`)
+    - match: HostSNI(`*`)
+      middlewares:
+        - name: rfc1918-tcp
+          namespace: networking
       services:
-        - name: ha-postgres
+        - name: db-home-assistant
           port: 5432

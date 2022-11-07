@@ -1,0 +1,28 @@
+---
+apiVersion: kubegres.reactive-tech.io/v1
+kind: Kubegres
+metadata:
+  name: emqx-db
+  namespace: home
+spec:
+  customConfig: emqx-postgres-conf
+  replicas: 1
+  image: docker.io/library/postgres:15
+  database:
+    size: 256Mi
+    storageClassName: ceph-block
+  backup:
+    schedule: "0 */1 * * *"
+    pvcName: emqx-db-backup
+    volumeMount: /var/lib/backup
+  env:
+    - name: POSTGRES_PASSWORD
+      value: ${EMQX_KUBEGRES_PASSWORD}
+    - name: POSTGRES_REPLICATION_PASSWORD
+      value: ${EMQX_KUBEGRES_PASSWORD}
+    - name: EMQX_DB_NAME
+      value: ${EMQX_DB_NAME}
+    - name: EMQX_DB_PASSWORD
+      value: ${EMQX_DB_PASSWORD}
+    - name: EMQX_DB_USER
+      value: ${EMQX_DB_USER}

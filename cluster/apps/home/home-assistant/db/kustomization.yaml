@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: home
+resources:
+  # - ./backup-pvc.yaml
+  - ./db-home-assistant.yaml
+configMapGenerator:
+  - name: hass-postgres-conf
+    files:
+      - primary_init_script.sh
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled

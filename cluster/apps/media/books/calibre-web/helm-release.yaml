@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 0.2.2
+      version: 1.0.1
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -23,17 +23,34 @@ spec:
     remediation:
       remediateLastFailure: true
 
+  dependsOn:
+    - name: calibre
+      namespace: media
+
   values:
     image:
       repository: ghcr.io/bjw-s/calibre-web
-      tag: 0.6.19@sha256:e9536e29cfeaaa481abb5ca492dca28b8b36ac544c7c533cd42528e327f25abe
+      tag: 0.6.19@sha256:243f0fa03d8444dcdaaea9e0cccaf53a00894cf394c5bff9426be66a6c6e7634
 
     env:
       TZ: "${TZ}"
       PGID: "${MEDIA_GID}"
       PUID: "${CALIBRE_WEB_PID}"
+
+    securityContext:
+      runAsUser: 0
+      runAsGroup: 0
+
+    podSecurityContext:
       fsGroup: "${MEDIA_GID}"
       fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 100
+        - 568
+        # Custom Camelus Group(s)
+        - 65541
+        - 65536
+        - 65537
 
     enableServiceLinks: false
 
@@ -97,11 +114,11 @@ spec:
             hosts:
               - calibre-web.${XYZ_DOMAIN}
 
-    tolerations:
-      - key: "kubernetes.io/arch"
-        operator: "Equal"
-        value: "arm64"
-        effect: "NoSchedule"
+    # tolerations:
+    #   - key: "kubernetes.io/arch"
+    #     operator: "Equal"
+    #     value: "arm64"
+    #     effect: "NoSchedule"
 
     # affinity:
     #   podAntiAffinity:

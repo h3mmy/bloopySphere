@@ -5,7 +5,7 @@ metadata:
   name: authentik-postgres
   namespace: auth
   annotations:
-    config.alpha.linkerd.io/proxy-wait-before-exit-seconds: "20"
+    config.alpha.linkerd.io/proxy-wait-before-exit-seconds: "25"
 spec:
   replicas: 1
   image: docker.io/library/postgres:14.5

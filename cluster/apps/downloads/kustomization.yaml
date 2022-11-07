@@ -4,3 +4,6 @@ kind: Kustomization
 resources:
   - qbittorrent
   - downloads-pv
+  - sabnzbd
+  - jackett
+  - whisparr

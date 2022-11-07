@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.traefik.io/traefik
       chart: traefik
-      version: 18.1.0
+      version: 19.0.3
       sourceRef:
         kind: HelmRepository
         name: traefik-charts
@@ -61,31 +61,75 @@ spec:
     globalArguments:
       - "--api.insecure=true"
       - "--serverstransport.insecureskipverify=true"
-      - "--providers.kubernetesingress.ingressclass=traefik"
       - "--metrics.prometheus=true"
-      - "--metrics.prometheus.entryPoint=metrics"
       - "--entryPoints.websecure.forwardedHeaders.trustedIPs=10.0.0.0/8,192.168.0.0/16,172.16.0.0/12,103.21.244.0/22,103.22.200.0/22,103.31.4.0/22,104.16.0.0/13,104.24.0.0/14,108.162.192.0/18,131.0.72.0/22,141.101.64.0/18,162.158.0.0/15,172.64.0.0/13,173.245.48.0/20,188.114.96.0/20,190.93.240.0/20,197.234.240.0/22,198.41.128.0/17,2400:cb00::/32,2606:4700::/32,2803:f800::/32,2405:b500::/32,2405:8100::/32,2a06:98c0::/29,2c0f:f248::/32"
-    additionalArguments:
-      - "--providers.kubernetesingress.ingressendpoint.ip=${LB_V4_TRAEFIK}"
-      # - "--providers.kubernetesingress.ingressendpoint.ip=${LB_V6_TRAEFIK}"
-      - "--providers.kubernetesingress.allowexternalnameservices=true"
-      - "--providers.kubernetescrd.allowexternalnameservices=true"
-      - "--providers.kubernetescrd.allowCrossNamespace=true"
+
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowCrossNamespace: true
+        allowExternalNameServices: true
+        allowEmptyServices: false
+        # ingressClass: traefik-internal
+        # labelSelector: environment=production,method=traefik
+        namespaces: []
+      kubernetesIngress:
+        enabled: true
+        allowExternalNameServices: true
+        allowEmptyServices: false
+        ingressClass: traefik
+        # labelSelector: environment=production,method=traefik
+        namespaces: []
+          # - "default"
+        # IP used for Kubernetes Ingress endpoints
+        publishedService:
+          enabled: true
+          # Published Kubernetes Service to copy status from. Format: namespace/servicename
+          # By default this Traefik service
+          # pathOverride: ""
+
     ports:
       traefik:
         expose: true
       web:
-        address: 80
-        http:
-          redirections:
-            entryPoint:
-              to: websecure
-              scheme: https
+        port: 8000
+        expose: true
+        exposedPort: 80
+        protocol: TCP
+        # Port Redirections
+        # Added in 2.2, you can make permanent redirects via entrypoints.
+        # https://docs.traefik.io/routing/entrypoints/#redirection
+        redirectTo: websecure
+        #
+        # Trust forwarded  headers information (X-Forwarded-*).
+        # forwardedHeaders:
+        #   trustedIPs: []
+        #   insecure: false
+        #
+        # Enable the Proxy Protocol header parsing for the entry point
+        # proxyProtocol:
+        #   trustedIPs: []
+        #   insecure: false
       websecure:
+        port: 8443
+        # hostPort: 8443
+        expose: true
+        exposedPort: 443
+        # The port protocol (TCP/UDP)
+        protocol: TCP
+        # nodePort: 32443
+        #
+        ## Enable HTTP/3 on the entrypoint
+        ## Enabling it will also enable http3 experimental feature
+        ## https://doc.traefik.io/traefik/routing/entrypoints/#http3
+        ## There are known limitations when trying to listen on same ports for
+        ## TCP & UDP (Http3). There is a workaround in this chart using dual Service.
+        ## https://github.com/kubernetes/kubernetes/issues/47249#issuecomment-587960741
         http3:
-          # Have to disable for now
-          # https://github.com/kubernetes/kubernetes/issues/47249
-          enabled: false
+          enabled: true
+          # advertisedPort: 4443
+        ## Set TLS at the entrypoint
+        ## https://doc.traefik.io/traefik/routing/entrypoints/#tls
         tls:
           enabled: true
           options: default
@@ -132,6 +176,12 @@ spec:
         port: 8082
         expose: true
         exposedPort: 8082
+      postgres:
+        port: 5432
+        expose: true
+        expostedPort: 5432
+        tls:
+          enabled: false
     tlsOptions:
       default:
         minVersion: VersionTLS12
@@ -153,6 +203,48 @@ spec:
         cpu: 100m
       limits:
         memory: 600Mi
+
+    metrics:
+      prometheus:
+        entryPoint: metrics
+
+##  enable optional CRDs for Prometheus Operator
+##
+        serviceMonitor:
+          additionalLabels:
+            foo: bar
+          namespace: "networking"
+          namespaceSelector: {}
+          metricRelabelings:
+            - sourceLabels: [__name__]
+              separator: ;
+              regex: ^fluentd_output_status_buffer_(oldest|newest)_.+
+              replacement: $1
+              action: drop
+          relabelings:
+            - sourceLabels: [__meta_kubernetes_pod_node_name]
+              separator: ;
+              regex: ^(.*)$
+              targetLabel: nodename
+              replacement: $1
+              action: replace
+          jobLabel: traefik
+          scrapeInterval: 30s
+          scrapeTimeout: 5s
+          honorLabels: true
+        prometheusRule:
+          additionalLabels: {}
+          namespace: "networking"
+          rules:
+            - alert: TraefikDown
+              expr: up{job="traefik"} == 0
+              for: 5m
+              labels:
+                context: traefik
+                severity: warning
+              annotations:
+                summary: "Traefik Down"
+                description: "{{ $labels.pod }} on {{ $labels.nodename }} is down"
 
     affinity:
       podAntiAffinity:

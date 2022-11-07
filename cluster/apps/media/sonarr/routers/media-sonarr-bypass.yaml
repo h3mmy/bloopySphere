@@ -10,12 +10,12 @@ spec:
   routes:
     - kind: Rule
       match: Host(`sonarr.${XYZ_DOMAIN}`) && (Headers(`X-Api-Key`, `${SONARR_API_KEY}`) || Query(`apikey`, `${SONARR_API_KEY}`))
-      priority: 98
+      priority: 100
       services:
         - kind: Service
           name: sonarr
           port: 8989
       middlewares:
-        - name: networking-bloopnet-xyz-auth@kubernetescrd
+        - name: networking-rfc1918@kubernetescrd
   tls:
     secretName: "tls.sonarr"

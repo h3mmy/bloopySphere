@@ -11,9 +11,9 @@ spec:
   ports:
     - name: https
       protocol: TCP
-      port: 443
-      targetPort: 443
-    - port: 80
+      port: 8443
+      targetPort: 8443
+    - port: 8084
       name: http
       protocol: TCP
     - port: 9001

@@ -1,0 +1,23 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: network-ups-tools
+  namespace: home
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: network-ups-tools
+      app.kubernetes.io/instance: network-ups-tools
+  endpoints:
+    - port: metrics
+      scheme: http
+      interval: 15s
+      scrapeTimeout: 10s
+      path: /ups_metrics
+      params:
+        target:
+          - localhost:3493
+      relabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: target

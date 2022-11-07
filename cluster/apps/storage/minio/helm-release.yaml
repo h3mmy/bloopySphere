@@ -26,7 +26,7 @@ spec:
   values:
     image:
       repository: quay.io/minio/minio
-      tag: RELEASE.2022-10-24T18-35-07Z
+      tag: RELEASE.2022-10-29T06-21-33Z
 
     nameOverride: "minio"
 
@@ -124,13 +124,13 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918-ips@kubernetescrd
         hosts:
-          - host: "minio.${XYZ_DOMAIN}"
+          - host: &host1 "minio.${XYZ_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
                 service:
                   port: 9001
-          - host: "s3.${XYZ_DOMAIN}"
+          - host: &host2 "s3.${XYZ_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -139,8 +139,8 @@ spec:
         tls:
           - secretName: tls.minio
             hosts:
-              - "{{ (index .Values.ingress.main.hosts 0).host }}"
-              - "{{ (index .Values.ingress.main.hosts 1).host }}"
+              - *host1
+              - *host2
 
     podAnnotations:
       secret.reloader.stakater.com/reload: "minio"

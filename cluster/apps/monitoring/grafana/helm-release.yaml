@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://grafana.github.io/helm-charts
       chart: grafana
-      version: 6.43.1
+      version: 6.43.3
       sourceRef:
         kind: HelmRepository
         name: grafana-charts
@@ -188,7 +188,7 @@ spec:
             type: prometheus
             access: proxy
             url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
-          - name: Blocky-Query
+          - name: &blockydb Blocky-QueryDB
             type: postgres
             url: blocky-postgres.networking:5432
             database: blocky_log
@@ -249,7 +249,7 @@ spec:
       networking:
         blocky-query:
           url: https://raw.githubusercontent.com/0xERR0R/blocky/development/docs/blocky-query-grafana.json
-          datasource: MariaDB Blocky
+          datasource: *blockydb
         # Ref: https://grafana.com/grafana/dashboards/15513
         # cert-manager:
         #   url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json

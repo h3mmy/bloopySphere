@@ -1,0 +1,28 @@
+---
+apiVersion: kubegres.reactive-tech.io/v1
+kind: Kubegres
+metadata:
+  name: db-home-assistant
+  namespace: home
+spec:
+  customConfig: hass-postgres-conf
+  replicas: 1
+  image: docker.io/library/postgres:15
+  database:
+    size: 10Gi
+    storageClassName: ceph-block
+  # backup:
+  #   schedule: "0 */1 * * *"
+  #   pvcName: hass-db-backup
+  #   volumeMount: /var/lib/backup
+  env:
+    - name: POSTGRES_PASSWORD
+      value: ${HASS_DB_POSTGRES_PASSWORD}
+    - name: POSTGRES_REPLICATION_PASSWORD
+      value: ${HASS_DB_POSTGRES_PASSWORD}
+    - name: HASS_DB_NAME
+      value: ${HASS_DB_NAME}
+    - name: HASS_DB_PASSWORD
+      value: ${HASS_DB_PASSWORD}
+    - name: HASS_DB_USER
+      value: ${HASS_DB_USER}

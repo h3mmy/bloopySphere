@@ -17,6 +17,10 @@ spec:
         namespace: flux-system
       reconcileStrategy: Revision
 
+  dependsOn:
+    - name: kube-prometheus-stack
+      namespace: monitoring
+
   install:
     crds: Create
     remediation: # perform remediation when helm install fails
@@ -48,8 +52,6 @@ spec:
         linkerd.io/inject: enabled
     podSecurityPolicy:
       enabled: false
-    startupapicheck:
-      enabled: true
 
     extraArgs:
       - --dns01-recursive-nameservers=1.1.1.1:53,1.1.0.0:53
@@ -62,7 +64,7 @@ spec:
         - "1.1.0.0"
     prometheus:
       enabled: true
-      serviceMonitor:
+      servicemonitor:
         enabled: true
         namespace: *namespace
         honorLabels: true

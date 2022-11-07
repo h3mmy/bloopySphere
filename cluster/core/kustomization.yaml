@@ -3,6 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - namespaces
+  - kube-prometheus-stack
   - cert-manager
   - kube-system
   - metallb-system
@@ -11,3 +12,4 @@ resources:
   - tigera-operator
   - mysql
   - linkerd
+  # - ./emqx/emqx-chart.yaml

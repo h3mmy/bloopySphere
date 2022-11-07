@@ -10,3 +10,4 @@ resources:
   - kured
   - descheduler
   - reflector
+  # - kopia

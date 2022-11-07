@@ -17,3 +17,4 @@ resources:
   - chain-no-epages.yaml
   - ghost-admin-add-prefix.yaml
   - chain-ghost-admin.yaml
+  - internal-only-auth.yaml
