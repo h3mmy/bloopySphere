@@ -41,3 +41,4 @@ container_list_backup
 emqx_user_list.txt
 genSaltedPass.sh
 cluster/apps/home/n8n/credentials/*
+infrastructure/*
