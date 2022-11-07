@@ -10,10 +10,10 @@ spec:
     spec:
       # renovate: registryUrl=https://repos.emqx.io/charts
       chart: emqx
-      version: 5.0.9
+      version: 5.0.3
       sourceRef:
-        kind: GitRepository
-        name: emqx-chart
+        kind: HelmRepository
+        name: emqx-charts
         namespace: flux-system
       interval: 15m
   install:
