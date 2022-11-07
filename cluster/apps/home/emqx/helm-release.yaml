@@ -32,7 +32,7 @@ spec:
     recreatePods: true
     envFromSecret: emqx-secrets
     emqxConfig:
-      EMQX_AUTHENTICATION__ENABLE: "true"
+      EMQX_AUTHENTICATION__1__ENABLE: "true"
       EMQX_AUTHENTICATION__1__MECHANISM: password_based
       EMQX_AUTHENTICATION__1__BACKEND: postgresql
       EMQX_AUTHENTICATION__1__DATABASE: ${EMQX_DB_NAME}
