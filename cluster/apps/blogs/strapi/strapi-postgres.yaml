@@ -6,7 +6,7 @@ metadata:
   namespace: blogs
 spec:
   replicas: 1
-  image: docker.io/library/postgres:14.5
+  image: docker.io/library/postgres:14.6
   database:
     size: 5Gi
     storageClassName: ceph-block
