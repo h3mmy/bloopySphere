@@ -44,3 +44,5 @@ INSERT INTO mqtt_user(username, password_hash, salt, is_superuser) VALUES ('user
 ```
 
 You can do this manually, or set up a job to reconcile against a sops file, or other automation. I haven't settled on a preferred approach yet. I've been busy. If you want to try something, feel free to tag me in a discussion, or PR.
+
+I've included an example script for generating the required insert statements for many users `genSaltedPass.sh` which can be adjusted to insert users conditionally in an initContainer.

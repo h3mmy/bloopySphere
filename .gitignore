@@ -10,6 +10,7 @@ kubeconfig
 .config.env
 .config.live.env
 .config.api.env
+.config.tf.env
 # Ansible
 xanmanning.k3s*
 patrickjahns.promtail*
@@ -39,6 +40,5 @@ zwavejs2mqtt-store.zip
 test.sh
 container_list_backup
 emqx_user_list.txt
-genSaltedPass.sh
 cluster/apps/home/n8n/credentials/*
 infrastructure/*
