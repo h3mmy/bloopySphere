@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: velero/velero
-      tag: v1.9.2
+      tag: v1.9.3
     configuration:
       extraEnvVars:
         TZ: "${TZ}"
@@ -75,7 +75,7 @@ spec:
     kubectl:
       image:
         repository: ghcr.io/k8s-at-home/kubectl
-        tag: v1.25.3
+        tag: v1.25.4
 
     deployRestic: true
 

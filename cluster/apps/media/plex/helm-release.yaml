@@ -30,7 +30,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/plex # {"$imagepolicy": "flux-system:plex:name"}
-      tag: "1.29.1.6316-f4cdfea9c" # {"$imagepolicy": "flux-system:plex:tag"}
+      tag: "1.29.2.6364-6d72b0cf6" # {"$imagepolicy": "flux-system:plex:tag"}
       imagePullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"
@@ -161,7 +161,7 @@ spec:
         enabled: true
         image:
           repository: grafana/promtail
-          tag: 2.6.1
+          tag: 2.7.0
         loki: http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push
         logs:
           - name: promtail/plex
@@ -174,19 +174,18 @@ spec:
             readOnly: true
         securityContext:
           runAsUser: 0
-
-    # additionalContainers:
-    #   git-sync:
-    #     name: git-sync
-    #     image: willdockerhub/git-sync:v3.3.0
-    #     imagePullPolicy: IfNotPresent
-    #     args:
-    #       - "--repo=${PLEX_PLUGIN_REPO}"
-    #       - "--branch=main"
-    #       - "--username=h3mmy"
-    #       - "--password=${PLEX_GITSYNC_GITHUB_TOKEN}"
-    #       - "--root=/config/Library/Application Support/Plex Media Server/Plug-ins"
-    #       - "--wait=30"
+          # additionalContainers:
+          #   git-sync:
+          #     name: git-sync
+          #     image: willdockerhub/git-sync:v3.3.0
+          #     imagePullPolicy: IfNotPresent
+          #     args:
+          #       - "--repo=${PLEX_PLUGIN_REPO}"
+          #       - "--branch=main"
+          #       - "--username=h3mmy"
+          #       - "--password=${PLEX_GITSYNC_GITHUB_TOKEN}"
+          #       - "--root=/config/Library/Application Support/Plex Media Server/Plug-ins"
+          #       - "--wait=30"
 
 # additionalContainers:
 #   fsfreeze:

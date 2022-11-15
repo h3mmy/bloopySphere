@@ -7,3 +7,4 @@ area/cluster:
   - "cluster/**/*"
 area/terraform:
   - "provision/terraform/**/*"
+  - "infrastructure/terraform/**/*"

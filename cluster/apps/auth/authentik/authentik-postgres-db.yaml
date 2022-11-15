@@ -8,7 +8,7 @@ metadata:
     config.alpha.linkerd.io/proxy-wait-before-exit-seconds: "25"
 spec:
   replicas: 1
-  image: docker.io/library/postgres:14.5
+  image: docker.io/library/postgres:14.6
   database:
     size: 10Gi
     storageClassName: ceph-block

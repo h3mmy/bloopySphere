@@ -70,7 +70,21 @@ spec:
         - secretName: tls.jhub
           hosts:
             - "jhub.${XYZ_DOMAIN}"
+    prePuller:
+      hook:
+        nodeSelector:
+          kubernetes.io/arch: amd64
     singleuser:
+      extraNodeAffinity:
+        required:
+          - matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+                - amd64
+                - i386
+                - i686
+                - x86
       cpu:
         limit: 4
         guarantee: 0.05

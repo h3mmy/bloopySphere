@@ -5,7 +5,7 @@
 #
 
 # (string) Use a specific version of k3s
-k3s_release_version: "v1.24.6+k3s1"
+k3s_release_version: "v1.24.7+k3s1"
 
 # (bool) Install using hard links rather than symbolic links.
 k3s_install_hard_links: true
@@ -34,16 +34,16 @@ k3s_server_config_yaml_d_files:
 
 # (list) A flat list of templates to deploy on the primary control plane
 # /var/lib/rancher/k3s/server/manifests
-k3s_server_manifests_templates:
-  # - "home-dns/home-dns-rbac.yaml.j2"
-  - "calico/calico-installation.yaml.j2"
-  - "kube-vip/kube-vip-rbac.yaml.j2"
-  - "kube-vip/kube-vip-daemonset.yaml.j2"
+k3s_server_manifests_templates: []
+#   # - "home-dns/home-dns-rbac.yaml.j2"
+#   - "calico/calico-installation.yaml.j2"
+#   - "kube-vip/kube-vip-rbac.yaml.j2"
+#   - "kube-vip/kube-vip-daemonset.yaml.j2"
 
-# (list) A list of URLs to deploy on the primary control plane. Read notes below.
-k3s_server_manifests_urls:
-  - url: https://docs.projectcalico.org/archive/v3.20/manifests/tigera-operator.yaml
-    filename: tigera-operator.yaml
+# # (list) A list of URLs to deploy on the primary control plane. Read notes below.
+k3s_server_manifests_urls: []
+  # - url: https://docs.projectcalico.org/archive/v3.24/manifests/tigera-operator.yaml
+  #   filename: tigera-operator.yaml
 
 # # etcd backups to s3
 # k3s_etcd_s3: true
