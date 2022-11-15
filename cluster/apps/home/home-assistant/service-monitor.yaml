@@ -28,10 +28,9 @@ spec:
           regex: (.*)
           replacement: "${HASS_DIRECT}:8123"
           action: replace
-      authorization:
-        credentials:
-          key: token
-          name: home-assistant-prometheus-token
+      bearerTokenSecret:
+        key: token
+        name: home-assistant-prometheus-token
 ---
 apiVersion: v1
 kind: Endpoints
