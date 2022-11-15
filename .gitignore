@@ -20,6 +20,7 @@ patrickjahns.promtail*
 terraform.tfstate*
 oke/terraform.tfvars
 provision/terraform/oci/oke/terraform.tfvars
+provision/terraform/cloudflare/generated/*
 # Sops
 sops.asc
 *.agekey
@@ -41,5 +42,9 @@ test.sh
 container_list_backup
 emqx_user_list.txt
 cluster/apps/home/n8n/credentials/*
-infrastructure/*
+infrastructure/terraform/s3/*
+infrastructure/bare-metal/*
+infrastructure/shared/networks.yaml
 cluster/apps/infra/*
+*.backup
+*.bak
