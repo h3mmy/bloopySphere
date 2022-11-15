@@ -1,10 +1,34 @@
 ---
 creation_rules:
-  - path_regex: (provision|infrastructure)/.*\.sops\.ya?ml
+  - path_regex: (provision|infrastructure)/.*(cloudflare/).*\.sops\.ya?ml
     unencrypted_regex: "^(kind)$"
-    age: >-
-      age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq
+    key_groups:
+      # personal, flux, tf-cloud-cloudflare
+      - age:
+          - age1hr5v66mq2rtflw8vrzmdlaku48v0j5l2wr58lrdmxqp5decczugs3rr6yt
+          - age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq
+          - age1jzgdqns9ru8en3ahl9qpz4lwy4w6naesyyuu222c7kyad0znt5mstv0e3a
+  - path_regex: (provision|infrastructure)/.*(shared/).*\.sops\.ya?ml
+    unencrypted_regex: "^(kind)$"
+    key_groups:
+      # personal, flux, tf-cloud-cloudflare, tf-cloud-oci
+      - age:
+          - age1hr5v66mq2rtflw8vrzmdlaku48v0j5l2wr58lrdmxqp5decczugs3rr6yt
+          - age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq
+          - age1jzgdqns9ru8en3ahl9qpz4lwy4w6naesyyuu222c7kyad0znt5mstv0e3a
+          - age1s0tcmcz4ej87zm0uahynjyq77jd072twhmh0txjsamfqpzkspdxq8hcn2a
+  - path_regex: (provision|infrastructure)/.*(oci/).*\.sops\.ya?ml
+    unencrypted_regex: "^(kind)$"
+    key_groups:
+      # personal, flux, tf-cloud-cloudflare, tf-cloud-oci
+      - age:
+          - age1hr5v66mq2rtflw8vrzmdlaku48v0j5l2wr58lrdmxqp5decczugs3rr6yt
+          - age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq
+          - age1s0tcmcz4ej87zm0uahynjyq77jd072twhmh0txjsamfqpzkspdxq8hcn2a
   - path_regex: (k8s|cluster)/.*\.ya?ml
     encrypted_regex: "^(data|stringData)$"
-    age: >-
-      age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq
+    key_groups:
+      # personal, flux
+      - age:
+          - age1hr5v66mq2rtflw8vrzmdlaku48v0j5l2wr58lrdmxqp5decczugs3rr6yt
+          - age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq

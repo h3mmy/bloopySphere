@@ -18,7 +18,6 @@ patrickjahns.promtail*
 .terraform
 .terraform.tfstate*
 terraform.tfstate*
-provision/terraform/oci/oke/terraform.tfvars
 provision/terraform/cloudflare/generated/*
 # Sops
 sops.asc
