@@ -14,7 +14,7 @@
     "docker:enableMajor",
     "github>h3mmy/bloopysphere//.github/renovate/allowedVersions.json5",
     "github>h3mmy/bloopysphere//.github/renovate/commitMessage",
-    "github>h3mmy/bloopysphere//.github/renovate/autoMerge",
+    "github>h3mmy/bloopysphere//.github/renovate/autoMerge.json5",
     "github>h3mmy/bloopysphere//.github/renovate/labels.json5",
     "github>h3mmy/bloopysphere//.github/renovate/groups.json5",
     "github>h3mmy/bloopysphere//.github/renovate/disabledDatasources.json5",
