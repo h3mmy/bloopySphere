@@ -1,7 +1,7 @@
 ---
 collections:
   - name: community.general
-    version: 6.0.0
+    version: 6.0.1
   - name: community.sops
     version: 1.4.1
   - name: ansible.posix
@@ -11,7 +11,7 @@ collections:
 roles:
   - name: xanmanning.k3s
     src: https://github.com/PyratLabs/ansible-role-k3s.git
-    version: v3.3.0
+    version: v3.3.1
   - src: patrickjahns.promtail
     version: 1.18.0
   - src: geerlingguy.pip
