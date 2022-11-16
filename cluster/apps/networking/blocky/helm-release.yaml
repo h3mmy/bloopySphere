@@ -130,7 +130,7 @@ spec:
         enabled: true
 
     podAnnotations:
-      configmap.reloader.stakater.com/reload: blocky-config
+      configmap.reloader.stakater.com/reload: blocky-config,blocky-whitelist
       secret.reloader.stakater.com/reload: tls.blocky
       # linkerd.io/inject: enabled
 
