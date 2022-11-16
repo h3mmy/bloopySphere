@@ -1,29 +1,21 @@
 resource "oci_identity_compartment" "oke" {
-  compartment_id = var.tenancy_ocid
+  compartment_id = local.oci_secrets["compartment_ocid"]
   description    = "Compartment for Terraform resources."
-  name           = var.compartment_name
+  name           = local.oci_secrets["compartment_name"]
   enable_delete  = true
 }
 
-data "oci_core_images" "bastion" {
-  compartment_id           = oci_identity_compartment.oke.id
-  operating_system         = "Oracle Linux"
-  operating_system_version = "8"
-  shape                    = "VM.Standard.E2.1.Micro"
-  sort_by                  = "TIMECREATED"
-  sort_order               = "DESC"
-}
-
 module "oke" {
+  # External module. See https://registry.terraform.io/modules/oracle-terraform-modules/oke/oci
   source = "oracle-terraform-modules/oke/oci"
 
   compartment_id = oci_identity_compartment.oke.id
 
-  region              = var.region
-  home_region         = var.region
-  tenancy_id          = var.tenancy_ocid
-  ssh_public_key_path = var.ssh_public_key_path
-  create_operator     = false
+  region          = local.region
+  home_region     = local.region
+  tenancy_id      = local.oci_secrets["tenancy_ocid"]
+  ssh_public_key  = local.oci_secrets["ssh_public_key"]
+  create_operator = false
   bastion_shape = {
     shape = "VM.Standard.E2.1.Micro",
   }
@@ -38,6 +30,7 @@ module "oke" {
     int_lb   = { netnum = 16, newbits = 11 }
     pub_lb   = { netnum = 17, newbits = 11 }
     workers  = { netnum = 1, newbits = 2 }
+    pods     = { netnum = 2, newbits = 2 }
     fss      = { netnum = 18, newbits = 11 }
   }
   node_pools = {
@@ -53,3 +46,16 @@ module "oke" {
     oci.home = oci
   }
 }
+
+# Obtain provisioned Kubeconfig.
+data "oci_containerengine_cluster_kube_config" "kube_config" {
+  cluster_id = module.oke.cluster_id
+}
+
+# Store kubeconfig in vault.
+# resource "vault_generic_secret" "kube_config" {
+#   path = "my/cluster/path/kubeconfig"
+#   data_json = jsonencode({
+#     "data" : data.oci_containerengine_cluster_kube_config.kube_config.content
+#   })
+# }
