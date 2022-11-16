@@ -2,6 +2,12 @@
     "packageRules": [
       {
         "matchDatasources": ["docker"],
+        "matchPackageNames": ["postgres"],
+        "fileMatch": "cluster/apps/auth/authentik.+\\.ya?ml$",
+        "allowedVersions":"<15"
+      },
+      {
+        "matchDatasources": ["docker"],
         "matchPackageNames": ["influxdb"],
         "allowedVersions": "<2"
       },
