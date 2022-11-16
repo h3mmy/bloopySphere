@@ -193,6 +193,8 @@ spec:
             url: blocky-postgres.networking:5432
             database: blocky_log
             user: blocky
+            jsonData:
+              tls: false
             secureJsonData:
               password: ${BLOCKY_KUBEGRES_PASSWORD}
           - name: MariaDB Hass
