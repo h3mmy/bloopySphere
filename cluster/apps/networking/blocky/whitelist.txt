@@ -1,4 +1,5 @@
 reminders-pa.googleapis.com
+analytics.google.com
 firestore.googleapis.com
 googleapis.l.google.com
 dl.google.com
