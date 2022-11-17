@@ -21,7 +21,7 @@ spec:
   values:
     nodeSelector:
       kubernetes.io/arch: amd64
-    prometheusUrl: "prometheus-prometheus.monitoring.svc:9090"
+    prometheusUrl: "thanos-query.monitoring:9090"
     grafanaUrl: "grafana.monitoring.svc:80"
     jaegerUrl: ""
     # metrics API configuration
