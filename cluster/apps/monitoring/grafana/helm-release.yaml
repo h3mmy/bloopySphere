@@ -196,7 +196,7 @@ spec:
             user: blocky
             jsonData:
               # SSLmode. 'disable', 'require', 'verify-ca' or 'verify-full'
-              sslmode: disabled
+              sslmode: disable
             secureJsonData:
               password: ${BLOCKY_KUBEGRES_PASSWORD}
           - name: MariaDB Hass
