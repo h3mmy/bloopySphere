@@ -125,3 +125,32 @@ prometheus:
               - home-assistant.home.svc.cluster.local:8123
             labels:
               app.kubernetes.io/name: home-assistant
+ 
+      - job_name: 'linkerd-controller'
+        kubernetes_sd_configs:
+          - role: pod
+            namespaces:
+              names:
+                - linkerd
+                - linkerd
+        relabel_configs:
+          - source_labels:
+              - __meta_kubernetes_pod_container_port_name
+            action: keep
+            regex: admin-http
+          - source_labels: [__meta_kubernetes_pod_container_name]
+            action: replace
+            target_label: component
+
+      - job_name: 'linkerd-service-mirror'
+        kubernetes_sd_configs:
+          - role: pod
+        relabel_configs:
+          - source_labels:
+            - __meta_kubernetes_pod_label_linkerd_io_control_plane_component
+            - __meta_kubernetes_pod_container_port_name
+            action: keep
+            regex: linkerd-service-mirror;admin-http$
+          - source_labels: [__meta_kubernetes_pod_container_name]
+            action: replace
+            target_label: component
