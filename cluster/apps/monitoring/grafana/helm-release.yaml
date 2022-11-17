@@ -192,13 +192,13 @@ spec:
           - name: &blockydb Blocky-QueryDB
             type: postgres
             url: blocky-postgres.networking:5432
-            database: blocky_log
+            database: ${BLOCKY_QUERY_DB_NAME}
             user: blocky
             jsonData:
               # SSLmode. 'disable', 'require', 'verify-ca' or 'verify-full'
               sslmode: disable
             secureJsonData:
-              password: ${BLOCKY_KUBEGRES_PASSWORD}
+              password: ${BLOCKY_QUERY_DB_PASSWORD}
           - name: MariaDB Hass
             type: mysql
             url: ${MARIADB_ADDRESS}:3306
