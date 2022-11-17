@@ -54,5 +54,6 @@ spec:
           request: 50Mi
     grafana:
       enabled: false
+    # https://linkerd.io/2.12/tasks/external-prometheus/
     prometheus:
       enabled: false
