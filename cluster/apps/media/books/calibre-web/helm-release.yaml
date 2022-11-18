@@ -80,7 +80,7 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: networking-secure-headers@kubernetescrd,auth-ak-outpost-books-auth@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
           hajimari.io/instance: "bloop-xyz"
           hajimari.io/enable: "true"
           hajimari.io/icon: "bookshelf"
