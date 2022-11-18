@@ -6,5 +6,5 @@ resources:
   - wildcard-certificate
   - blocky
   - error-pages
-  - ddns
+  # - ddns
   - k8s-gateway
