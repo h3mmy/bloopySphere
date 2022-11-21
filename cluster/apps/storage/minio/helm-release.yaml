@@ -6,6 +6,7 @@ metadata:
   namespace: storage
 spec:
   interval: 15m
+  timeout: 10m
   chart:
     spec:
       chart: app-template
@@ -21,6 +22,7 @@ spec:
   upgrade:
     remediation:
       retries: 5
+    remediateLastFailure: true
 
   values:
     image:
