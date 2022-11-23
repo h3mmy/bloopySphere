@@ -21,7 +21,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/jackett
-      tag: 0.20.2271
+      tag: 0.20.2280
     env:
       TZ: ${TZ}
     service:
