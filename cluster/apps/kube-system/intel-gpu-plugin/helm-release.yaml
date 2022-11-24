@@ -31,7 +31,7 @@ spec:
       strategy: RollingUpdate
     image:
       repository: intel/intel-gpu-plugin
-      tag: "0.25.0"
+      tag: "0.25.1"
       pullPolicy: IfNotPresent
     args:
       - -shared-dev-num
