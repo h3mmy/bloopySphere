@@ -252,7 +252,7 @@ spec:
         #   datasource: Prometheus
       networking:
         blocky-query:
-          url: https://raw.githubusercontent.com/0xERR0R/blocky/development/docs/blocky-query-grafana.json
+          url: https://raw.githubusercontent.com/0xERR0R/blocky/development/docs/blocky-query-grafana-postgres.json
           datasource: *blockydb
         # Ref: https://grafana.com/grafana/dashboards/15513
         # cert-manager:
