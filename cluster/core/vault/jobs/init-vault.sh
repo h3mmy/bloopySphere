@@ -117,7 +117,7 @@ portForwardVault() {
 loginVault() {
   message "logging into vault"
   if [ -z "$VAULT_ROOT_TOKEN" ]; then
-    echo "VAULT_ROOT_TOKEN is not set! Check $REPO_ROOT/setup/.env"
+    echo "VAULT_ROOT_TOKEN is not set! Check secrets"
     exit 1
   fi
 
