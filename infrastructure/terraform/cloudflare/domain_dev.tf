@@ -90,14 +90,14 @@ module "cf_domain_dev" {
 }
 
 # Actually belongs to cf_domain_dev but I made a mistake
-resource "cloudflare_workers_kv_namespace" "cf_domain_xyz_status_kv_ns" {
-  title = "KV_STATUS_PAGE"
-}
+# resource "cloudflare_workers_kv_namespace" "cf_domain_xyz_status_kv_ns" {
+#   title = "KV_STATUS_PAGE"
+# }
 
 # Actually belongs to cf_domain_dev but I made a mistake
-resource "cloudflare_workers_kv_namespace" "cf_domain_xyz_static_kv_ns" {
-  title = "__STATIC_CONTENT"
-}
+# resource "cloudflare_workers_kv_namespace" "cf_domain_xyz_static_kv_ns" {
+#   title = "__STATIC_CONTENT"
+# }
 
 resource "cloudflare_worker_route" "cf_domain_dev_status_route" {
   zone_id     = module.cf_domain_dev.zone_id

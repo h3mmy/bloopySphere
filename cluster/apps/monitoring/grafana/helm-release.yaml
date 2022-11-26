@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://grafana.github.io/helm-charts
       chart: grafana
-      version: 6.44.0
+      version: 6.44.8
       sourceRef:
         kind: HelmRepository
         name: grafana-charts
@@ -168,6 +168,7 @@ spec:
             options:
               path: /var/lib/grafana/dashboards/users
     datasources:
+      # Schema: https://grafana.com/docs/grafana/latest/administration/provisioning/#datasources
       datasources.yaml:
         apiVersion: 1
         # list of datasources that should be deleted from the database
@@ -191,10 +192,13 @@ spec:
           - name: &blockydb Blocky-QueryDB
             type: postgres
             url: blocky-postgres.networking:5432
-            database: blocky_log
+            database: ${BLOCKY_QUERY_DB_NAME}
             user: blocky
+            jsonData:
+              # SSLmode. 'disable', 'require', 'verify-ca' or 'verify-full'
+              sslmode: disable
             secureJsonData:
-              password: ${BLOCKY_KUBEGRES_PASSWORD}
+              password: ${BLOCKY_QUERY_DB_PASSWORD}
           - name: MariaDB Hass
             type: mysql
             url: ${MARIADB_ADDRESS}:3306
@@ -248,7 +252,7 @@ spec:
         #   datasource: Prometheus
       networking:
         blocky-query:
-          url: https://raw.githubusercontent.com/0xERR0R/blocky/development/docs/blocky-query-grafana.json
+          url: https://raw.githubusercontent.com/0xERR0R/blocky/development/docs/blocky-query-grafana-postgres.json
           datasource: *blockydb
         # Ref: https://grafana.com/grafana/dashboards/15513
         # cert-manager:
