@@ -54,7 +54,7 @@ spec:
       extraEnvironmentVars:
         # VAULT_TOKEN: ${SECRET_VAULT_TOKEN}
         TZ: ${TZ}
-        GOOGLE_APPLICATION_CREDENTIALS: /vault/userconfig/kms-vault/account.json
+        GOOGLE_APPLICATION_CREDENTIALS: /vault/userconfig/kms-vault/serviceaccount.json
       extraVolumes:
         - type: secret
           name: kms-vault-unseal
