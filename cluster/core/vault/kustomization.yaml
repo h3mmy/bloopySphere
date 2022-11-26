@@ -6,3 +6,4 @@ resources:
   - deployment/credentials.sops.yaml
   - deployment/helm-release.yaml
   - secrets-operator/helm-release.yaml
+  - jobs

@@ -5,6 +5,8 @@ metadata:
   name: init-vault
   namespace: vault
 spec:
+  completions: 1
+  ttlSecondsAfterFinished: 1000
   backoffLimit: 0
   template:
     spec:
@@ -20,7 +22,7 @@ spec:
                       path: init-vault.sh
       containers:
         - name: kubectl
-          image: ghcr.io/k8s-at-home/kubectl:v1.27.1
+          image: ghcr.io/k8s-at-home/kubectl:v1.24.7
           volumeMounts:
             - name: init-vault
               mountPath: /scripts/init-vault.sh
@@ -33,7 +35,7 @@ spec:
             - |
               # install vault
               apt update && apt install unzip
-              curl -fsSL -o vault.zip "https://releases.hashicorp.com/vault/1.9.3/vault_1.9.3_linux_amd64.zip"
+              curl -fsSL -o vault.zip "https://releases.hashicorp.com/vault/1.12.1/vault_1.12.1_linux_amd64.zip"
               unzip vault.zip
               rm vault.zip
               mv vault /usr/local/bin/vault
