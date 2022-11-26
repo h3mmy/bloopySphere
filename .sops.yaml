@@ -25,6 +25,14 @@ creation_rules:
           - age1hr5v66mq2rtflw8vrzmdlaku48v0j5l2wr58lrdmxqp5decczugs3rr6yt
           - age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq
           - age1s0tcmcz4ej87zm0uahynjyq77jd072twhmh0txjsamfqpzkspdxq8hcn2a
+  - path_regex: (provision|infrastructure)/.*(gcp/).*\.sops\.ya?ml
+    unencrypted_regex: "^(kind)$"
+    key_groups:
+      # personal, flux, tf-gcp
+      - age:
+          - age1hr5v66mq2rtflw8vrzmdlaku48v0j5l2wr58lrdmxqp5decczugs3rr6yt
+          - age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq
+          - age1ehyfpdnft55jlre0xvdx22gn8rfe6p38wlarghh6m3tjmldsagasz3u4y0
   - path_regex: (k8s|cluster)/.*\.ya?ml
     encrypted_regex: "^(data|stringData)$"
     key_groups:
