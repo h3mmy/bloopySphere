@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export REPLIACS="0 1 2"
+
 initVault() {
   message "initializing and unsealing vault (if necesary)"
   VAULT_READY=1
@@ -40,7 +42,7 @@ initVault() {
       --from-literal=vault_recovery_token=$VAULT_RECOVERY_TOKEN
     echo "SAVE THESE VALUES!"
 
-    REPLIACS_LIST=($REPLIACS)
+    REPLIACS_LIST=($REPLICAS)
     echo "sleeping 10 seconds to allow first vault to be ready"
     sleep 10
     for replica in "${REPLIACS_LIST[@]:1}"; do
@@ -95,3 +97,7 @@ EOF
     policies=vault-secrets-operator \
     ttl=24h
 }
+
+initVault()
+
+setupVaultSecretsOperator()
