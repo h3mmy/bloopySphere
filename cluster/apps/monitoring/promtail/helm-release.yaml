@@ -25,7 +25,7 @@ spec:
       repository: k8s-at-home/promtail
 
     config:
-      lokiAddress: http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push
+      lokiAddress: http://loki-gateway.monitoring.svc.cluster.local:80/loki/api/v1/push
       snippets:
         extraScrapeConfigs: |
           - job_name: journal
