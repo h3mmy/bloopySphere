@@ -3,7 +3,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: init-vault
-  namespace: vault
+  namespace: &ns vault
 spec:
   completions: 1
   ttlSecondsAfterFinished: 1000
@@ -28,7 +28,8 @@ spec:
               mountPath: /scripts/init-vault.sh
               subPath: init-vault.sh
               readOnly: true
-
+          env:
+            - VAULT_NAMESPACE: *ns
           command:
             - "/bin/sh"
             - "-ec"
