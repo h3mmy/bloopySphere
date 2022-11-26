@@ -15,6 +15,9 @@ data:
   DOMAIN_CORE_BLOOP: "bloopycore"
   DOMAIN_SMALL_BLOOP: "smallbloop"
   EMQX_PSQL_QUERY_STRING: "SELECT password_hash, salt, is_superuser FROM mqtt_user WHERE username = ${username} LIMIT 1"
+  GCP_VAULT_KEYRING_NAME: bloopy-vault
+  GCP_VAULT_KMS_REGION: global
+  GCP_VAULT_CRYPTO_NAME: bloopy-vault-crypt
   LB_PLEX_IP: 10.1.0.105
   LB_PROMTAIL: 10.1.0.103
   LB_TRAEFIK_CLASSIC: 10.1.0.50

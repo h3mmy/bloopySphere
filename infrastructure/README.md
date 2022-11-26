@@ -10,6 +10,12 @@ Note: The relevant private key needs to be in an environment variable named SOPS
 
 Also, don't forget to re-encrypt your sops file after adding new keys to it.
 
+Snippets:
+`age-keygen -o tf-mymodule.agekey`
+`cat tf-mymodule.agekey >> $SOPS_AGE_KEY_FILE`
+
+Add privkey to SOPS_AGE_KEY in tf runner.
+
 ## Cloudflare
 
 For maintaining domains that interface with the bloopysphere. Attempted to use [terraformer](https://github.com/GoogleCloudPlatform/terraformer) and [cf-terraforming](https://github.com/cloudflare/cf-terraforming) in an effort to make the migration easier, but they were uncooperative. Eventually I managed to get a rudimentary state via terraformer and did a manual walk through to copy the resource definitions. It can be scripted but I didn't have enough entries to justify that. A few "Find & Replace" ops later and I had the resource files you can see in the folder.

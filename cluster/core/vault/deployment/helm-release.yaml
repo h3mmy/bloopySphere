@@ -1,0 +1,100 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: vault
+  namespace: vault
+spec:
+  interval: 75m
+  chart:
+    spec:
+      # renovate: registryUrl=https://helm.releases.hashicorp.com
+      chart: vault
+      version: 0.22.1
+      sourceRef:
+        kind: HelmRepository
+        name: hashicorp-charts
+        namespace: flux-system
+
+  valuesFrom:
+    - targetPath: server.extraEnvironmentVars.VAULT_TOKEN
+      kind: Secret
+      name: vault-tokens
+      optional: true
+      valuesKey: vault_root_token
+  values:
+    metrics:
+      enabled: true
+    service:
+      enabled: true
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      annotation:
+        cert-manager.io/cluster-issuer: letsencrypt-production
+        hajimari.io/enable: "true"
+        hajimari.io/icon: shield-key
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
+        kubernetes.io/ingress.class: nginx
+      hosts:
+        - host: &host vault.${XYZ_DOMAIN}
+          paths:
+            - /
+      tls:
+        - secretName: tls.vault
+        - hosts:
+            - *host
+    server:
+      extraLabels:
+        configmap.reloader.stakater.com/reload: vault-config
+      dataStorage:
+        enabled: true
+        storageClass: "ceph-block"
+      extraEnvironmentVars:
+        # VAULT_TOKEN: ${SECRET_VAULT_TOKEN}
+        TZ: ${TZ}
+        GOOGLE_APPLICATION_CREDENTIALS: /vault/userconfig/kms-vault/account.json
+      extraVolumes:
+        - type: secret
+          name: kms-vault
+          path: /vault/userconfig
+      tolerations: |
+        - key: "arm"
+          operator: "Exists"
+      annotations:
+        backup.velero.io/backup-volumes: data
+      resources:
+        requests:
+          memory: 256Mi
+          cpu: 250m
+        limits:
+          memory: 256Mi
+      standalone:
+        enabled: false
+      ha:
+        enabled: true
+        replicas: 3
+        raft:
+          enabled: true
+          setNodeId: true
+          config: |
+            ui = true
+            listener "tcp" {
+              tls_disable = 1
+              address = "[::]:8200"
+              cluster_address = "[::]:8201"
+            }
+            storage "raft" {
+              path = "/vault/data"
+            }
+            seal "gcpckms" {
+              project     = "${GCP_PROJECT_KEY_0}"
+              region      = "${GCP_VAULT_KMS_REGION}"
+              key_ring    = "${GCP_VAULT_KEYRING_NAME}"
+              crypto_key  = "${GCP_VAULT_CRYPTO_NAME}"
+            }
+            service_registration "kubernetes" {}
+    ui:
+      enabled: true
+      serviceType: "ClusterIP"

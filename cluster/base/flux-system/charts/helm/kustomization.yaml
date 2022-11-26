@@ -40,3 +40,4 @@ resources:
   - bjw-s-charts.yaml
   - kyverno-charts.yaml
   - hashicorp-charts.yaml
+  - ricoberger-charts.yaml

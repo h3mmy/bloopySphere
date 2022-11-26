@@ -1,0 +1,45 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: init-vault
+  namespace: vault
+spec:
+  completions: 1
+  ttlSecondsAfterFinished: 1000
+  backoffLimit: 0
+  template:
+    spec:
+      volumes:
+        - name: init-script
+          projected:
+            defaultMode: 0775
+            sources:
+              - configMap:
+                  name: init-script
+                  items:
+                    - key: init-vault.sh
+                      path: init-vault.sh
+      containers:
+        - name: kubectl
+          image: ghcr.io/k8s-at-home/kubectl:v1.24.7
+          volumeMounts:
+            - name: init-vault
+              mountPath: /scripts/init-vault.sh
+              subPath: init-vault.sh
+              readOnly: true
+
+          command:
+            - "/bin/sh"
+            - "-ec"
+            - |
+              # install vault
+              apt update && apt install unzip
+              curl -fsSL -o vault.zip "https://releases.hashicorp.com/vault/1.12.1/vault_1.12.1_linux_amd64.zip"
+              unzip vault.zip
+              rm vault.zip
+              mv vault /usr/local/bin/vault
+              chmod +x /usr/local/bin/vault
+              /scripts/init-vault.sh
+
+      restartPolicy: OnFailure
