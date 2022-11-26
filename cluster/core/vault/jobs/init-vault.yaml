@@ -22,7 +22,7 @@ spec:
                       path: init-vault.sh
       containers:
         - name: kubectl
-          image: ghcr.io/k8s-at-home/kubectl:v1.24.7
+          image: ghcr.io/k8s-at-home/kubectl:v1.25.4
           volumeMounts:
             - name: init-script
               mountPath: /scripts/init-vault.sh
