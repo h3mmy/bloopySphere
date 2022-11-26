@@ -36,7 +36,6 @@ spec:
         hajimari.io/icon: shield-key
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
-        kubernetes.io/ingress.class: nginx
       hosts:
         - host: &host vault.${XYZ_DOMAIN}
           paths:
