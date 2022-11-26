@@ -6,7 +6,6 @@ metadata:
   namespace: &ns vault
 spec:
   completions: 1
-  ttlSecondsAfterFinished: 1000
   backoffLimit: 5
   template:
     spec:
