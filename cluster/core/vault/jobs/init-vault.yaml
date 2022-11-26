@@ -32,7 +32,7 @@ spec:
             - name: VAULT_NAMESPACE
               value: *ns
             - name: VAULT_ADDR
-              value: vault:8200
+              value: http://vault:8200
           command:
             - "/bin/sh"
             - "-ec"
