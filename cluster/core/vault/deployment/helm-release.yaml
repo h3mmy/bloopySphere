@@ -57,7 +57,7 @@ spec:
         GOOGLE_APPLICATION_CREDENTIALS: /vault/userconfig/kms-vault/account.json
       extraVolumes:
         - type: secret
-          name: kms-vault
+          name: kms-vault-unseal
           path: /vault/userconfig
       tolerations: |
         - key: "arm"
