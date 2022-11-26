@@ -1,6 +1,16 @@
-#!/bin/sh
+#!/bin/bash
+
+# Requires env vars
+# $VAULT_NAMESPACE
+# $VAULT_ADDR
 
 export REPLIACS="0 1 2"
+
+message() {
+  echo -e "\n######################################################################"
+  echo "# $1"
+  echo "######################################################################"
+}
 
 initVault() {
   message "initializing and unsealing vault (if necesary)"
@@ -37,9 +47,7 @@ initVault() {
     echo "VAULT_RECOVERY_TOKEN is: $VAULT_RECOVERY_TOKEN"
     echo "VAULT_ROOT_TOKEN is: $VAULT_ROOT_TOKEN"
 
-    kubectl -n $VAULT_NAMESPACE create secret generic vault-tokens \
-      --from-literal=vault_root_token=$VAULT_ROOT_TOKEN \
-      --from-literal=vault_recovery_token=$VAULT_RECOVERY_TOKEN
+    kubectl -n $VAULT_NAMESPACE create secret generic vault-tokens --from-literal=vault_root_token=$VAULT_ROOT_TOKEN --from-literal=vault_recovery_token=$VAULT_RECOVERY_TOKEN
     echo "SAVE THESE VALUES!"
 
     REPLIACS_LIST=($REPLICAS)
@@ -98,6 +106,41 @@ EOF
     ttl=24h
 }
 
-initVault()
+portForwardVault() {
+  message "port-forwarding vault"
+  kubectl -n kube-system port-forward svc/vault 8200:8200 >/dev/null 2>&1 &
+  export VAULT_FWD_PID=$!
 
-setupVaultSecretsOperator()
+  sleep 5
+}
+
+loginVault() {
+  message "logging into vault"
+  if [ -z "$VAULT_ROOT_TOKEN" ]; then
+    echo "VAULT_ROOT_TOKEN is not set! Check $REPO_ROOT/setup/.env"
+    exit 1
+  fi
+
+  vault login -no-print "$VAULT_ROOT_TOKEN" || exit 1
+
+  vault auth list >/dev/null 2>&1
+  if [[ "$?" -ne 0 ]]; then
+    echo "not logged into vault!"
+    echo "1. port-forward the vault service (e.g. 'kubectl -n kube-system port-forward svc/vault 8200:8200 &')"
+    echo "2. set VAULT_ADDR (e.g. 'export VAULT_ADDR=http://localhost:8200')"
+    echo "3. login: (e.g. 'vault login <some token>')"
+    exit 1
+  fi
+}
+
+
+FIRST_RUN=1
+
+initVault
+portForwardVault
+loginVault
+if [ $FIRST_RUN == 0 ]; then
+  setupVaultSecretsOperator
+fi
+
+kill $VAULT_FWD_PID

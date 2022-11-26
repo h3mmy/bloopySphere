@@ -5,8 +5,9 @@ metadata:
   name: init-vault
   namespace: &ns vault
 spec:
+  # PodFailurePolicy only on v1.25+ https://kubernetes.io/docs/concepts/workloads/controllers/job/#pod-failure-policy
   completions: 1
-  backoffLimit: 5
+  backoffLimit: 15
   template:
     spec:
       volumes:
@@ -30,6 +31,8 @@ spec:
           env:
             - name: VAULT_NAMESPACE
               value: *ns
+            - name: VAULT_ADDR
+              value: vault:8200
           command:
             - "/bin/sh"
             - "-ec"
