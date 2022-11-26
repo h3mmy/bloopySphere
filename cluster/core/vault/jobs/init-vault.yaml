@@ -29,7 +29,8 @@ spec:
               subPath: init-vault.sh
               readOnly: true
           env:
-            - VAULT_NAMESPACE: *ns
+            - name: VAULT_NAMESPACE
+              value: *ns
           command:
             - "/bin/sh"
             - "-ec"
