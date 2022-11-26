@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app minio-old
+  name: &app minio
   namespace: storage
 spec:
   interval: 15m
@@ -27,9 +27,9 @@ spec:
   values:
     image:
       repository: quay.io/minio/minio
-      tag: RELEASE.2022-10-15T19-57-03Z
+      tag: RELEASE.2022-11-17T23-20-09Z
 
-    nameOverride: "minio-old"
+    nameOverride: "minio"
 
     env:
       TZ: "${TZ}"
@@ -47,8 +47,8 @@ spec:
       MINIO_PROMETHEUS_AUTH_TYPE: "public"
       MINIO_PROMETHEUS_URL: "http://prometheus-prometheus.monitoring.svc.cluster.local:9090"
       MINIO_PROMETHEUS_JOB_ID: "minio"
-      MINIO_BROWSER_REDIRECT_URL: "https://minio-old.${XYZ_DOMAIN}"
-      MINIO_SERVER_URL: "https://s3-old.${XYZ_DOMAIN}"
+      MINIO_BROWSER_REDIRECT_URL: "https://minio.${XYZ_DOMAIN}"
+      MINIO_SERVER_URL: "https://s3.${XYZ_DOMAIN}"
       MINIO_IDENTITY_OPENID_CONFIG_URL:
         valueFrom:
           secretKeyRef:
@@ -93,7 +93,7 @@ spec:
         volumeSpec:
           nfs:
             server: "${NAS_ADDRESS}"
-            path: /volume1/Minio/.minio
+            path: /volume1/minio-v2/.minio
         mountPath: /root/.minio
       data:
         enabled: true
@@ -101,7 +101,7 @@ spec:
         volumeSpec:
           nfs:
             server: "${NAS_ADDRESS}"
-            path: /volume1/Minio
+            path: /volume1/minio-v2
         mountPath: /data
 
     service:
@@ -141,13 +141,13 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918-ips@kubernetescrd
         hosts:
-          - host: &host-console "minio-old.${XYZ_DOMAIN}"
+          - host: &host-console "minio.${XYZ_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
                 service:
                   port: *port-console
-          - host: &host-api "s3-old.${XYZ_DOMAIN}"
+          - host: &host-api "s3.${XYZ_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
