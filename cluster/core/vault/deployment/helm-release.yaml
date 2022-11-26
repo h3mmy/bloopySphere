@@ -5,7 +5,7 @@ metadata:
   name: vault
   namespace: vault
 spec:
-  interval: 15m
+  interval: 75m
   chart:
     spec:
       # renovate: registryUrl=https://helm.releases.hashicorp.com
@@ -15,6 +15,13 @@ spec:
         kind: HelmRepository
         name: hashicorp-charts
         namespace: flux-system
+
+  valuesFrom:
+    - targetPath: server.extraEnvironmentVars.VAULT_TOKEN
+      kind: Secret
+      name: vault-tokens
+      optional: true
+      valuesKey: vault_root_token
   values:
     metrics:
       enabled: true
@@ -45,7 +52,7 @@ spec:
         enabled: true
         storageClass: "ceph-block"
       extraEnvironmentVars:
-        VAULT_TOKEN: ${SECRET_VAULT_TOKEN}
+        # VAULT_TOKEN: ${SECRET_VAULT_TOKEN}
         TZ: ${TZ}
         GOOGLE_APPLICATION_CREDENTIALS: /vault/userconfig/kms-vault/account.json
       extraVolumes:
