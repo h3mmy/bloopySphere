@@ -13,7 +13,7 @@ metadata:
   name: system:vault-job-role
 rules:
   - apiGroups: [""]
-    resources: ["services", "services/status", "nodes", "pods", "secrets"]
+    resources: ["services", "services/status", "nodes", "pods", "pods/exec", "secrets"]
     verbs: ["list", "get", "watch", "update", "create"]
 ---
 kind: ClusterRoleBinding
