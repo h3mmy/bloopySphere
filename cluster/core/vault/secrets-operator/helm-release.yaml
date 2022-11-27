@@ -26,6 +26,12 @@ spec:
     replicaCount: 1
     deploymentStrategy:
       type: Recreate
+    serviceAccount:
+      create: true
+    serviceMonitor:
+      enabled: true
+    rbac:
+      enabled: true
     vault:
       address: "http://vault:8200"
       authMethod: kubernetes
