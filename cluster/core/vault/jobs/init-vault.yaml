@@ -10,6 +10,7 @@ spec:
   backoffLimit: 15
   template:
     spec:
+      serviceAccountName: vault-job
       volumes:
         - name: init-script
           projected:

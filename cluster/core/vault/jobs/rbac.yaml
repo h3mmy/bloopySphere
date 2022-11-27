@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vault-job
+  namespace: vault
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: "true"
+  name: system:vault-job-role
+rules:
+  - apiGroups: [""]
+    resources: ["services", "services/status", "nodes", "pods", "secrets"]
+    verbs: ["list", "get", "watch", "update", "create"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: system:vault-job-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:vault-job-role
+subjects:
+  - kind: ServiceAccount
+    name: vault-job
+    namespace: vault
