@@ -5,7 +5,7 @@ metadata:
   name: vault-secrets-operator
   namespace: vault
 spec:
-  interval: 45m
+  interval: 35m
   timeout: 5m
   chart:
     spec:

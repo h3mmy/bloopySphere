@@ -17,6 +17,7 @@ spec:
         namespace: flux-system
 
   valuesFrom:
+    # Injected by init-job
     - targetPath: server.extraEnvironmentVars.VAULT_TOKEN
       kind: Secret
       name: vault-tokens
