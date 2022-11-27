@@ -37,9 +37,9 @@ spec:
             - name: VAULT_ROOT_TOKEN
               valueFrom:
                 secretKeyRef:
-                  - name: vault-tokens
-                    key: vault_root_token
-                    optional: true
+                  name: vault-tokens
+                  key: vault_root_token
+                  optional: true
           command:
             - "/bin/sh"
             - "-ec"
