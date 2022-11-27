@@ -15,6 +15,9 @@ spec:
         kind: HelmRepository
         name: ricoberger-charts
         namespace: flux-system
+  dependsOn:
+    - name: vault
+      namespace: vault
   install:
     crds: Create
   upgrade:
