@@ -92,14 +92,14 @@ spec:
         server: "${NAS_ADDRESS}"
         path: /volume1/DataR
         mountPath: /DataR
-        readOnly: true
+        readOnly: false
       downloads:
         enabled: true
         type: nfs
         server: "${NAS_ADDRESS}"
         path: /volume3/Data/Downloads
         mountPath: /Downloads
-        readOnly: true
+        readOnly: false
     resources:
       requests:
         cpu: 10m
