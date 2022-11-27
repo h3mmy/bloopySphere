@@ -27,7 +27,7 @@ initVault() {
 
   VAULT_READY=1
   while [ $VAULT_READY != 0 ]; do
-    init_status=$(kubectl -n $VAULT_NAMESPACE exec "vault-0" -- vault status -format=json 2>/dev/null | jq -r '.initialized')
+    init_status=$(kubectl -n $VAULT_NAMESPACE exec "vault-0" -- vault status -format=json | jq -r '.initialized')
     if [ "$init_status" == "false" ] || [ "$init_status" == "true" ]; then
       VAULT_READY=0
     else
@@ -36,8 +36,8 @@ initVault() {
     fi
   done
 
-  sealed_status=$(kubectl -n $VAULT_NAMESPACE exec "vault-0" -- vault status -format=json 2>/dev/null | jq -r '.sealed')
-  init_status=$(kubectl -n $VAULT_NAMESPACE exec "vault-0" -- vault status -format=json 2>/dev/null | jq -r '.initialized')
+  sealed_status=$(kubectl -n $VAULT_NAMESPACE exec "vault-0" -- vault status -format=json | jq -r '.sealed')
+  init_status=$(kubectl -n $VAULT_NAMESPACE exec "vault-0" -- vault status -format=json | jq -r '.initialized')
 
   if [ "$init_status" == "false" ]; then
     echo "initializing vault"
