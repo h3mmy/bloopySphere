@@ -81,6 +81,8 @@ setupVaultSecretsOperator() {
   }
 EOF
 
+# https://kubernetes.io/docs/concepts/configuration/secret/#service-account-token-secrets
+
   export VAULT_SECRETS_OPERATOR_NAMESPACE=$(kubectl -n $VAULT_NAMESPACE get sa vault-secrets-operator -o jsonpath="{.metadata.namespace}")
   export VAULT_SECRET_NAME=$(kubectl -n $VAULT_NAMESPACE get sa vault-secrets-operator -o jsonpath="{.secrets[*]['name']}")
   export SA_JWT_TOKEN=$(kubectl -n $VAULT_NAMESPACE get secret $VAULT_SECRET_NAME -o jsonpath="{.data.token}" | base64 --decode; echo)

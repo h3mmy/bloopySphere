@@ -33,6 +33,8 @@ The `vault operator init` command will generate important keys we want to use el
 
 ### Vault Secrets Operator
 
+This is whaat is typically recommended for initializing the vault-secrets operator including [official documentation](https://github.com/ricoberger/vault-secrets-operator). It should be noted that as of kubernetes v1.24 (See [v1.24 urgent notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.24.md#urgent-upgrade-notes)) [service account secrets]((https://kubernetes.io/docs/concepts/configuration/secret/#service-account-token-secrets)) will no longer be automatically generated.
+
 ```sh
 export VAULT_ADDR=<if port-forward http://localhost:8200 else $vault_addr>
 export VAULT_SECRETS_OPERATOR_NAMESPACE=<your namespace>
@@ -48,6 +50,25 @@ vault write auth/kubernetes/config \
     kubernetes_ca_cert="$SA_CA_CRT" \
     issuer="https://kubernetes.default.svc.cluster.local" \
     disable_iss_validation=false
+
+vault write auth/kubernetes/role/vault-secrets-operator \
+  bound_service_account_names="vault-secrets-operator" \
+  bound_service_account_namespaces="$VAULT_SECRETS_OPERATOR_NAMESPACE" \
+  policies=vault-secrets-operator \
+  ttl=24h
+```
+
+Instead, we will use the local sa token as per [vault documentation](https://developer.hashicorp.com/vault/docs/auth/kubernetes#use-local-service-account-token-as-the-reviewer-jwt). This also simplifies the "manual" steps required.
+TODO: update init-vault job to use this method of setup for vault-secrets-operator
+
+```bash
+export VAULT_SECRETS_OPERATOR_NAMESPACE=$(kubectl -n $VAULT_NAMESPACE get sa vault-secrets-operator -o jsonpath="{.metadata.namespace}")
+export K8S_HOST=$(kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}')
+export K8S_ISSUER=$(kubectl get --raw /.well-known/openid-configuration | jq -r .issuer)
+
+vault write auth/kubernetes/config \
+    kubernetes_host=$K8S_HOST \
+    issuer=$K8S_ISSUER
 
 vault write auth/kubernetes/role/vault-secrets-operator \
   bound_service_account_names="vault-secrets-operator" \
