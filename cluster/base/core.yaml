@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: crds
   path: ./cluster/core
-  prune: false
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
