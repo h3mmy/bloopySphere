@@ -137,10 +137,8 @@ loginVault() {
 FIRST_RUN=1
 
 initVault
-portForwardVault
+# portForwardVault
 loginVault
 if [ $FIRST_RUN == 0 ]; then
   setupVaultSecretsOperator
 fi
-
-kill $VAULT_FWD_PID
