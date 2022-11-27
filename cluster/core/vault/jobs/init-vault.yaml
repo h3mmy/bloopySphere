@@ -7,7 +7,7 @@ metadata:
 spec:
   # PodFailurePolicy only on v1.25+ https://kubernetes.io/docs/concepts/workloads/controllers/job/#pod-failure-policy
   completions: 1
-  backoffLimit: 15
+  backoffLimit: 16
   template:
     spec:
       serviceAccountName: vault-job
