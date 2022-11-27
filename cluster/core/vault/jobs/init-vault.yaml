@@ -34,6 +34,12 @@ spec:
               value: *ns
             - name: VAULT_ADDR
               value: http://vault:8200
+            - name: VAULT_ROOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  - name: vault-tokens
+                    key: vault_root_token
+                    optional: true
           command:
             - "/bin/sh"
             - "-ec"
