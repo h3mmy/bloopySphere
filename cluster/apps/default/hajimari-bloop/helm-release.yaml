@@ -40,6 +40,8 @@ spec:
           - default
           - networking
           - auth
+          - home
+          - downloads
           - storage
           - monitoring
           - media
