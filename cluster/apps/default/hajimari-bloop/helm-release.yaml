@@ -34,6 +34,7 @@ spec:
       tag: v0.3.1
     hajimari:
       defaultEnable: false
+      darkTheme: chalk
       instanceName: "bloop-quarky"
       namespaceSelector:
         matchNames:
@@ -56,18 +57,18 @@ spec:
         - name: Tyg3r Blog Admin Panel
           url: "https://tyg3r.${XYZ_DOMAIN}"
           icon: post
-      groups:
-        - name: Communicate
+      bookmarkGroups:
+        - group: Communicate
           links:
             - name: Discord
               url: "https://discord.com"
             - name: Gmail
               url: "https://gmail.com"
-        - name: Cloud
+        - group: Cloud
           links:
             - name: Drive
               url: "https://drive.google.com"
-        - name: Design
+        - group: Design
           links:
             - name: Awwwards
               url: "https://awwwards.com"
@@ -75,7 +76,7 @@ spec:
               url: "https://dribbble.com"
             - name: Muz.li
               url: "https://medium.muz.li/"
-        - name: Dev
+        - group: Dev
           links:
             - name: Codepen
               url: "https://codepen.io/"
@@ -83,7 +84,7 @@ spec:
               url: "https://devdocs.io"
             - name: Devhints
               url: "https://devhints.io"
-        - name: Lifestyle
+        - group: Lifestyle
           links:
             - name: Design Milk
               url: "https://design-milk.com/category/interior-design/"
@@ -91,7 +92,7 @@ spec:
               url: "https://www.dwell.com/"
             - name: Freshome
               url: "https://www.mymove.com/freshome/"
-        - name: Media
+        - group: Media
           links:
             - name: Spotify
               url: "http://browse.spotify.com"
@@ -99,7 +100,7 @@ spec:
               url: "http://trakt.tv"
             - name: YouTube
               url: "https://youtube.com/feed/subscriptions"
-        - name: Reading
+        - group: Reading
           links:
             - name: Instapaper
               url: "https://www.instapaper.com/u"
@@ -107,7 +108,7 @@ spec:
               url: "http://medium.com"
             - name: Reddit
               url: "http://reddit.com"
-        - name: Tech
+        - group: Tech
           links:
             - name: Hacker News
               url: "https://news.ycombinator.com/"
