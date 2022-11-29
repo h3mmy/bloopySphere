@@ -40,7 +40,7 @@ spec:
         # loadBalancerIPs:
         #   - ${SVC_EXPORTERS_ADDR_V4}
         #   - ${SVC_EXPORTERS_ADDR_V6}
-        # externalTrafficPolicy: Local
+        externalTrafficPolicy: Local
         # ipFamilyPolicy: PreferDualStack
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${LB_NUT}"
