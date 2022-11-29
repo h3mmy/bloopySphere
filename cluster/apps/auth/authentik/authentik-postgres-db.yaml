@@ -17,6 +17,9 @@ spec:
     pvcName: authentik-db-backup
     volumeMount: /var/lib/backup
   env:
+    # This is required due to a bug
+    - name: PGPASSWORD
+      value: ${AUTHENTIK_KUBEGRES_PASSWORD}
     - name: POSTGRES_PASSWORD
       value: ${AUTHENTIK_KUBEGRES_PASSWORD}
     - name: POSTGRES_REPLICATION_PASSWORD
