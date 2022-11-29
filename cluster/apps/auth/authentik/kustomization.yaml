@@ -4,8 +4,7 @@ kind: Kustomization
 namespace: auth
 resources:
   - redis
-  - helm-release.yaml
+  - postgres
   - media
-  - pvc-backup.yaml
-  - authentik-postgres-db.yaml
   - sp-authentik.yaml
+  - helm-release.yaml

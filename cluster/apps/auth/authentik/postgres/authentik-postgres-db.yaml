@@ -7,6 +7,7 @@ metadata:
   annotations:
     config.alpha.linkerd.io/proxy-wait-before-exit-seconds: "25"
 spec:
+  customConfig: authentik-postgres-conf
   replicas: 1
   image: docker.io/library/postgres:14.6
   database:
@@ -24,3 +25,8 @@ spec:
       value: ${AUTHENTIK_KUBEGRES_PASSWORD}
     - name: POSTGRES_REPLICATION_PASSWORD
       value: ${AUTHENTIK_KUBEGRES_PASSWORD}
+    - name: SECRET_AUTHENTIK_POSTGRES_PASSWORD
+      value: ${SECRET_AUTHENTIK_POSTGRES_PASSWORD}
+      # This is custom. See backup_database.sh for how it's used
+    - name: RETENTION_COUNT
+      value: 5

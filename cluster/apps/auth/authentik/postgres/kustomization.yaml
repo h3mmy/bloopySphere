@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: auth
+resources:
+  - pvc-backup.yaml
+  - authentik-postgres-db.yaml
+configMapGenerator:
+  - name: authentik-postgres-conf
+    files:
+      - primary_init_script.sh
+      - backup_database.sh
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
