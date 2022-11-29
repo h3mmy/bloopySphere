@@ -5,7 +5,7 @@ metadata:
   name: hajimari-xyz
   namespace: default
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       # renovate: registryUrl=https://hajimari.io
@@ -15,7 +15,6 @@ spec:
         kind: HelmRepository
         name: hajimari-charts
         namespace: flux-system
-      interval: 5m
 
   install:
     remediation:
@@ -34,6 +33,7 @@ spec:
       tag: v0.3.1
     hajimari:
       defaultEnable: false
+      darkTheme: chalk
       instanceName: "bloop-xyz"
       namespaceSelector:
         matchNames:
@@ -53,7 +53,6 @@ spec:
         - name: Tyg3r Blog
           url: "https://${TGR_DOMAIN}"
           icon: post
-        - name: "https://readarr.${SECRET_DOMAIN}"
       groups:
         - name: Design
           links:
