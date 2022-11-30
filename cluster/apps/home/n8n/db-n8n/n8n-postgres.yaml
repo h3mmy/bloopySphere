@@ -18,6 +18,9 @@ spec:
     pvcName: n8n-db-backup
     volumeMount: /var/lib/backup
   env:
+    # This is required due to a bug
+    - name: PGPASSWORD
+      value: ${N8N_KUBEGRES_PASSWORD}
     - name: POSTGRES_PASSWORD
       value: ${N8N_KUBEGRES_PASSWORD}
     - name: POSTGRES_REPLICATION_PASSWORD
