@@ -4,6 +4,7 @@ kind: ClusterPolicy
 metadata:
   name: replace-kubegres-backup-script
   annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
     policies.kyverno.io/title: Replace Kubegres Backup Scripts
     policies.kyverno.io/subject: ConfigMap
     policies.kyverno.io/description: >-
