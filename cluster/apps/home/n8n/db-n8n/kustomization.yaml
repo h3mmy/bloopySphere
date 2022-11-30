@@ -9,7 +9,7 @@ configMapGenerator:
   - name: n8n-postgres-conf
     files:
       - primary_init_script.sh
-      - backup_database.sh
+      # - backup_database.sh
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
