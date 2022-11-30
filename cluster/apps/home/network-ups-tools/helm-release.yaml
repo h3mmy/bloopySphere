@@ -37,9 +37,8 @@ spec:
             port: 3493
             protocol: TCP
         type: LoadBalancer
-        # loadBalancerIPs:
-        #   - ${SVC_EXPORTERS_ADDR_V4}
-        #   - ${SVC_EXPORTERS_ADDR_V6}
+        loadBalancerIPs:
+          - "${LB_NUT}"
         externalTrafficPolicy: Local
         # ipFamilyPolicy: PreferDualStack
         annotations:
