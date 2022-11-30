@@ -9,8 +9,9 @@ configMapGenerator:
   - name: emqx-postgres-conf
     files:
       - primary_init_script.sh
-      - backup_database.sh
 generatorOptions:
   disableNameSuffixHash: true
+  labels:
+    backup.kubegres.version/limited: "true"
   annotations:
     kustomize.toolkit.fluxcd.io/substitute: disabled
