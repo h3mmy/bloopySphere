@@ -11,11 +11,13 @@ spec:
   database:
     size: 10Gi
     storageClassName: ceph-block
-  # backup:
-  #   schedule: "0 */1 * * *"
-  #   pvcName: hass-db-backup
-  #   volumeMount: /var/lib/backup
+  backup:
+    schedule: "0 */1 * * *"
+    pvcName: hass-db-backup
+    volumeMount: /var/lib/backup
   env:
+    - name: PGPASSWORD
+      value: ${HASS_DB_POSTGRES_PASSWORD}
     - name: POSTGRES_PASSWORD
       value: ${HASS_DB_POSTGRES_PASSWORD}
     - name: POSTGRES_REPLICATION_PASSWORD
@@ -26,3 +28,5 @@ spec:
       value: ${HASS_DB_PASSWORD}
     - name: HASS_DB_USER
       value: ${HASS_DB_USER}
+    - name: RETENTION_LIMIT
+      value: "5"
