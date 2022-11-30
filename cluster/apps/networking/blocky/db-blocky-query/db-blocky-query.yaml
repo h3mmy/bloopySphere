@@ -18,6 +18,9 @@ spec:
     pvcName: blocky-db-backup
     volumeMount: /var/lib/backup
   env:
+    # This is required due to a bug
+    - name: PGPASSWORD
+      value: ${BLOCKY_KUBEGRES_PASSWORD}
     - name: POSTGRES_PASSWORD
       value: ${BLOCKY_KUBEGRES_PASSWORD}
     - name: POSTGRES_REPLICATION_PASSWORD
