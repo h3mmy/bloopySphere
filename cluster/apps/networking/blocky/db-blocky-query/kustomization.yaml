@@ -8,6 +8,7 @@ configMapGenerator:
   - name: blocky-postgres-conf
     files:
       - primary_init_script.sh
+      - backup_database.sh
 generatorOptions:
   disableNameSuffixHash: true
   annotations:

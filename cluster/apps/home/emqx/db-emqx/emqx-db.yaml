@@ -26,3 +26,6 @@ spec:
       value: ${EMQX_DB_PASSWORD}
     - name: EMQX_DB_USER
       value: ${EMQX_DB_USER}
+      # This is custom. See backup_database.sh for how it's used
+    - name: RETENTION_COUNT
+      value: "5"
