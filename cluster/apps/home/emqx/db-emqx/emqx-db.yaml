@@ -16,6 +16,9 @@ spec:
     pvcName: emqx-db-backup
     volumeMount: /var/lib/backup
   env:
+    # This is required due to a bug
+    - name: PGPASSWORD
+      value: ${EMQX_KUBEGRES_PASSWORD}
     - name: POSTGRES_PASSWORD
       value: ${EMQX_KUBEGRES_PASSWORD}
     - name: POSTGRES_REPLICATION_PASSWORD

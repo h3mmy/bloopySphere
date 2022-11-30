@@ -19,8 +19,9 @@ fi
 
 echo "$dt - DB backup completed for Kubegres resource $KUBEGRES_RESOURCE_NAME into file: $backUpFilePath";
 
+echo "$dt - Using dir $BACKUP_DESTINATION_FOLDER"
 echo "$dt - removing all but last $RETENTION_COUNT entries"
-numFiles=$(ls -t | awk -v i=$RETENTION_COUNT 'NR>i' | wc -l)
+numFiles=$(ls -t $BACKUP_DESTINATION_FOLDER | awk -v i=$RETENTION_COUNT 'NR>i' | wc -l)
 echo "$dt - deleting $numFiles files"
-rm `ls -t | awk -v i=$RETENTION_COUNT 'NR>i'`
+rm `ls -t $BACKUP_DESTINATION_FOLDER | awk -v i=$RETENTION_COUNT 'NR>i'`
 echo "$dt - done"
