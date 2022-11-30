@@ -33,7 +33,7 @@ The `vault operator init` command will generate important keys we want to use el
 
 ### Vault Secrets Operator
 
-This is whaat is typically recommended for initializing the vault-secrets operator including [official documentation](https://github.com/ricoberger/vault-secrets-operator). It should be noted that as of kubernetes v1.24 (See [v1.24 urgent notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.24.md#urgent-upgrade-notes)) [service account secrets]((https://kubernetes.io/docs/concepts/configuration/secret/#service-account-token-secrets)) will no longer be automatically generated.
+This is whaat is typically recommended for initializing the vault-secrets operator including [official documentation](https://github.com/ricoberger/vault-secrets-operator). It should be noted that as of kubernetes v1.24 (See [v1.24 urgent notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.24.md#urgent-upgrade-notes)) [service account secrets](https://kubernetes.io/docs/concepts/configuration/secret/#service-account-token-secrets) will no longer be automatically generated.
 
 ```sh
 export VAULT_ADDR=<if port-forward http://localhost:8200 else $vault_addr>
