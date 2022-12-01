@@ -112,6 +112,14 @@ module "cf_domain_xyz" {
     },
     # Sendgrid
     {
+      name = "em456.${local.domains["xyz"]}"
+      proxiable = false
+      proxied   = false
+      ttl       = 1
+      type      = "CNAME"
+      value     = "u24570643.wl144.sendgrid.net"
+    },
+    {
       name      = "s1._domainkey.${local.domains["xyz"]}"
       proxiable = false
       proxied   = false
