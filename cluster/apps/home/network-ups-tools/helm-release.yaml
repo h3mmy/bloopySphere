@@ -38,11 +38,11 @@ spec:
             protocol: TCP
         type: LoadBalancer
         loadBalancerIPs:
-          - "${LB_NUT}"
+          - "${LB_NUT_V4}"
         externalTrafficPolicy: Local
         # ipFamilyPolicy: PreferDualStack
         annotations:
-          metallb.universe.tf/loadBalancerIPs: "${LB_NUT}"
+          metallb.universe.tf/loadBalancerIPs: "${LB_NUT_V4}"
           external-dns.alpha.kubernetes.io/hostname: "exporters.${XYZ_DOMAIN}"
       metrics:
         enabled: true
