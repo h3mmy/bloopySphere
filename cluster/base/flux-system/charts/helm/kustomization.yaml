@@ -41,3 +41,4 @@ resources:
   - kyverno-charts.yaml
   - hashicorp-charts.yaml
   - ricoberger-charts.yaml
+  - tf-controller.yaml

@@ -43,6 +43,5 @@ cluster/apps/home/n8n/credentials/*
 infrastructure/terraform/s3/*
 infrastructure/bare-metal/*
 infrastructure/shared/networks.yaml
-cluster/apps/infra/*
 *.backup
 *.bak
