@@ -88,7 +88,7 @@ spec:
             - kubernetes_logs
           source: |
             # Standardize 'app' index
-            .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+            .custom_app_name = .pod_labels.app.kubernetes.io/name || .pod_labels.app || .pod_labels.k8s-app || "unknown"
         # filter_traefik_logs:
         #   type: filter
         #   inputs:
@@ -182,9 +182,10 @@ spec:
           encoding:
             codec: json
           labels:
-            hostname: udm
+            hostname: >-
+              {{`{{ host }}`}}
             appname: >-
-              {{`"{{ appname }}"`}}
+              {{`{{ appname }}`}}
         prometheus_sink:
           type: prometheus_exporter
           inputs:
