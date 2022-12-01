@@ -26,12 +26,30 @@ spec:
 
   values:
     write:
-      replicas: 1
+      replicas: 3
+      affinity: |
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    {{- include "loki.writeSelectorLabels" . | nindent 12 }}
+                topologyKey: kubernetes.io/hostname
       persistence:
         size: 5Gi
         storageClass: ceph-block
     read:
-      replicas: 1
+      replicas: 3
+      affinity: |
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    {{- include "loki.readSelectorLabels" . | nindent 12 }}
+                topologyKey: kubernetes.io/hostname
       extraVolumeMounts:
         - name: loki-rules
           mountPath: /rules/fake
@@ -51,7 +69,16 @@ spec:
         storageClass: ceph-block
     gateway:
       enabled: true
-      replicas: 1
+      replicas: 3
+      affinity: |
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    {{- include "loki.gatewaySelectorLabels" . | nindent 12 }}
+                topologyKey: kubernetes.io/hostname
       ingress:
         enabled: true
         ingressClassName: "traefik"
