@@ -46,7 +46,7 @@ spec:
         hosts:
           - host: &host vault.${XYZ_DOMAIN}
             paths:
-              - path: /
+              - path: "/*"
         tls:
           - secretName: tls.vault
           - hosts:
