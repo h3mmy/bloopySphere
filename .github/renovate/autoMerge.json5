@@ -13,12 +13,11 @@
         "datasources": ["docker", "github-tags"],
         "automerge": true,
         "requiredStatusChecks": null,
-        "schedule": "after 1am and before 5am",
         "updateTypes": ["minor", "patch"],
         "packageNames": [
+          "docker.io/n8nio/n8n",
           "ghcr.io/onedr0p/jackett",
           "ghcr.io/onedr0p/lidarr",
-          "ghcr.io/onedr0p/plex",
           "homeassistant/home-assistant",
           "ghcr.io/onedr0p/radarr",
           "ghcr.io/onedr0p/radarr-nightly",
@@ -29,7 +28,6 @@
           "ghcr.io/onedr0p/prowlarr",
           "ghcr.io/onedr0p/readarr",
           "ghcr.io/sct/overseerr",
-          "plexinc/pms-docker",
           "hotio/readarr",
           "nodered/node-red",
           "quay.io/minio/minio",
@@ -38,11 +36,22 @@
         ]
       },
       {
+        "datasources": ["docker", "github-tags"],
+        "automerge": true,
+        "requiredStatusChecks": null,
+        "schedule": "after 1am and before 5am",
+        "updateTypes": ["minor", "patch"],
+        "packageNames": [
+          "ghcr.io/onedr0p/plex",
+          "homeassistant/home-assistant",
+          "plexinc/pms-docker"
+        ]
+      },
+      {
         "datasources": ["helm"],
         "automerge": true,
         "automergeType": "branch",
         "requiredStatusChecks": null,
-        "schedule": "after 1am and before 5am",
         "updateTypes": ["minor", "patch"],
         "packageNames": [
           "grafana",
@@ -51,7 +60,10 @@
           "blocky",
           "uptimerobot-prometheus",
           "kube-prometheus-stack",
-          "redis"
+          "redis",
+          "node-problem-detector",
+          "prometheus-pushgateway",
+          "velero"
         ]
       },
       {
