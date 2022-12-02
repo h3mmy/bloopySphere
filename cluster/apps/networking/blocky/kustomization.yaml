@@ -11,8 +11,8 @@ configMapGenerator:
   - name: blocky-whitelist
     files:
       - whitelist.txt
-  # - name: blocky-config
-  #   files:
-  #     - config=blocky-config.yaml
+  - name: blocky-config-values
+    files:
+      - config=blocky-config-values.yaml
 generatorOptions:
   disableNameSuffixHash: true
