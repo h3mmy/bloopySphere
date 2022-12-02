@@ -21,6 +21,13 @@ Else:
 
 ### Vault
 
+[github - vault-helm](https://github.com/hashicorp/vault-helm)
+
+Some quirks I noted with the helm values:
+
+- `ingress` is nested under `server`
+- `pathType` is set at Ingress level
+
 Requires the following steps.
 
 ```bash

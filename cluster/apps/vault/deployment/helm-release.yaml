@@ -45,8 +45,7 @@ spec:
           traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
         hosts:
           - host: &host vault.${XYZ_DOMAIN}
-            paths:
-              - path: "/*"
+            paths: []
         tls:
           - secretName: tls.vault
           - hosts:
