@@ -29,12 +29,12 @@ spec:
     - name: blocky-redis
       namespace: networking
 
-  valuesFrom:
-    - name: blocky-config-values
-      kind: ConfigMap
-      valuesKey: config
-      targetPath: config
-      optional: false
+  # valuesFrom:
+  #   - name: blocky-config-values
+  #     kind: ConfigMap
+  #     valuesKey: config
+  #     targetPath: config
+  #     optional: false
 
   values:
 
