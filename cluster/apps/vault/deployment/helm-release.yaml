@@ -33,6 +33,10 @@ spec:
       ingress:
         enabled: true
         ingressClassName: traefik
+        # When HA mode is enabled and K8s service registration is being used,
+        # configure the ingress to point to the Vault active service.
+        activeService: true
+        pathType: Prefix
         annotation:
           cert-manager.io/cluster-issuer: letsencrypt-production
           hajimari.io/enable: "true"
@@ -43,7 +47,6 @@ spec:
           - host: &host vault.${XYZ_DOMAIN}
             paths:
               - path: /
-                pathType: Prefix
         tls:
           - secretName: tls.vault
           - hosts:
