@@ -21,3 +21,4 @@ resources:
   - cert-manager
   - linkerd
   - kyverno
+  - vault

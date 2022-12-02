@@ -76,3 +76,35 @@ vault write auth/kubernetes/role/vault-secrets-operator \
   policies=vault-secrets-operator \
   ttl=24h
 ```
+
+## Enable OIDC
+
+Using [documentation](https://developer.hashicorp.com/vault/tutorials/auth-methods/oidc-auth)
+
+```sh
+vault policy write manager - <<EOF
+# Manage k/v secrets
+path "/secret/*" {
+    capabilities = ["create", "read", "update", "delete", "list"]
+}
+EOF
+```
+
+```sh
+vault policy write reader -<<EOF
+# Read permission on the k/v secrets
+path "/secret/*" {
+    capabilities = ["read", "list"]
+}
+EOF
+```
+
+`vault auth enable oidc`
+
+```sh
+vault write auth/oidc/config \
+         oidc_discovery_url="https://<discovery>" \
+         oidc_client_id="<client_id>" \
+         oidc_client_secret="<client_secret>" \
+         default_role="reader"
+```
