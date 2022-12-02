@@ -7,7 +7,7 @@ upstream:
     - tcp-tls:dns.google
     - https://cloudflare-dns.com/dns-query
 upstreamTimeout: 5
-bootstrapDns: 1.1.1.1:53
+bootstrapDns: "1.1.1.1:53"
 conditional:
   mapping:
     # local: tcp+udp:kube-dns.svc
@@ -23,14 +23,14 @@ conditional:
     mask-h2.icloud.com: tcp+udp:10.1.0.10
 customDNS:
   mapping:
-    ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_TRAEFIK_CLASSIC}
-    ${SECRET_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
-    ${TGR_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
-    emqx.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
-    home-assistant.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
-    mqtt.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
-    wss.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
-    dns.${XYZ_DOMAIN}: ${SVC_BLOCKY_ADDR_V4},${SVC_BLOCKY_ADDR_V6}
+    ${CLASSIC_DOMAIN}: "${NAS_ADDRESS},${LB_TRAEFIK_CLASSIC}"
+    ${SECRET_DOMAIN}: "${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}"
+    ${TGR_DOMAIN}: "${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}"
+    emqx.${XYZ_DOMAIN}: "${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}"
+    home-assistant.${XYZ_DOMAIN}: "${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}"
+    mqtt.${XYZ_DOMAIN}: "${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}"
+    wss.${XYZ_DOMAIN}: "${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}"
+    dns.${XYZ_DOMAIN}: "${SVC_BLOCKY_ADDR_V4},${SVC_BLOCKY_ADDR_V6}"
 blocking:
   blockType: zeroIp
   failStartOnListError: true
