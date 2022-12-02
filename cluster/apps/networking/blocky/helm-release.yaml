@@ -30,7 +30,7 @@ spec:
       namespace: networking
 
   valuesFrom:
-    - name: blocky
+    - name: blocky-config-values
       kind: ConfigMap
       valuesKey: config
       targetPath: config
