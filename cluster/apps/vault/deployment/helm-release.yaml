@@ -28,25 +28,26 @@ spec:
       enabled: true
     service:
       enabled: true
-    ingress:
-      enabled: true
-      ingressClassName: traefik
-      annotation:
-        cert-manager.io/cluster-issuer: letsencrypt-production
-        hajimari.io/enable: "true"
-        hajimari.io/icon: shield-key
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
-      hosts:
-        - host: &host vault.${XYZ_DOMAIN}
-          paths:
-            - path: /
-              pathType: Prefix
-      tls:
-        - secretName: tls.vault
-        - hosts:
-            - *host
+
     server:
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        annotation:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          hajimari.io/enable: "true"
+          hajimari.io/icon: shield-key
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
+        hosts:
+          - host: &host vault.${XYZ_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: tls.vault
+          - hosts:
+              - *host
       extraLabels:
         configmap.reloader.stakater.com/reload: vault-config
       dataStorage:
