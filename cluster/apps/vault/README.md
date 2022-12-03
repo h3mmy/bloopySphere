@@ -87,6 +87,9 @@ vault write auth/kubernetes/role/vault-secrets-operator \
 ## Enable OIDC
 
 Using [documentation](https://developer.hashicorp.com/vault/tutorials/auth-methods/oidc-auth)
+TODO: Move this process into a tf config?
+
+### Make policy/policies
 
 ```sh
 vault policy write manager - <<EOF
@@ -106,12 +109,62 @@ path "/secret/*" {
 EOF
 ```
 
+### Enable OIDC AUTH method
+
 `vault auth enable oidc`
+
+Write Config
 
 ```sh
 vault write auth/oidc/config \
-         oidc_discovery_url="https://<discovery>" \
-         oidc_client_id="<client_id>" \
-         oidc_client_secret="<client_secret>" \
+         oidc_discovery_url="https://${DISCOVERY_URL}" \
+         oidc_client_id="${CLIENT_ID}" \
+         oidc_client_secret="${CLIENT_SECRET}" \
          default_role="reader"
+```
+
+Create Reader Role
+
+```sh
+vault write auth/oidc/role/reader \
+      bound_audiences="${CLIENT_ID}" \
+      allowed_redirect_uris="https://vault.${XYZ_DOMAIN}/ui/vault/auth/oidc/oidc/callback" \
+      allowed_redirect_uris="https://vault.${XYZ_DOMAIN}/oidc/callback" \
+      allowed_redirect_uris="http://localhost:8250/oidc/callback" \
+      user_claim="sub" \
+      oidc_scopes="openid,profile" \
+      policies="reader"
+```
+Create Manager Role
+
+```sh
+vault write auth/oidc/role/kv-mgr \
+         bound_audiences="${CLIENT_ID}" \
+         allowed_redirect_uris="https://vault.${XYZ_DOMAIN}/ui/vault/auth/oidc/oidc/callback" \
+         allowed_redirect_uris="https://vault.${XYZ_DOMAIN}/oidc/callback" \
+         allowed_redirect_uris="http://localhost:8200/ui/vault/auth/oidc/oidc/callback" \
+         allowed_redirect_uris="http://localhost:8250/oidc/callback" \
+         user_claim="sub" \
+         token_policies="reader" \
+         oidc_scopes="openid,profile" \
+         groups_claim="groups"
+```
+
+Create Group-Policy link
+
+```sh
+vault write identity/group name="manager" type="external" \
+         policies="manager" \
+         metadata=responsibility="Manage K/V Secrets"
+```
+
+Create OIDC Mapping
+
+```sh
+GROUP_ID=$(vault read -field=id identity/group/name/manager)
+OIDC_AUTH_ACCESSOR=$(vault auth list -format=json  | jq -r '."oidc/".accessor')
+
+vault write identity/group-alias name="kv-mgr" \
+         mount_accessor="$OIDC_AUTH_ACCESSOR" \
+         canonical_id="$GROUP_ID"
 ```
