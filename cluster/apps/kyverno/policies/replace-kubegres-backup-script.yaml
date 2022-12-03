@@ -52,5 +52,5 @@ spec:
               echo "$dt - removing all but last $RETENTION_COUNT entries"
               numFiles=$(ls -t $BACKUP_DESTINATION_FOLDER | awk -v i=$RETENTION_COUNT 'NR>i' | wc -l)
               echo "$dt - deleting $numFiles files"
-              rm `ls -t $BACKUP_DESTINATION_FOLDER | awk -v i=$RETENTION_COUNT 'NR>i'`
+              rm `ls -dt $BACKUP_DESTINATION_FOLDER/* | awk -v i=$RETENTION_COUNT 'NR>i'`
               echo "$dt - done"
