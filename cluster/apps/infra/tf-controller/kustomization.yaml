@@ -5,7 +5,7 @@ namespace: infrastructure
 resources:
   - ./secret-sops-key.sops.yaml
   - ./secret-tfe-cli-config.sops.yaml
-  - ./helmrelease.yaml
+  - ./helm-release.yaml
 commonLabels:
   app.kubernetes.io/name: tf-controller
   app.kubernetes.io/instance: tf-controller
