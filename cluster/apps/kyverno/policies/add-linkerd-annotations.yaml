@@ -28,3 +28,14 @@ spec:
             annotations:
               +(linkerd.io/inject): enabled
               +(config.linkerd.io/proxy-await): enabled
+    - name: add-kubegres-annotations
+      match:
+        any:
+          - resources:
+              kinds:
+                - Kubegres
+      mutate:
+        patchStrategicMerge:
+          metadata:
+            annotations:
+              +(config.alpha.linkerd.io/proxy-wait-before-exit-seconds): "25"
