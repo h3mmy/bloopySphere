@@ -2,11 +2,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - traefik
-  - grafana-agent-operator
-  - kube-prometheus-stack
-  - external-snapshotter
-  - external-dns
-  - cert-manager
-  - mysql-crds
-  - linkerd
+  - ./traefik
+  - ./grafana-agent-operator
+  - ./kube-prometheus-stack
+  - ./external-snapshotter
+  - ./external-dns
+  - ./cert-manager
+  - ./mysql-crds
+  - ./linkerd
+  - ./tf-controller/crds.yaml
