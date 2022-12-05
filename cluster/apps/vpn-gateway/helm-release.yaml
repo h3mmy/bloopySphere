@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: vpn-gateway
-  namespace: vpn-gateway
+  namespace: &ns vpn-gateway
 spec:
   interval: 5m
   chart:
@@ -88,35 +88,33 @@ spec:
 
       vpn:
         enabled: true
-        type: wireguard
-
-        wireguard:
+        type: gluetun
+        gluetun:
           image:
-            repository: ghcr.io/k8s-at-home/wireguard
-            tag: v1.0.20210914
-            pullPolicy: IfNotPresent
-
-        securityContext:
-          runAsUser: 568
-          runAsGroup: 568
-          # capabilities:
-          #   drop:
-          #     - "SYS_MODULE"
+            repository: docker.io/qmcgaw/gluetun
+            tag: latest@sha256:f02266372019d5ce464a3a9bde3d887d1de7585da39c1df30cb61f366c3cba06
 
         env:
-          TZ: "${TZ}"
-          IPTABLES_BACKEND: nft
-          # @default -- false
-          # KILLSWITCH: "true"
-          # -- A separated list of IPv4 networks that will be excluded from the VPN/killswitch
-          # KILLSWITCH_EXCLUDEDNETWORKS_IPV4: "${NETWORK_K8S_CLUSTER_CIDR};${NETWORK_K8S_SERVICE_CIDR};${NETWORK_MANAGEMENT_CIDR}"
-          # -- A separated list of IPv6 networks that will be excluded from the VPN/killswitch
-          # KILLSWITCH_EXCLUDEDNETWORKS_IPV6:
-          # -- The separator that is used to split the KILLSWITCH_EXCLUDEDNETWORKS lists
-          # @default -- ;
-          # SEPARATOR: ;
+          - name: VPN_SERVICE_PROVIDER
+            value: mullvad
+          - name: VPN_TYPE
+            value: wireguard
+          - name: VPN_INTERFACE
+            value: wg0
+          - name: FIREWALL
+            value: "off"
+          - name: DOT
+            value: "off"
+          - name: FIREWALL_VPN_INPUT_PORTS
+            value: "${VPN_FORWARDED_PORT_1},${VPN_FORWARDED_PORT_2}"
+          - name: VPN_ENDPOINT_PORT
+            value: ${VPN_GATEWAY_VPN_PORT}
 
-        configFileSecret: vpn-gateway-vpnconfig
+        envFrom:
+          - secretRef:
+              name: mullvad
+              namespace: *ns
+
 
         resources:
           requests:

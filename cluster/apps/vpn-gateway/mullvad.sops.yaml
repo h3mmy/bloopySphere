@@ -1,0 +1,40 @@
+# yamllint disable
+apiVersion: v1
+kind: Secret
+metadata:
+    name: mullvad
+    namespace: vpn-gateway
+stringData:
+    WIREGUARD_PRIVATE_KEY: ENC[AES256_GCM,data:NUwaWPavr5iCSXi9ktfBg+B8AA6E1kYPNQIMGAEI4OjrqiNr9h83SuENUxQ=,iv:D5CnPJ4sldl2KnYRfO2Gwm+EcDhcaXtfsTf3n8uPkuw=,tag:bFWcxV85X6fJcon1+iMmJw==,type:str]
+    WIREGUARD_ADDRESSES: ENC[AES256_GCM,data:zkQ/7emgFoIMOXqphbI6Z/7PAcODJhyf6q0AGhmPgUwCKHLenBFGysifjX2H8wU=,iv:CZFKZ5psVUpKCuMHHulTNtmc7BokYpNdH2tZnRaeMG8=,tag:dsM37MOvnIGGJXDYZJNnEg==,type:str]
+    WIREGUARD_PUBLIC_KEY: ENC[AES256_GCM,data:I0zDmxjsgIMyxptQdbFSmVjf4EurSHJJ8gbZDq8fN2lwi93jMehoRV1Hz3Y=,iv:MxEVmVMVyaVqy+QdQtbFA2GslamXYERf5FN4Ue2jAqg=,tag:/1NmHFRBFg38UYby8x+Jmw==,type:str]
+    DNS_ADDRESS: ENC[AES256_GCM,data:GwLeZRWYlHPF,iv:/a6tq09agBdgT9weYBtoDHDDJ9LtJnl7LrqteIzZkWk=,tag:jurdwE2ZTisM8tu7q+QFNA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1hr5v66mq2rtflw8vrzmdlaku48v0j5l2wr58lrdmxqp5decczugs3rr6yt
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBxRGFRU1dtSUE2M0Y0ekZh
+            UUlzTEwrdTRHQmZiUkM3YU9uMWZYSTNEeHhZCk5HUTJxSDhCT1Q1dVF2SzJIb2s1
+            UDNGaGUrWkluVkl0NmFuRU9OYjdFd2cKLS0tIFdMREhEKzhkV1ZpemNoK1RnZ1Vp
+            V1lScU9CZ2ZJR2IxWW5zcE1CRktBdEUKOYm06qUmfRaLRu2qJ/u10RCri5fBoDnu
+            bdpCW8l3qTjqFCyA5SHiGS9+PFMaBCJYv67qXVWHaflHmgIPJpJNYg==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBRUjJFUlRveXRFYm9PZkdj
+            WERHTE9JUzE2aFJ2dVNJbDA0MEttcVN2cHhZCmpoKzh6WVVsZ01lU1ZMZGVlRVps
+            Z25wcXBSQ1Flb0tUUUgwRmdoY25BZ1UKLS0tIFNNbHdIbng1OWVzQUk4Z0FidC9Y
+            Q2dxamhCZkk3WlNqeHprNDd0R2t4OFkK1/ESI7rdAu4nNHL4GagvM/Mer+9rUvZp
+            PHPQK/qPopvf2Rv9u0eeAcshROlK/uAlJIdSdAle4hRgT4FsBktx+w==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2022-12-05T22:09:00Z"
+    mac: ENC[AES256_GCM,data:IF7ruqiOu1t5Ibtf07esiQk8VUM9ndnQgAFDIyGH6JvDctn1aPwMdsitm/noFELGmeG3rcNewQAfxnOaGVZeV2jwUxfWl8m+3kjm/FnI9cJVy3wQjxxC0dyRRpvXicRMRE3YZuClp+rbYK9YsdFxQTCVpWNycM+5C9G1pzEVjSY=,iv:+DLHPy3ELZQex5GnqI+OV0/SXVb8NlS3A5SDdUzDE08=,tag:OuBLkB3Vbksdu3zO/mWT7w==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.1
