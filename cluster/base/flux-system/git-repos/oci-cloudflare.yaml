@@ -3,9 +3,9 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: OCIRepository
 metadata:
   name: oci-terraform-cloudflare
-  namespace: infrastructure
+  namespace: flux-system
 spec:
-  interval: 1m
+  interval: 15m
   url: oci://ghcr.io/h3mmy/terraform-cloudflare
   ref:
     tag: main

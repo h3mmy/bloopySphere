@@ -5,3 +5,4 @@ resources:
   - kubegres.yaml
   - emqx-chart.yaml
   - keys
+  - oci-cloudflare.yaml
