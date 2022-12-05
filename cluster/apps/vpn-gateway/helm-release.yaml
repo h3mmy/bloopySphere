@@ -105,6 +105,8 @@ spec:
             value: "off"
           - name: DOT
             value: "off"
+          - name: SERVER_CITIES
+            value: chicago
           - name: FIREWALL_VPN_INPUT_PORTS
             value: "${VPN_FORWARDED_PORT_1},${VPN_FORWARDED_PORT_2}"
           - name: VPN_ENDPOINT_PORT
