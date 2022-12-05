@@ -8,7 +8,7 @@ metadata:
     component.bloopysphere-0/part-of: bootstrap
 spec:
   interval: 30m
-  path: "./kubernetes/cluster/repositories"
+  path: "./cluster/repositories"
   prune: true
   wait: true
   sourceRef:
