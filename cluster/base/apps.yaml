@@ -8,8 +8,9 @@ spec:
   timeout: 5m0s
   interval: 10m0s
   dependsOn:
-    - name: core
     - name: config
+    - name: core
+    - name: crds
   path: ./cluster/apps
   prune: true
   sourceRef:

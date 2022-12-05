@@ -4,6 +4,8 @@ kind: Kustomization
 metadata:
   name: config
   namespace: flux-system
+  labels:
+    component.bloopysphere-0/part-of: bootstrap
 spec:
   interval: 30m
   path: ./cluster/config
