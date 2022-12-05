@@ -1,0 +1,27 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: bloopyboi
+  namespace: flux-system
+spec:
+  interval: 60m
+  image: registry.gitlab.com/h3mmy/bloopyboi
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: bloopyboi
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: bloopyboi
+    namespace: flux-system
+  filterTags:
+    pattern: '^v(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)$'
+    extract: "$major$minor$patch"
+  policy:
+    numerical:
+      order: asc
+    # semver:
+    #   range: ">=1.2.5"
