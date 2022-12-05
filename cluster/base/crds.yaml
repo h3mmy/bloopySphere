@@ -9,6 +9,7 @@ spec:
   interval: 10m0s
   dependsOn:
     - name: config
+    - name: repositories
   path: ./cluster/crds
   prune: false
   sourceRef:

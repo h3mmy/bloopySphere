@@ -11,6 +11,7 @@ spec:
     - name: config
     - name: core
     - name: crds
+    - name: repositories
   path: ./cluster/apps
   prune: true
   sourceRef:
