@@ -8,14 +8,14 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      # renovate: registryUrl=https://angelnu.github.io/helm-charts/
       chart: pod-gateway
-      version: 5.6.2
+      version: 6.0.0
+      interval: 15m
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: angelnu-charts
         namespace: flux-system
-      interval: 5m
 
   install:
     remediation:
@@ -26,8 +26,8 @@ spec:
 
   values:
     image:
-      repository: ghcr.io/k8s-at-home/pod-gateway
-      tag: v1.7.0
+      repository: ghcr.io/angelnu/pod-gateway
+      tag: v1.8.1@sha256:690b6365728fe9012ad4cdfca38334992664596513dca187d1b93d2025205776
 
     env:
       TZ: "${TZ}"
@@ -63,8 +63,8 @@ spec:
 
     webhook:
       image:
-        repository: ghcr.io/k8s-at-home/gateway-admision-controller
-        tag: v3.6.0
+        repository: ghcr.io/angelnu/gateway-admision-controller
+        tag: v3.7.0@sha256:985eb60fd0017f657d5e66707f7e9b3f764f3337a87a379d26cd15e950bd79ad
 
       gatewayDefault: true
       gatewayLabel: setGateway
@@ -123,7 +123,7 @@ spec:
             cpu: "0.001"
             memory: 128Mi
           limits:
-            memory: 512Mi
+            memory: 2Gi
 
         networkPolicy:
           enabled: true
