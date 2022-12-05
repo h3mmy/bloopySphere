@@ -2,20 +2,22 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: lidarr
+  name: &app lidarr
   namespace: media
 spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: lidarr
-      version: 14.2.2
+      chart: app-template
+      version: 1.1.3
+      interval: 15m
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
   install:
     remediation:
       retries: 4
@@ -26,10 +28,19 @@ spec:
 
   values:
     image:
-      repository: ghcr.io/k8s-at-home/lidarr
-      tag: v1.1.0.2600
+      repository: ghcr.io/onedr0p/lidarr
+      tag: 1.0.2.2592@sha256:1ce91061aeb75f3a6443f325e06872b9b3e88fcaee85abc950f0c67cdc14910e
     env:
       TZ: "${TZ}"
+      LIDARR__INSTANCE_NAME: Lidarr
+      LIDARR__PORT: &port 8686
+      LIDARR__LOG_LEVEL: info
+      LIDARR__API_KEY: ${LIDARR_API_KEY}
+    service:
+      main:
+        ports:
+          http:
+            port: *port
     ingress:
       main:
         enabled: true
@@ -41,7 +52,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "music-box"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          # traefik.ingress.kubernetes.io/router.priority: "10"
+          traefik.ingress.kubernetes.io/router.priority: "99"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
           - host: &host "lidarr.${XYZ_DOMAIN}"
@@ -53,34 +64,18 @@ spec:
               - *host
             secretName: tls.lidarr
 
-    securityContext:
-      runAsUser: 0
-      runAsGroup: 0
-
     podSecurityContext:
+      fsGroup: "${MEDIA_GID}"
+      fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
         - 100
-        - 568
         # Custom Camelus Group(s)
         - 65541
         - 65536
         - 65537
 
-    metrics:
-      enabled: true
-      serviceMonitor:
-        interval: 3m
-        scrapeTimeout: 1m
-      prometheusRule:
-        enabled: true
-      exporter:
-        image:
-          repository: ghcr.io/onedr0p/exportarr
-          tag: v1.1.0
-        env:
-          port: 9794
-          additionalMetrics: true
-          unknownQueueItems: false
+    podAnnotations:
+      secret.reloader.stakater.com/reload: *app
     persistence:
       config:
         enabled: true

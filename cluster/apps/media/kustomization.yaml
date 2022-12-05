@@ -11,7 +11,7 @@ resources:
   - ./books/readarr
   # - ./books/mylar
   - ./bazarr
-  # - lidarr
+  - ./lidarr
   # - tdarr
   - ./sonarr
   - ./radarr
