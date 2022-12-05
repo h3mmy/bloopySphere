@@ -15,7 +15,7 @@ spec:
   sourceRef:
     kind: OCIRepository
     name: oci-terraform-cloudflare
-    namespace: infrastructure
+    namespace: flux-system
   runnerPodTemplate:
     spec:
       volumeMounts:
