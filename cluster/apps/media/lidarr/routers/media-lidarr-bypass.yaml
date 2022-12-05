@@ -1,0 +1,21 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: lidarr-bypass
+  namespace: media
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`lidarr.${XYZ_DOMAIN}`) && (Headers(`X-Api-Key`, `${LIDARR_API_KEY}`) || Query(`apikey`, `${LIDARR_API_KEY}`))
+      priority: 100
+      services:
+        - kind: Service
+          name: lidarr
+          port: 8686
+      middlewares:
+        - name: networking-rfc1918@kubernetescrd
+  tls:
+    secretName: "tls.lidarr"
