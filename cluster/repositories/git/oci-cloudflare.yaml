@@ -2,7 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: OCIRepository
 metadata:
-  name: oci-terraform-cloudflare
+  name: terraform-cloudflare
   namespace: flux-system
 spec:
   interval: 15m
