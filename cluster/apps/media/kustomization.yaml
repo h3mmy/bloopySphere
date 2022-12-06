@@ -6,7 +6,7 @@ resources:
   - ./plex
   - ./books/calibre
   - ./books/calibre-web
-  # - ./books/lazylibrarian
+  - ./books/lazylibrarian
   - ./books/readarr-audio
   - ./books/readarr
   # - ./books/mylar
