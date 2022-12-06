@@ -41,7 +41,7 @@ spec:
       QBT_Preferences__WebUI__ClickjackingProtection: 'false'
       # UMASK: "022"
       QBITTORRENT__PORT: &port 8080
-      QBITTORRENT__USE_PROFILE: "true"
+      # QBITTORRENT__USE_PROFILE: "true"
       QBITTORRENT__BT_PORT: &port-bt ${VPN_FORWARDED_PORT_1}
 
     hostname: qbittorrent
