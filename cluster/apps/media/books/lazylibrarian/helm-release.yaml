@@ -55,9 +55,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: "nfs-client"
-        accessMode: ReadWriteOnce
-        size: 1Gi
+        existingClaim: lazylib-config-v1
       media:
         enabled: true
         type: custom
