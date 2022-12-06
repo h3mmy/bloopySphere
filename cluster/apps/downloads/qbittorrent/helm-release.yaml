@@ -8,16 +8,16 @@ spec:
   dependsOn:
     - name: vpn-gateway
       namespace: vpn-gateway
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      chart: qbittorrent
-      version: 13.5.2
+      spec:
+      chart: app-template
+      version: 1.2.0
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
 
   install:
     remediation:
@@ -28,8 +28,8 @@ spec:
 
   values:
     image:
-      repository: ghcr.io/k8s-at-home/qbittorrent
-      tag: v4.4.2
+      repository: ghcr.io/onedr0p/qbittorrent
+      tag: 4.4.5@sha256:6765f8a7709ad446fb761d3dde16f2a2706d118c21e2f191955ba07935e75e29
 
     # Adding false for CSRF and Clickjacking else it gives a 401 to browsers and prometheus-exporter (unreliably)
     # This is only okay for my particular use case
@@ -40,35 +40,41 @@ spec:
       PGID: "${MEDIA_GID}"
       QBT_Preferences__WebUI__CSRFProtection: 'false'
       QBT_Preferences__WebUI__ClickjackingProtection: 'false'
+      # UMASK: "022"
+      QBITTORRENT__PORT: &port 8080
+      QBITTORRENT__USE_PROFILE: "true"
+      QBITTORRENT__BT_PORT: &port-bt ${VPN_FORWARDED_PORT_1}
 
     hostname: qbittorrent
 
     podAnnotations:
       setGateway: "true"
+      configmap.reloader.stakater.com/reload: "qbittorrent-config"
 
     podLabels:
       setGateway: "true"
 
-    settings:
-      automaticPortSetup: false
 
     service:
       main:
         ports:
           http:
-            port: 8080
+            port: *port
       bittorrent:
         enabled: true
         type: LoadBalancer
-        loadBalancerIP: ${SVC_QBITTORRENT_ADDR}
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: ${SVC_QBITTORRENT_ADDR}
+        loadBalancerIPs: ["${SVC_QBITTORRENT_ADDR}"]
         # For BGP mode
         # externalIPs:
         #   - "${SVC_QBITTORRENT_ADDR}"
         ports:
           bittorrent:
             enabled: true
-            port: ${VPN_FORWARDED_PORT_1}
+            port: *port-bt
             protocol: TCP
+            targetPort: *port-bt
         externalTrafficPolicy: Local
 
     ingress:
@@ -79,18 +85,18 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth@kubernetescrd"
           hajimari.io/enable: "true"
-          hajimari.io/icon: "cloud-download"
+          hajimari.io/icon: "download-networ"
           hajimari.io/instance: "bloop-quarky"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
-          - host: "qbittorrent.${XYZ_DOMAIN}"
+          - host: &host "qbittorrent.${XYZ_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - secretName: tls.qbittorrent
             hosts:
-              - "{{ (index .Values.ingress.main.hosts 0).host }}"
+              - *host
       api:
         enabled: true
         ingressClassName: "traefik"
@@ -99,16 +105,20 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
         hosts:
-          - host: "qbittorrent.${XYZ_DOMAIN}"
+          - host: *host
             paths:
               - path: /api
                 pathType: Prefix
         tls:
           - secretName: tls.qbittorrent
             hosts:
-              - "{{ (index .Values.ingress.api.hosts 0).host }}"
+              - *host
 
     persistence:
+      cache:
+        enabled: true
+        type: emptyDir
+        mountPath: /config/qBittorrent/cache
       config:
         enabled: true
         existingClaim: qbittorrent-config-v1
@@ -130,14 +140,14 @@ spec:
       limits:
         memory: 2500Mi
 
-    metrics:
-      enabled: true
-      prometheusRule:
-        enabled: true
-      exporter:
-        image:
-          repository: esanchezm/prometheus-qbittorrent-exporter
-          tag: v1.2.0
-        env:
-          user: "${QB_USER}"
-          password: "${QB_PASSWORD}"
+    # metrics:
+    #   enabled: true
+    #   prometheusRule:
+    #     enabled: true
+    #   exporter:
+    #     image:
+    #       repository: esanchezm/prometheus-qbittorrent-exporter
+    #       tag: v1.2.0
+    #     env:
+    #       user: "${QB_USER}"
+    #       password: "${QB_PASSWORD}"

@@ -43,6 +43,10 @@ spec:
             port: ${VPN_FORWARDED_PORT_1}
           - type: tcp
             port: ${VPN_FORWARDED_PORT_1}
+          - type: udp
+            port: ${VPN_FORWARDED_PORT_2}
+          - type: tcp
+            port: ${VPN_FORWARDED_PORT_2}
 
     # Default VPN_VXLAN DNS
     DNS: 172.16.0.1
