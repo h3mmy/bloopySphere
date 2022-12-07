@@ -2,5 +2,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - kubegres.yaml
-  - emqx-chart.yaml
+  - terraform-cloudflare.yaml
+  - terraform-gcp.yaml
+  - terraform-oci.yaml
