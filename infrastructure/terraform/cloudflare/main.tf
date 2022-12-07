@@ -5,7 +5,7 @@ data "sops_file" "cloudflare_secrets" {
 }
 
 data "sops_external" "domains" {
-  source_file = data.http.bloopysphere_domains.response_body
+  source = data.http.bloopysphere_domains.response_body
   input_type = "yaml"
 }
 
