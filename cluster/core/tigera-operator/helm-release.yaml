@@ -42,12 +42,12 @@ spec:
     # here: https://projectcalico.docs.tigera.io/reference/installation/api#operator.tigera.io/v1.InstallationSpec
     installation:
       enabled: true
+      registry: quay.io
+      imagePath: calico
       # Configures Calico networking.
       calicoNetwork:
         # Note: The ipPools section cannot be modified post-install.
         # ALl blocks must fall within the NETWORK_K8S_CLUSTER_CIDR
-        registry: quay.io
-        imagePath: calico
         bgp: Enabled
         ipPools:
           - blockSize: 20
