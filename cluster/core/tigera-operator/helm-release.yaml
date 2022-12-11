@@ -46,7 +46,9 @@ spec:
       calicoNetwork:
         # Note: The ipPools section cannot be modified post-install.
         # ALl blocks must fall within the NETWORK_K8S_CLUSTER_CIDR
-        bgp: Disabled
+        registry: quay.io
+        imagePath: calico
+        bgp: Enabled
         ipPools:
           - blockSize: 20
             cidr: ${NETWORK_K8S_CLUSTER_CIDR}
