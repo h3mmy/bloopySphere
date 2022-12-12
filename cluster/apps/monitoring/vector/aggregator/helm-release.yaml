@@ -51,10 +51,11 @@ spec:
 
     resources:
       requests:
-        cpu: 35m
-        memory: 100M
+        cpu: 34m
+        memory: 127M
       limits:
-        memory: 500M
+        cpu: 57m
+        memory: 788M
 
     customConfig:
       data_dir: /vector-data-dir

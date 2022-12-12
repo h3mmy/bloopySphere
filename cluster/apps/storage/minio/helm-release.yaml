@@ -186,7 +186,8 @@ spec:
 
     resources:
       requests:
-        memory: 100Mi
-        cpu: 100m
+        cpu: 77m
+        memory: 866M
       limits:
-        memory: 750Mi
+        cpu: 849m
+        memory: 1258M
