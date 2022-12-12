@@ -139,13 +139,16 @@ spec:
             - loki-memberlist
         limits_config:
           enforce_metric_name: false
+          max_cache_freshness_per_query: 10m
+          split_queries_by_interval: 15m
           reject_old_samples: true
           reject_old_samples_max_age: 168h
           ingestion_rate_mb: 16
           ingestion_burst_size_mb: 24
+          retention_period: 14d
         common:
           path_prefix: /var/loki
-          replication_factor: 1
+          replication_factor: 3
           storage:
             s3:
               bucketnames: loki
