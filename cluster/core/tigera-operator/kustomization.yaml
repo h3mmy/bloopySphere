@@ -5,6 +5,7 @@ namespace: tigera-operator
 resources:
   - helm-release.yaml
   - bgp-config.yaml
+  - bgp-peers.yaml
 configMapGenerator:
   - name: kubernetes-service-endpoint
     literals:
