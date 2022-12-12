@@ -1,0 +1,14 @@
+---
+apiVersion: crd.projectcalico.org/v1
+kind: BGPConfiguration
+metadata:
+  name: default
+spec:
+  asNumber: 64512
+  nodeToNodeMeshEnabled: true
+  serviceClusterIPs:
+    - cidr: "${NETWORK_K8S_SERVICE_CIDR}"
+    - cidr: "${NETWORK_K8S_SERVICE_CIDR_V6}"
+  serviceExternalIPs:
+    - cidr: "${NETWORK_BGP_BLOCK_V4}"
+    - cidr: "${NETWORK_BGP_BLOCK_V6}"
