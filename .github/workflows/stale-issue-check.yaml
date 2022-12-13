@@ -18,7 +18,7 @@ jobs:
     if: github.repository == 'h3mmy/bloopySphere'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@975308fb9d005fd1d6680ff07a34bb9d82321354
+      - uses: actions/stale@627cef3f3764759e961ae4e0788ea732c9b92e2c
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           stale-issue-message: "This issue is stale because it has been open 60 days with no activity."
