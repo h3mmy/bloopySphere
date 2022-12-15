@@ -43,7 +43,7 @@ spec:
     image:
       reposistory: ghost
       # renovate: datasource=docker depName=ghost
-      tag: "5.25.3"
+      tag: "5.25.5"
     env:
       TZ: "${TZ}"
       url: "https://${TGR_DOMAIN}"
