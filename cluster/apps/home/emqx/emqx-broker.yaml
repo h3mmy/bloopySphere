@@ -6,7 +6,7 @@ metadata:
   namespace: home
 spec:
   serviceAccountName: "emqx"
-  image: emqx/emqx:5.0.11
+  image: emqx/emqx:5.0.12
   imagePullPolicy: IfNotPresent
   # imagePullSecrets:
   #   - name: fake-secrets
