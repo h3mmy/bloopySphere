@@ -46,9 +46,9 @@ spec:
       # See https://github.com/emqx/emqx/commit/a2a4c813e75eb447b6bdbc96c8656bd8db8a4423#diff-5563b95bbac1fd565c21e4a37ced5a944c398bce5b340d093c2059231560f165
       # Compare to current values.yaml and it should make sense. I tested using v5.0.12
       EMQX_CLUSTER__DISCOVERY_STRATEGY: k8s
-      EMQX_CLUSTER__K8S__APISERVER: "https://kubernetes.default.svc:443"
-      EMQX_CLUSTER__K8S__SERVICE_NAME: "{{ .Release.Name }}-headless"
-      EMQX_CLUSTER__K8S__NAMESPACE: *ns
+      # EMQX_CLUSTER__K8S__APISERVER: "https://kubernetes.default.svc:443"
+      # EMQX_CLUSTER__K8S__SERVICE_NAME: "{{ .Release.Name }}-headless"
+      # EMQX_CLUSTER__K8S__NAMESPACE: *ns
       EMQX_DASHBOARD__DEFAULT_USERNAME: admin
       EMQX_DASHBOARD__DEFAULT_PASSWORD: ${EMQX_ADMIN_PASSWORD}
       EMQX_LOADED_MODULES: "emqx_mod_presence,emqx_mod_subscription,emqx_mod_topic_metrics"
