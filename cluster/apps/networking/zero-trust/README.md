@@ -9,3 +9,5 @@ Secret creds.json should be formatted like so
 ```
 
 Note: AccountTag is your Account ID.
+
+Helm-Release is a draft, untested and disabled. Using it as-is will probably not work
