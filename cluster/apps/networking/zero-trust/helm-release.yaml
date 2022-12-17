@@ -35,9 +35,16 @@ spec:
       rollingUpdate:
         surge: 0
         unavailable: 1
+
     image:
       repository: cloudflare/cloudflared
       tag: "2022.5.3"
+
+    args:
+      - tunnel
+      - --config
+      - /opt/zt/config/config.yaml
+      - run
 
     env:
       TZ: "${TZ}"
