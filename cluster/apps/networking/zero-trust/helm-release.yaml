@@ -25,6 +25,7 @@ spec:
     global:
       labels:
         tunnel: api-zt
+
     controller:
       replicas: 3
       labels:
@@ -37,9 +38,18 @@ spec:
     image:
       repository: cloudflare/cloudflared
       tag: "2022.5.3"
+
     env:
       TZ: "${TZ}"
       GOMAXPROCS: "2"
+
+    service:
+      main:
+        type: ClusterIP
+        externalTrafficPolicy: Local
+        ports:
+          http:
+            port: 8081
 
     persistence:
       config:
