@@ -8,3 +8,4 @@ resources:
   - error-pages
   # - ddns
   - k8s-gateway
+  - zero-trust

@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tunnel-zt
+  namespace: example
+  labels:
+    tunnel: api-zt
+data:
+  config.yaml: |
+    tunnel: ${ZT_TUNNEL_ID}
+    credentials-file: /opt/zt/creds/creds.json
+    metrics: 0.0.0.0:8081
+    warp-routing:
+        enabled: true
