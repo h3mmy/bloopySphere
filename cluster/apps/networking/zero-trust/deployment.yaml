@@ -55,9 +55,8 @@ spec:
               name: creds
               readOnly: true
       volumes:
-        - secret:
-            name: tunnel-creds
-          name: creds
-        - configMap:
+        - name: creds
+          secretName: tunnel-creds
+        - name: config
+          configMap:
             name: tunnel-api-zt
-          name: config
