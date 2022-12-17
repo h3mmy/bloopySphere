@@ -62,14 +62,12 @@ spec:
         enabled: true
         type: configMap
         name: tunnel-api-zt
-        subPath: config.yaml
         mountPath: /opt/zt/config
         readOnly: true
       creds:
         enabled: true
         type: secret
         name: tunnel-creds
-        subPath: creds.json
         mountPath: /opt/zt/creds
 
     probes:
