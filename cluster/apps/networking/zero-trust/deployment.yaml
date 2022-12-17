@@ -59,6 +59,9 @@ spec:
           secret:
             secretName: tunnel-creds
             optional: false
+            items:
+              - key: creds.json
+                path: /opt/zt/creds/creds.json
         - name: config
           configMap:
             name: tunnel-api-zt
