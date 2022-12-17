@@ -61,7 +61,11 @@ spec:
             optional: false
             items:
               - key: creds.json
-                path: /opt/zt/creds/creds.json
+                path: creds.json
         - name: config
           configMap:
             name: tunnel-api-zt
+            optional: false
+            items:
+              - key: config.yaml
+                path: config.yaml
