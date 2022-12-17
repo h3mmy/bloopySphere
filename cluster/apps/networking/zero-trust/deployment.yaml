@@ -31,7 +31,7 @@ spec:
               value: "2"
             - name: TZ
               value: ${TZ}
-          image: cloudflare/cloudflared:2022.5.3
+          image: cloudflare/cloudflared:2022.11.1
           livenessProbe:
             failureThreshold: 1
             httpGet:
