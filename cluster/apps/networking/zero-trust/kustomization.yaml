@@ -5,4 +5,4 @@ namespace: networking
 resources:
   - config-map.yaml
   - secrets.sops.yaml
-  - deployment.yaml
+  - helm-release.yaml
