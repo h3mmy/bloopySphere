@@ -2,8 +2,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: tunnel-zt
-  namespace: example
+  name: tunnel-api-zt
+  namespace: networking
   labels:
     tunnel: api-zt
 data:
