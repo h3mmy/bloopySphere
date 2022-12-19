@@ -64,5 +64,5 @@ spec:
 
     resources:
       requests:
-        cpu: 15m
+        cpu: 25m
         memory: 64M
