@@ -12,6 +12,7 @@
       {
         "datasources": ["docker", "github-tags"],
         "automerge": true,
+        "automergeType": "branch"
         "requiredStatusChecks": null,
         "updateTypes": ["minor", "patch"],
         "packageNames": [
