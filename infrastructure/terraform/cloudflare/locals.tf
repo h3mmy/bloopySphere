@@ -4,5 +4,6 @@ locals {
   status_dev_ipv4    = "192.0.2.1"
   status_dev_ipv6    = "100::"
   gitlab_repo = "h3mmy.gitlab.io"
-  kube_api_ipv4 = "10.43.0.1/16"
+  kube_api_ipv4 = "10.43.0.0/16"
+  kube_api_cname = "muon"
 }

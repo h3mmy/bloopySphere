@@ -53,3 +53,37 @@ resource "cloudflare_teams_rule" "k8s_apiserver_zero_trust_http" {
   filters     = ["http"]
   traffic     = format("any(http.conn.dst_ip[*] in $%s)", replace(cloudflare_teams_list.k8s_apiserver_ips.id, "-", ""))
 }
+
+
+# azureAD
+resource "cloudflare_access_identity_provider" "azure_ad" {
+  account_id = var.account_id
+  name       = "Azure AD"
+  type       = "azureAD"
+  config {
+    directory_id = var.az_directory_id
+    client_secret = var.az_application_secret
+    client_id = var.az_application_id
+    pkce_enabled = true
+    support_groups = true
+  }
+}
+
+# Application
+resource "cloudflare_access_application" "bloopysphere_k8s_api" {
+  zone_id                   = var.zone_id
+  name                      = "Bloopysphere k8s"
+  domain                    = "${var.api_cname}.${var.api_domain_name}"
+  type                      = "self_hosted"
+  session_duration          = "24h"
+  auto_redirect_to_identity = false
+}
+
+# This won't work unless there is an ingress rule as well (as a kubernetes resource)
+resource "cloudflare_record" "foobar" {
+  zone_id = var.zone_id
+  name    = var.api_cname
+  value   = "${cloudflare_argo_tunnel.k8s_zero_trust_tunnel.id}.cfargotunnel.com"
+  type    = "CNAME"
+  ttl     = 3600
+}

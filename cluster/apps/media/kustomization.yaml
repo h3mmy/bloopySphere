@@ -12,7 +12,7 @@ resources:
   # - ./books/mylar
   - ./bazarr
   - ./lidarr
-  # - tdarr
+  # - ./tdarr
   - ./sonarr
   - ./radarr
   - ./overseer
