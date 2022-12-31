@@ -51,7 +51,7 @@ spec:
               url: "http://101.1.0.105:32400/web"
               icon: play-network-outline
               
-      customBookmarks:
+      globalBookmarks:
         - group: Comms
           bookmarks:
             - name: Discord Server
