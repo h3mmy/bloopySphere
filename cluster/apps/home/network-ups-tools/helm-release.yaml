@@ -147,4 +147,4 @@ spec:
     additionalContainers:
       exporter:
         name: exporter
-        image: ghcr.io/druggeri/nut_exporter:2.5.0
+        image: ghcr.io/druggeri/nut_exporter:2.5.2
