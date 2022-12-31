@@ -56,10 +56,10 @@ spec:
           bookmarks:
             - name: Discord Server
               url: "https://discord.gg/${DISCORD_SERVER_INVITE_CODE}"
-              icon: discord
+             # icon: discord
             - name: Tyg3r Blog
               url: "https://${TGR_DOMAIN}" 
-              icon: post 
+              #icon: post 
               
       #                      groups        - name: Desiglinks:            - name: Awwwardurl: "https://awwwards.com"
         #   - name: Dribbble
