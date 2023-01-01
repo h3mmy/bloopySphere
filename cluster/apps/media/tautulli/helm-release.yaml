@@ -75,6 +75,18 @@ spec:
             path: /volume3/Data/Backups/app/tautulli
         mountPath: /config/backups
         readOnly: false
+    additionalContainers:
+      jbops:
+        name: jbops
+        image: k8s.gcr.io/git-sync/git-sync:v3.6.2
+        args:
+          - --repo=https://github.com/blacktwin/JBOPS.git
+          - --branch=master
+          - --depth=1
+          - --root=/
+        volumeMounts:
+          - name: jbops
+            mountPath: /config/JBOPS
     resources:
       requests:
         cpu: 10m
