@@ -87,7 +87,6 @@ spec:
         volumeMounts:
           - name: config
             mountPath: /config
-            subPath: JBOPS
     resources:
       requests:
         cpu: 10m
