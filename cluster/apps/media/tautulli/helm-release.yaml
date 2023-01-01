@@ -85,7 +85,7 @@ spec:
           - --depth=1
           - --root=/config/JBOPS
         volumeMounts:
-          - name: *app
+          - name: config
             mountPath: /config
             subPath: JBOPS
     resources:

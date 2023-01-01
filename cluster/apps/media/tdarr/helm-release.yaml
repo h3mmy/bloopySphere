@@ -34,6 +34,27 @@ spec:
       TZ: ${TZ}
       ffmpegPath: /usr/bin/ffmpeg
       PGID: 65537
+    additionalContainers:
+      node:
+        name: node
+        image: haveagitgat/tdarr_node:2.00.18
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: TZ
+            value: ${TZ}
+          - name: nodeID
+            value: node
+          - name: serverIP
+            value: localhost
+          - name: serverPort
+            value: *server-port
+        volumeMounts:
+          - name: config
+            mountPath: /app/configs
+          - name: media
+            mountPath: /media
+          - name: shared
+            mountPath: /shared
     podSecurityContext:
       # Required for passthrough of /dev/dri devices from NFD
       # https://dgpu-docs.intel.com/installation-guides/ubuntu/ubuntu-focal.html
@@ -53,7 +74,11 @@ spec:
       data:
         enabled: true
         mountPath: /app/server
+        existingClaim: tdarr-data-v1
+      config:
+        enabled: true
         existingClaim: tdarr-config-v1
+        mountPath: /app/configs
       shared:
         enabled: true
         type: emptyDir
@@ -80,11 +105,11 @@ spec:
       main:
         ports:
           http:
-            port: 8265
+            port: *web-port
           server:
             enabled: true
             protocol: TCP
-            port: 8266
+            port: *server-port
     ingress:
       main:
         enabled: true
