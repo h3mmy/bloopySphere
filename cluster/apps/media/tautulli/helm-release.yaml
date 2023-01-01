@@ -83,10 +83,7 @@ spec:
           - --repo=https://github.com/blacktwin/JBOPS.git
           - --branch=master
           - --depth=1
-          - --root=/
-        volumeMounts:
-          - name: jbops
-            mountPath: /config/JBOPS
+          - --root=/config/JBOPS
     resources:
       requests:
         cpu: 10m
