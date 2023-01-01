@@ -26,4 +26,6 @@ Note regarding ddns: I have forgone the IPv4 detection via http check. The terra
 
 After getting this set up, I added the sops age key to the terraform cloud config and connected it to this repository. It will auto-apply changes when branch `main` has changes at `infrastructure/terraform/cloudflare` or `infrastructure/shared`. Once I have the other facets set up, I will be shifting this to API usage via either a github runner, or declarative webhook via github, or via flux. Idk yet.
 
+For integrating azure idp: [Docs](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/azuread/)
+
 ## Oracle Cloud

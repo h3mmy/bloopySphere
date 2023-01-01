@@ -4,6 +4,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: tdarr-config-v1
   namespace: media
+  labels:
+    app.kubernetes.io/name: tdarr
+    app.kubernetes.io/instance: tdarr
 spec:
   accessModes:
     - ReadWriteOnce
@@ -11,3 +14,19 @@ spec:
   resources:
     requests:
       storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tdarr-data-v1
+  namespace: media
+  labels:
+    app.kubernetes.io/name: tdarr
+    app.kubernetes.io/instance: tdarr
+spec:
+  storageClassName: ceph-block
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
