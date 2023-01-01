@@ -48,7 +48,7 @@ spec:
       - name: mygreatschedule
         schedule: "0 0 * * *" # Daily, at midnight
         backupProfileName: ghost-mysql-backup-pvc # reference the desired backupProfiles's name
-        enabled: false # backup schedules can be temporarily disabled
+        enabled: true # backup schedules can be temporarily disabled
     podSpec:
       affinity:
         podAntiAffinity:
