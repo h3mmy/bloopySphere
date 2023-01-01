@@ -8,6 +8,7 @@ spec:
   storageClassName: "nfs-client"
   accessModes:
     - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 10Gi
