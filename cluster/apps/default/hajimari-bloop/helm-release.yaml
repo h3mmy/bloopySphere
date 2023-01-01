@@ -36,6 +36,7 @@ spec:
       defaultEnable: false
       darkTheme: chalk
       instanceName: "bloop-quarky"
+      title: "BloopNet Admin"
       namespaceSelector:
         matchNames:
           - default
