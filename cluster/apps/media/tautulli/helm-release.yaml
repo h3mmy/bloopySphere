@@ -84,6 +84,10 @@ spec:
           - --branch=master
           - --depth=1
           - --root=/config/JBOPS
+        volumeMounts:
+          - name: *app
+            mountPath: /config
+            subPath: JBOPS
     resources:
       requests:
         cpu: 10m
