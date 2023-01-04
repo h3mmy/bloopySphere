@@ -40,7 +40,7 @@ spec:
   values:
     extraInitContainers:
       - name: wait-for-calico
-        image: busybox:1.35
+        image: busybox:1.36
         command:
           - /bin/sh
           - -xc
