@@ -52,7 +52,9 @@ spec:
           - name: config
             mountPath: /app/configs
           - name: media
-            mountPath: /media
+            mountPath: &mediaPath /volume3/Data
+          - name: media2
+            mountPath: &mediaPath2 /volume1/Data2
           - name: shared
             mountPath: /shared
     podSecurityContext:
@@ -88,18 +90,18 @@ spec:
         type: custom
         volumeSpec:
           nfs:
-            path: /volume3/Data
+            path: *mediaPath
             server: ${NAS_ADDRESS}
-        mountPath: /volume3/Data
+        mountPath: *mediaPath
         readOnly: false
       media2:
         enabled: true
         type: custom
         volumeSpec:
           nfs:
-            path: /volume1/Data2
+            path: *mediaPath2
             server: ${NAS_ADDRESS}
-        mountPath: /volume1/Data2
+        mountPath: *mediaPath2
         readOnly: false
     service:
       main:
