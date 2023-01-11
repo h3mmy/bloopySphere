@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - classic-svc.yaml
   - home-assistant.yaml
-  # - nas-camelus.yaml
+  - nas-camelus.yaml
