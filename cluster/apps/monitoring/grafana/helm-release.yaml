@@ -5,7 +5,7 @@ metadata:
   name: grafana
   namespace: monitoring
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       # renovate: registryUrl=https://grafana.github.io/helm-charts
@@ -15,7 +15,6 @@ spec:
         kind: HelmRepository
         name: grafana-charts
         namespace: flux-system
-      interval: 5m
 
   install:
     remediation:
@@ -26,6 +25,9 @@ spec:
 
   values:
     replicas: 1
+
+    rbac:
+      pspEnabled: false
 
     podAnnotations:
       configmap.reloader.stakater.com/reload: "grafana"
@@ -335,7 +337,7 @@ spec:
       - farski-blendstat-panel
 
     serviceMonitor:
-      enabled: false
+      enabled: true
 
     ingress:
       enabled: true
