@@ -8,8 +8,8 @@ spec:
   ipAddressPools:
     - default
   nodeSelectors:
-    matchLabels:
-      - kubernetes.io/hostname: slowpoke
+    - matchLabels:
+        - kubernetes.io/hostname: slowpoke
   interfaces:
     - enp89s0
 ---
@@ -22,8 +22,8 @@ spec:
   ipAddressPools:
     - default
   nodeSelectors:
-    matchLabels:
-      - kubernetes.io/hostname:: k8s-3
+    - matchLabels:
+        - kubernetes.io/hostname:: k8s-3
   interfaces:
     - enp3s0
 ---
@@ -36,8 +36,8 @@ spec:
   ipAddressPools:
     - default
   nodeSelectors:
-    matchLabels:
-      - kubernetes.io/hostname: k8s-2
+    - matchLabels:
+        - kubernetes.io/hostname: k8s-2
   interfaces:
     - eno1
 ---
@@ -50,7 +50,7 @@ spec:
   ipAddressPools:
     - default
   nodeSelectors:
-    matchLabels:
-      - kubernetes.io/hostname: k8s-0
+    - matchLabels:
+        - kubernetes.io/hostname: k8s-0
   interfaces:
     - eth0
