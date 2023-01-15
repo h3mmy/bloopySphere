@@ -32,7 +32,7 @@ k3s_server_config_yaml_d_files:
 # (list) A list of URLs to deploy on the primary control plane. Read notes below.
 k3s_server_manifests_urls:
   # Deployed Via Flux now
-  # - url: https://docs.projectcalico.org/archive/v3.22/manifests/tigera-operator.yaml
+  # - url: https://docs.projectcalico.org/archive/v3.25/manifests/tigera-operator.yaml
   #   filename: tigera-operator.yaml
   # - url: https://kube-vip.io/manifests/rbac.yaml
   #   filename: kube-vip-rbac.yaml

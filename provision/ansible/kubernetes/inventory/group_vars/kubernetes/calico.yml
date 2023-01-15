@@ -1,6 +1,7 @@
 ---
 # # Encapsulation type
 calico_encapsulation: "VXLANCrossSubnet"
+calico_encapsulation_ipv6: "None"
 # # BGP Peer IP
 # # (usually your router IP address)
 # calico_bgp_peer_ip: 10.1.0.1
@@ -12,4 +13,4 @@ calico_encapsulation: "VXLANCrossSubnet"
 # calico_bgp_external_ips: 10.4.69.0/24
 # # CIDR of the host node interface Calico should use
 calico_node_cidr: 10.1.0.0/24
-calico_node_cidr_ipv6: "2601:0404:c580:1c72::/106"
+calico_node_cidr_ipv6: "2601:0404:c580:1c72::/116"
