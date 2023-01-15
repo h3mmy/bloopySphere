@@ -37,6 +37,7 @@ spec:
           hajimari.io/icon: "eye-circle"
           hajimari.io/appName: "Requests"
           hajimari.io/instance: "bloop-xyz,bloop-quarky"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth@kubernetescrd"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
           - host: "requests.${XYZ_DOMAIN}"
