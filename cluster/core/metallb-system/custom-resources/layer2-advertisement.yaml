@@ -2,7 +2,7 @@
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
-  name: l2-advertisement
+  name: l2-advertisement-slowpoke
   namespace: metallb-system
 spec:
   ipAddressPools:
@@ -15,7 +15,7 @@ spec:
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
-  name: l2-advertisement
+  name: l2-advertisement-3
   namespace: metallb-system
 spec:
   ipAddressPools:
@@ -28,7 +28,7 @@ spec:
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
-  name: l2-advertisement
+  name: l2-advertisement-2
   namespace: metallb-system
 spec:
   ipAddressPools:
@@ -41,7 +41,7 @@ spec:
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
-  name: l2-advertisement
+  name: l2-advertisement-0
   namespace: metallb-system
 spec:
   ipAddressPools:
