@@ -7,3 +7,46 @@ metadata:
 spec:
   ipAddressPools:
     - default
+  nodeSelector:
+    - kubernetes.io/hostname: slowpoke
+  interfaces:
+    - enp89s0
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: l2-advertisement
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+    - default
+  nodeSelector:
+    - kubernetes.io/hostname: k8s-3
+  interfaces:
+    - enp3s0
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: l2-advertisement
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+    - default
+  nodeSelector:
+    - kubernetes.io/hostname: k8s-2
+  interfaces:
+    - eno1
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: l2-advertisement
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+    - default
+  nodeSelector:
+    - kubernetes.io/hostname: k8s-0
+  interfaces:
+    - eth0

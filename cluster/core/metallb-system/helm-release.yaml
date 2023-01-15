@@ -10,31 +10,49 @@ spec:
     spec:
       # renovate: registryUrl=https://metallb.github.io/metallb
       chart: metallb
-      version: 0.12.1
+      version: 0.13.7
       sourceRef:
         kind: HelmRepository
         name: metallb-charts
         namespace: flux-system
-  values:
-    configInline:
-      address-pools:
-        - name: default
-          protocol: layer2
-          addresses:
-            - "${METALLB_LB_RANGE}"
-            - "${METALLB_LB_IP6_RANGE}"
 
+  dependsOn:
+    - name: tigera-operator
+      namespace: tigera-operator
+
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+
+  values:
     prometheus:
       scrapeAnnotations: false
       metricsPort: 7472
       serviceAccount: prometheus-prometheus
       namespace: monitoring
-      podMonitor:
+      serviceMonitor:
         enabled: true
       prometheusRule:
         enabled: true
 
+    crds:
+      enabled: true
+
     speaker:
+      # frr contains configuration specific to the MetalLB FRR container,
+      # for speaker running alongside FRR.
+      frr:
+        enabled: false
+        image:
+          repository: frrouting/frr
+          tag: v7.5.1
+          pullPolicy:
+        metricsPort: 7473
+        resources: {}
+      tolerateMaster: true
       livenessProbe:
         enabled: true
         failureThreshold: 3
@@ -60,3 +78,13 @@ spec:
         - key: node-role.kubernetes.io/control-plane
           operator: Exists
           effect: NoSchedule
+        - key: node-role.kubernetes.io/storage
+          effect: PreferNoSchedule
+          operator: Exists
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: low-mem
+                    operator: DoesNotExist
