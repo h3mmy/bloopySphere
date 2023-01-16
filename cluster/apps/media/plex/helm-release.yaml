@@ -72,7 +72,7 @@ spec:
           - ${LB_PLEX_IP}
         externalTrafficPolicy: Local
         annotations:
-          metallb.universe.tf/loadBalancerIPs: "${LB_PLEX_IP}
+          metallb.universe.tf/loadBalancerIPs: "${LB_PLEX_IP}" 
           metallb.universe.tf/allow-shared-ip: plex
           traefik.ingress.kubernetes.io/service.serversscheme: https
           coredns.io/hostname: plex
