@@ -78,7 +78,7 @@ spec:
     additionalContainers:
       jbops:
         name: jbops
-        image: k8s.gcr.io/git-sync/git-sync:v3.6.2
+        image: k8s.gcr.io/git-sync/git-sync:v3.6.3
         args:
           - --repo=https://github.com/blacktwin/JBOPS.git
           - --branch=master
