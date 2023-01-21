@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: linkerd-control-plane
-      version: 1.10.1-edge
+      version: 1.11.1-edge
       sourceRef:
         kind: HelmRepository
         name: linkerd-edge-charts
