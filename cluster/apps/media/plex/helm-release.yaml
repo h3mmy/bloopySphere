@@ -4,17 +4,16 @@ metadata:
   name: plex
   namespace: media
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      # renovate: registryUrl=https://bjw-s.github.io/helm-charts/
       chart: app-template
       version: 1.2.1
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
   install:
     remediation:
       retries: 4
@@ -72,7 +71,7 @@ spec:
           - ${LB_PLEX_IP}
         externalTrafficPolicy: Local
         annotations:
-          metallb.universe.tf/loadBalancerIPs: "${LB_PLEX_IP}" 
+          metallb.universe.tf/loadBalancerIPs: "${LB_PLEX_IP}"
           metallb.universe.tf/allow-shared-ip: plex
           traefik.ingress.kubernetes.io/service.serversscheme: https
           coredns.io/hostname: plex
