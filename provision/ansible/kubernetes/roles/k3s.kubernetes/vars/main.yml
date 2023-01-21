@@ -3,15 +3,15 @@
 # Below vars are for the xanmanning.k3s role
 # ...see https://github.com/PyratLabs/ansible-role-k3s#globalcluster-variables
 #
-
 # (string) Use a specific version of k3s
+# renovate: datasource=github-releases depName=k3s-io/k3s
 k3s_release_version: "v1.25.5+k3s1"
 
 # (bool) Install using hard links rather than symbolic links.
 k3s_install_hard_links: true
 
 # (bool) Escalate user privileges for all tasks
-k3s_become_for_all: true
+k3s_become: true
 
 # (bool) Enable debug logging on the k3s service
 k3s_debug: false
@@ -22,28 +22,29 @@ k3s_etcd_datastore: true
 # (bool) Allow the use of unsupported configurations in k3s
 k3s_use_unsupported_config: true
 
-# Control Plane registration address
-# this is set to my haproxy address running on my router.
-# If you want to use kube-vip only
-# set this to "{{ kubevip_address }}"
+# (string) Control Plane registration address
 k3s_registration_address: "{{ kubevip_address }}"
 
 # /etc/rancher/k3s/config.yaml.d
 k3s_server_config_yaml_d_files:
   - "k3s/10-etcd-snapshots.yaml.j2"
 
+# (list) A list of URLs to deploy on the primary control plane. Read notes below.
+k3s_server_manifests_urls:
+  # Deployed Via Flux now
+  # - url: https://docs.projectcalico.org/archive/v3.25/manifests/tigera-operator.yaml
+  #   filename: tigera-operator.yaml
+  # - url: https://kube-vip.io/manifests/rbac.yaml
+  #   filename: kube-vip-rbac.yaml
+
 # (list) A flat list of templates to deploy on the primary control plane
 # /var/lib/rancher/k3s/server/manifests
 k3s_server_manifests_templates: []
-#   # - "home-dns/home-dns-rbac.yaml.j2"
-#   - "calico/calico-installation.yaml.j2"
-#   - "kube-vip/kube-vip-rbac.yaml.j2"
-#   - "kube-vip/kube-vip-daemonset.yaml.j2"
+  # Now using the core/tigera-operator helm-release to apply this manifest
+  # - "calico/calico-installation.yaml.j2"
+  # Using core helm-release/Daemonset
+  # - "kube-vip/kube-vip-daemonset.yaml.j2"
 
-# # (list) A list of URLs to deploy on the primary control plane. Read notes below.
-k3s_server_manifests_urls: []
-  # - url: https://docs.projectcalico.org/archive/v3.24/manifests/tigera-operator.yaml
-  #   filename: tigera-operator.yaml
 
 # # etcd backups to s3
 # k3s_etcd_s3: true

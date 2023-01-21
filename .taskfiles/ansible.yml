@@ -52,6 +52,12 @@ tasks:
     cmds:
       - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/k3s.yml"
 
+  playbook:k3s-install-dry:
+    desc: Install Kubernetes on the nodes
+    dir: provision/ansible
+    cmds:
+      - "ansible-playbook -C -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/k3s.yml"
+
   playbook:k3s-nuke:
     desc: Nuke Kubernetes on the nodes
     dir: provision/ansible

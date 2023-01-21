@@ -52,3 +52,31 @@ os_packages_remove:
   - sosreport
   - ubuntu-advantage-tools
   - ufw
+
+fedora:
+  packages:
+    - dnf-plugin-system-upgrade
+    - dnf-utils
+    - hdparm
+    - htop
+    - ipvsadm
+    - lm_sensors
+    - nano
+    - nvme-cli
+    - socat
+    - python3-kubernetes
+    - python3-libselinux
+    - python3-pyyaml
+
+ubuntu:
+  packages:
+    - hdparm
+    - htop
+    - ipvsadm
+    - lm-sensors
+    - nano
+    - nfs-common
+    - nvme-cli
+    - socat
+    - python3-kubernetes
+    - python3-yaml
