@@ -5,9 +5,10 @@ metadata:
   name: linkerd-control-plane
   namespace: linkerd
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
+      # renovate: registryUrl=https://helm.linkerd.io/edge
       chart: linkerd-control-plane
       version: 1.11.1-edge
       sourceRef:

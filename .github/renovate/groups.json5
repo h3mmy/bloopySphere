@@ -26,6 +26,16 @@
       stabilityDays: 2,
     },
     {
+      description: "linkerd-edge charts",
+      groupName: "linkerd",
+      matchPackagePatterns: ["linkerd-control-plane", "linkerd-cni", "linkerd-crds", "linkerd-viz"],
+      matchDatasources: ["helm"],
+      group: { commitMessageTopic: "{{{groupName}}} group" },
+      separateMinorPatch: true,
+      stabilityDays: 2,
+      versioning: "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-edge?$",
+    },
+    {
       matchDatasources: ["helm", "docker"],
       matchPackageNames: [
         "quay.io/cilium/cilium",

@@ -8,6 +8,7 @@ spec:
   interval: 5m
   chart:
     spec:
+      # renovate: registryUrl=https://helm.linkerd.io/edge
       chart: linkerd2-cni
       version: 30.6.0-edge
       sourceRef:

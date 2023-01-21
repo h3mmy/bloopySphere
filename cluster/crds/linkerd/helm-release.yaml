@@ -8,6 +8,7 @@ spec:
   interval: 5m
   chart:
     spec:
+      # renovate: registryUrl=https://helm.linkerd.io/edge
       chart: linkerd-crds
       version: 1.4.0
       sourceRef:
