@@ -46,6 +46,8 @@ spec:
 
     service:
       annotations:
+        metallb.universe.tf/loadBalancerIPs: "${LB_VECTOR_AGGREGATOR_V4}"
+        metallb.universe.tf/allow-shared-ip: vector-aggregator
       enabled: true
       type: LoadBalancer
 

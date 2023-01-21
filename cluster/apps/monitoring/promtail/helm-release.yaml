@@ -70,7 +70,7 @@ spec:
         containerPort: 1514
         service:
           type: LoadBalancer
-          loadBalancerIP: ${LB_PROMTAIL}
+          loadBalancerIP: ${LB_V4_PROMTAIL}
 
     affinity:
       nodeAffinity:

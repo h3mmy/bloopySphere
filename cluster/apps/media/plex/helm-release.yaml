@@ -33,7 +33,7 @@ spec:
       imagePullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"
-      ADVERTISE_IP: "http://${LB_PLEX_IP}:32400/,https://plex.${XYZ_DOMAIN}/"
+      ADVERTISE_IP: "http://${LB_V4_PLEX}:32400/,https://plex.${XYZ_DOMAIN}/"
       ALLOWED_NETWORKS: "${PLEX_NOAUTH_NETWORKS}"
       # PLEX_CLAIM: "${SECRET_PLEX_CLAIM}"
       # https://support.plex.tv/articles/201105343-advanced-hidden-server-settings/
@@ -68,10 +68,10 @@ spec:
       main:
         type: LoadBalancer
         loadBalancerIPs:
-          - ${LB_PLEX_IP}
+          - ${LB_V4_PLEX}
         externalTrafficPolicy: Local
         annotations:
-          metallb.universe.tf/loadBalancerIPs: "${LB_PLEX_IP}"
+          metallb.universe.tf/loadBalancerIPs: "${LB_V4_PLEX}"
           metallb.universe.tf/allow-shared-ip: plex
           traefik.ingress.kubernetes.io/service.serversscheme: https
           coredns.io/hostname: plex

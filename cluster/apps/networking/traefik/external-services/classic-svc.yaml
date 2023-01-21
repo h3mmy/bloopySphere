@@ -19,7 +19,7 @@ spec:
     - port: 9001
       name: mqtt-websockets
       protocol: TCP
-  externalName: ${LB_TRAEFIK_CLASSIC}
+  externalName: ${LB_V4_TRAEFIK_CLASSIC}
   selector:
     app.kubernetes.io/instance: classic-traefik
     app.kubernetes.io/name: classic-traefik

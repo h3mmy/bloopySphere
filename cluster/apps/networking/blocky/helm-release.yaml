@@ -225,7 +225,7 @@ spec:
           mask-h2.icloud.com: tcp+udp:10.1.0.10
       customDNS:
         mapping:
-          ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_TRAEFIK_CLASSIC}
+          ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_V4_TRAEFIK_CLASSIC}
           ${SECRET_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
           ${TGR_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
           emqx.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
