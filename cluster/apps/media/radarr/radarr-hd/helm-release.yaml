@@ -5,7 +5,7 @@ metadata:
   name: radarr
   namespace: media
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
       # renovate: registryUrl=https://bjw-s.github.io/helm-charts/
@@ -15,7 +15,6 @@ spec:
         kind: HelmRepository
         name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
   install:
     remediation:
       retries: 4
@@ -127,8 +126,3 @@ spec:
         cpu: 100m
       limits:
         memory: 1500Mi
-  #  tolerations:
-   #   - key: "arch"
-   #     operator: "Equal"
-   #     value: "arm64"
-  #      effect: "NoSchedule"

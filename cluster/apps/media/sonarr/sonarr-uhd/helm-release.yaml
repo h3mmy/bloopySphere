@@ -5,17 +5,16 @@ metadata:
   name: sonarr-uhd
   namespace: media
 spec:
-  interval: 8m
+  interval: 20m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: sonarr
-      version: 16.3.2
+      # renovate: registryUrl=https://bjw-s.github.io/helm-charts/
+      chart: app-template
+      version: 1.2.1
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
   install:
     remediation:
       retries: 5
@@ -23,6 +22,9 @@ spec:
     remediation:
       retries: 5
       remediateLastFailure: true
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
   values:
     image:
       repository: ghcr.io/onedr0p/sonarr-develop
@@ -31,6 +33,14 @@ spec:
       TZ: "${TZ}"
       PGID: "${MEDIA_GID}"
       SONARR__AUTHENTICATION_METHOD: None
+      PUID: ${SONARR_PUID}
+      SONARR__PORT: &port 8989
+      SONARR__APPLICATION_URL: https://sonarr-uhd.${XYZ_DOMAIN}
+    service:
+      main:
+        ports:
+          http:
+            port: *port
     ingress:
       main:
         enabled: true
