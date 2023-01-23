@@ -205,9 +205,10 @@ spec:
           # - tcp+udp:8.8.8.8
           # - tcp+udp:8.8.4.4
           - tcp+udp:1.1.1.1
+          # - tcp+udp:[2606:4700:4700::1111]
           # re-enable after fixing ipv6 incident
-          # - tcp-tls:one.one.one.one
-          # - tcp-tls:dns.google
+          - tcp-tls:one.one.one.one
+          - tcp-tls:dns.google
           - https://cloudflare-dns.com/dns-query
       upstreamTimeout: 5
       bootstrapDns: 1.1.1.1:53
@@ -221,9 +222,9 @@ spec:
           ${DOMAIN_CORE_BLOOP}: tcp+udp:${LOCAL_GATEWAY_CORE_BLOOP}
           status.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
           # DoH canary domains. Forward to pihole for NODATA or NXDOMAIN
-          use-application-dns.net: tcp+udp:10.1.0.10
-          mask.icloud.com: tcp+udp:10.1.0.10
-          mask-h2.icloud.com: tcp+udp:10.1.0.10
+          use-application-dns.net: tcp+udp:10.1.0.9
+          mask.icloud.com: tcp+udp:10.1.0.9
+          mask-h2.icloud.com: tcp+udp:10.1.0.9
       customDNS:
         mapping:
           ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_V4_TRAEFIK_CLASSIC}
