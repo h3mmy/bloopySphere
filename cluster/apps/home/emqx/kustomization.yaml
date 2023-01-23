@@ -2,7 +2,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - db-emqx
-  - secrets.sops.yaml
-  - dashboard
-  - helm-release.yaml
+  - ./db-emqx
+  - ./secrets.sops.yaml
+  - ./dashboard
+  - ./helm-release.yaml
+  - ./pdb.yaml

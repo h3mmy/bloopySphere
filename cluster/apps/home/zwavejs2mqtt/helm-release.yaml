@@ -5,7 +5,7 @@ metadata:
   name: zwavejs2mqtt
   namespace: home
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       chart: zwavejs2mqtt
@@ -14,10 +14,13 @@ spec:
         kind: HelmRepository
         name: k8s-at-home-charts
         namespace: flux-system
-      interval: 5m
   install:
     createNamespace: true
+  dependsOn:
+    - name: ser2sock
+      namespace: home
   values:
+    priorityClassName: home-cluster-critical
     image:
       repository: ghcr.io/zwave-js/zwave-js-ui
       tag: 8.7.0

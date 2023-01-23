@@ -17,6 +17,7 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    priorityClassName: home-cluster-critical
     image:
       repository: tenstartups/ser2sock
       imagePullPolicy: IfNotPresent
