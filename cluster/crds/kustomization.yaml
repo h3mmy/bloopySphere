@@ -11,3 +11,4 @@ resources:
   - ./mysql-crds
   - ./linkerd
   - ./tf-controller/crds.yaml
+  - ./velero

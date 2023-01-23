@@ -10,8 +10,8 @@ spec:
   secretRef:
     name: flux-system
   ref:
-    # renovate: registryUrl=https://github.com/grafana/helm-charts chart=grafana-agent-operator
-    tag: grafana-agent-operator-0.2.4
+    # renovate: datasource=github-releases depName=grafana-agent-operator
+    tag: grafana-agent-operator-0.2.8
   ignore: |
     # exclude all
     /*
