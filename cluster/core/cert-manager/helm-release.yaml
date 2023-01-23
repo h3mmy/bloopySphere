@@ -42,7 +42,7 @@ spec:
   values:
     podAnnotations:
       linkerd.io/inject: enabled
-    installCRDs: false
+    installCRDs: true
     webhook:
       enabled: true
       podAnnotations:
