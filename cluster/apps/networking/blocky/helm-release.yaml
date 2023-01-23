@@ -205,8 +205,9 @@ spec:
           # - tcp+udp:8.8.8.8
           # - tcp+udp:8.8.4.4
           - tcp+udp:1.1.1.1
-          - tcp-tls:one.one.one.one
-          - tcp-tls:dns.google
+          # re-enable after fixing ipv6 incident
+          # - tcp-tls:one.one.one.one
+          # - tcp-tls:dns.google
           - https://cloudflare-dns.com/dns-query
       upstreamTimeout: 5
       bootstrapDns: 1.1.1.1:53
