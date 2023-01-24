@@ -27,7 +27,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/readarr-nightly
-      tag: 0.1.2.1539@sha256:590bd965464a3292cf01e464c36b2b889d1fd8283faebe8e949c46d99cbf47bc
+      tag: 0.1.2.1544@sha256:a8e38d1cf51bb7cba7483630cfeb0a97ecce91b970249575073fcdde97638ee4
     env:
       TZ: "${TZ}"
       PGID: ${MEDIA_GID}
