@@ -135,6 +135,7 @@ vault write auth/oidc/role/reader \
       oidc_scopes="openid,profile" \
       policies="reader"
 ```
+
 Create Manager Role
 
 ```sh
@@ -168,3 +169,5 @@ vault write identity/group-alias name="kv-mgr" \
          mount_accessor="$OIDC_AUTH_ACCESSOR" \
          canonical_id="$GROUP_ID"
 ```
+
+To login via oidc `vault login -method=oidc role="kv-mgr"`
