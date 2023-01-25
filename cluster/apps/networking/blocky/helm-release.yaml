@@ -46,13 +46,14 @@ spec:
       enabled: true
       type: deployment
       strategy: RollingUpdate
-      replicas: 2
+      replicas: 3
 
     env:
       TZ: "${TZ}"
 
+    # Disabling until blocky helm chart removes "autoscaling/v2beta1" for kubernetes 1.25+ compatibility
     autoscaling:
-      enabled: true
+      enabled: false
       target: blocky
       minReplicas: 2
       maxReplicas: 3
