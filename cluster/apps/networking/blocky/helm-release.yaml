@@ -2,18 +2,18 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: blocky
+  name: &app blocky
   namespace: networking
 spec:
   interval: 11m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: blocky
-      version: 10.5.2
+      # renovate: registryUrl=https://bjw-s.github.io/helm-charts/
+      chart: app-template
+      version: 1.2.1
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
 
   install:
@@ -50,18 +50,17 @@ spec:
     env:
       TZ: "${TZ}"
 
-    # Disabling until blocky helm chart removes "autoscaling/v2beta1" for kubernetes 1.25+ compatibility
-    # autoscaling:
-    #   enabled: false
-    #   target: blocky
-    #   minReplicas: 2
-    #   maxReplicas: 3
-    #   targetCPUUtilizationPercentage: 85
-    #   targetMemoryUtilizationPercentage: 85
-
     service:
       main:
         enabled: true
+        type: LoadBalancer
+        ipFamilyPolicy: PreferDualStack
+        ipFamilies:
+          - "IPv4"
+          - "IPv6"
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: &lbs "${LB_V4_BLOCKY}, ${SVC_BLOCKY_ADDR_V6}"
+          metallb.universe.tf/allow-shared-ip: *app
         ports:
           http:
             port: 4000
@@ -100,8 +99,8 @@ spec:
           - "IPv4"
           - "IPv6"
         annotations:
-          metallb.universe.tf/loadBalancerIPs: "${LB_V4_BLOCKY}, ${SVC_BLOCKY_ADDR_V6}"
-          metallb.universe.tf/allow-shared-ip: blocky
+          metallb.universe.tf/loadBalancerIPs: *lbs
+          metallb.universe.tf/allow-shared-ip: *app
 
     ingress:
       main:
@@ -125,16 +124,15 @@ spec:
               - dns.${XYZ_DOMAIN}
               - "*.dns.${XYZ_DOMAIN}"
 
-    metrics:
-      enabled: true
-      serviceMonitor:
-        interval: 30s
-        scrapeTimeout: 10s
-      prometheusRule:
+    serviceMonitor:
+      main:
         enabled: true
-    prometheus:
-      serviceMonitor:
-        enabled: true
+        serviceName: *app
+        endpoints:
+          - interval: 30s
+            path: /metrics
+            port: http
+            scrapeTimeout: 10s
 
     podAnnotations:
       configmap.reloader.stakater.com/reload: blocky-config,blocky-whitelist
@@ -174,6 +172,12 @@ spec:
 
 
     persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: &config blocky-config
+        mountPath: /app/config.yml
+        subPath: config.yml
       whitelists:
         enabled: true
         mountPath: /app/whitelists
@@ -199,115 +203,117 @@ spec:
         memory: 950Mi
         cpu: 1500m
 
-    config: |
-      upstream:
-        default:
-          # - tcp+udp:8.8.8.8
-          # - tcp+udp:8.8.4.4
-          - tcp+udp:1.1.1.1
-          # - tcp+udp:[2606:4700:4700::1111]
-          # re-enable after fixing ipv6 incident
-          - tcp-tls:one.one.one.one
-          - tcp-tls:dns.google
-          - https://cloudflare-dns.com/dns-query
-      upstreamTimeout: 5
-      bootstrapDns: 1.1.1.1:53
-      conditional:
-        mapping:
-          # local: tcp+udp:kube-dns.svc
-          unifi: tcp+udp:${LOCAL_GATEWAY_MAIN}
-          ${XYZ_DOMAIN}: tcp+udp:${LB_V4_K8S_GATEWAY},tcp+udp:${LB_V6_K8S_GATEWAY}
-          ${DOMAIN_BIG_BLOOP}: tcp+udp:${LOCAL_GATEWAY_BIG_BLOOP}
-          ${DOMAIN_SMALL_BLOOP}: tcp+udp:${LOCAL_GATEWAY_SMALL_BLOOP}
-          ${DOMAIN_CORE_BLOOP}: tcp+udp:${LOCAL_GATEWAY_CORE_BLOOP}
-          status.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
-          # DoH canary domains. Forward to pihole for NODATA or NXDOMAIN
-          use-application-dns.net: tcp+udp:10.1.0.9
-          mask.icloud.com: tcp+udp:10.1.0.9
-          mask-h2.icloud.com: tcp+udp:10.1.0.9
-      customDNS:
-        mapping:
-          ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_V4_TRAEFIK_CLASSIC}
-          ${SECRET_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
-          ${TGR_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
-          emqx.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
-          home-assistant.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
-          mqtt.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
-          wss.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
-          dns.${XYZ_DOMAIN}: ${SVC_BLOCKY_ADDR_V4},${SVC_BLOCKY_ADDR_V6}
-      blocking:
-        blockType: zeroIp
-        failStartOnListError: true
-        blackLists:
-          ads:
-            - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-            - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
-            - http://sysctl.org/cameleon/hosts
-            - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
-          special:
-            - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts
-          doh:
-            - https://raw.githubusercontent.com/Sekhan/TheGreatWall/master/TheGreatWall.txt
-            - https://gist.githubusercontent.com/ckuethe/f71185f604be9cde370e702aa179fc2e/raw/53fe52046836ac3009e9505b7b8b8b5de42d84e3/doh-blocklist.txt
-          none:
-        whiteLists:
-          ads:
-            - /app/whitelists/whitelist.txt
-            - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
-          doh:
-            - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
-        clientGroupsBlock:
-          default:
-            - ads
-          ${LOCAL_GATEWAY_BIG_BLOOP}/16:
-            - ads
-            - doh
-          ${LOCAL_GATEWAY_SMALL_BLOOP}/24:
-            - ads
-            - special
-            - doh
+    configMaps:
+      config:
+        enabled: true
+        data:
+          config.yml: |-
+            upstream:
+              default:
+                # - tcp+udp:1.1.1.1
+                # - tcp+udp:[2606:4700:4700::1111]
+                # re-enable after fixing ipv6 incident
+                - tcp-tls:one.one.one.one
+                - tcp-tls:dns.google
+                - https://cloudflare-dns.com/dns-query
+            upstreamTimeout: 5
+            bootstrapDns: tcp+udp:1.1.1.1:53
+            conditional:
+              mapping:
+                # local: tcp+udp:kube-dns.svc
+                unifi: tcp+udp:${LOCAL_GATEWAY_MAIN}
+                ${XYZ_DOMAIN}: tcp+udp:${LB_V4_K8S_GATEWAY},tcp+udp:${LB_V6_K8S_GATEWAY}
+                ${DOMAIN_BIG_BLOOP}: tcp+udp:${LOCAL_GATEWAY_BIG_BLOOP}
+                ${DOMAIN_SMALL_BLOOP}: tcp+udp:${LOCAL_GATEWAY_SMALL_BLOOP}
+                ${DOMAIN_CORE_BLOOP}: tcp+udp:${LOCAL_GATEWAY_CORE_BLOOP}
+                status.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
+                # DoH canary domains. Forward to pihole for NODATA or NXDOMAIN
+                use-application-dns.net: tcp+udp:10.1.0.9
+                mask.icloud.com: tcp+udp:10.1.0.9
+                mask-h2.icloud.com: tcp+udp:10.1.0.9
+            customDNS:
+              mapping:
+                ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_V4_TRAEFIK_CLASSIC}
+                ${SECRET_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+                ${TGR_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+                emqx.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+                home-assistant.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+                mqtt.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+                wss.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+                dns.${XYZ_DOMAIN}: ${SVC_BLOCKY_ADDR_V4},${SVC_BLOCKY_ADDR_V6}
+            blocking:
+              blockType: zeroIp
+              failStartOnListError: true
+              blackLists:
+                ads:
+                  - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+                  - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+                  - http://sysctl.org/cameleon/hosts
+                  - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
+                special:
+                  - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts
+                doh:
+                  - https://raw.githubusercontent.com/Sekhan/TheGreatWall/master/TheGreatWall.txt
+                  - https://gist.githubusercontent.com/ckuethe/f71185f604be9cde370e702aa179fc2e/raw/53fe52046836ac3009e9505b7b8b8b5de42d84e3/doh-blocklist.txt
+                none:
+              whiteLists:
+                ads:
+                  - /app/whitelists/whitelist.txt
+                  - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
+                doh:
+                  - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
+              clientGroupsBlock:
+                default:
+                  - ads
+                ${LOCAL_GATEWAY_BIG_BLOOP}/16:
+                  - ads
+                  - doh
+                ${LOCAL_GATEWAY_SMALL_BLOOP}/24:
+                  - ads
+                  - special
+                  - doh
 
-      clientLookup:
-        upstream: tcp+udp:${LOCAL_GATEWAY_MAIN}
-        # optional: some routers return multiple names for client (host name and user defined name). Define which single name should be used.
-        # Example: take second name if present, if not take first name
-        singleNameOrder:
-          - 2
-          - 1
-        # optional: custom mapping of client name to IP addresses. Useful if reverse DNS does not work properly or just to have custom client names.
-        # clients:
-        #   laptop:
-        #     - 192.168.178.29
-      caching:
-        prefetching: true
-      redis:
-        address: blocky-redis-master:6379
-        password: ${BLOCKY_REDIS_PASSWORD}
-        database: 2
-        required: true
-      prometheus:
-        enable: true
-        path: /metrics
-      httpPort: 4000
-      httpsPort: 443
-      tlsPort: 853
-      certFile: /certs/tls.crt
-      keyFile: /certs/tls.key
-      logLevel: info
-      # optional: write query information (question, answer, client, duration etc.) to daily csv file
-      queryLog:
-        # optional one of: mysql, postgresql, csv, csv-client. If empty, log to console
-        type: postgresql
-        # directory (should be mounted as volume in docker) for csv, db connection string for mysql/postgresql
-        #mysql target: db_user:db_password@tcp(db_host_or_ip:3306)/db_name?charset=utf8mb4&parseTime=True&loc=Local
-        target: "postgres://postgres:${BLOCKY_KUBEGRES_PASSWORD}@blocky-postgres:5432/${BLOCKY_QUERY_DB_NAME}"
-        # if > 0, deletes log files which are older than ... days
-        logRetentionDays: 7
-        # optional: Max attempts to create specific query log writer, default: 3
-        creationAttempts: 1
-        # optional: Time between the creation attempts, default: 2s
-        creationCooldown: 2s
-      # queryLog:
-      #   type: mysql
-      #   target: ${MARIADB_BLOCKY_USER}:${MARIADB_BLOCKY_PASSWORD}@tcp(${MARIADB_ADDRESS}:3306)/${MARIADB_BLOCKY_DATABASE}?charset=utf8mb4&parseTime=True&loc=Local
-      #   logRetentionDays: 7
+            clientLookup:
+              upstream: tcp+udp:${LOCAL_GATEWAY_MAIN}
+              # optional: some routers return multiple names for client (host name and user defined name). Define which single name should be used.
+              # Example: take second name if present, if not take first name
+              singleNameOrder:
+                - 2
+                - 1
+              # optional: custom mapping of client name to IP addresses. Useful if reverse DNS does not work properly or just to have custom client names.
+              # clients:
+              #   laptop:
+              #     - 192.168.178.29
+            caching:
+              prefetching: true
+            redis:
+              address: blocky-redis-master:6379
+              password: ${BLOCKY_REDIS_PASSWORD}
+              database: 2
+              required: true
+            prometheus:
+              enable: true
+              path: /metrics
+            httpPort: 4000
+            httpsPort: 443
+            tlsPort: 853
+            certFile: /certs/tls.crt
+            keyFile: /certs/tls.key
+            logLevel: info
+            # optional: write query information (question, answer, client, duration etc.) to daily csv file
+            queryLog:
+              # optional one of: mysql, postgresql, csv, csv-client. If empty, log to console
+              type: postgresql
+              # directory (should be mounted as volume in docker) for csv, db connection string for mysql/postgresql
+              #mysql target: db_user:db_password@tcp(db_host_or_ip:3306)/db_name?charset=utf8mb4&parseTime=True&loc=Local
+              target: "postgres://postgres:${BLOCKY_KUBEGRES_PASSWORD}@blocky-postgres:5432/${BLOCKY_QUERY_DB_NAME}"
+              # if > 0, deletes log files which are older than ... days
+              logRetentionDays: 7
+              # optional: Max attempts to create specific query log writer, default: 3
+              creationAttempts: 1
+              # optional: Time between the creation attempts, default: 2s
+              creationCooldown: 2s
+            # queryLog:
+            #   type: mysql
+            #   target: ${MARIADB_BLOCKY_USER}:${MARIADB_BLOCKY_PASSWORD}@tcp(${MARIADB_ADDRESS}:3306)/${MARIADB_BLOCKY_DATABASE}?charset=utf8mb4&parseTime=True&loc=Local
+            #   logRetentionDays: 7
