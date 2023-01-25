@@ -52,13 +52,13 @@ spec:
       TZ: "${TZ}"
 
     # Disabling until blocky helm chart removes "autoscaling/v2beta1" for kubernetes 1.25+ compatibility
-    autoscaling:
-      enabled: false
-      target: blocky
-      minReplicas: 2
-      maxReplicas: 3
-      targetCPUUtilizationPercentage: 85
-      targetMemoryUtilizationPercentage: 85
+    # autoscaling:
+    #   enabled: false
+    #   target: blocky
+    #   minReplicas: 2
+    #   maxReplicas: 3
+    #   targetCPUUtilizationPercentage: 85
+    #   targetMemoryUtilizationPercentage: 85
 
     service:
       main:
