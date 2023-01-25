@@ -131,7 +131,7 @@ spec:
         https: true
         insecureSkipVerify: true
     kubeEtcd:
-      enabled: true
+      enabled: false
       # control-plane-endpoints
       endpoints: ["10.1.0.87", "10.1.0.85", "10.1.0.91"]
       service:
