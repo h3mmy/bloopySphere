@@ -26,6 +26,7 @@ spec:
     crds: CreateReplace
     remediation:
       retries: 7
+      remediateLastFailure: true
   valuesFrom:
     - kind: ConfigMap
       name: prometheus-values
