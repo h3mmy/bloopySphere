@@ -5,7 +5,7 @@ metadata:
   name: blocky
   namespace: networking
 spec:
-  interval: 5m
+  interval: 8m
   chart:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
@@ -15,11 +15,10 @@ spec:
         kind: HelmRepository
         name: k8s-at-home-charts
         namespace: flux-system
-      interval: 5m
 
   install:
     remediation:
-      retries: 7
+      retries: 6
   upgrade:
     remediation:
       remediateLastFailure: true
