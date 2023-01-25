@@ -17,9 +17,9 @@ spec:
         namespace: flux-system
       reconcileStrategy: Revision
 
-  dependsOn:
-    - name: kube-prometheus-stack
-      namespace: monitoring
+  # dependsOn:
+    # - name: kube-prometheus-stack
+    #  namespace: monitoring
 
   install:
     crds: Create
