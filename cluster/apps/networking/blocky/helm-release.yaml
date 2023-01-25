@@ -20,11 +20,11 @@ spec:
     remediation:
       retries: 7
   upgrade:
-    force: true
-    disableHooks: true
-    #remediation:
+    # force: true
+    # disableHooks: true
+    remediation:
       # remediateLastFailure: true
-      #retries: 7
+      retries: 7
       #strategy: uninstall
 
   dependsOn:
