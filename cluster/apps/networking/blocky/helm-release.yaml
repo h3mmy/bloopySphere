@@ -21,8 +21,9 @@ spec:
       retries: 7
   upgrade:
     remediation:
-      remediateLastFailure: true
+      # remediateLastFailure: true
       retries: 7
+      strategy: uninstall
 
   dependsOn:
     - name: blocky-redis
