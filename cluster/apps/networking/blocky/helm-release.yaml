@@ -5,7 +5,7 @@ metadata:
   name: blocky
   namespace: networking
 spec:
-  interval: 8m
+  interval: 11m
   chart:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
