@@ -7,7 +7,8 @@ metadata:
 spec:
   interval: 60m
   url: ssh://github.com/traefik/traefik-helm-chart.git
-  secretRef: flux-system
+  secretRef:
+    name: flux-system
   ref:
     # renovate: registryUrl=https://helm.traefik.io/traefik chart=traefik
     tag: v20.8.0
