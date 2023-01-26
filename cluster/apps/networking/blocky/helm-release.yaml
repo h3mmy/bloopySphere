@@ -55,14 +55,14 @@ spec:
     service:
       main:
         enabled: true
-        type: LoadBalancer
-        ipFamilyPolicy: PreferDualStack
-        ipFamilies:
-          - "IPv4"
-          - "IPv6"
-        annotations:
-          metallb.universe.tf/loadBalancerIPs: &lbs "${LB_V4_BLOCKY}, ${SVC_BLOCKY_ADDR_V6}"
-          metallb.universe.tf/allow-shared-ip: *app
+        # type: LoadBalancer
+        # ipFamilyPolicy: PreferDualStack
+        # ipFamilies:
+        #   - "IPv4"
+        #   - "IPv6"
+        # annotations:
+        #   metallb.universe.tf/loadBalancerIPs: &lbs "${LB_V4_BLOCKY}, ${SVC_BLOCKY_ADDR_V6}"
+        #   metallb.universe.tf/allow-shared-ip: *app
         ports:
           http:
             port: 4000
@@ -101,7 +101,7 @@ spec:
           - "IPv4"
           - "IPv6"
         annotations:
-          metallb.universe.tf/loadBalancerIPs: *lbs
+          metallb.universe.tf/loadBalancerIPs: &lbs "${LB_V4_BLOCKY}, ${SVC_BLOCKY_ADDR_V6}"
           metallb.universe.tf/allow-shared-ip: *app
 
     ingress:
