@@ -17,15 +17,20 @@ spec:
         namespace: flux-system
 
   install:
+    crds: CreateReplace
     remediation:
-      retries: 7
+      retries: 5
   upgrade:
-    # force: true
-    # disableHooks: true
+    crds: CreateReplace
     remediation:
-      # remediateLastFailure: true
+      remediateLastFailure: true
       retries: 7
-      #strategy: uninstall
+      cleanupOnFail: true
+  # temporary block for tranisitioning the autoscaling api
+  rollback:
+    disableWait: true
+    disableHooks: true
+    cleanupOnFail: true
 
   dependsOn:
     - name: blocky-redis

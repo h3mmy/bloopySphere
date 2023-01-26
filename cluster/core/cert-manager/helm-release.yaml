@@ -5,7 +5,7 @@ metadata:
   name: cert-manager
   namespace: &namespace cert-manager
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       # renovate: registryUrl=https://charts.jetstack.io/
@@ -17,9 +17,9 @@ spec:
         namespace: flux-system
       reconcileStrategy: Revision
 
-  # dependsOn:
-    # - name: kube-prometheus-stack
-    #  namespace: monitoring
+  dependsOn:
+    - name: kube-prometheus-stack
+      namespace: monitoring
 
   install:
     crds: Create
@@ -27,7 +27,6 @@ spec:
       retries: 5
 
   upgrade:
-    force: true
     crds: CreateReplace
     remediation: # perform remediation when helm upgrade fails
       retries: 5

@@ -2,17 +2,18 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - redis
-  - db-blocky-query
-  - helm-release.yaml
-  - dashboard
+  - ./prometheus-rule.yaml
+  - ./redis
+  - ./db-blocky-query
+  - ./helm-release.yaml
+  - ./dashboard
 namespace: networking
 configMapGenerator:
   - name: blocky-whitelist
     files:
       - whitelist.txt
-  - name: blocky-config-values
-    files:
-      - config=blocky-config-values.yaml
+  # - name: blocky-config-values
+  #   files:
+  #     - config=blocky-config-values.yaml
 generatorOptions:
   disableNameSuffixHash: true
