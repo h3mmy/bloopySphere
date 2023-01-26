@@ -30,7 +30,7 @@ spec:
     keepHistory: false
   values:
     write:
-      replicas: 3
+      replicas: 1
       affinity: |
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -44,7 +44,7 @@ spec:
         size: 5Gi
         storageClass: ceph-block
     read:
-      replicas: 3
+      replicas: 1
       affinity: |
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -76,7 +76,7 @@ spec:
         storageClass: ceph-block
     gateway:
       enabled: true
-      replicas: 3
+      replicas: 1
       affinity: |
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -155,7 +155,7 @@ spec:
           retention_period: 14d
         common:
           path_prefix: /var/loki
-          replication_factor: 3
+          replication_factor: 1
           storage:
             s3:
               bucketnames: loki
