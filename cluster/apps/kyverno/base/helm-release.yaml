@@ -28,6 +28,8 @@ spec:
     - name: kube-prometheus-stack
       namespace: monitoring
   values:
+    installCRDs: true
+
     # TODO: change this to "mode: ha" when the new version gets released
     replicaCount: 3
 
