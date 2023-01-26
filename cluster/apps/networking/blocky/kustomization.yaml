@@ -5,7 +5,7 @@ resources:
   - ./prometheus-rule.yaml
   - ./redis
   - ./db-blocky-query
-  - ./helm-release.yaml
+  # - ./helm-release.yaml
   - ./dashboard
 namespace: networking
 configMapGenerator:
