@@ -56,15 +56,15 @@ spec:
                 topologyKey: kubernetes.io/hostname
       extraVolumeMounts:
         - name: loki-rules
-          mountPath: /rules/fake
+          mountPath: /rules
         - name: loki-rules-tmp
           mountPath: /tmp/scratch
         - name: loki-tmp
           mountPath: /tmp/loki-tmp
       extraVolumes:
         - name: loki-rules
-          configMap:
-            name: loki-alerting-rules
+          emptyDir: {}
+          readonly: false
         - name: loki-rules-tmp
           emptyDir: {}
           readonly: false
