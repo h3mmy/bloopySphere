@@ -15,7 +15,7 @@ spec:
         kind: HelmRepository
         name: bjw-s-charts
         namespace: flux-system
-    reconcileStrategy: Revision
+      reconcileStrategy: Revision
   maxHistory: 3
   install:
     createNamespace: true
