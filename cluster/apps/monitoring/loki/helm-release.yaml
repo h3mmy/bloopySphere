@@ -17,13 +17,17 @@ spec:
         name: grafana-charts
         namespace: flux-system
 
+  maxHistory: 5
   install:
     remediation:
       retries: 4
   upgrade:
+    disableWait: true # intended to be temporary
+    timeout: 15m
     remediation:
       remediateLastFailure: true
-
+  uninstall:
+    keepHistory: false
   values:
     write:
       replicas: 3
