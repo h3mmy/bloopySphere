@@ -15,13 +15,18 @@ spec:
         kind: HelmRepository
         name: bjw-s-charts
         namespace: flux-system
+  maxHistory: 3
   install:
+    createNamespace: true
     remediation:
-      retries: 4
+      retries: 3
   upgrade:
+    cleanupOnFail: true
     remediation:
-      retries: 4
       remediateLastFailure: true
+      retries: 3
+  uninstall:
+    keepHistory: false
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
@@ -76,21 +81,7 @@ spec:
         - 65541
         - 65536
         - 65537
-    metrics:
-      enabled: true
-      serviceMonitor:
-        interval: 3m
-        scrapeTimeout: 1m
-      prometheusRule:
-        enabled: true
-      exporter:
-        image:
-          repository: ghcr.io/onedr0p/exportarr
-          tag: v1.1.0
-        env:
-          port: 9794
-          additionalMetrics: true
-          unknownQueueItems: false
+
     persistence:
       config:
         enabled: true
