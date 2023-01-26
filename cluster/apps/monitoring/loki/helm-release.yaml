@@ -29,6 +29,23 @@ spec:
   uninstall:
     keepHistory: false
   values:
+
+    backend:
+      replicas: 3
+      persistence:
+        storageClass: ceph-block
+      extraVolumeMounts:
+        - name: rules
+          mountPath: /rules/fake
+        - name: scratch
+          mountPath: /tmp/scratch
+      extraVolumes:
+        - name: rules
+          configMap:
+            name: loki-alerting-rules
+        - name: scratch
+          emptyDir: {}
+
     write:
       replicas: 1
       affinity: |
@@ -43,6 +60,7 @@ spec:
       persistence:
         size: 5Gi
         storageClass: ceph-block
+
     read:
       replicas: 1
       affinity: |
@@ -74,6 +92,7 @@ spec:
       persistence:
         size: 5Gi
         storageClass: ceph-block
+
     gateway:
       enabled: true
       replicas: 1
@@ -198,6 +217,8 @@ spec:
             final_sleep: 0s
           chunk_idle_period: 5m
           chunk_retain_period: 30s
+    test:
+      enabled: false
 
     monitoring:
       dashboards:
@@ -209,9 +230,11 @@ spec:
       serviceMonitor:
         enabled: true
       selfMonitoring:
-        enabled: true
+        enabled: false
         grafanaAgent:
           installOperator: false
+      lokiCanary:
+        enabled: false
       rules:
         enabled: true
         alerting: true
