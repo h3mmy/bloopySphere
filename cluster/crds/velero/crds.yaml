@@ -6,7 +6,8 @@ metadata:
   namespace: flux-system
 spec:
   interval: 60m
-  url: https://github.com/vmware-tanzu/helm-charts.git
+  url: ssh://github.com/vmware-tanzu/helm-charts.git
+  secretRef: flux-system
   ref:
     # renovate: registryUrl=https://vmware-tanzu.github.io/helm-charts chart=velero
     tag: velero-3.1.0
