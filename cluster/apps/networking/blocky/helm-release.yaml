@@ -25,7 +25,6 @@ spec:
     remediation:
       remediateLastFailure: true
       retries: 7
-      cleanupOnFail: true
   # temporary block for tranisitioning the autoscaling api
   rollback:
     disableWait: true
