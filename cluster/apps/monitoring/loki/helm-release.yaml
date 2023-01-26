@@ -22,7 +22,7 @@ spec:
     remediation:
       retries: 4
   upgrade:
-    disableWait: true # intended to be temporary
+    # disableWait: true # intended to be temporary
     timeout: 15m
     remediation:
       remediateLastFailure: true
