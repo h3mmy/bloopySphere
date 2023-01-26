@@ -47,7 +47,7 @@ spec:
           emptyDir: {}
 
     write:
-      replicas: 1
+      replicas: 3
       affinity: |
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -62,7 +62,7 @@ spec:
         storageClass: ceph-block
 
     read:
-      replicas: 1
+      replicas: 3
       affinity: |
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -95,7 +95,7 @@ spec:
 
     gateway:
       enabled: true
-      replicas: 1
+      replicas: 3
       affinity: |
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
