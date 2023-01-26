@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - routers
   - sonarr-hd
-  - sonarr-uhd
+  # - sonarr-uhd
