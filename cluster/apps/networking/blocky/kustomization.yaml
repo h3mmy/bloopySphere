@@ -7,6 +7,7 @@ resources:
   - ./db-blocky-query
   - ./helm-release.yaml
   - ./dashboard
+  - ./pdb.yaml
 namespace: networking
 configMapGenerator:
   - name: blocky-whitelist

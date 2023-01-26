@@ -29,6 +29,8 @@ package-lock.json
 #inc.
 old_lazylib_config.ini
 *private
+*.backup
+*.bak
 
 # TEmporary
 provision/talos/*
@@ -45,5 +47,4 @@ infrastructure/terraform/s3/*
 infrastructure/bare-metal/*
 infrastructure/shared/networks.yaml
 infrastructure/terraform/vault/*
-*.backup
-*.bak
+cluster/apps/kube-system/coredns/

@@ -1,0 +1,12 @@
+---
+
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: blocky
+  namespace: networking
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: blocky

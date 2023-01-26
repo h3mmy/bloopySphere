@@ -38,6 +38,7 @@ spec:
   #     optional: false
 
   values:
+    priorityClassName: network-cluster-critical
 
     image:
       repository: ghcr.io/0xerr0r/blocky
