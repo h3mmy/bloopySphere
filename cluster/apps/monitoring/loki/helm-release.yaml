@@ -5,7 +5,8 @@ metadata:
   name: loki
   namespace: monitoring
 spec:
-  interval: 15m
+  interval: 60m
+  timeout: 15m
   chart:
     spec:
       # renovate: registryUrl=https://grafana.github.io/helm-charts
