@@ -6,7 +6,9 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: https://github.com/mysql/mysql-operator.git
+  url: ssh://github.com/mysql/mysql-operator.git
+  secretRef:
+    name: flux-system
   ref:
     # renovate: registryUrl=https://mysql.github.io/mysql-operator/ chart=mysql-operator
     tag: 8.0.30-2.0.8

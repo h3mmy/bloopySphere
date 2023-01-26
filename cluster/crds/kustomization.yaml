@@ -5,8 +5,8 @@ resources:
   - ./traefik/crds.yaml
   - ./grafana-agent-operator
   - ./kube-prometheus-stack
-  - ./external-snapshotter
-  - ./external-dns
+  - ./external-snapshotter/crds.yaml
+  - ./external-dns/crds.yaml
   - ./mysql-crds/crds.yaml
   - ./linkerd
   - ./tf-controller/crds.yaml
