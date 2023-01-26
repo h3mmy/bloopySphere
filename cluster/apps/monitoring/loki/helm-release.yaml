@@ -58,8 +58,8 @@ spec:
           mountPath: /tmp/loki-tmp
       extraVolumes:
         - name: loki-rules
-          emptyDir: {}
-          readonly: false
+          configMap:
+            name: loki-alerting-rules
         - name: loki-rules-tmp
           emptyDir: {}
           readonly: false
