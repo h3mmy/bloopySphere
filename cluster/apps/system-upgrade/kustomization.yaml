@@ -5,6 +5,6 @@ kind: Kustomization
 namespace: system-upgrade
 resources:
   # renovate: datasource=docker image=rancher/system-upgrade-controller
-  - github.com/rancher/system-upgrade-controller/releases/download/v0.10.0/crd.yaml
+  - https://github.com/rancher/system-upgrade-controller/releases/download/v0.10.0/crd.yaml
   - namespace.yaml
   - system-upgrade-controller
