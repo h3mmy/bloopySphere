@@ -59,10 +59,13 @@ spec:
       extraVolumes:
         - name: loki-rules
           emptyDir: {}
+          readonly: false
         - name: loki-rules-tmp
           emptyDir: {}
+          readonly: false
         - name: loki-tmp
           emptyDir: {}
+          readonly: false
       persistence:
         size: 5Gi
         storageClass: ceph-block
