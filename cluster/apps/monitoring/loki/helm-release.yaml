@@ -171,7 +171,7 @@ spec:
           alertmanager_url: http://prometheus-alertmanager:9093
           ring:
             kvstore:
-              store: inmemory
+              store: memberlist
           enable_api: true
         distributor:
           ring:
