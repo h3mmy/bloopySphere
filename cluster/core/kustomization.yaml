@@ -3,12 +3,14 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - namespaces
-  - kube-prometheus-stack
-  - cert-manager
-  - kube-system
-  - metallb-system
-  - rook-ceph
-  - kubegres
-  - tigera-operator
-  - mysql
-  - linkerd
+  - ./monitoring
+  - ./cert-manager
+  - ./kube-system
+  - ./metallb-system
+  - ./rook-ceph
+  - ./kubegres
+  - ./tigera-operator
+  - ./mysql
+  - ./linkerd
+commonLabels:
+  rollout.bloopysphere-0/stage: "3"

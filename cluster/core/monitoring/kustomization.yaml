@@ -2,7 +2,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./kube-vip
-  # - multus
+  - ./namespace.yaml
+  - ./monitoring
 commonLabels:
-  component.bloopysphere-0/aspect: networking
+  component.bloopysphere-0/aspect: monitoring

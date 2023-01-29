@@ -3,11 +3,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./traefik/crds.yaml
-  - ./grafana-agent-operator
-  - ./kube-prometheus-stack
+  - ./grafana-agent-operator/crds.yaml
+  - ./kube-prometheus-stack/crds.yaml
   - ./external-snapshotter/crds.yaml
   - ./external-dns/crds.yaml
   - ./mysql-crds/crds.yaml
   - ./linkerd
   - ./tf-controller/crds.yaml
   - ./velero/crds.yaml
+commonLabels:
+  rollout.bloopysphere-0/stage: "2"

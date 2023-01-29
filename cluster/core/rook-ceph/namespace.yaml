@@ -5,3 +5,4 @@ metadata:
   name: rook-ceph
   labels:
     goldilocks.fairwinds.com/enabled: "true"
+    linkerd.io/inject: disabled

@@ -6,7 +6,9 @@ metadata:
   namespace: flux-system
 spec:
   interval: 12h
-  url: https://github.com/weaveworks/tf-controller.git
+  url: ssh://github.com/weaveworks/tf-controller.git
+  secretRef:
+    name: flux-system
   ref:
     tag: v0.13.1
   ignore: |

@@ -4,3 +4,5 @@ kind: Kustomization
 resources:
   - ./custom-resources
   - ./helm-release.yaml
+commonLabels:
+  component.bloopysphere-0/aspect: networking

@@ -4,6 +4,8 @@ kind: Kustomization
 metadata:
   name: apps
   namespace: flux-system
+  labels:
+    component.bloopysphere-0/part-of: deploy
 spec:
   timeout: 5m0s
   interval: 10m0s

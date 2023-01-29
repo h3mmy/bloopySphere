@@ -5,7 +5,7 @@ metadata:
   name: mysql-operator
   namespace: mysql-operator
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       # renovate: registryUrl=https://mysql.github.io/mysql-operator/ chart=mysql-operator
@@ -15,7 +15,6 @@ spec:
         kind: HelmRepository
         name: mysql-charts
         namespace: flux-system
-      interval: 5m
 
   install:
     crds: Create

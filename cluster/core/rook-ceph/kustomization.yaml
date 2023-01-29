@@ -2,8 +2,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - cluster
-  - operator
-  - rbac
-  - rook-direct-mount
-  - snapshot-controller
+  - ./namespace.yaml
+  - ./cluster
+  - ./operator
+  - ./rbac
+  - ./rook-direct-mount
+  - ./snapshot-controller
+commonLabels:
+  component.bloopysphere-0/aspect: storage

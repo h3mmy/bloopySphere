@@ -19,6 +19,8 @@ spec:
   dependsOn:
     - name: cert-manager
       namespace: cert-manager
+    - name: cert-manager-trust
+      namespace: cert-manager
     - name: linkerd-cni-plugin
       namespace: linkerd-cni
 

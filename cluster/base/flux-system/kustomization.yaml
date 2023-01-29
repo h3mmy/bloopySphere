@@ -7,3 +7,6 @@ resources:
   - keys
 patchesStrategicMerge:
   - gotk-patches.yaml
+commonLabels:
+  rollout.bloopysphere-0/stage: "1"
+  component.bloopysphere-0/part-of: bootstrap

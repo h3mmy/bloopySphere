@@ -6,7 +6,9 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: https://github.com/prometheus-community/helm-charts.git
+  url: ssh://github.com/prometheus-community/helm-charts.git
+  secretRef:
+    name: flux-system
   ref:
     # renovate: registryUrl=https://prometheus-community.github.io/helm-charts chart=kube-prometheus-stack
     tag: kube-prometheus-stack-44.3.0
