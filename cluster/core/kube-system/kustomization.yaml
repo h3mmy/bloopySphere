@@ -4,5 +4,3 @@ kind: Kustomization
 resources:
   - ./kube-vip
   # - multus
-commonLabels:
-  component.bloopysphere-0/aspect: networking
