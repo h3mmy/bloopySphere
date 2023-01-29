@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: tigera-operator
   namespace: tigera-operator
+  labels:
+    component.bloopysphere-0/aspect: networking
 spec:
   interval: 5m
   chart:

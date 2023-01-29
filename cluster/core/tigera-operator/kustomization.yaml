@@ -14,5 +14,3 @@ configMapGenerator:
       - KUBERNETES_SERVICE_PORT="6443"
 generatorOptions:
   disableNameSuffixHash: true
-commonLabels:
-  component.bloopysphere-0/aspect: networking

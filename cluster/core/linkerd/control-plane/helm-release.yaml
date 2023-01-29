@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: linkerd-control-plane
   namespace: linkerd
+  labels:
+    component.bloopysphere-0/aspect: networking
 spec:
   interval: 15m
   chart:
