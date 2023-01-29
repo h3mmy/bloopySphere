@@ -6,6 +6,7 @@ metadata:
   namespace: flux-system
   labels:
     component.bloopysphere-0/part-of: bootstrap
+    rollout.bloopysphere-0/stage: "1"
 spec:
   interval: 30m
   path: ./cluster/config

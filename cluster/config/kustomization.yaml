@@ -4,6 +4,3 @@ kind: Kustomization
 resources:
   - ./cluster-settings.yaml
   - ./cluster-secrets.sops.yaml
-commonLabels:
-  rollout.bloopysphere-0/stage: "0"
-  component.bloopysphere-0/part-of: bootstrap

@@ -11,5 +11,3 @@ resources:
   - ./linkerd
   - ./tf-controller/crds.yaml
   - ./velero/crds.yaml
-commonLabels:
-  rollout.bloopysphere-0/stage: "2"
