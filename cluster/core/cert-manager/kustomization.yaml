@@ -6,5 +6,3 @@ resources:
   - ./issuers
   - ./prometheus-rule.yaml
   - ./cert-manager-trust
-commonLabels:
-  component.bloopysphere-0/aspect: networking

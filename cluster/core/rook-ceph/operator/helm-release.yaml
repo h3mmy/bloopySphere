@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: rook-ceph
   namespace: rook-ceph
+  labels:
+    component.bloopysphere-0/aspect: networking
 spec:
   interval: 5m
   chart:

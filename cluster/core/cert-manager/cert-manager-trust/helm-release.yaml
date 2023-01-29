@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: cert-manager-trust
   namespace: cert-manager
+  labels:
+    component.bloopysphere-0/aspect: networking
 spec:
   interval: 5m
   chart:

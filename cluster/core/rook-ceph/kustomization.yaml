@@ -8,5 +8,3 @@ resources:
   - ./rbac
   - ./rook-direct-mount
   - ./snapshot-controller
-labels:
-  component.bloopysphere-0/aspect: storage
