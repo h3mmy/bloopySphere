@@ -30,7 +30,7 @@ spec:
       - --dir
       - /books
       - --port
-      - &port "8080"
+      - "8080"
       - --name
       - openbooks82937
 
@@ -48,7 +48,7 @@ spec:
       main:
         ports:
           http:
-            port: *port
+            port: 8080
 
     ingress:
       main:
@@ -76,5 +76,8 @@ spec:
 
     resources:
       requests:
-        cpu: 15m
-        memory: 64M
+        cpu: 10m
+        memory: 32M
+      limits:
+        # cpu: 403m
+        memory: 423M

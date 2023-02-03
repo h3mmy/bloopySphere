@@ -81,3 +81,11 @@ spec:
       config:
         enabled: true
         existingClaim: jackett-config-v1
+
+    resources:
+      requests:
+        cpu: 10m
+        memory: 190M
+      limits:
+        # cpu: 428m
+        memory: 7944M
