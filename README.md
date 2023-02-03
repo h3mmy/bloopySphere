@@ -16,7 +16,7 @@ _... managed with Flux and Renovate_ :robot:
 <!-- markdownlint-disable-next-line -->
 <div align="center">
 
-[![k3s](https://img.shields.io/badge/k3s-v1.25.5-brightgreen?style=for-the-badge&logo=kubernetes&logoColor=white)](https://k3s.io/)
+[![k3s](https://img.shields.io/badge/k3s-v1.26.1-brightgreen?style=for-the-badge&logo=kubernetes&logoColor=white)](https://k3s.io/)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=for-the-badge)](https://github.com/pre-commit/pre-commit)
 [![renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?style=for-the-badge&logo=renovatebot&logoColor=white)](https://github.com/renovatebot/renovate)
 
@@ -91,6 +91,12 @@ Other useful snippets:
 kubectl -n flux-system create secret generic sops-age --from-file=age.agekey=/dev/stdin`
 
 `kubectl  create namespace flux-system --dry-run=client -o yaml | kubectl apply -f -`
+
+Loki snippets. If you know you know.
+
+```logql
+{container="traefik"} | json message_extracted="message" |  line_format "{{.message_extracted}}" | json | DownstreamStatus!=`200`
+```
 
 ## :handshake:&nbsp; Community
 
