@@ -23,7 +23,7 @@ spec:
       name: traefik
     deployment:
       kind: Deployment
-      replicas: 3
+      replicas: 2
       # podAnnotations:
       #   linkerd.io/inject: ingress
     podSecurityPolicy:
