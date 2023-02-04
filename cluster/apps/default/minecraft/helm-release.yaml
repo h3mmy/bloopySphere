@@ -77,7 +77,7 @@ spec:
       metallb.universe.tf/allow-shared-ip: mcsv
     extraEnv:
       TZ: ${TZ}
-      MODS: "https://github.com/EssentialsX/Essentials/releases/download/2.19.7/EssentialsX-2.19.7.jar,https://mediafilez.forgecdn.net/files/4167/109/Dynmap-3.5-beta-1-spigot.jar"
+      MODS: "https://github.com/EssentialsX/Essentials/releases/download/2.19.7/EssentialsX-2.19.7.jar,https://mediafilez.forgecdn.net/files/4167/109/Dynmap-3.5-beta-2-spigot.jar"
       ENABLE_AUTOPAUSE: FALSE
       # PATCH_DEFINITIONS: /mnt/patches
       # 274 Dynmap https://www.spigotmc.org/resources/dynmap%C2%AE.274/
@@ -91,7 +91,7 @@ spec:
       version: "LATEST"
       # This can be one of "VANILLA", "FORGE", "SPIGOT", "BUKKIT", "PAPER", "FTBA", "SPONGEVANILLA", "CURSEFORGE"
       type: PAPER
-      paperDownloadUrl: https://api.papermc.io/v2/projects/paper/versions/1.19.2/builds/142/downloads/paper-1.19.2-142.jar
+      paperDownloadUrl: https://api.papermc.io/v2/projects/paper/versions/1.19.3/builds/386/downloads/paper-1.19.3-386.jar
       jvmOpts: >-
         -Xms4G -Xmx4G
         -XX:+UseG1GC -XX:+ParallelRefProcEnabled
@@ -162,11 +162,15 @@ spec:
       vanillaTweaksShareCodes: []
       # Optional URI to a resource pack. The player may choose to use it.
       # mc1: "https://download.mc-packs.net/pack/679d8f1cf33259a3c0bb86253ce13411d9469cad.zip"
-      resourcePackUrl: "https://download.mc-packs.net/pack/53fcb49d17d0bb816e4a52cdaef9b545a8c654e5.zip"
+      # mc2: "https://download.mc-packs.net/pack/53fcb49d17d0bb816e4a52cdaef9b545a8c654e5.zip" faithful 32x 1.19.2
+      # mc3: "https://download.mc-packs.net/pack/ae4c63056a8422fa0044b02a9846b078690e8f9a.zip" faithful 32x 1.19.3
+      resourcePackUrl: "https://download.mc-packs.net/pack/ae4c63056a8422fa0044b02a9846b078690e8f9a.zip"
       # Optional SHA-1 digest of the resource pack, in lowercase hexadecimal.
       # It is recommended to specify this, because it is used to verify the integrity of the resource pack.
       # mc-1: 679d8f1cf33259a3c0bb86253ce13411d9469cad
-      resourcePackSha: 53fcb49d17d0bb816e4a52cdaef9b545a8c654e5
+      # mc-2: 53fcb49d17d0bb816e4a52cdaef9b545a8c654e5
+      # mc-3: ae4c63056a8422fa0044b02a9846b078690e8f9a
+      resourcePackSha: ae4c63056a8422fa0044b02a9846b078690e8f9a
       # When true, players will be prompted for a response and will be disconnected if they decline the required pack
       resourcePackEnforce: false
       # Check accounts against Minecraft account service.
