@@ -33,6 +33,11 @@ spec:
           - resources:
               namespaces:
                 - kube-system
+      preconditions:
+        any:
+          - key: "{{ request.object.spec.containers[0].resources.limits.cpu || '' }}"
+            operator: NotEquals
+            value: ''
       mutate:
         foreach:
           - list: "request.object.spec.containers"
