@@ -77,6 +77,7 @@ spec:
         hajimari.io/url: "https://auth.${XYZ_DOMAIN}"
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        coredns.io/hostname: "auth.${XYZ_DOMAIN}"
         traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth@kubernetescrd"
       hosts:
         - host: &host "auth.${XYZ_DOMAIN}"
