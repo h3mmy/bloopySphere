@@ -122,6 +122,20 @@ spec:
         #
         # Trust forwarded  headers information (X-Forwarded-*).
         # forwardedHeaders:
+
+        #
+        # Enable the Proxy Protocol header parsing for the entry point
+        # proxyProtocol:
+        #   trustedIPs: []
+        #   insecure: false
+      websecure:
+        port: 8443
+        # hostPort: 8443
+        expose: true
+        exposedPort: 443
+        # The port protocol (TCP/UDP)
+        protocol: TCP
+        # nodePort: 32443
         trustedIPs:
           # Local Servers
           - ${CALICO_NODE_CIDR}
@@ -162,19 +176,6 @@ spec:
           - 2a06:98c0::/29
           - 2c0f:f248::/32
         insecure: false
-        #
-        # Enable the Proxy Protocol header parsing for the entry point
-        # proxyProtocol:
-        #   trustedIPs: []
-        #   insecure: false
-      websecure:
-        port: 8443
-        # hostPort: 8443
-        expose: true
-        exposedPort: 443
-        # The port protocol (TCP/UDP)
-        protocol: TCP
-        # nodePort: 32443
         #
         ## Enable HTTP/3 on the entrypoint
         ## Enabling it will also enable http3 experimental feature
