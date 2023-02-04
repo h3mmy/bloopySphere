@@ -213,11 +213,11 @@ spec:
           config.yml: |-
             upstream:
               default:
-                # - tcp+udp:1.1.1.1
+                - tcp+udp:1.1.1.1
                 - tcp+udp:[2606:4700:4700::1111]
                 # re-enable after fixing ipv6 incident
-                - tcp-tls:1.1.1.1
-                - tcp-tls:dns.google
+                - tcp-tls:1dot1dot1dot1.cloudflare-dns.com
+                - tcp-tls:one.one.one.one
                 - https://cloudflare-dns.com/dns-query
             upstreamTimeout: 5
             bootstrapDns: tcp+udp:1.1.1.1:53
