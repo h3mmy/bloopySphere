@@ -44,7 +44,7 @@ spec:
       licenseKey: "${MAXMIND_LICENSE_KEY}"
     authentik:
       outposts:
-        docker_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
+        container_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
       secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
       postgresql:
         host: "authentik-postgres"
