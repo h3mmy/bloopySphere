@@ -15,7 +15,6 @@ spec:
         kind: HelmRepository
         name: traefik-charts
         namespace: flux-system
-      interval: 5m
   dependsOn:
     - name: cert-manager
       namespace: cert-manager
@@ -24,7 +23,7 @@ spec:
       name: traefik
     deployment:
       kind: Deployment
-      replicas: 2
+      replicas: 3
       # podAnnotations:
       #   linkerd.io/inject: ingress
     podSecurityPolicy:
@@ -47,10 +46,32 @@ spec:
     logs:
       general:
         format: json
-        level: INFO
+        level: WARN
       access:
         enabled: true
         format: json
+        filters:
+          statuscodes: 200,300-302
+          retryattempts: true
+          minduration: 450000ns
+        fields:
+          general:
+            names:
+              defaultmode: drop
+              ClientAddr: keep
+              RequestAddr: keep
+              RequestMethod: keep
+              RequestPath: keep
+              RequestCount: keep
+              RequestProtocol: keep
+              RequestScheme: keep
+              RetryAttempts: keep
+              RouterName: keep
+              Duration: keep
+          headers:
+            defaultmode: keep
+            names:
+              Authorization: drop
     ingressClass:
       enabled: true
       isDefaultClass: true
@@ -59,11 +80,9 @@ spec:
       dashboard:
         enabled: false
     globalArguments:
-      - "--api.insecure=true"
-      - "--serverstransport.insecureskipverify=true"
+      - "--global.checknewversion=true"
+      - "--global.sendanonymoususage=false"
       - "--metrics.prometheus=true"
-      - "--entryPoints.websecure.forwardedHeaders.trustedIPs=10.0.0.0/8,192.168.0.0/16,172.16.0.0/12,103.21.244.0/22,103.22.200.0/22,103.31.4.0/22,104.16.0.0/13,104.24.0.0/14,108.162.192.0/18,131.0.72.0/22,141.101.64.0/18,162.158.0.0/15,172.64.0.0/13,173.245.48.0/20,188.114.96.0/20,190.93.240.0/20,197.234.240.0/22,198.41.128.0/17,2400:cb00::/32,2606:4700::/32,2803:f800::/32,2405:b500::/32,2405:8100::/32,2a06:98c0::/29,2c0f:f248::/32"
-
     providers:
       kubernetesCRD:
         enabled: true
@@ -103,8 +122,46 @@ spec:
         #
         # Trust forwarded  headers information (X-Forwarded-*).
         # forwardedHeaders:
-        #   trustedIPs: []
-        #   insecure: false
+        trustedIPs:
+          # Local Servers
+          - ${CALICO_NODE_CIDR}
+          - ${CALICO_NODE_CIDR_IPV6}
+          - ${LOCAL_CIDR_1}
+          - ${LOCAL_CIDR_2}
+          - ${LOCAL_GATEWAY_MAIN}
+          - ${LOCAL_GATEWAY_BGP}
+          - ${LOCAL_GATEWAY_CORE_BLOOP}
+          - ${NETWORK_K8S_CLUSTER_CIDR}
+          - ${NETWORK_K8S_CLUSTER_CIDR_V6}
+          - ${NETWORK_K8S_SERVICE_CIDR}
+          - ${NETWORK_K8S_SERVICE_CIDR_V6}
+          - ${NETWORK_BGP_BLOCK_V4}
+          - ${NETWORK_BGP_BLOCK_V6}
+          - 172.16.0.0/12
+          # Cloudflare IPs
+          - 103.21.244.0/22
+          - 103.22.200.0/22
+          - 103.31.4.0/22
+          - 104.16.0.0/13
+          - 104.24.0.0/14
+          - 108.162.192.0/18
+          - 131.0.72.0/22
+          - 141.101.64.0/18
+          - 162.158.0.0/15
+          - 172.64.0.0/13
+          - 173.245.48.0/20
+          - 188.114.96.0/20
+          - 190.93.240.0/20
+          - 197.234.240.0/22
+          - 198.41.128.0/17
+          - 2400:cb00::/32
+          - 2606:4700::/32
+          - 2803:f800::/32
+          - 2405:b500::/32
+          - 2405:8100::/32
+          - 2a06:98c0::/29
+          - 2c0f:f248::/32
+        insecure: false
         #
         # Enable the Proxy Protocol header parsing for the entry point
         # proxyProtocol:
@@ -207,7 +264,8 @@ spec:
     metrics:
       prometheus:
         entryPoint: metrics
-
+        service:
+          enabled: true
 ##  enable optional CRDs for Prometheus Operator
 ##
         serviceMonitor:
