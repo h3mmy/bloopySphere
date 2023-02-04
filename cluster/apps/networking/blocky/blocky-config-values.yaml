@@ -33,7 +33,8 @@ customDNS:
     dns.${XYZ_DOMAIN}: ${SVC_BLOCKY_ADDR_V4},${SVC_BLOCKY_ADDR_V6}
 blocking:
   blockType: zeroIp
-  failStartOnListError: true
+  # failStartOnListError: true
+  startStrategy: failOnError
   blackLists:
     ads:
       - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
