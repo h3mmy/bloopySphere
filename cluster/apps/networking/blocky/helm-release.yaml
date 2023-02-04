@@ -214,7 +214,7 @@ spec:
             upstream:
               default:
                 # - tcp+udp:1.1.1.1
-                # - tcp+udp:[2606:4700:4700::1111]
+                - tcp+udp:[2606:4700:4700::1111]
                 # re-enable after fixing ipv6 incident
                 - tcp-tls:one.one.one.one
                 - tcp-tls:dns.google
@@ -246,7 +246,8 @@ spec:
                 dns.${XYZ_DOMAIN}: ${SVC_BLOCKY_ADDR_V4},${SVC_BLOCKY_ADDR_V6}
             blocking:
               blockType: zeroIp
-              failStartOnListError: true
+              # failStartOnListError: true
+              startStrategy: failOnError
               blackLists:
                 ads:
                   - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
