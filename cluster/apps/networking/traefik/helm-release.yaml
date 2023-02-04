@@ -80,6 +80,8 @@ spec:
       dashboard:
         enabled: false
     globalArguments:
+      - "--api.insecure=true"
+      - "--serverstransport.insecureskipverify=true"
       - "--global.checknewversion=true"
       - "--global.sendanonymoususage=false"
       - "--metrics.prometheus=true"
