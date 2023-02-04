@@ -116,6 +116,10 @@ spec:
                 items:
                   - key: sound_wave.svg
                     path: sound_wave.svg
+  env:
+    AUTHENTIK_LOG_LEVEL: DEBUG
+  worker:
+    replicas: 2
 
     # The redis sub-chart does not have arm support
     # Authentik helm applies this to all it's pieces. No mix-and-match like with keycloak
