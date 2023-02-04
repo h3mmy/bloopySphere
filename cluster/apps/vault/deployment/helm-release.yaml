@@ -37,7 +37,7 @@ spec:
         # configure the ingress to point to the Vault active service.
         activeService: true
         pathType: Prefix
-        annotation:
+        annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
           hajimari.io/enable: "true"
           hajimari.io/icon: shield-key
