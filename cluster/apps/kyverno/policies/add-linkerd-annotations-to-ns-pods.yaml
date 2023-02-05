@@ -2,7 +2,7 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: add-linkerd-mesh-injection
+  name: add-linkerd-annotations-to-ns-pods
   annotations:
     policies.kyverno.io/title: Add Linkerd Mesh Injection
     policies.kyverno.io/category: Linkerd
