@@ -43,7 +43,7 @@ spec:
       accountId: "${MAXMIND_ACCOUNT_ID}"
       licenseKey: "${MAXMIND_LICENSE_KEY}"
     authentik:
-      log_level: trace
+      log_level: info
       outposts:
         container_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
       secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
