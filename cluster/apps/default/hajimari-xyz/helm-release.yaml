@@ -134,6 +134,7 @@ spec:
         enabled: true
         existingClaim: hajimari-xyz-config
     podAnnotations:
+      linkerd.io/inject: enabled
       configmap.reloader.stakater.com/reload: "hajimari-xyz-settings"
     resources:
       requests:
