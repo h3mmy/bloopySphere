@@ -1,0 +1,121 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: coredns
+  namespace: kube-system
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: coredns
+      version: 1.19.7
+      sourceRef:
+        kind: HelmRepository
+        name: coredns-charts
+        namespace: flux-system
+  install:
+    timeout: 10m
+    replace: true
+    crds: CreateReplace
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    cleanupOnFail: true
+    crds: CreateReplace
+    remediation:
+      retries: 5
+  test:
+    enable: true
+  rollback:
+    recreate: true
+    force: true
+    cleanupOnFail: true
+  uninstall:
+    keepHistory: false
+  maxHistory: 3
+
+  values:
+    rbac:
+      create: true
+    image:
+      repository: coredns/coredns
+      tag: 1.10.0
+
+    fullnameOverride: coredns
+
+    replicaCount: 3
+
+    serviceAccount:
+      create: true
+
+    prometheus:
+      # Set this to true to create Service for Prometheus metrics
+      service:
+        enabled: true
+
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: "coredns"
+
+    # https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configmap-options
+    servers:
+      - zones:
+          - zone: .
+            scheme: dns://
+            use_tcp: true
+        port: 53
+        plugins:
+          - name: log
+          - name: errors
+          # Serves a /health endpoint on :8080, required for livenessProbe
+          - name: health
+            configBlock: |-
+              lameduck 5s
+          # Serves a /ready endpoint on :8181, required for readinessProbe
+          - name: ready
+          # Required to query kubernetes API for data
+          - name: kubernetes
+            parameters: cluster.local in-addr.arpa ip6.arpa
+            configBlock: |-
+              pods insecure
+              fallthrough in-addr.arpa ip6.arpa
+              ttl 30
+          # - name: hosts
+          #   parameters: /etc/coredns/NodeHosts
+          #   configBlock: |-
+          #     ttl 60
+          #     reload 15s
+          #     fallthrough
+          # Serves a /metrics endpoint on :9153, required for serviceMonitor
+          - name: prometheus
+            parameters: 0.0.0.0:9153
+          # Forward everything else to Cloudflare DNS
+          # Note: plugin/forward: this plugin can only be used once per Server Block
+          - name: forward
+            parameters: . 2606:4700:4700::1111 1.0.0.1
+          # Set up cache
+          - name: cache
+            parameters: 30
+          # Detects simple forwarding loops and halts the CoreDNS process if a loop is found.
+          - name: loop
+          # Allows automatic reload of a changed Corefile.
+          - name: reload
+          # The loadbalance will act as a round-robin DNS load balancer by randomizing the order of A, AAAA, and MX records in the answer.
+          - name: loadbalance
+
+    tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+      - key: node-role.kubernetes.io/etcd
+        operator: Exists
+
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/instance: coredns

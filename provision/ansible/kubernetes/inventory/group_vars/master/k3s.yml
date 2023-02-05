@@ -24,27 +24,31 @@ k3s_server:
     - metrics-server
     # Disable servicelb - replaced with metallb and installed with Flux
     - servicelb
-    # Disable traefik - replaced with ingress-nginx and installed with Flux
+    # Disable traefik - replaced with ingress-nginx/own traefik  and installed with Flux
     - traefik
+    # Disable coredns - replaced with own version
+    - coredns
   disable-network-policy: true
   disable-cloud-controller: true
   write-kubeconfig-mode: "644"
   # Network CIDR to use for pod IPs (Ipv6 link-local)
-  cluster-cidr: "10.42.0.0/16,fd0d:b917:e7b6:42::/116"
+  cluster-cidr: "10.42.0.0/16,fd0d:b917:e7b6:42::/112"
   # Network CIDR to use for service IPs (Ipv6 link-local)
-  service-cidr: "10.43.0.0/16,fd0d:b917:e7b6:43::/116"
+  service-cidr: "10.43.0.0/16,fd0d:b917:e7b6:43::/112"
   kubelet-arg:
     # Enable Alpha/Beta features
-    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    - "feature-gates=MixedProtocolLBService=true,ReadWriteOncePod=true"
     # Allow pods to be rescheduled quicker in the case of a node failure
     # https://github.com/k3s-io/k3s/issues/1264
     - "node-status-update-frequency=4s"
+    # Because ubuntu is beholden to systemd
+    - "resolv-conf=/run/systemd/resolve/resolv.conf"
   kube-controller-manager-arg:
     - "node-cidr-mask-size-ipv6=116"
     # Required to monitor kube-proxy with kube-prometheus-stack
     - "bind-address=0.0.0.0"
     # Enable Alpha/Beta features
-    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    - "feature-gates=MixedProtocolLBService=true,ReadWriteOncePod=true"
     # Allow pods to be rescheduled quicker in the case of a node failure
     # https://github.com/k3s-io/k3s/issues/1264
     - "node-monitor-period=4s"
@@ -52,18 +56,18 @@ k3s_server:
     - "pod-eviction-timeout=20s"
   kube-proxy-arg:
     # Enable Alpha/Beta features
-    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    - "feature-gates=MixedProtocolLBService=true,ReadWriteOncePod=true"
     # Required to monitor component with kube-prometheus-stack
     - "metrics-bind-address=0.0.0.0"
   kube-scheduler-arg:
     # Enable Alpha/Beta features
-    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    - "feature-gates=MixedProtocolLBService=true,ReadWriteOncePod=true"
     # Required to monitor component with kube-prometheus-stack
     - "bind-address=0.0.0.0"
   etcd-expose-metrics: true
   kube-apiserver-arg:
     # Enable Alpha/Beta features
-    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    - "feature-gates=MixedProtocolLBService=true,ReadWriteOncePod=true"
     # Required for HAProxy health-checks
     - "anonymous-auth=true"
     # Allow pods to be rescheduled quicker in the case of a node failure

@@ -43,3 +43,4 @@ resources:
   - ricoberger-charts.yaml
   - tf-controller.yaml
   - angelnu-charts.yaml
+  - coredns-charts.yaml
