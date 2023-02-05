@@ -50,12 +50,17 @@ spec:
     serviceAccount:
       create: true
 
+    service:
+      clusterIP: &ipv4 10.43.0.10
+      clusterIPs:
+        - *ipv4
+        - fd0d:b917:e7b6:43::d21e
+      name: kube-dns
+
     prometheus:
       # Set this to true to create Service for Prometheus metrics
       service:
         enabled: true
-        clusterIP: 10.43.0.10
-        name: kube-dns
 
     podAnnotations:
       configmap.reloader.stakater.com/reload: "coredns"
