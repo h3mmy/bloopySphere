@@ -14,7 +14,6 @@ spec:
         kind: HelmRepository
         name: k8s-gateway
         namespace: flux-system
-      interval: 5m
   install:
     remediation:
       retries: 5
@@ -34,7 +33,6 @@ spec:
       annotations:
         metallb.universe.tf/allow-shared-ip: k8s-gateway
         metallb.universe.tf/loadBalancerIPs: "${LB_V4_K8S_GATEWAY}, ${LB_V6_K8S_GATEWAY}"
-        # metallb.universe.tf/loadBalancerIPs: "${LB_V4_K8S_GATEWAY}"
       externalTrafficPolicy: Local
       loadBalancerIPs:
         - ${LB_V4_K8S_GATEWAY}

@@ -43,7 +43,7 @@ spec:
       repository: coredns/coredns
       tag: 1.10.0
 
-    fullnameOverride: coredns
+    # fullnameOverride: coredns
 
     replicaCount: 3
 
