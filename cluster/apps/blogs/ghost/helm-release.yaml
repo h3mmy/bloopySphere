@@ -94,7 +94,7 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           # Once authentik gets itself together this can go back to networking-bloopnet-xyz-auth@kubernetescrd
-          traefik.ingress.kubernetes.io/router.middlewares: networking-bloopnet-xyz-auth@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
         hosts:
           - host: &host tyg3r.${XYZ_DOMAIN}
             paths:
