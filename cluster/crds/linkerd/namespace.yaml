@@ -10,6 +10,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: linkerd-viz
+  annotations:
+    linkerd.io/inject: enabled
   labels:
     linkerd.io/extension: viz
     goldilocks.fairwinds.com/enabled: "true"
