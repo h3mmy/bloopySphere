@@ -43,7 +43,7 @@ spec:
       repository: coredns/coredns
       tag: 1.10.0
 
-    # fullnameOverride: coredns
+    fullnameOverride: coredns
 
     replicaCount: 3
 
@@ -54,6 +54,8 @@ spec:
       # Set this to true to create Service for Prometheus metrics
       service:
         enabled: true
+        clusterIP: 10.43.0.10
+        name: kube-dns
 
     podAnnotations:
       configmap.reloader.stakater.com/reload: "coredns"
