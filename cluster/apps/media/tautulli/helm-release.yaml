@@ -83,7 +83,7 @@ spec:
           - --repo=https://github.com/blacktwin/JBOPS.git
           - --branch=master
           - --depth=1
-          - --git-config="safe.directory:/config/JBOPS"
+          - --git-config="safe.directory:*"
           - --root=/config/JBOPS
         volumeMounts:
           - name: config
