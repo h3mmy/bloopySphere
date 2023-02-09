@@ -31,7 +31,7 @@ spec:
         enabled: false
 
     dashboard:
-      replicaCount: 1
+      replicaCount: 2
       ingress:
         enabled: true
         ingressClassName: "traefik"
