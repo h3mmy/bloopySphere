@@ -23,7 +23,8 @@ spec:
 
   upgrade:
     crds: CreateReplace
-
+  test:
+    enabled: true
   values:
     recommender:
       enabled: true
