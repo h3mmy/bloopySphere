@@ -24,6 +24,13 @@ spec:
                 - Pod
               namespaces:
                 - auth
+      exclude:
+        any:
+          - resources:
+              selector:
+                matchExpressions:
+                  key: statefulset.kubernetes.io/pod-name
+                  operator: Exists
       mutate:
         patchStrategicMerge:
           metadata:
