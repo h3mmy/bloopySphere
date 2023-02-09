@@ -24,7 +24,7 @@ spec:
   upgrade:
     crds: CreateReplace
   test:
-    enabled: true
+    enable: true
   values:
     recommender:
       enabled: true
