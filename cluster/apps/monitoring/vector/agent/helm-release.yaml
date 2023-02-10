@@ -51,10 +51,10 @@ spec:
 
     resources:
       requests:
-        cpu: 48m
-        memory: 127M
+        cpu: 68m
+        memory: 307M
       limits:
-        cpu: 70m
+        cpu: 510m
         memory: 907M
 
     customConfig:
