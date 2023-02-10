@@ -54,9 +54,9 @@ spec:
     resources:
       requests:
         cpu: 34m
-        memory: 127M
+        memory: 457M
       limits:
-        cpu: 57m
+        cpu: 857m
         memory: 788M
 
     customConfig:
