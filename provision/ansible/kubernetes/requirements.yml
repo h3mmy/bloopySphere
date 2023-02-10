@@ -13,7 +13,7 @@ roles:
     src: https://github.com/PyratLabs/ansible-role-k3s.git
     version: v3.3.1
   - src: patrickjahns.promtail
-    version: 1.21.0
+    version: 1.22.0
   - src: geerlingguy.pip
     version: 2.2.0
   - src: geerlingguy.docker
