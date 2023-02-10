@@ -31,6 +31,10 @@ spec:
         enabled: false
 
     dashboard:
+      resources:
+        limits:
+          cpu: 100m
+          memory: 300Mi
       replicaCount: 2
       ingress:
         enabled: true
