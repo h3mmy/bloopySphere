@@ -35,7 +35,7 @@ spec:
         limits:
           cpu: 100m
           memory: 300Mi
-      replicaCount: 2
+      replicaCount: 1
       ingress:
         enabled: true
         ingressClassName: "traefik"
