@@ -32,8 +32,6 @@ spec:
       remediateLastFailure: true
 
   values:
-    podAnnotations:
-      linkerd.io/inject: enabled
     fullnameOverride: authentik
     image:
       repository: ghcr.io/goauthentik/server
