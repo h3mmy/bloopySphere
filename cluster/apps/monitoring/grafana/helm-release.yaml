@@ -74,6 +74,10 @@ spec:
         disable_sanitize_html: true
       auth.basic:
         disable_login_form: true
+      auth.jwt:
+        enabled: true
+        jwk_set_url: https://auth.${XYZ_DOMAIN}/application/o/grafana-bloopnet/jwks/
+        role_attribute_path: "contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'"
       auth.generic_oauth:
         enabled: true
         name: ${CLUSTER_NAME}
