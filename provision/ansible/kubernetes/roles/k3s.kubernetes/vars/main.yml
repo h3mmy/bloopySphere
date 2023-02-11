@@ -59,7 +59,7 @@ calico_encapsulation_ipv6: "None"
 # -- CIDR of the host node interface Calico should use
 calico_node_cidr: 10.1.0.0/24
 # -- CIDR of the host node interface Calico should use ipv6
-calico_node_cidr_ipv6: "2601:0404:c580:1c72::/116"
+calico_node_cidr_ipv6: "{new_ipv6}/116"
 
 # # (string) The interface on the host kube-vip should attach to
 # kubevip_interface: "enp89s0"
