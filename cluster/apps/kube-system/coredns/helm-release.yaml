@@ -81,6 +81,8 @@ spec:
               lameduck 5s
           # Serves a /ready endpoint on :8181, required for readinessProbe
           - name: ready
+          - name: rewrite
+            parameters: exact auth.${XYZ_DOMAIN} authentik.auth.svc.cluster.local
           # Required to query kubernetes API for data
           - name: kubernetes
             parameters: cluster.local in-addr.arpa ip6.arpa
