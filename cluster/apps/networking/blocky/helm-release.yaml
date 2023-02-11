@@ -252,7 +252,7 @@ spec:
                 ads:
                   - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
                   - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
-                  - http://sysctl.org/cameleon/hosts
+                  # - http://sysctl.org/cameleon/hosts
                   - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
                 special:
                   - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts
