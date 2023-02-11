@@ -81,8 +81,8 @@ spec:
               lameduck 5s
           # Serves a /ready endpoint on :8181, required for readinessProbe
           - name: ready
-          - name: rewrite
-            parameters: exact auth.${XYZ_DOMAIN} authentik.auth.svc.cluster.local
+          # - name: rewrite
+          #   parameters: name auth.${XYZ_DOMAIN} authentik.auth.svc.cluster.local
           # Required to query kubernetes API for data
           - name: kubernetes
             parameters: cluster.local in-addr.arpa ip6.arpa
@@ -102,7 +102,7 @@ spec:
           # Forward everything else to Cloudflare DNS
           # Note: plugin/forward: this plugin can only be used once per Server Block
           - name: forward
-            parameters: . ${SVC_BLOCKY_ADDR_V6} 2606:4700:4700::1111 1.0.0.1
+            parameters: . ${LB_BLOCKY_V4} ${SVC_BLOCKY_ADDR_V6} 2606:4700:4700::1111 1.0.0.1
           # Set up cache
           - name: cache
             parameters: 30
