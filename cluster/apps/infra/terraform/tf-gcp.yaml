@@ -11,7 +11,7 @@ spec:
     disable: true
   cliConfigSecretRef:
     name: tfe-cli-config
-  path: "./"
+  path: "./infrastructure/terraform/gcp"
   sourceRef:
     kind: OCIRepository
     name: terraform-gcp
