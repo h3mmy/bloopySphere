@@ -1,0 +1,21 @@
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta2
+kind: Receiver
+metadata:
+  name: oci-repositories
+  namespace: flux-system
+spec:
+  type: github
+  events:
+    - package
+    - registry_package
+    - release
+  secretRef:
+    name: github-webhook-token
+  resources:
+    - kind: OCIRepository
+      name: terraform-cloudflare
+    - kind: OCIRepository
+      name: terraform-gcp
+    - kind: OCIRepository
+      name: terraform-oci

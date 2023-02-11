@@ -7,6 +7,7 @@ resources:
   - bloopyboi.yaml
   - ingressroute-flux-webhook.yaml
   - flux-system.yaml
+  - oci-repo.yaml
 # secretGenerator:
 #   - name: github-webhook-token
 #     namespace: flux-system
