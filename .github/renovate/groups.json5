@@ -96,5 +96,17 @@
       ],
       versioning: "regex:^version-v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
     },
+    {
+      "matchDatasources": [
+        "github-tags",
+        "docker"
+      ],
+      "matchPackagePatterns": [
+        "rancher/system-upgrade-controller"
+      ],
+      "groupName": "system-upgrade-controller-suite",
+      "additionalBranchPrefix": "",
+      "separateMinorPatch": true
+    }
   ],
 }

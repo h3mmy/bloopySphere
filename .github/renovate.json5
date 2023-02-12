@@ -150,7 +150,12 @@
     {
       "matchDatasources": ["docker", "git-releases"],
       "versioning": "loose",
-      "matchPackageNames": ["plexinc/pms-docker", "k8s-at-home/plex","ghcr.io/onedr0p/plex", "ghcr.io/onedr0p/qbittorrent"]
+      "matchPackageNames": [
+        "plexinc/pms-docker",
+       "k8s-at-home/plex",
+       "ghcr.io/onedr0p/plex",
+      "ghcr.io/onedr0p/qbittorrent"
+      ]
     },
     {
       "matchDatasources": [
@@ -163,18 +168,6 @@
         "tigera-operator"
       ],
       "groupName": "external-snapshotter-suite",
-      "additionalBranchPrefix": "",
-      "separateMinorPatch": true
-    },
-    {
-      "matchDatasources": [
-        "github-tags",
-        "docker"
-      ],
-      "matchPackagePatterns": [
-        "rancher/system-upgrade-controller"
-      ],
-      "groupName": "system-upgrade-controller-suite",
       "additionalBranchPrefix": "",
       "separateMinorPatch": true
     }

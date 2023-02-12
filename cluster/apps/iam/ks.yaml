@@ -30,7 +30,6 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "false"
 spec:
-  suspend: true
   interval: 10m
   path: "./cluster/apps/iam/keycloak/operator"
   targetNamespace: &ns auth
