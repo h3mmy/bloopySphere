@@ -144,10 +144,10 @@ spec:
         https: true
         insecureSkipVerify: true
     kubeProxy:
-      # enable true unless using eBPF
-      enabled: true
+      # enable true unless using eBPF or other proxying
+      enabled: false
       serviceMonitor:
-        enabled: true
+        enabled: false
         https: true
         insecureSkipVerify: true
     kubeEtcd:
