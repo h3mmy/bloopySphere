@@ -130,6 +130,11 @@ spec:
       enabled: true
       # control-plane-endpoints
       endpoints: ["10.1.0.87", "10.1.0.85", "10.1.0.91"]
+      coreDns:
+        enabled: true
+        service:
+          selector:
+            app.kubernetes.io/name=coredns
       service:
         enabled: true
         port: 10257
