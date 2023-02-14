@@ -27,6 +27,11 @@ spec:
       remediateLastFailure: true # remediate the last failure, when no retries remain
     # crds: CreateReplace
   values:
+    configOverride: |
+      [global]
+      bdev_enable_discard = true
+      bdev_async_discard = true
+
     monitoring:
       createPrometheusRules: true
       enabled: true
