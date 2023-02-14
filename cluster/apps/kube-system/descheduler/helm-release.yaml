@@ -54,5 +54,8 @@ spec:
                   operator: In
                   values:
                     - emqx
+                    - vault
+                    - prometheus
+                    - loki
         LowNodeUtilization:
           enabled: false
