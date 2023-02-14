@@ -35,7 +35,7 @@ spec:
     fullnameOverride: authentik
     image:
       repository: ghcr.io/goauthentik/server
-      tag: 2023.1.2
+      tag: 2023.2.0
     geoip:
       enabled: true
       accountId: "${MAXMIND_ACCOUNT_ID}"
