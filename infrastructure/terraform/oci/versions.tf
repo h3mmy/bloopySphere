@@ -3,7 +3,7 @@ terraform {
     oci = {
       source = "oracle/oci"
       configuration_aliases = [ oci.home ]
-      version = "4.107.0"
+      version = "4.108.0"
     }
 
     sops = {
