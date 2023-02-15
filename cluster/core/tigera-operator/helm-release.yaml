@@ -96,7 +96,7 @@ spec:
     tigeraOperator:
       # datasource=docker depName=tigera/operator
       image: tigera/operator
-      version: v1.29.0
+      version: v1.29.1
       registry: quay.io
       nodeSelector:
         matchExpressions:
