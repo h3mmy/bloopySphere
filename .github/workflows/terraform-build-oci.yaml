@@ -10,55 +10,75 @@ on: # yamllint disable-line rule:truthy
       - "infrastructure/terraform/**"
 
 jobs:
-  generate-build-matrix:
-    name: Generate matrix for building images
+  changed-files:
+    name: Generate Build Matrix
     runs-on: ubuntu-22.04
     outputs:
-      projects: ${{ steps.reduce.outputs.projects }}
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - uses: dorny/paths-filter@v2
-        id: filter
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@5a331a4999f9f21a3ef2a6459edee90393a8b92a # v35.5.5
         with:
-          list-files: json
-          filters: |
-            addedOrModified:
-              - 'infrastructure/terraform/**'
-      - id: reduce
+          dir_names: true
+          dir_names_max_depth: 2
+          json: true
+          files: |
+            infrastructure/terraform/**
+      - name: List all changed files
         run: |
-          PATHS='${{ steps.filter.outputs.addedOrModified_files }}'
-          PROJECTS=$(echo $PATHS | jq --raw-output -c 'map(. |= sub("infrastructure/terraform/"; "") | split("/")[0]) | unique')
-          echo "projects=${PROJECTS}" >> $GITHUB_OUTPUT
-  publish:
-    runs-on: ubuntu-22.04
-    needs:
-      - generate-build-matrix
-    strategy:
-      matrix:
-        project: ${{ fromJson(needs.generate-build-matrix.outputs.projects) }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+          echo '${{ steps.changed-files.outputs.all_changed_files }}'
+      - id: set-matrix
+        run: echo "matrix={\"project\":${{ steps.changed-files.outputs.all_changed_files }}}" >> "${GITHUB_OUTPUT}"
 
+  publish:
+    name: Publish OCI
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      id-token: write
+    needs: [changed-files]
+    strategy:
+      matrix: ${{ fromJSON(needs.changed-files.outputs.matrix) }}
+    steps:
+      - name: Generate Token
+        uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92 # v1.8.0
+        id: generate-token
+        with:
+          app_id: "${{ secrets.APP_ID }}"
+          private_key: "${{ secrets.APP_PRIVATE_KEY }}"
+
+      - name: Checkout
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+        with:
+          token: "${{ steps.generate-token.outputs.token }}"
+
+      - name: Setup Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Setup Tools
+        run: |
+          brew install cosign fluxcd/tap/flux
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # renovate: tag=v2.1.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Flux
-        uses: fluxcd/flux2/action@main
+      - name: Generate OCI tag
+        id: generate-tag
+        run: echo "tag=${{ env.IMAGE_REGISTRY }}/${{ github.repository_owner }}/infrastructure/terraform-$(basename ${{ matrix.project }})-oci:$(git rev-parse --short HEAD)" >> "${GITHUB_OUTPUT}"
 
       - name: Publish OCI
         run: |
-          flux push artifact oci://ghcr.io/${{ github.repository_owner }}/terraform-${{matrix.project}}:$(git rev-parse --short HEAD) \
-              --path="./infrastructure/terraform/${{matrix.project}}" \
+          flux push artifact oci://${{ steps.generate-tag.outputs.tag }} \
+              --path="./${{ matrix.project }}" \
               --source="$(git config --get remote.origin.url)" \
               --revision="$(git branch --show-current)/$(git rev-parse HEAD)"
+
       - name: Tag OCI
-        run: |
-          flux tag artifact oci://ghcr.io/${{ github.repository_owner }}/terraform-${{matrix.project}}:$(git rev-parse --short HEAD) \
-              --tag main
+        run: flux tag artifact oci://${{ steps.generate-tag.outputs.tag }} --tag main
