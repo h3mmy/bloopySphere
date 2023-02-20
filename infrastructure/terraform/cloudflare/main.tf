@@ -1,5 +1,3 @@
-
-
 data "sops_file" "cloudflare_secrets" {
   source_file = "secrets.sops.yaml"
 }
