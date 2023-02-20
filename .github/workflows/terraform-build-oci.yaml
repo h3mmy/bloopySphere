@@ -9,6 +9,9 @@ on: # yamllint disable-line rule:truthy
     paths:
       - "infrastructure/terraform/**"
 
+env:
+  IMAGE_REGISTRY: ghcr.io
+
 jobs:
   changed-files:
     name: Generate Build Matrix
