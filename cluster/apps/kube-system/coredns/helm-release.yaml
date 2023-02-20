@@ -102,7 +102,7 @@ spec:
           # Forward everything else to Cloudflare DNS
           # Note: plugin/forward: this plugin can only be used once per Server Block
           - name: forward
-            parameters: . ${LB_V4_BLOCKY} ${SVC_BLOCKY_ADDR_V6} 2606:4700:4700::1111 1.0.0.1
+            parameters: . ${LB_V4_BLOCKY} 2606:4700:4700::1111 1.0.0.1
           # Set up cache
           - name: cache
             parameters: 30
