@@ -90,7 +90,7 @@ spec:
       config:
         enabled: true
         existingClaim: pvc-config-v1
-        mountPath: /root
+        mountPath: /root/.minio
         readonly: false
       data:
         enabled: true
