@@ -45,6 +45,7 @@ spec:
             name: plugins
 
     credentials:
+      useSecret: true
       existingSecret: velero-minio-credentials
 
     schedules:
@@ -73,8 +74,8 @@ spec:
 
     kubectl:
       image:
-        repository: ghcr.io/k8s-at-home/kubectl
-        tag: v1.25.4
+        repository: ghcr.io/onedr0p/kubernetes-kubectl
+        tag: v1.26.1
 
     deployNodeAgent: true
 
