@@ -3,12 +3,15 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: flux-system
 configMapGenerator:
+  - name: flux-logs
+    files:
+      - https://raw.githubusercontent.com/fluxcd/flux2/v0.40.0/manifests/monitoring/monitoring-config/dashboards/logs.json
   - name: flux-cluster-dashboard
     files:
-      - https://raw.githubusercontent.com/fluxcd/flux2/v0.35.0/manifests/monitoring/monitoring-config/dashboards/cluster.json
+      - https://raw.githubusercontent.com/fluxcd/flux2/v0.40.0/manifests/monitoring/monitoring-config/dashboards/cluster.json
   - name: flux-control-plane-dashboard
     files:
-      - https://raw.githubusercontent.com/fluxcd/flux2/v0.35.0/manifests/monitoring/monitoring-config/dashboards/control-plane.json
+      - https://raw.githubusercontent.com/fluxcd/flux2/v0.40.0/manifests/monitoring/monitoring-config/dashboards/control-plane.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:

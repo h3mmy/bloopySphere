@@ -183,6 +183,8 @@ spec:
         deleteDatasources:
           - name: Loki
             orgId: 1
+          - name: Alertmanager
+            orgId: 1
         datasources:
           - name: Prometheus
             type: prometheus
