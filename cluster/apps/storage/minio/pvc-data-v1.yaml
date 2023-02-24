@@ -29,7 +29,7 @@ metadata:
   name: pvc-data-v1
   namespace: storage
   annotations:
-    pv.beta.kubernetes.io/gid: "65537"
+    pv.beta.kubernetes.io/gid: "65539"
 spec:
   accessModes:
     - ReadWriteMany
