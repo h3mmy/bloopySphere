@@ -89,20 +89,14 @@ spec:
     persistence:
       config:
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: "${NAS_ADDRESS}"
-            path: /volume1/minio-v2/.minio
-        mountPath: /root/.minio
+        existingClaim: pvc-config-v1
+        mountPath: /root
+        readonly: false
       data:
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: "${NAS_ADDRESS}"
-            path: /volume1/minio-v2
+        existingClaim: pvc-data-v1
         mountPath: /data
+        readOnly: false
 
     service:
       main:
