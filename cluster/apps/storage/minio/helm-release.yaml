@@ -163,6 +163,7 @@ spec:
         # Custom Camelus Group(s)
         - 65541
         - 65540
+        - 65539
         - 65537
 
     affinity:
