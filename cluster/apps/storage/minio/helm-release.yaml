@@ -87,11 +87,6 @@ spec:
       - :9001
 
     persistence:
-      config:
-        enabled: true
-        existingClaim: pvc-config-v1
-        mountPath: /root/.minio
-        readonly: false
       data:
         enabled: true
         existingClaim: pvc-data-v1
