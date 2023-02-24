@@ -15,7 +15,7 @@ spec:
     server: "${NAS_ADDRESS}"
     path: /volume1/minio-v2
   mountOptions:
-    - nfsvers=4.2
+    - nfsvers=4.1
     - tcp
     - intr
     - hard
