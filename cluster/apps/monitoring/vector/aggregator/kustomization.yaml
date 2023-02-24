@@ -15,3 +15,5 @@ labels:
       app.kubernetes.io/name: vector-aggregator
       app.kubernetes.io/instance: vector-aggregator
       app.kubernetes.io/part-of: vector
+generatorOptions:
+  disableNameSuffixHash: true
