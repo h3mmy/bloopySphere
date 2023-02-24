@@ -8,6 +8,7 @@ spec:
     storage: 1Mi
   accessModes:
     - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: *pv
   persistentVolumeReclaimPolicy: Retain
   nfs:
@@ -27,9 +28,12 @@ kind: PersistentVolumeClaim
 metadata:
   name: pvc-data-v1
   namespace: storage
+  annotations:
+    pv.beta.kubernetes.io/gid: "65537"
 spec:
   accessModes:
     - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: minio-nfs
   resources:
     requests:
