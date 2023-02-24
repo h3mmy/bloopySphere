@@ -2,34 +2,43 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: vector-aggregator
+  name: &app vector-aggregator
   namespace: monitoring
 spec:
   dependsOn:
     - name: loki
       namespace: monitoring
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      chart: vector
-      version: 0.19.0
+      chart: app-template
+      version: 1.3.2
       sourceRef:
         kind: HelmRepository
-        name: vector-charts
+        name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
+  maxHistory: 3
   install:
     createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
+    controller:
+      replicas: 1
+      strategy: RollingUpdate
+      annotations:
+        reloader.stakater.com/auto: "true"
     image:
-      repository: timberio/vector
+      # https://github.com/vectordotdev/vector/issues/6715
+      repository: ghcr.io/onedr0p/vector
       tag: 0.27.1-debian
-    role: "Stateless-Aggregator"
-
-    podMonitor:
-      enabled: true
-      jobLabel: vector-aggregator
-      port: prometheus-sink
+    args: ["--config", "/etc/vector/vector.yaml"]
 
     affinity:
       podAntiAffinity:
@@ -45,11 +54,25 @@ spec:
               topologyKey: kubernetes.io/hostname
 
     service:
-      annotations:
-        metallb.universe.tf/loadBalancerIPs: "${LB_VECTOR_AGGREGATOR_V4}"
-        metallb.universe.tf/allow-shared-ip: vector-aggregator
-      enabled: true
-      type: LoadBalancer
+      main:
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${LB_VECTOR_AGGREGATOR_V4}"
+          metallb.universe.tf/allow-shared-ip: vector-aggregator
+        enabled: true
+        type: LoadBalancer
+        loadBalancerIP: "${LB_VECTOR_AGGREGATOR_V4}"
+        ports:
+          http:
+            port: 8686
+          journald:
+            enabled: true
+            port: 6010
+          kubernetes:
+            enabled: true
+            port: 6000
+          udm:
+            enabled: true
+            port: 6100
 
     resources:
       requests:
@@ -57,125 +80,25 @@ spec:
         memory: 457M
       limits:
         cpu: 857m
-        memory: 788M
+        memory: 1088M
 
-    customConfig:
-      data_dir: /vector-data-dir
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: vector-aggregator-configmap # overriden by kustomizeconfig
+        subPath: vector.yaml
+        mountPath: /etc/vector/vector.yaml
+        readOnly: true
+      data:
+        enabled: true
+        type: emptyDir
+        mountPath: /vector-data-dir
 
-      api:
-        enabled: false
-
-      # Sources
-      sources:
-        kubernetes_logs:
-          address: 0.0.0.0:6000
-          type: vector
-          version: "2"
-        journal_logs:
-          type: vector
-          address: 0.0.0.0:6010
-          version: "2"
-        udm_logs:
-          address: 0.0.0.0:6100
-          type: syslog
-          mode: "udp"
-          max_length: 102_400
-        vector_metrics:
-          type: internal_metrics
-
-      # Transforms
-      transforms:
-        kubernetes_logs_remap:
-          type: remap
-          inputs:
-            - kubernetes_logs
-          source: |
-            # Standardize 'app' index
-            .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
-        udm_logs_xform:
-          type: "remap"
-          inputs:
-            - "udm_logs"
-          source: |-
-            .timestamp=null
-
-      # Sinks
-      sinks:
-        loki_journal:
-          type: loki
-          inputs:
-            - journal_logs
-          endpoint: &loki http://loki-gateway:80
-          encoding:
-            codec: json
-          batch:
-            max_bytes: 2049000
-          out_of_order_action: accept
-          remove_label_fields: true
-          remove_timestamp: true
-          labels:
-            hostname: >-
-              {{`{{ host }}`}}
-        loki_kubernetes:
-          type: loki
-          inputs:
-            - kubernetes_logs_remap
-          endpoint: *loki
-          encoding:
-            codec: json
-          batch:
-            max_bytes: 2049000
-          out_of_order_action: rewrite_timestamp
-          remove_label_fields: true
-          remove_timestamp: true
-          labels:
-            app: >-
-              {{`{{ custom_app_name }}`}}
-            container: >-
-              {{`{{ kubernetes.container_name }}`}}
-            filename: >-
-              {{`{{ kubernetes.file }}`}}
-            # instance: >-
-            #   {{`{{ kubernetes.pod_labels.app\.kubernetes\.io/instance }}`}}
-            namespace: >-
-              {{`{{ kubernetes.pod_namespace }}`}}
-            node: >-
-              {{`{{ kubernetes.pod_node_name }}`}}
-            pod: >-
-              {{`{{ kubernetes.pod_name }}`}}
-        loki_udm:
-          type: loki
-          inputs:
-            - udm_logs_xform
-          endpoint: *loki
-          batch:
-            max_bytes: 1048576
-          out_of_order_action: rewrite_timestamp
-          remove_label_fields: true
-          remove_timestamp: true
-          encoding:
-            codec: json
-          labels:
-            hostname: >-
-              {{`{{ host }}`}}
-            appname: >-
-              {{`{{ appname }}`}}
-        prometheus_sink:
-          type: prometheus_exporter
-          inputs:
-            - vector_metrics
-          address: 0.0.0.0:9090
-
-    podAnnotations:
-      configmap.reloader.stakater.com/reload: vector-aggregator
-
-  postRenderers:
-    - kustomize:
-        patchesJson6902:
-          - target:
-              kind: Service
-              name: vector-aggregator
-            patch:
-              - op: add
-                path: /spec/loadBalancerIP
-                value: ${LB_VECTOR_AGGREGATOR_V4}
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: *app
