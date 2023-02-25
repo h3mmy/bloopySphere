@@ -90,7 +90,7 @@ jobs:
 
       - name: Generate OCI tag
         id: generate-tag
-        run: echo "tag=${{ env.IMAGE_REGISTRY }}/${{ github.repository_owner }}/terraform-$(basename ${{ matrix.project }})-oci:$(git rev-parse --short HEAD)" >> "${GITHUB_OUTPUT}"
+        run: echo "tag=${{ env.IMAGE_REGISTRY }}/${{ github.repository_owner }}/terraform-$(basename ${{ matrix.project }}):$(git rev-parse --short HEAD)" >> "${GITHUB_OUTPUT}"
 
       - name: Publish OCI
         run: |
