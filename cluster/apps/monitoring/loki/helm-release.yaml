@@ -178,7 +178,7 @@ spec:
           storage:
             s3:
               bucketnames: loki
-              endpoint: "minio.storage.svc.cluster.local:9000"
+              endpoint: "s3.storage.svc.cluster.local:9000"
               s3forcepathstyle: true
               insecure: true
           ring:
