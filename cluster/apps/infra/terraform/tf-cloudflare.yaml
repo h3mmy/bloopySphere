@@ -11,6 +11,7 @@ spec:
     disable: true
   cliConfigSecretRef:
     name: tfe-cli-config
+  workspace: home-cloudflare-provisioner
   path: "./"
   sourceRef:
     kind: OCIRepository

@@ -5,3 +5,4 @@ resources:
   - terraform-cloudflare.yaml
   - terraform-gcp.yaml
   - terraform-oci.yaml
+  - terraform-s3.yaml
