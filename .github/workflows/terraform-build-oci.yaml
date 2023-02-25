@@ -15,28 +15,44 @@ env:
 jobs:
   changed-files:
     name: Generate Build Matrix
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
+      - name: Generate Token
+        uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92 # v1.8.0
+        id: generate-token
+        with:
+          app_id: "${{ secrets.APP_ID }}"
+          private_key: "${{ secrets.APP_PRIVATE_KEY }}"
+
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          token: "${{ steps.generate-token.outputs.token }}"
 
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@23e3c4300cb904a9d9c36fc2df4111a2fa9b9ff1 # v35.5.6
         with:
           dir_names: true
-          dir_names_max_depth: 2
+          dir_names_max_depth: 3
           json: true
           files: |
             infrastructure/terraform/**
+
       - name: List all changed files
         run: |
           echo '${{ steps.changed-files.outputs.all_changed_files }}'
-      - id: set-matrix
-        run: echo "matrix={\"project\":${{ steps.changed-files.outputs.all_changed_files }}}" >> "${GITHUB_OUTPUT}"
 
+      - name: Store changed projects
+        id: set-matrix
+        run: |
+          if [[ "${{ steps.changed-files.outputs.all_changed_files }}" == "[]" ]]; then
+            echo "matrix={\"project\":$(find infrastructure/terraform -type d -mindepth 1 -maxdepth 1 | jo -a)}" >> "${GITHUB_OUTPUT}"
+          else
+            echo "matrix={\"project\":${{ steps.changed-files.outputs.all_changed_files }}}" >> "${GITHUB_OUTPUT}"
+          fi
   publish:
     name: Publish OCI
     runs-on: ubuntu-latest
@@ -74,7 +90,7 @@ jobs:
 
       - name: Generate OCI tag
         id: generate-tag
-        run: echo "tag=${{ env.IMAGE_REGISTRY }}/${{ github.repository_owner }}/infrastructure/terraform-$(basename ${{ matrix.project }})-oci:$(git rev-parse --short HEAD)" >> "${GITHUB_OUTPUT}"
+        run: echo "tag=${{ env.IMAGE_REGISTRY }}/${{ github.repository_owner }}/terraform-$(basename ${{ matrix.project }})-oci:$(git rev-parse --short HEAD)" >> "${GITHUB_OUTPUT}"
 
       - name: Publish OCI
         run: |
