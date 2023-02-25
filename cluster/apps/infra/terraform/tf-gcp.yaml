@@ -12,7 +12,7 @@ spec:
   cliConfigSecretRef:
     name: tfe-cli-config
   path: "./"
-  workspace: home-gcp-provisioner
+  workspace: bloopy-gcp-provisioner
   sourceRef:
     kind: OCIRepository
     name: terraform-gcp
