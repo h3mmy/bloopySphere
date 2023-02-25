@@ -36,6 +36,7 @@ spec:
       PUID: ${SONARR_PUID}
       SONARR__PORT: &port 8989
       SONARR__APPLICATION_URL: https://sonarr-uhd.${XYZ_DOMAIN}
+      SONARR__API_KEY: ${SONARR_UHD_API_KEY}
     service:
       main:
         ports:

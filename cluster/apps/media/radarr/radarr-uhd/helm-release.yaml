@@ -42,6 +42,7 @@ spec:
       PGID: "${MEDIA_GID}"
       RADARR__PORT: &port 7878
       RADARR__APPLICATION_URL: https://radarr.${XYZ_DOMAIN}
+      RADARR__API_KEY: ${RADARR_UHD_API_KEY}
     service:
       main:
         ports:
