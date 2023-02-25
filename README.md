@@ -92,6 +92,8 @@ kubectl -n flux-system create secret generic sops-age --from-file=age.agekey=/de
 
 `kubectl  create namespace flux-system --dry-run=client -o yaml | kubectl apply -f -`
 
+`kubectl get secret db-user-pass -o json | jq '.data | map_values(@base64d)'`
+
 Loki snippets. If you know you know.
 
 ```logql

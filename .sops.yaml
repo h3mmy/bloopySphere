@@ -35,6 +35,15 @@ creation_rules:
           - age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq
           - age1s0tcmcz4ej87zm0uahynjyq77jd072twhmh0txjsamfqpzkspdxq8hcn2a
           - age1pzky92h7assvm9vlyxwpv3q09lcxsz47drjmyvu8eq4j5834792qwsy3ff
+  - path_regex: (provision|infrastructure)/.*(s3/).*\.sops\.ya?ml
+    unencrypted_regex: "^(kind)$"
+    key_groups:
+      # personal, flux, tf-controller
+      - age:
+          - age1hr5v66mq2rtflw8vrzmdlaku48v0j5l2wr58lrdmxqp5decczugs3rr6yt
+          - age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq
+          - age1s0tcmcz4ej87zm0uahynjyq77jd072twhmh0txjsamfqpzkspdxq8hcn2a
+          - age1pzky92h7assvm9vlyxwpv3q09lcxsz47drjmyvu8eq4j5834792qwsy3ff
   - path_regex: (provision|infrastructure)/.*(gcp/).*\.sops\.ya?ml
     unencrypted_regex: "^(kind)$"
     key_groups:
