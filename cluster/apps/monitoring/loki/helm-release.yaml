@@ -155,6 +155,8 @@ spec:
               prefix: loki_index_
               period: 24h
       structuredConfig:
+        analytics:
+          reporting_enabled: false
         auth_enabled: false
         server:
           log_level: info
