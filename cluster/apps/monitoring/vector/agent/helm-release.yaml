@@ -111,7 +111,7 @@ spec:
         readOnly: true
 
     podAnnotations:
-      configmap.reloader.stakater.com/reload: vector-agent
+      configmap.reloader.stakater.com/reload: vector-agent-configmap
 
     tolerations:
       - key: node-role.kubernetes.io/master
