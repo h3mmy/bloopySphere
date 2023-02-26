@@ -62,6 +62,15 @@ spec:
           ttl: "120h"
           includedNamespaces:
             - default
+      plex-daily:
+        schedule: "0 7 * * *"
+        template:
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: plex
+          ttl: "120h"
+          includedNamespaces:
+            - media
 
     metrics:
       enabled: true

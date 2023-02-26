@@ -12,3 +12,4 @@ resources:
   - ./descheduler
   - ./reflector
   # - kopia
+  - ./volsync
