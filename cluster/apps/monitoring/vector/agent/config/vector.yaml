@@ -1,0 +1,42 @@
+---
+data_dir: /vector-data-dir
+#
+# Sources
+#
+sources:
+  journald_source:
+    type: journald
+    journal_directory: /var/log/journal
+  kubernetes_source:
+    type: kubernetes_logs
+    pod_annotation_fields:
+      container_image: container_image
+      container_name: container_name
+      pod_annotations: pod_annotations
+      pod_labels: pod_labels
+      pod_name: pod_name
+  vector_metrics:
+    type: internal_metrics
+#
+# Sinks
+#
+sinks:
+  kubernetes:
+    type: vector
+    compression: true
+    version: "2"
+    inputs:
+      - kubernetes_source
+    address: vector-aggregator.monitoring.svc.cluster.local:6000
+  journald:
+    type: vector
+    compression: true
+    version: "2"
+    address: vector-aggregator.monitoring.svc.cluster.local:6010
+    inputs:
+      - journald_source
+  prometheus:
+    type: prometheus_exporter
+    inputs:
+      - vector_metrics
+    address: 0.0.0.0:9090

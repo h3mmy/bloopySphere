@@ -9,7 +9,7 @@ configMapGenerator:
     files:
       - vector.yaml=./config/vector.yaml
 configurations:
-  - ./patches/kustomizeconfig.yaml
+  - ./patches/kustomize-config.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: vector-aggregator

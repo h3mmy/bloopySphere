@@ -1,45 +1,117 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: vector-agent
   namespace: monitoring
 spec:
-  dependsOn:
-    - name: loki
-      namespace: monitoring
   interval: 15m
   chart:
     spec:
-      chart: vector
-      version: 0.19.2
+      chart: app-template
+      version: 1.3.2
       sourceRef:
         kind: HelmRepository
-        name: vector-charts
+        name: bjw-s-charts
         namespace: flux-system
+  maxHistory: 3
   install:
     createNamespace: true
     remediation:
       retries: 3
   upgrade:
+    cleanupOnFail: true
     remediation:
       retries: 3
-      remediateLastFailure: true
-    cleanupOnFail: true
+  uninstall:
+    keepHistory: false
 
   values:
-    podAnnotations:
-      configmap.reloader.stakater.com/reload: vector-agent
 
-    role: "Agent"
+    controller:
+      type: daemonset
+      strategy: RollingUpdate
 
-    podMonitor:
-      enabled: true
-      jobLabel: vector-agent
-      port: prometheus-sink
+    image:
+      # https://github.com/vectordotdev/vector/issues/6715
+      repository: ghcr.io/onedr0p/vector
+      tag: 0.27.1-debian
+    args: ["--config", "/etc/vector/vector.yaml"]
+
+    env:
+      PROCFS_ROOT: /host/proc
+      SYSFS_ROOT: /host/sys
+      VECTOR_SELF_NODE_NAME:
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: spec.nodeName
+      VECTOR_SELF_POD_NAME:
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.name
+      VECTOR_SELF_POD_NAMESPACE:
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.namespace
 
     service:
-      enabled: false
+      main:
+        enabled: false
+
+    serviceAccount:
+      create: true
+      name: vector-agent
+
+    securityContext:
+      privileged: true
+
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: vector-agent-configmap # overriden by kustomizeconfig
+        subPath: vector.yaml
+        mountPath: /etc/vector/vector.yaml
+        readOnly: true
+      data:
+        enabled: true
+        type: emptyDir
+        mountPath: /vector-data-dir
+      var-log:
+        enabled: true
+        type: hostPath
+        hostPath: /var/log
+        hostPathType: Directory
+        mountPath: /var/log
+        readOnly: true
+      var-lib:
+        enabled: true
+        type: hostPath
+        hostPath: /var/lib
+        hostPathType: Directory
+        mountPath: /var/lib
+        readOnly: true
+      procfs:
+        enabled: true
+        type: hostPath
+        hostPath: /proc
+        hostPathType: Directory
+        mountPath: /host/proc
+        readOnly: true
+      sysfs:
+        enabled: true
+        type: hostPath
+        hostPath: /sys
+        hostPathType: Directory
+        mountPath: /host/sys
+        readOnly: true
+
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: vector-agent
 
     tolerations:
       - key: node-role.kubernetes.io/master
@@ -56,39 +128,3 @@ spec:
       limits:
         cpu: 510m
         memory: 907M
-
-    customConfig:
-      data_dir: /vector-data-dir
-
-      api:
-        enabled: false
-
-      # Sources
-      sources:
-        journal_logs:
-          type: journald
-          journal_directory: /var/log/journal
-        kubernetes_logs:
-          type: kubernetes_logs
-        vector_metrics:
-          type: internal_metrics
-
-      # Sinks
-      sinks:
-        loki_kubernetes_sink:
-          type: vector
-          inputs:
-            - kubernetes_logs
-          address: "vector-aggregator:6000"
-          version: "2"
-        loki_journal_sink:
-          type: vector
-          inputs:
-            - journal_logs
-          address: vector-aggregator:6010
-          version: "2"
-        prometheus_sink:
-          type: prometheus_exporter
-          inputs:
-            - vector_metrics
-          address: 0.0.0.0:9090

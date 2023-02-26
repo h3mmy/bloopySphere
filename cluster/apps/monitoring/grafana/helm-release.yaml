@@ -74,6 +74,8 @@ spec:
         url: https://grafana.net
       panels:
         disable_sanitize_html: true
+      auth:
+        signout_redirect_url: https://auth.${XYZ_DOMAIN}/application/o/grafana/end-session/
       auth.basic:
         disable_login_form: true
       auth.jwt:
