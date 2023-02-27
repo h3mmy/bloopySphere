@@ -45,3 +45,4 @@ resources:
   - tf-controller.yaml
   - angelnu-charts.yaml
   - coredns-charts.yaml
+  - external-secrets.yaml
