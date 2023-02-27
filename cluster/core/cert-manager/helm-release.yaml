@@ -20,8 +20,8 @@ spec:
       reconcileStrategy: Revision
 
   dependsOn:
-    - name: kube-prometheus-stack
-      namespace: monitoring
+    #- name: kube-prometheus-stack
+   #   namespace: monitoring
     - name: tigera-operator
       namespace: tigera-operator
 
