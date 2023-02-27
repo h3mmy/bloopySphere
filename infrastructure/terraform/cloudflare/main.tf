@@ -16,5 +16,3 @@ data "http" "bloopysphere_domains" {
 data "http" "ipv4_lookup_raw" {
   url = "http://ipv4.icanhazip.com"
 }
-
-# This line is to bump teh oci version to use the latest gh-action
