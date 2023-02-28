@@ -120,7 +120,6 @@ spec:
           - secretRef:
               name: mullvad
 
-
         resources:
           requests:
             cpu: "0.001"

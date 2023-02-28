@@ -37,8 +37,8 @@ spec:
     env:
       TZ: "${TZ}"
       PGID: "${MEDIA_GID}"
-      QBT_Preferences__WebUI__CSRFProtection: 'false'
-      QBT_Preferences__WebUI__ClickjackingProtection: 'false'
+      QBT_Preferences__WebUI__CSRFProtection: "false"
+      QBT_Preferences__WebUI__ClickjackingProtection: "false"
       # UMASK: "022"
       QBITTORRENT__PORT: &port 8080
       # QBITTORRENT__USE_PROFILE: "true"
@@ -52,7 +52,6 @@ spec:
 
     podLabels:
       setGateway: "true"
-
 
     service:
       main:

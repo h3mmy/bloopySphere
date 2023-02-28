@@ -40,7 +40,8 @@ k3s_server_manifests_urls:
 
 # (list) A flat list of templates to deploy on the primary control plane
 # /var/lib/rancher/k3s/server/manifests
-k3s_server_manifests_templates: []
+k3s_server_manifests_templates:
+  []
   # Now using the core/tigera-operator helm-release to apply this manifest
   # - "calico/calico-installation.yaml.j2"
   # Using core helm-release/Daemonset

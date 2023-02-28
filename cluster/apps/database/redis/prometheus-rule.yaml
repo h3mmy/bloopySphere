@@ -70,7 +70,8 @@ spec:
             severity: critical
         - alert: RedisClusterFlapping
           annotations:
-            description: Changes have been detected in Redis replica connection. This can occur when
+            description:
+              Changes have been detected in Redis replica connection. This can occur when
               replica nodes lose connection to the master and reconnect (a.k.a flapping).
             summary: Redis cluster flapping.
           expr: |

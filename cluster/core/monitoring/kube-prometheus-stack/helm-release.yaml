@@ -133,8 +133,7 @@ spec:
       coreDns:
         enabled: true
         service:
-          selector:
-            app.kubernetes.io/name=coredns
+          selector: app.kubernetes.io/name=coredns
       service:
         enabled: true
         port: 10257

@@ -27,7 +27,6 @@ spec:
     keepHistory: false
 
   values:
-
     controller:
       type: daemonset
       strategy: RollingUpdate

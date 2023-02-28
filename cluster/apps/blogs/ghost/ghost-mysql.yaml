@@ -37,8 +37,8 @@ spec:
           storage: 6Gi
 
     backupProfiles:
-      - name: ghost-mysql-backup-pvc  # Embedded backup profile
-        dumpInstance:         # MySQL Shell Dump
+      - name: ghost-mysql-backup-pvc # Embedded backup profile
+        dumpInstance: # MySQL Shell Dump
           # dumpOptions:
           #   excludeTables: "[world.country]" # Example to exclude one table
           storage:

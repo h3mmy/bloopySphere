@@ -107,7 +107,7 @@ spec:
       limits:
         memory: 1500Mi
     # tolerations:
-   #   - key: "arch"
+    #   - key: "arch"
     #    operator: "Equal"
-   #     value: "arm64"
-   #     effect: "NoSchedule"
+    #     value: "arm64"
+    #     effect: "NoSchedule"

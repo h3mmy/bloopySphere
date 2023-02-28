@@ -21,7 +21,7 @@ spec:
 
   dependsOn:
     #- name: kube-prometheus-stack
-   #   namespace: monitoring
+    #   namespace: monitoring
     - name: tigera-operator
       namespace: tigera-operator
 

@@ -8,7 +8,7 @@ spec:
   # A service profile defines a list of routes.  Linkerd can aggregate metrics
   # like request volume, latency, and success rate by route.
   routes:
-    - name: '/authors/{id}'
+    - name: "/authors/{id}"
 
       # Each route must define a condition.  All requests that match the
       # condition will be counted as belonging to that route.  If a request
@@ -44,9 +44,8 @@ spec:
       # A route may optionally define a list of response classes which describe
       # how responses from this route will be classified.
       responseClasses:
-
-      # Each response class must define a condition.  All responses from this
-      # route that match the condition will be classified as this response class.
+        # Each response class must define a condition.  All responses from this
+        # route that match the condition will be classified as this response class.
         - condition:
             # The simplest condition is a HTTP status code range.
             status:

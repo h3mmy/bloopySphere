@@ -2,7 +2,8 @@
 # This one is for docs only
 
 # MD003/heading-style/header-style - Heading style
-MD003: false
+MD003:
+  false
   # Heading style
   # style: "consistent"
 

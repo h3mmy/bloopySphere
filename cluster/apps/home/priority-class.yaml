@@ -1,6 +1,7 @@
 ---
 apiVersion: scheduling.k8s.io/v1
-description: Used for home critical pods that must run in the cluster for WAF, but can be
+description:
+  Used for home critical pods that must run in the cluster for WAF, but can be
   moved to another node if necessary.
 kind: PriorityClass
 metadata:

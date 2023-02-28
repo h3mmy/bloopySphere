@@ -86,12 +86,12 @@ prometheus:
         static_configs:
           - targets:
               - "minio.storage.svc.cluster.local:9000"
-      - job_name: 'blocky'
+      - job_name: "blocky"
         honor_timestamps: true
         static_configs:
           - targets:
               - "blocky.networking.svc.cluster.local:4000"
-      - job_name: 'uptimerobot'
+      - job_name: "uptimerobot"
         params:
           script: [uptimerobot]
         static_configs:
@@ -126,7 +126,7 @@ prometheus:
             labels:
               app.kubernetes.io/name: home-assistant
 
-      - job_name: 'linkerd-controller'
+      - job_name: "linkerd-controller"
         kubernetes_sd_configs:
           - role: pod
             namespaces:
@@ -141,7 +141,7 @@ prometheus:
             action: replace
             target_label: component
 
-      - job_name: 'linkerd-service-mirror'
+      - job_name: "linkerd-service-mirror"
         kubernetes_sd_configs:
           - role: pod
         relabel_configs:
@@ -154,7 +154,7 @@ prometheus:
             action: replace
             target_label: component
 
-      - job_name: 'linkerd-proxy'
+      - job_name: "linkerd-proxy"
         kubernetes_sd_configs:
           - role: pod
         relabel_configs:

@@ -1,20 +1,21 @@
 ---
 # Configuration file for MegaLinter
 # See all available variables at https://megalinter.github.io/configuration/ and in linters documentation
-ENABLE_LINTERS: [
-  "ACTION_ACTIONLINT",
-  "ANSIBLE_ANSIBLE_LINT",
-  "COPYPASTE_JSCPD",
-  "CREDENTIALS_SECRETLINT",
-  "GIT_GIT_DIFF",
-  "KUBERNETES_KUBEVAL",
-  "MARKDOWN_MARKDOWNLINT",
-  "PYTHON_PYLINT",
-  "PYTHON_FLAKE8",
-  "TERRAFORM_TERRAFORM_FMT",
-  "YAML_PRETTIER",
-  "YAML_YAMLLINT"
-]
+ENABLE_LINTERS:
+  [
+    "ACTION_ACTIONLINT",
+    "ANSIBLE_ANSIBLE_LINT",
+    "COPYPASTE_JSCPD",
+    "CREDENTIALS_SECRETLINT",
+    "GIT_GIT_DIFF",
+    "KUBERNETES_KUBEVAL",
+    "MARKDOWN_MARKDOWNLINT",
+    "PYTHON_PYLINT",
+    "PYTHON_FLAKE8",
+    "TERRAFORM_TERRAFORM_FMT",
+    "YAML_PRETTIER",
+    "YAML_YAMLLINT",
+  ]
 PRINT_ALPACA: false
 KUBERNETES_KUBEVAL_ARGUMENTS: --ignore-missing-schemas
 KUBERNETES_KUBEVAL_FILTER_REGEX_INCLUDE: "(k8s/clusters|k8s/global|cluster/.*ya?ml)"

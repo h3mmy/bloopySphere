@@ -96,8 +96,8 @@ spec:
         service:
           type: ClusterIP
 
-
-    resources: {}
+    resources:
+      {}
       # -- Kubernetes pod resource limits for trust.
       # limits:
       #   cpu: 100m

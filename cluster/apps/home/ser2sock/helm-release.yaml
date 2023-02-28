@@ -36,7 +36,10 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
-                - {key: "feature.node.kubernetes.io/usb-ff_10c4_ea60.present", operator: In, values: ["true"]}
+                - key: "feature.node.kubernetes.io/usb-ff_10c4_ea60.present"
+                  operator: In
+                  values: ["true"]
+
     persistence:
       usb:
         enabled: true

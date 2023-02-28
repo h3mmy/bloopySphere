@@ -100,7 +100,6 @@ spec:
     # - name: EMQX_AUTH__LDAP__PASSWORD__ATTRIBUTETYPE
     #   value: password
 
-
   emqxTemplate:
     listener:
       annotations:

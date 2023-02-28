@@ -55,7 +55,7 @@ sinks:
     remove_label_fields: true
     remove_timestamp: true
     labels:
-      hostname: '{{ host }}'
+      hostname: "{{ host }}"
   loki_kubernetes:
     type: loki
     inputs:
@@ -69,14 +69,14 @@ sinks:
     remove_label_fields: true
     remove_timestamp: true
     labels:
-      app: '{{ custom_app_name }}'
-      container: '{{ kubernetes.container_name }}'
-      filename: '{{ kubernetes.file }}'
+      app: "{{ custom_app_name }}"
+      container: "{{ kubernetes.container_name }}"
+      filename: "{{ kubernetes.file }}"
       # instance: >-
       #   {{`{{ kubernetes.pod_labels.app\.kubernetes\.io/instance }}`}}
-      namespace: '{{ kubernetes.pod_namespace }}'
-      node: '{{ kubernetes.pod_node_name }}'
-      pod: '{{ kubernetes.pod_name }}'
+      namespace: "{{ kubernetes.pod_namespace }}"
+      node: "{{ kubernetes.pod_node_name }}"
+      pod: "{{ kubernetes.pod_name }}"
   loki_udm:
     type: loki
     inputs:
@@ -90,8 +90,8 @@ sinks:
     encoding:
       codec: json
     labels:
-      hostname: '{{ host }}'
-      appname: '{{ appname }}'
+      hostname: "{{ host }}"
+      appname: "{{ appname }}"
   prometheus_sink:
     type: prometheus_exporter
     inputs:

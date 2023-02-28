@@ -101,7 +101,8 @@ spec:
         allowEmptyServices: false
         ingressClass: traefik
         # labelSelector: environment=production,method=traefik
-        namespaces: []
+        namespaces:
+          []
           # - "default"
         # IP used for Kubernetes Ingress endpoints
         publishedService:
@@ -270,8 +271,8 @@ spec:
         entryPoint: metrics
         service:
           enabled: true
-##  enable optional CRDs for Prometheus Operator
-##
+        ##  enable optional CRDs for Prometheus Operator
+        ##
         serviceMonitor:
           additionalLabels:
             foo: bar

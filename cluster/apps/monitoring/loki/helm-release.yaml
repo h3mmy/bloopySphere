@@ -29,7 +29,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-
     backend:
       replicas: 3
       persistence:
@@ -381,7 +380,6 @@ spec:
         #           category: logs
         #         annotations:
         #           summary: "Node-Red is unable to connect to Home Assistant"
-
 
   valuesFrom:
     - kind: Secret

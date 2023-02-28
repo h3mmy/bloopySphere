@@ -38,7 +38,7 @@ spec:
         any:
           - key: "{{ request.object.spec.containers[0].resources.limits.cpu || '' }}"
             operator: NotEquals
-            value: ''
+            value: ""
       mutate:
         foreach:
           - list: "request.object.spec.containers"

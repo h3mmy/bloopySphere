@@ -1,5 +1,4 @@
 ---
-
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:

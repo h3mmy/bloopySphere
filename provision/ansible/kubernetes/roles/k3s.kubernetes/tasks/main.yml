@@ -78,7 +78,6 @@
   when:
     - k3s_server_manifests_urls
     - k3s_server_manifests_urls | length > 0
-
 # - name: Generate kubeconfig for home-dns on k8s-0
 #   include_role:
 #     name: dns.kubernetes

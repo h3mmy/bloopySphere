@@ -173,7 +173,6 @@ spec:
         value: "arm64"
         effect: "NoSchedule"
 
-
     persistence:
       config:
         enabled: true

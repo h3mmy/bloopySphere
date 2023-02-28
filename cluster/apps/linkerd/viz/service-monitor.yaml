@@ -20,9 +20,9 @@ spec:
       honorLabels: true
       relabelings:
         - action: keep
-          regex: '^prometheus$'
+          regex: "^prometheus$"
           sourceLabels:
-            - '__meta_kubernetes_pod_container_name'
+            - "__meta_kubernetes_pod_container_name"
   jobLabel: app
   namespaceSelector:
     matchNames:

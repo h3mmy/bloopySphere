@@ -11,22 +11,22 @@ spec:
   replicas: 2
   image: docker.io/library/postgres:15
   scheduler:
-      affinity:
-         podAntiAffinity:
-            preferredDuringSchedulingIgnoredDuringExecution:
-               - weight: 100
-                 podAffinityTerm:
-                    labelSelector:
-                       matchExpressions:
-                         - key: app
-                           operator: In
-                           values:
-                             - *app
-                    topologyKey: "kubernetes.io/hostname"
-      tolerations:
-         - key: group
-           operator: Equal
-           value: critical
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - *app
+              topologyKey: "kubernetes.io/hostname"
+    tolerations:
+      - key: group
+        operator: Equal
+        value: critical
 
   database:
     size: 5Gi

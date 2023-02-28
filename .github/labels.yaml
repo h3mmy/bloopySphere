@@ -74,7 +74,6 @@
 - name: renovate/annotations
   color: "ededed"
 
-
 # Area
 - name: area/ansible
   color: "72ccf3"
