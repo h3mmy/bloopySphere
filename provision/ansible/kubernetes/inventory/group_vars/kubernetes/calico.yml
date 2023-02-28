@@ -13,4 +13,4 @@ calico_encapsulation_ipv6: "None"
 # calico_bgp_external_ips: 10.4.69.0/24
 # # CIDR of the host node interface Calico should use
 calico_node_cidr: 10.1.0.0/24
-calico_node_cidr_ipv6: "{new_ipv6}/112"
+calico_node_cidr_ipv6: "{ipv6_node_cidr}"
