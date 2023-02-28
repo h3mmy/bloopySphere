@@ -20,11 +20,11 @@ spec:
     crds: CreateReplace
     disableWait: true
     remediation:
-      retries: 7
+      retries: 5
   upgrade:
     crds: CreateReplace
     remediation:
-      retries: 7
+      retries: 8
       remediateLastFailure: true
   dependsOn:
     - name: tigera-operator
