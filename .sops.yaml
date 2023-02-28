@@ -22,10 +22,10 @@ creation_rules:
       # personal, flux, tf-cloud-cloudflare, tf-cloud-oci, tf-controller
       - age:
           - age1hr5v66mq2rtflw8vrzmdlaku48v0j5l2wr58lrdmxqp5decczugs3rr6yt
+          - age1pzky92h7assvm9vlyxwpv3q09lcxsz47drjmyvu8eq4j5834792qwsy3ff
           - age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq
           - age1jzgdqns9ru8en3ahl9qpz4lwy4w6naesyyuu222c7kyad0znt5mstv0e3a
           - age1s0tcmcz4ej87zm0uahynjyq77jd072twhmh0txjsamfqpzkspdxq8hcn2a
-          - age1pzky92h7assvm9vlyxwpv3q09lcxsz47drjmyvu8eq4j5834792qwsy3ff
   - path_regex: (provision|infrastructure)/.*(oci/).*\.sops\.ya?ml
     unencrypted_regex: "^(kind)$"
     key_groups:
