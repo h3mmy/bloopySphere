@@ -30,7 +30,8 @@ spec:
     image:
       repository: quay.io/prometheus/snmp-exporter
     extraArgs:
-      # - "--config.file=/config/snmp.yaml"
+
+
       - "--web.config.file=/config/basic_auth.yaml"
     extraConfigmapMounts:
       # - name: *app
