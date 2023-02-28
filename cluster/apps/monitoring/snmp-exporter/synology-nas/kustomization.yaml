@@ -6,17 +6,17 @@ resources:
   - ./secret.sops.yaml
   - ./helm-release.yaml
   # - ./prometheus-rule.yaml
-configMapGenerator:
+# configMapGenerator:
   # - name: synology-dashboard
   #   files:
   #     - synology-dashboard.json=./dashboard.json
-  - name: snmp-exporter-synology
-    files:
-      - snmp.yaml=./snmp.yaml
-generatorOptions:
-  disableNameSuffixHash: true
-  annotations:
-    kustomize.toolkit.fluxcd.io/substitute: disabled
+  # - name: snmp-exporter-synology
+  #   files:
+  #     - snmp.yaml=./snmp.yaml
+# generatorOptions:
+#   disableNameSuffixHash: true
+#   annotations:
+#     kustomize.toolkit.fluxcd.io/substitute: disabled
   # labels:
   #   grafana_dashboard: "true"
 labels:

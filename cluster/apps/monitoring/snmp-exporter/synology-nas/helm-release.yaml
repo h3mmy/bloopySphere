@@ -33,12 +33,12 @@ spec:
       # - "--config.file=/config/snmp.yaml"
       "--web.config.file=/config/basic_auth.yaml"
     extraConfigmapMounts:
-      - name: *app
-        mountPath: /config/snmp.yaml
-        subPath: snmp.yaml
-        configMap: *app
-        readOnly: true
-        defaultMode: 420
+      # - name: *app
+      #   mountPath: /config/snmp.yaml
+      #   subPath: snmp.yaml
+      #   configMap: *app
+      #   readOnly: true
+      #   defaultMode: 420
       - name: &bauth snmp-auth-synology-0
         mountPath: /config/basic_auth.yaml
         subPath: basic_auth.yaml
