@@ -13,4 +13,4 @@ resources:
   - vertical-pod-autoscaler
   - vector
   - node-problem-detector
-  - snmp-exporter
+ # - snmp-exporter
