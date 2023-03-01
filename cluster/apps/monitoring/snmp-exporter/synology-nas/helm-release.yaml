@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: prometheus-community-charts
         namespace: flux-system
-  maxHistory: 3
+  maxHistory: 4
   install:
     createNamespace: true
     remediation:
