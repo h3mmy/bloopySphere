@@ -33,7 +33,7 @@ spec:
       - "--config.file=/etc/snmp_exporter/snmp.yml" 
 
       - "--web.config.file=/config/basic_auth.yaml"
-    extraConfigmapMounts:
+    extraSecretMounts:
       # - name: *app
       #   mountPath: /config/snmp.yaml
       #   subPath: snmp.yaml
