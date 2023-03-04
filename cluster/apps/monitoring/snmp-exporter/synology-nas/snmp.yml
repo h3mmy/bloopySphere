@@ -2276,9 +2276,9 @@ synology:
   timeout: 5s
   auth:
     security_level: authNoPriv
-    username: ${SNMP_SYNO_USER}
-    password: ${SNMP_SYNO_PASS}
+    username: ${SYNO_SNMP_USER}
+    password: ${SYNO_SNMP_PASS}
     auth_protocol: SHA
-    # priv_protocol: DES
-    # priv_password: otherPass
+    priv_protocol: DES
+    priv_password: otherPass
     context_name: context
