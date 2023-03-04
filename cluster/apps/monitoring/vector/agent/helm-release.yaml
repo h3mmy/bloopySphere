@@ -108,8 +108,8 @@ spec:
         mountPath: /host/sys
         readOnly: true
 
-    podAnnotations:
-      configmap.reloader.stakater.com/reload: vector-agent-configmap
+    # podAnnotations:
+    #   configmap.reloader.stakater.com/reload: vector-agent-configmap
 
     tolerations:
       - key: node-role.kubernetes.io/master

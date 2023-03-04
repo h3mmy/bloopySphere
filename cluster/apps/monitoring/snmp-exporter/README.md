@@ -2,10 +2,10 @@
 
 This is using the [prometheus snmp-exporter](https://github.com/prometheus/snmp_exporter)
 
-The exporter has a default config file which works for my purposes [snmp.yml](https://\
-47aw.githubusercontent.com/prometheus/snmp_exporter/v0.21.0/snmp.yml/). Instead of using a simple kustomization to download it, I've made a copy so it doesn't have a fit when my internet is down.
+The exporter has a default config file [snmp.yml](https://raw.githubusercontent.com/prometheus/snmp_exporter/v0.21.0/snmp.yml/). It is too big to fit in a configMap.
 If needed a generator is available [here](https://github.com/prometheus/snmp_exporter/tree/main/generator)
 
+If you want to use auth credentials from a secret you can use a secret, mount it using `extraSecretMounts` in the helm-values and pass an extraArg `"--web.config.file=/config/basic_auth.yaml"`
 The basic_auth.yaml looks like this:
 
 ```yaml

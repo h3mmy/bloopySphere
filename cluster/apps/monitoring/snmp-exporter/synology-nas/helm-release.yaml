@@ -30,18 +30,12 @@ spec:
     image:
       repository: quay.io/prometheus/snmp-exporter
     extraArgs:
-      - "--web.config.file=/config/basic_auth.yaml"
-    extraSecretMounts:
-      # - name: *app
-      #   mountPath: /config/snmp.yaml
-      #   subPath: snmp.yaml
-      #   configMap: *app
-      #   readOnly: true
-      #   defaultMode: 420
-      - name: &bauth snmp-auth-synology-0
-        mountPath: /config/basic_auth.yaml
-        subPath: basic_auth.yaml
-        secretName: *bauth
+      - "--config.file=/config/snmp.yaml"
+    extraConfigMaps:
+      - name: *app
+        mountPath: /config/snmp.yaml
+        subPath: snmp.yaml
+        configMap: *app
         readOnly: true
         defaultMode: 420
     serviceMonitor:
