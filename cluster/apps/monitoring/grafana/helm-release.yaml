@@ -226,13 +226,12 @@ spec:
               implementation: "prometheus"
 
     dashboards:
-      calico:
+      default:
         # Ref: https://grafana.com/grafana/dashboards/12175
         calico-felix:
           gnetId: 12175
           revision: 5
           datasource: Prometheus
-      default:
         kubernetes-api-server:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-api-server.json
           datasource: Prometheus
