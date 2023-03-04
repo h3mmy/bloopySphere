@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: &fullname ak-outpost-ldap-external
+  namespace: auth
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: "${LB_V4_AK_LDAP}"
+    metallb.universe.tf/allow-shared-ip: *fullname
+spec:
+  ports:
+    - name: ldap
+      port: 389
+      protocol: TCP
+      targetPort: ldap
+    - name: ldaps
+      port: 636
+      protocol: TCP
+      targetPort: ldaps
+    - name: http-metrics
+      port: 9300
+      protocol: TCP
+      targetPort: http-metrics
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  loadBalancerIPs:
+    - ${LB_V4_AK_LDAP}
+  selector:
+    app.kubernetes.io/managed-by: goauthentik.io
+    app.kubernetes.io/name: authentik-outpost
+    app.kubernetes.io/instance: *fullname
+    goauthentik.io/outpost-type: ldap
+    goauthentik.io/outpost-name: ldap-external

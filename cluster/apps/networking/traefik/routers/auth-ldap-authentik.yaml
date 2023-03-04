@@ -9,6 +9,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: ldaps
     traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
     cert-manager.io/cluster-issuer: letsencrypt-production
+    traefik.ingress.kubernetes.io/affinity: "true"
 spec:
   rules:
     # - host: &host ldap.${XYZ_DOMAIN}

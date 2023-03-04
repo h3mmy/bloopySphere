@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: auth
+resources:
+  - deployment.yaml
+  - service.yaml
+  - secret.sops.yaml
+commonLabels:
+  app.kubernetes.io/instance: ldap-external
+  app.kubernetes.io/managed-by: goauthentik.io
+  app.kubernetes.io/name: authentik-outpost-ldap
+  app.kubernetes.io/version: 2023.2.3
+  goauthentik.io/outpost-type: ldap
+  goauthentik.io/outpost-name: ldap-external

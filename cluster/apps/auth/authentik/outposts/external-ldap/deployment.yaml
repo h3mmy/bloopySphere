@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ak-outpost-ldap-external
+  namespace: auth
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: &outpostName ldap-external
+      app.kubernetes.io/managed-by: goauthentik.io
+      app.kubernetes.io/name: authentik-outpost-ldap
+      app.kubernetes.io/version: 2023.2.3
+      goauthentik.io/outpost-type: ldap
+      goauthentik.io/outpost-name: *outpostName
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: *outpostName
+        app.kubernetes.io/managed-by: goauthentik.io
+        app.kubernetes.io/name: authentik-outpost-ldap
+        app.kubernetes.io/version: 2023.2.3
+        goauthentik.io/outpost-type: ldap
+        goauthentik.io/outpost-name: *outpostName
+    spec:
+      containers:
+        - env:
+            - name: AUTHENTIK_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: authentik_host
+                  name: authentik-outpost-api
+            - name: AUTHENTIK_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: token
+                  name: authentik-outpost-api
+            - name: AUTHENTIK_INSECURE
+              valueFrom:
+                secretKeyRef:
+                  key: authentik_host_insecure
+                  name: authentik-outpost-api
+          image: ghcr.io/goauthentik/ldap
+          name: ldap
+          ports:
+            - containerPort: 3389
+              name: ldap
+              protocol: TCP
+            - containerPort: 6636
+              name: ldaps
+              protocol: TCP
+            - containerPort: 9300
+              name: http-metrics
+              protocol: TCP
