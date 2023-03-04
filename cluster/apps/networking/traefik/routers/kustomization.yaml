@@ -5,6 +5,7 @@ resources:
   - error-pages.yaml
   - classic-traefik.yaml
   - auth-ldap-authentik.yaml
+  - auth-ldap-authentik-ingroutetcp.yaml
   # - media-lidarr-bypass.yaml
   - home-home-assistant.yaml
   - home-emqx.yaml

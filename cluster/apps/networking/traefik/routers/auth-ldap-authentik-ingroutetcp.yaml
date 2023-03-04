@@ -1,0 +1,16 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: ldap-authentik-tcp
+  namespace: auth
+spec:
+  entryPoints:
+    - ldaps
+  routes:
+    - match: HostSNI(`ldap.${CLASSIC_DOMAIN}`)
+      services:
+        - name: ak-outpost-ldap-outpost
+          port: 389
+  tls:
+    secretName: tls.ldap-bloopnet

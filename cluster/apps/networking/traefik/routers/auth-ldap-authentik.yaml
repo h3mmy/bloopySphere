@@ -11,16 +11,16 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   rules:
-    - host: &host ldap.${XYZ_DOMAIN}
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: ak-outpost-ldap-outpost
-                port:
-                  number: 389
+    # - host: &host ldap.${XYZ_DOMAIN}
+    #   http:
+    #     paths:
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: ak-outpost-ldap-outpost
+    #             port:
+    #               number: 389
     - host: &shost ldaps.${XYZ_DOMAIN}
       http:
         paths:
@@ -34,5 +34,5 @@ spec:
   tls:
     - secretName: tls.ldap-bloopnet
       hosts:
-        - *host
+        - ldap.${XYZ_DOMAIN}
         - *shost
