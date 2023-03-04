@@ -8,7 +8,7 @@ spec:
   entryPoints:
     - ldaps
   routes:
-    - match: HostSNI(`ldap.${CLASSIC_DOMAIN}`)
+    - match: HostSNI(`ldap.${XYZ_DOMAIN}`)
       services:
         - name: ak-outpost-ldap-outpost
           port: 389
