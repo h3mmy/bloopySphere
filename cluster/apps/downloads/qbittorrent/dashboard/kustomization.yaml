@@ -5,7 +5,8 @@ namespace: downloads
 configMapGenerator:
   - name: qbittorrent-dashboard
     files:
-      - qbittorrent.json=https://raw.githubusercontent.com/esanchezm/prometheus-qbittorrent-exporter/master/grafana/dashboard.json
+      - qbittorrent.json=./dashboard.json
+      # - qbittorrent.json=https://raw.githubusercontent.com/esanchezm/prometheus-qbittorrent-exporter/master/grafana/dashboard.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
