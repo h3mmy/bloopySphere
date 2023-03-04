@@ -9,4 +9,5 @@ resources:
   - home-home-assistant.yaml
   - home-emqx.yaml
   - home-hass-db.yaml
+  - networking-camelus.yaml
   # - home-zwavejs-wss.yaml

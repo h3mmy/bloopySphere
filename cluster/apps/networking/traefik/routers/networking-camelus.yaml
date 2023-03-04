@@ -1,0 +1,31 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: camelus-plexii
+  namespace: networking
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    hajimari.io/appName: camelus-plexii
+    hajimari.io/instance: bloop-xyz
+    hajimari.io/enable: "true"
+    hajimari.io/icon: synology
+
+spec:
+  rules:
+    - host: &host camelus.${XYZ_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: camelus-plexii
+                port:
+                  number: 5001
+  tls:
+    - secretName: tls.camelus-plexii
+      hosts:
+        - *host
