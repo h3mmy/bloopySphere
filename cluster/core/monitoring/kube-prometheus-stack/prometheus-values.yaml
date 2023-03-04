@@ -103,7 +103,7 @@ prometheus:
         honor_timestamps: true
         static_configs:
           - targets:
-              - "kube-dns.kube-system:9153"
+              - "coredns-metrics.kube-system:9153"
       - job_name: "jupyterhub"
         scrape_interval: 5m
         scrape_timeout: 90s
