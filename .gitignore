@@ -47,4 +47,4 @@ infrastructure/bare-metal/*
 infrastructure/shared/networks.yaml
 infrastructure/terraform/vault/*
 *volsync-config.yaml
-**/synology-nas/Synology_MIB_File/*
+cluster/apps/auth/realms/*
