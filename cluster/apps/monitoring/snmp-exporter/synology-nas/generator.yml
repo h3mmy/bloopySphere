@@ -37,7 +37,7 @@ modules:
 
     auth:
       # Community string is used with SNMP v1 and v2. Defaults to "public".
-      # community: public
+      community: synology
 
       # v3 has different and more complex settings.
       # Which are required depends on the security_level.

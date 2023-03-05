@@ -2275,6 +2275,7 @@ synology:
   retries: 3
   timeout: 5s
   auth:
+    community: synology
     security_level: authNoPriv
     username: ${SYNO_SNMP_USER}
     password: ${SYNO_SNMP_PASS}
