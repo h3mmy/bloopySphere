@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - tf-cloudflare.yaml
   - tf-gcp.yaml
+  - tf-s3.yaml
