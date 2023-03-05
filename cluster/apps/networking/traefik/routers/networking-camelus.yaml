@@ -6,7 +6,7 @@ metadata:
   namespace: networking
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
     cert-manager.io/cluster-issuer: letsencrypt-production
     hajimari.io/appName: camelus-plexii
     hajimari.io/instance: bloop-xyz
