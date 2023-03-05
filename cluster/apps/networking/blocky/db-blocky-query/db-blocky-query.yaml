@@ -8,7 +8,7 @@ metadata:
     config.alpha.linkerd.io/proxy-wait-before-exit-seconds: "20"
 spec:
   customConfig: blocky-postgres-conf
-  replicas: 2
+  replicas: 1
   image: docker.io/library/postgres:15
   scheduler:
     affinity:
