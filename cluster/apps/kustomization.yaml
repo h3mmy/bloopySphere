@@ -24,3 +24,4 @@ resources:
   - kyverno
   - vault
   - infra
+  - iam/ks.yaml
