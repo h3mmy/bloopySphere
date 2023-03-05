@@ -2270,7 +2270,7 @@ synology:
       type: DisplayString
     - labels: []
       labelname: serviceInfoIndex
-  version: 3
+  version: 2
   max_repetitions: 25
   retries: 3
   timeout: 5s

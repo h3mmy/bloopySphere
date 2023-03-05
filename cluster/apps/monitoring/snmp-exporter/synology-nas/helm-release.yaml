@@ -38,6 +38,8 @@ spec:
         configMap: *app
         readOnly: true
         defaultMode: 420
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: *app
     serviceMonitor:
       enabled: true
       namespace: monitoring
