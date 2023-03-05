@@ -14,21 +14,3 @@ spec:
     kind: GitRepository
     name: flux-system
   wait: true
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-kind: Kustomization
-metadata:
-  name: cluster-apps-cloudnative-pg-config
-  namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
-spec:
-  interval: 10m
-  path: "./cluster/apps/database/cloudnative-pg/config"
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-  wait: true
-  dependsOn:
-    - name: cluster-apps-cloudnative-pg
