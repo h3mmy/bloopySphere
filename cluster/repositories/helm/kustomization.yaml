@@ -46,3 +46,4 @@ resources:
   - angelnu-charts.yaml
   - coredns-charts.yaml
   - external-secrets.yaml
+  - cloudnative-pg.yaml
