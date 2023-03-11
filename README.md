@@ -100,6 +100,22 @@ Loki snippets. If you know you know.
 {container="traefik"} | json message_extracted="message" |  line_format "{{.message_extracted}}" | json | DownstreamStatus!=`200`
 ```
 
+
+Publicly available DoH server lists
+
+
+
+https://github.com/curl/curl/wiki/DNS-over-HTTPS#publicly-available-servers
+
+https://cln.io/blog/combined-list-of-dns-servers/
+
+https://github.com/Sekhan/TheGreatWall
+
+https://github.com/crypt0rr/public-doh-servers/tree/main
+
+
+
+
 ## :handshake:&nbsp; Community
 
 Thanks to all the people who donate their time to the [Kubernetes @Home](https://github.com/k8s-at-home/) community.
