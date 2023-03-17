@@ -24,7 +24,7 @@ spec:
                       path: init-vault.sh
       containers:
         - name: kubectl
-          image: ghcr.io/onedr0p/kubernetes-kubectl:1.26.2
+          image: ghcr.io/onedr0p/kubernetes-kubectl:1.26.3
           volumeMounts:
             - name: init-script
               mountPath: /scripts/init-vault.sh
