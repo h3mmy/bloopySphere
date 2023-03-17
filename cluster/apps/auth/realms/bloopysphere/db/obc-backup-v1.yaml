@@ -1,0 +1,12 @@
+---
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: cnpg-kc-backup-v1
+  namespace: auth
+spec:
+  generateBucketName: kc-postgres-backup
+  storageClassName: rook-ceph-bucket
+  additionalConfig:
+    maxObjects: "1000"
+    maxSize: "2G"

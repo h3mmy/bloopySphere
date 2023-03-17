@@ -47,4 +47,5 @@ infrastructure/bare-metal/*
 infrastructure/shared/networks.yaml
 infrastructure/terraform/vault/*
 *volsync-config.yaml
-cluster/apps/auth/realms/*
+cluster/apps/auth/realms/bloopysphere/keycloak.yaml
+cluster/apps/auth/realms/bloopysphere/certificate.yaml
