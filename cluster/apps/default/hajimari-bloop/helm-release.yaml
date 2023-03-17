@@ -127,7 +127,7 @@ spec:
           hajimari.io/instance: "bloop-xyz"
           hajimari.io/icon: "weather-sunset"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-xyz-auth@kubernetescrd"
         hosts:
           - host: "admin.${XYZ_DOMAIN}"
             paths:
