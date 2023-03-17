@@ -8,6 +8,12 @@
       },
       {
         "matchDatasources": ["docker"],
+        "matchPackageNames": ["ghcr.io/goauthentik/server"],
+        "fileMatch": "cluster/apps/auth/authentik.+\\.ya?ml$",
+        "allowedVersions":"<=2023.3.0"
+      },
+      {
+        "matchDatasources": ["docker"],
         "matchPackageNames": ["influxdb"],
         "allowedVersions": "<2"
       },
