@@ -10,7 +10,7 @@ spec:
   serviceAccountName: system-upgrade
   concurrency: 1
   # renovate: datasource=github-releases depName=k3s-io/k3s
-  version: v1.26.1+k3s1
+  version: v1.26.2+k3s1
   prepare:
     # Since v0.5.0-m1 SUC will use the resolved version of the plan for the tag on the prepare container.
     # image: rancher/k3s-upgrade:v1.23.5-k3s1
