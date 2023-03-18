@@ -103,6 +103,30 @@ module "cf_domain_xyz" {
       value     = "spool.mail.gandi.net"
     },
     {
+      name = "gm1._domainkey.${local.domains["xyz"]}"
+      proxiable = false
+      proxied   = false
+      ttl       = 1
+      type      = "CNAME"
+      value     = "gm1.gandimail.net."
+    },
+    {
+      name = "gm2._domainkey.${local.domains["xyz"]}"
+      proxiable = false
+      proxied   = false
+      ttl       = 1
+      type      = "CNAME"
+      value     = "gm2.gandimail.net."
+    },
+    {
+      name = "gm3._domainkey.${local.domains["xyz"]}"
+      proxiable = false
+      proxied   = false
+      ttl       = 1
+      type      = "CNAME"
+      value     = "gm3.gandimail.net."
+    },
+    {
       name      = "webmail.${local.domains["xyz"]}"
       proxiable = true
       proxied   = true
