@@ -34,8 +34,10 @@ spec:
   values:
     fullnameOverride: authentik
     image:
-      repository: ghcr.io/goauthentik/server
-      tag: 2023.3.0
+      # repository: ghcr.io/goauthentik/server
+      # tag: 2023.3.0
+      repository: ghcr.io/goauthentik/dev-server
+      tag: gh-providers-proxy-rework-endpoints-1679090841-c08a9a2-arm64
     geoip:
       enabled: true
       accountId: "${MAXMIND_ACCOUNT_ID}"
@@ -43,7 +45,8 @@ spec:
     authentik:
       log_level: info
       outposts:
-        container_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
+        container_image_base: ghcr.io/goauthentik/dev-%(type)s:gh-%(build_hash)s
+        # container_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
       secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
       postgresql:
         host: "authentik-postgres"
