@@ -37,7 +37,7 @@ spec:
       # repository: ghcr.io/goauthentik/server
       # tag: 2023.3.0
       repository: ghcr.io/goauthentik/dev-server
-      tag: gh-providers-proxy-rework-endpoints-1679090841-c08a9a2-arm64
+      tag: gh-providers-proxy-rework-endpoints-1679090841-c08a9a2
     geoip:
       enabled: true
       accountId: "${MAXMIND_ACCOUNT_ID}"
