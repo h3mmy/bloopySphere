@@ -33,6 +33,7 @@ spec:
         maxParallel: 5
       destinationPath: s3://cnpg/v15/v1
       endpointURL: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local
+      # credentials are populated via rook-ceph-operator
       s3Credentials:
         accessKeyId:
           name: cloudnative-pg-postgres-s3

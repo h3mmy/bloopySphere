@@ -50,8 +50,20 @@ spec:
       - --clientRateLimitQPS=30
       - --clientRateLimitBurst=60
 
+    grafana:
+      enabled: true
     serviceMonitor:
       enabled: true
+      interval: 1m
+    backgroundController:
+      serviceMonitor:
+        enabled: true
+    cleanupController:
+      serviceMonitor:
+        enabled: true
+    reportsController:
+      serviceMonitor:
+        enabled: true
 
     resources:
       requests:
