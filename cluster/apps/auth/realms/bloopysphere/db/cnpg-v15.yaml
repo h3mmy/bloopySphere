@@ -3,7 +3,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: kc-postgres
-  namespace: database
+  namespace: auth
 spec:
   instances: 3
 
@@ -24,6 +24,15 @@ spec:
 
   superuserSecret:
     name: cloudnative-pg-postgres-superuser
+
+  bootstrap:
+    # https://www.keycloak.org/server/db
+    initdb:
+      owner: keycloak
+      database: keycloak
+      secret:
+        name: kc-postgres-user
+      encoding: 'UTF8'
 
   backup:
     retentionPolicy: 30d

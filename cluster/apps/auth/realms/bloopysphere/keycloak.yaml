@@ -15,6 +15,6 @@ spec:
       name: keycloak-db-secret
       key: password
   http:
-    tlsSecret: example-tls-secret
+    tlsSecret: tls.${XYZ_DOMAIN/./-}
   hostname:
-    hostname: test.keycloak.org
+    hostname: id.${XYZ_DOMAIN}

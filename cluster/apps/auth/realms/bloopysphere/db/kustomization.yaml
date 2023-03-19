@@ -4,3 +4,6 @@ kind: Kustomization
 resources:
   - ./obc-backup-v1.yaml
   - ./backup-schedule.yaml
+  - ./secret.sops.yaml
+  # - ./prometheus-rule.yaml
+  # - ./cnpg-v15.yaml

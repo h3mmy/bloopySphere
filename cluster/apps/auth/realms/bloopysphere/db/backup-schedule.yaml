@@ -2,11 +2,11 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
-  name: postgres-v15
-  namespace: database
+  name: backup-schedule-kc-postgres-v1
+  namespace: auth
 spec:
   schedule: "@daily"
   immediate: true
   backupOwnerReference: self
   cluster:
-    name: postgres-v15
+    name: kc-postgres
