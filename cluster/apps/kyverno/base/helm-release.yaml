@@ -47,7 +47,6 @@ spec:
             app.kubernetes.io/instance: kyverno
 
     extraArgs:
-      - --autogenInternals=false
       - --clientRateLimitQPS=30
       - --clientRateLimitBurst=60
 
