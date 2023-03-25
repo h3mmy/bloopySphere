@@ -33,7 +33,7 @@ jobs:
 
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@9328bab880abf4acc377d77718d28c6ac167f154 # v35.7.2
+        uses: tj-actions/changed-files@07f86bcdc42639264ec561c7f175fea5f532b6ce # v35.7.6
         with:
           dir_names: true
           dir_names_max_depth: 3
@@ -71,7 +71,7 @@ jobs:
           private_key: "${{ secrets.APP_PRIVATE_KEY }}"
 
       - name: Checkout
-        uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f # v3.4.0
+        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
         with:
           token: "${{ steps.generate-token.outputs.token }}"
 
