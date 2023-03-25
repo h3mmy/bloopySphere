@@ -72,6 +72,10 @@ spec:
         containerIPForwarding: Enabled
       nodeMetricsPort: 9091
       typhaMetricsPort: 9093
+      calicoNodeDaemonSet:
+        metadata:
+          labels:
+            goldilocks.fairwinds.com/enabled: "true"
 
     # Configures general installation parameters for Calico. Schema is based
     # on the operator.tigera.io/Installation API documented

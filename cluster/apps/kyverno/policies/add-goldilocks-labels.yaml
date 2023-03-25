@@ -26,6 +26,8 @@ spec:
                 - default
                 - rook-ceph
                 - monitoring
+                - calico-system
+                - linkerd-cni
       mutate:
         targets:
           - apiVersion: v1
