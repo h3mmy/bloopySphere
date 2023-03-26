@@ -24,7 +24,7 @@ resource "google_kms_key_ring" "key_ring" {
 resource "google_kms_crypto_key" "crypto_key" {
   name            = var.crypto_key
   key_ring        = google_kms_key_ring.key_ring.id
-  rotation_period = "100000s"
+  rotation_period = "90d"
 }
 
 # Add the service account to the Keyring
