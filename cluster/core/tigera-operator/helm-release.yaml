@@ -12,7 +12,7 @@ spec:
     spec:
       # renovate: registryUrl=https://projectcalico.docs.tigera.io/charts
       chart: tigera-operator
-      version: &tag v3.25.0
+      version: &tag v3.25.1
       sourceRef:
         kind: HelmRepository
         name: calico-charts
