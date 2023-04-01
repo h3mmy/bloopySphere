@@ -6,5 +6,5 @@ resources:
   - redis
   - postgres
   - media
-  - sp-authentik.yaml
+ # - sp-authentik.yaml
   - helm-release.yaml
