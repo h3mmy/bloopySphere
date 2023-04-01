@@ -6,7 +6,7 @@ resources:
   - ./home-assistant
   - ./zwavejs2mqtt
   - ./ser2sock
-  - ./network-ups-tools
+  # - ./network-ups-tools
   - ./emqx
   - ./node-red
   - ./n8n

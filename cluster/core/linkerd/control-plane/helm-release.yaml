@@ -65,7 +65,7 @@ spec:
     # -- Docker image pull policy
     imagePullPolicy: IfNotPresent
     # -- Log level for the control plane components
-    controllerLogLevel: info
+    controllerLogLevel: debug
     # -- Log format for the control plane components
     controllerLogFormat: plain
     # -- default kubernetes deployment strategy
