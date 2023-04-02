@@ -37,7 +37,7 @@ spec:
     additionalContainers:
       node:
         name: node
-        image: haveagitgat/tdarr_node:2.00.18
+        image: haveagitgat/tdarr_node:2.00.20
         imagePullPolicy: IfNotPresent
         env:
           - name: TZ
