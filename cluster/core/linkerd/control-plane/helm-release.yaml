@@ -65,7 +65,7 @@ spec:
     # -- Docker image pull policy
     imagePullPolicy: IfNotPresent
     # -- Log level for the control plane components
-    controllerLogLevel: debug
+    controllerLogLevel: info
     # -- Log format for the control plane components
     controllerLogFormat: plain
     # -- default kubernetes deployment strategy
@@ -94,6 +94,8 @@ spec:
       # "all-unauthenticated", "cluster-authenticated", "cluster-unauthenticated", "deny"
       # @default -- "all-unauthenticated"
       defaultAllowPolicy: "all-unauthenticated"
+
+      logLevel: debug
 
       probeNetworks:
         - 0.0.0.0/0
