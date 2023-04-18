@@ -9,7 +9,7 @@ spec:
   ref:
     branch: main
     # renovate: datasource=github-releases depName=emqx/emqx versioning=loose
-    tag: v5.0.22
+    tag: v5.0.23
   url: ssh://github.com/emqx/emqx.git
   secretRef:
     name: flux-system
