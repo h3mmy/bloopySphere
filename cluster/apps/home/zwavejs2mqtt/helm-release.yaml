@@ -23,7 +23,7 @@ spec:
     priorityClassName: home-cluster-critical
     image:
       repository: ghcr.io/zwave-js/zwave-js-ui
-      tag: 8.13.1
+      tag: 8.14.0
     env:
       TZ: "${TZ}"
     service:
