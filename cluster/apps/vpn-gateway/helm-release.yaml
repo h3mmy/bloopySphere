@@ -115,6 +115,8 @@ spec:
             value: "${VPN_FORWARDED_PORT_1},${VPN_FORWARDED_PORT_2}"
           - name: VPN_ENDPOINT_PORT
             value: ${VPN_GATEWAY_VPN_PORT}
+          - name: DNS_ADDRESS
+            value: ${SVC_KUBE_DNS_V4}
 
         envFrom:
           - secretRef:

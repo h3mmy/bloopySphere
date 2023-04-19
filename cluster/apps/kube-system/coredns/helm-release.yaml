@@ -54,8 +54,12 @@ spec:
       clusterIP: &ipv4 10.43.0.10
       clusterIPs:
         - *ipv4
-        - fd0d:b917:e7b6:43::d21e
+        - ${SVC_KUBE_DNS_V6}
       name: kube-dns
+      ipFamilyPolicy: PreferDualStack
+      ipFamilies:
+        - "IPv4"
+        - "IPv6"
 
     prometheus:
       # Set this to true to create Service for Prometheus metrics
