@@ -5,5 +5,5 @@ resources:
   - flux-oci-ks.yaml
   - keys
   - gotk-pvc.yaml
-patchesStrategicMerge:
-  - gotk-patches.yaml
+# patchesStrategicMerge:
+#   - gotk-patches.yaml
