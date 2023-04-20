@@ -107,6 +107,7 @@ spec:
         storageClass: "local-path"
         accessMode: ReadWriteOnce
         size: 20Gi
+        volumeName: pvc-8254e279-95f2-4332-a470-b06934807458
       transcode:
         enabled: true
         type: emptyDir
