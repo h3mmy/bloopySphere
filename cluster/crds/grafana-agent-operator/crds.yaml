@@ -18,7 +18,7 @@ spec:
     # include deploy crds dir
     !/charts/agent-operator/crds/monitoring.grafana.com*
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: grafana-agent-operator-crds
