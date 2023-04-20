@@ -8,7 +8,7 @@ spec:
   accessModes:
     - ReadWriteOnce
     - ReadWriteMany
-  storageClassName: rook-ceph
+  storageClassName: ceph-block
   resources:
     requests:
       storage: 2Gi
