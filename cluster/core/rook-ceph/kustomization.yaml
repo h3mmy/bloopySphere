@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./cluster
- # - ./operator
+  - ./operator
   - ./rbac
 #  - ./rook-direct-mount
 #  - ./snapshot-controller
