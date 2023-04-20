@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gotk-pvc
+  namespace: flux-system
+spec:
+  accessModes:
+    - ReadWriteOnce
+    - ReadWriteMany
+  storageClassName: rook-ceph
+  resources:
+    requests:
+      storage: 2Gi

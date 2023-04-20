@@ -8,12 +8,19 @@ metadata:
 spec:
   template:
     spec:
+      volumes:
+        - name: persistent-data
+          persistentVolumeClaim:
+            claimName: gotk-pvc
       containers:
         - name: manager
           resources:
             limits:
-              cpu: 1
+              cpu: "1"
               memory: 2Gi
+          volumeMounts:
+            - name: persistent-data
+              mountPath: /data
           args:
             - --watch-all-namespaces
             - --log-level=info
@@ -51,6 +58,10 @@ spec:
             limits:
               cpu: 1200m
               memory: 1500Mi
+          args:
+            - "--feature-gates=OOMWatch=true"
+            - "--oom-watch-memory-threshold=95"
+            - "--oom-watch-interval=500ms"
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
