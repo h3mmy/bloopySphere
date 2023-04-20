@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - kubegres.yaml
   - emqx-chart.yaml
+  - local-path-provisioner.yaml
