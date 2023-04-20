@@ -50,3 +50,4 @@ infrastructure/terraform/vault/*
 cluster/apps/auth/realms/bloopysphere/keycloak.yaml
 cluster/apps/auth/realms/bloopysphere/certificate.yaml
 cluster/bootstrap
+kube-dns.yml
