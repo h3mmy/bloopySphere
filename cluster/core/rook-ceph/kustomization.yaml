@@ -6,5 +6,5 @@ resources:
   - ./cluster
  # - ./operator
   - ./rbac
-  - ./rook-direct-mount
-  - ./snapshot-controller
+#  - ./rook-direct-mount
+#  - ./snapshot-controller
