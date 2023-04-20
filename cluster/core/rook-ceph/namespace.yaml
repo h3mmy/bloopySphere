@@ -3,6 +3,7 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: rook-ceph
+  #kubectl get namespace "rook-ceph" -o json   | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/"   | kubectl replace --raw /api/v1/namespaces/rook-ceph/finalize -f -
   labels:
     goldilocks.fairwinds.com/enabled: "true"
     linkerd.io/inject: disabled

@@ -100,6 +100,8 @@ Loki snippets. If you know you know.
 {container="traefik"} | json message_extracted="message" |  line_format "{{.message_extracted}}" | json | DownstreamStatus!=`200`
 ```
 
+`kubectl get namespace "monitoring" -o json   | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/"   | kubectl replace --raw /api/v1/namespaces/monitoring/finalize -f -`
+
 
 Publicly available DoH server lists
 
