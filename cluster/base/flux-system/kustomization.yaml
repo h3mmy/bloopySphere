@@ -6,6 +6,6 @@ resources:
   - keys
   - gotk-pvc.yaml
   - gotk-sync.yaml
-  - gotk-components.yaml
-patchesStrategicMerge:
-  - gotk-patches.yaml
+  # - gotk-components.yaml
+# patchesStrategicMerge:
+#   - gotk-patches.yaml
