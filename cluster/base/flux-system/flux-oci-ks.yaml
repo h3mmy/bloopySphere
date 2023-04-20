@@ -18,8 +18,6 @@ metadata:
   name: flux
   namespace: flux-system
 spec:
-  # not active yet - just in case
-  suspend: true
   interval: 10m
   path: ./
   prune: true
