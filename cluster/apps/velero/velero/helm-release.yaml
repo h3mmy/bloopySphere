@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: velero/velero
-      tag: v1.10.2
+      tag: v1.11.0
     configuration:
       extraEnvVars:
         TZ: "${TZ}"
