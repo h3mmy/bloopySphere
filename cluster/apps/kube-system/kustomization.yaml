@@ -13,3 +13,4 @@ resources:
   - ./reflector
   # - kopia
   - ./volsync
+  - ./local-path-provisioner/ks.yaml
