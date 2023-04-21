@@ -129,7 +129,7 @@ spec:
         ssl: false
 
       mon:
-        count: 3
+        count: 1
 
       storage:
         useAllNodes: false
