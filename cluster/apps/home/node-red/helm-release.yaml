@@ -28,7 +28,7 @@ spec:
     priorityClassName: home-cluster-critical
     initContainers:
       npm-update:
-        image: node:19-alpine
+        image: node:20-alpine
         command:
           - /bin/sh
           - -c
