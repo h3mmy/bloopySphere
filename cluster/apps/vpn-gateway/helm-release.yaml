@@ -8,6 +8,7 @@ spec:
   interval: 5m
   chart:
     spec:
+      reconcileStrategy: Revision
       # renovate: registryUrl=https://angelnu.github.io/helm-charts/
       chart: pod-gateway
       version: 6.5.0
