@@ -29,8 +29,6 @@ spec:
   dependsOn:
     - name: tigera-operator
       namespace: tigera-operator
-    - name: rook-ceph
-      namespace: rook-ceph
   valuesFrom:
     - kind: ConfigMap
       name: prometheus-values
