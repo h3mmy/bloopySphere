@@ -36,6 +36,13 @@ spec:
         requests:
           storage: 6Gi
 
+    initDB:
+      dump:
+        name: ghost-mysql-mygreatschedule230418040027
+        path: /
+        persistentVolumeClaim:
+          claimName: ghost-db-backup
+
     backupProfiles:
       - name: ghost-mysql-backup-pvc # Embedded backup profile
         dumpInstance: # MySQL Shell Dump
