@@ -109,7 +109,7 @@ spec:
         osd:
           requests:
             # @default cpu 3000m
-            cpu: 600m
+            cpu: 650m
             memory: 1Gi
         prepareosd:
           requests:
