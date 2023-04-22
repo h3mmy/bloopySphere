@@ -35,8 +35,6 @@ spec:
 
   values:
     image:
-      repository: mysql
-      name: mysql-operator
       pullPolicy: IfNotPresent
 
     envs:

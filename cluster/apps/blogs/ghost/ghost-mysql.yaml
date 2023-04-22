@@ -24,7 +24,7 @@ spec:
       remediateLastFailure: true
 
   values:
-    serverVersion: "8.0.30"
+    serverVersion: "8.0.33"
     serverInstances: 1
     routerInstances: 1
     tls:
