@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.goauthentik.io/
       chart: authentik
-      version: 2023.3.1
+      version: 2023.4.1
       sourceRef:
         kind: HelmRepository
         name: authentik-charts
@@ -34,7 +34,7 @@ spec:
     fullnameOverride: authentik
     image:
       repository: ghcr.io/goauthentik/server
-      tag: 2023.3.1
+      tag: 2023.4.1
       # repository: ghcr.io/goauthentik/dev-server
       # tag: gh-providers-proxy-rework-endpoints-1679090841-c08a9a2
     geoip:
