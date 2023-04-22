@@ -22,7 +22,7 @@ spec:
   upgrade:
     remediation:
       retries: 7
-      remediateLastFailure: true # remediate the last failure, when no retries remain
+      remediateLastFailure: false # remediate the last failure, when no retries remain
     # crds: CreateReplace
   values:
     configOverride: |
