@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: &app sabnzbd
   namespace: downloads
+  labels:
+    routed-gateway: "false"
 spec:
   interval: 15m
   chart:
@@ -115,7 +117,7 @@ spec:
           nfs:
             server: "${NAS_ADDRESS}"
             path: /volume3/Data/Backups/app/sabnzbd
-        mountPath: /config/Backups
+        mountPath: /Backups
         readOnly: false
     resources:
       requests:
