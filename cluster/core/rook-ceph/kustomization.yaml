@@ -8,4 +8,4 @@ resources:
   # Flux-Kustomizations
   - ./rook-ceph/ks.yaml
   # Post Flux Kustomizations
-  - ./rook-ceph/kustomization.yaml
+  - ./rook-ceph/tools
