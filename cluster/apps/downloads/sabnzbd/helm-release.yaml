@@ -4,8 +4,6 @@ kind: HelmRelease
 metadata:
   name: &app sabnzbd
   namespace: downloads
-  labels:
-    routed-gateway: "false"
 spec:
   interval: 15m
   chart:

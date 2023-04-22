@@ -52,6 +52,7 @@ spec:
     DNS: 172.16.0.1
 
     settings:
+      IPTABLES_NFT: "yes"
       NOT_ROUTED_TO_GATEWAY_CIDRS: "172.16.0.0/12 ${NETWORK_K8S_CLUSTER_CIDR} ${NETWORK_K8S_SERVICE_CIDR} ${NETWORK_MANAGEMENT_CIDR}"
       # tun0 for openvpn, wg0 for wireguard
       VPN_INTERFACE: wg0
