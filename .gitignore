@@ -51,3 +51,5 @@ cluster/apps/auth/realms/bloopysphere/keycloak.yaml
 cluster/apps/auth/realms/bloopysphere/certificate.yaml
 cluster/bootstrap
 kube-dns.yml
+ceph-dis/*
+strip_rook_id.sh

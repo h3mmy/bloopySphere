@@ -82,7 +82,7 @@ spec:
             probe:
               timeoutSeconds: 5
       mgr:
-        count: 2
+        count: 1
 
       placement:
         all:
