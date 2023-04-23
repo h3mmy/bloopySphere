@@ -40,7 +40,7 @@ spec:
     initDB:
       dump:
         name: ghost-mysql-mygreatschedule230418040027
-        path: /
+        path: /ghost-mysql-mygreatschedule230418040027
         persistentVolumeClaim:
           claimName: ghost-db-backup
 
