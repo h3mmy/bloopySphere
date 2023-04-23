@@ -13,6 +13,9 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
 CREATE DATABASE $customDatabaseName;
 CREATE USER $customUserName WITH PASSWORD '$HASS_DB_PASSWORD';
 GRANT ALL PRIVILEGES ON DATABASE "$customDatabaseName" to $customUserName;
+# Home Assistant has a superiority complex
+ALTER DATABASE $customDatabaseName OWNER TO $customUserName;
+ALTER USER $customUserName WITH SUPERUSER;
 EOSQL
 
 echo "$dt - Init script is completed";
