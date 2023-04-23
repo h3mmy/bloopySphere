@@ -12,7 +12,7 @@ spec:
     size: 256Mi
     storageClassName: ceph-block
   backup:
-    schedule: "0 */1 * * *"
+    schedule: "0 1 * * *"
     pvcName: emqx-db-backup
     volumeMount: /var/lib/backup
   env:

@@ -14,7 +14,7 @@ spec:
     size: 10Gi
     storageClassName: ceph-block
   backup:
-    schedule: "0 */1 * * *"
+    schedule: "0 1 * * *"
     pvcName: authentik-db-backup
     volumeMount: /var/lib/backup
   env:
