@@ -20,7 +20,7 @@ resources:
   - home
   - blogs
   - cert-manager
-  - linkerd
+  # - linkerd
   - kyverno
   - vault
   - infra
