@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: velero/velero
-      tag: v1.10.2
+      tag: v1.11.0
     configuration:
       extraEnvVars:
         TZ: "${TZ}"
@@ -38,7 +38,7 @@ spec:
 
     initContainers:
       - name: velero-plugin-for-aws
-        image: velero/velero-plugin-for-aws:v1.6.1
+        image: velero/velero-plugin-for-aws:v1.7.0
         imagePullPolicy: IfNotPresent
         volumeMounts:
           - mountPath: /target
