@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: &app sabnzbd
   namespace: downloads
+  labels:
+    setGateway: "false"
 spec:
   interval: 15m
   chart:
