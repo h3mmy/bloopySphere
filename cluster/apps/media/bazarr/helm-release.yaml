@@ -87,7 +87,7 @@ spec:
           nfs:
             server: "${NAS_ADDRESS}"
             path: /volume3/Data/Backups/app/bazarr
-        mountPath: /config/Backups
+        mountPath: /config/backup
         readOnly: false
     resources:
       requests:
