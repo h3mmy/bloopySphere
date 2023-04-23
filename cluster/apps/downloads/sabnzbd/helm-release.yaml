@@ -4,8 +4,6 @@ kind: HelmRelease
 metadata:
   name: &app sabnzbd
   namespace: downloads
-  labels:
-    setGateway: "false"
 spec:
   interval: 15m
   chart:
@@ -97,6 +95,8 @@ spec:
         - 65541
         - 65536
         - 65537
+    podLabels:
+      setGateway: "false"
     persistence:
       config:
         enabled: true
