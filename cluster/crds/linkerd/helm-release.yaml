@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.linkerd.io/edge
       chart: linkerd-crds
-      version: 1.5.0-edge
+      version: 1.7.0-edge
       sourceRef:
         kind: HelmRepository
         name: linkerd-edge-charts
