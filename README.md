@@ -97,7 +97,7 @@ kubectl -n flux-system create secret generic sops-age --from-file=age.agekey=/de
 Loki snippets. If you know you know.
 
 ```logql
-{container="traefik"} | json message_extracted="message" |  line_format "{{.message_extracted}}" | json | DownstreamStatus!=`200`
+{app="traefik"} | json message_extracted="message" |  line_format "{{.message_extracted}}" | json | DownstreamStatus!=`200`
 ```
 
 `kubectl get namespace "monitoring" -o json   | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/"   | kubectl replace --raw /api/v1/namespaces/monitoring/finalize -f -`
