@@ -30,6 +30,8 @@ spec:
     stsSeconds: 63072000
     hostsProxyHeaders:
       - "X-Forwarded-Host"
+      - "X-Real-IP"
+      - "X-Forwarded-For"
       - "Forwarded"
     contentSecurityPolicy: "frame-ancestors 'self' *.bloopnet.xac.im:* *.xac.im *.quarkynet.com *.bloopnet.xyz;" # script-src 'self' code.iconify.design cdnjs.cloudflare.com; object-src 'self'; require-trusted-types-for 'script';"
     customResponseHeaders:

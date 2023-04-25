@@ -67,6 +67,9 @@ spec:
         username: "apikey"
         password: "${SECRET_SENDGRID_API_KEY}"
         from: "no-reply@${XYZ_DOMAIN}"
+    # service:
+    #   type: ClusterIP
+    #   externalTrafficPolicy: Local
     ingress:
       enabled: true
       ingressClassName: "traefik"
