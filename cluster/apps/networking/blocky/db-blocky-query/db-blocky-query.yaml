@@ -32,7 +32,7 @@ spec:
     size: 5Gi
     storageClassName: ceph-block
   backup:
-    schedule: "0 */1 * * *"
+    schedule: "0 1 * * *"
     pvcName: blocky-db-backup
     volumeMount: /var/lib/backup
   env:
