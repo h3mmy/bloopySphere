@@ -115,7 +115,8 @@ spec:
     coreDns:
       enabled: true
     kubelet:
-      enabled: true
+      # Eats a LOT of memory
+      enabled: false
       serviceMonitor:
         metricRelabelings:
           - action: replace
