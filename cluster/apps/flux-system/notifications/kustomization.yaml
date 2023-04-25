@@ -5,4 +5,4 @@ resources:
   - ./discord
   - ./grafana
   - ./receivers
-  - ./alert-manager
+  - ./alert-manager/notification.yaml
