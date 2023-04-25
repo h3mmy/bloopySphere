@@ -43,10 +43,10 @@ prometheus:
   prometheusSpec:
     resources:
       requests:
-        memory: 2700Mi
+        memory: 3250Mi
         cpu: 250m
       limits:
-        memory: 8000Mi
+        memory: 8200Mi
     enableAdminAPI: true
     podAntiAffinity: hard
     podMonitorNamespaceSelector: {}
