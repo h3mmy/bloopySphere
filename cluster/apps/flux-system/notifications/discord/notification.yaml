@@ -25,8 +25,8 @@ spec:
       name: "*"
     - kind: Kustomization
       name: "*"
-    - kind: Terraform
-      name: "*"
+    #- kind: Terraform
+    #  name: "*"
   exclusionList:
     - "error.*lookup github\\.com"
     - "error.*lookup raw\\.githubusercontent\\.com"
