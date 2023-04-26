@@ -47,3 +47,4 @@ resources:
   - coredns-charts.yaml
   - external-secrets.yaml
   - cloudnative-pg.yaml
+  - grafana-operator-chart.yaml
