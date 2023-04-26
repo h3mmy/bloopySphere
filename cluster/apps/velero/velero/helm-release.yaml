@@ -26,14 +26,15 @@ spec:
       provider: aws
 
       backupStorageLocation:
-        name: default
-        bucket: velero-2
-        default: true
-        config:
-          region: us-east-1
-          s3ForcePathStyle: true
-          s3Url: http://minio.storage.svc.cluster.local:9000
-          publicUrl: https://s3.${XYZ_DOMAIN}
+        - name: default
+          bucket: velero-2
+          default: true
+          config:
+            region: us-east-1
+            s3ForcePathStyle: true
+            s3Url: http://minio.storage.svc.cluster.local:9000
+            publicUrl: https://s3.${XYZ_DOMAIN}
+
       resticTimeout: 4h
 
     initContainers:
