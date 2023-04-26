@@ -23,11 +23,10 @@ spec:
       extraEnvVars:
         TZ: "${TZ}"
 
-      provider: aws
-
       backupStorageLocation:
         - name: default
           bucket: velero-2
+          provider: aws
           default: true
           config:
             region: us-east-1
