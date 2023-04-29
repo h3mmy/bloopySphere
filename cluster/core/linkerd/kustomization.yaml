@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./certificate.yaml
   - ./cni-plugin
-  - ./control-plane
+  # - ./control-plane
