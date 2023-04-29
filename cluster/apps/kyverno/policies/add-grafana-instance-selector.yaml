@@ -1,0 +1,30 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: add-grafana-instance-selector
+  annotations:
+    policies.kyverno.io/title: Add Instance Selector to Grafana Dashboards
+    policies.kyverno.io/subject: GrafanaDashboard
+    policies.kyverno.io/description: >-
+      This policy adds an instance selector to grafana dashboard objects
+    pod-policies.kyverno.io/autogen-controllers: none
+spec:
+  mutateExistingOnPolicyUpdate: true
+  generateExistingOnPolicyUpdate: true
+  rules:
+    - name: add-selector-to-dashboard
+      match:
+        any:
+          - resources:
+              kinds:
+                - GrafanaDashboard
+      mutate:
+        targets:
+          - apiVersion: v1
+            kind: GrafanaDashboard
+            name: "{{request.object.metadata.name}}"
+            patchesJson6902: |-
+              - op: add
+                path: /spec/instanceSelector/matchLabels/dashboard
+                value: grafana

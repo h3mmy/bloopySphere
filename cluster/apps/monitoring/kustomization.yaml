@@ -6,7 +6,7 @@ resources:
   - thanos
   - loki
   # - pushgateway
-  - grafana
+  - grafana/hr
   - uptimerobot
   - unifi-poller
   - goldilocks

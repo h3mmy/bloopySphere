@@ -1,0 +1,21 @@
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDatasource
+metadata:
+  name: blocky
+  namespace: monitoring
+spec:
+  instanceSelector:
+    matchLabels:
+      dashboards: "grafana"
+  datasource:
+    name: Blocky-QueryDB
+    type: postgres
+    url: blocky-postgres.networking:5432
+    database: ${BLOCKY_QUERY_DB_NAME}
+    user: blocky
+    jsonData:
+      # SSLmode. 'disable', 'require', 'verify-ca' or 'verify-full'
+      sslmode: disable
+    secureJsonData:
+      password: ${BLOCKY_QUERY_DB_PASSWORD}

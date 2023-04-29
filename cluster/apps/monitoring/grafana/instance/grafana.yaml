@@ -1,0 +1,76 @@
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: Grafana
+metadata:
+  name: grafana
+  namespace: monitoring
+  labels:
+    dashboards: "grafana"
+spec:
+  deployment:
+    spec:
+      replicas: 1
+      strategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxSurge: 1
+          maxUnavailable: 1
+      template:
+        metadata:
+          annotations:
+            configmap.reloader.stakater.com/reload: "grafana"
+  config:
+    log:
+      mode: "console"
+    auth:
+      disable_login_form: "false"
+      signout_redirect_url: https://auth.${XYZ_DOMAIN}/application/o/grafana/end-session/
+      generic_oauth:
+        enabled: true
+        name: ${CLUSTER_NAME}
+        client_id: "${GRAFANA_OAUTH_CLIENT_ID}"
+        client_secret: "${GRAFANA_OAUTH_CLIENT_SECRET}"
+        scopes: "openid email profile"
+        auth_url: https://auth.${XYZ_DOMAIN}/application/o/authorize/
+        token_url: https://auth.${XYZ_DOMAIN}/application/o/token/
+        api_url: https://auth.${XYZ_DOMAIN}/application/o/userinfo/
+        role_attribute_path: "contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'"
+      jwt:
+        enabled: true
+        jwk_set_url: https://auth.${XYZ_DOMAIN}/application/o/grafana-bloopnet/jwks/
+        role_attribute_path: "contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'"
+    security:
+      admin_user: root
+      admin_password: ${SECRET_GRAFANA_PASSWORD}
+    grafana_net:
+      url: https://grafana.net
+    panels:
+      disable_sanitize_html: true
+    server:
+      root_url: "https://grafana.${XYZ_DOMAIN}"
+    paths:
+      data: /var/lib/grafana/data
+      logs: /var/log/grafana
+      plugins: /var/lib/grafana/plugins
+      provisioning: /etc/grafana/provisioning
+    analytics:
+      check_for_updates: false
+  ingress:
+    metadata:
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-production
+        hajimari.io/instance: "bloop-quarky"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "chart-bar-stacked"
+        hajimari.io/appName: "Status"
+        external-dns.alpha.kubernetes.io/hostname: ipv4.${XYZ_DOMAIN}
+        external-dns/is-public: "true"
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    spec:
+      ingressClassName: "traefik"
+      hosts:
+        - "grafana.${XYZ_DOMAIN}"
+      tls:
+        - secretName: tls.grafana
+          hosts:
+            - "grafana.${XYZ_DOMAIN}"
