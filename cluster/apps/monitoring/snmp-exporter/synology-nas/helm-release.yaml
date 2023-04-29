@@ -53,3 +53,10 @@ spec:
       relabelings:
         - sourceLabels: [__param_target]
           targetLabel: instance
+    resources:
+      requests:
+        cpu: 15m
+        memory: 64M
+      limits:
+        cpu: 73m
+        memory: 76M

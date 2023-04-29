@@ -1,0 +1,95 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-iam-keycloak-db-config
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/auth/realms/bloopysphere/db/config"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  wait: true
+  healthChecks:
+    - apiVersion: v1
+      kind: Secret
+      name: kc-postgres-user
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-iam-keycloak-db-backup
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/auth/realms/bloopysphere/db/backup"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  wait: true
+  dependsOn:
+    - name: cluster-core-rook-ceph-cluster
+    - name: cluster-apps-cloudnative-pg
+  healthChecks:
+    - apiVersion: objectbucket.io/v1alpha1
+      kind: ObjectBucketClaim
+      name: cnpg-kc-backup-v1
+    - apiVersion: postgresql.cnpg.io/v1
+      kind: ScheduledBackup
+      name: backup-schedule-kc-postgres-v1
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-iam-keycloak-db-cluster
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/auth/realms/bloopysphere/db/cluster"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  wait: true
+  dependsOn:
+    - name: cluster-apps-cloudnative-pg
+    - name: cluster-apps-local-path-provisioner
+    - name: cluster-iam-keycloak-db-config
+    # Needed for rook-ceph bucket credentials
+    - name: cluster-iam-keycloak-db-backup
+  healthChecks:
+    - apiVersion: postgresql.cnpg.io/v1
+      kind: Cluster
+      name: kc-postgres
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-iam-keycloak-db-alerts
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/auth/realms/bloopysphere/db/alerts"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  wait: true
+  dependsOn:
+    - name: kube-prometheus-stack-crds
+    - name: cluster-iam-keycloak-db-cluster
+  healthChecks:
+    - apiVersion: monitoring.coreos.com/v1
+      kind: PrometheusRule
+      name: kc-cnpg-rules

@@ -1,0 +1,22 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-iam-keycloak-instance
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  interval: 10m
+  path: "./cluster/apps/auth/realms/bloopysphere/instance"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  wait: true
+  dependsOn:
+    - name: cluster-iam-keycloak-db-cluster
+  healthChecks:
+    - apiVersion: k8s.keycloak.org/v2alpha1
+      kind: Keycloak
+      name: kc-instance

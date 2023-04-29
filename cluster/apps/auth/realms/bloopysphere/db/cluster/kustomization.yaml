@@ -2,6 +2,4 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  # - ./certificate.yaml
-  - ./db/ks.yaml
-  - ./keycloak/ks.yaml
+  - ./cnpg-v15.yaml
