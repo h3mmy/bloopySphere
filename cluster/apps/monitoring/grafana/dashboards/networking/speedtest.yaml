@@ -1,0 +1,12 @@
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: speedtest
+  namespace: monitoring
+spec:
+  # Ref: https://grafana.com/grafana/dashboards/13665
+  grafanaCom:
+    id: 13665
+    revision: 1
+    datasource: prometheus

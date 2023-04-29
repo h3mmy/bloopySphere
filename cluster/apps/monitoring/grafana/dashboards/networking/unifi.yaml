@@ -9,7 +9,7 @@ spec:
   grafanaCom:
     id: 11315
     revision: 8
-    datasource: Prometheus
+    datasource: rometheus
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
@@ -21,7 +21,7 @@ spec:
   grafanaCom:
     id: 11311
     revision: 8
-    datasource: Prometheus
+    datasource: prometheus
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
@@ -33,7 +33,7 @@ spec:
   grafanaCom:
     id: 11314
     revision: 8
-    datasource: Prometheus
+    datasource: prometheus
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
@@ -45,4 +45,4 @@ spec:
   grafanaCom:
     id: 11312
     revision: 8
-    datasource: Prometheus
+    datasource: prometheus

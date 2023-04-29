@@ -1,0 +1,12 @@
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: authentik
+  namespace: monitoring
+spec:
+  # Ref: https://grafana.com/grafana/dashboards/14837
+  grafanaCom:
+    id: 14837
+    revision: 2
+    datasource: prometheus

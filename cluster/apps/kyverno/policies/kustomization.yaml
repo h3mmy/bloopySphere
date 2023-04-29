@@ -11,3 +11,4 @@ resources:
   - ./add-prom-probes.yaml
   - ./verify-tls-contains-host-path.yaml
   #- ./add-linkerd-annotations-to-ns-pods.yaml
+  - ./add-grafana-instance-selector.yaml
