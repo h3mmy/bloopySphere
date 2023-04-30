@@ -27,7 +27,13 @@ spec:
       - key: group
         operator: Equal
         value: critical
-
+  resources:
+    requests:
+      cpu: 22m
+      memory: 204M
+    limits:
+      cpu: 141m
+      memory: 604M
   database:
     size: 5Gi
     storageClassName: ceph-block
