@@ -50,7 +50,21 @@ spec:
         schedule: "0 0 * * *" # Daily, at midnight
         backupProfileName: ghost-mysql-backup-pvc # reference the desired backupProfiles's name
         enabled: true # backup schedules can be temporarily disabled
+
+    router:
+      resources:
+        requests:
+          cpu: 48m
+          memory: 64M
+
     podSpec:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 1200M
+        limits:
+          cpu: 300m
+          memory: 2250M
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:

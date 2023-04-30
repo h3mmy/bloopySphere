@@ -13,6 +13,13 @@ spec:
   database:
     size: 10Gi
     storageClassName: ceph-block
+  resources:
+    requests:
+      cpu: 22m
+      memory: 70M
+    limits:
+      cpu: 141m
+      memory: 304M
   backup:
     schedule: "0 1 * * *"
     pvcName: authentik-db-backup
