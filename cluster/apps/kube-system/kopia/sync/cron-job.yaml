@@ -19,7 +19,7 @@ spec:
           restartPolicy: OnFailure
           initContainers:
             - name: wait-for-repo
-              image: ghcr.io/onedr0p/kopia:0.12.1@sha256:4ee9bc68299481fced34899eaec8bd42a6c9e5db902c6bef61ba0b0094b25b3b
+              image: ghcr.io/onedr0p/kopia:0.13.0@sha256:1b0f77c7851f7d948c63e4f05af0e24b3efcd6d7266b7b1ce59d2d43138d08f5
               command:
                 - /bin/bash
                 - -c
@@ -33,7 +33,7 @@ spec:
                   mountPath: /snapshots
           containers:
             - name: sync
-              image: ghcr.io/onedr0p/kopia:0.12.1@sha256:4ee9bc68299481fced34899eaec8bd42a6c9e5db902c6bef61ba0b0094b25b3b
+              image: ghcr.io/onedr0p/kopia:0.13.0@sha256:1b0f77c7851f7d948c63e4f05af0e24b3efcd6d7266b7b1ce59d2d43138d08f5
               env:
                 - name: KOPIA_CACHE_DIRECTORY
                   value: /snapshots/cache
