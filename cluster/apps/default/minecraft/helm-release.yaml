@@ -159,7 +159,7 @@ spec:
       # If set, the modpack at this URL will be downloaded at startup
       # downloadModpackUrl:
       # If true, old versions of downloaded mods will be replaced with new ones from downloadModpackUrl
-      removeOldMods: true
+      removeOldMods: false
       # A list of VanillaTweaks Share Codes to download. (https://vanillatweaks.net/share#wUq1iz => "wUq1iz")
       vanillaTweaksShareCodes: []
       # Optional URI to a resource pack. The player may choose to use it.
