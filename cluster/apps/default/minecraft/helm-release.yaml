@@ -217,7 +217,9 @@ spec:
         repository: itzg/mc-backup
         pullPolicy: IfNotPresent
       persistence:
-        existingClaim: nfs-mcsv-backups-v1
+        backupDir:
+          enabled: true
+          existingClaim: nfs-mcsv-backups-v1
       #  wait 2 minutes before starting
       initialDelay: 2m
 
