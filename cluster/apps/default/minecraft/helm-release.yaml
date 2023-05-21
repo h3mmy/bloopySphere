@@ -189,39 +189,6 @@ spec:
       rcon:
         enabled: true
         password: ${MC_WORLD_2_RCON_PASSWORD}
-      mcbackup:
-        enabled: true
-        image:
-          repository: itzg/mc-backup
-          pullPolicy: IfNotPresent
-        persistence:
-          existingClaim: nfs-mcsv-backups-v1
-        #  wait 2 minutes before starting
-        initialDelay: 2m
-
-        # ***set to 0 or smaller, script will run once and exit.  DO NOT SET TO 0 or smaller, this will cause K8s to kill your pod!***
-        # backupInterval="1.5d" -> backup every one and a half days (36 hours)
-        # backupInterval="2h 30m" -> backup every two and a half hours
-        backupInterval: 24h
-
-        # option lets you pause backups if no players are online.
-        pauseIfNoPlayers: "false"
-
-        # is set to a positive number, it'll delete old .tgz backup files from DEST_DIR. By default deletes backups older than a week.
-        pruneBackupsDays: 20
-
-        # Set to a negative value to retry indefinitely
-        rconRetries: 5
-        rconRetryInterval: 10s
-
-        # is a comma-separated list of glob(3) patterns to exclude from backups. By default excludes all jar files (plugins, server files),
-        # logs folder and cache (used by i.e. PaperMC server).
-        excludes: "*.jar,cache,logs"
-        # backup methods, see https://github.com/itzg/docker-mc-backup e.g. tar, rclone, restic
-        backupMethod: tar
-        # tar and rclone methods
-        destDir: /backups
-        compressMethod: gzip
       extraPorts:
         - name: map
           containerPort: 8123
@@ -243,3 +210,37 @@ spec:
               - hosts:
                   - *host
                 secretName: tls.minecraft-map
+
+    mcbackup:
+      enabled: true
+      image:
+        repository: itzg/mc-backup
+        pullPolicy: IfNotPresent
+      persistence:
+        existingClaim: nfs-mcsv-backups-v1
+      #  wait 2 minutes before starting
+      initialDelay: 2m
+
+      # ***set to 0 or smaller, script will run once and exit.  DO NOT SET TO 0 or smaller, this will cause K8s to kill your pod!***
+      # backupInterval="1.5d" -> backup every one and a half days (36 hours)
+      # backupInterval="2h 30m" -> backup every two and a half hours
+      backupInterval: 24h
+
+      # option lets you pause backups if no players are online.
+      pauseIfNoPlayers: "false"
+
+      # is set to a positive number, it'll delete old .tgz backup files from DEST_DIR. By default deletes backups older than a week.
+      pruneBackupsDays: 20
+
+      # Set to a negative value to retry indefinitely
+      rconRetries: 5
+      rconRetryInterval: 10s
+
+      # is a comma-separated list of glob(3) patterns to exclude from backups. By default excludes all jar files (plugins, server files),
+      # logs folder and cache (used by i.e. PaperMC server).
+      excludes: "*.jar,cache,logs"
+      # backup methods, see https://github.com/itzg/docker-mc-backup e.g. tar, rclone, restic
+      backupMethod: tar
+      # tar and rclone methods
+      destDir: /backups
+      compressMethod: gzip
