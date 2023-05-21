@@ -25,13 +25,13 @@ spec:
       dataDir:
         enabled: true
         existingClaim: minecraft-data-v1
-    extraVolumes:
-      - volumeSpec:
-          nfs:
-            server: "${NAS_ADDRESS}"
-            path: /volume3/Data/Backups/app/mcsv-world-2
-        mountPath: &backupdir /backups
-        readOnly: false
+    # extraVolumes:
+    #   - volumeSpec:
+    #       nfs:
+    #         server: "${NAS_ADDRESS}"
+    #         path: /volume3/Data/Backups/app/mcsv-world-2
+    #     mountPath: &backupdir /backups
+    #     readOnly: false
     #   - volumeMounts:
     #       - name: mcsv-world-2-patches
     #         mountPath: /mnt/patches/patchset-paper.json
@@ -77,7 +77,8 @@ spec:
       metallb.universe.tf/allow-shared-ip: mcsv
     extraEnv:
       TZ: ${TZ}
-      MODS: "https://github.com/EssentialsX/Essentials/releases/download/2.19.7/EssentialsX-2.19.7.jar,https://mediafilez.forgecdn.net/files/4371/728/Dynmap-3.5-beta-2-spigot.jar"
+      # ,https://cdn.modrinth.com/data/fRQREgAc/versions/YsFoYsPV/Dynmap-3.5-spigot.jar
+      MODS: "https://github.com/EssentialsX/Essentials/releases/download/2.19.7/EssentialsX-2.19.7.jar"
       ENABLE_AUTOPAUSE: "FALSE"
       # PATCH_DEFINITIONS: /mnt/patches
       # 274 Dynmap https://www.spigotmc.org/resources/dynmap%C2%AE.274/
@@ -91,8 +92,7 @@ spec:
       version: "LATEST"
       # This can be one of "VANILLA", "FORGE", "SPIGOT", "BUKKIT", "PAPER", "FTBA", "SPONGEVANILLA", "CURSEFORGE"
       type: PAPER
-      paperDownloadUrl: https://api.papermc.io/v2/projects/paper/versions/1.19.3/builds/386/downloads/paper-1.19.3-386.jar
-      # paperDownloadUrl: https://api.papermc.io/v2/projects/paper/versions/1.19.2/builds/142/downloads/paper-1.19.2-142.jar
+      paperDownloadUrl: https://api.papermc.io/v2/projects/paper/versions/1.19.4/builds/538/downloads/paper-1.19.4-538.jar
       jvmOpts: >-
         -Xms4G -Xmx4G
         -XX:+UseG1GC -XX:+ParallelRefProcEnabled
@@ -159,22 +159,23 @@ spec:
       # If set, the modpack at this URL will be downloaded at startup
       # downloadModpackUrl:
       # If true, old versions of downloaded mods will be replaced with new ones from downloadModpackUrl
-      removeOldMods: false
+      removeOldMods: true
       # A list of VanillaTweaks Share Codes to download. (https://vanillatweaks.net/share#wUq1iz => "wUq1iz")
       vanillaTweaksShareCodes: []
       # Optional URI to a resource pack. The player may choose to use it.
       # mc1: "https://download.mc-packs.net/pack/679d8f1cf33259a3c0bb86253ce13411d9469cad.zip"
       # mc2: "https://download.mc-packs.net/pack/53fcb49d17d0bb816e4a52cdaef9b545a8c654e5.zip" faithful 32x 1.19.2
       # mc3: "https://download.mc-packs.net/pack/ae4c63056a8422fa0044b02a9846b078690e8f9a.zip" faithful 32x 1.19.3
+      # mc4: "https://database.faithfulpack.net/packs/32x-Java/April%202023/Faithful%2032x%20-%201.19.4.zip" faithful 32x 1.19.4
       # resourcePackUrl: "https://download.mc-packs.net/pack/53fcb49d17d0bb816e4a52cdaef9b545a8c654e5.zip"
-      resourcePackUrl: "https://download.mc-packs.net/pack/ae4c63056a8422fa0044b02a9846b078690e8f9a.zip"
+      resourcePackUrl: "https://database.faithfulpack.net/packs/32x-Java/April%202023/Faithful%2032x%20-%201.19.4.zip"
       # Optional SHA-1 digest of the resource pack, in lowercase hexadecimal.
       # It is recommended to specify this, because it is used to verify the integrity of the resource pack.
       # mc-1: 679d8f1cf33259a3c0bb86253ce13411d9469cad
       # mc-2: 53fcb49d17d0bb816e4a52cdaef9b545a8c654e5
       # mc-3: ae4c63056a8422fa0044b02a9846b078690e8f9a
-      resourcePackSha: ae4c63056a8422fa0044b02a9846b078690e8f9a
-      # resourcePackSha: 53fcb49d17d0bb816e4a52cdaef9b545a8c654e5
+      # mc-4: 7d8a814cabb07f6510e07c969c4d80686acb6ccd
+      resourcePackSha: 7d8a814cabb07f6510e07c969c4d80686acb6ccd
       # When true, players will be prompted for a response and will be disconnected if they decline the required pack
       resourcePackEnforce: false
       # Check accounts against Minecraft account service.
@@ -190,8 +191,34 @@ spec:
         image:
           repository: itzg/mc-backup
           pullPolicy: IfNotPresent
+        persistence:
+          existingClaim: nfs-mcsv-backups-v1
+        #  wait 2 minutes before starting
+        initialDelay: 2m
+
+        # ***set to 0 or smaller, script will run once and exit.  DO NOT SET TO 0 or smaller, this will cause K8s to kill your pod!***
+        # backupInterval="1.5d" -> backup every one and a half days (36 hours)
+        # backupInterval="2h 30m" -> backup every two and a half hours
+        backupInterval: 24h
+
+        # option lets you pause backups if no players are online.
+        pauseIfNoPlayers: "false"
+
+        # is set to a positive number, it'll delete old .tgz backup files from DEST_DIR. By default deletes backups older than a week.
+        pruneBackupsDays: 20
+
+        # Set to a negative value to retry indefinitely
+        rconRetries: 5
+        rconRetryInterval: 10s
+
+        # is a comma-separated list of glob(3) patterns to exclude from backups. By default excludes all jar files (plugins, server files),
+        # logs folder and cache (used by i.e. PaperMC server).
+        excludes: "*.jar,cache,logs"
+        # backup methods, see https://github.com/itzg/docker-mc-backup e.g. tar, rclone, restic
         backupMethod: tar
-        destDir: *backupdir
+        # tar and rclone methods
+        destDir: /backups
+        compressMethod: gzip
       extraPorts:
         - name: map
           containerPort: 8123
