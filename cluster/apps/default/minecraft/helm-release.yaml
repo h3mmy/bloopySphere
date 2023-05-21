@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: itzg/minecraft-server
-      tag: 2023.3.0-java17
+      tag: java-17@sha256:c6c6afd0e3fa4f06074a449c2dc8248a55a7c639bdda5754d5eaa6963447c909
     strategyType: Recreate
     persistence:
       dataDir:
