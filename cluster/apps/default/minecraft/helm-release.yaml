@@ -219,7 +219,7 @@ spec:
       persistence:
         backupDir:
           enabled: true
-          existingClaim: nfs-mcsv-backups-v1
+          existingClaim: mcsv-backups-v1
       #  wait 2 minutes before starting
       initialDelay: 2m
 
