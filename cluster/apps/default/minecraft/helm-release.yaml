@@ -87,6 +87,8 @@ spec:
       # 39534 dynmap-structures https://www.spigotmc.org/resources/dynmap-structures.39534/
       # 81534 chunky https://www.spigotmc.org/resources/chunky.81534/
       SPIGET_RESOURCES: "39534,81534"
+      REMOVE_OLD_MODS_INCLUDE: "*.jar"
+      REMOVE_OLD_MODS_DEPTH: 1
     minecraftServer:
       eula: "TRUE"
       version: "LATEST"
