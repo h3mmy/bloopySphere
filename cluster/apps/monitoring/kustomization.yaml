@@ -7,7 +7,7 @@ resources:
   - loki
   # - pushgateway
   - grafana/hr
-  - grafana/ks.yaml
+  #- grafana/ks.yaml
   - uptimerobot
   - unifi-poller
   - goldilocks
