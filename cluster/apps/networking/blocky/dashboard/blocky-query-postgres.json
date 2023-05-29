@@ -1,8 +1,8 @@
 {
     "__inputs": [
       {
-        "name": "Blocky-QueryDB",
-        "label": "Blocky-QueryDB",
+        "name": "DS_POSTGRES",
+        "label": "Postgres",
         "description": "",
         "type": "datasource",
         "pluginId": "postgres",
@@ -876,7 +876,7 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "Blocky query",
+    "title": "Blocky Query",
     "uid": "AVmWSVWgz",
     "version": 3
   }

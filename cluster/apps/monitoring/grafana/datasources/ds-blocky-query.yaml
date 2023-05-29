@@ -2,7 +2,7 @@
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDatasource
 metadata:
-  name: blocky
+  name: blocky-query
   namespace: monitoring
 spec:
   instanceSelector:

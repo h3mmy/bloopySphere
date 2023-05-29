@@ -5,5 +5,5 @@ metadata:
   name: blocky-db
   namespace: monitoring
 spec:
-  url: https://raw.githubusercontent.com/0xERR0R/blocky/development/docs/blocky-query-grafana-postgres.json
+  url: https://raw.githubusercontent.com/0xERR0R/blocky/main/docs/blocky-query-grafana-postgres.json
   datasource: Blocky-QueryDB
