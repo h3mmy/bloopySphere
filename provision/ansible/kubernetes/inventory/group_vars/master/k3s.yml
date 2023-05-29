@@ -53,7 +53,9 @@ k3s_server:
     # https://github.com/k3s-io/k3s/issues/1264
     - "node-monitor-period=4s"
     - "node-monitor-grace-period=16s"
-    - "pod-eviction-timeout=20s"
+    # https://kubernetes.io/blog/2023/03/17/upcoming-changes-in-kubernetes-v1-27/#removal-of-pod-eviction-timeout-command-line-argument
+    # See https://kubernetes.io/blog/2023/05/15/speed-up-pod-startup/ for other strategies
+    # - "pod-eviction-timeout=20s" # This is removed in 1.27.x
   kube-proxy-arg:
     # Enable Alpha/Beta features
     - "feature-gates=MixedProtocolLBService=true,ReadWriteOncePod=true"
