@@ -11,7 +11,7 @@ spec:
   chart:
     spec:
       chart: cert-manager-trust
-      version: v0.2.0
+      version: v0.2.1
       sourceRef:
         kind: HelmRepository
         name: jetstack-charts
