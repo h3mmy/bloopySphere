@@ -30,6 +30,16 @@ spec:
       retries: 4
       remediateLastFailure: true
 
+  valuesFrom:
+    - targetPath: geoip.accountId
+      kind: Secret
+      name: geoip-secrets
+      valuesKey: maxmindAccountId
+    - targetPath: geoip.licenseKey
+      kind: Secret
+      name: geoip-secrets
+      valuesKey: maxmindLicenseKey
+
   values:
     fullnameOverride: authentik
     image:
@@ -39,8 +49,6 @@ spec:
       # tag: gh-providers-proxy-rework-endpoints-1679090841-c08a9a2
     geoip:
       enabled: true
-      accountId: "${MAXMIND_ACCOUNT_ID}"
-      licenseKey: "${MAXMIND_LICENSE_KEY}"
     authentik:
       log_level: info
       outposts:
