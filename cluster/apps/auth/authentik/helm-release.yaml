@@ -30,15 +30,15 @@ spec:
       retries: 5
       remediateLastFailure: true
 
-  valuesFrom:
-    - targetPath: geoip.accountId
-      kind: Secret
-      name: geoip-secrets
-      valuesKey: maxmindAccountId
-    - targetPath: geoip.licenseKey
-      kind: Secret
-      name: geoip-secrets
-      valuesKey: maxmindLicenseKey
+  # valuesFrom:
+  #   - targetPath: geoip.accountId
+  #     kind: Secret
+  #     name: geoip-secrets
+  #     valuesKey: maxmindAccountId
+  #   - targetPath: geoip.licenseKey
+  #     kind: Secret
+  #     name: geoip-secrets
+  #     valuesKey: maxmindLicenseKey
 
   values:
     fullnameOverride: authentik
@@ -47,8 +47,8 @@ spec:
       # tag: 2023.5.2 # default follows chart version
       # repository: ghcr.io/goauthentik/dev-server
       # tag: gh-providers-proxy-rework-endpoints-1679090841-c08a9a2
-    geoip:
-      enabled: true
+    # geoip:
+    #   enabled: true
     authentik:
       log_level: info
       outposts:
