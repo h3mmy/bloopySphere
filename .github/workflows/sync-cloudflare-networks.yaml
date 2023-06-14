@@ -36,7 +36,7 @@ jobs:
           npx zx ./.github/scripts/cloudflareNetworks.mjs > ${{ env.DEFAULT_CLOUDFLARE_NETWORKS_FILE }}
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@284f54f989303d2699d373481a0cfa13ad5a6666 # v5.0.1
+        uses: peter-evans/create-pull-request@153407881ec5c347639a548ade7d8ad1d6740e38 # v5.0.2
         with:
           token: "${{ steps.generate-token.outputs.token }}"
           branch: github-action/update-cloudflare-networks
