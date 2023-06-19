@@ -28,27 +28,12 @@ spec:
     - name: kube-prometheus-stack
       namespace: monitoring
   values:
-    installCRDs: true
+    upgrade:
+      # -- Upgrading from v2 to v3 is not allowed by default, set this to true once changes have been reviewed.
+      fromV2: false
 
-    # TODO: change this to "mode: ha" when the new version gets released
-    replicaCount: 3
-
-    updateStrategy:
-      type: RollingUpdate
-      rollingUpdate:
-        maxSurge: 1
-
-    topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: DoNotSchedule
-        labelSelector:
-          matchLabels:
-            app.kubernetes.io/instance: kyverno
-
-    extraArgs:
-      - --clientRateLimitQPS=30
-      - --clientRateLimitBurst=60
+    crds:
+      install: true
 
     grafana:
       enabled: true
@@ -64,8 +49,44 @@ spec:
     reportsController:
       serviceMonitor:
         enabled: true
-
+    admissionController:
+      replicas: 3
+      serviceMonitor:
+        enabled: true
+      updateStrategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxSurge: 1
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/instance: kyverno
+              app.kubernetes.io/component: kyverno
     resources:
       requests:
         cpu: 92m
         memory: 246M
+
+    # Cleanup cronjobs to prevent internal resources from stacking up in the cluster
+    cleanupJobs:
+
+      admissionReports:
+        enabled: true
+        image:
+          registry: ghcr.io
+          repository: onedr0p/kubectl
+          tag: '1.27.3'
+          pullPolicy: IfNotPresent
+        threshold: 5000 # Default is 10k
+
+      clusterAdmissionReports:
+        enabled: true
+        image:
+          registry: ghcr.io
+          repository: onedr0p/kubectl
+          tag: '1.27.3'
+          pullPolicy: IfNotPresent
+        threshold: 5000 # Default is 10k
