@@ -29,7 +29,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/plex # {"$imagepolicy": "flux-system:plex:name"}
-      tag: "1.32.3.7192-7aa441827" # {"$imagepolicy": "flux-system:plex:tag"}
+      tag: "1.32.4.7195-7c8f9d3b6" # {"$imagepolicy": "flux-system:plex:tag"}
       imagePullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"
