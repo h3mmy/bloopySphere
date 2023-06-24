@@ -33,7 +33,7 @@ module "cf_domain_tyg3r" {
     # Generic settings
     {
       name  = "_dmarc"
-      value = "v=DMARC1; p=none; rua=mailto:${local.cloudflare_secrets["dmarc_rua_email"]}"
+      value = "v=DMARC1; p=none; rua=mailto:${local.cloudflare_secrets["dmarc_rua_email_v2"]}"
       type  = "TXT"
     },
     # Mailgun
