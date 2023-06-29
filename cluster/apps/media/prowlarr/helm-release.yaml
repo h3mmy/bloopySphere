@@ -33,6 +33,9 @@ spec:
       PROWLARR__INSTANCE_NAME: Prowlarr
       PROWLARR__PORT: &port 80
       PROWLARR__LOG_LEVEL: info
+      # https://wiki.servarr.com/prowlarr/faq#can-i-disable-forced-authentication
+      # https://github.com/onedr0p/containers/blob/main/apps/prowlarr/config.xml.tmpl
+      PROWLARR__AUTHENTICATION_METHOD: External
       # For potential future shift to kubegres managed db
       # PROWLARR__POSTGRES_HOST: postgres-rw.database
       # PROWLARR__POSTGRES_MAIN_DB: prowlarr
