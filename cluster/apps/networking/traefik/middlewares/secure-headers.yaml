@@ -12,6 +12,7 @@ spec:
       - "App-Pragma"
       - "X-Ghost-Version"
       - "X-Requested-With"
+      - "Content-Type"
     accessControlAllowMethods:
       - "GET"
       - "OPTIONS"
