@@ -14,14 +14,14 @@ spec:
       - "PUT"
     accessControlAllowOriginList:
       - "https://${XYZ_DOMAIN}"
-      - "https://auth.${XYZ_DOMAIN}"
       - "https://tyg3r.${XYZ_DOMAIN}"
+      - "https://auth.${XYZ_DOMAIN}"
       - "https://${TGR_DOMAIN}"
       - "https://${SECRET_DOMAIN}"
     # accessControlAllowOriginListRegex:
-    #   - "https://(.*)?${XYZ_DOMAIN_REV}([^\\s\\x60!()\\[\\]{};:'\\x22.,<>?«»“”‘’]*)"
-    #   - "https://(.*)?${SECRET_DOMAIN_REV}([^\\s\\x60!()\\[\\]{};:'\\x22.,<>?«»“”‘’]*)"
-    #   - "https://(.*)?${CLASSIC_DOMAIN_REV}([^\\s\\x60!()\\[\\]{};:'\\x22.,<>?«»“”‘’]*)"
+    #   - "https://(.*)?${XYZ_DOMAIN_REV}([^\\s\\x60!()\\[\\]{};:'\\x22.,<>?«»""'']*)"
+    #   - "https://(.*)?${SECRET_DOMAIN_REV}([^\\s\\x60!()\\[\\]{};:'\\x22.,<>?«»""'']*)"
+    #   - "https://(.*)?${CLASSIC_DOMAIN_REV}([^\\s\\x60!()\\[\\]{};:'\\x22.,<>?«»""'']*)"
     accessControlMaxAge: 100
     addVaryHeader: true
     stsPreload: true
@@ -35,7 +35,7 @@ spec:
       - "X-Real-IP"
       - "X-Forwarded-For"
       - "Forwarded"
-    contentSecurityPolicy: "frame-ancestors 'self' *.${BLOOPNET_URI}:* *.xac.im *.quarkynet.com *.${XYZ_DOMAIN} *.${TGR_DOMAIN};" # script-src 'self' code.iconify.design cdnjs.cloudflare.com; object-src 'self'; require-trusted-types-for 'script';"
+    contentSecurityPolicy: "frame-ancestors 'self' *.${XYZ_DOMAIN} *.${TGR_DOMAIN};" # script-src 'self' code.iconify.design cdnjs.cloudflare.com; object-src 'self'; require-trusted-types-for 'script';"
     customResponseHeaders:
       X-xss-protection: "1"
       X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex,"

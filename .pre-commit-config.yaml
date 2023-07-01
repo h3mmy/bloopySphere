@@ -26,7 +26,7 @@ repos:
     rev: 0.2.0
     hooks:
       - id: fix-smartquotes
-        exclude: "^cluster/apps/networking/traefik/middlewares/secure-headers.yaml$"
+        exclude: "^cluster/apps/networking/traefik/middlewares/secure-headers.*$"
 
   - repo: https://github.com/k8s-at-home/sops-pre-commit
     rev: v2.1.1

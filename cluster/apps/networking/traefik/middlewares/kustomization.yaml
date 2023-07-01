@@ -12,7 +12,9 @@ resources:
   - plex-add-web.yaml
   - calibre-auth.yaml
   - secure-headers.yaml
+  - secure-headers-tgr.yaml
   - chain-no-auth.yaml
+  - chain-no-auth-tgr.yaml
   - error-pages.yaml
   - chain-no-epages.yaml
   - ghost-admin-add-prefix.yaml
