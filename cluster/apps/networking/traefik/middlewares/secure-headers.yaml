@@ -8,6 +8,10 @@ spec:
   headers:
     frameDeny: true
     browserXssFilter: true
+    accessControlAllowHeaders:
+      - "App-Pragma"
+      - "X-Ghost-Version"
+      - "X-Requested-With"
     accessControlAllowMethods:
       - "GET"
       - "OPTIONS"
@@ -23,6 +27,7 @@ spec:
     #   - "https://(.*)?${SECRET_DOMAIN_REV}([^\\s\\x60!()\\[\\]{};:'\\x22.,<>?«»“”‘’]*)"
     #   - "https://(.*)?${CLASSIC_DOMAIN_REV}([^\\s\\x60!()\\[\\]{};:'\\x22.,<>?«»“”‘’]*)"
     accessControlMaxAge: 100
+    referrerPolicy: origin
     addVaryHeader: true
     stsPreload: true
     forceSTSHeader: true
