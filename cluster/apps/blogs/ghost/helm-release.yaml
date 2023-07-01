@@ -70,7 +70,7 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           cert-manager.io/uri-sans: &host3 www.${TGR_DOMAIN}
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth-tgr@kubernetescrd"
         hosts:
           - host: &host2 ${TGR_DOMAIN}
             paths:
