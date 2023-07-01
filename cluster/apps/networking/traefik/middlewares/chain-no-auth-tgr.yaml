@@ -2,7 +2,7 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: chain-no-auth
+  name: chain-no-auth-tgr
   namespace: networking
 spec:
   chain:
