@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`tygr.${XYZ_DOMAIN}`) && PathPrefix(`/ghost`)
+      match: HostSNI(`tygr.${XYZ_DOMAIN}`) && PathPrefix(`/ghost`)
       services:
         - kind: Service
           name: ghost
@@ -18,7 +18,7 @@ spec:
         - name: networking-rfc1918@kubernetescrd
         - name: networking-secure-headers-tgr@kubernetescrd
     - kind: Rule
-      match: Host(`tygr.${XYZ_DOMAIN}`)
+      match: HostSNI(`tygr.${XYZ_DOMAIN}`)
       services:
         - kind: Service
           name: ghost

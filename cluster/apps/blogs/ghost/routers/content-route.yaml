@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`${TGR_DOMAIN}`)
+      match: HostSNI(`${TGR_DOMAIN}`)
       priority: 100
       services:
         - kind: Service
@@ -18,7 +18,7 @@ spec:
       middlewares:
         - name: networking-chain-no-auth-tgr@kubernetescrd
     - kind: Rule
-      match: Host(`www.${TGR_DOMAIN}`)
+      match: HostSNI(`www.${TGR_DOMAIN}`)
       priority: 100
       services:
         - kind: Service
