@@ -17,6 +17,7 @@ spec:
       - "https://tyg3r.${XYZ_DOMAIN}"
       - "https://auth.${XYZ_DOMAIN}"
       - "https://${TGR_DOMAIN}"
+      - "https://www.${TGR_DOMAIN}"
       - "https://${SECRET_DOMAIN}"
     accessControlMaxAge: 100
     addVaryHeader: true
