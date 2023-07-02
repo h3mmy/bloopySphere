@@ -6,4 +6,6 @@ resources:
   - pvc-config.yaml
   - ghost-secrets.sops.yaml
   - ghost-mysql.yaml
+  - routers/admin-route.yaml
+  - routers/content-route.yaml
   - helm-release.yaml

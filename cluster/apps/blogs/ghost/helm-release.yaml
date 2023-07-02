@@ -69,6 +69,7 @@ spec:
           hajimari.io/icon: "ghost"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           cert-manager.io/uri-sans: &host3 www.${TGR_DOMAIN}
+          traefik.ingress.kubernetes.io/router.priority: "99"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth-tgr@kubernetescrd"
         hosts:
@@ -94,12 +95,12 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           # Once authentik gets itself together this can go back to networking-bloopnet-xyz-auth@kubernetescrd
-          traefik.ingress.kubernetes.io/router.middlewares: networking-bloopnet-xyz-auth@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: ghost-admin-add-prefix@kubernetescrd
         hosts:
           - host: &host tyg3r.${XYZ_DOMAIN}
             paths:
               - path: /
-                pathType: Prefix
+                pathType: Exact
         tls:
           - hosts:
               - *host
