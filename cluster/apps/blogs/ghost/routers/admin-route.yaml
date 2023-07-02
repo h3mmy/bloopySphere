@@ -15,16 +15,16 @@ spec:
           name: ghost
           port: 2368
       middlewares:
-        - name: networking-rfc1918@kubernetescrd
+        - name: networking-rate-limit@kubernetescrd
         - name: networking-secure-headers-tgr@kubernetescrd
-    - kind: Rule
-      match: Host(`tygr.${XYZ_DOMAIN}`)
-      services:
-        - kind: Service
-          name: ghost
-          port: 2368
-      middlewares:
-        - name: networking-rfc1918@kubernetescrd
-        - name: networking-secure-headers-tgr@kubernetescrd
+    # - kind: Rule
+    #   match: Host(`tygr.${XYZ_DOMAIN}`) && PathPrefix(`/ghost/api/`)
+    #   services:
+    #     - kind: Service
+    #       name: ghost
+    #       port: 2368
+    #   middlewares:
+    #     - name: networking-rate-limit@kubernetescrd
+    #     - name: networking-secure-headers-tgr@kubernetescrd
   tls:
     secretName: "tls.${XYZ_DOMAIN/./-}"
