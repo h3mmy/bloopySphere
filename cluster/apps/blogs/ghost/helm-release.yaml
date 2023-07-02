@@ -86,25 +86,25 @@ spec:
               - *host2
               - *host3
             secretName: tls.tyg3r-tgr
-      admin:
-        enabled: true
-        ingressClassName: traefik
-        annotations:
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "ghost"
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          # Once authentik gets itself together this can go back to networking-bloopnet-xyz-auth@kubernetescrd
-          traefik.ingress.kubernetes.io/router.middlewares: networking-ghost-admin-add-prefix@kubernetescrd
-        hosts:
-          - host: &host tyg3r.${XYZ_DOMAIN}
-            paths:
-              - path: /
-                pathType: Exact
-        tls:
-          - hosts:
-              - *host
-            secretName: tls.tyg3r-xyz
+      # admin:
+      #   enabled: true
+      #   ingressClassName: traefik
+      #   annotations:
+      #     hajimari.io/enable: "true"
+      #     hajimari.io/icon: "ghost"
+      #     cert-manager.io/cluster-issuer: "letsencrypt-production"
+      #     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+      #     # Once authentik gets itself together this can go back to networking-bloopnet-xyz-auth@kubernetescrd
+      #     traefik.ingress.kubernetes.io/router.middlewares: networking-ghost-admin-add-prefix@kubernetescrd
+      #   hosts:
+      #     - host: &host tyg3r.${XYZ_DOMAIN}
+      #       paths:
+      #         - path: /
+      #           pathType: Exact
+      #   tls:
+      #     - hosts:
+      #         - *host
+      #       secretName: tls.tyg3r-xyz
     persistence:
       content:
         enabled: true
