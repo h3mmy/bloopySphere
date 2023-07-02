@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`tygr.${XYZ_DOMAIN}`) && PathPrefix(`/ghost`)
+      match: Host(`tyg3r.${XYZ_DOMAIN}`) && PathPrefix(`/ghost`)
       services:
         - kind: Service
           name: ghost
