@@ -8,6 +8,11 @@ spec:
   headers:
     frameDeny: true
     browserXssFilter: true
+    accessControlAllowHeaders:
+      - "App-Pragma"
+      - "X-Ghost-Version"
+      - "X-Requested-With"
+      - "Content-Type"
     accessControlAllowMethods:
       - "GET"
       - "OPTIONS"
