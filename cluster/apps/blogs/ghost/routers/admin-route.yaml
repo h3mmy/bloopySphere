@@ -10,7 +10,7 @@ spec:
   routes:
     - kind: Rule
       match: Host(`tygr.${XYZ_DOMAIN}`) && PathPrefix(`/ghost`)
-      priority: 100
+      # priority: 100
       services:
         - kind: Service
           name: ghost
