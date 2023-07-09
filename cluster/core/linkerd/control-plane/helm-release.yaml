@@ -12,7 +12,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.linkerd.io/edge
       chart: linkerd-control-plane
-      version: 1.13.7-edge
+      version: 1.13.8-edge
       sourceRef:
         kind: HelmRepository
         name: linkerd-edge-charts
