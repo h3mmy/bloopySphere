@@ -13,6 +13,11 @@ spec:
       - "X-Ghost-Version"
       - "X-Requested-With"
       - "Content-Type"
+      - "Access-Control-Allow-Headers"
+      - "Access-Control-Allow-Methods"
+      - "Audit-Id"
+      - "X-Content-Type-Options"
+      - "Cache-Control"
     accessControlAllowMethods:
       - "GET"
       - "OPTIONS"
