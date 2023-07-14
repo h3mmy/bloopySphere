@@ -49,18 +49,18 @@ prometheus:
         memory: 8200Mi
     enableAdminAPI: true
     podAntiAffinity: hard
-    podMonitorNamespaceSelector: {}
-    podMonitorSelector: {}
+    # podMonitorNamespaceSelector: {}
+    # podMonitorSelector: {}
     podMonitorSelectorNilUsesHelmValues: false
     probeSelectorNilUsesHelmValues: false
     replicaExternalLabelName: "replica"
     replicas: 2
     retention: 6h
     retentionSize: 8GB
-    ruleSelector: {}
+    # ruleSelector: {}
     ruleSelectorNilUsesHelmValues: false
-    serviceMonitorNamespaceSelector: {}
-    serviceMonitorSelector: {}
+    # serviceMonitorNamespaceSelector: {}
+    # serviceMonitorSelector: {}
     serviceMonitorSelectorNilUsesHelmValues: false
     walCompression: true
 
