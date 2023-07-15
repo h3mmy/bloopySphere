@@ -44,7 +44,7 @@ spec:
     fullnameOverride: authentik
     image:
       repository: ghcr.io/goauthentik/server
-      # tag: 2023.5.2 # default follows chart version
+      # tag: 2023.6.1 # default follows chart version
       # repository: ghcr.io/goauthentik/dev-server
       # tag: gh-providers-proxy-rework-endpoints-1679090841-c08a9a2
     # geoip:
