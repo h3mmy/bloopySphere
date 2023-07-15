@@ -6,11 +6,11 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  # renovate: datasource=github-releases
   url: ssh://github.com/kubernetes-sigs/external-dns.git
   secretRef:
     name: flux-system
   ref:
+    # renovate: datasource=github-releases registryUrl=github.com/kubernetes-sigs/external-dns.git
     tag: v0.13.4
   ignore: |
     # exclude all
