@@ -120,7 +120,19 @@ spec:
       - name: background-image-1
         mountPath: /media/sound_wave.svg
         readOnly: true
+      - name: cluster-domain-cert
+        mountPath: /certs/cluster-domain-cert
+        readOnly: true
     volumes:
+      - name: cluster-domain-cert
+        secret:
+          secretName: tls.${XYZ_DOMAIN/./-}
+          optional: false # default setting; "mysecret" must exist
+          items:
+            - key: tls.crt
+              path: fullchain.pem
+            - key: tls.key
+              path: privkey.pem
       - name: background-image-1
         projected:
           defaultMode: 0775
