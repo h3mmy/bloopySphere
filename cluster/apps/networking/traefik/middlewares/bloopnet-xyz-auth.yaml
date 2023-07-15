@@ -8,7 +8,7 @@ spec:
   chain:
     middlewares:
       # Note this requires cloudflare proxy
-      # - name: cloudflare-ips
+      - name: cloudflare-ips
       - name: networking-secure-headers@kubernetescrd
       - name: networking-rate-limit@kubernetescrd
       - name: networking-authentik@kubernetescrd
@@ -24,5 +24,5 @@ spec:
     middlewares:
       - name: networking-secure-headers@kubernetescrd
       - name: networking-rate-limit@kubernetescrd
-      - name: auth-ak-outpost-bloopnet-xyz@kubernetescrd
+      - name: networking-authentik@kubernetescrd
       - name: networking-error-pages@kubernetescrd

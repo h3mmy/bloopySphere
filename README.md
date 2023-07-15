@@ -100,6 +100,10 @@ Loki snippets. If you know you know.
 {app="traefik"} | json message_extracted="message" |  line_format "{{.message_extracted}}" | json | DownstreamStatus!=`200`
 ```
 
+```logql
+{app="authentik"} | json message_extracted="message"| line_format "{{.message_extracted}}" | json level="level",timestamp="timestamp",event="event" | level=`error`
+```
+
 `kubectl get namespace "monitoring" -o json   | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/"   | kubectl replace --raw /api/v1/namespaces/monitoring/finalize -f -`
 
 
