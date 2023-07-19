@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: docker.io/n8nio/n8n
-      tag: 1.0.3
+      tag: 1.0.4
 
     dnsConfig:
       options:
