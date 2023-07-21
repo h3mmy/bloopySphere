@@ -16,7 +16,7 @@ _... managed with Flux and Renovate_ :robot:
 <!-- markdownlint-disable-next-line -->
 <div align="center">
 
-[![k3s](https://img.shields.io/badge/k3s-v1.27.2-brightgreen?style=for-the-badge&logo=kubernetes&logoColor=white)](https://k3s.io/)
+[![k3s](https://img.shields.io/badge/k3s-v1.27.4-brightgreen?style=for-the-badge&logo=kubernetes&logoColor=white)](https://k3s.io/)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=for-the-badge)](https://github.com/pre-commit/pre-commit)
 [![renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?style=for-the-badge&logo=renovatebot&logoColor=white)](https://github.com/renovatebot/renovate)
 
@@ -29,7 +29,7 @@ _... managed with Flux and Renovate_ :robot:
 [![GitHub last commit](https://img.shields.io/github/last-commit/h3mmy/bloopySphere?style=for-the-badge)](https://github.com/h3mmy/bloopySphere/commits/main)
 
 [![GitHub branch checks state](https://img.shields.io/github/checks-status/h3mmy/bloopySphere/main?style=for-the-badge)](https://github.com/h3mmy/bloopySphere/actions?query=branch%3Amain)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/h3mmy/bloopySphere/Deploy%20Keycloak%20Theme%20to%20GHCR?label=Keycloak%20Theme&style=for-the-badge)](https://github.com/h3mmy/bloopySphere/actions/workflows/deploy-keycloak-theme.yaml)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/h3mmy/bloopySphere/deploy-keycloak-theme.yaml?branch=main&label=Keycloak%20Theme&style=for-the-badge)](https://github.com/h3mmy/bloopySphere/actions/workflows/deploy-keycloak-theme.yaml)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/h3mmy/bloopysphere/Lint?label=Lint&style=for-the-badge)](https://github.com/h3mmy/bloopySphere/actions/workflows/lint.yaml)
 
 ![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/h3mmy/bloopysphere?style=for-the-badge)
