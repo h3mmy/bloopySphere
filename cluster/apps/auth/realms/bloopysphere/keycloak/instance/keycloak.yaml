@@ -18,6 +18,6 @@ spec:
   http:
     tlsSecret: "tls.${XYZ_DOMAIN/./-}"
   hostname:
-    hostname: id.${XYZ_DOMAIN}
+    hostname: iam.${XYZ_DOMAIN}
   ingress:
     enabled: false

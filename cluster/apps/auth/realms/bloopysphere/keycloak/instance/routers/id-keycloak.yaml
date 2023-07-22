@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`id.${XYZ_DOMAIN}`)
+      match: Host(`iam.${XYZ_DOMAIN}`)
       services:
         - kind: Service
           name: kc-instance-service
