@@ -7,11 +7,11 @@ metadata:
   labels:
     component.bloopysphere-0/aspect: networking
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       chart: cert-manager-trust
-      version: v0.2.1
+      version: v0.5.0
       sourceRef:
         kind: HelmRepository
         name: jetstack-charts
@@ -39,6 +39,8 @@ spec:
     cleanupOnFail: true
 
   values:
+    crds:
+      enabled: true
     # -- Number of replicas of trust to run.
     replicaCount: 1
 
@@ -68,7 +70,7 @@ spec:
           type: ClusterIP
           # -- ServiceMonitor resource for this Service.
           servicemonitor:
-            enabled: false
+            enabled: true
             prometheusInstance: kube-prometheus-stack
             interval: 30s
             scrapeTimeout: 10s
