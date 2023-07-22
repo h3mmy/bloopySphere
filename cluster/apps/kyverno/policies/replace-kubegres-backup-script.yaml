@@ -23,7 +23,8 @@ spec:
                   backup.kubegres.version/limited: "true"
       mutate:
         targets:
-          - kind: ConfigMap
+          - apiVersion: v1
+            kind: ConfigMap
         patchStrategicMerge:
           data:
             backup_database.sh: |
