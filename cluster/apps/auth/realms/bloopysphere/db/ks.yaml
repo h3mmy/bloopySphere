@@ -46,9 +46,11 @@ spec:
     - apiVersion: objectbucket.io/v1alpha1
       kind: ObjectBucketClaim
       name: cnpg-kc-backup-v1
+      namespace: auth
     - apiVersion: postgresql.cnpg.io/v1
       kind: ScheduledBackup
       name: backup-schedule-kc-postgres-v1
+      namespace: auth
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
