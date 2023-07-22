@@ -38,7 +38,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  wait: true
+  # wait: true
   dependsOn:
     - name: cluster-core-rook-ceph-cluster
     - name: cluster-apps-cloudnative-pg
@@ -64,7 +64,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  wait: true
   dependsOn:
     - name: cluster-apps-cloudnative-pg
     - name: cluster-apps-local-path-provisioner
@@ -91,7 +90,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  wait: true
   dependsOn:
     - name: kube-prometheus-stack-crds
     - name: cluster-iam-keycloak-db-cluster

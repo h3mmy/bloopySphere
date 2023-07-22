@@ -13,7 +13,8 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  wait: true
+  # healthCheck field is ignored when wait is true
+  # wait: true
   dependsOn:
     - name: cluster-iam-keycloak-db-cluster
   decryption:
