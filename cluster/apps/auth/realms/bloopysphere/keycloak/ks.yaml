@@ -16,6 +16,10 @@ spec:
   wait: true
   dependsOn:
     - name: cluster-iam-keycloak-db-cluster
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   postBuild:
     substitute: {}
     substituteFrom:
