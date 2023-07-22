@@ -17,6 +17,7 @@ spec:
       key: password
   http:
     tlsSecret: "tls.${XYZ_DOMAIN/./-}"
+    httpsPort: 8443
   hostname:
     hostname: iam.${XYZ_DOMAIN}
   ingress:

@@ -22,7 +22,6 @@ spec:
                 name: kc-instance-service
                 port:
                   name: https
-                  number: 8443
   tls:
     - secretName: "tls.${XYZ_DOMAIN/./-}"
       hosts:
