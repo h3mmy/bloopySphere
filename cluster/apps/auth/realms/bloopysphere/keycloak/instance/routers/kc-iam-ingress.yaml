@@ -11,6 +11,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
     traefik.ingress.kubernetes.io/affinity: "true"
 spec:
+  ingressClassName: traefik
   rules:
     - host: &shost iam.${XYZ_DOMAIN}
       http:
