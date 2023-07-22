@@ -25,6 +25,9 @@ spec:
               annotations:
                 probe.home.arpa/enabled: "false"
       mutate:
+        targets:
+          - apiVersion: networking.k8s.io/v1
+            kind: Ingress
         patchStrategicMerge:
           metadata:
             annotations:
