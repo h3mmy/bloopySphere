@@ -31,3 +31,4 @@ spec:
     - apiVersion: k8s.keycloak.org/v2alpha1
       kind: Keycloak
       name: kc-instance
+      namespace: auth

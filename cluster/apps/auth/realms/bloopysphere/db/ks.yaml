@@ -22,6 +22,7 @@ spec:
     - apiVersion: v1
       kind: Secret
       name: kc-postgres-user
+      namespace: auth
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -74,6 +75,7 @@ spec:
     - apiVersion: postgresql.cnpg.io/v1
       kind: Cluster
       name: kc-postgres
+      namespace: auth
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -97,3 +99,4 @@ spec:
     - apiVersion: monitoring.coreos.com/v1
       kind: PrometheusRule
       name: kc-cnpg-rules
+      namespace: auth
