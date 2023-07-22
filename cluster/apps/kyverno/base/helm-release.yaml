@@ -50,6 +50,9 @@ spec:
                 - ""
               resources:
                 - pods
+                - ingresses
+                - services
+                - namespaces
               verbs:
                 - create
                 - update
@@ -64,6 +67,20 @@ spec:
       serviceMonitor:
         enabled: true
     admissionController:
+      rbac:
+        clusterRole:
+          extraResources:
+            - apiGroups:
+                - ""
+              resources:
+                - pods
+                - namespaces
+                - services
+                - ingresses
+              verbs:
+                - create
+                - update
+                - delete
       replicas: 3
       serviceMonitor:
         enabled: true
