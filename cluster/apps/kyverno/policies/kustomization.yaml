@@ -12,3 +12,4 @@ resources:
   - ./verify-tls-contains-host-path.yaml
   #- ./add-linkerd-annotations-to-ns-pods.yaml
   # - ./add-grafana-instance-selector.yaml
+  - ./add-svc-tls-annotations.yaml
