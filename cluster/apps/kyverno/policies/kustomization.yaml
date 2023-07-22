@@ -6,9 +6,9 @@ resources:
   #- ./remove-cpu-limit.yaml
   # - ./set-internal-ingress-annotations.yaml
   # - ./snapshot-cronjob-controller.yaml
-  - ./replace-kubegres-backup-script.yaml
+  # - ./replace-kubegres-backup-script.yaml
   # - ./add-ndots.yaml
-  - ./add-prom-probes.yaml
+  # - ./add-prom-probes.yaml
   - ./verify-tls-contains-host-path.yaml
   #- ./add-linkerd-annotations-to-ns-pods.yaml
   # - ./add-grafana-instance-selector.yaml
