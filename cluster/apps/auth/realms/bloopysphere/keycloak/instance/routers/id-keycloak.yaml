@@ -4,6 +4,12 @@ kind: IngressRoute
 metadata:
   name: id-keycloak
   namespace: auth
+  annotations:
+    hajimari.io/appName: IAM Settings
+    hajimari.io/enable: true
+    hajimari.io/icon: account-lock-outline
+    hajimari.io/instance: bloop-quarky
+    hajimari.io/url: https://iam.${XYZ_DOMAIN}
 spec:
   entryPoints:
     - websecure
