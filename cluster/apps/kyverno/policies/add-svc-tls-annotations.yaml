@@ -20,7 +20,7 @@ spec:
               kinds: ["Service"]
               name: kc-instance-service
       mutate:
-        target:
+        targets:
           - apiVersion: v1
             kind: Service
         patchStrategicMerge:
