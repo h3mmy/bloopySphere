@@ -109,18 +109,18 @@ spec:
 
       admissionReports:
         enabled: true
-        image:
-          registry: ghcr.io
-          repository: onedr0p/kubernetes-kubectl
-          tag: '1.27.4'
-          pullPolicy: IfNotPresent
+        # image:
+        #   registry: ghcr.io
+        #   repository: onedr0p/kubernetes-kubectl
+        #   tag: '1.27.4'
+        #   pullPolicy: IfNotPresent
         threshold: 5000 # Default is 10k
 
       clusterAdmissionReports:
         enabled: true
-        image:
-          registry: ghcr.io
-          repository: onedr0p/kubernetes-kubectl
-          tag: '1.27.4'
-          pullPolicy: IfNotPresent
+        # image:
+        #   registry: ghcr.io
+        #   repository: onedr0p/kubernetes-kubectl
+        #   tag: '1.27.4'
+        #   pullPolicy: IfNotPresent
         threshold: 5000 # Default is 10k
