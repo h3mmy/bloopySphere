@@ -55,6 +55,7 @@ spec:
                 - ingresses
                 - services
                 - namespaces
+                - configmaps
               verbs:
                 - create
                 - update

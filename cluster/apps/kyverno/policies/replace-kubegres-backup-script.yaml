@@ -22,6 +22,8 @@ spec:
                 matchLabels:
                   backup.kubegres.version/limited: "true"
       mutate:
+        targets:
+          - kind: ConfigMap
         patchStrategicMerge:
           data:
             backup_database.sh: |

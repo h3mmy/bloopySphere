@@ -5,4 +5,4 @@ resources:
   - ./helm-release.yaml
   - ./issuers
   - ./prometheus-rule.yaml
-  - ./cert-manager-trust
+  - ./trust-manager

@@ -37,7 +37,7 @@ repos:
     rev: v0.3.0
     hooks:
       - id: check-flux-helm-values
-        exclude: "^cluster/core/cert-manager/cert-manager-trust/helm-release.yaml$"
+        exclude: "^cluster/core/cert-manager/trust-manager/helm-release.yaml$"
 
   # - repo: https://github.com/koalaman/shellcheck-precommit
   #   rev: v0.7.2
