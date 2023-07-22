@@ -19,3 +19,5 @@ spec:
     tlsSecret: "tls.${XYZ_DOMAIN/./-}"
   hostname:
     hostname: id.${XYZ_DOMAIN}
+  ingress:
+    enabled: false

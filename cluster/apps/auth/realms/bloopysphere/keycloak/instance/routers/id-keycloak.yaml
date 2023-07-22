@@ -1,0 +1,20 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: id-keycloak
+  namespace: auth
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`id.${XYZ_DOMAIN}`)
+      services:
+        - kind: Service
+          name: kc-instance-service
+          port: 8443
+      middlewares:
+        - name: networking-rate-limit@kubernetescrd
+  tls:
+    secretName: "tls.${XYZ_DOMAIN/./-}"
