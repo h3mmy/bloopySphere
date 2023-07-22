@@ -57,6 +57,16 @@ spec:
                 - namespaces
                 - configmaps
                 - jobs
+              verbs:
+                - create
+                - update
+                - patch
+                - delete
+                - get
+                - list
+            - apiGroups:
+                - "batch/v1"
+              resources:
                 - cronjobs
               verbs:
                 - create
