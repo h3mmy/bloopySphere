@@ -21,9 +21,9 @@ spec:
 
   monitoring:
     enablePodMonitor: true
-  # will be generated if undefined
-  # superuserSecret:
-  #  name: cloudnative-pg-postgres-superuser
+
+  superuserSecret:
+    name: cnpg-keycloak-superuser
 
   bootstrap:
     # https://www.keycloak.org/server/db
