@@ -37,6 +37,8 @@ spec:
 
     grafana:
       enabled: true
+      annotations:
+        grafana_folder: kyverno
     serviceMonitor:
       enabled: true
       interval: 1m
