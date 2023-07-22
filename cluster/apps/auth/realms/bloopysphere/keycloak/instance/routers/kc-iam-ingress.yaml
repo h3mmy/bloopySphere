@@ -24,6 +24,6 @@ spec:
                   name: https
                   number: 8443
   tls:
-    secretName: "tls.${XYZ_DOMAIN/./-}"
-    hosts:
-      - *shost
+    - secretName: "tls.${XYZ_DOMAIN/./-}"
+      hosts:
+        - *shost
