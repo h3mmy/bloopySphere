@@ -21,7 +21,8 @@ resources:
   - blogs
   - cert-manager
   # - linkerd
-  - kyverno
+  - ./kyverno/namespace.yaml
+  - ./kyverno/ks.yaml
   - vault
   - infra
   - ./iam/ks.yaml
