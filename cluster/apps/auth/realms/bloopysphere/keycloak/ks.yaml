@@ -16,6 +16,13 @@ spec:
   wait: true
   dependsOn:
     - name: cluster-iam-keycloak-db-cluster
+  postBuild:
+    substitute: {}
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-settings
+      - kind: Secret
+        name: cluster-secrets
   healthChecks:
     - apiVersion: k8s.keycloak.org/v2alpha1
       kind: Keycloak
