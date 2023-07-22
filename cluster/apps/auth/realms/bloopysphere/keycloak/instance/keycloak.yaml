@@ -10,10 +10,10 @@ spec:
     vendor: postgres
     host: postgres-db
     usernameSecret:
-      name: keycloak-db-secret
+      name: kc-postgres-user
       key: username
     passwordSecret:
-      name: keycloak-db-secret
+      name: kc-postgres-user
       key: password
   http:
     tlsSecret: "tls.${XYZ_DOMAIN/./-}"
