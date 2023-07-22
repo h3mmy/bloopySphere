@@ -6,7 +6,6 @@ metadata:
   namespace: auth
   annotations:
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/service.serversscheme: tcp
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
     traefik.ingress.kubernetes.io/affinity: "true"
@@ -22,7 +21,7 @@ spec:
               service:
                 name: kc-instance-service
                 port:
-                  name: https
+                  number: 8443
   tls:
     - secretName: "tls.${XYZ_DOMAIN/./-}"
       hosts:
