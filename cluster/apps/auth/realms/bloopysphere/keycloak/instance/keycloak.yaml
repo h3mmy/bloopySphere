@@ -8,7 +8,7 @@ spec:
   instances: 1
   db:
     vendor: postgres
-    host: postgres-db
+    host: kc-postgres-rw
     usernameSecret:
       name: kc-postgres-user
       key: username
