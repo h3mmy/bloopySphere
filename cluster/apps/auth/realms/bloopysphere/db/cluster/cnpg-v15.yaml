@@ -32,7 +32,6 @@ spec:
       database: keycloak
       secret:
         name: kc-postgres-user
-        namespace: auth
       encoding: 'UTF8'
 
   backup:
