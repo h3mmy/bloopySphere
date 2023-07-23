@@ -20,6 +20,8 @@ spec:
     limits:
       cpu: 141m
       memory: 304M
+  failover:
+    isDisabled: false
   backup:
     schedule: "0 1 * * *"
     pvcName: authentik-db-backup
