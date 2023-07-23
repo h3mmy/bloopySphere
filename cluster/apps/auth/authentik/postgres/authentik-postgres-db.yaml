@@ -22,7 +22,7 @@ spec:
       memory: 304M
   failover:
     isDisabled: false
-    promotePod: "authentik-postgres-1-0"
+    promotePod: "authentik-postgres-2-0"
   backup:
     schedule: "0 1 * * *"
     pvcName: authentik-db-backup
