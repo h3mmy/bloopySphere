@@ -55,7 +55,7 @@ spec:
       mail__from: ${MAIILGUN_FROM_EMAIL}
       mail__options__service: Mailgun
       mail__options__host: smtp.mailgun.org
-      mail__options__port: 587
+      mail__options__port: 465
       mail__options__secure: true
       mail__options__auth__user: postmaster@mail.${TGR_DOMAIN}
       mail__options__auth__pass: ${MAILGUN_SMTP_PASSWORD}
