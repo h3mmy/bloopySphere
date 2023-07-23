@@ -16,7 +16,7 @@ spec:
     storageClass: local-path
   postgresql:
     parameters:
-      max_connections: "300"
+      max_connections: "301"
       shared_buffers: 512MB
 
   monitoring:
