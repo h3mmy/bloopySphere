@@ -1,5 +1,7 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: auth
 resources:
-  - ./kc-cnpg-v15.yaml
+  - ./cnpg-secret.sops.yaml
+  - ./lldap-secret.sops.yaml

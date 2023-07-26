@@ -16,7 +16,7 @@ spec:
   # healthCheck field is ignored when wait is true
   # wait: true
   dependsOn:
-    - name: cluster-iam-keycloak-db-cluster
+    - name: cluster-iam-db-cluster
   decryption:
     provider: sops
     secretRef:

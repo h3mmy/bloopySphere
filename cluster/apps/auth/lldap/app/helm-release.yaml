@@ -1,0 +1,104 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app lldap
+  namespace: auth
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controller:
+      replicas: 2
+      strategy: RollingUpdate
+      annotations:
+        reloader.stakater.com/auto: "true"
+    image:
+      repository: ghcr.io/lldap/lldap
+      tag: v0.4.3
+    env:
+      TZ: ${TZ}
+      LLDAP_HTTP_PORT: &port 80
+      LLDAP_HTTP_URL: https://lldap.${XYZ_DOMAIN}
+      LLDAP_LDAPS_OPTIONS__PORT: &ldapsPort 636
+      LLDAP_LDAPS_OPTIONS__ENABLED: true
+      LLDAP_LDAPS_OPTIONS__KEY_FILE: /data/lldap-cert/tls.key
+      LLDAP_LDAPS_OPTIONS__CERT_FILE: /data/lldap-cert/tls.crt
+      LLDAP_LDAP_PORT: &ldapPort 389
+
+    envFrom:
+      - secretRef:
+          name: lldap-env
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+          ldap:
+            enabled: true
+            port: *ldapPort
+          ldaps:
+            enabled: true
+            port: *ldapsPort
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: traefik
+        hosts:
+          - host: &host "{{ .Release.Name }}.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: tls.lldap
+    persistence:
+      data:
+        enabled: true
+        type: emptyDir
+    volumeMounts:
+      - name: lldap-cert
+        mountPath: /data/lldap-cert
+        readOnly: true
+    volumes:
+      - name: lldap-cert
+        secret:
+          secretName: tls.lldap
+          optional: false # default setting; "mysecret" must exist
+          items:
+            - key: tls.crt
+              path: fullchain.pem
+            - key: tls.key
+              path: privkey.pem
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: *app
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+      limits:
+        memory: 500Mi

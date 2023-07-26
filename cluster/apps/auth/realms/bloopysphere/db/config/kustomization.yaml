@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: auth
 resources:
   - ./cnpg-secret.sops.yaml
-  - ./secret.sops.yaml
+  - ./kc-secret.sops.yaml

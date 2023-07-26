@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-iam-keycloak-db-config
+  name: cluster-iam-lldap-db-config
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "false"
 spec:
   interval: 10m
-  path: "./cluster/apps/auth/realms/bloopysphere/db/config"
+  path: "./cluster/apps/auth/lldap/db/config"
   prune: true
   sourceRef:
     kind: GitRepository
@@ -21,23 +21,23 @@ spec:
   healthChecks:
     - apiVersion: v1
       kind: Secret
-      name: kc-postgres-user
+      name: lldap-postgres-user
       namespace: auth
     - apiVersion: v1
       kind: Secret
-      name: cnpg-keycloak-superuser
+      name: cnpg-lldap-superuser
       namespace: auth
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-iam-keycloak-db-backup
+  name: cluster-iam-lldap-db-backup
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "false"
 spec:
   interval: 10m
-  path: "./cluster/apps/auth/realms/bloopysphere/db/backup"
+  path: "./cluster/apps/auth/lldap/db/backup"
   prune: true
   sourceRef:
     kind: GitRepository
@@ -49,19 +49,19 @@ spec:
   healthChecks:
     - apiVersion: objectbucket.io/v1alpha1
       kind: ObjectBucketClaim
-      name: cnpg-kc-backup-v1
+      name: cnpg-lldap-backup-v1
       namespace: auth
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-iam-keycloak-db-cluster
+  name: cluster-iam-lldap-db-cluster
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "false"
 spec:
   interval: 10m
-  path: "./cluster/apps/auth/realms/bloopysphere/db/cluster"
+  path: "./cluster/apps/auth/lldap/db/cluster"
   prune: true
   sourceRef:
     kind: GitRepository
@@ -69,34 +69,34 @@ spec:
   dependsOn:
     - name: cluster-apps-cloudnative-pg
     - name: cluster-apps-local-path-provisioner
-    - name: cluster-iam-keycloak-db-config
+    - name: cluster-iam-lldap-db-config
     # Needed for rook-ceph bucket credentials
-    - name: cluster-iam-keycloak-db-backup
+    - name: cluster-iam-lldap-db-backup
   healthChecks:
     - apiVersion: postgresql.cnpg.io/v1
       kind: Cluster
-      name: kc-postgres
+      name: lldap-postgres
       namespace: auth
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-iam-keycloak-db-alerts
+  name: cluster-iam-lldap-db-alerts
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "false"
 spec:
   interval: 10m
-  path: "./cluster/apps/auth/realms/bloopysphere/db/alerts"
+  path: "./cluster/apps/auth/lldap/db/alerts"
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
   dependsOn:
     - name: kube-prometheus-stack-crds
-    - name: cluster-iam-keycloak-db-cluster
+    - name: cluster-iam-lldap-db-cluster
   healthChecks:
     - apiVersion: monitoring.coreos.com/v1
       kind: PrometheusRule
-      name: kc-cnpg-rules
+      name: lldap-cnpg-rules
       namespace: auth
