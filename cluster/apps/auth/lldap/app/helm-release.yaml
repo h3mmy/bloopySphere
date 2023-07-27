@@ -40,8 +40,8 @@ spec:
       LLDAP_HTTP_URL: https://lldap.${XYZ_DOMAIN}
       LLDAP_LDAPS_OPTIONS__PORT: &ldapsPort 636
       LLDAP_LDAPS_OPTIONS__ENABLED: true
-      LLDAP_LDAPS_OPTIONS__KEY_FILE: /lldap-cert/privkey.pem
-      LLDAP_LDAPS_OPTIONS__CERT_FILE: /lldap-cert/fullchain.pem
+      LLDAP_LDAPS_OPTIONS__KEY_FILE: /certs/tls.key
+      LLDAP_LDAPS_OPTIONS__CERT_FILE: /certs/tls.crt
       LLDAP_LDAP_PORT: &ldapPort 389
 
     envFrom:
@@ -75,20 +75,10 @@ spec:
       data:
         enabled: true
         type: emptyDir
-    volumeMounts:
-      - name: lldap-cert
-        mountPath: /lldap-cert
-        readOnly: true
-    volumes:
-      - name: lldap-cert
-        secret:
-          secretName: tls.lldap
-          optional: false # default setting; "mysecret" must exist
-          items:
-            - key: tls.crt
-              path: fullchain.pem
-            - key: tls.key
-              path: privkey.pem
+      certs:
+        enabled: true
+        type: secret
+        name: tls.lldap
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
