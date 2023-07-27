@@ -40,8 +40,8 @@ spec:
       LLDAP_HTTP_URL: https://lldap.${XYZ_DOMAIN}
       LLDAP_LDAPS_OPTIONS__PORT: &ldapsPort 636
       LLDAP_LDAPS_OPTIONS__ENABLED: true
-      LLDAP_LDAPS_OPTIONS__KEY_FILE: /data/lldap-cert/tls.key
-      LLDAP_LDAPS_OPTIONS__CERT_FILE: /data/lldap-cert/tls.crt
+      LLDAP_LDAPS_OPTIONS__KEY_FILE: /lldap-cert/tls.key
+      LLDAP_LDAPS_OPTIONS__CERT_FILE: /lldap-cert/tls.crt
       LLDAP_LDAP_PORT: &ldapPort 389
 
     envFrom:
@@ -77,7 +77,7 @@ spec:
         type: emptyDir
     volumeMounts:
       - name: lldap-cert
-        mountPath: /data/lldap-cert
+        mountPath: /lldap-cert
         readOnly: true
     volumes:
       - name: lldap-cert
