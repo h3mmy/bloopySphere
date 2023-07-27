@@ -9,7 +9,7 @@ sources:
     journal_directory: /var/log/journal
   kubernetes_source:
     type: kubernetes_logs
-    use_api_server_cache: true
+    use_apiserver_cache: true
     pod_annotation_fields:
       container_image: container_image
       container_name: container_name
