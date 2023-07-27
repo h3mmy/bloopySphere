@@ -38,10 +38,11 @@ spec:
       TZ: ${TZ}
       LLDAP_HTTP_PORT: &port 80
       LLDAP_HTTP_URL: https://lldap.${XYZ_DOMAIN}
-      LLDAP_LDAPS_OPTIONS__PORT: &ldapsPort 636
-      LLDAP_LDAPS_OPTIONS__ENABLED: true
-      LLDAP_LDAPS_OPTIONS__KEY_FILE: /certs/tls.key
-      LLDAP_LDAPS_OPTIONS__CERT_FILE: /certs/tls.crt
+      # enable after cert secret is generated
+      # LLDAP_LDAPS_OPTIONS__PORT: &ldapsPort 636
+      # LLDAP_LDAPS_OPTIONS__ENABLED: true
+      # LLDAP_LDAPS_OPTIONS__KEY_FILE: /certs/tls.key
+      # LLDAP_LDAPS_OPTIONS__CERT_FILE: /certs/tls.crt
       LLDAP_LDAP_PORT: &ldapPort 389
 
     envFrom:
@@ -55,9 +56,10 @@ spec:
           ldap:
             enabled: true
             port: *ldapPort
-          ldaps:
-            enabled: true
-            port: *ldapsPort
+          # enable after cert secret is generated
+          # ldaps:
+          #   enabled: true
+          #   port: *ldapsPort
     ingress:
       main:
         enabled: true
@@ -75,10 +77,11 @@ spec:
       data:
         enabled: true
         type: emptyDir
-      certs:
-        enabled: true
-        type: secret
-        name: tls.lldap
+      # enable after cert secret is generated
+      # certs:
+      #   enabled: true
+      #   type: secret
+      #   name: tls.lldap
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
