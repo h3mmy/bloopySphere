@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: haveagitgat/tdarr
-      tag: 2.00.21
+      tag: 2.00.22
       pullPolicy: IfNotPresent
     env:
       webUIPort: &web-port 8265
