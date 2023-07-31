@@ -44,7 +44,7 @@ spec:
       LLDAP_LDAPS_OPTIONS__KEY_FILE: /certs/tls.key
       LLDAP_LDAPS_OPTIONS__CERT_FILE: /certs/tls.crt
       LLDAP_LDAP_PORT: &ldapPort 389
-
+      LLDAP_VERBOSE: true
     envFrom:
       - secretRef:
           name: lldap-env
