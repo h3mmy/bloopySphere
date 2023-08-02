@@ -72,11 +72,11 @@ spec:
     - name: cluster-iam-lldap-db-config
     # Needed for rook-ceph bucket credentials
     - name: cluster-iam-lldap-db-backup
-  healthChecks:
-    - apiVersion: postgresql.cnpg.io/v1
-      kind: Cluster
-      name: lldap-postgres
-      namespace: auth
+  # healthChecks:
+  #   - apiVersion: postgresql.cnpg.io/v1
+  #     kind: Cluster
+  #     name: lldap-postgres
+  #     namespace: auth
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
