@@ -4,5 +4,5 @@ kind: Kustomization
 resources:
   - ./realms
   - ./authentik
-  # - ./lldap/db/ks.yaml
-  # - ./lldap/ks.yaml
+  - ./lldap/db/ks.yaml
+  - ./lldap/ks.yaml
