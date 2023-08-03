@@ -22,10 +22,10 @@ spec:
     hostname: iam.${XYZ_DOMAIN}
   ingress:
     enabled: false
-  resources:
-    requests:
-      cpu: 48m
-      memory: 588M
-    limits:
-      cpu: 756m
-      memory: 928M
+  #resources:
+  #  requests:
+  #    cpu: 48m
+  #    memory: 588M
+  #  limits:
+  #    cpu: 756m
+  #    memory: 928M
