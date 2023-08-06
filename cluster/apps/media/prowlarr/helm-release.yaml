@@ -22,6 +22,12 @@ spec:
   upgrade:
     remediation:
       retries: 5
+  valuesFrom:
+    - kind: Secret
+      name: *app
+      valuesKey: PROWLARR__API_KEY
+      targetPath: env.PROWLARR__API_KEY
+      optional: false
   values:
     global:
       nameOverride: *app
@@ -50,9 +56,6 @@ spec:
       #     secretKeyRef:
       #       name: prowlarr-postgres
       #       key: POSTGRES_PASSWORD
-    envFrom:
-      - secretRef:
-          name: *app
     service:
       main:
         ports:

@@ -26,6 +26,12 @@ spec:
       namespace: rook-ceph
     - name: vpn-gateway
       namespace: vpn-gateway
+  valuesFrom:
+    - kind: Secret
+      name: *app
+      valuesKey: WHISPARR__API_KEY
+      targetPath: env.WHISPARR__API_KEY
+      optional: false
   values:
     controller:
       type: statefulset
@@ -39,9 +45,7 @@ spec:
       WHISPARR__INSTANCE_NAME: Whisparr
       WHISPARR__PORT: &port 80
       WHISPARR__LOG_LEVEL: info
-    envFrom:
-      - secretRef:
-          name: *app
+      WHISPARR__AUTHENTICATION_METHOD: None
     service:
       main:
         ports:

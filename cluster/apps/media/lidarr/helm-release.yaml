@@ -27,6 +27,8 @@ spec:
       remediateLastFailure: true
 
   values:
+    controller:
+      type: statefulset
     image:
       repository: ghcr.io/onedr0p/lidarr
       tag: 1.2.6.3313@sha256:24dccd066c58ae3fea202198ab5b2f0bd3c1cef51db9b95ae25574d999201cce
