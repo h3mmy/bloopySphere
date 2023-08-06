@@ -33,11 +33,13 @@ spec:
       targetPath: env.WHISPARR__API_KEY
       optional: false
   values:
+    global:
+      nameOverride: *app
     controller:
       type: statefulset
     image:
-      repository: ghcr.io/onedr0p/whisparr-nightly
-      tag: 0.1.0.53@sha256:5a6ce55522afa84195cd723447f987f63a19009a37e2779b861a65aec940572b
+      repository: docker.io/hotio/whisparr
+      tag: nightly-77b4eb3
     env:
       TZ: "${TZ}"
       PGID: ${MEDIA_GID}
