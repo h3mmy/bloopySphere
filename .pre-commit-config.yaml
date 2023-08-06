@@ -17,9 +17,9 @@ repos:
       - id: mixed-line-ending
 
   - repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.5.3
+    # v1.5.3 has a bug that prevents this from working
+    rev: v1.5.1
     hooks:
-      # - id: forbid-crlf
       - id: remove-crlf
       - id: remove-tabs
 
