@@ -31,7 +31,7 @@ transforms:
       - kubernetes_logs
     source: |
       # Standardize 'app' index
-      .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+      .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || .pod_labels."app.kubernetes.io/part-of" || "unknown"
   udm_logs_xform:
     type: "remap"
     inputs:
