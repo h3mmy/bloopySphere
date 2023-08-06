@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: auth
 resources:
   - ./cnpg-secret.sops.yaml
-  - ./lldap-secret.sops.yaml
+  - ./ldap-secret.sops.yaml

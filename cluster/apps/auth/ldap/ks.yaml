@@ -8,7 +8,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-iam-ldap-db-cluster
-  path: ./cluster/apps/auth/lldap/app
+  path: ./cluster/apps/auth/ldap/app
   prune: true
   sourceRef:
     kind: GitRepository
