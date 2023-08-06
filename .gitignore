@@ -48,7 +48,6 @@ infrastructure/bare-metal/*
 infrastructure/shared/networks.yaml
 infrastructure/terraform/vault/*
 *volsync-config.yaml
-cluster/apps/auth/ldap
 cluster/bootstrap
 kube-dns.yml
 ceph-dis/*
