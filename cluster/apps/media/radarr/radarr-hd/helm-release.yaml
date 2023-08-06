@@ -35,6 +35,7 @@ spec:
       RADARR__PORT: &port 7878
       RADARR__APPLICATION_URL: https://radarr.${XYZ_DOMAIN}
       RADARR__API_KEY: ${RADARR_API_KEY}
+      RADARR__AUTHENTICATION_METHOD: None
     service:
       main:
         ports:

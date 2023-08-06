@@ -34,6 +34,8 @@ spec:
       READARR__INSTANCE_NAME: Readarr
       READARR__PORT: &port 80
       READARR__LOG_LEVEL: info
+      READARR__AUTHENTICATION_METHOD: None
+      READARR__APPLICATION_URL: readarr.${XYZ_DOMAIN}
     envFrom:
       - secretRef:
           name: *app
