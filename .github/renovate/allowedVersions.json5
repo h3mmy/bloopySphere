@@ -7,8 +7,8 @@
         "allowedVersions":"<15"
       },
       {
-        "matchPackageNames": ["Lucas-C/pre-commit-hooks"]
-        "fileMatch": ".pre-commit-config.yaml"
+        "matchPackageNames": ["Lucas-C/pre-commit-hooks"],
+        "fileMatch": ".pre-commit-config.yaml",
         "allowedVersions": "!/1.5.3/$"
       },
       {
