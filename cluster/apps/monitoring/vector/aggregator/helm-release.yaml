@@ -56,11 +56,11 @@ spec:
     service:
       main:
         annotations:
-          metallb.universe.tf/loadBalancerIPs: "${LB_VECTOR_AGGREGATOR_V4}"
+          metallb.universe.tf/loadBalancerIPs: "${LB_V4_VECTOR_AGGREGATOR}"
           metallb.universe.tf/allow-shared-ip: vector-aggregator
         enabled: true
         type: LoadBalancer
-        loadBalancerIP: "${LB_VECTOR_AGGREGATOR_V4}"
+        loadBalancerIPs: ["${LB_V4_VECTOR_AGGREGATOR}"]
         ports:
           http:
             port: 8686
