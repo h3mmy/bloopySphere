@@ -191,19 +191,19 @@ spec:
           - name: Prometheus
             type: prometheus
             access: proxy
-            url: http://thanos-query:9090
+            url: http://thanos-query.monitoring.svc.cluster.local:9090
             isDefault: true
           - name: Loki
             type: loki
             access: proxy
-            url: http://loki-gateway:80
+            url: http://loki-gateway.monitoring.svc.cluster.local:80
           - name: Promeheus-Direct
             type: prometheus
             access: proxy
             url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
           - name: &blockydb Blocky-QueryDB
             type: postgres
-            url: blocky-postgres.networking:5432
+            url: blocky-postgres.networking.svc.cluster.local:5432
             database: ${BLOCKY_QUERY_DB_NAME}
             user: blocky
             jsonData:
@@ -221,7 +221,7 @@ spec:
           - name: AlertManager
             type: alertmanager
             access: proxy
-            url: http://alertmanager-operated:9093
+            url: http://alertmanager-operated.monitoring.svc.cluster.local:9093
             jsonData:
               implementation: "prometheus"
 

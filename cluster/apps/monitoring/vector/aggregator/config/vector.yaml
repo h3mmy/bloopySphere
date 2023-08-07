@@ -46,7 +46,7 @@ sinks:
     type: loki
     inputs:
       - journal_logs
-    endpoint: &loki http://loki-gateway:80
+    endpoint: &loki http://loki-gateway.monitoring.svc.cluster.local:80
     encoding:
       codec: json
     batch:
