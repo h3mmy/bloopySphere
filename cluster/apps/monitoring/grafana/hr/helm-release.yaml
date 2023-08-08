@@ -254,7 +254,7 @@ spec:
         # Ref: https://grafana.com/grafana/dashboards/763-redis-dashboard-for-prometheus-redis-exporter-1-x/
         redis:
           gnetId: 763
-          revision: 4
+          revision: 5
           datasource: Prometheus
         # # Ref: https://grafana.com/grafana/dashboards/2842
         # ceph-cluster:
@@ -274,7 +274,7 @@ spec:
         # Ref: https://grafana.com/grafana/dashboards/13502
         minio:
           gnetId: 13502
-          revision: 10
+          revision: 23
           datasource: Prometheus
         # flux-cluster:
         #   url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/cluster.json
@@ -323,6 +323,11 @@ spec:
         unifi-dpi:
           gnetId: 11310
           revision: 5
+          datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/11313-unifi-poller-usg-insights-prometheus/
+        unifi-usg-insights:
+          gnetId: 11313
+          revision: 9
           datasource: Prometheus
       media:
         lidarr:
