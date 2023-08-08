@@ -283,6 +283,10 @@ spec:
         #   url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/control-plane.json
         #   datasource: Prometheus
       networking:
+        blocky-query:
+          gnetId: 17996
+          revision: 11
+          datasource: *blockydb
         # blocky-query:
           # url: https://raw.githubusercontent.com/shizunge/blocky-postgresql-dashboard/main/Blocky-Postgres.json
           # # url: https://raw.githubusercontent.com/0xERR0R/blocky/main/docs/blocky-query-grafana-postgres.json
