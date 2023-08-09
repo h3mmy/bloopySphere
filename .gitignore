@@ -32,6 +32,7 @@ old_lazylib_config.ini
 *.backup
 *.bak
 authentik-postgres-backup-19*
+mb8611*
 
 # TEmporary
 provision/talos/*

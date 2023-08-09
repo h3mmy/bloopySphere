@@ -6,9 +6,9 @@ configMapGenerator:
   - name: blocky-dashboard
     files:
       - blocky-dashboard.json
-  #- name: blocky-query-dashboard
-   # files:
-    #  - blocky-query-postgres.json
+  - name: blocky-query-dashboard
+    files:
+      - blocky-query-postgres.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
