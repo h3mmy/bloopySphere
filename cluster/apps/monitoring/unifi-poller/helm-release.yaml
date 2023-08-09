@@ -36,10 +36,12 @@ spec:
       UP_UNIFI_DEFAULT_USER: "unifipoller"
       UP_UNIFI_DEFAULT_PASS: "${UNIFI_POLLER_PASS}"
       UP_UNIFI_DEFAULT_SAVE_SITES: true
+      UP_UNIFI_DEFAULT_SAVE_EVENTS: true
+      UP_UNIFI_DEFAULT_SAVE_ALARMS: false
       UP_UNIFI_DEFAULT_SAVE_DPI: true
       UP_INFLUXDB_DISABLE: true
       UP_PROMETHEUS_DISABLE: false
-      UP_LOKI_URL: http://loki-gateway.monitoring.svc.cluster.local
+      UP_LOKI_URL: "http://loki-gateway.monitoring.svc.cluster.local"
     service:
       main:
         ports:
