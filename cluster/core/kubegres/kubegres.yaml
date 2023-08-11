@@ -31,7 +31,7 @@ spec:
                       memory: 20Mi
                     limits:
                       cpu: 800m
-                      memory: 60Mi
+                      memory: 600Mi
       target:
         kind: Deployment
         labelSelector: control-plane=controller-manager
