@@ -65,7 +65,8 @@ spec:
       # Set this to true to create Service for Prometheus metrics
       service:
         enabled: true
-
+      monitor:
+        enabled: true
     podAnnotations:
       configmap.reloader.stakater.com/reload: "coredns"
 
