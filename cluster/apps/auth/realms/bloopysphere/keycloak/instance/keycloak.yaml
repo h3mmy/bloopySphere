@@ -20,8 +20,12 @@ spec:
     httpsPort: 8443
   hostname:
     hostname: iam.${XYZ_DOMAIN}
+  # Ingress is declared in the routers
   ingress:
     enabled: false
+  features:
+    enabled:
+      - declarative-user-profile
   #resources:
   #  requests:
   #    cpu: 48m
