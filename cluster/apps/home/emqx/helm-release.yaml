@@ -31,7 +31,10 @@ spec:
     replicaCount: 3
     recreatePods: true
     envFromSecret: emqx-secrets
+    # Dashboard params were quietly changed https://github.com/emqx/emqx/issues/7567
     emqxConfig:
+      EMQX_DASHBOARD__DEFAULT_USER__LOGIN: admin
+      EMQX_DASHBOARD__DEFAULT_USER__PASSWORD: ${EMQX_ADMIN_PASSWORD}
       EMQX_AUTHENTICATION__ENABLE: "false"
       EMQX_AUTHENTICATION__MECHANISM: password_based
       EMQX_AUTHENTICATION__BACKEND: postgresql
@@ -49,8 +52,6 @@ spec:
       # EMQX_CLUSTER__K8S__APISERVER: "https://kubernetes.default.svc:443"
       # EMQX_CLUSTER__K8S__SERVICE_NAME: "{{ .Release.Name }}-headless"
       # EMQX_CLUSTER__K8S__NAMESPACE: *ns
-      EMQX_DASHBOARD__DEFAULT_USERNAME: admin
-      EMQX_DASHBOARD__DEFAULT_PASSWORD: ${EMQX_ADMIN_PASSWORD}
       EMQX_LOADED_MODULES: "emqx_mod_presence,emqx_mod_subscription,emqx_mod_topic_metrics"
       EMQX_LOADED_PLUGINS: "emqx_management,emqx_recon,emqx_retainer,emqx_dashboard,emqx_rule_engine,emqx_prometheus,emqx_auth_mnesia"
     # emqxAclConfig: >
