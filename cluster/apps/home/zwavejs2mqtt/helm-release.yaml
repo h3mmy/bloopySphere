@@ -34,6 +34,7 @@ spec:
     image:
       repository: ghcr.io/zwave-js/zwave-js-ui
       tag: 8.22.3
+      imagePullPolicy: Always
     env:
       TZ: "${TZ}"
 
