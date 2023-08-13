@@ -53,3 +53,5 @@ cluster/bootstrap
 kube-dns.yml
 ceph-dis/*
 strip_rook_id.sh
+store-backup.tar/*
+store-backup.tar.gz

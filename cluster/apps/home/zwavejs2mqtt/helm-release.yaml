@@ -36,6 +36,7 @@ spec:
       tag: 8.22.3
     env:
       TZ: "${TZ}"
+
     service:
       main:
         type: LoadBalancer
@@ -99,6 +100,9 @@ spec:
 
     securityContext:
       privileged: true
+
+    podAnnotations:
+      backup.velero.io/backup-volumes: config
 
     persistence:
       config:

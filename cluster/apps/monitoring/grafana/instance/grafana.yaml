@@ -37,8 +37,8 @@ spec:
         role_attribute_path: "contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
       jwt:
         enabled: true
-        jwk_set_url: https://auth.${XYZ_DOMAIN}/application/o/grafana-bloopnet/jwks/
-        role_attribute_path: "contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'"
+        jwk_set_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/certs"
+        role_attribute_path: "contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
     security:
       admin_user: root
       admin_password: ${SECRET_GRAFANA_PASSWORD}
