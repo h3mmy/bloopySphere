@@ -70,7 +70,8 @@ spec:
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${LB_V4_ZWAVEJS}"
           metallb.universe.tf/allow-shared-ip: zwavejs
-          traefik.ingress.kubernetes.io/service.serversscheme: tcp
+          coredns.io/hostname: *host
+          # traefik.ingress.kubernetes.io/service.serversscheme: tcp
         ports:
           http:
             port: &port 8091
