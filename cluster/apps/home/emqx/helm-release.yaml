@@ -6,9 +6,9 @@ metadata:
   namespace: &ns home
 spec:
   interval: 15m
-  reconcileStrategy: Revision
   chart:
     spec:
+      reconcileStrategy: Revision
       # renovate: registryUrl=https://repos.emqx.io/charts
       chart: emqx
       version: 5.1.4

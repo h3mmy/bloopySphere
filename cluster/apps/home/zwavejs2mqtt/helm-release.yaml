@@ -6,9 +6,9 @@ metadata:
   namespace: home
 spec:
   interval: 35m
-  reconcileStrategy: Revision
   chart:
     spec:
+      reconcileStrategy: Revision
       chart: app-template
       version: 1.5.1
       sourceRef:
