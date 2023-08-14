@@ -41,6 +41,7 @@ spec:
       EMQX_AUTHENTICATION__1__DATABASE: ${EMQX_DB_NAME}
       EMQX_AUTHENTICATION__1__USERNAME: postgres
       EMQX_AUTHENTICATION__1__SERVER: emqx-db.home.svc.cluster.local:5432
+      EMQX_AUTHENTICATION__1__QUERY: ${EMQX_PSQL_QUERY_STRING}
       EMQX_AUTHENTICATION__2__ENABLE: "false"
       EMQX_AUTHENTICATION__2__MECHANISM: password_based
       EMQX_AUTHENTICATION__2__BACKEND: postgresql
@@ -50,7 +51,6 @@ spec:
       EMQX_AUTHENTICATION__2__PASSWORD_HASH_ALGORITHM__NAME: sha256
       EMQX_AUTHENTICATION__2__PASSWORD_HASH_ALGORITHM__SALT_POSITION: prefix
       EMQX_ALLOW_ANONYMOUS: "false"
-      EMQX_AUTHENTICATION__QUERY: ${EMQX_PSQL_QUERY_STRING}
       # Need to explicity add these.
       # See https://github.com/emqx/emqx/commit/a2a4c813e75eb447b6bdbc96c8656bd8db8a4423#diff-5563b95bbac1fd565c21e4a37ced5a944c398bce5b340d093c2059231560f165
       # Compare to current values.yaml and it should make sense. I tested using v5.0.12
