@@ -34,49 +34,10 @@ spec:
     image:
       repository: ghcr.io/zwave-js/zwave-js-ui
       tag: 8.22.2
-      imagePullPolicy: Always
+      imagePullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"
-      LOGLEVEL: debug
-
-    service:
-      main:
-        type: LoadBalancer
-        annotations:
-          traefik.ingress.kubernetes.io/service.serversscheme: http
-        ports:
-          http:
-            port: &port 8091
-      websock:
-        enabled: true
-        type: LoadBalancer
-        externalTrafficPolicy: Local
-        annotations:
-          metallb.universe.tf/loadBalancerIPs: "${LB_V4_ZWAVEJS}"
-          metallb.universe.tf/allow-shared-ip: zwavejs
-          traefik.ingress.kubernetes.io/service.serversscheme: tcp
-        ports:
-          websocket:
-            enabled: true
-            port: 3000
-            protocol: TCP
-            targetPort: 3000
-
-    probes:
-      liveness: &probes
-        enabled: true
-        custom: true
-        spec:
-          httpGet:
-            path: /health
-            port: *port
-          initialDelaySeconds: 0
-          periodSeconds: 10
-          timeoutSeconds: 1
-          failureThreshold: 3
-      readiness: *probes
-      startup:
-        enabled: false
+      LOGLEVEL: info
 
     ingress:
       main:
@@ -99,6 +60,41 @@ spec:
           - hosts:
               - *host
             secretName: tls.zwavejs2mqtt
+
+    service:
+      main:
+        enabled: true
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        ipFamilyPolicy: PreferDualStack
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${LB_V4_ZWAVEJS}"
+          metallb.universe.tf/allow-shared-ip: zwavejs
+          traefik.ingress.kubernetes.io/service.serversscheme: tcp
+        ports:
+          http:
+            port: &port 8091
+          websocket:
+            enabled: true
+            port: 3000
+            protocol: TCP
+            targetPort: 3000
+
+    probes:
+      liveness: &probes
+        enabled: true
+        custom: true
+        spec:
+          httpGet:
+            path: /health
+            port: *port
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
+      readiness: *probes
+      startup:
+        enabled: false
 
     securityContext:
       privileged: true
