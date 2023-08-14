@@ -227,6 +227,11 @@ spec:
 
     dashboards:
       default:
+        # Ref: https://grafana.com/grafana/dashboards/17446
+        emqx:
+          gnetId: 17446
+          revision: 1
+          datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/12175
         calico-felix:
           gnetId: 12175
