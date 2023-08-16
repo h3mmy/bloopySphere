@@ -38,7 +38,7 @@ spec:
       imagePullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"
-      LOGLEVEL: info
+      LOGLEVEL: debug
 
     ingress:
       main:
@@ -67,7 +67,7 @@ spec:
         enabled: true
         type: LoadBalancer
         externalTrafficPolicy: Local
-        ipFamilyPolicy: SingleStack
+        ipFamilyPolicy: PreferDualStack
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${LB_V4_ZWAVEJS}"
           metallb.universe.tf/allow-shared-ip: zwavejs
