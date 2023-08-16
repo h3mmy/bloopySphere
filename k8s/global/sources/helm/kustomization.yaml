@@ -13,7 +13,7 @@ resources:
   - hajimari-charts.yaml
   - fairwinds-charts.yaml
   - infracloudio-charts.yaml
-  - jetstack-charts.yaml
+  - jetstack.yaml
   - k8s-at-home-charts.yaml
   - metallb-charts.yaml
   - metrics-server-charts.yaml

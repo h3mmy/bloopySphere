@@ -67,7 +67,7 @@ spec:
         enabled: true
         type: LoadBalancer
         externalTrafficPolicy: Local
-        ipFamilyPolicy: PreferDualStack
+        ipFamilyPolicy: SingleStack
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${LB_V4_ZWAVEJS}"
           metallb.universe.tf/allow-shared-ip: zwavejs
