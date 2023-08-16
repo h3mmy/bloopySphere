@@ -38,6 +38,11 @@ spec:
           keyfile = "/mnt/cert/tls.key"
         }
       }
+      listeners.quic.default {
+        enabled = true
+        bind = "0.0.0.0:14567"
+        max_connections = 1024000
+      }
   coreTemplate:
     metadata:
       name: emqx-core
