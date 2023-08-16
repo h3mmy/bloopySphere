@@ -9,4 +9,4 @@ resources:
   # - ./network-ups-tools
   - ./emqx
   # - ./node-red
-  - ./n8n
+  # - ./n8n
