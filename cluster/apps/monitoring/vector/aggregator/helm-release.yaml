@@ -70,7 +70,7 @@ spec:
           kubernetes:
             enabled: true
             port: 6000
-          udm:
+          syslog:
             enabled: true
             port: 6100
 

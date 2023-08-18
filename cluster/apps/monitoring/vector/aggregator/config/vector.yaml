@@ -15,7 +15,7 @@ sources:
     type: vector
     address: 0.0.0.0:6010
     version: "2"
-  udm_logs:
+  syslog_logs:
     address: 0.0.0.0:6100
     type: syslog
     mode: "udp"
@@ -31,13 +31,13 @@ transforms:
       - kubernetes_logs
     source: |
       # Standardize 'app' index
-      .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || .pod_labels."app.kubernetes.io/part-of" || "unknown"
-  udm_logs_xform:
-    type: "remap"
-    inputs:
-      - "udm_logs"
-    source: |-
-      .timestamp=null
+      .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || .pod_labels."app.kubernetes.io/part-of" || .pod_labels."cnpg.io/cluster" || "unknown"
+  # syslog_xform:
+  #   type: "remap"
+  #   inputs:
+  #     - "syslog_logs"
+  #   source: |-
+  #     .timestamp=null
 #
 # Sinks
 #
@@ -77,10 +77,10 @@ sinks:
       namespace: "{{ kubernetes.pod_namespace }}"
       node: "{{ kubernetes.pod_node_name }}"
       pod: "{{ kubernetes.pod_name }}"
-  loki_udm:
+  loki_syslog:
     type: loki
     inputs:
-      - udm_logs_xform
+      - syslog_logs
     endpoint: *loki
     batch:
       max_bytes: 1048576
