@@ -70,8 +70,8 @@ sinks:
     remove_timestamp: true
     labels:
       app: "{{ custom_app_name }}"
-      container: "{{ kubernetes.container_name }}"
-      filename: "{{ kubernetes.file }}"
+      container: "{{ container_name }}"
+      filename: "{{ file }}"
       # instance: >-
       #   {{`{{ kubernetes.pod_labels.app\.kubernetes\.io/instance }}`}}
       namespace: "{{ kubernetes.pod_namespace }}"
