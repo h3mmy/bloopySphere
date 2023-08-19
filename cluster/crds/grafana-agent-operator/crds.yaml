@@ -10,8 +10,8 @@ spec:
   secretRef:
     name: flux-system
   ref:
-    # renovate: datasource=github-releases depName=grafana-agent-operator
-    tag: grafana-agent-operator-0.2.8
+    # renovate: datasource=github-releases
+    tag: grafana-agent-operator-0.3.2
   ignore: |
     # exclude all
     /*
