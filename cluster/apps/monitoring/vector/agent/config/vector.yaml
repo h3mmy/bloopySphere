@@ -18,6 +18,11 @@ sources:
       pod_name: pod_name
   vector_metrics:
     type: internal_metrics
+  plex_source:
+    type: file
+    include:
+      - "/config/Library/Application Support/Plex Media Server/Logs/*.log"
+      - "/config/Library/Application Support/Plex Media Server/Logs/PMS Plugin Logs/*.log"
 #
 # Sinks
 #
@@ -36,6 +41,11 @@ sinks:
     address: vector-aggregator.monitoring.svc.cluster.local:6010
     inputs:
       - journald_source
+  plex:
+    type: "file"
+    inputs:
+      - plex_source
+    path: "/tmp/vector-%Y-%m-%d.log"
   prometheus:
     type: prometheus_exporter
     inputs:
