@@ -5,7 +5,7 @@ metadata:
   name: vpa
   namespace: monitoring
 spec:
-  interval: 5m
+  interval: 45m
   chart:
     spec:
       chart: vpa
@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: fairwinds-charts
         namespace: flux-system
-      interval: 5m
+      reconcileStrategy: Revision
   timeout: 20m
 
   install:
@@ -34,8 +34,7 @@ spec:
           cpu: 15m
           memory: 145M
         limits:
-          cpu: 15m
-          memory: 183M
+          memory: 583M
 
       extraArgs:
         pod-recommendation-min-cpu-millicores: 15
