@@ -51,8 +51,6 @@ spec:
       repository:
         driver: quay.io/jetstack/cert-manager-csi-driver-spiffe
         approver: quay.io/jetstack/cert-manager-csi-driver-spiffe-approver
-        # -- Target image version tag.
-        tag: v0.2.0
         # -- Kubernetes imagePullPolicy on DaemonSet.
         pullPolicy: IfNotPresent
 
@@ -108,16 +106,12 @@ spec:
       nodeDriverRegistrarImage:
         # -- Target image repository.
         repository: k8s.gcr.io/sig-storage/csi-node-driver-registrar
-        # -- Target image version tag.
-        tag: v2.5.0
         # -- Kubernetes imagePullPolicy on node-driver.
         pullPolicy: IfNotPresent
 
       livenessProbeImage:
         # -- Target image repository.
         repository: k8s.gcr.io/sig-storage/livenessprobe
-        # -- Target image version tag.
-        tag: v2.6.0
         # -- Kubernetes imagePullPolicy on liveness probe.
         pullPolicy: IfNotPresent
 
