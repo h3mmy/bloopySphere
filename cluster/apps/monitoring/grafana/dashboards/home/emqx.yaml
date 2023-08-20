@@ -1,0 +1,12 @@
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: emqx
+  namespace: home
+spec:
+  # Ref: https://grafana.com/grafana/dashboards/17446
+  grafanaCom:
+    gnetId: 17446
+    revision: 1
+    datasource: prometheus
