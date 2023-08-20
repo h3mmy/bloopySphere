@@ -43,7 +43,8 @@ sinks:
       - journald_source
   plex:
     type: loki
-    encoding.codec: console
+    encoding:
+      codec: logfmt
     inputs:
       - plex_source
     endpoint: http://loki-gateway.monitoring.svc.cluster.local:80
