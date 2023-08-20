@@ -38,6 +38,8 @@ Condition Logic is set to `{1} and ({2} or {3})`
 
 I've included PGS subtitles as a streambreaker, but onyl for 4K streams. They usually force a transcode because they are images and have to be burned in. Some clients *can* direct play PGS subtitles, but I have opinions, and prefer usage of SRT. Using `bazarr` ensures most streams should have SRT subtitles.
 
+You can also add/remove conditions to personalize this. Example Only kill 4k transcodes for remote streams, or block remote 4k streaming entirely. You could add a warning if there is a remote 4k stream that keeps buffering, so the user can adjust their resolution, etc.
+
 #### Arguments
 
 This is where you will pass parameters to the script. You will need to add these for each trigger you selected. I used something like this, but you should adapt it to your needs.
