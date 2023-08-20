@@ -42,10 +42,10 @@ sinks:
     inputs:
       - journald_source
   plex:
-    type: "file"
+    type: loki
     inputs:
       - plex_source
-    path: "/tmp/vector-%Y-%m-%d.log"
+    address: http://loki-gateway.monitoring.svc.cluster.local:80
   prometheus:
     type: prometheus_exporter
     inputs:
