@@ -41,13 +41,13 @@ sinks:
     address: vector-aggregator.monitoring.svc.cluster.local:6010
     inputs:
       - journald_source
-  plex:
-    type: loki
-    encoding:
-      codec: logfmt
-    inputs:
-      - plex_source
-    endpoint: http://loki-gateway.monitoring.svc.cluster.local:80
+#  plex:
+#    type: loki
+#    encoding:
+#      codec: logfmt
+ #   inputs:
+#      - plex_source
+#    endpoint: http://loki-gateway.monitoring.svc.cluster.local:80
   prometheus:
     type: prometheus_exporter
     inputs:
