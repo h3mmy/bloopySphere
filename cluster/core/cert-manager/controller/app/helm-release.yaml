@@ -43,16 +43,9 @@ spec:
     cleanupOnFail: true
 
   values:
-    podAnnotations:
-      linkerd.io/inject: enabled
     installCRDs: true
     webhook:
       enabled: true
-      podAnnotations:
-        linkerd.io/inject: enabled
-    cainjector:
-      podAnnotations:
-        linkerd.io/inject: enabled
     podSecurityPolicy:
       enabled: false
 
