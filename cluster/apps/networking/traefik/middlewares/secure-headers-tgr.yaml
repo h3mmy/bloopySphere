@@ -42,5 +42,5 @@ spec:
     contentSecurityPolicy: "frame-ancestors 'self' *.${XYZ_DOMAIN} *.${TGR_DOMAIN};" # script-src 'self' code.iconify.design cdnjs.cloudflare.com; object-src 'self'; require-trusted-types-for 'script';"
     customResponseHeaders:
       X-xss-protection: "1"
-      X-Robots-Tag: "all"
+      X-Robots-Tag: "all,index"
       X-Forwarded-Proto: "https"
