@@ -64,8 +64,8 @@ spec:
       # EMQX_CLUSTER__K8S__APISERVER: "https://kubernetes.default.svc:443"
       # EMQX_CLUSTER__K8S__SERVICE_NAME: "{{ .Release.Name }}-headless"
       # EMQX_CLUSTER__K8S__NAMESPACE: *ns
-      EMQX_LOADED_MODULES: "emqx_mod_presence,emqx_mod_subscription,emqx_mod_topic_metrics"
-      EMQX_LOADED_PLUGINS: "emqx_management,emqx_recon,emqx_retainer,emqx_dashboard,emqx_rule_engine,emqx_prometheus,emqx_auth_mnesia"
+      #EMQX_LOADED_MODULES: "emqx_mod_presence,emqx_mod_subscription,emqx_mod_topic_metrics"
+     # EMQX_LOADED_PLUGINS: "emqx_management,emqx_recon,emqx_retainer,emqx_dashboard,emqx_rule_engine,emqx_prometheus"
     # emqxAclConfig: >
     #   {allow, {user, "dashboard"}, subscribe, ["$SYS/#"]}.
     #   {allow, {ipaddr, "127.0.0.1"}, pubsub, ["$SYS/#", "#"]}.
