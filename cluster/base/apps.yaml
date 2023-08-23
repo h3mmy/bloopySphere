@@ -14,6 +14,7 @@ spec:
     - name: core
     - name: crds
     - name: repositories
+    - name: cluster-cert-manager-operator
   path: ./cluster/apps
   prune: true
   sourceRef:

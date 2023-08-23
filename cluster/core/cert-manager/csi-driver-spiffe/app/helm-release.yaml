@@ -158,6 +158,3 @@ spec:
       # requests:
       #   cpu: 100m
       #   memory: 128Mi
-
-  # -- Optional priority class to be used for the csi-driver pods.
-  priorityClassName: ""
