@@ -34,8 +34,8 @@ spec:
     envFromSecret: emqx-secrets
     # Dashboard params were quietly changed https://github.com/emqx/emqx/issues/7567
     emqxConfig:
-      # EMQX_DASHBOARD__DEFAULT_USERNAME: admin
-      # EMQX_DASHBOARD__DEFAULT_PASSWORD: ${EMQX_ADMIN_PASSWORD}
+      EMQX_DASHBOARD__DEFAULT_USERNAME: admin
+      EMQX_DASHBOARD__DEFAULT_PASSWORD: ${EMQX_ADMIN_PASSWORD}
       EMQX_LISTENERS__QUIC__DEFAULT__ENABLED: true
       # EMQX_LISTENERS__QUIC__DEFAULT__MAX_CONNECTIONS: 1024000
       EMQX_AUTHENTICATION__1__ENABLE: "false"
@@ -66,11 +66,11 @@ spec:
       # EMQX_CLUSTER__K8S__NAMESPACE: *ns
       #EMQX_LOADED_MODULES: "emqx_mod_presence,emqx_mod_subscription,emqx_mod_topic_metrics"
      # EMQX_LOADED_PLUGINS: "emqx_management,emqx_recon,emqx_retainer,emqx_dashboard,emqx_rule_engine,emqx_prometheus"
-    # emqxAclConfig: >
-    #   {allow, {user, "dashboard"}, subscribe, ["$SYS/#"]}.
-    #   {allow, {ipaddr, "127.0.0.1"}, pubsub, ["$SYS/#", "#"]}.
-    #   {allow, all, subscribe, ["$SYS/#", {eq, "#"}]}.
-    #   {allow, all}.
+    emqxAclConfig: >
+      {allow, {user, "dashboard"}, subscribe, ["$SYS/#"]}.
+      {allow, {ipaddr, "127.0.0.1"}, pubsub, ["$SYS/#", "#"]}.
+      {allow, all, subscribe, ["$SYS/#", {eq, "#"}]}.
+      {allow, all}.
     metrics:
       enabled: true
       type: prometheus
