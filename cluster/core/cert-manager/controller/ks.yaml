@@ -4,7 +4,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-cert-manager-operator
-  namespace: monitoring
+  namespace: flux-system
 spec:
   path: ./cluster/core/cert-manager/controller/app
   prune: true
@@ -20,7 +20,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-cert-manager-prom-rules
-  namespace: monitoring
+  namespace: flux-system
 spec:
   path: ./cluster/core/cert-manager/controller/rules
   dependsOn:
