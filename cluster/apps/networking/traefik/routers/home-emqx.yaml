@@ -47,10 +47,10 @@ spec:
     - match: Host(`emqx.${XYZ_DOMAIN}`)
       kind: Rule
       services:
-        - name: emqx
+        - name: emqx-headless
           kind: Service
           port: 18083
       middlewares:
-        - name: networking-bloopnet-xyz-auth@kubernetescrd
+        - name: networking-rfc-1918@kubernetescrd
   tls:
     secretName: tls.${XYZ_DOMAIN/./-}

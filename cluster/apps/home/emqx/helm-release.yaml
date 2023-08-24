@@ -26,6 +26,11 @@ spec:
       retries: 5
       remediateLastFailure: true
     cleanupOnFail: true
+  valuesFrom:
+    - targetPath: emqx-config.EMQX_API_KEY__BOOTSTRAP_FILE
+      kind: Secret
+      name: emqx-api-keys
+      valuesKey: bootstrap_file
   values:
     image:
       repository: emqx/emqx
