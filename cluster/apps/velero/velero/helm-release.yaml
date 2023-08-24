@@ -84,7 +84,7 @@ spec:
     kubectl:
       image:
         repository: ghcr.io/onedr0p/kubernetes-kubectl
-        tag: 1.28.0
+        tag: 1.28.1
 
     deployNodeAgent: true
 
