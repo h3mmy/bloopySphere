@@ -47,7 +47,7 @@ spec:
     - match: Host(`emqx.${XYZ_DOMAIN}`)
       kind: Rule
       services:
-        - name: emqx-headless
+        - name: emqx
           kind: Service
           port: 18083
       middlewares:
