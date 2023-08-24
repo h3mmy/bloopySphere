@@ -51,6 +51,6 @@ spec:
           kind: Service
           port: 18083
       middlewares:
-        - name: networking-rfc-1918@kubernetescrd
+        - name: networking-bloopnet-xyz@kubernetescrd
   tls:
     secretName: tls.${XYZ_DOMAIN/./-}
