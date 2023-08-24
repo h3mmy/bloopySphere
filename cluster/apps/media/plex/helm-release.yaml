@@ -164,7 +164,7 @@ spec:
                   operator: In
                   values:
                     - "true"
-    addons:
+    sidecars:
       promtail:
         enabled: true
         image:
