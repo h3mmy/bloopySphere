@@ -51,6 +51,7 @@ spec:
       EMQX_AUTHENTICATION__1__SERVER: emqx-db.home.svc.cluster.local:5432
       EMQX_AUTHENTICATION__1__QUERY: ${EMQX_PSQL_QUERY_STRING}
       EMQX_AUTHORIZATION__NO_MATCH: allow
+      EMQX_API_KEY__BOOTSTRAP_FILE: /opt/emqx/etc/bootstrap/api_key.bootstrap
       # EMQX_AUTHENTICATION__2__ENABLE: "false"
       # EMQX_AUTHENTICATION__2__MECHANISM: password_based
       # EMQX_AUTHENTICATION__2__BACKEND: postgresql
@@ -82,6 +83,16 @@ spec:
       type: prometheus
     persistence:
       enabled: false
+    extraVolumeMounts:
+      - name: api-key-bootstrap
+        mountPath: /opt/emqx/etc/bootstrap
+    extraVolumes:
+      - name: api-key-bootstrap
+        secret: 
+          secretName: emqx-api-keys
+          items:
+            - key: bootstrap_file
+              path: api_key.bootstrap
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
