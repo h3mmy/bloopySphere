@@ -39,6 +39,7 @@ spec:
       PROWLARR__INSTANCE_NAME: Prowlarr
       PROWLARR__PORT: &port 80
       PROWLARR__LOG_LEVEL: info
+      PROWLARR__APPLICATION_URL: https://prowlarr.${XYZ_DOMAIN}
       # https://wiki.servarr.com/prowlarr/faq#can-i-disable-forced-authentication
       # https://github.com/onedr0p/containers/blob/main/apps/prowlarr/config.xml.tmpl
       PROWLARR__AUTHENTICATION_METHOD: External

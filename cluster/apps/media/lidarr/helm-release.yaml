@@ -38,6 +38,7 @@ spec:
       LIDARR__PORT: &port 8686
       LIDARR__LOG_LEVEL: info
       LIDARR__API_KEY: ${LIDARR_API_KEY}
+      LIDARR__APPLICATION_URL: https://lidarr.${XYZ_DOMAIN}
     service:
       main:
         ports:

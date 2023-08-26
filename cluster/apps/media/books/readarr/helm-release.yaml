@@ -43,7 +43,7 @@ spec:
       READARR__PORT: &port 80
       READARR__LOG_LEVEL: info
       READARR__AUTHENTICATION_METHOD: None
-      READARR__APPLICATION_URL: readarr.${XYZ_DOMAIN}
+      READARR__APPLICATION_URL: https://readarr.${XYZ_DOMAIN}
     service:
       main:
         ports:
