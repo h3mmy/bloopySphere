@@ -38,7 +38,7 @@ spec:
     controller:
       type: statefulset
     image:
-      repository: h3mmy/whisparr-nightly
+      repository: ghcr.io/h3mmy/whisparr-nightly
       tag: 2.0.0.250@sha256:ccc20ef247f158ef08850f3f066d2df121d67136ab0b815a8b332016421c9aa8
     env:
       TZ: "${TZ}"
