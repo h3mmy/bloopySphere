@@ -76,7 +76,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: pmm-config-pvc
+        existingClaim: pmm-config-v1
       config-template:
         enabled: true
         type: configMap
