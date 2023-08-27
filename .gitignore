@@ -56,3 +56,4 @@ strip_rook_id.sh
 store-backup.tar/*
 store-backup.tar.gz
 kc-grafc*
+debugger.yaml

@@ -47,7 +47,8 @@ spec:
       WHISPARR__INSTANCE_NAME: Whisparr
       WHISPARR__PORT: &port 80
       WHISPARR__LOG_LEVEL: info
-      WHISPARR__AUTHENTICATION_METHOD: None
+      WHISPARR__AUTHENTICATION_METHOD: External
+      WHISPARR__APPLICATION_URL: https://whisparr.${XYZ_DOMAIN}
     service:
       main:
         ports:
@@ -107,6 +108,15 @@ spec:
         server: "${NAS_ADDRESS}"
         path: /volume3/Data/Downloads
         mountPath: /Downloads
+        readOnly: false
+      backup:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume3/Data/Backups/app/whisparr
+        mountPath: /config/Backups
         readOnly: false
     resources:
       requests:
