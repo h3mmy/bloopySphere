@@ -45,9 +45,9 @@ spec:
       SONARR_API_KEY: ${SONARR_API_KEY}
       RADARR_API_KEY: ${RADARR_API_KEY}
       TAUTULLI_API_KEY: ${TAUTULLI_API_KEY}
-    envFrom:
-      - secretRef:
-        name: pmm-secret
+    #envFrom:
+     # - secretRef:
+       # name: pmm-secret
     initContainers:
       config-setup:
         image: ghcr.io/onedr0p/alpine:3.18.3@sha256:974f5883eb9b838792f1b27b812d8b9f80375ba9ac1f8b038fda27a53f6cd763
@@ -56,11 +56,11 @@ spec:
           - -c
           - |
             mkdir -p /config/assets
-            envsubst < /tmp/config-template/config.yml > /config/config.yml
+            envsubst < /tmp/config-template/config.yaml > /config/config.yml
             exit 0
         envFrom:
-          - secretRef:
-              name: starr-apps-secret
+          #- secretRef:
+          #    name: starr-apps-secret
           - secretRef:
               name: pmm-secret
         volumeMounts:
