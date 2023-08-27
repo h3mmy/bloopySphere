@@ -121,20 +121,20 @@ plex:
   optimize: false
 
 tmdb: # REQUIRED for the script to run
-  API_KEY: ${TMDB_API_KEY}
+  apikey: ${TMDB_API_KEY}
   language: en
   cache_expiration: 60
 
 tautulli:
   url: http://tautulli.media.svc.cluster.local:8181
-  API_KEY: ${TAUTULLI_API_KEY}
+  apikey: ${TAUTULLI_API_KEY}
 
 omdb:
-  API_KEY: ${OMDB_API_KEY}
+  apikey: ${OMDB_API_KEY}
   cache_expiration: 60
 
 mdblist:
-  API_KEY: ${MDBLIST_API_KEY}
+  apikey: ${MDBLIST_API_KEY}
   cache_expiration: 60
 
 # notifiarr:
