@@ -28,19 +28,19 @@ libraries: # This is called out once within the config.yaml file
   Movies:
     metadata_path:
       - file: config/Pre-rolls.yaml
-      - file: config/Movies.yaml
-      - file: config/Movies - Holidays by Drazzizzi.yaml
-      - file: config/Movies - Trakt (Unplayed) by Magic815.yaml
+      - repo: Movies.yaml
+      - repo: Movies - Holidays by Drazzizzi.yaml
+      - repo: Movies - Trakt (Unplayed) by Magic815.yaml
       - pmm: basic
       - pmm: imdb
     overlay_path:
       - remove_overlays: false
-      - file: config/Movies - Overlays - Charts.yaml
-      - file: config/Movies - Overlays - Oscars.yaml
-      - file: config/Movies - Overlays - Ratings.yaml
-      - file: config/Movies - Overlays - Stand-up.yaml
-      - file: config/Movies - Overlays - Streaming Services.yaml
-      - file: config/Movies - Overlays - Studios.yaml
+      - repo: Movies - Overlays - Charts.yaml
+      - repo: Movies - Overlays - Oscars.yaml
+      - repo: Movies - Overlays - Ratings.yaml
+      - repo: Movies - Overlays - Stand-up.yaml
+      - repo: Movies - Overlays - Streaming Services.yaml
+      - repo: Movies - Overlays - Studios.yaml
     operations:
       mass_genre_update: imdb
       mass_content_rating_update: omdb
@@ -50,17 +50,17 @@ libraries: # This is called out once within the config.yaml file
 
   TV Shows:
     metadata_path:
-      - file: config/TV Shows.yaml
+      - repo: TV Shows.yaml
       - pmm: basic
       - pmm: imdb
     overlay_path:
       - remove_overlays: false
-      - file: config/TV Shows - Overlays - Charts.yaml
-      - file: config/TV Shows - Overlays - Networks.yaml
-      - file: config/TV Shows - Overlays - Ratings.yaml
-      - file: config/TV Shows - Overlays - Statuses.yaml
-      - file: config/TV Shows - Overlays - Streaming Services.yaml
-      - file: config/TV Shows - Overlays - Studios.yaml
+      - repo: TV Shows - Overlays - Charts.yaml
+      - repo: TV Shows - Overlays - Networks.yaml
+      - repo: TV Shows - Overlays - Ratings.yaml
+      - repo: TV Shows - Overlays - Statuses.yaml
+      - repo: TV Shows - Overlays - Streaming Services.yaml
+      - repo: TV Shows - Overlays - Studios.yaml
     operations:
       mass_genre_update: tmdb
       mass_content_rating_update: omdb
