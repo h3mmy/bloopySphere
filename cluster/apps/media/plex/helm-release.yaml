@@ -133,6 +133,13 @@ spec:
         existingClaim: nfs-misc-pvc
         mountPath: /DataR
         readOnly: false
+      plex-profile:
+        enabled: true
+        type: configMap
+        name: plex-profile-configmap
+        subPath: Chromecast.xml
+        mountPath: /usr/lib/plexmediaserver/Resources/Profiles/Chromecast.xml
+        readOnly: true
     podAnnotations:
       backup.velero.io/backup-volumes: config
       # pre.hook.backup.velero.io/container: fsfreeze

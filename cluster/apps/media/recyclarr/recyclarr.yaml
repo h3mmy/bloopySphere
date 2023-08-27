@@ -3,7 +3,7 @@
 # https://github.com/rcdailey/trash-updater/wiki/Configuration-Reference
 
 sonarr:
-  - base_url: http://sonarr
+  - base_url: http://sonarr.media.svc.cluster.local
     api_key: ${SONARR_API_KEY}
     quality_definition: hybrid
     delete_old_custom_formats: true
@@ -62,7 +62,7 @@ sonarr:
             reset_unmatched_scores: true
 
 radarr:
-  - base_url: http://radarr
+  - base_url: http://radarr.media.svc.cluster.local
     api_key: ${RADARR_API_KEY}
     delete_old_custom_formats: true
     quality_definition:

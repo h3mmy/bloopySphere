@@ -19,3 +19,4 @@ resources:
   - ./overseer
   - ./prowlarr
   - ./tautulli
+  - ./plex-meta-manager

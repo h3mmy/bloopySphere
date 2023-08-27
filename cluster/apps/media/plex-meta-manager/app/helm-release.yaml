@@ -1,0 +1,98 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: plex-meta-manager
+  namespace: media
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controller:
+      type: cronjob
+      annotations:
+        secret.reloader.stakater.com/reload: &secret pmm-secret
+      cronjob:
+        schedule: 0 6 * * *
+    image:
+      repository: docker.io/meisnate12/plex-meta-manager
+      tag: v1.19.0
+    # https://metamanager.wiki/en/latest/home/environmental.html
+    env:
+      TZ: "${TZ}"
+      PUID: "568"
+      PGID: "568"
+      PMM_CONFIG: config/config.yaml
+      PMM_READ_ONLY_CONFIG: "true"
+      SONARR_API_KEY: ${SONARR_API_KEY}
+      RADARR_API_KEY: ${RADARR_API_KEY}
+      TAUTULLI_API_KEY: ${TAUTULLI_API_KEY}
+    envFrom:
+      - secretRef:
+        name: pmm-secret
+    initContainers:
+      config-setup:
+        image: ghcr.io/onedr0p/alpine:3.18.3@sha256:974f5883eb9b838792f1b27b812d8b9f80375ba9ac1f8b038fda27a53f6cd763
+        command:
+          - "/bin/sh"
+          - -c
+          - |
+            mkdir -p /config/assets
+            envsubst < /tmp/config-template/config.yml > /config/config.yml
+            exit 0
+        envFrom:
+          - secretRef:
+              name: starr-apps-secret
+          - secretRef:
+              name: pmm-secret
+        volumeMounts:
+          - name: config-template
+            mountPath: /tmp/config-template
+          - name: config
+            mountPath: /config
+    command:
+      - /scripts/run.sh
+    service:
+      main:
+        enabled: false
+    persistence:
+      config:
+        enabled: true
+        existingClaim: pmm-config-pvc
+      config-template:
+        enabled: true
+        type: configMap
+        name: pmm-config-template
+        readOnly: true
+        mountPath: "-"
+      config-prerolls:
+        enabled: true
+        type: configMap
+        name: pmm-prerolls
+        mountPath: /config/Pre-rolls.yaml
+        subPath: Pre-rolls.yaml
+        readOnly: true
+      scripts:
+        enabled: true
+        type: configMap
+        name: pmm-scripts
+        mountPath: /scripts
+        defaultMode: 511
