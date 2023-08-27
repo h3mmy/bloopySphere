@@ -27,4 +27,4 @@ Plex Meta Manager can
 
 ## Pre-rolls
 
-Path prefix for pre-rolls needs to match a plex mount.
+Path prefix for pre-rolls needs to match a plex mount. Preroll clips need to be acquired via the pre-roll community and manually added to the appropriate folder

@@ -5,8 +5,9 @@ collections:
   ############################
 
   Regular:
+    # Collection with "anti-piracy" warnings
     build_collection: false
-    server_preroll: /Data/prerolls/Regular/Piracy by Netflix.mp4;/Data/prerolls/Regular/Netflix Love is Sharing.mp4;/Data/prerolls/Regular/Netflix Colorful Lines Plex Pre-roll.mp4
+    server_preroll: /Data/prerolls/Regular/Piracy_by_Netflix.mp4;/Data/prerolls/Regular/Netflix Love_is_Sharing_Pre-roll.mp4;/Data/prerolls/Regular/Piracy_Intro.mp4
     schedule:
       - range(01/01-01/31) # January
       - range(03/01-03/31) # March
@@ -20,17 +21,17 @@ collections:
 
   Black History:
     build_collection: false
-    server_preroll: /Data/prerolls/Black History/Black History Plex Pre-roll.mp4
+    server_preroll: /Data/prerolls/Black History/Black_History_Plex.mp4
     schedule: range(02/01-02/28) # February
 
   Pride:
     build_collection: false
-    server_preroll: /Data/prerolls/Pride/Netflix Pride Colors Pre-roll.mp4
+    server_preroll: /Data/prerolls/Pride/Netflix_Pride_Colors.mp4
     schedule: range(06/01-06/30) # June
 
   Halloween:
     build_collection: false
-    server_preroll: /Data/prerolls/Halloween/Halloween Pack V01 Plex Pre-roll.mp4;/Data/prerolls/Halloween/Halloween Pack V02 Plex Pre-roll.mp4;/Data/prerolls/Halloween/Halloween Pack V03 Plex Pre-roll.mp4;/Data/prerolls/Halloween/Halloween Pack V05 Plex Pre-roll.mp4;/Data/prerolls/Halloween/Halloween Pack V05 Plex Pre-roll.mp4;/Data/prerolls/Halloween/Halloween Pack V06 Plex Pre-roll.mp4;/Data/prerolls/Halloween/Halloween Pack V07 Plex Pre-roll.mp4;/Data/prerolls/Halloween/Halloween Pack V08 Plex Pre-roll.mp4;/Data/prerolls/Halloween/Halloween Pack V09 Plex Pre-roll.mp4
+    server_preroll: /Data/prerolls/Halloween/Halloween_Pack_V01_Plex_Pre-roll.mp4;/Data/prerolls/Halloween/Halloween_Pack_V02_Plex_Pre-roll.mp4;/Data/prerolls/Halloween/Halloween_Pack_V03_Plex_Pre-roll.mp4;/Data/prerolls/Halloween/Halloween_Pack_V05_Plex_Pre-roll.mp4;/Data/prerolls/Halloween/Halloween_Pack_V05_Plex_Pre-roll.mp4;/Data/prerolls/Halloween/Halloween_Pack_V06_Plex_Pre-roll.mp4;/Data/prerolls/Halloween/Halloween_Pack_V07_Plex_Pre-roll.mp4;/Data/prerolls/Halloween/Halloween_Pack_V08_Plex_Pre-roll.mp4;/Data/prerolls/Halloween/Halloween_Pack_V09_Plex Pre-roll.mp4
     schedule: range(10/01-10/31) # October
 
   ############################
@@ -39,25 +40,25 @@ collections:
 
   Valentine's Day:
     build_collection: false
-    server_preroll: /Data/prerolls/Valentines/Valentine's Day Flowers Plex Pre-roll.mp4
+    server_preroll: /Data/prerolls/Valentines/Valentines_Day_Flowers_Plex_Pre-roll.mp4
     schedule: yearly(02/14) # This changes yearly
 
   Easter:
     build_collection: false
-    server_preroll: /Data/prerolls/Easter/Happy Easter Plex Pre-roll.mp4
+    server_preroll: /Data/prerolls/Easter/Happy_Easter_Plex_Pre-roll.mp4
     schedule: yearly(04/09) # This changes yearly
 
   Thanksgiving:
     build_collection: false
-    server_preroll: /Data/prerolls/Thanksgiving/Happy Thanksgiving Plex Pre-roll.mp4
+    server_preroll: /Data/prerolls/Thanksgiving/Happy_Thanksgiving_Plex_Pre-roll.mp4
     schedule: yearly(11/23) # This changes yearly
 
   Christmas:
     build_collection: false
-    server_preroll: /Data/prerolls/Christmas/Magic Christmas Tree Plex Pre-roll.mp4
+    server_preroll: /Data/prerolls/Christmas/Magic_Christmas_Tree_Plex_Pre-roll.mp4
     schedule: range(12/20-12/25)
 
   New Years:
     build_collection: false
-    server_preroll: /Data/prerolls/New Years/New Years Fireworks Plex Pre-roll.mp4
+    server_preroll: /Data/prerolls/New Years/New_Years_Fireworks_Plex_Pre-roll.mp4
     schedule: range(12/31-01/07)
