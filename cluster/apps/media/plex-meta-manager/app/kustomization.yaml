@@ -11,6 +11,9 @@ configMapGenerator:
   - name: pmm-config-template
     files:
       - ./configs/config.yaml
+    options:
+      labels:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
   - name: pmm-prerolls
     files:
       - ./configs/Pre-rolls.yaml
@@ -19,8 +22,6 @@ configMapGenerator:
       - ./scripts/run.sh
 generatorOptions:
   disableNameSuffixHash: true
-  annotations:
-    kustomize.toolkit.fluxcd.io/substitute: disabled
 labels:
   - pairs:
       app.kubernetes.io/name: plex-meta-manager

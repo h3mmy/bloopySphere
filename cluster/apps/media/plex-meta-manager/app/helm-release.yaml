@@ -42,9 +42,6 @@ spec:
       PGID: "568"
       PMM_CONFIG: config/config.yaml
       PMM_READ_ONLY_CONFIG: "true"
-      SONARR_API_KEY: ${SONARR_API_KEY}
-      RADARR_API_KEY: ${RADARR_API_KEY}
-      TAUTULLI_API_KEY: ${TAUTULLI_API_KEY}
     #envFrom:
      # - secretRef:
        # name: pmm-secret
@@ -59,10 +56,12 @@ spec:
             envsubst < /tmp/config-template/config.yaml > /config/config.yaml
             exit 0
         envFrom:
-          #- secretRef:
-          #    name: starr-apps-secret
           - secretRef:
               name: pmm-secret
+        env:
+          SONARR_API_KEY: ${SONARR_API_KEY}
+          RADARR_API_KEY: ${RADARR_API_KEY}
+          TAUTULLI_API_KEY: ${TAUTULLI_API_KEY}
         volumeMounts:
           - name: config-template
             mountPath: /tmp/config-template
