@@ -19,4 +19,4 @@ resources:
   - ./overseer
   - ./prowlarr
   - ./tautulli
-  - ./plex-meta-manager
+  - ./plex-meta-manager/ks.yaml
