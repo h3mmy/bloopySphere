@@ -141,7 +141,7 @@ mdblist:
 #   API_KEY: ${NOTIFIARR_API_KEY}
 
 radarr:
-  url: http://radarr.media.svc.cluster.local:80
+  url: http://radarr.media.svc.cluster.local:7878
   token: ${RADARR_API_KEY}
   add_missing: false
   add_existing: false
@@ -156,7 +156,7 @@ radarr:
   update_existing: false
 
 sonarr:
-  url: http://sonarr.media.svc.cluster.local:80
+  url: http://sonarr.media.svc.cluster.local:8989
   token: ${SONARR_API_KEY}
   add_missing: false
   add_existing: false
