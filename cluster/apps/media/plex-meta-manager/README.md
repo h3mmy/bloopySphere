@@ -24,3 +24,7 @@ Plex Meta Manager can
 
 [PMM Instructions](https://metamanager.wiki/en/latest/config/trakt.html)
 [Online Auth Script](https://replit.com/@chazlarson/TraktAuth)
+
+## Pre-rolls
+
+Path prefix for pre-rolls needs to match a plex mount.
