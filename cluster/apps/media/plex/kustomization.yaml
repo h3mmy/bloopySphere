@@ -4,3 +4,9 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - pdb.yaml
+configMapGenerator:
+  - name: plex-profile-configmap
+    files:
+      - Chromecast.xml=config/Chromecast.xml
+generatorOptions:
+  disableNameSuffixHash: true
