@@ -90,7 +90,7 @@ sinks:
     encoding:
       codec: json
     labels:
-      hostname: "{{ host }}"
+      hostname: "{{ host }} || {{ hostname }} || unknown"
       appname: "{{ appname }}"
   prometheus_sink:
     type: prometheus_exporter
