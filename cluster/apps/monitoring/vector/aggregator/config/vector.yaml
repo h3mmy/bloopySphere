@@ -78,7 +78,7 @@ sinks:
       #   {{`{{ kubernetes.pod_labels.app\.kubernetes\.io/instance }}`}}
       namespace: "{{ kubernetes.pod_namespace }}"
       node: "{{ kubernetes.pod_node_name }}"
-      pod: "{{ kubernetes.pod_name }}"
+      pod: "{{ custom_pod_name }}"
   loki_syslog:
     type: loki
     inputs:
