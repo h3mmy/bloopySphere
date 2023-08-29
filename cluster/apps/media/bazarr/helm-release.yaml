@@ -22,7 +22,7 @@ spec:
 
     env:
       TZ: ${TZ}
-      BAZARR__AUTHENTICATION_METHOD: None
+      BAZARR__AUTHENTICATION_METHOD: External
       BAZARR__APPLICATION_URL: https://bazarr.${XYZ_DOMAIN}
       BAZARR__API_KEY: ${BAZARR_API_KEY}
     service:
