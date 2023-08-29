@@ -32,12 +32,12 @@ transforms:
     source: |
       # Standardize 'app' index
       .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || .pod_labels."app.kubernetes.io/part-of" || .pod_labels."cnpg.io/cluster" || "unknown"
-  # syslog_xform:
-  #   type: "remap"
-  #   inputs:
-  #     - "syslog_logs"
-  #   source: |-
-  #     .timestamp=null
+  syslog_xform:
+    type: "remap"
+    inputs:
+      - "syslog_logs"
+    source: |-
+      .timestamp=null
 #
 # Sinks
 #
