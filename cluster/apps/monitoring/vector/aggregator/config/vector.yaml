@@ -80,7 +80,7 @@ sinks:
   loki_syslog:
     type: loki
     inputs:
-      - syslog_logs
+      - syslog_xform
     endpoint: *loki
     batch:
       max_bytes: 1048576
