@@ -60,6 +60,7 @@ spec:
           metallb.universe.tf/allow-shared-ip: vector-aggregator
         enabled: true
         type: LoadBalancer
+        externalTrafficPolicy: Local
         loadBalancerIPs: ["${LB_V4_VECTOR_AGGREGATOR}"]
         ports:
           http:
@@ -73,6 +74,7 @@ spec:
           syslog:
             enabled: true
             port: 6100
+            protocol: udp
 
     resources:
       requests:
