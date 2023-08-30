@@ -95,6 +95,9 @@ spec:
         type: emptyDir
         mountPath: /vector-data-dir
 
+    podMonitor:
+      enabled: true
+
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
