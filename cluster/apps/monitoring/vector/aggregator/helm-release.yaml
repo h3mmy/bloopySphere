@@ -74,7 +74,7 @@ spec:
           syslog:
             enabled: true
             port: 6100
-            protocol: udp
+            protocol: UDP
 
     resources:
       requests:
