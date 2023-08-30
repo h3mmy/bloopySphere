@@ -13,7 +13,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: ${NAS_ADDRESS}
-    path: "/volume1/DataR/Misc"
+    path: "/volume1/DataR"
   mountOptions:
     - nfsvers=4.1
     - tcp
