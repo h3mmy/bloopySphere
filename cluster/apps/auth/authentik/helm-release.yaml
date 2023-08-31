@@ -125,14 +125,14 @@ spec:
       - name: cluster-domain-cert
         mountPath: /certs/cluster-domain-cert
         readOnly: true
-      - name: spiffe
-        mountPath: /certs/spiffe
-        readOnly: true
+      #- name: spiffe
+       # mountPath: /certs/spiffe
+       # readOnly: true
     volumes:
-      - name: spiffe
-        csi:
-          driver: spiffe.csi.cert-manager.io
-          readOnly: true
+      #- name: spiffe
+     #   csi:
+     #     driver: spiffe.csi.cert-manager.io
+     #     readOnly: true
       - name: cluster-domain-cert
         secret:
           secretName: tls.${XYZ_DOMAIN/./-}
