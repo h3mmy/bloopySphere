@@ -50,7 +50,7 @@ spec:
       enabled: false
 
     extraArgs:
-      - --controllers='*\,-certificaterequests-approver'
+      - --controllers='*,-certificaterequests-approver'
       - --dns01-recursive-nameservers=1.1.1.1:53,1.1.0.0:53
     #  - --dns01-recursive-nameservers-only
     replicaCount: 1

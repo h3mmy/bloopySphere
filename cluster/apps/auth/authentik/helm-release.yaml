@@ -154,6 +154,17 @@ spec:
     worker:
       replicas: 2
 
+    serviceAccount:
+      # -- Service account is needed for managed outposts
+      create: true
+      annotations: {}
+      serviceAccountSecret:
+        # -- As we use the authentik-remote-cluster chart as subchart, and that chart
+        # creates a service account secret by default which we don't need here, disable its creation
+        enabled: false
+      fullnameOverride: authentik
+      nameOverride: authentik
+
     # The redis sub-chart does not have arm support
     # Authentik helm applies this to all it's pieces. No mix-and-match like with keycloak
     # May have to stop with the keycloak comparisons. Keycloak is far superior for customizability (imo)
