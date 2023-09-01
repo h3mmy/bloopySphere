@@ -30,7 +30,7 @@ spec:
       tag: 2.13.1@sha256:0a995c25a9c56b609c80dedfd9432c006b0d4835bd4fa2ba911ed112b50c5034
     env:
       TZ: "${TZ}"
-      TAUTULLI__BASE_URL: "https://tautulli.${XYZ_DOMAIN}/"
+      # TAUTULLI__BASE_URL: "https://tautulli.${XYZ_DOMAIN}/"
       TAUTULLI__HTTP_PROXY: "1"
     service:
       main:
