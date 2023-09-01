@@ -46,9 +46,10 @@ spec:
       - "X-Real-IP"
       - "X-Forwarded-For"
       - "Forwarded"
-      - "X-Forwarded-Ssl"
     contentSecurityPolicy: "frame-ancestors 'self' *.${BLOOPNET_URI}:* *.xac.im *.quarkynet.com *.${XYZ_DOMAIN} *.${TGR_DOMAIN};" # script-src 'self' code.iconify.design cdnjs.cloudflare.com; object-src 'self'; require-trusted-types-for 'script';"
     customResponseHeaders:
       X-xss-protection: "1"
       X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex,"
+    sslProxyHeaders:
       X-Forwarded-Proto: "https"
+      X-Forwarded-Ssl: "on"
