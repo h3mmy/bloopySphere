@@ -30,7 +30,6 @@ spec:
       tag: 2.13.1@sha256:0a995c25a9c56b609c80dedfd9432c006b0d4835bd4fa2ba911ed112b50c5034
     env:
       TZ: "${TZ}"
-      TAUTULLI__ROOT_URL: "\"\""
       TAUTULLI__BASE_URL: "https://tautulli.${XYZ_DOMAIN}/"
       TAUTULLI__HTTP_PROXY: "1"
     service:
@@ -49,7 +48,7 @@ spec:
           hajimari.io/instance: "bloop-quarky"
           external-dns.home.arpa/enabled: "true"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.priority: "99"
+          traefik.ingress.kubernetes.io/router.priority: "97"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
           - host: &host "{{ .Release.Name }}.${XYZ_DOMAIN}"

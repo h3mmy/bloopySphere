@@ -6,5 +6,5 @@ metadata:
   namespace: networking
 spec:
   rateLimit:
-    average: 100
-    burst: 50
+    average: 200
+    burst: 70
