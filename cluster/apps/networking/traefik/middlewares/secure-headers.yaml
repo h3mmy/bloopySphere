@@ -43,6 +43,7 @@ spec:
     stsSeconds: 63072000
     hostsProxyHeaders:
       - "X-Forwarded-Host"
+      - "Host"
       - "X-Real-IP"
       - "X-Forwarded-For"
       - "Forwarded"
