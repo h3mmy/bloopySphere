@@ -32,7 +32,7 @@ spec:
       serverIP: 0.0.0.0
       serverPort: &server-port 8266
       TZ: ${TZ}
-      ffmpegPath: /usr/bin/ffmpeg
+      ffmpegPath: "/usr/local/bin/ffmpeg"
       PGID: 65537
     additionalContainers:
       node:
@@ -81,10 +81,12 @@ spec:
         enabled: true
         existingClaim: tdarr-config-v1
         mountPath: /app/configs
-      shared:
+      cache:
         enabled: true
-        type: emptyDir
-        mountPath: /shared
+        type: nfs
+        server: "${NAS_ADDRESS}"
+        path: /volume3/Data/cache
+        mountPath: /cache
       media:
         enabled: true
         type: custom
