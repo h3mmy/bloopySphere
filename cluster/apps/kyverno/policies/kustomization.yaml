@@ -8,8 +8,7 @@ resources:
   # - ./snapshot-cronjob-controller.yaml
   # - ./replace-kubegres-backup-script.yaml
   # - ./add-ndots.yaml
-  # - ./add-prom-probes.yaml
-  - ./verify-tls-contains-host-path.yaml
+  - ./add-prom-probes.yaml
   #- ./add-linkerd-annotations-to-ns-pods.yaml
   # - ./add-grafana-instance-selector.yaml
   - ./add-svc-tls-annotations.yaml

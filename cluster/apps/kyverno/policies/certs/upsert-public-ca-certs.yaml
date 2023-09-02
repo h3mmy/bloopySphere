@@ -1,0 +1,47 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  # Example: https://kyverno.io/policies/other/a/add-certificates-volume/add-certificates-volume/
+  name: upsert-public-ca-certs
+  annotations:
+    policies.kyverno.io/title: Upsert Public CA Bundle
+    policies.kyverno.io/subject: Pod,Volume
+    pod-policies.kyverno.io/autogen-controllers: DaemonSet,Deployment,Job,StatefulSet
+    policies.kyverno.io/description: >-
+      This policy adds/replaces public ca bundles located in /etc/ssl/certs
+       and keeps them up to date. It targets pods with `inject.public-trust/enabled` set to `true`
+spec:
+  mutateExistingOnPolicyUpdate: true
+  generateExistingOnPolicyUpdate: true
+  rules:
+    - name: upsert-public-ca-bundle
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      preconditions:
+        all:
+          - key: '{{request.object.metadata.annotations."inject.public-trust/enabled" || ""}}'
+            operator: Equals
+            value: enabled
+          - key: "{{request.operation || 'BACKGROUND'}}"
+            operator: AnyIn
+            value:
+              - CREATE
+              - UPDATE
+      mutate:
+        foreach:
+          - list: "request.object.spec.containers"
+            patchStrategicMerge:
+              spec:
+                containers:
+                  - name: "{{ element.name }}"
+                    volumeMounts:
+                      - name: etc-ssl-certs
+                        mountPath: /etc/ssl/certs
+                volumes:
+                  - name: etc-ssl-certs
+                    configMap:
+                      name: public-bundle
