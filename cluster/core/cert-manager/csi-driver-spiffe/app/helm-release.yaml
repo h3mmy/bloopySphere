@@ -59,6 +59,8 @@ spec:
       logLevel: 1 # 1-5
       # -- Duration requested for requested certificates.
       certificateRequestDuration: 1h
+      approver:
+        signerName: clusterissuers.cert-manager.io/spiffe-ca
     # -- The Trust Domain for this driver.
     trustDomain: cluster.local
     # -- The name for the CSI driver installation.
@@ -75,7 +77,7 @@ spec:
     driver:
       # -- Optional file containing a CA bundle that will be propagated to
       # managed volumes.
-      sourceCABundle: # /var/run/secrets/spiffe.io/ca.pem
+      sourceCABundle: /var/run/secrets/cert-manager-csi-driver-spiffe/ca.crt
       volumeFileName:
         # -- File name which signed certificates are written to in volumes.
         cert: tls.crt
@@ -84,14 +86,14 @@ spec:
         # -- File name where the CA bundles are written to, if enabled.
         ca: ca.crt
       # -- Optional extra volumes. Useful for mounting root CAs
-      volumes: []
-      #- name: root-cas
-      #  secret:
-      #    secretName: root-ca-bundle
+      volumes:
+        - name: root-cas
+          secret:
+            secretName: csi-driver-spiffe
       # -- Optional extra volume mounts. Useful for mounting root CAs
-      volumeMounts: []
-      #- name: root-cas
-      #  mountPath: /var/run/secrets/cert-manager-csi-driver-spiffe
+      volumeMounts:
+        - name: root-cas
+          mountPath: /var/run/secrets/cert-manager-csi-driver-spiffe
 
       resources: {}
       # -- Kubernetes pod resource limits for cert-manager-csi-driver-spiffe
@@ -127,7 +129,7 @@ spec:
       # permission to approve and deny. CertificateRequests referencing this
       # signer name can be processed by the SPIFFE approver. See:
       # https://cert-manager.io/docs/concepts/certificaterequest/#approval
-      signerName: "clusterissuers.cert-manager.io/*"
+      signerName: "clusterissuers.cert-manager.io/spiffe-ca"
       readinessProbe:
         # -- Container port to expose csi-driver-spiffe-approver HTTP readiness
         # probe on default network interface.
