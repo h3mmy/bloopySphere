@@ -1,0 +1,73 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: recyclarr
+  namespace: default
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+  values:
+    controller:
+      type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
+    image:
+      repository: ghcr.io/recyclarr/recyclarr
+      tag: 5.3.1
+    env:
+      TZ: ${TZ}
+      SONARR_API_KEY: ${SONARR_API_KEY}
+      RADARR_API_KEY: ${RADARR_API_KEY}
+      SONARR_UHD_API_KEY: ${SONARR_UHD_API_KEY}
+      RADARR_UHD_API_KEY: ${RADARR_UHD_API_KEY}
+      LIDARR_API_KEY: ${LIDARR_API_KEY}
+      WHISPARR_API_KEY: ${WHISPARR_API_KEY}
+    service:
+      main:
+        enabled: false
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: OnRootMismatch
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: ceph-block
+    persistence:
+      config-file:
+        enabled: true
+        type: configMap
+        name: recyclarr-config
+        subPath: recyclarr.yaml
+        mountPath: /config/recyclarr.yaml
+        readOnly: true
+    resources:
+      requests:
+        cpu: 15m
+        memory: 80M
+      limits:
+        memory: 150M

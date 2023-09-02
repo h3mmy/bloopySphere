@@ -1,0 +1,48 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-recyclarr
+  namespace: flux-system
+spec:
+  dependsOn:
+    # - name: cluster-apps-radarr
+    # - name: cluster-apps-sonarr
+    - name: cluster-apps-recyclarr-config
+  path: ./cluster/apps/media/recyclarr/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: recyclarr
+      namespace: media
+  wait: false # no flux ks dependents
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-recyclarr-config
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: apps
+  path: ./cluster/apps/media/recyclarr/config
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  healthChecks:
+    - apiVersion: v1
+      kind: ConfigMap
+      name: recyclarr-config
+      namespace: media
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
