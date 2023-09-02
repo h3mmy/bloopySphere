@@ -34,29 +34,6 @@ spec:
       TZ: ${TZ}
       ffmpegPath: "/usr/local/bin/ffmpeg"
       PGID: 65537
-    additionalContainers:
-      node:
-        name: node
-        image: haveagitgat/tdarr_node:2.10.02
-        imagePullPolicy: IfNotPresent
-        env:
-          - name: TZ
-            value: ${TZ}
-          - name: nodeID
-            value: node
-          - name: serverIP
-            value: localhost
-          - name: serverPort
-            value: *server-port
-        volumeMounts:
-          - name: config
-            mountPath: /app/configs
-          - name: media
-            mountPath: &mediaPath /volume3/Data
-          - name: media2
-            mountPath: &mediaPath2 /volume1/Data2
-          - name: shared
-            mountPath: /shared
     podSecurityContext:
       # Required for passthrough of /dev/dri devices from NFD
       # https://dgpu-docs.intel.com/installation-guides/ubuntu/ubuntu-focal.html
@@ -92,7 +69,7 @@ spec:
         type: custom
         volumeSpec:
           nfs:
-            path: *mediaPath
+            path: &mediaPath /volume3/Data
             server: ${NAS_ADDRESS}
         mountPath: *mediaPath
         readOnly: false
@@ -101,7 +78,7 @@ spec:
         type: custom
         volumeSpec:
           nfs:
-            path: *mediaPath2
+            path: &mediaPath2 /volume1/Data2
             server: ${NAS_ADDRESS}
         mountPath: *mediaPath2
         readOnly: false
