@@ -29,7 +29,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ak-outpost-ldap-outpost
+                name: ak-outpost-ldap-external
                 port:
                   number: 636
   tls:
