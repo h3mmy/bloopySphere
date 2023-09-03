@@ -24,7 +24,7 @@ spec:
         namespace: flux-system
   values:
     image:
-      repository: haveagitgat/tdarr
+      repository: ghcr.io/haveagitgat/tdarr_acc
       tag: 2.10.02
       pullPolicy: IfNotPresent
     env:
