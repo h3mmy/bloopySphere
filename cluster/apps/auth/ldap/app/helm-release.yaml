@@ -60,6 +60,8 @@ spec:
             port: *ldapPort
           # enable after cert secret is generated
       ldaps:
+        enabled: true
+        type: LoadBalancer
         # See https://github.com/kubernetes/enhancements/pull/1992
         loadBalancerIPs:
           - "${LB_V4_LLDAP}"
