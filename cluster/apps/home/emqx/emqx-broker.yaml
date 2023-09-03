@@ -78,7 +78,7 @@ spec:
       listenersServiceTemplate:
         spec:
           type: LoadBalancer
-          loadBalancerIPs: ["${LB_V4_EMQX}"]
+          loadBalancerIPs: ["${LB_V4_EMQX}", "${LB_V6_EMQX}"]
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt-production
             coredns.io/hostname: mqtt.${XYZ_DOMAIN}

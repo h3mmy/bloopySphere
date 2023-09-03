@@ -59,6 +59,21 @@ spec:
             enabled: true
             port: *ldapPort
           # enable after cert secret is generated
+      ldaps:
+        # See https://github.com/kubernetes/enhancements/pull/1992
+        loadBalancerIPs:
+          - "${LB_V4_LLDAP}"
+          - "${LB_V6_LLDAP}"
+        externalTrafficPolicy: Local
+        ipFamilyPolicy: PreferDualStack
+        ipFamilies:
+          - "IPv4"
+          - "IPv6"
+        annotations:
+          corends.io/hostname: &host "{{ .Release.Name }}.${XYZ_DOMAIN}"
+          metallb.universe.tf/loadBalancerIPs: "${LB_V4_LLDAP}, ${LB_V6_LLDAP}"
+          metallb.universe.tf/allow-shared-ip: lldap
+        ports:
           ldaps:
             enabled: true
             port: *ldapsPort
@@ -73,7 +88,7 @@ spec:
           # hajimari.io/icon: "weather-sunset"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
-          - host: &host "{{ .Release.Name }}.${XYZ_DOMAIN}"
+          - host: *host
             paths:
               - path: /
                 pathType: Prefix
