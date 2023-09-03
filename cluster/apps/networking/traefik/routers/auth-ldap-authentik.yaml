@@ -31,7 +31,7 @@ spec:
               service:
                 name: ak-outpost-ldap-external
                 port:
-                  number: 636
+                  number: 389
   tls:
     - secretName: tls.ldap-bloopnet
       hosts:
