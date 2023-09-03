@@ -5,8 +5,7 @@ metadata:
   name: ldap-authentik-ingress
   namespace: auth
   annotations:
-    traefik.ingress.kubernetes.io/service.serversscheme: tcp
-    traefik.ingress.kubernetes.io/router.entrypoints: ldaps
+    traefik.ingress.kubernetes.io/router.entrypoints: ldap,ldaps
     traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
     cert-manager.io/cluster-issuer: letsencrypt-production
     traefik.ingress.kubernetes.io/affinity: "true"
