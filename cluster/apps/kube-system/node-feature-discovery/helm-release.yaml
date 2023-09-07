@@ -21,6 +21,8 @@ spec:
   upgrade:
     crds: CreateReplace
   values:
+    prometheus:
+      enable: true
     nodeFeatureRule:
       createCRD: true
     master:
