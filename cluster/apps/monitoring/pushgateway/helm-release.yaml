@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: prom/pushgateway
-      tag: v1.6.1
+      tag: v1.6.2
       pullPolicy: IfNotPresent
     serviceMonitor:
       enabled: true
