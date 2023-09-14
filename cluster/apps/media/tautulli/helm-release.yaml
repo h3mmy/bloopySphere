@@ -27,9 +27,11 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/tautulli
-      tag: 2.12.5@sha256:d0757cd22196df22e251b9be8db9e729493fb573a07d4d957b553c6676e64440
+      tag: 2.13.1@sha256:0a995c25a9c56b609c80dedfd9432c006b0d4835bd4fa2ba911ed112b50c5034
     env:
       TZ: "${TZ}"
+      TAUTULLI__BASE_URL: "https://tautulli.${XYZ_DOMAIN}/"
+      TAUTULLI__HTTP_PROXY: "1"
     service:
       main:
         ports:
@@ -46,7 +48,7 @@ spec:
           hajimari.io/instance: "bloop-quarky"
           external-dns.home.arpa/enabled: "true"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.priority: "99"
+          traefik.ingress.kubernetes.io/router.priority: "97"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
           - host: &host "{{ .Release.Name }}.${XYZ_DOMAIN}"
@@ -75,25 +77,21 @@ spec:
             path: /volume3/Data/Backups/app/tautulli
         mountPath: /config/backups
         readOnly: false
-    #  additionalContainers:
-    #   jbops:
-    #    name: jbops
-    #    image: k8s.gcr.io/git-sync/git-sync:v3.6.4
-    #     args:
-    #       - --repo=https://github.com/blacktwin/JBOPS.git
-    #       - --branch=master
-    #      - --depth=1
-    #        - --root=/config/JBOPS
-    #     volumeMounts:
-    #       - name: config
-    #         mountPath: /config
-    #     resources:
-    #        requests:
-    #         cpu: 78m
-    #         memory: 50M
-    #       limits:
-    #        cpu: 78m
-    #         memory: 50M
+      add-ons:
+        enabled: true
+        type: emptyDir
+
+    sidecars:
+      jbops:
+        image: registry.k8s.io/git-sync/git-sync:v4.0.0
+        imagePullPolicy: IfNotPresent
+        args:
+          - --repo=https://github.com/blacktwin/JBOPS
+          - --ref=master
+          - --period=24h
+          - --root=/add-ons
+        volumeMounts:
+          - { name: add-ons, mountPath: /add-ons }
     resources:
       requests:
         cpu: 10m

@@ -77,7 +77,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "book-open-page-variant"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure,wss"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
           - host: &host "{{ .Release.Name }}.${XYZ_DOMAIN}"

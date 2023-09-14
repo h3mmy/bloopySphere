@@ -24,7 +24,13 @@ spec:
           - resources:
               annotations:
                 probe.home.arpa/enabled: "false"
+          - resources:
+              annotations:
+                probe.bloopysphere.arpa/enabled: "false"
       mutate:
+        targets:
+          - apiVersion: networking.k8s.io/v1
+            kind: Ingress
         patchStrategicMerge:
           metadata:
             annotations:

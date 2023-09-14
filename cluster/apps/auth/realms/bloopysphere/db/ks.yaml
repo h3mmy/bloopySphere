@@ -14,10 +14,19 @@ spec:
     kind: GitRepository
     name: flux-system
   wait: true
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   healthChecks:
     - apiVersion: v1
       kind: Secret
       name: kc-postgres-user
+      namespace: auth
+    - apiVersion: v1
+      kind: Secret
+      name: cnpg-keycloak-superuser
+      namespace: auth
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -33,7 +42,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  wait: true
+  # wait: true
   dependsOn:
     - name: cluster-core-rook-ceph-cluster
     - name: cluster-apps-cloudnative-pg
@@ -41,9 +50,7 @@ spec:
     - apiVersion: objectbucket.io/v1alpha1
       kind: ObjectBucketClaim
       name: cnpg-kc-backup-v1
-    - apiVersion: postgresql.cnpg.io/v1
-      kind: ScheduledBackup
-      name: backup-schedule-kc-postgres-v1
+      namespace: auth
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -59,7 +66,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  wait: true
   dependsOn:
     - name: cluster-apps-cloudnative-pg
     - name: cluster-apps-local-path-provisioner
@@ -70,6 +76,7 @@ spec:
     - apiVersion: postgresql.cnpg.io/v1
       kind: Cluster
       name: kc-postgres
+      namespace: auth
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -85,7 +92,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  wait: true
   dependsOn:
     - name: kube-prometheus-stack-crds
     - name: cluster-iam-keycloak-db-cluster
@@ -93,3 +99,4 @@ spec:
     - apiVersion: monitoring.coreos.com/v1
       kind: PrometheusRule
       name: kc-cnpg-rules
+      namespace: auth

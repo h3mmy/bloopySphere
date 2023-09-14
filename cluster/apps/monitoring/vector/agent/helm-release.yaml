@@ -34,8 +34,11 @@ spec:
     image:
       # https://github.com/vectordotdev/vector/issues/6715
       repository: ghcr.io/onedr0p/vector
-      tag: 0.31.0-debian
+      tag: 0.32.1-debian
     args: ["--config", "/etc/vector/vector.yaml"]
+
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: "vector-agent-configmap"
 
     env:
       PROCFS_ROOT: /host/proc

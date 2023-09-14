@@ -22,17 +22,24 @@ spec:
   upgrade:
     remediation:
       retries: 5
+  valuesFrom:
+    - kind: Secret
+      name: *app
+      valuesKey: PROWLARR__API_KEY
+      targetPath: env.PROWLARR__API_KEY
+      optional: false
   values:
     global:
       nameOverride: *app
     image:
       repository: ghcr.io/onedr0p/prowlarr-nightly
-      tag: 1.7.3.3758@sha256:8a5022f401f3b12ed1d8f4eb7fc1390bf2f15036a0d9175b5698614304131c07
+      tag: 1.9.0.3957@sha256:77da09e35db3f0e0e982e8fe637475620f90ca8b76a4ad831e46b49dcfad3e25
     env:
       TZ: "${TZ}"
       PROWLARR__INSTANCE_NAME: Prowlarr
       PROWLARR__PORT: &port 80
       PROWLARR__LOG_LEVEL: info
+      PROWLARR__APPLICATION_URL: https://prowlarr.${XYZ_DOMAIN}
       # https://wiki.servarr.com/prowlarr/faq#can-i-disable-forced-authentication
       # https://github.com/onedr0p/containers/blob/main/apps/prowlarr/config.xml.tmpl
       PROWLARR__AUTHENTICATION_METHOD: External
@@ -50,9 +57,6 @@ spec:
       #     secretKeyRef:
       #       name: prowlarr-postgres
       #       key: POSTGRES_PASSWORD
-    envFrom:
-      - secretRef:
-          name: *app
     service:
       main:
         ports:

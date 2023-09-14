@@ -7,6 +7,11 @@
         "allowedVersions":"<15"
       },
       {
+        "matchPackageNames": ["Lucas-C/pre-commit-hooks"],
+        "fileMatch": ".pre-commit-config.yaml",
+        "allowedVersions": "!/1.5.3/$"
+      },
+      {
         "matchDatasources": ["docker"],
         "matchPackageNames": ["ghcr.io/goauthentik/server"],
         "fileMatch": "cluster/apps/auth/authentik.+\\.ya?ml$",

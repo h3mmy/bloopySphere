@@ -1,0 +1,98 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: tdarr-node
+  namespace: media
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controller:
+      type: daemonset
+    image:
+      repository: ghcr.io/haveagitgat/tdarr_node_acc
+      tag: 2.11.01
+    env:
+      TZ: "${TIMEZONE}"
+      # PUID: "568"
+      # PGID: "568"
+      serverIP: tdarr.media.svc.cluster.local
+      serverPort: 8266
+      ffmpegPath: "/usr/local/bin/ffmpeg"
+      nodeName:
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
+    service:
+      main:
+        enabled: false
+        ports:
+          enabled: false
+          http:
+            port: 8265
+    persistence:
+      media:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            path: &mediaPath /volume3/Data
+            server: ${NAS_ADDRESS}
+        mountPath: *mediaPath
+        readOnly: false
+      media2:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            path: &mediaPath2 /volume1/Data2
+            server: ${NAS_ADDRESS}
+        mountPath: *mediaPath2
+        readOnly: false
+      cache:
+        enabled: true
+        type: nfs
+        server: "${NAS_ADDRESS}"
+        path: /volume3/Data/cache
+        mountPath: /cache
+    podSecurityContext:
+      runAsUser: 0
+      runAsGroup: 0
+      fsGroup: 100
+      supplementalGroups:
+        - 34
+        - 44
+        - 100
+        - 109
+        - 226
+        # Custom Camelus Group(s)
+        - 65541
+        - 65536
+        - 65537
+      fsGroupChangePolicy: "OnRootMismatch"
+      capabilities:
+        add:
+          - CHOWN
+    resources:
+      requests:
+        cpu: 10m
+        memory: 250Mi

@@ -2,6 +2,8 @@
 
 I've switched away from using the emqx operator due to it not correctly mutating the CRD from v1beta2 to v1beta3. I didn't have the patience to dive in and fix it. I've been busy.
 
+TODO: Update configuration for v2beta1
+
 ## Notes
 
 * Ingresses are defined in [cluster/apps/networking/traefik/routers/home-emqx.yaml](https://github.com/h3mmy/bloopysphere/blob/main/cluster/apps/networking/traefik/routers/home-emqx.yaml)

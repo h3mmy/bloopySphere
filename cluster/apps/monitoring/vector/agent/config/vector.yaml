@@ -9,6 +9,7 @@ sources:
     journal_directory: /var/log/journal
   kubernetes_source:
     type: kubernetes_logs
+    use_apiserver_cache: true
     pod_annotation_fields:
       container_image: container_image
       container_name: container_name
@@ -17,6 +18,11 @@ sources:
       pod_name: pod_name
   vector_metrics:
     type: internal_metrics
+  plex_source:
+    type: file
+    include:
+      - "/config/Library/Application Support/Plex Media Server/Logs/*.log"
+      - "/config/Library/Application Support/Plex Media Server/Logs/PMS Plugin Logs/*.log"
 #
 # Sinks
 #
@@ -35,6 +41,13 @@ sinks:
     address: vector-aggregator.monitoring.svc.cluster.local:6010
     inputs:
       - journald_source
+#  plex:
+#    type: loki
+#    encoding:
+#      codec: logfmt
+ #   inputs:
+#      - plex_source
+#    endpoint: http://loki-gateway.monitoring.svc.cluster.local:80
   prometheus:
     type: prometheus_exporter
     inputs:

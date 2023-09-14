@@ -24,19 +24,24 @@ spec:
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
+  valuesFrom:
+    - kind: Secret
+      name: *app
+      valuesKey: READARR__API_KEY
+      targetPath: env.READARR__API_KEY
+      optional: false
   values:
     image:
       repository: ghcr.io/onedr0p/readarr-nightly
-      tag: 0.2.4.1999@sha256:c543fb58d083ee2cb02887bf2830e13b9b97be1cf0fea534f735adae9f32fe63
+      tag: 0.3.4.2207@sha256:17df7f7b477f84dc82f62686f6ffa57cccd3281d1bca385929b03d3b680b50ea
     env:
       TZ: "${TZ}"
       PGID: ${MEDIA_GID}
       READARR__INSTANCE_NAME: Readarr (Audio)
       READARR__PORT: &port 80
       READARR__LOG_LEVEL: info
-    envFrom:
-      - secretRef:
-          name: *app
+      READARR__AUTHENTICATION_METHOD: None
+      READARR__APPLICATION_URL: https://readarr-audio.${XYZ_DOMAIN}
     service:
       main:
         ports:

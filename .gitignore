@@ -32,6 +32,7 @@ old_lazylib_config.ini
 *.backup
 *.bak
 authentik-postgres-backup-19*
+mb8611*
 
 # TEmporary
 provision/talos/*
@@ -48,9 +49,13 @@ infrastructure/bare-metal/*
 infrastructure/shared/networks.yaml
 infrastructure/terraform/vault/*
 *volsync-config.yaml
-cluster/apps/auth/realms/bloopysphere/keycloak.yaml
-cluster/apps/auth/realms/bloopysphere/certificate.yaml
 cluster/bootstrap
 kube-dns.yml
 ceph-dis/*
 strip_rook_id.sh
+store-backup.tar/*
+store-backup.tar.gz
+kc-grafc*
+debugger.yaml
+whisparr_backup.zip
+kc-metadata-saml.xml

@@ -14,7 +14,7 @@ data:
   DOMAIN_BIG_BLOOP: "bigbloop"
   DOMAIN_CORE_BLOOP: "bloopycore"
   DOMAIN_SMALL_BLOOP: "smallbloop"
-  EMQX_PSQL_QUERY_STRING: "SELECT password_hash, salt, is_superuser FROM mqtt_user WHERE username = ${username} LIMIT 1"
+  EMQX_PSQL_QUERY_STRING: "SELECT password_hash, salt, is_superuser FROM mqtt_user WHERE username='${username}' LIMIT 1"
   GCP_VAULT_KEYRING_NAME: bloopy-vault
   GCP_VAULT_KMS_REGION: global
   GCP_VAULT_CRYPTO_NAME: bloopy-vault-crypt
@@ -24,6 +24,7 @@ data:
   LB_V4_MINECRAFT: 10.1.0.106
   LB_V4_PLEX: 10.1.0.105
   LB_V4_PROMTAIL: 10.1.0.103
+  LB_V4_LLDAP: 10.1.0.114
   LB_V4_TRAEFIK: 10.1.0.101
   LB_V4_TRAEFIK_CLASSIC: 10.1.0.50
   LB_V4_VECTOR_AGGREGATOR: 10.1.0.108

@@ -1,15 +1,95 @@
 ---
-apiVersion: apps.emqx.io/v2alpha1
+apiVersion: apps.emqx.io/v2beta1
 kind: EMQX
 metadata:
   name: emqx
   namespace: home
 spec:
   serviceAccountName: "emqx"
-  image: emqx/emqx:5.1.2
+  image: emqx/emqx:5.2.0
   imagePullPolicy: IfNotPresent
-  # imagePullSecrets:
-  #   - name: fake-secrets
+  updateStrategy:
+    evacuationStrategy:
+      connEvictRate: 1000
+      sessEvictRate: 1000
+      waitTakeover: 10
+    initialDelaySeconds: 10
+    type: Recreate
+  bootstrapApiKeys:
+    - key: secretKey
+      secret: secret
+    - key: prometheusKey
+      secret: secret
+  config:
+    data: |
+      dashboard.listeners.http.bind = 18083
+      dashboard.default_username = admin
+      dashboard.default_password = blahblah123*
+      sysmon.vm.long_schedule = disabled
+      listeners.tcp.default {
+        bind = "0.0.0.0:1883"
+        max_connections = 1024000
+      }
+      listeners.ssl.default {
+        bind = "0.0.0.0:8883"
+        ssl_options {
+          cacertfile = "/mnt/cert/ca.crt"
+          certfile = "/mnt/cert/tls.crt"
+          keyfile = "/mnt/cert/tls.key"
+        }
+      }
+      listeners.quic.default {
+        enabled = true
+        bind = "0.0.0.0:14567"
+        max_connections = 1024000
+      }
+  coreTemplate:
+    metadata:
+      name: emqx-core
+      labels:
+        apps.emqx.io/instance: emqx
+        apps.emqx.io/managed-by: emqx-operator
+        apps.emqx.io/db-role: core
+      annotations:
+    spec:
+      replicas: 3
+
+      extraVolumes:
+        - name: &vol1 emqx-tls
+          secret:
+            secretName: tls.emqx
+      extraVolumeMounts:
+        - name: *vol1
+          mountPath: /mnt/cert
+
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - emqx-core
+                topologyKey: kubernetes.io/hostname
+
+      listenersServiceTemplate:
+        spec:
+          type: LoadBalancer
+          loadBalancerIPs: ["${LB_V4_EMQX}", "${LB_V6_EMQX}"]
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-production
+            coredns.io/hostname: mqtt.${XYZ_DOMAIN}
+          ports:
+          mqtt: 1883
+          mqtts: 8883
+          ws: 8083
+          wss: 8084
+          dashboard: 18083
+          api: 8081
+
   bootstrapConfig: |
     node {
       cookie = emqxsecretcookie
@@ -23,95 +103,7 @@ spec:
         name:"emqx-headless.home.svc.cluster.local"
       }
     }
-    dashboard {
-      listeners.http {
-          bind: 18083
-      }
-      default_username: "admin"
-      default_password: "example"
-    }
-    listeners.tcp.default {
-      bind = "0.0.0.0:1883"
-      max_connections = 1024000
-    }
-    sysmon.vm.long_schedule = disabled
-  replicas: 3
-  labels:
-    cluster: emqx
-    app.kubernetes.io/name: emqx
-  affinity:
-    podAntiAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          podAffinityTerm:
-            labelSelector:
-              matchExpressions:
-                - key: app.kubernetes.io/name
-                  operator: In
-                  values:
-                    - emqx
-            topologyKey: kubernetes.io/hostname
-
-  env:
-    - name: EMQX_PROMETHEUS__PUSH__GATEWAY__SERVER
-      value: prometheus-pushgateway.monitoring:9091
-    - name: EMQX_ADMIN_PASSWORD
-      value: ${EMQX_ADMIN_PASSWORD}
-    - name: EMQX_AUTH__USER__1__USERNAME
-      value: ${EMQX_USER_1_USERNAME}
-    - name: EMQX_AUTH__USER__1__PASSWORD
-      value: ${EMQX_USER_1_PASSWORD}
-    - name: EMQX_AUTH__USER__2__USERNAME
-      value: ${EMQX_USER_2_USERNAME}
-    - name: EMQX_AUTH__USER__2__PASSWORD
-      value: ${EMQX_USER_2_PASSWORD}
-    - name: EMQX_AUTH__USER__3__USERNAME
-      value: ${EMQX_USER_3_USERNAME}
-    - name: EMQX_AUTH__USER__3__PASSWORD
-      value: ${EMQX_USER_3_PASSWORD}
-    - name: EMQX_AUTH__USER__4__USERNAME
-      value: ${EMQX_USER_4_USERNAME}
-    - name: EMQX_AUTH__USER__4__PASSWORD
-      value: ${EMQX_USER_4_PASSWORD}
-    - name: EMQX_AUTH__USER__5__PASSWORD
-      value: ${EMQX_USER_5_PASSWORD}
-    - name: EMQX_AUTH__USER__5__USERNAME
-      value: ${EMQX_USER_5_USERNAME}
-    - name: EMQX_AUTH__USER__6__USERNAME
-      value: ${EMQX_METRICS_USER}
-    - name: EMQX_AUTH__USER__6__PASSWORD
-      value: ${EMQX_METRICS_PASSWORD}
-    # - name: EMQX_AUTH__LDAP__SERVERS
-    #   value: ak-outpost-ldap-outpost.auth.svc.cluster.local
-    # - name: EMQX_AUTH__LDAP__PORT
-    #   value: "389"
-    # - name: EMQX_AUTH__LDAP__BIND_DN
-    #   value: ${EMQX_BIND_DN}
-    # - name: EMQX_AUTH__LDAP__BIND_PASSWORD
-    #   value: ${EMQX_BIND_PASSWORD}
-    # - name: EMQX_AUTH__LDAP__TIMEOUT
-    #   value: 30s
-    # - name: EMQX_AUTH__LDAP__DEVICE_DN
-    #   value:
-    # - name: EMQX_AUTH__LDAP__MATCH_OBJECTCLASS
-    #   value: user
-    # - name: EMQX_AUTH__LDAP__USERNAME__ATTRIBUTETYPE
-    #   value: cn
-    # - name: EMQX_AUTH__LDAP__PASSWORD__ATTRIBUTETYPE
-    #   value: password
-
   emqxTemplate:
-    listener:
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-production
-      type: ClusterIP
-      ports:
-        mqtt: 1883
-        mqtts: 8883
-        ws: 8083
-        wss: 8084
-        dashboard: 18083
-        api: 8081
     acl:
       # v1beta2 -> v1beta3 screwed this up and also the kustomization won't reconcile due to creationTimestamp being a non-field
       # - '{allow, {user, "dashboard"}, subscribe, ["$SYS/#"]}.'

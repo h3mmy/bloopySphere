@@ -42,7 +42,7 @@ spec:
 
     image:
       repository: ghcr.io/0xerr0r/blocky
-      tag: v0.21
+      tag: v0.22
 
     controller:
       enabled: true
@@ -221,6 +221,8 @@ spec:
             upstreamTimeout: 5
             bootstrapDns: tcp+udp:1.1.1.1:53
             conditional:
+              rewrite:
+                cluster.local.${DOMAIN_CORE_BLOOP} : cluster.local
               mapping:
                 # local: tcp+udp:kube-dns.svc
                 unifi: tcp+udp:${LOCAL_GATEWAY_MAIN}

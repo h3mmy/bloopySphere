@@ -8,9 +8,10 @@ spec:
   interval: 15m
   chart:
     spec:
+      reconcileStrategy: Revision
       # renovate: registryUrl=https://repos.emqx.io/charts
       chart: emqx
-      version: 5.1.2
+      version: 5.2.0
       sourceRef:
         kind: HelmRepository
         name: emqx-charts
@@ -23,25 +24,46 @@ spec:
   upgrade:
     remediation:
       retries: 5
-      remediateLastFailure: true # remediate the last failure, when no retries remain
+      remediateLastFailure: true
     cleanupOnFail: true
+ # valuesFrom:
+ #   - targetPath: emqxConfig.EMQX_API_KEY__BOOTSTRAP_FILE
+    #  kind: Secret
+ #     name: emqx-api-keys
+  #    valuesKey: bootstrap_file
   values:
     image:
       repository: emqx/emqx
     replicaCount: 3
     recreatePods: true
     envFromSecret: emqx-secrets
+    # Dashboard params were quietly changed https://github.com/emqx/emqx/issues/7567
     emqxConfig:
-      EMQX_AUTHENTICATION__ENABLE: "false"
-      EMQX_AUTHENTICATION__MECHANISM: password_based
-      EMQX_AUTHENTICATION__BACKEND: postgresql
-      EMQX_AUTHENTICATION__DATABASE: ${EMQX_DB_NAME}
-      EMQX_AUTHENTICATION__USERNAME: postgres
-      EMQX_AUTHENTICATION__SERVER: emqx-db:5432
-      EMQX_AUTHENTICATION__PASSWORD_HASH_ALGORITHM__NAME: sha256
-      EMQX_AUTHENTICATION__PASSWORD_HASH_ALGORITHM__SALT_POSITION: prefix
-      EMQX_ALLOW_ANONYMOUS: "false"
-      EMQX_AUTHENTICATION__QUERY: ${EMQX_PSQL_QUERY_STRING}
+      EMQX_DASHBOARD__DEFAULT_USERNAME: admin
+      EMQX_DASHBOARD__DEFAULT_PASSWORD: ${EMQX_ADMIN_PASSWORD}
+      EMQX_LISTENERS__QUIC__DEFAULT__ENABLED: true
+      # EMQX_LISTENERS__QUIC__DEFAULT__MAX_CONNECTIONS: 1024000
+      EMQX_AUTHENTICATION__1__ENABLE: "false"
+      EMQX_AUTHENTICATION__1__MECHANISM: password_based
+      EMQX_AUTHENTICATION__1__BACKEND: postgresql
+      EMQX_AUTHENTICATION__1__DATABASE: ${EMQX_DB_NAME}
+      EMQX_AUTHENTICATION__1__USERNAME: postgres
+      EMQX_AUTHENTICATION__1__SERVER: emqx-db.home.svc.cluster.local:5432
+      EMQX_AUTHENTICATION__1__QUERY: ${EMQX_PSQL_QUERY_STRING}
+      EMQX_AUTHORIZATION__NO_MATCH: allow
+      EMQX_API_KEY__BOOTSTRAP_FILE: /opt/emqx/etc/bootstrap/api_key.bootstrap
+      # EMQX_AUTHENTICATION__2__ENABLE: "false"
+      # EMQX_AUTHENTICATION__2__MECHANISM: password_based
+      # EMQX_AUTHENTICATION__2__BACKEND: postgresql
+      # EMQX_AUTHENTICATION__2__DATABASE: ${EMQX_DB_NAME}
+      # EMQX_AUTHENTICATION__2__USERNAME: postgres
+      # EMQX_AUTHENTICATION__2__QUERY: ${EMQX_PSQL_QUERY_STRING}
+      # EMQX_AUTHENTICATION__2__SERVER: emqx-db.home.svc.cluster.local:5432
+      # EMQX_AUTHENTICATION__2__PASSWORD_HASH_ALGORITHM__NAME: sha256
+      # EMQX_AUTHENTICATION__2__PASSWORD_HASH_ALGORITHM__SALT_POSITION: prefix
+      # Used for debugging. connections restricted via network firewall and rfc1918 middleware in traefik
+      EMQX_ALLOW_ANONYMOUS: "true"
+      EMQX_LOG__CONSOLE_HANDLER__LEVEL: info
       # Need to explicity add these.
       # See https://github.com/emqx/emqx/commit/a2a4c813e75eb447b6bdbc96c8656bd8db8a4423#diff-5563b95bbac1fd565c21e4a37ced5a944c398bce5b340d093c2059231560f165
       # Compare to current values.yaml and it should make sense. I tested using v5.0.12
@@ -49,20 +71,28 @@ spec:
       # EMQX_CLUSTER__K8S__APISERVER: "https://kubernetes.default.svc:443"
       # EMQX_CLUSTER__K8S__SERVICE_NAME: "{{ .Release.Name }}-headless"
       # EMQX_CLUSTER__K8S__NAMESPACE: *ns
-      EMQX_DASHBOARD__DEFAULT_USERNAME: admin
-      EMQX_DASHBOARD__DEFAULT_PASSWORD: ${EMQX_ADMIN_PASSWORD}
-      EMQX_LOADED_MODULES: "emqx_mod_presence,emqx_mod_subscription,emqx_mod_topic_metrics"
-      EMQX_LOADED_PLUGINS: "emqx_management,emqx_recon,emqx_retainer,emqx_dashboard,emqx_rule_engine,emqx_prometheus,emqx_auth_mnesia"
-    # emqxAclConfig: >
-    #   {allow, {user, "dashboard"}, subscribe, ["$SYS/#"]}.
-    #   {allow, {ipaddr, "127.0.0.1"}, pubsub, ["$SYS/#", "#"]}.
-    #   {allow, all, subscribe, ["$SYS/#", {eq, "#"}]}.
-    #   {allow, all}.
+      #EMQX_LOADED_MODULES: "emqx_mod_presence,emqx_mod_subscription,emqx_mod_topic_metrics"
+     # EMQX_LOADED_PLUGINS: "emqx_management,emqx_recon,emqx_retainer,emqx_dashboard,emqx_rule_engine,emqx_prometheus"
+    emqxAclConfig: >
+      {allow, {user, "dashboard"}, subscribe, ["$SYS/#"]}.
+      {allow, {ipaddr, "127.0.0.1"}, pubsub, ["$SYS/#", "#"]}.
+      {allow, all, subscribe, ["$SYS/#", {eq, "#"}]}.
+      {allow, all}.
     metrics:
       enabled: true
       type: prometheus
     persistence:
       enabled: false
+    extraVolumeMounts:
+      - name: api-key-bootstrap
+        mountPath: /opt/emqx/etc/bootstrap
+    extraVolumes:
+      - name: api-key-bootstrap
+        secret: 
+          secretName: emqx-api-keys
+          items:
+            - key: bootstrap_file
+              path: api_key.bootstrap
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:

@@ -37,7 +37,7 @@ spec:
     image:
       # https://github.com/vectordotdev/vector/issues/6715
       repository: ghcr.io/onedr0p/vector
-      tag: 0.31.0-debian
+      tag: 0.32.1-debian
     args: ["--config", "/etc/vector/vector.yaml"]
 
     affinity:
@@ -56,11 +56,12 @@ spec:
     service:
       main:
         annotations:
-          metallb.universe.tf/loadBalancerIPs: "${LB_VECTOR_AGGREGATOR_V4}"
+          metallb.universe.tf/loadBalancerIPs: "${LB_V4_VECTOR_AGGREGATOR}"
           metallb.universe.tf/allow-shared-ip: vector-aggregator
         enabled: true
         type: LoadBalancer
-        loadBalancerIP: "${LB_VECTOR_AGGREGATOR_V4}"
+        externalTrafficPolicy: Local
+        loadBalancerIPs: ["${LB_V4_VECTOR_AGGREGATOR}"]
         ports:
           http:
             port: 8686
@@ -70,9 +71,10 @@ spec:
           kubernetes:
             enabled: true
             port: 6000
-          udm:
+          syslog:
             enabled: true
             port: 6100
+            protocol: UDP
 
     resources:
       requests:
@@ -94,6 +96,9 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /vector-data-dir
+
+    podMonitor:
+      enabled: true
 
     topologySpreadConstraints:
       - maxSkew: 1

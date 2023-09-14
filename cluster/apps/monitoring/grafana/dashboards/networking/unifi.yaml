@@ -8,7 +8,7 @@ spec:
   # Ref: https://grafana.com/grafana/dashboards/11315
   grafanaCom:
     id: 11315
-    revision: 8
+    revision: 9
     datasource: rometheus
 ---
 apiVersion: grafana.integreatly.org/v1beta1
@@ -20,7 +20,7 @@ spec:
   # Ref: https://grafana.com/grafana/dashboards/11311
   grafanaCom:
     id: 11311
-    revision: 8
+    revision: 9
     datasource: prometheus
 ---
 apiVersion: grafana.integreatly.org/v1beta1
@@ -32,7 +32,7 @@ spec:
   # Ref: https://grafana.com/grafana/dashboards/11314
   grafanaCom:
     id: 11314
-    revision: 8
+    revision: 9
     datasource: prometheus
 ---
 apiVersion: grafana.integreatly.org/v1beta1
@@ -44,5 +44,29 @@ spec:
   # Ref: https://grafana.com/grafana/dashboards/11312
   grafanaCom:
     id: 11312
-    revision: 8
+    revision: 9
     datasource: prometheus
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: unifi-dpi
+  namespace: monitoring
+spec:
+  # Ref: https://grafana.com/grafana/dashboards/11310-unifi-poller-client-dpi-prometheus/
+  grafanaCom:
+    gnetId: 11310
+    revision: 5
+    datasource: Prometheus
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: unifi-usg-insights
+  namespace: monitoring
+spec:
+  # Ref: https://grafana.com/grafana/dashboards/11313-unifi-poller-usg-insights-prometheus/
+  grafanaCom:
+    gnetId: 11313
+    revision: 9
+    datasource: Prometheus

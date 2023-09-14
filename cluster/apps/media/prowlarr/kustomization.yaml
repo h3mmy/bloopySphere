@@ -5,3 +5,4 @@ resources:
   - ./secrets.sops.yaml
   - ./pvc-config.yaml
   - ./helm-release.yaml
+  - ./routers/media-prowlarr-bypass.yaml

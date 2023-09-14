@@ -8,5 +8,5 @@ resources:
   - ./ser2sock
   # - ./network-ups-tools
   - ./emqx
-  - ./node-red
-  - ./n8n
+  # - ./node-red
+  # - ./n8n

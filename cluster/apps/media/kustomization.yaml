@@ -13,9 +13,11 @@ resources:
   # - ./books/mylar
   - ./bazarr
   - ./lidarr
-  - ./tdarr
+  - ./tdarr/ks.yaml
   - ./sonarr
   - ./radarr
   - ./overseer
   - ./prowlarr
   - ./tautulli
+  - ./plex-meta-manager/ks.yaml
+  # - ./recyclarr/ks.yaml

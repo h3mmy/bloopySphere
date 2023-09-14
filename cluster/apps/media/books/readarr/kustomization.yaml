@@ -5,3 +5,4 @@ resources:
   - secret.sops.yaml
   - helm-release.yaml
   - pvc-config.yaml
+  - ./routers/media-readarr-bypass.yaml

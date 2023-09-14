@@ -1,0 +1,102 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-iam-ldap-db-config
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/auth/ldap/db/config"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  wait: true
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  healthChecks:
+    - apiVersion: v1
+      kind: Secret
+      name: ldap-postgres-user
+      namespace: auth
+    - apiVersion: v1
+      kind: Secret
+      name: cnpg-ldap-superuser
+      namespace: auth
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-iam-ldap-db-backup
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/auth/ldap/db/backup"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  # wait: true
+  dependsOn:
+    - name: cluster-core-rook-ceph-cluster
+    - name: cluster-apps-cloudnative-pg
+  healthChecks:
+    - apiVersion: objectbucket.io/v1alpha1
+      kind: ObjectBucketClaim
+      name: cnpg-ldap-backup-v1
+      namespace: auth
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-iam-ldap-db-cluster
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/auth/ldap/db/cluster"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  dependsOn:
+    - name: cluster-apps-cloudnative-pg
+    - name: cluster-apps-local-path-provisioner
+    - name: cluster-iam-ldap-db-config
+    # Needed for rook-ceph bucket credentials
+    - name: cluster-iam-ldap-db-backup
+  # healthChecks:
+  #   - apiVersion: postgresql.cnpg.io/v1
+  #     kind: Cluster
+  #     name: ldap-postgres
+  #     namespace: auth
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-iam-ldap-db-alerts
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/auth/ldap/db/alerts"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  dependsOn:
+    - name: kube-prometheus-stack-crds
+    - name: cluster-iam-ldap-db-cluster
+  healthChecks:
+    - apiVersion: monitoring.coreos.com/v1
+      kind: PrometheusRule
+      name: ldap-cnpg-rules
+      namespace: auth

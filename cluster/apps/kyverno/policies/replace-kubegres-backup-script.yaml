@@ -22,6 +22,14 @@ spec:
                 matchLabels:
                   backup.kubegres.version/limited: "true"
       mutate:
+        targets:
+          - apiVersion: v1
+            kind: ConfigMap
+            preconditions:
+              all:
+                - key: "{{target.metadata.name}}"
+                  operator: Equals
+                  value: "*-postgres-conf"
         patchStrategicMerge:
           data:
             backup_database.sh: |

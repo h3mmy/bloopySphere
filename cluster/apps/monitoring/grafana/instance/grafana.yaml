@@ -30,15 +30,15 @@ spec:
         name: ${CLUSTER_NAME}
         client_id: "${GRAFANA_OAUTH_CLIENT_ID}"
         client_secret: "${GRAFANA_OAUTH_CLIENT_SECRET}"
-        scopes: "openid email profile"
-        auth_url: https://auth.${XYZ_DOMAIN}/application/o/authorize/
-        token_url: https://auth.${XYZ_DOMAIN}/application/o/token/
-        api_url: https://auth.${XYZ_DOMAIN}/application/o/userinfo/
-        role_attribute_path: "contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'"
+        scopes: "openid email profile offline_access roles"
+        auth_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/auth
+        token_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/token
+        api_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/userinfo
+        role_attribute_path: "contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
       jwt:
         enabled: true
-        jwk_set_url: https://auth.${XYZ_DOMAIN}/application/o/grafana-bloopnet/jwks/
-        role_attribute_path: "contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'"
+        jwk_set_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/certs"
+        role_attribute_path: "contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
     security:
       admin_user: root
       admin_password: ${SECRET_GRAFANA_PASSWORD}

@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://grafana.github.io/helm-charts
       chart: grafana
-      version: 6.58.4
+      version: 6.59.4
       sourceRef:
         kind: HelmRepository
         name: grafana-charts
@@ -191,19 +191,19 @@ spec:
           - name: Prometheus
             type: prometheus
             access: proxy
-            url: http://thanos-query:9090
+            url: http://thanos-query.monitoring.svc.cluster.local:9090
             isDefault: true
           - name: Loki
             type: loki
             access: proxy
-            url: http://loki-gateway:80
+            url: http://loki-gateway.monitoring.svc.cluster.local:80
           - name: Promeheus-Direct
             type: prometheus
             access: proxy
             url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
           - name: &blockydb Blocky-QueryDB
             type: postgres
-            url: blocky-postgres.networking:5432
+            url: blocky-postgres.networking.svc.cluster.local:5432
             database: ${BLOCKY_QUERY_DB_NAME}
             user: blocky
             jsonData:
@@ -221,12 +221,17 @@ spec:
           - name: AlertManager
             type: alertmanager
             access: proxy
-            url: http://alertmanager-operated:9093
+            url: http://alertmanager-operated.monitoring.svc.cluster.local:9093
             jsonData:
               implementation: "prometheus"
 
     dashboards:
       default:
+        # Ref: https://grafana.com/grafana/dashboards/17446
+        emqx:
+          gnetId: 17446
+          revision: 1
+          datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/12175
         calico-felix:
           gnetId: 12175
@@ -236,7 +241,9 @@ spec:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-api-server.json
           datasource: Prometheus
         kubernetes-coredns:
-          url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-coredns.json
+          gnetId: 15762
+          revision: 13
+          # url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-coredns.json
           datasource: Prometheus
         kubernetes-global:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-global.json
@@ -254,7 +261,7 @@ spec:
         # Ref: https://grafana.com/grafana/dashboards/763-redis-dashboard-for-prometheus-redis-exporter-1-x/
         redis:
           gnetId: 763
-          revision: 4
+          revision: 5
           datasource: Prometheus
         # # Ref: https://grafana.com/grafana/dashboards/2842
         # ceph-cluster:
@@ -274,7 +281,7 @@ spec:
         # Ref: https://grafana.com/grafana/dashboards/13502
         minio:
           gnetId: 13502
-          revision: 10
+          revision: 23
           datasource: Prometheus
         # flux-cluster:
         #   url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/cluster.json
@@ -282,7 +289,11 @@ spec:
         # flux-control-plane:
         #   url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/control-plane.json
         #   datasource: Prometheus
-      # networking:
+      networking:
+        blocky-query:
+          gnetId: 17996
+          revision: 11
+          datasource: *blockydb
         # blocky-query:
           # url: https://raw.githubusercontent.com/shizunge/blocky-postgresql-dashboard/main/Blocky-Postgres.json
           # # url: https://raw.githubusercontent.com/0xERR0R/blocky/main/docs/blocky-query-grafana-postgres.json
@@ -302,22 +313,32 @@ spec:
         # Ref: https://grafana.com/grafana/dashboards/11315
         unifi-client-insights:
           gnetId: 11315
-          revision: 8
+          revision: 9
           datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/11311
         unifi-network-sites:
           gnetId: 11311
-          revision: 4
+          revision: 5
           datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/11314
         unifi-uap-insights:
           gnetId: 11314
-          revision: 9
+          revision: 10
           datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/11312
         unifi-usw-insights:
           gnetId: 11312
-          revision: 8
+          revision: 9
+          datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/11310-unifi-poller-client-dpi-prometheus/
+        unifi-dpi:
+          gnetId: 11310
+          revision: 5
+          datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/11313-unifi-poller-usg-insights-prometheus/
+        unifi-usg-insights:
+          gnetId: 11313
+          revision: 9
           datasource: Prometheus
       media:
         lidarr:

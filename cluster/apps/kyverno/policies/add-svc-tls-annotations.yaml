@@ -1,0 +1,34 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: apply-svc-dns-annotations
+  annotations:
+    policies.kyverno.io/title: Apply TLS annotations to target services
+    policies.kyverno.io/subject: Ingress
+    policies.kyverno.io/description: >-
+      This policy creates TLS annotations on services.
+      This applies to the traffic between the ingress and pod endpoint
+spec:
+  mutateExistingOnPolicyUpdate: true
+  generateExistingOnPolicyUpdate: true
+  rules:
+    - name: keycloak
+      match:
+        any:
+          - resources:
+              kinds: ["Service"]
+              name: kc-instance-service
+      mutate:
+        targets:
+          - apiVersion: v1
+            kind: Service
+            preconditions:
+              all:
+                - key: "{{target.metadata.name}}"
+                  operator: Equals
+                  value: kc-instance-service
+        patchStrategicMerge:
+          metadata:
+            annotations:
+              +(traefik.ingress.kubernetes.io/service.serversscheme): https

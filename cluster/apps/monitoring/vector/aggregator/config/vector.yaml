@@ -15,7 +15,7 @@ sources:
     type: vector
     address: 0.0.0.0:6010
     version: "2"
-  udm_logs:
+  syslog_logs:
     address: 0.0.0.0:6100
     type: syslog
     mode: "udp"
@@ -31,13 +31,15 @@ transforms:
       - kubernetes_logs
     source: |
       # Standardize 'app' index
-      .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
-  udm_logs_xform:
+      .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || .pod_labels."app.kubernetes.io/part-of" || .pod_labels."cnpg.io/cluster" || "unknown"
+      .custom_pod_name = .pod_name || "unknown"
+  syslog_xform:
     type: "remap"
     inputs:
-      - "udm_logs"
+      - "syslog_logs"
     source: |-
       .timestamp=null
+      .host= .host || .hostname || "unknown"
 #
 # Sinks
 #
@@ -46,7 +48,7 @@ sinks:
     type: loki
     inputs:
       - journal_logs
-    endpoint: &loki http://loki-gateway:80
+    endpoint: &loki http://loki-gateway.monitoring.svc.cluster.local:80
     encoding:
       codec: json
     batch:
@@ -70,17 +72,17 @@ sinks:
     remove_timestamp: true
     labels:
       app: "{{ custom_app_name }}"
-      container: "{{ kubernetes.container_name }}"
-      filename: "{{ kubernetes.file }}"
+      container: "{{ container_name }}"
+      filename: "{{ file }}"
       # instance: >-
       #   {{`{{ kubernetes.pod_labels.app\.kubernetes\.io/instance }}`}}
       namespace: "{{ kubernetes.pod_namespace }}"
       node: "{{ kubernetes.pod_node_name }}"
-      pod: "{{ kubernetes.pod_name }}"
-  loki_udm:
+      pod: "{{ custom_pod_name }}"
+  loki_syslog:
     type: loki
     inputs:
-      - udm_logs_xform
+      - syslog_xform
     endpoint: *loki
     batch:
       max_bytes: 1048576

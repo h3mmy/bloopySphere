@@ -1,0 +1,28 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: iam-ingress
+  namespace: auth
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
+    traefik.ingress.kubernetes.io/affinity: "true"
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: &shost iam.${XYZ_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kc-instance-service
+                port:
+                  number: 8443
+  tls:
+    - secretName: "tls.${XYZ_DOMAIN/./-}"
+      hosts:
+        - *shost

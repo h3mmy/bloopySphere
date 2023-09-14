@@ -1,8 +1,9 @@
 ---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./helm-release.yaml
-  - ./issuers
-  - ./prometheus-rule.yaml
-  - ./cert-manager-trust
+  - ./certs/ks.yaml
+  - ./controller/ks.yaml
+  - ./trust-manager/ks.yaml
+  - ./csi-driver-spiffe/ks.yaml

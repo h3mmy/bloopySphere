@@ -1,0 +1,40 @@
+# Example of RBAC syntax for cert-manager
+# ---
+# apiGroups: ["cert-manager.io"]
+# resources: ["signers"]
+# verbs: ["approve"]
+# resourceNames:
+#  # namesapced signers
+#  - "<signer-resource-name>.<signer-group>/<signer-namespace>.<signer-name>"
+#  # cluster scoped signers
+#  - "<signer-resource-name>.<signer-group>/<signer-name>"
+#  # all signers of this resource name
+#  - "<signer-resource-name>.<signer-group>/*"
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRole
+# metadata:
+#   name: cert-manager-controller-approve:my-issuer-example-com # edit
+# rules:
+# - apiGroups:
+#   - cert-manager.io
+#   resources:
+#   - signers
+#   verbs:
+#   - approve
+#   resourceNames:
+#   - issuers.my-issuer-example-com/* # edit
+#   - clusterissuers.my-issuer.example.com/* # edit
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: cert-manager-controller-approve:my-issuer-example-com # edit
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: cert-manager-controller-approve:my-issuer-example-com # edit
+# subjects:
+# - kind: ServiceAccount
+#   name: cert-manager
+#   namespace: cert-manager

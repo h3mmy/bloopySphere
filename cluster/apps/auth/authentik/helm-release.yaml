@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.goauthentik.io/
       chart: authentik
-      version: 2023.6.3
+      version: 2023.8.3
       sourceRef:
         kind: HelmRepository
         name: authentik-charts
@@ -49,6 +49,8 @@ spec:
       # tag: gh-providers-proxy-rework-endpoints-1679090841-c08a9a2
     # geoip:
     #   enabled: true
+    podLabels:
+      spiffe.bloopysphere.arpa/enabled: "true"
     authentik:
       log_level: info
       outposts:
@@ -123,7 +125,14 @@ spec:
       - name: cluster-domain-cert
         mountPath: /certs/cluster-domain-cert
         readOnly: true
+      #- name: spiffe
+       # mountPath: /certs/spiffe
+       # readOnly: true
     volumes:
+      #- name: spiffe
+     #   csi:
+     #     driver: spiffe.csi.cert-manager.io
+     #     readOnly: true
       - name: cluster-domain-cert
         secret:
           secretName: tls.${XYZ_DOMAIN/./-}
@@ -144,6 +153,17 @@ spec:
                     path: sound_wave.svg
     worker:
       replicas: 2
+
+    serviceAccount:
+      # -- Service account is needed for managed outposts
+      create: true
+      annotations: {}
+      serviceAccountSecret:
+        # -- As we use the authentik-remote-cluster chart as subchart, and that chart
+        # creates a service account secret by default which we don't need here, disable its creation
+        enabled: false
+      fullnameOverride: authentik
+      nameOverride: authentik
 
     # The redis sub-chart does not have arm support
     # Authentik helm applies this to all it's pieces. No mix-and-match like with keycloak

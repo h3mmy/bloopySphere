@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: coredns
-      version: 1.24.1
+      version: 1.26.0
       sourceRef:
         kind: HelmRepository
         name: coredns-charts
@@ -41,7 +41,7 @@ spec:
       create: true
     image:
       repository: coredns/coredns
-      tag: 1.10.1
+      tag: 1.11.1
 
     fullnameOverride: coredns
 
@@ -65,7 +65,8 @@ spec:
       # Set this to true to create Service for Prometheus metrics
       service:
         enabled: true
-
+      monitor:
+        enabled: true
     podAnnotations:
       configmap.reloader.stakater.com/reload: "coredns"
 

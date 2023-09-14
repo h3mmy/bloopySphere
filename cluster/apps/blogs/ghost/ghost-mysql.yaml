@@ -10,7 +10,7 @@ spec:
     spec:
       reconcileStrategy: Revision
       chart: mysql-innodbcluster
-      version: "2.0.10"
+      version: "2.1.0"
       sourceRef:
         kind: HelmRepository
         name: mysql-charts
@@ -25,7 +25,7 @@ spec:
       remediateLastFailure: true
 
   values:
-    serverVersion: "8.0.33"
+    serverVersion: "8.1.0"
     serverInstances: 1
     routerInstances: 1
     tls:

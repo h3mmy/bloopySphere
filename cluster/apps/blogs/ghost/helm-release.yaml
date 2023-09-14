@@ -43,7 +43,7 @@ spec:
     image:
       reposistory: ghost
       # renovate: datasource=docker depName=ghost
-      tag: "5.54.4"
+      tag: "5.62.0"
     env:
       TZ: "${TZ}"
       url: "https://${TGR_DOMAIN}"
@@ -55,7 +55,7 @@ spec:
       mail__from: ${MAIILGUN_FROM_EMAIL}
       mail__options__service: Mailgun
       mail__options__host: smtp.mailgun.org
-      mail__options__port: 587
+      mail__options__port: 465
       mail__options__secure: true
       mail__options__auth__user: postmaster@mail.${TGR_DOMAIN}
       mail__options__auth__pass: ${MAILGUN_SMTP_PASSWORD}

@@ -17,3 +17,4 @@ metadata:
 spec:
   addresses:
     - "${NETWORK_BGP_BLOCK_V4}"
+  autoAssign: false

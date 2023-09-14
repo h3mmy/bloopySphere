@@ -1,0 +1,107 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: trust-manager
+  namespace: cert-manager
+  labels:
+    component.bloopysphere-0/aspect: networking
+spec:
+  interval: 15m
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.jetstack.io/
+      chart: trust-manager
+      version: v0.6.0
+      sourceRef:
+        kind: HelmRepository
+        name: jetstack
+        namespace: flux-system
+
+  dependsOn:
+    - name: cert-manager
+      namespace: cert-manager
+
+  install:
+    crds: Create
+    remediation: # perform remediation when helm install fails
+      retries: 5
+
+  upgrade:
+    crds: CreateReplace
+    remediation: # perform remediation when helm upgrade fails
+      retries: 5
+      remediateLastFailure: true # remediate the last failure, when no retries remain
+    cleanupOnFail: true
+
+  rollback:
+    timeout: 10m
+    recreate: true
+    cleanupOnFail: true
+
+  values:
+    crds:
+      enabled: true
+    # -- Number of replicas of trust to run.
+    replicaCount: 1
+
+    # -- For Private docker registries, authentication is needed. Registry secrets are applied to the service account
+    imagePullSecrets: []
+
+    image:
+      # -- Kubernetes imagePullPolicy on Deployment.
+      pullPolicy: IfNotPresent
+
+    app:
+      # -- Verbosity of trust logging; takes a value from 1-5, with higher being more verbose
+      logLevel: 1
+
+      metrics:
+        # -- Port for exposing Prometheus metrics on 0.0.0.0 on path '/metrics'.
+        port: 9402
+        # -- Service to expose metrics endpoint.
+        service:
+          # -- Create a Service resource to expose metrics endpoint.
+          enabled: true
+          # -- Service type to expose metrics.
+          type: ClusterIP
+          # -- ServiceMonitor resource for this Service.
+          servicemonitor:
+            enabled: true
+            prometheusInstance: kube-prometheus-stack
+            interval: 30s
+            scrapeTimeout: 10s
+            labels: {}
+
+      readinessProbe:
+        # -- Container port on which to expose trust HTTP readiness probe using default network interface.
+        port: 6060
+        # -- Path on which to expose trust HTTP readiness probe using default network interface.
+        path: "/readyz"
+
+      trust:
+        # -- Namespace used as trust source. Note that the namespace _must_ exist
+        # before installing cert-manager/trust.
+        namespace: cert-manager
+
+      webhook:
+        # -- Host that the webhook listens on.
+        host: 0.0.0.0
+        # -- Port that the webhook listens on.
+        port: 6443
+        # -- Timeout of webhook HTTP request.
+        timeoutSeconds: 5
+        # -- Type of Kubernetes Service used by the Webhook
+        service:
+          type: ClusterIP
+
+    resources:
+      {}
+      # -- Kubernetes pod resource limits for trust.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # -- Kubernetes pod memory resource requests for trust.
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi

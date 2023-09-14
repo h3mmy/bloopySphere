@@ -13,6 +13,8 @@ spec:
       - "X-Ghost-Version"
       - "X-Requested-With"
       - "Content-Type"
+      - "Etag"
+      - "Cache-Control"
     accessControlAllowMethods:
       - "GET"
       - "OPTIONS"
@@ -40,5 +42,5 @@ spec:
     contentSecurityPolicy: "frame-ancestors 'self' *.${XYZ_DOMAIN} *.${TGR_DOMAIN};" # script-src 'self' code.iconify.design cdnjs.cloudflare.com; object-src 'self'; require-trusted-types-for 'script';"
     customResponseHeaders:
       X-xss-protection: "1"
-      X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex,"
+      X-Robots-Tag: "all,index"
       X-Forwarded-Proto: "https"

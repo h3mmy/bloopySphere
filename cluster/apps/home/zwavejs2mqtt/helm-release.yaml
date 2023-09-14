@@ -5,49 +5,40 @@ metadata:
   name: zwavejs2mqtt
   namespace: home
 spec:
-  interval: 15m
+  interval: 35m
   chart:
     spec:
-      chart: zwavejs2mqtt
-      version: 5.4.2
+      reconcileStrategy: Revision
+      chart: app-template
+      version: 1.5.1
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
   install:
-    createNamespace: true
+    remediation:
+      retries: 2
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  maxHistory: 2
+  uninstall:
+    keepHistory: false
   dependsOn:
     - name: ser2sock
       namespace: home
   values:
+    controller:
+      type: statefulset
     priorityClassName: home-cluster-critical
     image:
       repository: ghcr.io/zwave-js/zwave-js-ui
-      tag: 8.21.0
+      tag: 8.25.1
+      imagePullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"
-    service:
-      main:
-        type: LoadBalancer
-        annotations:
-          traefik.ingress.kubernetes.io/service.serversscheme: http
-        ports:
-          http:
-            port: 8091
-      websock:
-        enabled: true
-        type: LoadBalancer
-        externalTrafficPolicy: Local
-        annotations:
-          metallb.universe.tf/loadBalancerIPs: "${LB_V4_ZWAVEJS}"
-          metallb.universe.tf/allow-shared-ip: zwavejs
-          traefik.ingress.kubernetes.io/service.serversscheme: tcp
-        ports:
-          websocket:
-            enabled: true
-            port: 3000
-            protocol: TCP
-            targetPort: 3000
+      LOGLEVEL: debug
 
     ingress:
       main:
@@ -70,30 +61,62 @@ spec:
           - hosts:
               - *host
             secretName: tls.zwavejs2mqtt
-      # websocket:
-      #   enabled: true
-      #   ingressClassName: traefik
-      #   annotations:
-      #     traefik.ingress.kubernetes.io/router.entrypoints: wss
-      #     traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918-tcp@kubernetescrd
-      #   hosts:
-      #     - host: *host
-      #       paths:
-      #         - path: /
-      #           pathType: Prefix
+
+    service:
+      main:
+        enabled: true
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        ipFamilyPolicy: SingleStack
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${LB_V4_ZWAVEJS}"
+          metallb.universe.tf/allow-shared-ip: zwavejs
+          coredns.io/hostname: *host
+          external-dns.alpha.kubernetes.io/hostname: *host
+          # traefik.ingress.kubernetes.io/service.serversscheme: tcp
+        ports:
+          http:
+            port: &port 8091
+          websocket:
+            enabled: true
+            port: 3000
+            protocol: TCP
+            targetPort: 3000
+
+    probes:
+      liveness: &probes
+        enabled: true
+        custom: true
+        spec:
+          httpGet:
+            path: /health
+            port: *port
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
+      readiness: *probes
+      startup:
+        enabled: false
 
     securityContext:
       privileged: true
+
+    podAnnotations:
+      backup.velero.io/backup-volumes: config
+
     persistence:
       config:
         enabled: true
         existingClaim: zwavejs2mqtt-config-v1
         mountPath: "/usr/src/app/store"
+        readOnly: false
       usb:
         enabled: true
         type: hostPath
         hostPath: /dev/serial/by-id/${USB_ZWAVE_ID}
         hostPathType: CharDevice
+
     affinity:
       podAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -104,9 +127,8 @@ spec:
                   values:
                     - ser2sock
             topologyKey: kubernetes.io/hostname
-          # nodeSelectorTerms:
-          #   - matchExpressions:
-          #       - key: feature.node.kubernetes.io/custom-zwave
-          #         operator: In
-          #         values:
-          #           - "true"
+
+    resources:
+      requests:
+        cpu: 15m
+        memory: 100Mi

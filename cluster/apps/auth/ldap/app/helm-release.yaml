@@ -1,0 +1,124 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app lldap
+  namespace: auth
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controller:
+      replicas: 1
+      strategy: RollingUpdate
+      annotations:
+        reloader.stakater.com/auto: "true"
+    image:
+      repository: ghcr.io/lldap/lldap
+      # tag: v0.4.32@sha256:a2ac9a9a63fd7e926ee7b3bedafc77d428a2e8c80131853071f29234d85efa96
+      # TODO: Switch to release tag on next release
+      tag: latest-alpine@sha256:e89622e83083b5d57f18892d573e76539a3ecdf6da5ccffb41551d07e16a4c1c
+    env:
+      TZ: ${TZ}
+      LLDAP_HTTP_PORT: &port 80
+      LLDAP_HTTP_URL: https://lldap.${XYZ_DOMAIN}
+      # enable after cert secret is generated
+      LLDAP_LDAPS_OPTIONS__PORT: &ldapsPort 636
+      LLDAP_LDAPS_OPTIONS__ENABLED: true
+      LLDAP_LDAPS_OPTIONS__KEY_FILE: /certs/tls.key
+      LLDAP_LDAPS_OPTIONS__CERT_FILE: /certs/tls.crt
+      LLDAP_LDAP_PORT: &ldapPort 389
+      # LLDAP_VERBOSE: true
+    envFrom:
+      - secretRef:
+          name: lldap-env
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+          ldap:
+            enabled: true
+            port: *ldapPort
+          # enable after cert secret is generated
+      ldaps:
+        enabled: true
+        type: LoadBalancer
+        # See https://github.com/kubernetes/enhancements/pull/1992
+        loadBalancerIPs:
+          - "${LB_V4_LLDAP}"
+          - "${LB_V6_LLDAP}"
+        externalTrafficPolicy: Local
+        ipFamilyPolicy: PreferDualStack
+        ipFamilies:
+          - "IPv4"
+          - "IPv6"
+        annotations:
+          corends.io/hostname: &ldaps "lldaps.${XYZ_DOMAIN}"
+          external-dns.alpha.kubernetes.io/hostname: *ldaps
+          metallb.universe.tf/loadBalancerIPs: "${LB_V4_LLDAP}, ${LB_V6_LLDAP}"
+          metallb.universe.tf/allow-shared-ip: lldap
+        ports:
+          ldaps:
+            enabled: true
+            port: *ldapsPort
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/enable: "true"
+          hajimari.io/instance: "bloop-quarky"
+          # hajimari.io/icon: "weather-sunset"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - host: &host "{{ .Release.Name }}.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+              - *ldaps
+            secretName: tls.lldap
+    persistence:
+      data:
+        enabled: true
+        type: emptyDir
+      # enable after cert secret is generated
+      certs:
+        enabled: true
+        type: secret
+        name: tls.lldap
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: *app
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+      limits:
+        memory: 500Mi

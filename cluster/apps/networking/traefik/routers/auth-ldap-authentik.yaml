@@ -5,8 +5,7 @@ metadata:
   name: ldap-authentik-ingress
   namespace: auth
   annotations:
-    traefik.ingress.kubernetes.io/service.serversscheme: tcp
-    traefik.ingress.kubernetes.io/router.entrypoints: ldaps
+    traefik.ingress.kubernetes.io/router.entrypoints: ldap,ldaps
     traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
     cert-manager.io/cluster-issuer: letsencrypt-production
     traefik.ingress.kubernetes.io/affinity: "true"
@@ -29,9 +28,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ak-outpost-ldap-outpost
+                name: ak-outpost-ldap-external
                 port:
-                  number: 636
+                  number: 389
   tls:
     - secretName: tls.ldap-bloopnet
       hosts:

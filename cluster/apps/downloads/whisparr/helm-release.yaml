@@ -26,12 +26,20 @@ spec:
       namespace: rook-ceph
     - name: vpn-gateway
       namespace: vpn-gateway
+  valuesFrom:
+    - kind: Secret
+      name: *app
+      valuesKey: WHISPARR__API_KEY
+      targetPath: env.WHISPARR__API_KEY
+      optional: false
   values:
+    global:
+      nameOverride: *app
     controller:
       type: statefulset
     image:
-      repository: ghcr.io/onedr0p/whisparr-nightly
-      tag: 0.1.0.53@sha256:5a6ce55522afa84195cd723447f987f63a19009a37e2779b861a65aec940572b
+      repository: ghcr.io/h3mmy/whisparr-nightly
+      tag: 2.0.0.250@sha256:ccc20ef247f158ef08850f3f066d2df121d67136ab0b815a8b332016421c9aa8
     env:
       TZ: "${TZ}"
       PGID: ${MEDIA_GID}
@@ -39,9 +47,9 @@ spec:
       WHISPARR__INSTANCE_NAME: Whisparr
       WHISPARR__PORT: &port 80
       WHISPARR__LOG_LEVEL: info
-    envFrom:
-      - secretRef:
-          name: *app
+      WHISPARR__AUTHENTICATION_METHOD: External
+      WHISPARR__APPLICATION_URL: https://whisparr.${XYZ_DOMAIN}
+      WHISPARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
     service:
       main:
         ports:
@@ -78,6 +86,8 @@ spec:
         - 65541
         - 65536
         - 65537
+    podLabels:
+      setGateway: "false"
     volumeClaimTemplates:
       - name: config
         mountPath: /config
@@ -101,6 +111,15 @@ spec:
         server: "${NAS_ADDRESS}"
         path: /volume3/Data/Downloads
         mountPath: /Downloads
+        readOnly: false
+      backup:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume3/Data/Backups/app/whisparr
+        mountPath: /config/Backups
         readOnly: false
     resources:
       requests:

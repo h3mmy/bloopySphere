@@ -43,6 +43,7 @@ spec:
     stsSeconds: 63072000
     hostsProxyHeaders:
       - "X-Forwarded-Host"
+      - "Host"
       - "X-Real-IP"
       - "X-Forwarded-For"
       - "Forwarded"
@@ -50,4 +51,6 @@ spec:
     customResponseHeaders:
       X-xss-protection: "1"
       X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex,"
+    sslProxyHeaders:
       X-Forwarded-Proto: "https"
+      X-Forwarded-Ssl: "on"

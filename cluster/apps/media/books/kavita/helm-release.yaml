@@ -23,7 +23,7 @@ spec:
   values:
     image:
       repository: kizaing/kavita
-      tag: 0.7.5
+      tag: 0.7.8
     env:
       TZ: "${TZ}"
 
