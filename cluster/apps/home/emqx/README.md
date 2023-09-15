@@ -31,7 +31,7 @@ Mapping rules from environment variable name to config key
 
 ### Authentication
 
-I am using "password_based" authentication via postgresql (See [Documentation](https://www.emqx.io/docs/en/v5.0/security/authn/postgresql.html)). I strongly prefer not having a scattering of auth methods and once I have keycloak revamped and re-enabled I'll be using that. Authentik lacks the amount of customization I need. Theoretically, you can have a sops file with a user list, and have a job with a short postgres script to keep it in sync with the db.
+I am using "password_based" authentication via postgresql (See [Documentation](https://www.emqx.io/docs/en/v5.0/access-control/authn/postgresql.html#data-schema-and-query-statement)). I strongly prefer not having a scattering of auth methods and once I have keycloak revamped and re-enabled I'll be using that. Authentik lacks the amount of customization I need. Theoretically, you can have a sops file with a user list, and have a job with a short postgres script to keep it in sync with the db.
 
 The "Authentication Query" is qhat emqx uses to get the users
 
