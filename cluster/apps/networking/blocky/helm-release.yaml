@@ -218,7 +218,8 @@ spec:
                 - tcp-tls:1dot1dot1dot1.cloudflare-dns.com
                 - tcp-tls:one.one.one.one
                 - https://cloudflare-dns.com/dns-query
-            upstreamTimeout: "5s"
+            upstreams:
+              timeout: "5s"
             bootstrapDns: tcp+udp:1.1.1.1:53
             conditional:
               rewrite:
