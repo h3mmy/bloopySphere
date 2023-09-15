@@ -305,9 +305,9 @@ spec:
               http: 4000
               https: 443
               tls: 853
-         #   httpPort: 4000
-         #   httpsPort: 443
-            #tlsPort: 853
+            # httpPort: 4000
+            # httpsPort: 443
+            # tlsPort: 853
             certFile: /certs/tls.crt
             keyFile: /certs/tls.key
             log:
