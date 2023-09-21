@@ -36,21 +36,21 @@ spec:
   retryInterval: 1m
   timeout: 3m
 ---
-# # yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/kustomize.toolkit.fluxcd.io/kustomization_v1.json
-# apiVersion: kustomize.toolkit.fluxcd.io/v1
-# kind: Kustomization
-# metadata:
-#   name: cluster-apps-grafana-instance
-#   namespace: monitoring
-# spec:
-#   path: ./cluster/apps/monitoring/grafana/instance
-#   prune: true
-#   sourceRef:
-#     kind: GitRepository
-#     name: flux-system
-#   healthChecks:
-#     - kind: Grafana
-#       name: grafana
-#   interval: 15m
-#   retryInterval: 1m
-#   timeout: 3m
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-grafana-instance
+  namespace: monitoring
+spec:
+  path: ./cluster/apps/monitoring/grafana/instance
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  healthChecks:
+    - kind: Grafana
+      name: grafana
+  interval: 15m
+  retryInterval: 1m
+  timeout: 3m
