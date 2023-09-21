@@ -8,9 +8,9 @@ spec:
   interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=oci://ghcr.io/grafana-operator/helm-charts/grafana-operator
+      # renovate: registryUrl=oci://ghcr.io/grafana-operator/grafana-operator-chart
       chart: grafana-operator-chart
-      version: v5.3.0
+      version: v5.4.1
       sourceRef:
         kind: HelmRepository
         name: grafana-operator-chart
