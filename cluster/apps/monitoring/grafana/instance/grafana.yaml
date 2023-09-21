@@ -26,7 +26,7 @@ spec:
       disable_login_form: "false"
       signout_redirect_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/logout?redirect_uri=encodedRedirectUri
       generic_oauth:
-        enabled: true
+        enabled: "true"
         name: ${CLUSTER_NAME}
         client_id: "${GRAFANA_OAUTH_CLIENT_ID}"
         client_secret: "${GRAFANA_OAUTH_CLIENT_SECRET}"
@@ -36,7 +36,7 @@ spec:
         api_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/userinfo
         role_attribute_path: "contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
       jwt:
-        enabled: true
+        enabled: "true"
         jwk_set_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/certs"
         role_attribute_path: "contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
     security:
@@ -45,7 +45,7 @@ spec:
     grafana_net:
       url: https://grafana.net
     panels:
-      disable_sanitize_html: true
+      disable_sanitize_html: "true"
     server:
       root_url: "https://grafana.${XYZ_DOMAIN}"
     paths:
@@ -54,7 +54,7 @@ spec:
       plugins: /var/lib/grafana/plugins
       provisioning: /etc/grafana/provisioning
     analytics:
-      check_for_updates: false
+      check_for_updates: "false"
   ingress:
     metadata:
       annotations:
