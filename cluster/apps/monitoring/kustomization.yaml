@@ -5,7 +5,7 @@ resources:
   - thanos
   - loki
   # - grafana/hr
-  - grafana/ks.yaml
+  - ./grafana/ks.yaml
   - uptimerobot
   - unifi-poller
   - goldilocks
