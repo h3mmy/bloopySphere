@@ -24,7 +24,7 @@ spec:
       mode: "console"
     auth:
       disable_login_form: "false"
-      signout_redirect_url: https://auth.${XYZ_DOMAIN}/application/o/grafana/end-session/
+      signout_redirect_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/logout?redirect_uri=encodedRedirectUri
       generic_oauth:
         enabled: true
         name: ${CLUSTER_NAME}
