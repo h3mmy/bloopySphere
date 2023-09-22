@@ -7,7 +7,7 @@ metadata:
 spec:
   # url: https://raw.githubusercontent.com/0xERR0R/blocky/main/docs/blocky-query-grafana-postgres.json
   grafanaCom:
-    gnetId: 13768
+    id: 13768
     revision: 3
   datasources:
     - datasourceName: Blocky-QueryDB
