@@ -7,7 +7,7 @@ metadata:
 spec:
   # Ref: https://grafana.com/grafana/dashboards/12175
   grafanaCom:
-    gnetId: 12175
+    id: 12175
     revision: 5
     datasource: prometheus
   datasources:
