@@ -35,10 +35,10 @@ spec:
       token_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/token
       api_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/userinfo
       role_attribute_path: "contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
-      jwt: |
-        enabled: "true"
-        jwk_set_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/certs"
-        role_attribute_path: "contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
+    auth.jwt: 
+      enabled: "true"
+      jwk_set_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/certs"
+      role_attribute_path: "contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
     security:
       admin_user: root
       admin_password: ${SECRET_GRAFANA_PASSWORD}
