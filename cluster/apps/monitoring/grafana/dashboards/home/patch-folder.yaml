@@ -2,5 +2,5 @@
   path: /spec/folder
   value: home
 - op: add
-  path: /spec/instanceSelector/matchLabels/dashboards
-  value: grafana
+  path: /spec/instanceSelector
+  value: {matchLabels: {dashboards: grafana}}

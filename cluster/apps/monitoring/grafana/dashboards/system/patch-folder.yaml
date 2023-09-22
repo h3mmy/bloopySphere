@@ -1,3 +1,6 @@
 - op: add
   path: /spec/folder
   value: system
+- op: add
+  path: /spec/instanceSelector
+  value: {matchLabels: {dashboards: grafana}}
