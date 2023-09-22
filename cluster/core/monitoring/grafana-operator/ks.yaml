@@ -11,10 +11,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  healthChecks:
-    - kind: HelmRelease
-      name: grafana-operator
-      namespace: monitoring
   interval: 15m
   retryInterval: 1m
   timeout: 3m

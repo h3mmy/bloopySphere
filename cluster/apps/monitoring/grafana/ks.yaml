@@ -11,6 +11,9 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
+  dependsOn:
+    - name: cluster-core-grafana-operator
+      namespace: flux-system
   healthChecks:
     - kind: GrafanaDatasource
       name: prometheus
@@ -74,6 +77,9 @@ spec:
   healthChecks:
     - kind: Grafana
       name: grafana
+  dependsOn:
+    - name: cluster-core-grafana-operator
+      namespace: flux-system
   interval: 15m
   retryInterval: 1m
   timeout: 3m
