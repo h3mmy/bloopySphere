@@ -77,7 +77,7 @@ metadata:
 spec:
   # Ref: https://grafana.com/grafana/dashboards/11313-unifi-poller-usg-insights-prometheus/
   grafanaCom:
-    gnetId: 11313
+    id: 11313
     revision: 9
   datasources:
     - datasourceName: prometheus
