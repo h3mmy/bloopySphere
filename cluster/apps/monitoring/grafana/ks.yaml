@@ -14,9 +14,6 @@ spec:
   dependsOn:
     - name: cluster-core-grafana-operator
       namespace: flux-system
-  healthChecks:
-    - kind: GrafanaDatasource
-      name: prometheus
   interval: 15m
   retryInterval: 1m
   timeout: 3m
