@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./kube-prometheus-stack
-  - ./grafana-operator/helm-release.yaml
+  - ./grafana-operator/ks.yaml
