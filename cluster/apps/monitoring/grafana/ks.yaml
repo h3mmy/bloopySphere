@@ -71,9 +71,9 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  healthChecks:
-    - kind: Grafana
-      name: grafana
+  #healthChecks:
+  #  - kind: Grafana
+  #    name: grafana
   dependsOn:
     - name: cluster-core-grafana-operator
       namespace: flux-system
