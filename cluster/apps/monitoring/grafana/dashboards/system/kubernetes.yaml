@@ -17,7 +17,9 @@ spec:
   # url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-coredns.json
   gnetId: 15762
   revision: 13
-  datasource: prometheus
+  datasources:
+    - datasourceName: prometheus
+      inputName: DS_PROMETHEUS
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
@@ -26,7 +28,9 @@ metadata:
   namespace: monitoring
 spec:
   url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-global.json
-  datasource: prometheus
+  datasources:
+    - datasourceName: prometheus
+      inputName: DS_PROMETHEUS
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
@@ -35,7 +39,9 @@ metadata:
   namespace: monitoring
 spec:
   url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-namespaces.json
-  datasource: prometheus
+  datasources:
+    - datasourceName: prometheus
+      inputName: DS_PROMETHEUS
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
@@ -44,7 +50,9 @@ metadata:
   namespace: monitoring
 spec:
   url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-nodes.json
-  datasource: prometheus
+  datasources:
+    - datasourceName: prometheus
+      inputName: DS_PROMETHEUS
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
@@ -53,4 +61,6 @@ metadata:
   namespace: monitoring
 spec:
   url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
-  datasource: prometheus
+  datasources:
+    - datasourceName: prometheus
+      inputName: DS_PROMETHEUS
