@@ -70,6 +70,15 @@ spec:
       ingressClassName: "traefik"
       rules:
         - host: "grafana.${XYZ_DOMAIN}"
+          http:
+            paths:
+              - backend:
+                  service:
+                    name: grafana-service
+                    port:
+                      number: 3000
+                path: /
+                pathType: Prefix
       tls:
         - secretName: tls.grafana
           hosts:
