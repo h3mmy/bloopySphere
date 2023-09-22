@@ -6,7 +6,7 @@ metadata:
   namespace: monitoring
 spec:
   url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-api-server.json
-  datasource: prometheus
+  #datasource: prometheus
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
