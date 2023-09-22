@@ -15,7 +15,7 @@ metadata:
   namespace: monitoring
 spec:
   # url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-coredns.json
-  gnetId: 15762
+  id: 15762
   revision: 13
   datasources:
     - datasourceName: prometheus
