@@ -63,7 +63,7 @@ metadata:
 spec:
   # Ref: https://grafana.com/grafana/dashboards/11310-unifi-poller-client-dpi-prometheus/
   grafanaCom:
-    gnetId: 11310
+    id: 11310
     revision: 5
   datasources:
     - datasourceName: prometheus
