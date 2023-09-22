@@ -10,6 +10,11 @@ spec:
       dashboards: "grafana"
   datasource:
     name: Blocky-QueryDB
+    # <string, required> Sets the access mode, either
+    # proxy or direct (Server or Browser in the UI).
+    # Some data sources are incompatible with any setting
+    # but proxy (Server).
+    access: proxy
     type: postgres
     url: blocky-postgres.networking:5432
     database: ${BLOCKY_QUERY_DB_NAME}
