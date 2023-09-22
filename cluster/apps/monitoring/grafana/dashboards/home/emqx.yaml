@@ -7,7 +7,7 @@ metadata:
 spec:
   # Ref: https://grafana.com/grafana/dashboards/17446
   grafanaCom:
-    gnetId: 17446
+    id: 17446
     revision: 1
   datasources:
     - datasourceName: prometheus
