@@ -1,3 +1,6 @@
 - op: add
   path: /spec/folder
   value: auth
+- op: add
+  path: /spec/instanceSelector/matchLabels/dashboards
+  value: grafana
