@@ -25,7 +25,7 @@ spec:
     auth:
       disable_login_form: "false"
       signout_redirect_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/logout?redirect_uri=encodedRedirectUri
-      generic_oauth:
+      generic_oauth: |
         enabled: "true"
         name: ${CLUSTER_NAME}
         client_id: "${GRAFANA_OAUTH_CLIENT_ID}"
@@ -35,7 +35,7 @@ spec:
         token_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/token
         api_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/userinfo
         role_attribute_path: "contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
-      jwt:
+      jwt: |
         enabled: "true"
         jwk_set_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/certs"
         role_attribute_path: "contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
@@ -68,8 +68,8 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     spec:
       ingressClassName: "traefik"
-      hosts:
-        - "grafana.${XYZ_DOMAIN}"
+      rules:
+        - host: "grafana.${XYZ_DOMAIN}"
       tls:
         - secretName: tls.grafana
           hosts:
