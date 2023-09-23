@@ -25,17 +25,20 @@ spec:
     auth:
       disable_login_form: "false"
       signout_redirect_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/logout?redirect_uri=encodedRedirectUri
-    auth.generic_oauth: 
+    auth.generic_oauth:
       enabled: "true"
       name: ${CLUSTER_NAME}
       client_id: "${GRAFANA_OAUTH_CLIENT_ID}"
       client_secret: "${GRAFANA_OAUTH_CLIENT_SECRET}"
       scopes: "openid email profile offline_access roles"
+      email_attribute_path: email
+      login_attribute_path: username
+      name_attribute_path: full_name
       auth_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/auth
       token_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/token
       api_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/userinfo
       role_attribute_path: "contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
-    auth.jwt: 
+    auth.jwt:
       enabled: "true"
       jwk_set_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/certs"
       role_attribute_path: "contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
