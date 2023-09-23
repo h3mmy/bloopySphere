@@ -34,14 +34,15 @@ spec:
       email_attribute_path: email
       login_attribute_path: username
       name_attribute_path: full_name
+      allow_assign_grafana_admin: "true"
       auth_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/auth
       token_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/token
       api_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/userinfo
-      role_attribute_path: "contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
+      role_attribute_path: "contains(roles[*], 'grafana-admin') && 'GrafanaAdmin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
     auth.jwt:
       enabled: "true"
       jwk_set_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/certs"
-      role_attribute_path: "contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
+      role_attribute_path: "contains(roles[*], 'grafana-admin') && 'GrafanaAdmin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
     security:
       admin_user: root
       admin_password: ${SECRET_GRAFANA_PASSWORD}
