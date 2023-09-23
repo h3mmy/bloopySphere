@@ -7,5 +7,5 @@ metadata:
 spec:
   url: https://raw.githubusercontent.com/jr0dd/grafana-dashboards/main/metallb.json
   datasources:
-    - datasourceName: prometheus
+    - datasourceName: Prometheus
       inputName: DS_PROMETHEUS
