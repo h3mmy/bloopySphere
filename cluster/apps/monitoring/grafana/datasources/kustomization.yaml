@@ -6,3 +6,9 @@ resources:
   - ds-blocky-query.yaml
   - ds-loki.yaml
   - ds-prometheus.yaml
+patches:
+  - path: ./patches.yaml
+    target:
+      kind: GrafanaDatasource
+      group: grafana.integreatly.org
+      version: v1beta1
