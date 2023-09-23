@@ -70,6 +70,8 @@ spec:
         hajimari.io/appName: "Status"
         external-dns.alpha.kubernetes.io/hostname: ipv4.${XYZ_DOMAIN}
         external-dns/is-public: "true"
+        traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
+        traefik.ingress.kubernetes.io/affinity: "true"
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     spec:
       ingressClassName: "traefik"
