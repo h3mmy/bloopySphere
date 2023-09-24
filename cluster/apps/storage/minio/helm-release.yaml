@@ -49,33 +49,33 @@ spec:
       MINIO_PROMETHEUS_JOB_ID: "minio"
       MINIO_BROWSER_REDIRECT_URL: "https://minio.${XYZ_DOMAIN}"
       MINIO_SERVER_URL: "https://s3.${XYZ_DOMAIN}"
-      MINIO_IDENTITY_OPENID_CONFIG_URL_KEYCLOAK:
-        valueFrom:
-          secretKeyRef:
-            name: minio
-            key: kc-openid-wellknown-url
-      MINIO_IDENTITY_OPENID_CLIENT_ID_KEYCLOAK:
-        valueFrom:
-          secretKeyRef:
-            name: minio
-            key: kc-openid-client-id
-      MINIO_IDENTITY_OPENID_CLIENT_SECRET_KEYCLOAK:
-        valueFrom:
-          secretKeyRef:
-            name: minio
-            key: kc-openid-client-secret
-      MINIO_IDENTITY_OPENID_DISPLAY_NAME_KEYCLOAK: "BloopNet"
-      MINIO_IDENTITY_OPENID_SCOPES_KEYCLOAK:
-        valueFrom:
-          secretKeyRef:
-            name: minio
-            key: kc-openid-scopes
-      MINIO_IDENTITY_OPENID_CLAIM_NAME_KEYCLOAK:
-        valueFrom:
-          secretKeyRef:
-            name: minio
-            key: kc-openid-claim-name
-      MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC_KEYCLOAK: "on"
+      # MINIO_IDENTITY_OPENID_CONFIG_URL_KEYCLOAK:
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: minio
+      #       key: kc-openid-wellknown-url
+      # MINIO_IDENTITY_OPENID_CLIENT_ID_KEYCLOAK:
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: minio
+      #       key: kc-openid-client-id
+      # MINIO_IDENTITY_OPENID_CLIENT_SECRET_KEYCLOAK:
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: minio
+      #       key: kc-openid-client-secret
+      # MINIO_IDENTITY_OPENID_DISPLAY_NAME_KEYCLOAK: "BloopNet"
+      # MINIO_IDENTITY_OPENID_SCOPES_KEYCLOAK:
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: minio
+      #       key: kc-openid-scopes
+      # MINIO_IDENTITY_OPENID_CLAIM_NAME_KEYCLOAK:
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: minio
+      #       key: kc-openid-claim-name
+      # MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC_KEYCLOAK: "on"
       MINIO_IDENTITY_OPENID_DISPLAY_NAME_AUTHENTIK: "legacy bloopnet"
       MINIO_IDENTITY_OPENID_CONFIG_URL_AUTHENTIK:
         valueFrom:
@@ -107,6 +107,7 @@ spec:
           secretKeyRef:
             name: minio
             key: openid-config-callback-uri
+      MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC_AUTHENTIK: "on"
 
     args:
       - server
