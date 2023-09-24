@@ -6,7 +6,7 @@ resources:
   - ./redis
   - ./db-blocky-query
   - ./helm-release.yaml
-  - ./dashboard
+  # - ./dashboard
   - ./pdb.yaml
 namespace: networking
 configMapGenerator:

@@ -1,0 +1,44 @@
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: blocky
+  namespace: monitoring
+spec:
+  # url: https://grafana.com/grafana/dashboards/13768
+  grafanaCom:
+    id: 13768
+    revision: 3
+  datasources:
+    - datasourceName: Prometheus
+      inputName: DS_PROMETHEUS
+  envs:
+    - name: VAR_BLOCKY_URL
+      value: "http://blocky.networking.svc.cluster.local:4000"
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: blocky-postgres
+  namespace: monitoring
+spec:
+  # url: https://raw.githubusercontent.com/0xERR0R/blocky/main/docs/blocky-query-grafana-postgres.json
+  # https://grafana.com/grafana/dashboards/17996
+  grafanaCom:
+    id: 17996
+    revision: 11
+  datasources:
+    - datasourceName: Blocky-QueryDB
+      inputName: DS_POSTGRES
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: blocky-db
+  namespace: monitoring
+spec:
+  # url: https://raw.githubusercontent.com/0xERR0R/blocky/main/docs/blocky-query-grafana-postgres.json
+  url: https://raw.githubusercontent.com/0xERR0R/blocky/main/docs/blocky-query-grafana-postgres.json
+  datasources:
+    - datasourceName: Blocky-QueryDB
+      inputName: DS_POSTGRES
