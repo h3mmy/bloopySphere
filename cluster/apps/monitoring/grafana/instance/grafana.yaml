@@ -39,7 +39,7 @@ spec:
       auth_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/auth
       token_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/token
       api_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/userinfo
-      role_attribute_path: "contains(roles[*], 'grafana-admin') && 'GrafanaAdmin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
+      role_attribute_path: "contains(groups[*], 'grafana-admin') && 'GrafanaAdmin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
     auth.jwt:
       enabled: "true"
       jwk_set_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/certs"
