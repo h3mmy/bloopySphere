@@ -1,0 +1,42 @@
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: ceph-osd
+  namespace: monitoring
+spec:
+  # Ref: https://grafana.com/grafana/dashboards/5336
+  grafanaCom:
+    id: 5336
+    revision: 9
+  datasources:
+    - datasourceName: Prometheus
+      inputName: DS_PROMETHEUS
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: ceph-cluster
+  namespace: monitoring
+spec:
+  # Ref: https://grafana.com/grafana/dashboards/2842
+  grafanaCom:
+    id: 2842
+    revision: 17
+  datasources:
+    - datasourceName: Prometheus
+      inputName: DS_PROMETHEUS
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: ceph-pools
+  namespace: monitoring
+spec:
+  # Ref: https://grafana.com/grafana/dashboards/5342
+  grafanaCom:
+    id: 5342
+    revision: 9
+  datasources:
+    - datasourceName: Prometheus
+      inputName: DS_PROMETHEUS

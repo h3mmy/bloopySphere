@@ -1,0 +1,14 @@
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: redis
+  namespace: monitoring
+spec:
+  # Ref: https://grafana.com/grafana/dashboards/763
+  grafanaCom:
+    id: 763
+    revision: 5
+  datasources:
+    - datasourceName: Prometheus
+      inputName: DS_PROMETHEUS
