@@ -76,33 +76,33 @@ spec:
       #       name: minio
       #       key: kc-openid-claim-name
       # MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC_KEYCLOAK: "on"
-      MINIO_IDENTITY_OPENID_DISPLAY_NAME_AUTHENTIK: "legacy bloopnet"
-      MINIO_IDENTITY_OPENID_CONFIG_URL_AUTHENTIK:
+      MINIO_IDENTITY_OPENID_DISPLAY_NAME: "legacy bloopnet"
+      MINIO_IDENTITY_OPENID_CONFIG_URL:
         valueFrom:
           secretKeyRef:
             name: minio
             key: openid-config-url
-      MINIO_IDENTITY_OPENID_CLIENT_ID_AUTHENTIK:
+      MINIO_IDENTITY_OPENID_CLIENT_ID:
         valueFrom:
           secretKeyRef:
             name: minio
             key: openid-config-client-id
-      MINIO_IDENTITY_OPENID_CLIENT_SECRET_AUTHENTIK:
+      MINIO_IDENTITY_OPENID_CLIENT_SECRET:
         valueFrom:
           secretKeyRef:
             name: minio
             key: openid-config-client-secret
-      MINIO_IDENTITY_OPENID_CLAIM_NAME_AUTHENTIK:
+      MINIO_IDENTITY_OPENID_CLAIM_NAME:
         valueFrom:
           secretKeyRef:
             name: minio
             key: openid-config-claim-name
-      MINIO_IDENTITY_OPENID_SCOPES_AUTHENTIK:
+      MINIO_IDENTITY_OPENID_SCOPES:
         valueFrom:
           secretKeyRef:
             name: minio
             key: openid-config-scopes
-      MINIO_IDENTITY_OPENID_REDIRECT_URI_AUTHENTIK:
+      MINIO_IDENTITY_OPENID_REDIRECT_URI:
         valueFrom:
           secretKeyRef:
             name: minio
