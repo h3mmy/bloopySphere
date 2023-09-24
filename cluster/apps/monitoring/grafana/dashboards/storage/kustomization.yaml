@@ -5,7 +5,7 @@ resources:
   - ./folder.yaml
   - ./minio.yaml
   - ./redis.yaml
-  # - ./ceph.yaml
+  - ./ceph.yaml
 patches:
   - path: patch-folder.yaml
     target:

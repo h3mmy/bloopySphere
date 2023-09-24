@@ -59,6 +59,7 @@ spec:
       # level: debug
     auth:
       disable_login_form: "true"
+      # auto_login: "true"
       signout_redirect_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/logout
     auth.generic_oauth:
       enabled: "true"

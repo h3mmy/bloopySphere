@@ -16,7 +16,7 @@ resources:
   - calico-system
   - vpn-gateway
   - downloads
-  - rook-ceph
+  # - rook-ceph
   - home
   - blogs
   - cert-manager

@@ -69,7 +69,7 @@ spec:
 
     compactor:
       enabled: true
-      extraFlags: ["--compact.concurrency", "2", "compact.skip-block-with-out-of-order-chunks", "true"]
+      extraFlags: ["--compact.concurrency", "2"]
       retentionResolutionRaw: 7d
       retentionResolution5m: 14d
       retentionResolution1h: 30d
