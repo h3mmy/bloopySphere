@@ -107,7 +107,7 @@ spec:
           secretKeyRef:
             name: minio
             key: openid-config-callback-uri
-      MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC_AUTHENTIK: "on"
+      # MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC_AUTHENTIK: "on"
 
     args:
       - server
