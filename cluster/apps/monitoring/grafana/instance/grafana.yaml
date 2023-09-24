@@ -22,24 +22,25 @@ spec:
   config:
     log:
       mode: console
-      level: debug
+      # level: debug
     auth:
       disable_login_form: "true"
-      signout_redirect_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/logout?redirect_uri=encodedRedirectUri
+      signout_redirect_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/logout
     auth.generic_oauth:
       enabled: "true"
+      auto_login: "true"
       name: ${CLUSTER_NAME}
       client_id: "${GRAFANA_OAUTH_CLIENT_ID}"
       client_secret: "${GRAFANA_OAUTH_CLIENT_SECRET}"
       scopes: "openid email profile offline_access roles"
       email_attribute_path: email
-      login_attribute_path: username
+      login_attribute_path: preferred_username
       name_attribute_path: full_name
       allow_assign_grafana_admin: "true"
       auth_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/auth
       token_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/token
       api_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/userinfo
-      role_attribute_path: "contains(groups[*], 'grafana-admin') && 'GrafanaAdmin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
+      role_attribute_path: "contains(groups[*], 'grafana-admin') && 'GrafanaAdmin' || contains(groups[*], 'grafana-editor') && 'Editor' || 'Viewer'"
     auth.jwt:
       enabled: "true"
       jwk_set_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/certs"
