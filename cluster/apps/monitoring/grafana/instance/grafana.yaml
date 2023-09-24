@@ -21,8 +21,8 @@ spec:
             configmap.reloader.stakater.com/reload: "grafana"
   config:
     log:
-      mode: "console"
-      filters: "auth.generic_oauth:debug"
+      mode: console
+      level: debug
     auth:
       disable_login_form: "true"
       signout_redirect_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/logout?redirect_uri=encodedRedirectUri
