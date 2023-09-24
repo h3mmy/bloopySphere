@@ -30,7 +30,7 @@ spec:
             - name: grafana
               volumeMounts:
                 - mountPath: /etc/grafana/provisioning/dashboards
-                  name: config-provisioning
+                  name: provisioning
                 - mountPath: /var/lib/grafana/dashboards
                   name: dashboards
             # This container watches the namespace for configmaps with the `dashboards` label
