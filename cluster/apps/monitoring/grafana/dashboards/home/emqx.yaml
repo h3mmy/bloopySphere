@@ -10,5 +10,5 @@ spec:
     id: 17446
     revision: 1
   datasources:
-    - datasourceName: prometheus
+    - datasourceName: Prometheus
       inputName: DS_PROMETHEUS

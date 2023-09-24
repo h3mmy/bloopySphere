@@ -19,7 +19,7 @@ spec:
     id: 15762
     revision: 13
   datasources:
-    - datasourceName: prometheus
+    - datasourceName: Prometheus
       inputName: DS_PROMETHEUS
 ---
 apiVersion: grafana.integreatly.org/v1beta1
@@ -30,7 +30,7 @@ metadata:
 spec:
   url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-global.json
   datasources:
-    - datasourceName: prometheus
+    - datasourceName: Prometheus
       inputName: DS_PROMETHEUS
 ---
 apiVersion: grafana.integreatly.org/v1beta1
@@ -41,7 +41,7 @@ metadata:
 spec:
   url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-namespaces.json
   datasources:
-    - datasourceName: prometheus
+    - datasourceName: Prometheus
       inputName: DS_PROMETHEUS
 ---
 apiVersion: grafana.integreatly.org/v1beta1
@@ -52,7 +52,7 @@ metadata:
 spec:
   url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-nodes.json
   datasources:
-    - datasourceName: prometheus
+    - datasourceName: Prometheus
       inputName: DS_PROMETHEUS
 ---
 apiVersion: grafana.integreatly.org/v1beta1
@@ -63,5 +63,5 @@ metadata:
 spec:
   url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
   datasources:
-    - datasourceName: prometheus
+    - datasourceName: Prometheus
       inputName: DS_PROMETHEUS

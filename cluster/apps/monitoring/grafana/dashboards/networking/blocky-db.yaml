@@ -12,3 +12,6 @@ spec:
   datasources:
     - datasourceName: Blocky-QueryDB
       inputName: DS_POSTGRES
+  envs:
+    - name: VAR_BLOCKY_URL
+      value: "http://blocky.networking.svc.cluster.local:4000"
