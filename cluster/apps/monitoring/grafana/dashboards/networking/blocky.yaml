@@ -29,7 +29,7 @@ spec:
     revision: 11
   datasources:
     - datasourceName: Blocky-QueryDB
-      inputName: DS_POSTGRES
+      inputName: DS_BLOCKYDB
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
