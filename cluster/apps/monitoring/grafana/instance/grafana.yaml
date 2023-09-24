@@ -19,6 +19,40 @@ spec:
         metadata:
           annotations:
             configmap.reloader.stakater.com/reload: "grafana"
+        spec:
+          volumes:
+            - name: dashboards
+              emptyDir: {}
+            - name: provisioning
+              configMap:
+                name: config-provisioning
+          containers:
+            - name: grafana
+              volumeMounts:
+                - mountPath: /etc/grafana/provisioning/dashboards
+                  name: config-provisioning
+                - mountPath: /var/lib/grafana/dashboards
+                  name: dashboards
+            # This container watches the namespace for configmaps with the `dashboards` label
+            # and creates files for all their keys under `FOLDER`
+            - image: 'ghcr.io/kiwigrid/k8s-sidecar:1.25.1'
+              name: k8s-sidecar
+              env:
+                - name: LABEL
+                  value: "grafana_dashboard"
+                - name: LABEL_VALUE
+                  value: "1"
+                - name: FOLDER
+                  value: /var/lib/grafana/dashboards
+                - name: FOLDER_ANNOTATION
+                  value: "grafana_folder"
+                - name: NAMESPACE
+                  value: ALL
+                - name: RESOURCE
+                  value: configmap
+              volumeMounts:
+                - mountPath: /var/lib/grafana/dashboards
+                  name: dashboards
   config:
     log:
       mode: console

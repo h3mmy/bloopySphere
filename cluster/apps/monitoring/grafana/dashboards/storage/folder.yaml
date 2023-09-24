@@ -2,11 +2,11 @@
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaFolder
 metadata:
-  name: auth
+  name: storage
   namespace: monitoring
 spec:
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
   # If title is not defined, the value will be taken from metadata.name
-  title: auth
+  title: storage
