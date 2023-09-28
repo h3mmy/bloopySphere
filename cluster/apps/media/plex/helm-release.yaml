@@ -29,11 +29,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/plex # {"$imagepolicy": "flux-system:plex:name"}
-
-      tag: "1.32.6.7468-07e0d4a7e" # {"$imagepolicy": "flux-system:plex:tag"}
-
-
-
+      tag: "1.32.6.7557-1cf77d501" # {"$imagepolicy": "flux-system:plex:tag"}
       imagePullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"
@@ -175,21 +171,21 @@ spec:
                   operator: In
                   values:
                     - "true"
-    # sidecars:
-    #   promtail:
-    #    image: grafana/promtail:2.8.4
-   #     loki: http://loki-gateway.monitoring.svc.cluster.local:80/loki/api/v1/push
-       # logs:
-   #       - name: promtail/plex
-     #       path: "/config/Library/Application Support/Plex Media Server/Logs/*.log"
-    #      - name: promtail/plex/plugins
-    #        path: "/config/Library/Application Support/Plex Media Server/Logs/PMS Plugin Logs/*.log"
-      #  volumeMounts:
-      #    - name: config
-      #      mountPath: /config
-      #      readOnly: true
-      #  securityContext:
-      #    runAsUser: 0
+                    # sidecars:
+                    #   promtail:
+                    #    image: grafana/promtail:2.8.4
+          #     loki: http://loki-gateway.monitoring.svc.cluster.local:80/loki/api/v1/push
+          # logs:
+          #       - name: promtail/plex
+          #       path: "/config/Library/Application Support/Plex Media Server/Logs/*.log"
+          #      - name: promtail/plex/plugins
+          #        path: "/config/Library/Application Support/Plex Media Server/Logs/PMS Plugin Logs/*.log"
+          #  volumeMounts:
+          #    - name: config
+          #      mountPath: /config
+          #      readOnly: true
+          #  securityContext:
+          #    runAsUser: 0
           # additionalContainers:
           #   git-sync:
           #     name: git-sync
