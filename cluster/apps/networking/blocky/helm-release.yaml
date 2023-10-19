@@ -302,6 +302,8 @@ spec:
             prometheus:
               enable: true
               path: /metrics
+            ede:
+              enable: true
             ports:
               http: 4000
               https: 443
