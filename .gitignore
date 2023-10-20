@@ -48,6 +48,7 @@ cluster/apps/home/n8n/credentials/*
 infrastructure/bare-metal/*
 infrastructure/shared/networks.yaml
 infrastructure/terraform/vault/*
+infrastructure/terraform/unifi*
 *volsync-config.yaml
 cluster/bootstrap
 kube-dns.yml

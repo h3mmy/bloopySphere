@@ -111,7 +111,7 @@ spec:
         ingressClassName: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
-          cert-manager.io/ip-sans: "${SVC_BLOCKY_ADDR_V4}, ${SVC_BLOCKY_ADDR_V6}"
+          cert-manager.io/ip-sans: "${LB_V4_BLOCKY}, ${SVC_BLOCKY_ADDR_V6}"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure, dns-tls"
           traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
 
@@ -210,16 +210,18 @@ spec:
         enabled: true
         data:
           config.yml: |-
-            upstream:
-              default:
-                - tcp+udp:1.1.1.1
-                - tcp+udp:[2606:4700:4700::1111]
-                # re-enable after fixing ipv6 incident
-                - tcp-tls:1dot1dot1dot1.cloudflare-dns.com
-                - tcp-tls:one.one.one.one
-                - https://cloudflare-dns.com/dns-query
             upstreams:
               timeout: "5s"
+              # Default strategy is parallel_best
+              strategy: parallel_best
+              groups:
+                default:
+                  - tcp+udp:1.1.1.1
+                  - tcp+udp:[2606:4700:4700::1111]
+                  # re-enable after fixing ipv6 incident
+                  - tcp-tls:1dot1dot1dot1.cloudflare-dns.com
+                  - tcp-tls:one.one.one.one
+                  - https://cloudflare-dns.com/dns-query
             bootstrapDns: tcp+udp:1.1.1.1:53
             conditional:
               rewrite:
@@ -236,6 +238,8 @@ spec:
                 use-application-dns.net: tcp+udp:10.1.0.9
                 mask.icloud.com: tcp+udp:10.1.0.9
                 mask-h2.icloud.com: tcp+udp:10.1.0.9
+                # For reverse DNS lookups
+                ${LB_V4_BLOCKY_PTR}: ${LB_V4_BLOCKY}
             customDNS:
               mapping:
                 ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_V4_TRAEFIK_CLASSIC}
