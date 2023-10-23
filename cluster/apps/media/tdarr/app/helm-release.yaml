@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: ghcr.io/haveagitgat/tdarr_acc
-      tag: 2.13.01
+      tag: 2.14.01
       pullPolicy: IfNotPresent
     env:
       webUIPort: &web-port 8265
