@@ -17,12 +17,13 @@ spec:
   postgresql:
     parameters:
       max_connections: "300"
-      shared_buffers: 512MB
+      shared_buffers: 256MB
 
   resources:
     requests:
       cpu: 15m
-      memory: 120M
+      # Needs to be greater than shared_buffers
+      memory: 280M
     limits:
       memory: 650M
 
