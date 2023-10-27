@@ -124,6 +124,7 @@ spec:
         # https://docs.traefik.io/routing/entrypoints/#redirection
         redirectTo:
           port: websecure
+          priority: 10
         #
         # Trust forwarded  headers information (X-Forwarded-*).
         # forwardedHeaders:
