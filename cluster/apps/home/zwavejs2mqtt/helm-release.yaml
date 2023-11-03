@@ -25,9 +25,9 @@ spec:
   maxHistory: 2
   uninstall:
     keepHistory: false
-  dependsOn:
-    - name: ser2sock
-      namespace: home
+  #dependsOn:
+   # - name: ser2sock
+    #  namespace: home
   values:
     controller:
       type: statefulset
@@ -122,7 +122,7 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchExpressions:
-                - key: "feature.node.kubernetes.io/usb-ff_10c4_ea60.present"
+                - key: "feature.node.kubernetes.io/custom-usb.zwave"
                   operator: In
                   values: ["true"]
                 # - key: app.kubernetes.io/name
