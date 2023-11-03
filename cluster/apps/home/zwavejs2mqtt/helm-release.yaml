@@ -122,10 +122,13 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchExpressions:
-                - key: app.kubernetes.io/name
+                - key: "feature.node.kubernetes.io/usb-ff_10c4_ea60.present"
                   operator: In
-                  values:
-                    - ser2sock
+                  values: ["true"]
+                # - key: app.kubernetes.io/name
+                #   operator: In
+                #   values:
+                #     - ser2sock
             topologyKey: kubernetes.io/hostname
 
     resources:
