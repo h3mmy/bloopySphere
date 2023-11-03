@@ -118,11 +118,12 @@ spec:
         hostPathType: CharDevice
 
     affinity:
-      podAffinity:
+      nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchLabels:
-                feature.node.kubernetes.io/custom-usb.zwave: "true"
+          nodeSelectorTerms:
+            - labelSelector:
+                matchLabels:
+                  feature.node.kubernetes.io/custom-usb.zwave: "true"
               #matchExpressions:
                # - key: "feature.node.kubernetes.io/custom-usb.zwave"
              #     operator: In
