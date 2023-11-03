@@ -121,18 +121,11 @@ spec:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
-            - labelSelector:
-                matchLabels:
-                  feature.node.kubernetes.io/custom-usb.zwave: "true"
-              #matchExpressions:
-               # - key: "feature.node.kubernetes.io/custom-usb.zwave"
-             #     operator: In
-             #     values: ["true"]
-                # - key: app.kubernetes.io/name
-                #   operator: In
-                #   values:
-                #     - ser2sock
-            topologyKey: kubernetes.io/hostname
+            matchExpressions:
+              - key: "feature.node.kubernetes.io/custom-usb.zwave"
+                operator: In
+                values: ["true"]
+            #topologyKey: kubernetes.io/hostname
 
     resources:
       requests:
