@@ -107,7 +107,28 @@ module "cf_domain_xyz" {
       ttl       = 1
       type      = "TXT"
       value     = "v=spf1 include:_spf.mx.cloudflare.net ~all"
-    }
+    },
+    # {
+    #   name = "${local.domains["xyz"]}",
+    #   type = "MX",
+    #   value = "route1.mx.cloudflare.net"
+    #   priority = 48
+    #   proxied = false
+    # },
+    #  {
+    #   name = "${local.domains["xyz"]}",
+    #   type = "MX",
+    #   value = "route2.mx.cloudflare.net"
+    #   priority = 24
+    #   proxied = false
+    # },
+    #  {
+    #   name = "${local.domains["xyz"]}",
+    #   type = "MX",
+    #   value = "route3.mx.cloudflare.net"
+    #   priority = 38
+    #   proxied = false
+    # }
   ]
   dns_srv_entries = [
     # _service._proto.name. TTL class type of record priority weight port target.
@@ -142,27 +163,6 @@ module "cf_domain_xyz" {
       }
     }
   ]
-  # ext_dns_entries = [
-  #   # Cloudflare MX Records are managed by email_routing resources
-  #   {
-  #     hostname      = "${local.domains["xyz"]}"
-  #     priority  = 25
-  #     type      = "MX"
-  #     zone_id = module.cf_domain_xyz.zone_id
-  #   },
-  #   {
-  #     hostname      = "${local.domains["xyz"]}"
-  #     priority  = 19
-  #     type      = "MX"
-  #     zone_id = module.cf_domain_xyz.zone_id
-  #   },
-  #   {
-  #     hostname      = "${local.domains["xyz"]}"
-  #     priority  = 21
-  #     type      = "MX"
-  #     zone_id = module.cf_domain_xyz.zone_id
-  #   }
-  # ]
 }
 
 # Importing is not available. I had to delete the upstream resource and let terraform recreate it
@@ -176,21 +176,31 @@ resource "cloudflare_web3_hostname" "cf_domain_xyz_web3" {
 
 
 # There is additional verification downstream at network and cluster firewalls, traefik, etc.
-resource "cloudflare_filter" "cf_domain_xyz_github_flux_webhook" {
+resource "cloudflare_ruleset" "xyz_custom_ruleset" {
   zone_id     = module.cf_domain_xyz.zone_id
-  description = "Allow GitHub to Flux API"
-  expression = format(
-    "(ip.geoip.asnum eq 36459 and http.host eq \"notify.%s\")",
-    local.domains["xyz"]
-  )
-}
+  name        = "default"
+  description = ""
+  kind        = "zone"
+  phase       = "http_request_firewall_custom"
 
-resource "cloudflare_firewall_rule" "cf_domain_xyz_github_flux_webhook" {
-  zone_id     = module.cf_domain_xyz.zone_id
-  description = "Allow GitHub Flux API"
-  filter_id   = cloudflare_filter.cf_domain_xyz_github_flux_webhook.id
-  action      = "allow"
-  priority    = 1
+  rules {
+    action = "skip"
+    expression = format("(ip.geoip.asnum eq 36459 and http.host eq \"notify.%s\")", local.domains["xyz"])
+    description = "Allow GitHub to Flux API"
+    enabled = true
+    action_parameters {
+      ruleset = "current"
+            }
+    logging {
+      enabled = true
+    }
+  }
+  rules {
+    action = "block"
+        expression = "(ip.geoip.country ne \"US\") or (cf.threat_score ge 5)"
+        description= "Restrict NAS access"
+        enabled= false
+    }
 }
 
 resource "cloudflare_page_rule" "cf_domain_xyz_plex_bypass_cache" {
