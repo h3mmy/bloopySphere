@@ -17,48 +17,62 @@ spec:
     spec:
       # renovate: registryUrl=https://bjw-s.github.io/helm-charts/
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
         namespace: flux-system
   values:
-    image:
-      repository: ghcr.io/haveagitgat/tdarr_acc
-      tag: 2.14.02
-      pullPolicy: IfNotPresent
-    env:
-      webUIPort: &web-port 8265
-      serverIP: 0.0.0.0
-      serverPort: &server-port 8266
-      TZ: ${TZ}
-      ffmpegPath: "/usr/local/bin/ffmpeg"
-      PGID: 65537
-    podSecurityContext:
-      # Required for passthrough of /dev/dri devices from NFD
-      # https://dgpu-docs.intel.com/installation-guides/ubuntu/ubuntu-focal.html
-      supplementalGroups:
-        - 44
-        - 109
-        # Custom Camelus Group(s)
-        - 65541
-        - 65536
-        - 65537
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 100
+        capabilities:
+          add:
+            - CHOWN
+        fsGroupChangePolicy: "OnRootMismatch"
+        # Required for passthrough of /dev/dri devices from NFD
+        # https://dgpu-docs.intel.com/installation-guides/ubuntu/ubuntu-focal.html
+        supplementalGroups:
+          - 44
+          - 109
+          # Custom Camelus Group(s)
+          - 65541
+          - 65536
+          - 65537
+    controllers:
+      main:
+        type: deployment
+        containers:
+          main:
+            image:
+              repository: ghcr.io/haveagitgat/tdarr_acc
+              tag: 2.14.02
+              pullPolicy: IfNotPresent
+            env:
+              webUIPort: &web-port 8265
+              serverIP: 0.0.0.0
+              serverPort: &server-port 8266
+              TZ: ${TZ}
+              ffmpegPath: "/usr/local/bin/ffmpeg"
+              PGID: 65537
+            resources:
+              requests:
+                cpu: 10m
+                memory: 250Mi
+
     persistence:
-      data:
+      server:
         enabled: true
-        mountPath: /app/server
         existingClaim: tdarr-data-v1
+        globalMounts:
+          - path: /app/server
       config:
         enabled: true
         existingClaim: tdarr-config-v1
-        mountPath: /app/configs
-      cache:
-        enabled: true
-        type: nfs
-        server: "${NAS_ADDRESS}"
-        path: /volume3/Data/cache
-        mountPath: /cache
+        globalMounts:
+          - path: /app/configs
       media:
         enabled: true
         type: custom
@@ -77,6 +91,7 @@ spec:
             server: ${NAS_ADDRESS}
         mountPath: *mediaPath2
         readOnly: false
+
     service:
       main:
         ports:
@@ -86,6 +101,7 @@ spec:
             enabled: true
             protocol: TCP
             port: *server-port
+
     ingress:
       main:
         enabled: true
@@ -102,23 +118,15 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
             secretName: tls.tdarr
-    resources:
-      requests:
-        cpu: 10m
-        memory: 250Mi
+
     affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: feature.node.kubernetes.io/custom-intel-gpu
-                  operator: In
-                  values:
-                    - "true"
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 100

@@ -14,6 +14,11 @@ spec:
         kind: HelmRepository
         name: bjw-s-charts
         namespace: flux-system
+  dependsOn:
+    - name: traefik
+      namespace: networking
+    - name: node-feature-discovery
+      namespace: kube-system
   maxHistory: 3
   install:
     createNamespace: true
@@ -88,6 +93,7 @@ spec:
                     - "plex"
                     - "tdarr-node"
             topologyKey: "kubernetes.io/hostname"
+
     service:
       main:
         enabled: false
@@ -95,6 +101,7 @@ spec:
           enabled: false
           http:
             port: 8265
+
     persistence:
       media:
         enabled: true
