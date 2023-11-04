@@ -72,68 +72,6 @@ module "cf_domain_xyz" {
       type      = "TXT"
       value     = "google-site-verification=T0XlDvIcVdtuYPckOlmV9kL1GiIuLiC4TKfGqg_vaLE"
     },
-    # Gandi
-    {
-      id        = "gandi_mx_2"
-      name      = "${local.domains["xyz"]}"
-      priority  = 50
-      proxiable = false
-      proxied   = false
-      ttl       = 1
-      type      = "MX"
-      value     = "fb.mail.gandi.net"
-    },
-    {
-      id        = "gandi_spf_0"
-      name      = "${local.domains["xyz"]}"
-      proxiable = false
-      proxied   = false
-      ttl       = 1
-      type      = "TXT"
-      value     = "v=spf1 include:_mailcust.gandi.net ?all"
-    },
-    {
-      id        = "gandi_mx_1"
-      name      = "${local.domains["xyz"]}"
-      priority  = 10
-      proxiable = false
-      proxied   = false
-      ttl       = 1
-      type      = "MX"
-      value     = "spool.mail.gandi.net"
-    },
-    {
-      name = "gm1._domainkey.${local.domains["xyz"]}"
-      proxiable = false
-      proxied   = false
-      ttl       = 1
-      type      = "CNAME"
-      value     = "gm1.gandimail.net."
-    },
-    {
-      name = "gm2._domainkey.${local.domains["xyz"]}"
-      proxiable = false
-      proxied   = false
-      ttl       = 1
-      type      = "CNAME"
-      value     = "gm2.gandimail.net."
-    },
-    {
-      name = "gm3._domainkey.${local.domains["xyz"]}"
-      proxiable = false
-      proxied   = false
-      ttl       = 1
-      type      = "CNAME"
-      value     = "gm3.gandimail.net."
-    },
-    {
-      name      = "webmail.${local.domains["xyz"]}"
-      proxiable = true
-      proxied   = true
-      ttl       = 1
-      type      = "CNAME"
-      value     = "webmail.gandi.net"
-    },
     # Sendgrid
     {
       name = "em456.${local.domains["xyz"]}"
@@ -158,6 +96,17 @@ module "cf_domain_xyz" {
       ttl       = 1
       type      = "CNAME"
       value     = "s2.domainkey.u24570643.wl144.sendgrid.net"
+    },
+    # CF Mail
+    {
+      hostname  = "${local.domains["xyz"]}"
+      id        = "cloudflare_spf"
+      name      = "${local.domains["xyz"]}"
+      proxiable = false
+      proxied   = false
+      ttl       = 1
+      type      = "TXT"
+      value     = "v=spf1 include:_spf.mx.cloudflare.net ~all"
     }
   ]
   dns_srv_entries = [
@@ -170,18 +119,6 @@ module "cf_domain_xyz" {
     {
       type      = "SRV"
       data = {
-        service = "_pop3s"
-        proto = "_tcp"
-        priority  = 10
-        weight = "1"
-        port   = "995"
-        name = "pop3s.${local.domains["xyz"]}"
-        target = "mail.gandi.net"
-      }
-    },
-    {
-      type      = "SRV"
-      data = {
         service = "_imap"
         proto = "_tcp"
         priority  = 0
@@ -189,18 +126,6 @@ module "cf_domain_xyz" {
         port   = 0
         name = "imap.${local.domains["xyz"]}"
         target = "."
-      }
-    },
-    {
-      type      = "SRV"
-      data = {
-        service = "_imaps"
-        proto = "_tcp"
-        priority  = 0
-        weight = 1
-        port   = "465"
-        name = "imaps.${local.domains["xyz"]}"
-        target = "mail.gandi.net"
       }
     },
     {
@@ -215,21 +140,29 @@ module "cf_domain_xyz" {
         name = "pop3.${local.domains["xyz"]}"
         target = "."
       }
-    },
-    {
-      ttl       = 1
-      type      = "SRV"
-      data = {
-        service = "_submission"
-        proto = "_tcp"
-        priority  = 0
-        weight = 1
-        name = "submission.${local.domains["xyz"]}"
-        port   = 465
-        target = "mail.gandi.net"
-      }
     }
   ]
+  # ext_dns_entries = [
+  #   # Cloudflare MX Records are managed by email_routing resources
+  #   {
+  #     hostname      = "${local.domains["xyz"]}"
+  #     priority  = 25
+  #     type      = "MX"
+  #     zone_id = module.cf_domain_xyz.zone_id
+  #   },
+  #   {
+  #     hostname      = "${local.domains["xyz"]}"
+  #     priority  = 19
+  #     type      = "MX"
+  #     zone_id = module.cf_domain_xyz.zone_id
+  #   },
+  #   {
+  #     hostname      = "${local.domains["xyz"]}"
+  #     priority  = 21
+  #     type      = "MX"
+  #     zone_id = module.cf_domain_xyz.zone_id
+  #   }
+  # ]
 }
 
 # Importing is not available. I had to delete the upstream resource and let terraform recreate it
@@ -269,5 +202,42 @@ resource "cloudflare_page_rule" "cf_domain_xyz_plex_bypass_cache" {
   actions {
     cache_level         = "bypass"
     disable_performance = true
+  }
+}
+
+resource "cloudflare_email_routing_address" "xyz_0" {
+  account_id = local.cloudflare_secrets["cloudflare_account_id"]
+  email      = local.cloudflare_secrets["xyz_0_dest_email"]
+}
+
+resource "cloudflare_email_routing_catch_all" "xyz_0" {
+  zone_id = module.cf_domain_xyz.zone_id
+  name    = "catch_all"
+  enabled = true
+
+  matcher {
+    type = "all"
+  }
+
+  action {
+    type  = "drop"
+    value = []
+  }
+}
+
+resource "cloudflare_email_routing_rule" "main_xyz" {
+  zone_id = module.cf_domain_xyz.zone_id
+  name    = "Forward to primary inbox"
+  enabled = true
+
+  matcher {
+    type  = "literal"
+    field = "to"
+    value = "zee@${local.domains["xyz"]}"
+  }
+
+  action {
+    type  = "forward"
+    value = ["${local.cloudflare_secrets["xyz_0_dest_email"]}"]
   }
 }
