@@ -70,10 +70,10 @@ spec:
                 valueFrom:
                   fieldRef:
                     fieldPath: spec.nodeName
-              resources:
-                requests:
-                  cpu: 10m
-                  memory: 250Mi
+            resources:
+              requests:
+                cpu: 10m
+                memory: 250Mi
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
