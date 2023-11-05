@@ -91,6 +91,12 @@ spec:
             server: ${NAS_ADDRESS}
         mountPath: *mediaPath2
         readOnly: false
+      cache:
+        enabled: true
+        type: nfs
+        server: "${NAS_ADDRESS}"
+        path: /volume3/Data/cache
+        mountPath: /cache
 
     service:
       main:
@@ -108,7 +114,7 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc-1918@kubernetescrd"
           hajimari.io/enable: "true"
           hajimari.io/instance: "bloop-quarky"
           hajimari.io/icon: material-symbols:switch-video-outline
