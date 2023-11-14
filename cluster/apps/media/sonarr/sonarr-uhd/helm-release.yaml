@@ -72,6 +72,7 @@ spec:
       fsGroup: "${MEDIA_GID}"
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
+        - 568
         - 100
         # Custom Camelus Group(s)
         - 65541
