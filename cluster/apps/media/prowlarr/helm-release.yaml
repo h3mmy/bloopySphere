@@ -33,7 +33,7 @@ spec:
       nameOverride: *app
     image:
       repository: ghcr.io/onedr0p/prowlarr-nightly
-      tag: 1.10.5.4107@sha256:4bcdf83de1952909d5c555e57c80bdc54d4c842e820286b90db89021d13b48c5
+      tag: 1.11.0.4121@sha256:024ab8c94b7c6f032dbe424d631fd24a5f2c3617ba86d02538d128a5098b3739
     env:
       TZ: "${TZ}"
       PROWLARR__INSTANCE_NAME: Prowlarr
