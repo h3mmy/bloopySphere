@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=oci://ghcr.io/grafana-operator/grafana-operator-chart
       chart: grafana-operator
-      version: v5.5.1
+      version: v5.5.2
       sourceRef:
         kind: HelmRepository
         name: grafana-operator-chart
