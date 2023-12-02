@@ -111,7 +111,8 @@ spec:
           nfs:
             server: "${NAS_ADDRESS}"
             path: /volume3/Data/Library
-        mountPath: /data/nas-media
+        globalMounts:
+          - path: /data/nas-media
 
     resources:
       requests:
