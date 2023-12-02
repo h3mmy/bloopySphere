@@ -1,0 +1,24 @@
+---
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: Gateway
+metadata:
+  name: traefik
+  namespace: networking
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+spec:
+  gatewayClassName: traefik
+  listeners:
+    - name: websecure
+      hostname: '*.${XYZ_DOMAIN}'
+      port: 8443
+      protocol: HTTPS
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: tls.${XYZ_DOMAIN/./-}
+            kind: Secret
+            group: core
