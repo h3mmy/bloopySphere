@@ -30,7 +30,7 @@ spec:
   values:
     image:
       repository: ghcr.io/bjw-s/calibre-web
-      tag: 0.6.21@sha256:dd8d0aad904027c6dbcece2f919770f39cc2e3983fdab0d4df437ace346e8a55
+      tag: 0.6.21@sha256:bca0b47096d1df270f4ad7d640558ef69bbf03a675bf1691bf88d209d2ff7e4a
 
     env:
       TZ: "${TZ}"
