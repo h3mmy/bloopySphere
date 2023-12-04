@@ -1,0 +1,17 @@
+---
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: calibre
+  namespace: media
+spec:
+  hostnames:
+    - calibre.${XYZ_DOMAIN}
+  parentRefs:
+    - name: traefik
+      namespace: networking
+  rules:
+    - matches:
+      backendRefs:
+        - name: calibre
+          port: 8080
