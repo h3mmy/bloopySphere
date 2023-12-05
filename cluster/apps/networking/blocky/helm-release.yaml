@@ -265,6 +265,8 @@ spec:
                 special:
                   - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts
                 doh:
+                  - |
+                    doh.dns.apple.com.v.aaplimg.com
                   - https://raw.githubusercontent.com/Sekhan/TheGreatWall/master/TheGreatWall.txt
                   - https://gist.githubusercontent.com/ckuethe/f71185f604be9cde370e702aa179fc2e/raw/53fe52046836ac3009e9505b7b8b8b5de42d84e3/doh-blocklist.txt
                 none:
