@@ -229,6 +229,7 @@ spec:
               mapping:
                 # local: tcp+udp:kube-dns.svc
                 unifi: tcp+udp:${LOCAL_GATEWAY_MAIN}
+                lan.${XYZ_DOMAIN}: tcp+udp:${LOCAL_GATEWAY_MAIN}
                 ${XYZ_DOMAIN}: tcp+udp:${LB_V4_K8S_GATEWAY},tcp+udp:${LB_V6_K8S_GATEWAY}
                 ${DOMAIN_BIG_BLOOP}: tcp+udp:${LOCAL_GATEWAY_BIG_BLOOP}
                 ${DOMAIN_SMALL_BLOOP}: tcp+udp:${LOCAL_GATEWAY_SMALL_BLOOP}
