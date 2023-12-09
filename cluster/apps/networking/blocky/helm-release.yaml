@@ -223,6 +223,13 @@ spec:
                   - tcp-tls:one.one.one.one
                   - https://cloudflare-dns.com/dns-query
             bootstrapDns: tcp+udp:1.1.1.1:53
+            # This is only because if iOS does queries for both A/AAAA records and HTTPS,
+            # it will fail both if the HTTPS fails no matter the result of the A/AAAA query
+            # Temporary until I can either add custom HTTPS records based on traefik config OR until iOS fixes their bug
+            # It is only causing issues with spli-domain DNS. It may be that k8s-gateway supports this query type yet
+            filtering:
+              queryTypes:
+                - HTTPS
             conditional:
               rewrite:
                 cluster.local.${DOMAIN_CORE_BLOOP} : cluster.local
