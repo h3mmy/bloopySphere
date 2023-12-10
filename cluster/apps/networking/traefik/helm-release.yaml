@@ -257,10 +257,6 @@ spec:
     pilot:
       enabled: false
 
-    experimental:
-      plugins:
-        enabled: false
-
     resources:
       requests:
         cpu: 15m
