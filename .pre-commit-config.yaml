@@ -18,7 +18,7 @@ repos:
 
   - repo: https://github.com/Lucas-C/pre-commit-hooks
     # v1.5.3 has a bug that prevents this from working
-    rev: v1.5.1
+    rev: v1.5.4
     hooks:
       - id: remove-crlf
       - id: remove-tabs
