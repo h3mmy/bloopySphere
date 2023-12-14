@@ -12,8 +12,8 @@ on: # yamllint disable-line rule:truthy
         description: "Log-Level"
         default: "debug"
         required: false
-  schedule:
-    - cron: "0 * * * *"
+  # schedule:
+  #   - cron: "0 * * * *"
   push:
     branches:
       - main
