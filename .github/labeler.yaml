@@ -1,10 +1,18 @@
 ---
 area/ansible:
-  - "provision/ansible/**/*"
+  changed-files:
+    any-glob-to-any-file:
+      - "provision/ansible/**/*"
 area/ci:
-  - ".github/**/*"
+  changed-files:
+    any-glob-to-any-file:
+      - ".github/**/*"
 area/cluster:
-  - "cluster/**/*"
+  changed-files:
+    any-glob-to-any-file:
+      - "cluster/**/*"
 area/terraform:
-  - "provision/terraform/**/*"
-  - "infrastructure/terraform/**/*"
+  changed-files:
+    any-glob-to-any-file:
+      - "provision/terraform/**/*"
+      - "infrastructure/terraform/**/*"
