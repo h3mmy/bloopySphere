@@ -98,7 +98,7 @@ spec:
         gluetun:
           image:
             repository: docker.io/qmcgaw/gluetun
-            tag: latest@sha256:2ca6f6736a198817ebb4abd988ed063c98c3c8525ea5a8292f6cf6b85d878b9e
+            tag: latest@sha256:7ae590687a2aa6cd26a19c8cc49903d4d8ca18caf3fbc8296a20bc45f9e9e740
 
         securityContext:
           capabilities:
