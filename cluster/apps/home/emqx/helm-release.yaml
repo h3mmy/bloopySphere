@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: emqx
@@ -88,7 +88,7 @@ spec:
         mountPath: /opt/emqx/etc/bootstrap
     extraVolumes:
       - name: api-key-bootstrap
-        secret: 
+        secret:
           secretName: emqx-api-keys
           items:
             - key: bootstrap_file
