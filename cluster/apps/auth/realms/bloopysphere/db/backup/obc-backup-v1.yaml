@@ -6,7 +6,7 @@ metadata:
   namespace: auth
 spec:
   generateBucketName: kc-postgres-backup
-  storageClassName: rook-ceph-bucket
+  storageClassName: ceph-bucket
   additionalConfig:
     maxObjects: "1000"
     maxSize: "2G"
