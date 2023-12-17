@@ -93,7 +93,7 @@ spec:
     kind: GitRepository
     name: flux-system
   dependsOn:
-    - name: kube-prometheus-stack-crds
+    - name: core
     - name: cluster-iam-keycloak-db-cluster
   healthChecks:
     - apiVersion: monitoring.coreos.com/v1
