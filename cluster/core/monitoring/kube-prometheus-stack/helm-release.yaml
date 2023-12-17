@@ -54,6 +54,8 @@ spec:
                 path: /metadata/annotations/helm.toolkit.fluxcd.io~1driftDetection
                 value: disabled
   values:
+    crds:
+      enabled: true
     fullnameOverride: prometheus
     defaultRules:
       enabled: true

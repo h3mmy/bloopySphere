@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - ./traefik/crds.yaml
   - ./grafana-agent-operator/crds.yaml
-  - ./kube-prometheus-stack/crds.yaml
   - ./external-snapshotter/crds.yaml
   - ./external-dns/crds.yaml
   - ./mysql-crds/crds.yaml
