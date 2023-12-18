@@ -45,9 +45,9 @@ spec:
       s3Credentials:
         accessKeyId:
           name: cnpg-ldap-backup-v1
-          key: S3_ACCESS_KEY
+          key: AWS_ACCESS_KEY_ID
         secretAccessKey:
           name: cnpg-ldap-backup-v1
-          key: S3_SECRET_KEY
+          key: AWS_SECRET_ACCESS_KEY
 
   externalClusters: []
