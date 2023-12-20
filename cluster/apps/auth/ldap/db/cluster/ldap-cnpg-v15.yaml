@@ -33,21 +33,21 @@ spec:
         name: ldap-postgres-user
       encoding: 'UTF8'
 
-  backup:
-    retentionPolicy: 30d
-    barmanObjectStore:
-      wal:
-        compression: bzip2
-        maxParallel: 5
-      destinationPath: s3://cnpg/v15/v1
-      endpointURL: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local
-      # credentials are populated via rook-ceph-operator
-      s3Credentials:
-        accessKeyId:
-          name: cnpg-ldap-backup-v1
-          key: AWS_ACCESS_KEY_ID
-        secretAccessKey:
-          name: cnpg-ldap-backup-v1
-          key: AWS_SECRET_ACCESS_KEY
+  # backup:
+  #   retentionPolicy: 30d
+  #   barmanObjectStore:
+  #     wal:
+  #       compression: bzip2
+  #       maxParallel: 5
+  #     destinationPath: s3://cnpg/v15/v1
+  #     endpointURL: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local
+  #     # credentials are populated via rook-ceph-operator
+  #     s3Credentials:
+  #       accessKeyId:
+  #         name: cnpg-ldap-backup-v1
+  #         key: AWS_ACCESS_KEY_ID
+  #       secretAccessKey:
+  #         name: cnpg-ldap-backup-v1
+  #         key: AWS_SECRET_ACCESS_KEY
 
   externalClusters: []
