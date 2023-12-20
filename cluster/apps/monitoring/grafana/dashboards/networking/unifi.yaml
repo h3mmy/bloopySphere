@@ -22,7 +22,7 @@ spec:
   # Ref: https://grafana.com/grafana/dashboards/11311
   grafanaCom:
     id: 11311
-    revision: 9
+    revision: 5
   datasources:
     - datasourceName: Prometheus
       inputName: DS_PROMETHEUS
