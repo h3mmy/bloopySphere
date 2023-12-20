@@ -7,3 +7,4 @@ resources:
   - ./networking
   - ./storage
   - ./system
+  - ./cnpg
