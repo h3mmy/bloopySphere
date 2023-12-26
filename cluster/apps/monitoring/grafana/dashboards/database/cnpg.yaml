@@ -3,7 +3,7 @@ apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: cnpg
-  namespace: database
+  namespace: monitoring
 spec:
   instanceSelector:
     matchLabels:
