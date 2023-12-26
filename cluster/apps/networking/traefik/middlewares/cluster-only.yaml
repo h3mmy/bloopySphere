@@ -1,0 +1,37 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: cluster-only-ips
+  namespace: networking
+spec:
+  ipWhiteList:
+    sourceRange:
+      - "fc00::/7"
+      - "${CALICO_NODE_CIDR_IPV6}"
+      - "${CIDR_V6_SN_1}"
+      - "${CIDR_V6_SN_2}"
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: cluster-only
+  namespace: networking
+spec:
+  chain:
+    middlewares:
+      - name: cluster-only-ips@kubernetescrd
+      - name: networking-error-pages@kubernetescrd
+---
+apiVersion: traefik.io/v1alpha1
+kind: MiddlewareTCP
+metadata:
+  name: cluster-only-tcp
+  namespace: networking
+spec:
+  ipWhiteList:
+    sourceRange:
+      - "fc00::/7"
+      - "${CALICO_NODE_CIDR_IPV6}"
+      - "${CIDR_V6_SN_1}"
+      - "${CIDR_V6_SN_2}"

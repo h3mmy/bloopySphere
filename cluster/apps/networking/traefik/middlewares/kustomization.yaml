@@ -20,3 +20,4 @@ resources:
   - ghost-admin-add-prefix.yaml
   - chain-ghost-admin.yaml
   - internal-only-auth.yaml
+  - cluster-only.yaml
