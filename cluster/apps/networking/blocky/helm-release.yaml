@@ -230,6 +230,7 @@ spec:
             filtering:
               queryTypes:
                 - HTTPS
+                - SVCB
             conditional:
               rewrite:
                 cluster.local.${DOMAIN_CORE_BLOOP} : cluster.local
