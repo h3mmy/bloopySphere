@@ -13,7 +13,7 @@ spec:
     - ReadWriteOnce
   nfs:
     server: "${NAS_ADDRESS}"
-    path: /volume1/Data/cache/stash
+    path: /volume3/Data/cache/stash
 
 ---
 apiVersion: v1
