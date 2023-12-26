@@ -18,6 +18,8 @@ spec:
       - "Audit-Id"
       - "X-Content-Type-Options"
       - "Cache-Control"
+      - "Connection"
+      - "Upgrade"
     accessControlAllowMethods:
       - "GET"
       - "OPTIONS"
@@ -51,6 +53,7 @@ spec:
     customResponseHeaders:
       X-xss-protection: "1"
       X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex,"
+      Connection: Upgrade
     sslProxyHeaders:
       X-Forwarded-Proto: "https"
       X-Forwarded-Ssl: "on"
