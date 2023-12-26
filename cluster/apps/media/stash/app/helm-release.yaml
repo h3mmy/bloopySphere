@@ -47,7 +47,7 @@ spec:
 
             env:
               TZ: "${TZ}"
-              STASH_STASH: /media/
+              STASH_STASH: /media/Organized
               STASH_GENERATED: /generated/
               STASH_METADATA: /metadata/
               STASH_CACHE: /cache/
