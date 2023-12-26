@@ -5,7 +5,4 @@ metadata:
   name: flux-cluster-dashboard
   namespace: monitoring
 spec:
-  configMapRef:
-    name: flux-cluster-dashboard
-    namespace: flux-system
-    key: cluster.json
+  url: https://raw.githubusercontent.com/fluxcd/flux2/v2.2.1/manifests/monitoring/monitoring-config/dashboards/cluster.json
