@@ -51,6 +51,7 @@ spec:
               STASH_GENERATED: /generated/
               STASH_METADATA: /metadata/
               STASH_CACHE: /cache/
+              STASH_EXTERNAL_HOST: stash.${XYZ_DOMAIN}
 
     service:
       main:
@@ -69,6 +70,7 @@ spec:
           hajimari.io/group: "media"
           hajimari.io/instance: "bloop-quarky"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.priority: "99"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: networking-bloopnet-xyz-auth@kubernetescrd
         hosts:
