@@ -23,6 +23,8 @@ metadata:
   name: stash-cache-v1
   labels:
     type: nfs
+  annotations:
+    pv.beta.kubernetes.io/gid: "65537"
 spec:
   accessModes:
     - ReadWriteOnce
