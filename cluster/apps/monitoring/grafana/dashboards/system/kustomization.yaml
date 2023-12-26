@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./folder.yaml
   - ./kubernetes.yaml
-  - ./flux.yaml
+  #- ./flux.yaml
 patches:
   - path: patch-folder.yaml
     target:
