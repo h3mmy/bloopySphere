@@ -125,5 +125,5 @@ spec:
         enabled: true
         type: nfs
         server: "${NAS_ADDRESS}"
-        path: /volume3/Data/cache
+        path: /volume3/Data/cache/tdarr
         mountPath: /cache

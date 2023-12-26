@@ -1,0 +1,10 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - pvc-config-v1.yaml
+  - pvc-metadata-v1.yaml
+  - pvc-cache-v1.yaml
+  - pvc-generated-v1.yaml
+  - helm-release.yaml

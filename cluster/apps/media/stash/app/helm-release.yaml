@@ -1,0 +1,112 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: stash
+  namespace: media
+spec:
+  interval: 30m
+  chart:
+    spec:
+      # renovate: registryUrl=https://bjw-s.github.io/helm-charts/
+      chart: app-template
+      version: 2.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+
+  maxHistory: 3
+
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+
+  uninstall:
+    keepHistory: false
+
+  values:
+    controllers:
+      main:
+        type: statefulset
+
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          main:
+            image:
+              repository: stashapp/stash
+              tag: v0.23.1@sha256:96d4e778a9fb7199da28983413c9767617bafc69db781bf7d00cd2667344b76d
+
+            env:
+              TZ: "${TZ}"
+              STASH_STASH: /media/
+              STASH_GENERATED: /generated/
+              STASH_METADATA: /metadata/
+              STASH_CACHE: /cache/
+
+    service:
+      main:
+        ports:
+          http:
+            port: 9999
+
+    ingress:
+      main:
+        enabled: true
+        className: traefik
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Stash"
+          hajimari.io/icon: mdi:box
+          hajimari.io/group: "media"
+          hajimari.io/instance: "bloop-quarky"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-bloopnet-xyz-auth@kubernetescrd
+        hosts:
+          - host: &host stash.${XYZ_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: stash-config-v1
+        globalMounts:
+          - path: /root/.stash
+      media:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /volume1/DataR/Misc
+          mountOptions:
+            - nfsvers=4.1
+            - tcp
+            - intr
+            - nodiratime
+            - noatime
+      generated:
+        enabled: true
+        existingClaim: stash-generated-v1
+      metadata:
+        enabled: true
+        existingClaim: stash-metadata-v1
+      cache:
+        enabled: true
+        existingClaim: stash-cache-v1
