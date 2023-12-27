@@ -84,6 +84,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: tls.stash
 
     persistence:
       config:
