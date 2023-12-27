@@ -92,6 +92,10 @@ spec:
         existingClaim: stash-config-v1
         globalMounts:
           - path: /root/.stash
+      certs:
+        enabled: true
+        name: tls.stash
+        type: secret
       media:
         enabled: true
         type: custom
