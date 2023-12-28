@@ -17,7 +17,7 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: bloopnet-xyz-auth
+  name: bloopnet-xyz-auth-backup
   namespace: networking
 spec:
   chain:
@@ -30,7 +30,7 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: bloopnet-xyz-auth-embedded
+  name: bloopnet-xyz-auth
   namespace: networking
 spec:
   chain:
