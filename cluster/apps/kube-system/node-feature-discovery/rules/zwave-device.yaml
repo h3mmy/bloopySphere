@@ -1,0 +1,20 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/nfd.k8s-sigs.io/nodefeaturerule_v1alpha1.json
+apiVersion: nfd.k8s-sigs.io/v1alpha1
+kind: NodeFeatureRule
+metadata:
+  name: zwave-device
+  namespace: kube-system
+spec:
+  rules:
+    - # Zwave ZST10-700
+      name: zwave.zooz
+      labels:
+        zwave.feature.node.kubernetes.io/zst10-700: "true"
+        feature.node.kubernetes.io/zwave: "true"
+      matchFeatures:
+        - feature: usb.device
+          matchExpressions:
+            class: { op: In, value: ["02"] }
+            vendor: { op: In, value: ["0658"] }
+            device: { op: In, value: ["0200"] }
