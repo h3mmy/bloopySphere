@@ -60,7 +60,7 @@ spec:
           operator: "Exists"
       config:
         core:
-          sources:
+          labelSources:
             - custom
             - pci
             - usb

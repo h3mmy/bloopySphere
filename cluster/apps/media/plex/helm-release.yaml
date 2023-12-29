@@ -167,10 +167,14 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
-                - key: feature.node.kubernetes.io/custom-intel-gpu
-                  operator: In
-                  values:
-                    - "true"
+                - key: kubernetes.io/hostname
+                  operator: Equals
+                  value: slowpoke
+            # - matchExpressions:
+            #     - key: feature.node.kubernetes.io/custom-intel-gpu
+            #       operator: In
+            #       values:
+            #         - "true"
                     # sidecars:
                     #   promtail:
                     #    image: grafana/promtail:2.8.4
