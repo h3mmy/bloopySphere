@@ -51,7 +51,7 @@ spec:
               STASH_GENERATED: /generated/
               STASH_METADATA: /metadata/
               STASH_CACHE: /cache/
-              STASH_EXTERNAL_HOST: stash.${XYZ_DOMAIN}
+              STASH_EXTERNAL_HOST: "https://stash.${XYZ_DOMAIN}"
 
     service:
       main:
