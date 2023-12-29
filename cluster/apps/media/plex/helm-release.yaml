@@ -168,7 +168,7 @@ spec:
           nodeSelectorTerms:
             - matchExpressions:
                 - key: kubernetes.io/hostname
-                  operator: Equals
+                  operator: Eq
                   value: slowpoke
             # - matchExpressions:
             #     - key: feature.node.kubernetes.io/custom-intel-gpu
