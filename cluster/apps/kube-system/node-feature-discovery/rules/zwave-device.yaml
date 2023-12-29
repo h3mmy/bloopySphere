@@ -8,13 +8,12 @@ metadata:
 spec:
   rules:
     - # Zwave ZST10-700
-      name: zwave.zooz
+      name: hub.zwave
       labels:
-        zwave.feature.node.kubernetes.io/zst10-700: "true"
         feature.node.kubernetes.io/zwave: "true"
       matchFeatures:
         - feature: usb.device
           matchExpressions:
-            class: { op: In, value: ["02"] }
-            vendor: { op: In, value: ["0658"] }
-            device: { op: In, value: ["0200"] }
+            class: {op: In, value: ["02", "ff"]}
+            vendor: {op: In, value: ["0658", "10c4"]}
+            device: {op: In, value: ["0200", "ea60"]}
