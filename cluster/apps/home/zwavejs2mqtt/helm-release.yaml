@@ -25,9 +25,6 @@ spec:
   maxHistory: 2
   uninstall:
     keepHistory: false
-  #dependsOn:
-   # - name: ser2sock
-    #  namespace: home
   values:
     controller:
       type: statefulset
@@ -38,7 +35,7 @@ spec:
       imagePullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"
-      LOGLEVEL: debug
+      LOGLEVEL: info
 
     ingress:
       main:
