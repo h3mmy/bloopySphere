@@ -58,17 +58,17 @@ spec:
                 cpu: 100m
               limits:
                 memory: 1500Mi
-          pod:
-            securityContext:
-              fsGroup: "${MEDIA_GID}"
-              fsGroupChangePolicy: "OnRootMismatch"
-              supplementalGroups:
-                - 568
-                - 100
-                # Custom Camelus Group(s)
-                - 65541
-                - 65536
-                - 65537
+        pod:
+          securityContext:
+            fsGroup: "${MEDIA_GID}"
+            fsGroupChangePolicy: "OnRootMismatch"
+            supplementalGroups:
+              - 568
+              - 100
+              # Custom Camelus Group(s)
+              - 65541
+              - 65536
+              - 65537
 
     service:
       main:
