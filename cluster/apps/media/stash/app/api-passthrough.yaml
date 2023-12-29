@@ -17,5 +17,3 @@ spec:
           port: 9999
       middlewares:
         - name: networking-rfc1918@kubernetescrd
-  tls:
-    passthrough: true
