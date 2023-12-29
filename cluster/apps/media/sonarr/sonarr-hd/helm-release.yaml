@@ -26,24 +26,50 @@ spec:
     - name: rook-ceph-cluster
       namespace: rook-ceph
   values:
-    controller:
-      type: statefulset
-    image:
-      repository: ghcr.io/onedr0p/sonarr-develop
-      tag: "3.0.9.1555"
-    env:
-      TZ: "${TZ}"
-      PGID: ${MEDIA_GID}
-      PUID: ${SONARR_PUID}
-      SONARR__PORT: &port 8989
-      SONARR__APPLICATION_URL: https://sonarr.${XYZ_DOMAIN}
-      SONARR__AUTHENTICATION_METHOD: None
-      SONARR__API_KEY: ${SONARR_API_KEY}
+    controllers:
+      main:
+        type: statefulset
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/sonarr-develop
+              tag: "3.0.9.1555"
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "${TZ}"
+              PGID: ${MEDIA_GID}
+              PUID: ${SONARR_PUID}
+              SONARR__PORT: &port 8989
+              SONARR__APPLICATION_URL: https://sonarr.${XYZ_DOMAIN}
+              SONARR__AUTHENTICATION_METHOD: None
+              SONARR__API_KEY: ${SONARR_API_KEY}
+            securityContext:
+              runAsUser: 568
+              runAsGroup: 568
+            resources:
+              requests:
+                memory: 250Mi
+                cpu: 100m
+              limits:
+                memory: 1500Mi
+        pod:
+          securityContext:
+            fsGroup: "${MEDIA_GID}"
+            fsGroupChangePolicy: "OnRootMismatch"
+            supplementalGroups:
+              - 568
+              - 100
+              # Custom Camelus Group(s)
+              - 65541
+              - 65536
+              - 65537
+
     service:
       main:
         ports:
           http:
             port: *port
+
     ingress:
       main:
         enabled: true
@@ -68,21 +94,6 @@ spec:
           - secretName: tls.sonarr
             hosts:
               - *host
-
-    securityContext:
-      runAsUser: 568
-      runAsGroup: 568
-
-    podSecurityContext:
-      fsGroup: "${MEDIA_GID}"
-      fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 568
-        - 100
-        # Custom Camelus Group(s)
-        - 65541
-        - 65536
-        - 65537
     persistence:
       config:
         enabled: true
@@ -117,9 +128,3 @@ spec:
         globalMounts:
           - path: /config/Backups
             readOnly: false
-    resources:
-      requests:
-        memory: 250Mi
-        cpu: 100m
-      limits:
-        memory: 1500Mi
