@@ -39,6 +39,7 @@ spec:
       LIDARR__LOG_LEVEL: info
       LIDARR__API_KEY: ${LIDARR_API_KEY}
       LIDARR__APPLICATION_URL: https://lidarr.${XYZ_DOMAIN}
+      LIDARR__AUTHENTICATION_METHOD: None
     service:
       main:
         ports:
