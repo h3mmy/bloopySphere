@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.4.0
       interval: 15m
       sourceRef:
         kind: HelmRepository
@@ -30,6 +30,8 @@ spec:
     controllers:
       main:
         type: statefulset
+        annotations:
+          secret.reloader.stakater.com/reload: *app
         containers:
           main:
             image:
@@ -43,6 +45,22 @@ spec:
               LIDARR__API_KEY: ${LIDARR_API_KEY}
               LIDARR__APPLICATION_URL: https://lidarr.${XYZ_DOMAIN}
               LIDARR__AUTHENTICATION_METHOD: None
+            resources:
+              requests:
+                memory: 250Mi
+                cpu: 100m
+              limits:
+                memory: 1500Mi
+        pod:
+          securityContext:
+            fsGroup: "${MEDIA_GID}"
+            fsGroupChangePolicy: "OnRootMismatch"
+            supplementalGroups:
+              - 100
+              # Custom Camelus Group(s)
+              - 65541
+              - 65536
+              - 65537
     service:
       main:
         ports:
@@ -51,7 +69,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
+        className: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           hajimari.io/appName: "LiDaRR"
@@ -66,23 +84,13 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: *port
         tls:
           - hosts:
               - *host
             secretName: tls.lidarr
-
-    podSecurityContext:
-      fsGroup: "${MEDIA_GID}"
-      fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 100
-        # Custom Camelus Group(s)
-        - 65541
-        - 65536
-        - 65537
-
-    podAnnotations:
-      secret.reloader.stakater.com/reload: *app
     persistence:
       config:
         enabled: true
@@ -91,13 +99,15 @@ spec:
       media:
         enabled: true
         existingClaim: nfs-media-pvc
-        mountPath: /Data
-        readOnly: false
+        globalMounts:
+          - path: /Data
+            readOnly: false
       media-2:
         enabled: true
         existingClaim: nfs-media-2-pvc
-        mountPath: /Data2
-        readOnly: false
+        globalMounts:
+          - path: /Data2
+            readOnly: false
       backup:
         enabled: true
         type: custom
@@ -105,16 +115,6 @@ spec:
           nfs:
             server: "${NAS_ADDRESS}"
             path: /volume3/Data/Backups/app/lidarr
-        mountPath: /config/Backups
-        readOnly: false
-    resources:
-      requests:
-        memory: 250Mi
-        cpu: 100m
-      limits:
-        memory: 1500Mi
-    # tolerations:
-    #   - key: "arch"
-    #    operator: "Equal"
-    #     value: "arm64"
-    #     effect: "NoSchedule"
+        globalMounts:
+          - path: /config/Backups
+            readOnly: false
