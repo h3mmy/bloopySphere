@@ -18,4 +18,4 @@ spec:
       middlewares:
         - name: networking-rfc1918@kubernetescrd
   tls:
-    secretName: "tls.stash"
+    passthrough: true
