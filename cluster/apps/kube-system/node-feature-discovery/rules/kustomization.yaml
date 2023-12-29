@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - google-coral-device.yaml
   - ups-device.yaml
+  - zwave-device.yaml
