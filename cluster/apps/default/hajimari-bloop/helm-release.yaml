@@ -126,6 +126,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/instance: "bloop-xyz"
           hajimari.io/icon: "weather-sunset"
+          hajimari.io/appName: admin-dash
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
         hosts:
