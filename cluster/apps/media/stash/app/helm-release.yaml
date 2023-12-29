@@ -56,8 +56,9 @@ spec:
     service:
       main:
         ports:
-          https:
+          http:
             port: 9999
+            protocol: HTTPS
 
     ingress:
       main:
@@ -80,7 +81,7 @@ spec:
               - path: /
                 service:
                   name: main
-                  port: https
+                  port: http
         tls:
           - hosts:
               - *host
