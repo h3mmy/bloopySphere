@@ -26,19 +26,22 @@ spec:
     - name: rook-ceph-cluster
       namespace: rook-ceph
   values:
-    controller:
-      type: statefulset
-    image:
-      repository: ghcr.io/onedr0p/sonarr-develop
-      tag: "3.0.9.1555"
-    env:
-      TZ: "${TZ}"
-      PGID: "${MEDIA_GID}"
-      SONARR__AUTHENTICATION_METHOD: None
-      PUID: ${SONARR_PUID}
-      SONARR__PORT: &port 8989
-      SONARR__APPLICATION_URL: https://sonarr-uhd.${XYZ_DOMAIN}
-      SONARR__API_KEY: ${SONARR_UHD_API_KEY}
+    controllers:
+      main:
+        type: statefulset
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/sonarr-develop
+              tag: "3.0.9.1555"
+            env:
+              TZ: "${TZ}"
+              PGID: "${MEDIA_GID}"
+              SONARR__AUTHENTICATION_METHOD: None
+              PUID: ${SONARR_PUID}
+              SONARR__PORT: &port 8989
+              SONARR__APPLICATION_URL: https://sonarr-uhd.${XYZ_DOMAIN}
+              SONARR__API_KEY: ${SONARR_UHD_API_KEY}
     service:
       main:
         ports:

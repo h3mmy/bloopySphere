@@ -27,19 +27,22 @@ spec:
       remediateLastFailure: true
 
   values:
-    controller:
-      type: statefulset
-    image:
-      repository: ghcr.io/onedr0p/lidarr
-      tag: 2.0.7.3849@sha256:baba272ee36cfb14103256a9b173a161c5a45ca2959c26dcd170f32cdc57c406
-    env:
-      TZ: "${TZ}"
-      LIDARR__INSTANCE_NAME: Lidarr
-      LIDARR__PORT: &port 8686
-      LIDARR__LOG_LEVEL: info
-      LIDARR__API_KEY: ${LIDARR_API_KEY}
-      LIDARR__APPLICATION_URL: https://lidarr.${XYZ_DOMAIN}
-      LIDARR__AUTHENTICATION_METHOD: None
+    controllers:
+      main:
+        type: statefulset
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/lidarr
+              tag: 2.0.7.3849@sha256:baba272ee36cfb14103256a9b173a161c5a45ca2959c26dcd170f32cdc57c406
+            env:
+              TZ: "${TZ}"
+              LIDARR__INSTANCE_NAME: Lidarr
+              LIDARR__PORT: &port 8686
+              LIDARR__LOG_LEVEL: info
+              LIDARR__API_KEY: ${LIDARR_API_KEY}
+              LIDARR__APPLICATION_URL: https://lidarr.${XYZ_DOMAIN}
+              LIDARR__AUTHENTICATION_METHOD: None
     service:
       main:
         ports:
