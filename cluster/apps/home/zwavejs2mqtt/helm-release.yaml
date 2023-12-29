@@ -122,7 +122,7 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
-                - key: "feature.node.kubernetes.io/custom-usb.zwave"
+                - key: "feature.node.kubernetes.io/zwave"
                   operator: In
                   values: ["true"]
 
