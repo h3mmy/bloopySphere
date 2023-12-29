@@ -27,3 +27,4 @@ resources:
   - infra
   - ./iam/ks.yaml
   - ./database
+  - ./system
