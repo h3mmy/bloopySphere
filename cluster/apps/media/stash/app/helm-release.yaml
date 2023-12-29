@@ -53,6 +53,17 @@ spec:
               STASH_CACHE: /cache/
               STASH_EXTERNAL_HOST: "https://stash.${XYZ_DOMAIN}"
 
+            probes:
+              liveness:
+                spec:
+                  timeoutSeconds: 3
+              readiness:
+                spec:
+                  timeoutSeconds: 3
+              startup:
+                spec:
+                  timeoutSeconds: 3
+
     service:
       main:
         ports:
