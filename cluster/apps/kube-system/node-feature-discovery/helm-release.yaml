@@ -77,6 +77,10 @@ spec:
               - "class"
               - "vendor"
               - "device"
+          # WARNING!
+          # node-feature-discovery quietly removed this in v0.15.0
+          # https://github.com/kubernetes-sigs/node-feature-discovery/issues/1344
+          # I say quietly because it was not called out in the release notes and I was caught off guard
           custom:
             - name: "ups.cp1500lcd"
               matchOn:
@@ -98,11 +102,13 @@ spec:
                     class: {op: In, value: ["02", "ff"]}
                     vendor: {op: In, value: ["0658", "10c4"]}
                     device: {op: In, value: ["0200", "ea60"]}
-            - name: "intel-gpu"
-              matchOn:
-                - pciId:
-                    class: ["0300"]
-                    vendor: ["8086"]
+            # intel-device-plugin-operator now handles this NodeFeatureRule
+            # intel.feature.node.kubernetes.io/gpu: "true"
+            # - name: "intel-gpu"
+            #   matchOn:
+            #     - pciId:
+            #         class: ["0300"]
+            #         vendor: ["8086"]
             - name: "zwave"
               matchOn:
                 - usbId:

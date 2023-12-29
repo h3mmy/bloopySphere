@@ -48,3 +48,4 @@ resources:
   - external-secrets.yaml
   - cloudnative-pg.yaml
   - grafana-operator-chart.yaml
+  - intel.yaml
