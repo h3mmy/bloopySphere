@@ -33,7 +33,6 @@ spec:
           reloader.stakater.com/auto: "true"
 
         containers:
-
           main:
             image:
               repository: ghcr.io/onedr0p/sonarr-develop
