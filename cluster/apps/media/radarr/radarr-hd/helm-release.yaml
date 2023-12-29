@@ -26,16 +26,35 @@ spec:
     - name: rook-ceph-cluster
       namespace: rook-ceph
   values:
-    image:
-      repository: ghcr.io/k8s-at-home/radarr-nightly
-      tag: v4.3.1.6748
-    env:
-      TZ: "${TZ}"
-      PGID: "${MEDIA_GID}"
-      RADARR__PORT: &port 7878
-      RADARR__APPLICATION_URL: https://radarr.${XYZ_DOMAIN}
-      RADARR__API_KEY: ${RADARR_API_KEY}
-      RADARR__AUTHENTICATION_METHOD: None
+    controllers:
+      main:
+        type: statefulset
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/radarr-nightly
+              tag: v4.3.1.6748
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "${TZ}"
+              PGID: "${MEDIA_GID}"
+              RADARR__PORT: &port 7878
+              RADARR__APPLICATION_URL: https://radarr.${XYZ_DOMAIN}
+              RADARR__API_KEY: ${RADARR_API_KEY}
+              RADARR__AUTHENTICATION_METHOD: None
+            securityContext:
+              runAsUser: 0
+              runAsGroup: 0
+        pod:
+          securityContext:
+            fsGroup: "${MEDIA_GID}"
+            fsGroupChangePolicy: "OnRootMismatch"
+            supplementalGroups:
+              - 100
+              # Custom Camelus Group(s)
+              - 65541
+              - 65536
+              - 65537
     service:
       main:
         ports:
@@ -44,7 +63,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
+        className: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           hajimari.io/enable: "true"
@@ -58,24 +77,14 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: *port
         tls:
           - secretName: tls.radarr
             hosts:
               - *host
 
-    securityContext:
-      runAsUser: 0
-      runAsGroup: 0
-
-    podSecurityContext:
-      fsGroup: "${MEDIA_GID}"
-      fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 100
-        # Custom Camelus Group(s)
-        - 65541
-        - 65536
-        - 65537
     persistence:
       config:
         enabled: true
@@ -87,8 +96,9 @@ spec:
           nfs:
             server: "${NAS_ADDRESS}"
             path: /volume3/Data
-        mountPath: /Data
-        readOnly: false
+        globalMounts:
+          - path: /Data
+            readOnly: false
       media-2:
         enabled: true
         type: custom
@@ -96,8 +106,9 @@ spec:
           nfs:
             server: "${NAS_ADDRESS}"
             path: /volume1/Data2
-        mountPath: /Data2
-        readOnly: false
+        globalMounts:
+          - path: /Data2
+            readOnly: false
       backup:
         enabled: true
         type: custom
@@ -105,8 +116,9 @@ spec:
           nfs:
             server: "${NAS_ADDRESS}"
             path: /volume3/Data/Backups/app/radarr
-        mountPath: /config/Backups
-        readOnly: false
+        globalMounts:
+          - path: /config/Backups
+            readOnly: false
     resources:
       requests:
         memory: 327M

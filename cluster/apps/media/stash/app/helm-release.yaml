@@ -44,6 +44,7 @@ spec:
             image:
               repository: stashapp/stash
               tag: v0.24.1@sha256:170ad8c69caa8df6c9ab804a78a9aa56db7ee32004737074b53c4acde8719956
+              pullPolicy: IfNotPresent
 
             env:
               TZ: "${TZ}"
