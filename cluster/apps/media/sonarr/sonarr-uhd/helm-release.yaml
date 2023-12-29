@@ -42,7 +42,8 @@ spec:
             env:
               TZ: "${TZ}"
               PGID: "${MEDIA_GID}"
-              SONARR__AUTHENTICATION_METHOD: None
+              SONARR__AUTHENTICATION_METHOD: External
+              SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
               PUID: ${SONARR_PUID}
               SONARR__PORT: &port 8989
               SONARR__APPLICATION_URL: https://sonarr-uhd.${XYZ_DOMAIN}

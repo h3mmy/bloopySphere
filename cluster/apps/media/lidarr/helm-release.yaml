@@ -45,7 +45,8 @@ spec:
               LIDARR__LOG_LEVEL: info
               LIDARR__API_KEY: ${LIDARR_API_KEY}
               LIDARR__APPLICATION_URL: https://lidarr.${XYZ_DOMAIN}
-              LIDARR__AUTHENTICATION_METHOD: None
+              LIDARR__AUTHENTICATION_METHOD: External
+              LIDARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
             resources:
               requests:
                 memory: 250Mi
