@@ -22,8 +22,8 @@ spec:
       retries: 3
       remediateLastFailure: true
   dependsOn:
-    - name: intel-gpu-plugin
-      namespace: kube-system
+    - name: intel-device-plugin-gpu
+      namespace: system
     - name: node-feature-discovery
       namespace: kube-system
   values:
@@ -89,7 +89,6 @@ spec:
           hajimari.io/icon: "plex"
           hajimari.io/appName: "Plex"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          # traefik.ingress.kubernetes.io/router.tls.options: "networking-plex@kubernetescrd"
           traefik.ingress.kubernetes.io/router.priority: "150"
           # traefik.ingress.kubernetes.io/router.middlewares: "networking-plex-add-web@kubernetescrd"
         hosts:
@@ -150,9 +149,9 @@ spec:
       requests:
         cpu: 100m
         memory: 1500Mi
-        # gpu.intel.com/i915: 1
+        gpu.intel.com/i915: 1
       limits:
-        # gpu.intel.com/i915: 1
+        gpu.intel.com/i915: 1
         memory: 9000Mi
     affinity:
       podAntiAffinity:
@@ -170,11 +169,10 @@ spec:
                 - key: kubernetes.io/hostname
                   operator: In
                   values: ["slowpoke"]
-            # - matchExpressions:
-            #     - key: feature.node.kubernetes.io/custom-intel-gpu
-            #       operator: In
-            #       values:
-            #         - "true"
+                - key: intel.feature.node.kubernetes.io/gpu
+                  operator: In
+                  values:
+                    - "true"
                     # sidecars:
                     #   promtail:
                     #    image: grafana/promtail:2.8.4
