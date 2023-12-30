@@ -82,7 +82,7 @@ spec:
       header_name: X-JWT-Assertion
       username_claim: preferred_username
       jwk_set_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/certs
-      role_attribute_path: "contains(groups[*], 'grafana-admin') && 'GrafanaAdmin' || contains(groups[*], 'grafana-editor') && 'Editor' || 'Viewer'"
+      role_attribute_path: "contains(realm_access.roles[*], 'grafana-admin') && 'GrafanaAdmin' || contains(realm_access.roles[*], 'grafana-editor') && 'Editor' || 'Viewer'"
     security:
       admin_user: root
       admin_password: ${SECRET_GRAFANA_PASSWORD}
