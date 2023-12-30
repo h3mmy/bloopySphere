@@ -19,7 +19,7 @@ spec:
           volumeMounts:
             - name: grafana-auth
               mountPath: /scripts/grafana-auth.sh
-              subPath: cloudflare-ddns.sh
+              subPath: grafana-auth.sh
               readOnly: true
             - name: tmp
               mountPath: /tmp
