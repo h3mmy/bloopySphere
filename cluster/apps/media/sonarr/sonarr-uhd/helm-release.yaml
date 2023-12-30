@@ -31,7 +31,6 @@ spec:
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
-
         containers:
           main:
             image:
@@ -45,7 +44,7 @@ spec:
               SONARR__AUTHENTICATION_METHOD: External
               SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
               PUID: ${SONARR_PUID}
-              SONARR__PORT: &port 8989
+              SONARR__PORT: &port 80
               SONARR__APPLICATION_URL: https://sonarr-uhd.${XYZ_DOMAIN}
               SONARR__API_KEY: ${SONARR_UHD_API_KEY}
 
