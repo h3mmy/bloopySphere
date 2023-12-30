@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
   - notification.yaml
   - grafana-auth.sops.yaml
+  - grafana-alerting-auth.sops.yaml
   # - init-job.yaml
   # - scripts

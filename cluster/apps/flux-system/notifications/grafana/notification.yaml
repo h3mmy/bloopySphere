@@ -22,4 +22,4 @@ spec:
   type: grafana
   address: "http://grafana.monitoring/api/annotations"
   secretRef:
-    name: grafana-auth-flux
+    name: grafana-alerting-auth
