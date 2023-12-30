@@ -36,6 +36,9 @@ spec:
               tag: 5.2.6.8376@sha256:73f934fcaa652d0ee41af3038b943a3a1ee5146ad17646b99ed425f657a1b44a
               pullPolicy: IfNotPresent
             env:
+              # https://github.com/Radarr/Radarr/issues/7030#issuecomment-1039689518
+              # https://github.com/dotnet/runtime/issues/9336
+              COMPlus_EnableDiagnostics: "0"
               TZ: "${TZ}"
               PGID: "${MEDIA_GID}"
               RADARR__PORT: &port 7878
@@ -43,6 +46,7 @@ spec:
               RADARR__API_KEY: ${RADARR_API_KEY}
               RADARR__AUTHENTICATION_METHOD: External
               RADARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
+              RADARR__THEME: dark
             securityContext:
               runAsUser: 0
               runAsGroup: 0
