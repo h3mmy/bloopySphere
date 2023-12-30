@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://bjw-s.github.io/helm-charts/
       chart: app-template
-      version: 1.5.1
+      version: 2.4.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -34,16 +34,41 @@ spec:
     - name: traefik
       namespace: networking
   values:
-    image:
-      repository: ghcr.io/k8s-at-home/radarr-nightly
-      tag: v4.3.1.6748
-    env:
-      TZ: "${TZ}"
-      PGID: "${MEDIA_GID}"
-      RADARR__PORT: &port 7878
-      RADARR__APPLICATION_URL: https://radarr-uhd.${XYZ_DOMAIN}
-      RADARR__API_KEY: ${RADARR_UHD_API_KEY}
-      RADARR__AUTHENTICATION_METHOD: None
+    controllers:
+      main:
+        type: statefulset
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/radarr-develop
+              tag: 5.2.6.8376@sha256:73f934fcaa652d0ee41af3038b943a3a1ee5146ad17646b99ed425f657a1b44a
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "${TZ}"
+              PGID: "${MEDIA_GID}"
+              RADARR__PORT: &port 7878
+              RADARR__APPLICATION_URL: https://radarr-uhd.${XYZ_DOMAIN}
+              RADARR__API_KEY: ${RADARR_UHD_API_KEY}
+              RADARR__AUTHENTICATION_METHOD: External
+            securityContext:
+              runAsUser: 0
+              runAsGroup: 0
+            resources:
+              requests:
+                memory: 250Mi
+                cpu: 100m
+              limits:
+                memory: 1500Mi
+        pod:
+          securityContext:
+            fsGroup: "${MEDIA_GID}"
+            fsGroupChangePolicy: "OnRootMismatch"
+            supplementalGroups:
+              - 100
+              # Custom Camelus Group(s)
+              - 65541
+              - 65536
+              - 65537
     service:
       main:
         ports:
@@ -66,24 +91,13 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: *port
         tls:
           - secretName: tls.radarr-uhd
             hosts:
               - *host
-
-    securityContext:
-      runAsUser: 0
-      runAsGroup: 0
-
-    podSecurityContext:
-      fsGroup: "${MEDIA_GID}"
-      fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 100
-        # Custom Camelus Group(s)
-        - 65541
-        - 65536
-        - 65537
 
     persistence:
       config:
@@ -96,8 +110,9 @@ spec:
           nfs:
             server: "${NAS_ADDRESS}"
             path: /volume3/Data
-        mountPath: /Data
-        readOnly: false
+        globalMounts:
+          - path: /Data
+            readOnly: false
       media-2:
         enabled: true
         type: custom
@@ -105,8 +120,9 @@ spec:
           nfs:
             server: "${NAS_ADDRESS}"
             path: /volume1/Data2
-        mountPath: /Data2
-        readOnly: false
+        globalMounts:
+          - path: /Data2
+            readOnly: false
       backup:
         enabled: true
         type: custom
@@ -114,14 +130,10 @@ spec:
           nfs:
             server: "${NAS_ADDRESS}"
             path: /volume3/Data/Backups/app/radarr-uhd
-        mountPath: /config/Backups
-        readOnly: false
-    resources:
-      requests:
-        memory: 250Mi
-        cpu: 100m
-      limits:
-        memory: 1500Mi
+        globalMounts:
+          - path: /config/Backups
+            readOnly: false
+
   #  tolerations:
   #   - key: "arch"
   #     operator: "Equal"

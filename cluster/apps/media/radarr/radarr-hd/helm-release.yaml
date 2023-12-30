@@ -46,6 +46,12 @@ spec:
             securityContext:
               runAsUser: 0
               runAsGroup: 0
+            resources:
+              requests:
+                memory: 327M
+                cpu: 100m
+              limits:
+                memory: 1500Mi
         pod:
           securityContext:
             fsGroup: "${MEDIA_GID}"
@@ -120,9 +126,3 @@ spec:
         globalMounts:
           - path: /config/Backups
             readOnly: false
-    resources:
-      requests:
-        memory: 327M
-        cpu: 100m
-      limits:
-        memory: 1500Mi
