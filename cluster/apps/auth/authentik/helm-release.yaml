@@ -93,7 +93,7 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         coredns.io/hostname: "auth.${XYZ_DOMAIN}"
         traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth@kubernetescrd"
-        traefik.ingress.kubernetes.io/router.priority: "10"
+        # traefik.ingress.kubernetes.io/router.priority: "10"
         external-dns.home.arpa/enabled: "true"
         external-dns.target/enabled: "true"
       hosts:

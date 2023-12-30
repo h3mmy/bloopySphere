@@ -41,7 +41,7 @@ spec:
               PUID: ${SONARR_PUID}
               SONARR__PORT: &port 8989
               SONARR__APPLICATION_URL: https://sonarr.${XYZ_DOMAIN}
-              SONARR__AUTHENTICATION_METHOD: None
+              SONARR__AUTHENTICATION_METHOD: External
               SONARR__API_KEY: ${SONARR_API_KEY}
             securityContext:
               runAsUser: 568
