@@ -71,7 +71,7 @@ spec:
     - name: cluster-apps-local-path-provisioner
     - name: cluster-wiki-db-config
     # Needed for rook-ceph bucket credentials
-    - name: cluster-wiki-db-backup
+    # - name: cluster-wiki-db-backup
   healthChecks:
     - apiVersion: postgresql.cnpg.io/v1
       kind: Cluster
