@@ -1,0 +1,102 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-wiki-db-config
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/default/wiki/db/config"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  wait: true
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  healthChecks:
+    - apiVersion: v1
+      kind: Secret
+      name: wiki-postgres-user
+      namespace: default
+    - apiVersion: v1
+      kind: Secret
+      name: cnpg-wiki-superuser
+      namespace: default
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-wiki-db-backup
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/default/wiki/db/backup"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  # wait: true
+  dependsOn:
+    - name: cluster-core-rook-ceph-cluster
+    - name: cluster-apps-cloudnative-pg
+  healthChecks:
+    - apiVersion: objectbucket.io/v1alpha1
+      kind: ObjectBucketClaim
+      name: cnpg-wiki-backup-v1
+      namespace: default
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-wiki-db-cluster
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/default/wiki/db/cluster"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  dependsOn:
+    - name: cluster-apps-cloudnative-pg
+    - name: cluster-apps-local-path-provisioner
+    - name: cluster-wiki-db-config
+    # Needed for rook-ceph bucket credentials
+    - name: cluster-wiki-db-backup
+  healthChecks:
+    - apiVersion: postgresql.cnpg.io/v1
+      kind: Cluster
+      name: wiki-postgres
+      namespace: default
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-wiki-db-alerts
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/default/wiki/db/alerts"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  dependsOn:
+    - name: core
+    - name: cluster-wiki-db-cluster
+  healthChecks:
+    - apiVersion: monitoring.coreos.com/v1
+      kind: PrometheusRule
+      name: wiki-cnpg-rules
+      namespace: default
