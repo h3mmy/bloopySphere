@@ -20,6 +20,6 @@ metadata:
   namespace: flux-system
 spec:
   type: grafana
-  address: "http://grafana.monitoring/api/annotations"
+  address: "http://grafana-service.monitoring.svc.cluster.local:3000/api/annotations"
   secretRef:
     name: grafana-alerting-auth
