@@ -45,9 +45,9 @@ spec:
               RADARR_UHD_API_KEY: ${RADARR_UHD_API_KEY}
               LIDARR_API_KEY: ${LIDARR_API_KEY}
               WHISPARR_API_KEY: ${WHISPARR_API_KEY}
-            envFrom:
-              - secretRef:
-                  name: recyclarr-secret
+            # envFrom:
+            #   - secretRef:
+            #       name: recyclarr-secret
             resources:
               requests:
                 cpu: 10m
