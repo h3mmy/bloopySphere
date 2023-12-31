@@ -2,10 +2,17 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: media
+
 configMapGenerator:
   - name: recyclarr-config
+    namespace: media
     files:
       - recyclarr.yaml
+  - name: recyclarr-sub-configs
+    namespace: media
+    files:
+      # - sonarr-hd.yaml
+      - radarr-hd.yaml
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
