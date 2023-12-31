@@ -1,0 +1,62 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: wiki-postgres
+  namespace: default
+spec:
+  instances: 1
+
+  imageName: ghcr.io/cloudnative-pg/postgresql:16
+
+  primaryUpdateStrategy: unsupervised
+
+  storage:
+    size: 5Gi
+    storageClass: ceph-block
+  postgresql:
+    parameters:
+      max_connections: "300"
+      shared_buffers: 256MB
+
+  resources:
+    requests:
+      cpu: 15m
+      # Needs to be greater than shared_buffers
+      memory: 280M
+    limits:
+      memory: 650M
+
+  monitoring:
+    enablePodMonitor: true
+
+  superuserSecret:
+    name: cnpg-wiki-superuser
+
+  bootstrap:
+    # https://docs.requarks.io/install/config
+    initdb:
+      owner: wikijs
+      database: bloopwiki
+      secret:
+        name: wiki-postgres-user
+      encoding: 'UTF8'
+
+  backup:
+    retentionPolicy: 30d
+    barmanObjectStore:
+      wal:
+        compression: bzip2
+        maxParallel: 5
+      destinationPath: s3://cnpg/v16/v1
+      endpointURL: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local
+      # credentials are populated via rook-ceph-operator
+      s3Credentials:
+        accessKeyId:
+          name: cnpg-wiki-backup-v1
+          key: AWS_ACCESS_KEY_ID
+        secretAccessKey:
+          name: cnpg-wiki-backup-v1
+          key: AWS_SECRET_ACCESS_KEY
+
+  externalClusters: []
