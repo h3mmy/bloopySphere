@@ -2,7 +2,23 @@
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
-  name: flux-cluster-dashboard
+  name: flux-cluster
   namespace: monitoring
 spec:
   url: https://raw.githubusercontent.com/fluxcd/flux2/v2.2.1/manifests/monitoring/monitoring-config/dashboards/cluster.json
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: flux-control-plane
+  namespace: monitoring
+spec:
+  url: https://raw.githubusercontent.com/fluxcd/flux2/v2.2.1/manifests/monitoring/monitoring-config/dashboards/control-plane.json
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: flux-logs
+  namespace: monitoring
+spec:
+  url: https://raw.githubusercontent.com/fluxcd/flux2/v2.2.1/manifests/monitoring/monitoring-config/dashboards/logs.json
