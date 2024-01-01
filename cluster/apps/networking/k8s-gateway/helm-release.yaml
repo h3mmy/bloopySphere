@@ -26,7 +26,8 @@ spec:
     fallthrough:
       enabled: true
     domain: ${XYZ_DOMAIN}
-    ttl: 1
+    apex: dns
+    ttl: 300
     service:
       type: LoadBalancer
       port: 53
