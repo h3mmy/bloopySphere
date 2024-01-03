@@ -35,7 +35,7 @@ spec:
       repository: ghcr.io/lldap/lldap
       # tag: v0.4.32@sha256:a2ac9a9a63fd7e926ee7b3bedafc77d428a2e8c80131853071f29234d85efa96
       # TODO: Switch to release tag on next release
-      tag: latest-alpine@sha256:e17f08927e232e00eded7140d01aed85682a596f6151fe9b988a70afa21d9417
+      tag: latest-alpine@sha256:7bc69999443c57cc281d5dab5ca7d3dc822d25817c0d9aa8ad3e4ccadfded594
     env:
       TZ: ${TZ}
       LLDAP_HTTP_PORT: &port 80
