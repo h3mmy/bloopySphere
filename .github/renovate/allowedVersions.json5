@@ -46,6 +46,11 @@
         "matchDatasources": ["helm"],
         "matchPackageNames": ["metallb"],
         "allowedVersions": "<0.13.0"
+      },
+      {
+        matchDatasources: ["docker"],
+        matchPackageNames: ["registry.gitlab.com/h3mmy/bloopyboi"],
+        allowedVersions: ">=0.4.0"
       }
     ]
   }
