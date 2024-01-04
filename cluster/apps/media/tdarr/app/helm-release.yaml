@@ -114,7 +114,7 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc-1918@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
           hajimari.io/enable: "true"
           hajimari.io/instance: "bloop-quarky"
           hajimari.io/icon: material-symbols:switch-video-outline
