@@ -3,15 +3,17 @@ kind: HelmRelease
 metadata:
   name: bloopyboi
   namespace: default
+  labels:
+    component.bloopysphere-0/aspect: automata
 spec:
   interval: 60m
   chart:
     spec:
-      chart: bloopyboi
-      version: 0.1.1
+      chart: app-template
+      version: 2.4.0
       sourceRef:
         kind: HelmRepository
-        name: bloopy-charts
+        name: bjw-s-charts
         namespace: flux-system
   install:
     remediation:
@@ -20,17 +22,76 @@ spec:
     remediation:
       remediateLastFailure: true
   values:
-    env:
-      TZ: ${TZ}
-    image:
-      repository: registry.gitlab.com/h3mmy/bloopyboi
-      tag: v0.4.0
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: registry.gitlab.com/h3mmy/bloopyboi
+              tag: v0.4.0
+            env:
+              TZ: ${TZ}
+              # Downward API stuff.
+              # - name: NODE_NAME
+              #   valueFrom:
+              #     fieldRef:
+              #       fieldPath: spec.nodeName
+              # - name: POD_NAME
+              #   valueFrom:
+              #     fieldRef:
+              #       fieldPath: metadata.name
+              # - name: POD_NAMESPACE
+              #   valueFrom:
+              #     fieldRef:
+              #       fieldPath: metadata.namespace
+              # - name: POD_IP
+              #   valueFrom:
+              #     fieldRef:
+              #       fieldPath: status.podIP
+              # - name: POD_SERVICE_ACCOUNT
+              #   valueFrom:
+              #     fieldRef:
+              #       fieldPath: spec.serviceAccountName
+
+    service:
+      main:
+        controller: main
+        primary: true
+        externalTrafficPolicy: Local
+        ports:
+          http:
+            port: 3000
+
+    configMaps:
+      config:
+        # -- Enables or disables the configMap
+        enabled: true
+        # -- configMap data content. Helm template enabled.
+        data:
+          config.yaml: |
+            botName: BloopyBoi
+
+            # -- Log Level (info, warn, error, debug)
+            logLevel: info
+
+            # -- Feature Settings
+            features:
+                # -- Enables and configures InspiroBot
+              - name: inspiro
+                enabled: true
+                data:
+                  - api_url: "https://inspirobot.me/api?generate=true"
+                  - backup_image_url: "https://generated.inspirobot.me/a/12PYMWaBPB.jpg"
+
+  # foo: bar
   valuesFrom:
     - kind: Secret
       name: bloopyboi-secrets
-      targetPath: bloopyboi.botToken
+      targetPath: configMaps.config.data.botToken
       valuesKey: botToken
     - kind: Secret
       name: bloopyboi-secrets
-      targetPath: bloopyboi.appId
+      targetPath: configMaps.config.data.appId
       valuesKey: appId

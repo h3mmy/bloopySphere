@@ -49,8 +49,8 @@ spec:
               SONARR__API_KEY: ${SONARR_UHD_API_KEY}
 
             securityContext:
-              runAsUser: 568
-              runAsGroup: 568
+              runAsUser: 0
+              runAsGroup: 0
 
             resources:
               requests:
