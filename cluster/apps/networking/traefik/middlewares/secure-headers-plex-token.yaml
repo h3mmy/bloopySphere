@@ -22,6 +22,7 @@ spec:
       - "Upgrade"
       - "Set-Cookie"
       - "X-Plex-Token"
+      - "Authorization"
     accessControlAllowMethods:
       - "GET"
       - "OPTIONS"
