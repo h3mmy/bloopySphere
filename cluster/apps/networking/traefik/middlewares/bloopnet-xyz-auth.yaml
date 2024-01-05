@@ -22,7 +22,7 @@ metadata:
 spec:
   chain:
     middlewares:
-      - name: networking-secure-headers@kubernetescrd
+      - name: networking-secure-headers-extra@kubernetescrd
       - name: networking-rate-limit@kubernetescrd
       - name: networking-ak-forward-auth-extra-headers@kubernetescrd
       - name: networking-error-pages@kubernetescrd

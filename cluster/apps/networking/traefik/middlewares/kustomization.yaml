@@ -21,3 +21,4 @@ resources:
   - chain-ghost-admin.yaml
   - internal-only-auth.yaml
   - cluster-only.yaml
+  - secure-headers-plex-token.yaml
