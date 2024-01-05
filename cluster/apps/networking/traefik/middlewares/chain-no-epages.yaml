@@ -9,4 +9,4 @@ spec:
     middlewares:
       - name: networking-secure-headers@kubernetescrd
       - name: networking-rate-limit@kubernetescrd
-      - name: networking-authentik@kubernetescrd
+      - name: auth-ak-outpost-authentik-embedded-outpost@kubernetescrd
