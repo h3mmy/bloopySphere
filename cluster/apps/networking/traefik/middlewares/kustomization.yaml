@@ -5,7 +5,7 @@ resources:
   - cloudflare.yaml
   - rfc1918.yaml
   - redirect-path.yaml
-  - forward-auth.yaml
+  - ak-forward-auth-extra-headers.yaml
   - rate-limit.yaml
   - keycloak-forward-auth.yaml
   - bloopnet-xyz-auth.yaml

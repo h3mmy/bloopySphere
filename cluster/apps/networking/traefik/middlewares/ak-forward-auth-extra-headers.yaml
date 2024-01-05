@@ -2,10 +2,10 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: authentik
+  name: ak-forward-auth-extra-headers
   namespace: networking
 spec:
   forwardAuth:
-    address: https://auth.${XYZ_DOMAIN}/outpost.goauthentik.io/auth/traefik
+    address: http://ak-outpost-authentik-embedded-outpost.auth.svc.cluster.local:9000/outpost.goauthentik.io/auth/traefik
     trustForwardHeader: true
     authResponseHeadersRegex: ^.*$

@@ -17,14 +17,14 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: bloopnet-xyz-auth-backup
+  name: bloopnet-xyz-auth-extra
   namespace: networking
 spec:
   chain:
     middlewares:
       - name: networking-secure-headers@kubernetescrd
       - name: networking-rate-limit@kubernetescrd
-      - name: networking-authentik@kubernetescrd
+      - name: networking-ak-forward-auth-extra-headers@kubernetescrd
       - name: networking-error-pages@kubernetescrd
 ---
 apiVersion: traefik.io/v1alpha1
