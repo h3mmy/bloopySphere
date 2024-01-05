@@ -4,11 +4,3 @@ kind: Kustomization
 namespace: default
 resources:
   - ./secrets.sops.yaml
-configMapGenerator:
-  - name: bloopyboi-config
-    files:
-      - config.yaml=config.yaml
-generatorOptions:
-  disableNameSuffixHash: true
-  annotations:
-    kustomize.toolkit.fluxcd.io/substitute: disabled

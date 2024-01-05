@@ -22,7 +22,6 @@ spec:
     - apiVersion: v1
       kind: Secret
       name: bloopyboi-secrets
-      namespace: default
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -55,7 +54,6 @@ spec:
         name: cluster-secrets
       - kind: Secret
         name: bloopyboi-secrets
-        namespace: default
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta2
       kind: HelmRelease
