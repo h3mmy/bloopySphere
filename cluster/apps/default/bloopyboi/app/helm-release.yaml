@@ -64,34 +64,11 @@ spec:
           http:
             port: 3000
 
-    configMaps:
+    persistence:
       config:
-        # -- Enables or disables the configMap
         enabled: true
-        # -- configMap data content. Helm template enabled.
-        data:
-          config.yaml: |
-            botName: BloopyBoi
-
-            # -- Log Level (info, warn, error, debug)
-            logLevel: info
-
-            # -- Feature Settings
-            features:
-                # -- Enables and configures InspiroBot
-              - name: inspiro
-                enabled: true
-                data:
-                  - api_url: "https://inspirobot.me/api?generate=true"
-                  - backup_image_url: "https://generated.inspirobot.me/a/12PYMWaBPB.jpg"
-
-  # foo: bar
-  valuesFrom:
-    - kind: Secret
-      name: bloopyboi-secrets
-      targetPath: configMaps.config.data.botToken
-      valuesKey: botToken
-    - kind: Secret
-      name: bloopyboi-secrets
-      targetPath: configMaps.config.data.appId
-      valuesKey: appId
+        type: configMap
+        name: bloopyboi-config
+        globalMounts:
+          - path: /config
+            readOnly: true

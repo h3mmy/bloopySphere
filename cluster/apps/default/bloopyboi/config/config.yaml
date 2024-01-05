@@ -1,0 +1,14 @@
+botName: BloopyBoi
+botToken: ${botToken}
+appId: ${appId}
+# -- Log Level (info, warn, error, debug)
+logLevel: info
+
+# -- Feature Settings
+features:
+    # -- Enables and configures InspiroBot
+  - name: inspiro
+    enabled: true
+    data:
+      - api_url: "https://inspirobot.me/api?generate=true"
+      - backup_image_url: "https://generated.inspirobot.me/a/12PYMWaBPB.jpg"
