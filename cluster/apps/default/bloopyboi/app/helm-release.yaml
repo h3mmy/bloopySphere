@@ -59,7 +59,7 @@ spec:
       main:
         controller: main
         primary: true
-        externalTrafficPolicy: Local
+        # externalTrafficPolicy: Local
         ports:
           http:
             port: 3000
