@@ -11,6 +11,7 @@ spec:
     authResponseHeaders:
       - Authorization
       - Set-Cookie
+      - Cookie
       - X-authentik-username
       - X-authentik-groups
       - X-authentik-email
