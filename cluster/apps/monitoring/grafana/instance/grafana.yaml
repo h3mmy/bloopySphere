@@ -77,7 +77,7 @@ spec:
       api_url: https://iam.${XYZ_DOMAIN}/realms/bloopnet/protocol/openid-connect/userinfo
       role_attribute_path: "contains(groups[*], 'grafana-admin') && 'GrafanaAdmin' || contains(groups[*], 'grafana-editor') && 'Editor' || 'Viewer'"
     auth.jwt:
-      enabled: "true"
+      enabled: "false"
       auto_sign_up: "true"
       header_name: X-JWT-Assertion
       username_claim: preferred_username
