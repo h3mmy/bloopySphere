@@ -5,27 +5,93 @@ metadata:
   name: overseerr
   namespace: media
 spec:
-  interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: overseerr
-      version: 5.4.2
+      chart: app-template
+      version: 2.4.0
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
-  values:
-    image:
-      repository: ghcr.io/sct/overseerr
-      tag: 1.33.2
-    env:
-      TZ: ${TZ}
-      LOG_LEVEL: "info"
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: nfs-subdir-external-provisioner
+      namespace: kube-system
 
-    autoscaling:
-      enabled: false
+  values:
+    global:
+      defaultPodOptions:
+        affinity:
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 100
+                podAffinityTerm:
+                  labelSelector:
+                    matchExpressions:
+                      - key: app.kubernetes.io/name
+                        operator: In
+                        values:
+                          - overseerr
+                      - key: kubernetes.io/hostname
+                        operator: In
+                        values:
+                          - k8s-0
+                  topologyKey: kubernetes.io/hostname
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: ghcr.io/sct/overseerr
+              tag: 1.33.2
+            env:
+              TZ: ${TZ}
+              LOG_LEVEL: info
+              PORT: &port 5055
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/v1/status
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
+            resources:
+              requests:
+                memory: 250Mi
+                cpu: 100m
+              limits:
+                memory: 750Mi
+        pod:
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+
+    service:
+      main:
+        ports:
+          http:
+            port: 5055
 
     ingress:
       main:
@@ -44,6 +110,9 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - secretName: tls.overseerr
             hosts:
@@ -52,24 +121,8 @@ spec:
       config:
         enabled: true
         existingClaim: overseerr-config-v1
-        mountPath: /app/config
-
-    affinity:
-      podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                  - key: app.kubernetes.io/name
-                    operator: In
-                    values:
-                      - overseerr
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values:
-                      - k8s-0
-              topologyKey: kubernetes.io/hostname
+        globalMounts:
+          - path: /app/config
 
     # tolerations:
     #   - key: "arch"
@@ -83,10 +136,3 @@ spec:
     #     volumeMounts:
     #       - mountPath: /mnt/settings
     #         name: settings-file
-
-    resources:
-      requests:
-        memory: 250Mi
-        cpu: 100m
-      limits:
-        memory: 750Mi
