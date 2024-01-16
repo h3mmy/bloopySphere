@@ -12,9 +12,3 @@
 * node-problem-detector (No ARM)
 * grafana
 * goldilocks
-
-## Disabled Entries
-
-* botkube
-* promtail
-* pushgateway
