@@ -5,8 +5,8 @@ metadata:
   name: overseerr
   namespace: media
 spec:
+  interval: 30m
   chart:
-    interval: 30m
     spec:
       chart: app-template
       version: 2.4.0
@@ -49,6 +49,7 @@ spec:
                   topologyKey: kubernetes.io/hostname
     controllers:
       main:
+        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -104,6 +105,7 @@ spec:
           hajimari.io/icon: "movie-open-plus-outline"
           hajimari.io/appName: "Requests"
           hajimari.io/instance: "bloop-xyz,bloop-quarky"
+          traefik.ingress.kubernetes.io/router.priority: "99"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth-extra@kubernetescrd"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
