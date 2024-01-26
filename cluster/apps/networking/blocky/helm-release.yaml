@@ -318,7 +318,7 @@ spec:
               enable: true
               path: /metrics
             ede:
-              enable: true
+              enable: false
             ports:
               http: 4000
               https: 443
