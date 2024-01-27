@@ -26,6 +26,8 @@ spec:
       - "https://${TGR_DOMAIN}"
       - "https://www.${TGR_DOMAIN}"
       - "https://${SECRET_DOMAIN}"
+      - "https://${LJ_DOMAIN}"
+      - "https://www.${LJ_DOMAIN}"
     accessControlMaxAge: 100
     addVaryHeader: true
     stsPreload: true
@@ -39,7 +41,7 @@ spec:
       - "X-Real-IP"
       - "X-Forwarded-For"
       - "Forwarded"
-    contentSecurityPolicy: "frame-ancestors 'self' *.${XYZ_DOMAIN} *.${TGR_DOMAIN};" # script-src 'self' code.iconify.design cdnjs.cloudflare.com; object-src 'self'; require-trusted-types-for 'script';"
+    contentSecurityPolicy: "frame-ancestors 'self' *.${XYZ_DOMAIN} *.${TGR_DOMAIN} *.${LJ_DOMAIN};" # script-src 'self' code.iconify.design cdnjs.cloudflare.com; object-src 'self'; require-trusted-types-for 'script';"
     customResponseHeaders:
       X-xss-protection: "1"
       X-Robots-Tag: "all,index"

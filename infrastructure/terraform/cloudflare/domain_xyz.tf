@@ -3,6 +3,7 @@ module "cf_domain_xyz" {
   domain               = local.domains["xyz"]
   cloudflare_api_token = local.cloudflare_secrets["cloudflare_apitoken"]
   account_id           = local.cloudflare_secrets["cloudflare_account_id"]
+  enable_email_forwarding = true
   dns_entries = [
     {
       id      = "in_v4"
@@ -215,11 +216,6 @@ resource "cloudflare_page_rule" "cf_domain_xyz_plex_bypass_cache" {
   }
 }
 
-resource "cloudflare_email_routing_address" "xyz_0" {
-  account_id = local.cloudflare_secrets["cloudflare_account_id"]
-  email      = local.cloudflare_secrets["xyz_0_dest_email"]
-}
-
 resource "cloudflare_email_routing_catch_all" "xyz_0" {
   zone_id = module.cf_domain_xyz.zone_id
   name    = "catch_all"
@@ -235,7 +231,8 @@ resource "cloudflare_email_routing_catch_all" "xyz_0" {
   }
 }
 
-resource "cloudflare_email_routing_rule" "main_xyz" {
+resource "cloudflare_email_routing_rule" "xyz_0" {
+  depends_on = [ cloudflare_email_routing_address.xyz_1 ]
   zone_id = module.cf_domain_xyz.zone_id
   name    = "Forward to primary inbox"
   enabled = true
@@ -248,6 +245,6 @@ resource "cloudflare_email_routing_rule" "main_xyz" {
 
   action {
     type  = "forward"
-    value = ["${local.cloudflare_secrets["xyz_0_dest_email"]}"]
+    value = [cloudflare_email_routing_address.xyz_1.email]
   }
 }

@@ -1,33 +1,33 @@
-module "cf_domain_tyg3r" {
+module "cf_domain_lilj" {
   source               = "./modules/cf_domain"
-  domain               = local.domains["tyg3r"]
+  domain               = local.domains["lilj"]
   cloudflare_api_token = local.cloudflare_secrets["cloudflare_apitoken"]
   account_id = local.cloudflare_secrets["cloudflare_account_id"]
   enable_email_forwarding = true
   dns_entries = [
     {
       id      = "main_v4"
-      name    = "${local.domains["tyg3r"]}"
+      name    = "${local.domains["lilj"]}"
       value   = local.cloudflare_secrets["bloopysphere_ipv4"]
       type    = "A"
       proxied = true
     },
     {
       id      = "main_v6"
-      name    = "${local.domains["tyg3r"]}"
+      name    = "${local.domains["lilj"]}"
       value   = local.cloudflare_secrets["bloopysphere_ipv6_lb"]
       type    = "AAAA"
       proxied = true
     },
     {
       name    = "www"
-      value   = "${local.domains["tyg3r"]}"
+      value   = "${local.domains["lilj"]}"
       type    = "CNAME"
       proxied = true
     },
     {
       name    = "*"
-      value   = "${local.domains["tyg3r"]}"
+      value   = "${local.domains["lilj"]}"
       type    = "CNAME"
       proxied = true
     },
@@ -40,14 +40,14 @@ module "cf_domain_tyg3r" {
     # Mailgun
     {
       id    = "mailgun_dkim_1"
-      name  = "krs._domainkey.mail"
+      name  = "pic._domainkey.mg.${local.domains["lilj"]}"
       type  = "TXT"
-      value = "k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu+cIDE0k8wG22SsknCtwDpZt8629nY78M9GmNVzz6yvOx+1qxPkqZV63GP3SdliKdO3LZ/3mkKweb9iDrvVPTDe4XfWsaMJm+rb4JiXzkIr7ehBpid/a0oZ5uRWsz1peB3jyAPVCh1IZHThU3S8JWhwvHDqubVKkgAtpRM+HU0sSbm474BPCh0zqFmSwi5L8Pz8LSID2SLqdGOHE37XxC7ivrGOiG7jaG1z4A04HQTjWGrNnP7s8nuTZe4EOBT4RkjCXyX8u3fQCnjDy66x7iI3KgjW7kJLU/s2NX55icY5ZvViA2xqOhflsb5E+m1fGC1qEOmIcZl3ksm7PgiUh6wIDAQAB"
+      value = "${local.cloudflare_secrets["lilj_mailgun_dkim"]}"
     },
     {
-      hostname  = "mail.${local.domains["tyg3r"]}"
+      hostname  = "mg.${local.domains["lilj"]}"
       id        = "mailgun_spf"
-      name      = "mail.${local.domains["tyg3r"]}"
+      name      = "mg.${local.domains["lilj"]}"
       proxiable = false
       proxied   = false
       ttl       = 1
@@ -56,7 +56,7 @@ module "cf_domain_tyg3r" {
     },
     {
       id        = "mailgun_mx_2"
-      name      = "mail.${local.domains["tyg3r"]}"
+      name      = "mg.${local.domains["lilj"]}"
       priority  = 10
       proxiable = false
       proxied   = false
@@ -66,7 +66,7 @@ module "cf_domain_tyg3r" {
     },
     {
       id        = "mailgun_mx_1"
-      name      = "mail.${local.domains["tyg3r"]}"
+      name      = "mg.${local.domains["lilj"]}"
       priority  = 10
       proxiable = false
       proxied   = false
@@ -75,7 +75,7 @@ module "cf_domain_tyg3r" {
       value     = "mxa.mailgun.org"
     },
     {
-      name      = "email.mail.${local.domains["tyg3r"]}"
+      name      = "email.mg.${local.domains["lilj"]}"
       proxiable = true
       proxied   = true
       ttl       = 1
@@ -83,9 +83,9 @@ module "cf_domain_tyg3r" {
       value     = "mailgun.org"
     },
     {
-      hostname  = "${local.domains["tyg3r"]}"
+      hostname  = "${local.domains["lilj"]}"
       id        = "cloudflare_spf"
-      name      = "${local.domains["tyg3r"]}"
+      name      = "${local.domains["lilj"]}"
       proxiable = false
       proxied   = false
       ttl       = 1
@@ -98,28 +98,30 @@ module "cf_domain_tyg3r" {
   ext_dns_entries = [
     # Cloudflare MX Records are managed by email_routing resources
     {
-      hostname      = "${local.domains["tyg3r"]}"
-      priority  = 25
+      hostname      = "${local.domains["lilj"]}"
+      priority  = 53
       type      = "MX"
-      zone_id = module.cf_domain_tyg3r.zone_id
+      zone_id = module.cf_domain_lilj.zone_id
     },
     {
-      hostname      = "${local.domains["tyg3r"]}"
-      priority  = 19
+      hostname      = "${local.domains["lilj"]}"
+      priority  = 26
       type      = "MX"
-      zone_id = module.cf_domain_tyg3r.zone_id
+      zone_id = module.cf_domain_lilj.zone_id
     },
     {
-      hostname      = "${local.domains["tyg3r"]}"
-      priority  = 21
+      hostname      = "${local.domains["lilj"]}"
+      priority  = 61
       type      = "MX"
-      zone_id = module.cf_domain_tyg3r.zone_id
+      zone_id = module.cf_domain_lilj.zone_id
     }
   ]
 }
 
-resource "cloudflare_email_routing_catch_all" "tyg3r_0" {
-  zone_id = module.cf_domain_tyg3r.zone_id
+
+
+resource "cloudflare_email_routing_catch_all" "lilj_0" {
+  zone_id = module.cf_domain_lilj.zone_id
   name    = "catch_all"
   enabled = true
 
@@ -133,16 +135,16 @@ resource "cloudflare_email_routing_catch_all" "tyg3r_0" {
   }
 }
 
-resource "cloudflare_email_routing_rule" "tyg3r_0" {
+resource "cloudflare_email_routing_rule" "lilj_0" {
   depends_on = [ cloudflare_email_routing_address.tyg3r_1 ]
-  zone_id = module.cf_domain_tyg3r.zone_id
+  zone_id = module.cf_domain_lilj.zone_id
   name    = "Forward to primary inbox"
   enabled = true
 
   matcher {
     type  = "literal"
     field = "to"
-    value = "lily@${local.domains["tyg3r"]}"
+    value = "lillian@${local.domains["lilj"]}"
   }
 
   action {

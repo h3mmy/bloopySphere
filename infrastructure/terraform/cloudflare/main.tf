@@ -16,3 +16,13 @@ data "http" "bloopysphere_domains" {
 data "http" "ipv4_lookup_raw" {
   url = "http://ipv4.icanhazip.com"
 }
+
+resource "cloudflare_email_routing_address" "tyg3r_1" {
+  account_id = local.cloudflare_secrets["cloudflare_account_id"]
+  email      = local.cloudflare_secrets["tyg3r_dest_email"]
+}
+
+resource "cloudflare_email_routing_address" "xyz_1" {
+  account_id = local.cloudflare_secrets["cloudflare_account_id"]
+  email      = local.cloudflare_secrets["xyz_0_dest_email"]
+}

@@ -15,6 +15,13 @@ resource "cloudflare_zone" "zone" {
   zone   = var.domain
 }
 
+# No way to import yet
+# resource "cloudflare_email_routing_settings" "email_routing_settings" {
+#   depends_on = [ cloudflare_zone.zone ]
+#   zone_id = cloudflare_zone.zone.id
+#   enabled = var.enable_email_forwarding
+# }
+
 # Default settings for bloopysphere domains
 resource "cloudflare_zone_settings_override" "cloudflare_settings" {
   zone_id = cloudflare_zone.zone.id

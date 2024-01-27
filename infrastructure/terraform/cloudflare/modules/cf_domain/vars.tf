@@ -31,6 +31,11 @@ variable "dns_entries" {
   default = []
 }
 
+variable "enable_email_forwarding" {
+  type    = bool
+  default = false
+}
+
 
 # data {
 #     service  = "_sip"
