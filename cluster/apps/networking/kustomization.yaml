@@ -6,7 +6,7 @@ resources:
   - ./priority-class.yaml
   - ./traefik
   - ./wildcard-certificate
-  - ./blocky
+  - ./blocky/ks.yaml
   - ./error-pages
   # - ddns
   - ./k8s-gateway

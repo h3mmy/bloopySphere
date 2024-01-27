@@ -1,17 +1,22 @@
-upstream:
-  default:
-    # - tcp+udp:1.1.1.1
-    # - tcp+udp:[2606:4700:4700::1111]
-    # re-enable after fixing ipv6 incident
-    - tcp-tls:one.one.one.one
-    - tcp-tls:dns.google
-    - https://cloudflare-dns.com/dns-query
-upstreamTimeout: 5
+upstreams:
+  timeout: "5s"
+  # Default strategy is parallel_best
+  strategy: parallel_best
+  groups:
+    default:
+      - tcp+udp:1.1.1.1
+      - tcp+udp:[2606:4700:4700::1111]
+      - tcp-tls:1dot1dot1dot1.cloudflare-dns.com
+      - tcp-tls:one.one.one.one
+      - https://cloudflare-dns.com/dns-query
 bootstrapDns: tcp+udp:1.1.1.1:53
 conditional:
+  rewrite:
+    cluster.local.${DOMAIN_CORE_BLOOP}: cluster.local
   mapping:
     # local: tcp+udp:kube-dns.svc
     unifi: tcp+udp:${LOCAL_GATEWAY_MAIN}
+    lan.${XYZ_DOMAIN}: tcp+udp:${LOCAL_GATEWAY_MAIN}
     ${XYZ_DOMAIN}: tcp+udp:${LB_V4_K8S_GATEWAY},tcp+udp:${LB_V6_K8S_GATEWAY}
     ${DOMAIN_BIG_BLOOP}: tcp+udp:${LOCAL_GATEWAY_BIG_BLOOP}
     ${DOMAIN_SMALL_BLOOP}: tcp+udp:${LOCAL_GATEWAY_SMALL_BLOOP}
@@ -21,11 +26,14 @@ conditional:
     use-application-dns.net: tcp+udp:10.1.0.9
     mask.icloud.com: tcp+udp:10.1.0.9
     mask-h2.icloud.com: tcp+udp:10.1.0.9
+    # For reverse DNS lookups
+    ${LB_V4_BLOCKY_PTR}: ${LB_V4_BLOCKY}
 customDNS:
   mapping:
     ${CLASSIC_DOMAIN}: ${NAS_ADDRESS},${LB_V4_TRAEFIK_CLASSIC}
     ${SECRET_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
     ${TGR_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
+    tyg3r.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
     emqx.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
     home-assistant.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
     mqtt.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
@@ -34,16 +42,19 @@ customDNS:
 blocking:
   blockType: zeroIp
   # failStartOnListError: true
-  startStrategy: failOnError
+  loading:
+    strategy: failOnError
   blackLists:
     ads:
       - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
       - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
-      - http://sysctl.org/cameleon/hosts
+      # - http://sysctl.org/cameleon/hosts
       - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
     special:
       - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts
     doh:
+      - |
+        doh.dns.apple.com.v.aaplimg.com
       - https://raw.githubusercontent.com/Sekhan/TheGreatWall/master/TheGreatWall.txt
       - https://gist.githubusercontent.com/ckuethe/f71185f604be9cde370e702aa179fc2e/raw/53fe52046836ac3009e9505b7b8b8b5de42d84e3/doh-blocklist.txt
     none:
@@ -85,26 +96,27 @@ redis:
 prometheus:
   enable: true
   path: /metrics
-httpPort: 4000
-httpsPort: 443
-tlsPort: 853
+# See https://github.com/0xERR0R/blocky/issues/1273
+ede:
+  enable: false
+ports:
+  http: 4000
+  https: 443
+  tls: 853
 certFile: /certs/tls.crt
 keyFile: /certs/tls.key
-logLevel: info
+log:
+  level: info
 # optional: write query information (question, answer, client, duration etc.) to daily csv file
 queryLog:
   # optional one of: mysql, postgresql, csv, csv-client. If empty, log to console
   type: postgresql
   # directory (should be mounted as volume in docker) for csv, db connection string for mysql/postgresql
-  #mysql target: db_user:db_password@tcp(db_host_or_ip:3306)/db_name?charset=utf8mb4&parseTime=True&loc=Local
+  # mysql target: db_user:db_password@tcp(db_host_or_ip:3306)/db_name?charset=utf8mb4&parseTime=True&loc=Local
   target: "postgres://postgres:${BLOCKY_KUBEGRES_PASSWORD}@blocky-postgres:5432/${BLOCKY_QUERY_DB_NAME}"
   # if > 0, deletes log files which are older than ... days
   logRetentionDays: 7
   # optional: Max attempts to create specific query log writer, default: 3
-  creationAttempts: 1
+  # creationAttempts: 1
   # optional: Time between the creation attempts, default: 2s
-  creationCooldown: 2s
-# queryLog:
-#   type: mysql
-#   target: ${MARIADB_BLOCKY_USER}:${MARIADB_BLOCKY_PASSWORD}@tcp(${MARIADB_ADDRESS}:3306)/${MARIADB_BLOCKY_DATABASE}?charset=utf8mb4&parseTime=True&loc=Local
-#   logRetentionDays: 7
+  # creationCooldown: 2s
