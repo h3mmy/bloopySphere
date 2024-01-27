@@ -207,6 +207,9 @@ spec:
             - tyg3r: "${TGR_DOMAIN}"
               sans:
                 - "*.${TGR_DOMAIN}"
+            - lilj: "${LILJ_DOMAIN}"
+              sans:
+                - "*.${LILJ_DOMAIN}"
           stores: networking-default@kubernetescrd
       dns-tls:
         port: 8853
