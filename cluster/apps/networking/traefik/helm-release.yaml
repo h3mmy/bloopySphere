@@ -265,7 +265,7 @@ spec:
         cpu: 15m
         memory: 110M
       limits:
-        memory: 642M
+        memory: 742M
 
     metrics:
       prometheus:

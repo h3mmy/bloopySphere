@@ -5,7 +5,6 @@ metadata:
   name: &app ghost
   namespace: blogs
 spec:
-  interval: 5m
   chart:
     spec:
       chart: ghost
@@ -46,7 +45,7 @@ spec:
       tag: "5.76.2"
     env:
       TZ: "${TZ}"
-      url: "https://${TGR_DOMAIN}"
+      url: "https://${LILJ_DOMAIN}"
       admin__url: "https://tyg3r.${XYZ_DOMAIN}"
       database__client: mysql
       database__connection__host: ghost-mysql
@@ -57,7 +56,7 @@ spec:
       mail__options__host: smtp.mailgun.org
       mail__options__port: 465
       mail__options__secure: true
-      mail__options__auth__user: postmaster@mail.${TGR_DOMAIN}
+      mail__options__auth__user: postmaster@mg.${LILJ_DOMAIN}
       mail__options__auth__pass: ${MAILGUN_SMTP_PASSWORD}
       # mail__api_key: ${MAILGUN_API_KEY}
     ingress:
@@ -68,12 +67,16 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "ghost"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-          cert-manager.io/uri-sans: &host3 www.${TGR_DOMAIN}
+          cert-manager.io/uri-sans: &host3 www.${LILJ_DOMAIN}
           traefik.ingress.kubernetes.io/router.priority: "99"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth-tgr@kubernetescrd"
         hosts:
-          - host: &host2 ${TGR_DOMAIN}
+          - host: &host2 ${LILJ_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+          - host: www.${LILJ_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix

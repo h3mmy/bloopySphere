@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`${TGR_DOMAIN}`)
+      match: Host(`${LILJ_DOMAIN}`)
       priority: 100
       services:
         - kind: Service
@@ -18,7 +18,7 @@ spec:
       middlewares:
         - name: networking-chain-no-auth-tgr@kubernetescrd
     - kind: Rule
-      match: Host(`www.${TGR_DOMAIN}`)
+      match: Host(`www.${LILJ_DOMAIN}`)
       priority: 100
       services:
         - kind: Service
@@ -26,5 +26,11 @@ spec:
           port: 2368
       middlewares:
         - name: networking-chain-no-auth-tgr@kubernetescrd
+    - kind: Rule
+      match: Host(`${TGR_DOMAIN}`)
+      priority: 101
+      middlewares:
+        - name: blogs-redirect-tgr-lilj@kubernetescrd
+
   tls:
     secretName: "tls.tyg3r-tgr"

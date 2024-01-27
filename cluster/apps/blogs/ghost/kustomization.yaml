@@ -7,5 +7,6 @@ resources:
   - ghost-secrets.sops.yaml
   - ghost-mysql.yaml
   - routers/admin-route.yaml
+  - routers/redirect-tgr-lilj.yaml
   - routers/content-route.yaml
   - helm-release.yaml
