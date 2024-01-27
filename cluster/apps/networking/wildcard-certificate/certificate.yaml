@@ -22,5 +22,5 @@ spec:
     - "*.${SECRET_DOMAIN}"
     - "${TGR_DOMAIN}"
     - "*.${TGR_DOMAIN}"
-    - "${LJ_DOMAIN}"
-    - "*.${LJ_DOMAIN}"
+    - "${LILJ_DOMAIN}"
+    - "*.${LILJ_DOMAIN}"

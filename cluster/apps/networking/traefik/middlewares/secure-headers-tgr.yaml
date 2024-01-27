@@ -26,8 +26,8 @@ spec:
       - "https://${TGR_DOMAIN}"
       - "https://www.${TGR_DOMAIN}"
       - "https://${SECRET_DOMAIN}"
-      - "https://${LJ_DOMAIN}"
-      - "https://www.${LJ_DOMAIN}"
+      - "https://${LILJ_DOMAIN}"
+      - "https://www.${LILJ_DOMAIN}"
     accessControlMaxAge: 100
     addVaryHeader: true
     stsPreload: true
