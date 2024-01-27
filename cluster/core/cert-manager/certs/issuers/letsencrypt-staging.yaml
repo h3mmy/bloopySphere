@@ -21,3 +21,4 @@ spec:
             - ${SECRET_DOMAIN}
             - ${XYZ_DOMAIN}
             - ${TGR_DOMAIN}
+            - ${LILJ_DOMAIN}
