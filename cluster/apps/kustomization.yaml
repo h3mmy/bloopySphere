@@ -20,7 +20,6 @@ resources:
   - home
   - blogs
   - cert-manager
-  # - linkerd
   - ./kyverno/namespace.yaml
   - ./kyverno/ks.yaml
   - vault

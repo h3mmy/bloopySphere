@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - thanos
   - loki
-  # - grafana/hr
   - ./grafana/ks.yaml
   - uptimerobot
   - unifi-poller

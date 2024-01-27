@@ -11,5 +11,4 @@ resources:
   - ./kubegres
   - ./tigera-operator
   - ./mysql
-  # - ./linkerd
   - ./external-secrets
