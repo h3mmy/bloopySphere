@@ -29,8 +29,13 @@ spec:
     - kind: Rule
       match: Host(`${TGR_DOMAIN}`)
       priority: 101
+      services:
+        - kind: Service
+          name: ghost
+          port: 2368
       middlewares:
         - name: blogs-redirect-tgr-lilj@kubernetescrd
+        - name: networking-chain-no-auth@kubernetescrd
 
   tls:
     secretName: "tls.tyg3r-tgr"
