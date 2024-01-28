@@ -5,6 +5,7 @@ metadata:
   name: &app ghost
   namespace: blogs
 spec:
+  interval: 11m
   chart:
     spec:
       chart: ghost
@@ -73,10 +74,6 @@ spec:
           traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth-tgr@kubernetescrd"
         hosts:
           - host: &host2 ${LILJ_DOMAIN}
-            paths:
-              - path: /
-                pathType: Prefix
-          - host: www.${LILJ_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
