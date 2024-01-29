@@ -68,7 +68,7 @@ spec:
           secret_key: "${AUTHENTIK_S3_SECRET}"
           host: http://s3.minio.storage
       redis:
-        host: "redis://authentik-redis-headless.auth.svc.cluster.local:6379"
+        host: "authentik-redis-headless.auth.svc.cluster.local"
         password: ${AUTHENTIK_REDIS_PASSWORD}
       email:
         host: "smtp.sendgrid.net"
