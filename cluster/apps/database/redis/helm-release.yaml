@@ -24,7 +24,6 @@ spec:
       password: "${REDIS_PASSWORD}"
     master:
       persistence:
-        size: 5Gi
         existingClaim: redis-config-v1
     sentinal:
       enabled: true
