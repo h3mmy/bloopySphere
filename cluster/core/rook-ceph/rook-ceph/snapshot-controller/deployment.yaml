@@ -23,7 +23,7 @@ spec:
       serviceAccount: snapshot-controller
       containers:
         - name: snapshot-controller
-          image: registry.k8s.io/sig-storage/snapshot-controller:v6.3.3
+          image: registry.k8s.io/sig-storage/snapshot-controller:v7.0.0
           imagePullPolicy: IfNotPresent
           args:
             - "--v=5"
