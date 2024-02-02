@@ -29,8 +29,8 @@ spec:
         containers:
           main:
             image:
-              repository: bloopyboi@sha-bfdb53e7fb95df28bd50f727eee591ecfc5944e7
-              #tag: v0.4.0
+              repository: bloopyboi
+              tag: latest
             env:
               TZ: ${TZ}
               # Downward API stuff.
