@@ -29,7 +29,7 @@ spec:
         containers:
           main:
             image:
-              repository: bloopyboi
+              repository: ghcr.io/h3mmy/bloopyboi
               tag: latest
             env:
               TZ: ${TZ}
