@@ -29,8 +29,8 @@ spec:
         containers:
           main:
             image:
-              repository: registry.gitlab.com/h3mmy/bloopyboi
-              tag: v0.4.0
+              repository: bloopyboi@sha-bfdb53e7fb95df28bd50f727eee591ecfc5944e7
+              #tag: v0.4.0
             env:
               TZ: ${TZ}
               # Downward API stuff.
