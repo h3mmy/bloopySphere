@@ -5,7 +5,7 @@ metadata:
   name: cnpg-wiki-backup-v1
   namespace: default
 spec:
-  generateBucketName: wiki-postgres-backup
+  bucketName: wiki-postgres-backup
   storageClassName: ceph-bucket
   additionalConfig:
     maxObjects: "1000"
