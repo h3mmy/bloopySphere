@@ -12,3 +12,4 @@ generatorOptions:
     kustomize.toolkit.fluxcd.io/substitute: enabled
 resources:
   - helm-release.yaml
+  - secrets.sops.yaml
