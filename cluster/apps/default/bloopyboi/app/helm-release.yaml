@@ -76,6 +76,7 @@ spec:
       svckeyfile:
         enabled: true
         type: secret
+        name: bloopyboi-app-keys
         globalMounts:
           - path: *svc-keyfile
             subPath: bloopy-ops-dev.json
