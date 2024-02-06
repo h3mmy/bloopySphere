@@ -49,7 +49,7 @@ spec:
               # https://hub.docker.com/_/ghost
               repository: ghost
               # renovate: datasource=docker depName=ghost
-              tag: "5.78.0"
+              tag: "5.79.0"
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
