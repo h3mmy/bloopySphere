@@ -11,6 +11,7 @@ spec:
   namespaceSelector:
     matchNames:
       - flux-system
+      - infrastructure
   selector:
     matchExpressions:
       - key: app
@@ -22,5 +23,6 @@ spec:
           - notification-controller
           - image-automation-controller
           - image-reflector-controller
+          - tf-controller
   podMetricsEndpoints:
     - port: http-prom

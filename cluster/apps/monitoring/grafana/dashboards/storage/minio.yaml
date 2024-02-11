@@ -12,3 +12,17 @@ spec:
   datasources:
     - datasourceName: Prometheus
       inputName: DS_PROMETHEUS
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: minio-buckets
+  namespace: monitoring
+spec:
+  # Ref: https://grafana.com/grafana/dashboards/19237
+  grafanaCom:
+    id: 19237
+    revision: 1
+  datasources:
+    - datasourceName: Prometheus
+      inputName: DS_PROMETHEUS
