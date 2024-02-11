@@ -5,7 +5,9 @@ metadata:
   name: cnpg-ldap-backup-v1
   namespace: auth
 spec:
-  generateBucketName: ldap-postgres-backup
+ # generateBucketName would work but it adds that annoying suffix
+ # As long as this name is unique in the object store it is okay
+  bucketName: ldap-postgres-backup
   storageClassName: ceph-bucket
   additionalConfig:
     maxObjects: "1000"

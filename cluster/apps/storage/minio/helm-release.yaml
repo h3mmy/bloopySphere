@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.5.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -25,102 +25,154 @@ spec:
       remediateLastFailure: true
 
   values:
-    image:
-      repository: quay.io/minio/minio
-      tag: RELEASE.2024-01-29T03-56-32Z
-
     nameOverride: "minio"
+    controllers:
+      main:
+        annotations:
+          secret.reloader.stakater.com/reload: *app
+        containers:
+          main:
+            image:
+              repository: quay.io/minio/minio
+              tag: RELEASE.2024-02-09T21-25-16Z
+            env:
+              TZ: "${TZ}"
+              MINIO_UPDATE: "off"
+              MINIO_API_CORS_ALLOW_ORIGIN: https://minio.${XYZ_DOMAIN},https://s3.${XYZ_DOMAIN}
+              MINIO_ROOT_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: minio
+                    key: root-user
+              MINIO_ROOT_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: minio
+                    key: root-password
+              MINIO_PROMETHEUS_AUTH_TYPE: "public"
+              MINIO_PROMETHEUS_URL: "http://prometheus-prometheus.monitoring.svc.cluster.local:9090"
+              MINIO_PROMETHEUS_JOB_ID: "minio"
+              MINIO_BROWSER_REDIRECT_URL: "https://minio.${XYZ_DOMAIN}"
+              MINIO_SERVER_URL: "https://s3.${XYZ_DOMAIN}"
+              # MINIO_IDENTITY_OPENID_CONFIG_URL_KEYCLOAK:
+              #   valueFrom:
+              #     secretKeyRef:
+              #       name: minio
+              #       key: kc-openid-wellknown-url
+              # MINIO_IDENTITY_OPENID_CLIENT_ID_KEYCLOAK:
+              #   valueFrom:
+              #     secretKeyRef:
+              #       name: minio
+              #       key: kc-openid-client-id
+              # MINIO_IDENTITY_OPENID_CLIENT_SECRET_KEYCLOAK:
+              #   valueFrom:
+              #     secretKeyRef:
+              #       name: minio
+              #       key: kc-openid-client-secret
+              # MINIO_IDENTITY_OPENID_DISPLAY_NAME_KEYCLOAK: "BloopNet"
+              # MINIO_IDENTITY_OPENID_SCOPES_KEYCLOAK:
+              #   valueFrom:
+              #     secretKeyRef:
+              #       name: minio
+              #       key: kc-openid-scopes
+              # MINIO_IDENTITY_OPENID_CLAIM_NAME_KEYCLOAK:
+              #   valueFrom:
+              #     secretKeyRef:
+              #       name: minio
+              #       key: kc-openid-claim-name
+              # MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC_KEYCLOAK: "on"
+              MINIO_IDENTITY_OPENID_DISPLAY_NAME: "legacy bloopnet"
+              MINIO_IDENTITY_OPENID_CONFIG_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: minio
+                    key: openid-config-url
+              MINIO_IDENTITY_OPENID_CLIENT_ID:
+                valueFrom:
+                  secretKeyRef:
+                    name: minio
+                    key: openid-config-client-id
+              MINIO_IDENTITY_OPENID_CLIENT_SECRET:
+                valueFrom:
+                  secretKeyRef:
+                    name: minio
+                    key: openid-config-client-secret
+              MINIO_IDENTITY_OPENID_CLAIM_NAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: minio
+                    key: openid-config-claim-name
+              MINIO_IDENTITY_OPENID_SCOPES:
+                valueFrom:
+                  secretKeyRef:
+                    name: minio
+                    key: openid-config-scopes
+              MINIO_IDENTITY_OPENID_REDIRECT_URI:
+                valueFrom:
+                  secretKeyRef:
+                    name: minio
+                    key: openid-config-callback-uri
+              # MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC_AUTHENTIK: "on"
 
-    env:
-      TZ: "${TZ}"
-      MINIO_UPDATE: "off"
-      MINIO_ROOT_USER:
-        valueFrom:
-          secretKeyRef:
-            name: minio
-            key: root-user
-      MINIO_ROOT_PASSWORD:
-        valueFrom:
-          secretKeyRef:
-            name: minio
-            key: root-password
-      MINIO_PROMETHEUS_AUTH_TYPE: "public"
-      MINIO_PROMETHEUS_URL: "http://prometheus-prometheus.monitoring.svc.cluster.local:9090"
-      MINIO_PROMETHEUS_JOB_ID: "minio"
-      MINIO_BROWSER_REDIRECT_URL: "https://minio.${XYZ_DOMAIN}"
-      MINIO_SERVER_URL: "https://s3.${XYZ_DOMAIN}"
-      # MINIO_IDENTITY_OPENID_CONFIG_URL_KEYCLOAK:
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: minio
-      #       key: kc-openid-wellknown-url
-      # MINIO_IDENTITY_OPENID_CLIENT_ID_KEYCLOAK:
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: minio
-      #       key: kc-openid-client-id
-      # MINIO_IDENTITY_OPENID_CLIENT_SECRET_KEYCLOAK:
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: minio
-      #       key: kc-openid-client-secret
-      # MINIO_IDENTITY_OPENID_DISPLAY_NAME_KEYCLOAK: "BloopNet"
-      # MINIO_IDENTITY_OPENID_SCOPES_KEYCLOAK:
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: minio
-      #       key: kc-openid-scopes
-      # MINIO_IDENTITY_OPENID_CLAIM_NAME_KEYCLOAK:
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: minio
-      #       key: kc-openid-claim-name
-      # MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC_KEYCLOAK: "on"
-      MINIO_IDENTITY_OPENID_DISPLAY_NAME: "legacy bloopnet"
-      MINIO_IDENTITY_OPENID_CONFIG_URL:
-        valueFrom:
-          secretKeyRef:
-            name: minio
-            key: openid-config-url
-      MINIO_IDENTITY_OPENID_CLIENT_ID:
-        valueFrom:
-          secretKeyRef:
-            name: minio
-            key: openid-config-client-id
-      MINIO_IDENTITY_OPENID_CLIENT_SECRET:
-        valueFrom:
-          secretKeyRef:
-            name: minio
-            key: openid-config-client-secret
-      MINIO_IDENTITY_OPENID_CLAIM_NAME:
-        valueFrom:
-          secretKeyRef:
-            name: minio
-            key: openid-config-claim-name
-      MINIO_IDENTITY_OPENID_SCOPES:
-        valueFrom:
-          secretKeyRef:
-            name: minio
-            key: openid-config-scopes
-      MINIO_IDENTITY_OPENID_REDIRECT_URI:
-        valueFrom:
-          secretKeyRef:
-            name: minio
-            key: openid-config-callback-uri
-      # MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC_AUTHENTIK: "on"
+            args:
+              - server
+              - /data
+              - --console-address
+              - :9001
 
-    args:
-      - server
-      - /data
-      - --console-address
-      - :9001
+            securityContext:
+              runAsUser: 0
+              runAsGroup: 0
+
+            resources:
+              requests:
+                cpu: 77m
+                memory: 866M
+              limits:
+                cpu: 849m
+                memory: 1258M
+        pod:
+          securityContext:
+            fsGroup: 65539
+            fsGroupChangePolicy: "OnRootMismatch"
+            supplementalGroups:
+              - 100
+              - 101
+              - 5600
+              # Custom Camelus Group(s)
+              - 65541
+              - 65540
+              - 65539
+              - 65537
+          affinity:
+            nodeAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - weight: 100
+                  preference:
+                    matchExpressions:
+                      - key: "kubernetes.io/hostname"
+                        operator: In
+                        values:
+                          - k8s-2
+                          - k8s-3
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: "kubernetes.io/arch"
+                        operator: In
+                        values:
+                          - amd64
+                          - i386
+                          - i686
+                          - x86
 
     persistence:
       data:
         enabled: true
         existingClaim: pvc-data-v1
-        mountPath: /data
-        readOnly: false
+        globalMounts:
+          - path: /data
+            readOnly: false
 
     service:
       main:
@@ -149,7 +201,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
+        className: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
           hajimari.io/instance: "bloop-xyz"
@@ -157,7 +209,7 @@ spec:
           hajimari.io/icon: "nas"
           hajimari.io/appName: "MinIO"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918-ips@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
         hosts:
           - host: &host-console "minio.${XYZ_DOMAIN}"
             paths:
@@ -176,53 +228,3 @@ spec:
             hosts:
               - *host-console
               - *host-api
-
-    podAnnotations:
-      secret.reloader.stakater.com/reload: *app
-
-    securityContext:
-      runAsUser: 0
-      runAsGroup: 0
-
-    podSecurityContext:
-      fsGroup: 65539
-      fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 100
-        - 101
-        - 5600
-        # Custom Camelus Group(s)
-        - 65541
-        - 65540
-        - 65539
-        - 65537
-
-    affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            preference:
-              matchExpressions:
-                - key: "kubernetes.io/hostname"
-                  operator: In
-                  values:
-                    - k8s-2
-                    - k8s-3
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: "kubernetes.io/arch"
-                  operator: In
-                  values:
-                    - amd64
-                    - i386
-                    - i686
-                    - x86
-
-    resources:
-      requests:
-        cpu: 77m
-        memory: 866M
-      limits:
-        cpu: 849m
-        memory: 1258M

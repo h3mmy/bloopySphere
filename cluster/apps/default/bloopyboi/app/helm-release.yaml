@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.4.0
+      version: 2.5.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -29,10 +29,11 @@ spec:
         containers:
           main:
             image:
-              repository: registry.gitlab.com/h3mmy/bloopyboi
-              tag: v0.4.0
+              repository: ghcr.io/h3mmy/bloopyboi
+              tag: dev@sha256:49c72bb4d8529bdec82c8e426d4f6bd3cc86607fb3ab035b909abb73f767f5ba
             env:
               TZ: ${TZ}
+              GOOGLE_APPLICATION_CREDENTIALS: &svc-keyfile /bloopy-ops-dev.json
               # Downward API stuff.
               # - name: NODE_NAME
               #   valueFrom:
@@ -72,3 +73,10 @@ spec:
         globalMounts:
           - path: /config
             readOnly: true
+      svckeyfile:
+        enabled: true
+        type: secret
+        name: bloopyboi-app-keys
+        globalMounts:
+          - path: *svc-keyfile
+            subPath: bloopy-ops-dev.json

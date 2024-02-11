@@ -48,7 +48,7 @@ spec:
       wal:
         compression: bzip2
         maxParallel: 5
-      destinationPath: s3://cnpg/v15/v2
+      destinationPath: s3://kc-postgres-backup
       endpointURL: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local
       # credentials are populated via rook-ceph-operator
       s3Credentials:
