@@ -27,7 +27,7 @@ spec:
       persistence:
         existingClaim: redis-config-v1
     sentinel:
-      enabled: true
+      enabled: false
       serviceAccount:
         create: true
       masterSet: redis-master
