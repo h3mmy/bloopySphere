@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./cloudnative-pg/ks.yaml
   # - kubegres
-  # - redis
+  - redis

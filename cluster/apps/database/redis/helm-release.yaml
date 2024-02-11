@@ -5,7 +5,7 @@ metadata:
   name: redis
   namespace: database
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       # renovate: registryUrl=https://charts.bitnami.com/bitnami
@@ -15,20 +15,24 @@ spec:
         kind: HelmRepository
         name: bitnami-charts
         namespace: flux-system
-      interval: 5m
   values:
     architecture: standalone
     auth:
       enabled: true
-      sentinal: true
+      sentinel: true
       password: "${REDIS_PASSWORD}"
     master:
+      serviceAccount:
+        create: true
       persistence:
-        size: 5Gi
         existingClaim: redis-config-v1
-    sentinal:
+    sentinel:
       enabled: true
+      serviceAccount:
+        create: true
       masterSet: redis-master
+      persistence:
+        enabled: false
     # Bitnami hasn't added ARM support yet
     affinity: |
       nodeAffinity:
