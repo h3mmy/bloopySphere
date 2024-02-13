@@ -9,7 +9,7 @@ metadata:
 spec:
   customConfig: authentik-postgres-conf
   replicas: 1
-  image: docker.io/library/postgres:15.5
+  image: docker.io/library/postgres:15.6
   database:
     size: 10Gi
     storageClassName: ceph-block
