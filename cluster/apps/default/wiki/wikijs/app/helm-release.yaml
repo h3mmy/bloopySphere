@@ -52,12 +52,12 @@ spec:
                 value: wikijs
               - name: DB_USER
                 valueFrom:
-                  secretRef:
+                  secretKeyRef:
                     name: wiki-postgres-user
                     key: username
               - name: DB_PASS
                 valueFrom:
-                  secretRef:
+                  secretKeyRef:
                     name: wiki-postgres-user
                     key: password
     service:
