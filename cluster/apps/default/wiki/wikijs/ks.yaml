@@ -1,0 +1,30 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-wiki-app
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  interval: 10m
+  path: "./cluster/apps/default/wiki/wikijs/app"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  # healthCheck field is ignored when wait is true
+  # wait: true
+  dependsOn:
+    - name: cluster-wiki-db-cluster
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  postBuild:
+    substitute: {}
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-settings
+      - kind: Secret
+        name: cluster-secrets

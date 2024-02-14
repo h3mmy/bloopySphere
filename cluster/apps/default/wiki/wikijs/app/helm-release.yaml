@@ -1,0 +1,82 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: wikijs
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.5.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: ghcr.io/requarks/wiki
+              pullPolicy: IfNotPresent
+              tag: "2.5.301"
+            env:
+              TZ: ${TZ}
+              APP_URL: "https://wiki.${XYZ_DOMAIN}"
+              DB_TYPE: postgres
+              DB_HOST: wiki-postgres-rw.default.svc.cluster.local
+              DB_PORT: 5432
+              DB_NAME: wikijs
+            envFrom:
+              - name: DB_USER
+                secretRef:
+                  name: wiki-postgres-user
+                  key: username
+              - name: DB_PASS
+                secretRef:
+                  name: wiki-postgres-user
+                  key: password
+    service:
+      main:
+        ports:
+          http:
+            port: 3000
+    ingress:
+      main:
+        enabled: true
+        className: nginx
+        annotations:
+          ingress.home.arpa/type: external-auth
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "book"
+          hajimari.io/instance: "bloop-xyz,bloop-quarky"
+          hajimari.io/appName: "Wiki"
+          hajimari.io/url: "https://wiki.${XYZ_DOMAIN}"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          coredns.io/hostname: "wiki.${XYZ_DOMAIN}"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
+        hosts:
+          - host: "wiki.${XYZ_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
