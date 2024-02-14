@@ -79,7 +79,7 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           coredns.io/hostname: "wiki.${XYZ_DOMAIN}"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
         hosts:
           - host: "wiki.${XYZ_DOMAIN}"
             paths:
