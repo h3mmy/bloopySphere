@@ -68,7 +68,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: nginx
+        className: traefik
         annotations:
           ingress.home.arpa/type: external-auth
           hajimari.io/enable: "true"
@@ -87,3 +87,4 @@ spec:
                 service:
                   name: main
                   port: http
+            secretName: tls.wikijs
