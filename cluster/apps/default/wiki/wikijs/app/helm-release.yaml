@@ -38,21 +38,28 @@ spec:
               pullPolicy: IfNotPresent
               tag: "2.5.301"
             env:
-              TZ: ${TZ}
-              APP_URL: "https://wiki.${XYZ_DOMAIN}"
-              DB_TYPE: postgres
-              DB_HOST: wiki-postgres-rw.default.svc.cluster.local
-              DB_PORT: 5432
-              DB_NAME: wikijs
-            envFrom:
+              - name: TZ
+                value: ${TZ}
+              - name: APP_URL
+                value: "https://wiki.${XYZ_DOMAIN}"
+              - name: DB_TYPE
+                value: postgres
+              - name: DB_HOST
+                value: wiki-postgres-rw.default.svc.cluster.local
+              - name: DB_PORT
+                value: 5432
+              - name: DB_NAME
+                value: wikijs
               - name: DB_USER
-                secretRef:
-                  name: wiki-postgres-user
-                  key: username
+                valueFrom:
+                  secretRef:
+                    name: wiki-postgres-user
+                    key: username
               - name: DB_PASS
-                secretRef:
-                  name: wiki-postgres-user
-                  key: password
+                valueFrom:
+                  secretRef:
+                    name: wiki-postgres-user
+                    key: password
     service:
       main:
         ports:
