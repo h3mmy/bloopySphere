@@ -1,6 +1,6 @@
 {
     "themes": [{
         "name" : "keycloak_bloopnet",
-        "types": [ "login", "email", "welcome", "admin", "account" ]
+        "types": [ "login", "account" ]
     }]
 }
