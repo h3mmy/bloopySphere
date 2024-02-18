@@ -32,8 +32,24 @@ spec:
               repository: ghcr.io/h3mmy/bloopyboi
               tag: dev@sha256:47d482beb4184a7cfb5c5ef14ae16b32f52344963e7564c8d1bfc20b3e421374
             env:
-              TZ: ${TZ}
-              GOOGLE_APPLICATION_CREDENTIALS: &svc-keyfile /bloopy-ops-dev.json
+              - name: TZ
+                value: ${TZ}
+              - name: GOOGLE_APPLICATION_CREDENTIALS
+                value: &svc-keyfile /bloopy-ops-dev.json
+              - name: DB_HOST
+                value: bloopgres-rw.database.svc.cluster.local
+              - name: DB_NAME
+                value: bloopyboi
+              - name: DB_USER
+                valueFrom:
+                  secretKeyRef:
+                    name: bloopgres-user
+                    key: username
+              - name: DB_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: bloopgres-user
+                    key: password
               # Downward API stuff.
               # - name: NODE_NAME
               #   valueFrom:
