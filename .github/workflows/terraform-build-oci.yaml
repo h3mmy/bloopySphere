@@ -42,16 +42,20 @@ jobs:
             infrastructure/terraform/**
 
       - name: List all changed files
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
-          echo '${{ steps.changed-files.outputs.all_changed_files }}'
+          echo $ALL_CHANGED_FILES
 
       - name: Store changed projects
         id: set-matrix
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
-          if [[ "${{ steps.changed-files.outputs.all_changed_files }}" == "[]" ]]; then
+          if [[ "${ALL_CHANGED_FILES}" == "[]" ]]; then
             echo "matrix={\"project\":$(find infrastructure/terraform -type d -mindepth 1 -maxdepth 1 | jo -a)}" >> "${GITHUB_OUTPUT}"
           else
-            echo "matrix={\"project\":${{ steps.changed-files.outputs.all_changed_files }}}" >> "${GITHUB_OUTPUT}"
+            echo "matrix={\"project\":${ALL_CHANGED_FILES}}" >> "${GITHUB_OUTPUT}"
           fi
   publish:
     name: Publish OCI
