@@ -1,0 +1,14 @@
+---
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: cnpg-bloopgres-backup-v1
+  namespace: database
+spec:
+ # generateBucketName would work but it adds that annoying suffix
+ # As long as this name is unique in the object store it is okay
+  bucketName: bloopgres-backup
+  storageClassName: ceph-bucket
+  additionalConfig:
+    maxObjects: "1000"
+    maxSize: "3G"

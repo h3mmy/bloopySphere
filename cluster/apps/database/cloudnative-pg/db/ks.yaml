@@ -1,0 +1,88 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-bloopgres-db-config
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/database/cloudnative-pg/db/config"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  wait: true
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-bloopgres-db-backup
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/database/cloudnative-pg/db/backup"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  # wait: true
+  dependsOn:
+    - name: cluster-core-rook-ceph-cluster
+    - name: cluster-apps-cloudnative-pg
+  healthChecks:
+    - apiVersion: objectbucket.io/v1alpha1
+      kind: ObjectBucketClaim
+      name: cnpg-bloopgres-backup-v1
+      namespace: database
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-bloopgres-db-cluster
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/database/cloudnative-pg/db/cluster"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  dependsOn:
+    - name: cluster-apps-cloudnative-pg
+    - name: cluster-apps-local-path-provisioner
+    - name: cluster-bloopgres-db-config
+    # Needed for rook-ceph bucket credentials
+    - name: cluster-bloopgres-db-backup
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-bloopgres-db-alerts
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  interval: 10m
+  path: "./cluster/apps/database/cloudnative-pg/db/alerts"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  dependsOn:
+    - name: core
+    - name: cluster-bloopgres-db-cluster
+  healthChecks:
+    - apiVersion: monitoring.coreos.com/v1
+      kind: PrometheusRule
+      name: bloopgres-cnpg-rules
+      namespace: database

@@ -1,0 +1,12 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: backup-schedule-bloopgres-v1
+  namespace: database
+spec:
+  schedule: "@daily"
+  immediate: true
+  backupOwnerReference: self
+  cluster:
+    name: ldap-postgres

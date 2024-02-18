@@ -2,6 +2,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./cloudnative-pg/ks.yaml
-  - ./cloudnative-pg/db/ks.yaml
-  - ./redis
+  - ./obc-backup-v1.yaml
+  - ./backup-schedule.yaml
