@@ -18,6 +18,15 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
+  healthChecks:
+    - apiVersion: v1
+      kind: Secret
+      name: bloopgres-user
+      namespace: database
+    - apiVersion: v1
+      kind: Secret
+      name: cnpg-bloopgres-superuser
+      namespace: database
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
