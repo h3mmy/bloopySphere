@@ -55,7 +55,7 @@ jobs:
           if [[ "${ALL_CHANGED_FILES}" == "[]" ]]; then
             echo "matrix={\"project\":$(find infrastructure/terraform -type d -mindepth 1 -maxdepth 1 | jo -a)}" >> "${GITHUB_OUTPUT}"
           else
-            echo "matrix={\"project\":${ALL_CHANGED_FILES}}" >> "${GITHUB_OUTPUT}"
+            echo "matrix={\"project\":${{ steps.changes-files.outputs.all_changed_files }}}" >> "${GITHUB_OUTPUT}"
           fi
   publish:
     name: Publish OCI
