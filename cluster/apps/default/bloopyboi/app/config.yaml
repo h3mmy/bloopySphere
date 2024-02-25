@@ -1,9 +1,34 @@
-botName: BloopyBoi
-botToken: ${botToken}
-appId: ${appId}
-# -- Log Level (info, warn, error, debug)
+discord:
+  token: ${botToken}
+  name: BloopyBoi
+  appId: ${appId}
+  guilds:
+    - id: ${efGuildId}
+      announcement:
+        channel:
+          name: bot-announcements
+          id: ${efAnnounce}
+      commands:
+        - name: book
+          enabled: true
+          roles:
+            - ${efGoblinRoleId}
+            - ${efPlexGangRoleId}
+            - ${efDevRoleId}
+        - name: requests
+          enabled: true
+          roles:
+            - ${efGoblinRoleId}
+            - ${efPlexGangRoleId}
+            - ${efDevRoleId}
 logLevel: info
-
+db:
+  name: bloopyboi
+  type: postgres
+  host: bloopgres-rw.database.svc.cluster.local
+  user: bloopyboi
+  password: ${}
+  port: 5432
 # -- Feature Settings
 features:
     # -- Enables and configures InspiroBot
