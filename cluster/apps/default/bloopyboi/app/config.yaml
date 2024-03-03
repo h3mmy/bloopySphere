@@ -27,7 +27,7 @@ db:
   type: postgres
   host: bloopgres-rw.database.svc.cluster.local
   user: bloopyboi
-  password: ${}
+  password: ${postgresPass}
   port: 5432
 # -- Feature Settings
 features:
