@@ -42,7 +42,7 @@ resources:
   - kyverno-charts.yaml
   - hashicorp-charts.yaml
   - ricoberger-charts.yaml
-  - tf-controller.yaml
+  # - tf-controller.yaml
   - angelnu-charts.yaml
   - coredns-charts.yaml
   - external-secrets.yaml
