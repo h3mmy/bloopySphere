@@ -15,6 +15,6 @@ roles:
   - src: patrickjahns.promtail
     version: 1.28.0
   - src: geerlingguy.pip
-    version: 3.0.2
+    version: 3.0.3
   - src: geerlingguy.docker
     version: 7.1.0
