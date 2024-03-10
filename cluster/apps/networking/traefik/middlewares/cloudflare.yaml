@@ -5,7 +5,7 @@ metadata:
   name: cloudflare-ips
   namespace: networking
 spec:
-  ipWhiteList:
+  ipAllowList:
     sourceRange:
       - 103.21.244.0/22
       - 103.22.200.0/22
