@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.traefik.io/traefik
       chart: traefik
-      version: 26.0.0
+      version: 26.1.0
       sourceRef:
         kind: HelmRepository
         name: traefik-charts
@@ -139,6 +139,7 @@ spec:
         # hostPort: 8443
         expose: true
         exposedPort: 443
+        exposeInternal: true
         # The port protocol (TCP/UDP)
         protocol: TCP
         # nodePort: 32443
