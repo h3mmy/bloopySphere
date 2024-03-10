@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.goauthentik.io/
       chart: authentik
-      version: 2023.10.7
+      version: 2024.2.2
       sourceRef:
         kind: HelmRepository
         name: authentik-charts
@@ -41,16 +41,72 @@ spec:
   #     valuesKey: maxmindLicenseKey
 
   values:
-    fullnameOverride: authentik
-    image:
-      repository: ghcr.io/goauthentik/server
-      # tag: 2023.6.1 # default follows chart version
-      # repository: ghcr.io/goauthentik/dev-server
-      # tag: gh-providers-proxy-rework-endpoints-1679090841-c08a9a2
-    # geoip:
-    #   enabled: true
-    podLabels:
-      spiffe.bloopysphere.arpa/enabled: "true"
+
+    global:
+      fullnameOverride: authentik
+      image:
+        repository: ghcr.io/goauthentik/server
+        # tag: 2023.6.1 # default follows chart version
+        # repository: ghcr.io/goauthentik/dev-server
+        # tag: gh-providers-proxy-rework-endpoints-1679090841-c08a9a2
+      revisionHistoryLimit: 3
+      volumeMounts:
+        - name: background-image-1
+          mountPath: /media/sound_wave.svg
+          readOnly: true
+        - name: cluster-domain-cert
+          mountPath: /certs/cluster-domain-cert
+          readOnly: true
+        #- name: spiffe
+        # mountPath: /certs/spiffe
+        # readOnly: true
+      volumes:
+        #- name: spiffe
+      #   csi:
+      #     driver: spiffe.csi.cert-manager.io
+      #     readOnly: true
+        - name: cluster-domain-cert
+          secret:
+            secretName: tls.${XYZ_DOMAIN/./-}
+            optional: false # default setting; "mysecret" must exist
+            items:
+              - key: tls.crt
+                path: fullchain.pem
+              - key: tls.key
+                path: privkey.pem
+        - name: background-image-1
+          projected:
+            defaultMode: 0775
+            sources:
+              - configMap:
+                  name: background-image-1
+                  items:
+                    - key: sound_wave.svg
+                      path: sound_wave.svg
+      podLabels:
+        spiffe.bloopysphere.arpa/enabled: "true"
+      # The redis sub-chart does not have arm support
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 60
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+                      - i386
+                      - i686
+                      - x86
+
+    geoip:
+      enabled: true
+      existingSecret:
+        secretName: geoip-secrets
+        accountId: maxmindAccountId
+        licenseKey: maxmindLicenseKey
+
     authentik:
       log_level: info
       outposts:
@@ -80,78 +136,49 @@ spec:
     # service:
     #   type: ClusterIP
     #   externalTrafficPolicy: Local
-    ingress:
-      enabled: true
-      ingressClassName: "traefik"
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: "account-lock-outline"
-        hajimari.io/instance: "bloop-xyz,bloop-quarky"
-        hajimari.io/appName: "Login Settings"
-        hajimari.io/url: "https://auth.${XYZ_DOMAIN}"
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
-        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        coredns.io/hostname: "auth.${XYZ_DOMAIN}"
-        traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth@kubernetescrd"
-        # traefik.ingress.kubernetes.io/router.priority: "10"
-        external-dns.home.arpa/enabled: "true"
-        external-dns.target/enabled: "true"
-      hosts:
-        - host: &host "auth.${XYZ_DOMAIN}"
-          paths:
-            - path: "/"
-              pathType: Prefix
-        - host: &bloop "auth.${SECRET_DOMAIN}"
-          paths:
-            - path: "/"
-              pathType: Prefix
-      tls:
-        - hosts:
-            - *host
-            - *bloop
-          secretName: "tls.authentik"
+    server:
+      metrics:
+        serviceMonitor:
+          create: true
+      ingress:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "account-lock-outline"
+          hajimari.io/instance: "bloop-xyz,bloop-quarky"
+          hajimari.io/appName: "Login Settings"
+          hajimari.io/url: "https://auth.${XYZ_DOMAIN}"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          coredns.io/hostname: "auth.${XYZ_DOMAIN}"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth@kubernetescrd"
+          # traefik.ingress.kubernetes.io/router.priority: "10"
+          external-dns.home.arpa/enabled: "true"
+          external-dns.target/enabled: "true"
+        hosts:
+          - host: &host "auth.${XYZ_DOMAIN}"
+            paths:
+              - path: "/"
+                pathType: Prefix
+          - host: &bloop "auth.${SECRET_DOMAIN}"
+            paths:
+              - path: "/"
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+              - *bloop
+            secretName: "tls.authentik"
+
     postgresql:
       enabled: false
     redis:
       enabled: false
     prometheus:
       rules:
-        create: true
-      serviceMonitor:
-        create: true
-    volumeMounts:
-      - name: background-image-1
-        mountPath: /media/sound_wave.svg
-        readOnly: true
-      - name: cluster-domain-cert
-        mountPath: /certs/cluster-domain-cert
-        readOnly: true
-      #- name: spiffe
-       # mountPath: /certs/spiffe
-       # readOnly: true
-    volumes:
-      #- name: spiffe
-     #   csi:
-     #     driver: spiffe.csi.cert-manager.io
-     #     readOnly: true
-      - name: cluster-domain-cert
-        secret:
-          secretName: tls.${XYZ_DOMAIN/./-}
-          optional: false # default setting; "mysecret" must exist
-          items:
-            - key: tls.crt
-              path: fullchain.pem
-            - key: tls.key
-              path: privkey.pem
-      - name: background-image-1
-        projected:
-          defaultMode: 0775
-          sources:
-            - configMap:
-                name: background-image-1
-                items:
-                  - key: sound_wave.svg
-                    path: sound_wave.svg
+        enabled: true
+
     worker:
       replicas: 2
 
@@ -165,20 +192,3 @@ spec:
         enabled: false
       fullnameOverride: authentik
       nameOverride: authentik
-
-    # The redis sub-chart does not have arm support
-    # Authentik helm applies this to all it's pieces. No mix-and-match like with keycloak
-    # May have to stop with the keycloak comparisons. Keycloak is far superior for customizability (imo)
-    affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 60
-            preference:
-              matchExpressions:
-                - key: kubernetes.io/arch
-                  operator: In
-                  values:
-                    - amd64
-                    - i386
-                    - i686
-                    - x86
