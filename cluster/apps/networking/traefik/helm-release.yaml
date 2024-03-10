@@ -139,6 +139,7 @@ spec:
         # hostPort: 8443
         expose: true
         exposedPort: 443
+        exposedInternal: true
         # The port protocol (TCP/UDP)
         protocol: TCP
         # nodePort: 32443
