@@ -10,3 +10,5 @@ resources:
   - routers/redirect-tgr-lilj.yaml
   - routers/content-route.yaml
   - helm-release.yaml
+  - observability/ghost-gatus.yaml
+  - observability/ghost-mysql-gatus.yaml

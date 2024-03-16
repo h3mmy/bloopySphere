@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ghost-gatus-ep
+  namespace: blogs
+  labels:
+    gatus.io/enabled: "true"
+data:
+  config.yaml: |
+    endpoints:
+      - name: ghost-server
+        group: media
+        url:  https://tyg3r.${XYZ_DOMAIN}/ghost/api/admin/site/
+        interval: 5m
+        ui:
+          hide-url: true
+          hide-hostname: true
+        headers:
+          X-Forwarded-Proto: https
+        conditions:
+          - "[STATUS] == 200"
+          - "[BODY].site.url == https://${LILJ_DOMAIN}/"
+        alerts:
+          - type: discord

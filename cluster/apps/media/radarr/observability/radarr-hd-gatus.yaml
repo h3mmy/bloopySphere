@@ -1,0 +1,24 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: radarr-hd-gatus-ep
+  namespace: media
+  labels:
+    gatus.io/enabled: "true"
+data:
+  config.yaml: |
+    endpoints:
+      - name: radarr-hd
+        group: media
+        url: http://radarr.media.svc.cluster.local:7878/api/v3/health
+        interval: 5m
+        headers:
+          X-Api-Key: ${RADARR_API_KEY}
+        ui:
+          hide-url: true
+          hide-hostname: true
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: discord

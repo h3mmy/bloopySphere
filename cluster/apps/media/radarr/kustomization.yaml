@@ -5,3 +5,5 @@ resources:
   - routers
   - radarr-hd
   - radarr-uhd
+  - observability/radarr-hd-gatus.yaml
+  - observability/radarr-uhd-gatus.yaml

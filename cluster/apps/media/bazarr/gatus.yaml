@@ -1,0 +1,24 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bazarr-gatus-ep
+  namespace: media
+  labels:
+    gatus.io/enabled: "true"
+data:
+  config.yaml: |
+    endpoints:
+      - name: bazarr-uhd
+        group: media
+        url: http://bazarr-uhd.media.svc.cluster.local:6767/api/v3/health
+        interval: 5m
+        ui:
+          hide-url: true
+          hide-hostname: true
+        headers:
+          X-Api-Key: ${BAZARR_API_KEY}
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: discord

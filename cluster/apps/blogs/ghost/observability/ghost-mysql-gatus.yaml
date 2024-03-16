@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ghost-mysql-gatus-ep
+  namespace: blogs
+  labels:
+    gatus.io/enabled: "true"
+data:
+  config.yaml: |
+    endpoints:
+      - name: ghost-database
+        group: media
+        url:  tcp://ghost-mysql.blogs.svc.cluster.local:3306
+        interval: 5m
+        ui:
+          hide-url: true
+          hide-hostname: true
+        conditions:
+          - "[CONNECTED] == 200"
+        alerts:
+          - type: discord
