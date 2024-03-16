@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: authentik-postgres-gatus-ep
+  namespace: auth
+  labels:
+    gatus.io/enabled: "true"
+data:
+  config.yaml: |
+    endpoints:
+      - name: authentik-postgres
+        group: infrastructure
+        url: tcp://authentik-postgres.auth.svc.cluster.local:5432
+        interval: 1m
+        ui:
+          hide-url: true
+          hide-hostname: true
+        conditions:
+          - "[CONNECTED] == true"
+        alerts:
+          - type: discord

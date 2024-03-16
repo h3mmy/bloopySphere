@@ -5,6 +5,7 @@ namespace: auth
 resources:
   - pvc-backup.yaml
   - authentik-postgres-db.yaml
+  - gatus.yaml
 configMapGenerator:
   - name: authentik-postgres-conf
     files:
