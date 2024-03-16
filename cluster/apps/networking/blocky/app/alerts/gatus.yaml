@@ -15,7 +15,7 @@ data:
         interval: 1m
         dns:
           query-name: "gitlab.com"
-          query-type: "ALL"
+          query-type: "A"
         ui:
           hide-url: true
           hide-hostname: true
@@ -29,7 +29,7 @@ data:
         interval: 1m
         dns:
           query-name: "${XYZ_DOMAIN}"
-          query-type: "ALL"
+          query-type: "AAAA"
         ui:
           hide-url: true
           hide-hostname: true
