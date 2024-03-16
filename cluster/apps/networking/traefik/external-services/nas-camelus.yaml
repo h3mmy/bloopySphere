@@ -23,25 +23,25 @@ spec:
     app.kubernetes.io/instance: *app
     app.kubernetes.io/name: *app
     k8s-app: *app
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: camelus-plexii-gatus-ep
-  namespace: networking
-  labels:
-    gatus.io/enabled: "true"
-data:
-  config.yaml: |
-    endpoints:
-      - name: camelus-plexii-ping
-        group: infrastructure
-        url: icmp://camelus-plexii.networking.svc.cluster.local
-        interval: 1m
-        ui:
-          hide-url: true
-          hide-hostname: true
-        conditions:
-          - "[CONNECTED] == true"
-        alerts:
-          - type: discord
+# ---
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: camelus-plexii-gatus-ep
+#   namespace: networking
+#   labels:
+#     gatus.io/enabled: "true"
+# data:
+#   config.yaml: |
+#     endpoints:
+#       - name: camelus-plexii-ping
+#         group: infrastructure
+#         url: icmp://camelus-plexii.networking.svc.cluster.local
+#         interval: 1m
+#         ui:
+#           hide-url: true
+#           hide-hostname: true
+#         conditions:
+#           - "[CONNECTED] == true"
+#         alerts:
+          # - type: discord

@@ -17,6 +17,6 @@ data:
           hide-url: true
           hide-hostname: true
         conditions:
-          - "[CONNECTED] == 200"
+          - "[CONNECTED] == true"
         alerts:
           - type: discord

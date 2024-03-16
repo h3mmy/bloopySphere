@@ -11,7 +11,7 @@ data:
     endpoints:
       - name: bazarr-uhd
         group: media
-        url: http://bazarr-uhd.media.svc.cluster.local:6767/api/v3/health
+        url: http://bazarr.media.svc.cluster.local:6767/api/v3/health
         interval: 5m
         ui:
           hide-url: true
