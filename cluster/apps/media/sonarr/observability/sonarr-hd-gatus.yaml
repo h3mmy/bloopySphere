@@ -20,6 +20,5 @@ data:
           hide-hostname: true
         conditions:
           - "[STATUS] == 200"
-          - "[BODY].type == any(ok, notice)"
         alerts:
           - type: discord

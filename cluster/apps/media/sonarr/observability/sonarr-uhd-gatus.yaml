@@ -20,6 +20,5 @@ data:
           X-Api-Key: ${SONARR_UHD_API_KEY}
         conditions:
           - "[STATUS] == 200"
-          - "[BODY].type == any(ok, notice)"
         alerts:
           - type: discord
