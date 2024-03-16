@@ -12,3 +12,4 @@ resources:
   - vector
   - node-problem-detector
   - snmp-exporter
+  - ./gatus/ks.yaml
