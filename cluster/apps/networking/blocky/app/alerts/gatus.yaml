@@ -9,9 +9,9 @@ metadata:
 data:
   config.yaml: |
     endpoints:
-      - name: blocky-udp-external
+      - name: blocky-udp-external-v4
         group: networking
-        url: blocky.networking.svc.cluster.local:53
+        url: ${LB_V4_BLOCKY}:53
         interval: 1m
         dns:
           query-name: "gitlab.com"
@@ -23,9 +23,9 @@ data:
           - "[DNS_RCODE] == NOERROR"
         alerts:
           - type: discord
-      - name: blocky-udp-internal
+      - name: blocky-udp-internal-v4
         group: networking
-        url: blocky.networking.svc.cluster.local:53
+        url: ${LB_V4_BLOCKY}:53
         interval: 1m
         dns:
           query-name: "${XYZ_DOMAIN}"
@@ -35,6 +35,7 @@ data:
           hide-hostname: true
         conditions:
           - "[DNS_RCODE] == NOERROR"
+          - "[BODY] == ${LB_V4_TRAEFIK}"
         alerts:
           - type: discord
       - name: blocky-api-http
