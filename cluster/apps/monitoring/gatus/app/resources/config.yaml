@@ -10,6 +10,13 @@ debug: false
 ui:
   title: Status | Gatus
   header: Status
+security:
+  oidc:
+    client-id: ${GATUS_CLIENT_ID}
+    client-secret: ${GATUS_CLIENT_SECRET}
+    redirect-url: https://status.${XYZ_DOMAIN}/authorization-code/callback
+    issuer-url: https://iam.${XYZ_DOMAIN}/realms/bloopnet
+    scopes: [openid]
 alerting:
   discord:
     webhook-url: ${GATUS_DISCORD_WEBHOOK_URL}
