@@ -11,13 +11,13 @@ data:
     endpoints:
       - name: sonarr-hd
         group: media
-        url: http://sonarr-hd.media.svc.cluster.local/api/v3/health:80
+        url: http://sonarr.media.svc.cluster.local/api/v3/health:80
         interval: 5m
         ui:
           hide-url: true
           hide-hostname: true
         conditions:
-          - "[STATUS] == true"
+          - "[STATUS] == 200"
           - "[BODY].type == any(ok, notice)"
         alerts:
           - type: discord

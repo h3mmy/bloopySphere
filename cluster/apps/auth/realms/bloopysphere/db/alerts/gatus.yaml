@@ -11,7 +11,7 @@ data:
     endpoints:
       - name: keycloak-postgres
         group: infrastructure
-        url: tcp://kc-postgres-rw.database.svc.cluster.local:5432
+        url: tcp://kc-postgres-rw.auth.svc.cluster.local:5432
         interval: 1m
         ui:
           hide-url: true
