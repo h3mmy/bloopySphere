@@ -35,7 +35,7 @@ data:
           hide-hostname: true
         conditions:
           - "[DNS_RCODE] == NOERROR"
-          - "[BODY] == ${LB_V4_TRAEFIK}"
+          - "[BODY] == ${LB_V6_TRAEFIK}"
         alerts:
           - type: discord
       - name: blocky-api-http
