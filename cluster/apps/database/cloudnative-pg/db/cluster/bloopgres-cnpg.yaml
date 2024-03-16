@@ -14,6 +14,9 @@ spec:
   storage:
     size: 10G
     storageClass: ceph-block
+  # This is needed in order to use init-db to bootstrap app specific dbs
+  enableSuperuserAccess: true
+
   postgresql:
     parameters:
       max_connections: "400"
