@@ -29,13 +29,13 @@ data:
         interval: 1m
         dns:
           query-name: "${XYZ_DOMAIN}"
-          query-type: "AAAA"
+          query-type: "A"
         ui:
           hide-url: true
           hide-hostname: true
         conditions:
           - "[DNS_RCODE] == NOERROR"
-          - "[BODY] == ${LB_V6_TRAEFIK}"
+          - "[BODY] == ${LB_V4_TRAEFIK}"
         alerts:
           - type: discord
       - name: blocky-api-http
