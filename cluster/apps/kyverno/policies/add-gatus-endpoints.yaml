@@ -36,6 +36,11 @@ spec:
           variable:
             value: "{{ request.object.metadata.annotations.\"gatus.io/path\" || '' }}"
             jmesPath: "to_string(@) || ''"
+        - name: GATUS_GROUP
+          variable:
+            value: "{{ request.object.metadata.annotations.\"gatus.io/group\" }}"
+            default: "{{ request.namespace }}"
+            jmesPath: "to_string(@)"
         - name: GATUS_STATUS_CODE
           variable:
             value: "{{ request.object.metadata.annotations.\"gatus.io/status-code\" || `200` }}"
@@ -56,8 +61,9 @@ spec:
               ---
               endpoints:
                 - name: {{ GATUS_NAME }}
+                  group: {{ GATUS_GROUP }}
                   url: https://{{ GATUS_HOST }}{{ GATUS_PATH }}
-                  interval: 1m
+                  interval: 5m
                   client:
                     dns-resolver: tcp://1.1.1.1:53
                   conditions:

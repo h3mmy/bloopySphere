@@ -29,12 +29,3 @@ connectivity:
   checker:
     target: 1.1.1.1:53
     interval: 1m
-endpoints:
-  - name: status
-    group: external
-    url: https://status.${XYZ_DOMAIN}
-    interval: 1m
-    conditions:
-      - "[STATUS] == 200"
-    alerts:
-      - type: discord

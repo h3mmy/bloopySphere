@@ -144,6 +144,7 @@ spec:
         enabled: true
         ingressClassName: "traefik"
         annotations:
+          gatus.io/enabled: "true"
           hajimari.io/enable: "true"
           hajimari.io/icon: "account-lock-outline"
           hajimari.io/instance: "bloop-xyz,bloop-quarky"
