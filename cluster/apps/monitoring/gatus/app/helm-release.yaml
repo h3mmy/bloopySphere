@@ -135,7 +135,9 @@ spec:
         enabled: true
         className: traefik
         annotations:
-          annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
+          traefik.ingress.kubernetes.io/affinity: "true"
           gatus.io/enabled: "true"
           gatus.io/path: *path
           hajimari.io/icon: simple-icons:statuspage
