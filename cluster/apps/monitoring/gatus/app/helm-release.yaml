@@ -87,6 +87,10 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
+              # Since we're dropping cap_net_raw we will set the sysctl to allow gatus to use icmp
+              sysctls:
+                - name: net.ipv4.ping_group_range
+                  value: "0 65536"
             resources: *resources
           config-sync:
             image: *configSyncImage
