@@ -39,7 +39,7 @@ data:
           - type: discord
       - name: blocky-api-http
         group: networking
-        url: blocky.networking.svc.cluster.local:4000
+        url: http://blocky.networking.svc.cluster.local:4000
         interval: 10m
         ui:
           hide-url: true
