@@ -14,7 +14,7 @@ data:
         url: http://sonarr.media.svc.cluster.local/api/v3/health:80
         interval: 5m
         headers:
-          - X-Api-Key: ${SONARR_API_KEY}
+          X-Api-Key: ${SONARR_API_KEY}
         ui:
           hide-url: true
           hide-hostname: true

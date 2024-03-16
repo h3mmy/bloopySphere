@@ -17,7 +17,7 @@ data:
           hide-url: true
           hide-hostname: true
         headers:
-          - X-Api-Key: ${SONARR_UHD_API_KEY}
+          X-Api-Key: ${SONARR_UHD_API_KEY}
         conditions:
           - "[STATUS] == 200"
           - "[BODY].type == any(ok, notice)"
