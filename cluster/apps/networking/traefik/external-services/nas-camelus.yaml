@@ -36,7 +36,7 @@ data:
     endpoints:
       - name: camelus-plexii-ping
         group: infrastructure
-        url: icmp://${NAS_ADDRESS}
+        url: icmp://camelus-plexii.networking.svc.cluster.local
         interval: 1m
         ui:
           hide-url: true
