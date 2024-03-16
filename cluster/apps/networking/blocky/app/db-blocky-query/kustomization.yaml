@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./pvc-db-backup.yaml
   - ./db-blocky-query.yaml
+  - ./gatus.yaml
 namespace: networking
 configMapGenerator:
   - name: blocky-postgres-conf

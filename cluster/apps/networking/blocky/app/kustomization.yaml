@@ -3,6 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./alerts/prometheus-rule.yaml
+  - ./alerts/gatus.yaml
   - ./redis
   - ./db-blocky-query
   - ./helm-release.yaml
