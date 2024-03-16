@@ -36,7 +36,7 @@ spec:
             envFrom: &envFrom
               - secretRef:
                   name: gatus-secret
-            env:
+            env: &extraEnv
               INIT_POSTGRES_DBNAME: gatus
               INIT_POSTGRES_HOST: bloopgres-rw.database.svc.cluster.local
           # TODO: Convert this to a proper 'sidecar' container someday
@@ -62,7 +62,7 @@ spec:
             image:
               repository: ghcr.io/twin/gatus
               tag: v5.8.0@sha256:fecb4c38722df59f5e00ab4fcf2393d9b8dad9161db208d8d79386dc86da8a55
-            env:
+            env: *extraEnv
               TZ: ${TZ}
               GATUS_CONFIG_PATH: /config
               CUSTOM_WEB_PORT: &port 80
