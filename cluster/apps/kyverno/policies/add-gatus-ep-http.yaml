@@ -2,7 +2,7 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: add-gatus-endpoints
+  name: add-gatus-http-endpoints
   annotations:
     policies.kyverno.io/title: Generate gatus endpoints
     policies.kyverno.io/category: Monitoring
@@ -15,7 +15,7 @@ metadata:
 spec:
   generateExisting: true
   rules:
-    - name: generate-gatus
+    - name: generate-gatus-http
       match:
         any:
           - resources:
@@ -64,8 +64,6 @@ spec:
                   group: {{ GATUS_GROUP }}
                   url: https://{{ GATUS_HOST }}{{ GATUS_PATH }}
                   interval: 5m
-                  client:
-                    dns-resolver: tcp://1.1.1.1:53
                   conditions:
                     - "[STATUS] == {{ GATUS_STATUS_CODE }}"
                   alerts:

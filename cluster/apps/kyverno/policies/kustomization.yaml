@@ -12,4 +12,4 @@ resources:
   #- ./add-linkerd-annotations-to-ns-pods.yaml
   # - ./add-grafana-instance-selector.yaml
   - ./add-svc-tls-annotations.yaml
-  - ./add-gatus-endpoints.yaml
+  - ./add-gatus-ep-http.yaml

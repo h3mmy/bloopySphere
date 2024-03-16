@@ -99,6 +99,8 @@ spec:
       provisioning: /etc/grafana/provisioning
     analytics:
       check_for_updates: "false"
+    news:
+      news_feed_enabled: "false"
   ingress:
     metadata:
       annotations:
