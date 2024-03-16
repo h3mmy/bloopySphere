@@ -11,7 +11,7 @@ data:
     endpoints:
       - name: sonarr-uhd
         group: media
-        url: http://sonarr-uhd.media.svc.cluster.local/api/v3/health:80
+        url: http://sonarr-uhd.media.svc.cluster.local:80/api/v3/health
         interval: 5m
         ui:
           hide-url: true

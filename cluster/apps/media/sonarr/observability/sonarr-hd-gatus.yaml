@@ -11,7 +11,7 @@ data:
     endpoints:
       - name: sonarr-hd
         group: media
-        url: http://sonarr.media.svc.cluster.local/api/v3/health:80
+        url: http://sonarr.media.svc.cluster.local:80/api/v3/health
         interval: 5m
         headers:
           X-Api-Key: ${SONARR_API_KEY}
