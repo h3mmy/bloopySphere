@@ -10,6 +10,8 @@ debug: false
 ui:
   title: Status | Gatus
   header: Status
+  logo: https://raw.githubusercontent.com/h3mmy/bloopySphere/main/static/assets/bloop_frog_v2_1024.jpeg
+  link: https://${XYZ_DOMAIN}
 security:
   oidc:
     client-id: ${GATUS_CLIENT_ID}
