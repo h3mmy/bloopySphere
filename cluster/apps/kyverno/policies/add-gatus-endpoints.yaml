@@ -63,4 +63,4 @@ spec:
                   conditions:
                     - "[STATUS] == {{ GATUS_STATUS_CODE }}"
                   alerts:
-                    - type: pushover
+                    - type: discord
