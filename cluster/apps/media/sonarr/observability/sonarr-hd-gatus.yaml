@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sonarr-hd-gatus-ep
+  namespace: media
+  labels:
+    gatus.io/enabled: "true"
+data:
+  config.yaml: |
+    endpoints:
+      - name: sonarr-hd
+        group: media
+        url: http://sonarr-hd.media.svc.cluster.local/api/v3/health:80
+        interval: 5m
+        ui:
+          hide-url: true
+          hide-hostname: true
+        conditions:
+          - "[STATUS] == true"
+          - "[BODY].type == any(ok, notice)"
+        alerts:
+          - type: discord

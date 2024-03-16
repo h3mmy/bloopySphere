@@ -5,3 +5,5 @@ resources:
   - routers
   - sonarr-hd
   - sonarr-uhd
+  - observability/sonarr-hd-gatus.yaml
+  - observability/sonarr-uhd-gatus.yaml
