@@ -10,7 +10,7 @@ data:
   config.yaml: |
     endpoints:
       - name: wiki-postgres
-        group: infrastructure
+        group: wiki
         url: tcp://wiki-postgres-rw.default.svc.cluster.local:5432
         interval: 1m
         ui:

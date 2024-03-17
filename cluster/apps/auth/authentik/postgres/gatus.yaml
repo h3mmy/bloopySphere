@@ -10,7 +10,7 @@ data:
   config.yaml: |
     endpoints:
       - name: authentik-postgres
-        group: infrastructure
+        group: auth
         url: tcp://authentik-postgres.auth.svc.cluster.local:5432
         interval: 1m
         ui:

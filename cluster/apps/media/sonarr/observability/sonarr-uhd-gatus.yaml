@@ -9,8 +9,8 @@ metadata:
 data:
   config.yaml: |
     endpoints:
-      - name: sonarr-uhd
-        group: media
+      - name: sonarr-uhd (tv-shows 4k)
+        group: media-requests
         url: http://sonarr-uhd.media.svc.cluster.local:80/api/v3/health
         interval: 5m
         ui:

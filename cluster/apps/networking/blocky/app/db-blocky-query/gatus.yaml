@@ -10,7 +10,7 @@ data:
   config.yaml: |
     endpoints:
       - name: blocky-postgres
-        group: infrastructure
+        group: networking
         url: tcp://blocky-postgres.networking.svc.cluster.local:5432
         interval: 1m
         ui:

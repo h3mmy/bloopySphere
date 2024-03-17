@@ -9,8 +9,8 @@ metadata:
 data:
   config.yaml: |
     endpoints:
-      - name: radarr-hd
-        group: media
+      - name: radarr-hd (movies)
+        group: media-requests
         url: http://radarr.media.svc.cluster.local:7878/api/v3/health
         interval: 5m
         headers:

@@ -10,7 +10,7 @@ data:
   config.yaml: |
     endpoints:
       - name: lldap-postgres
-        group: infrastructure
+        group: auth
         url: tcp://ldap-postgres-rw.auth.svc.cluster.local:5432
         interval: 1m
         ui:

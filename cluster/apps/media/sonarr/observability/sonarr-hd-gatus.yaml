@@ -9,8 +9,8 @@ metadata:
 data:
   config.yaml: |
     endpoints:
-      - name: sonarr-hd
-        group: media
+      - name: sonarr-hd (tv shows)
+        group: media-requests
         url: http://sonarr.media.svc.cluster.local:80/api/v3/health
         interval: 5m
         headers:

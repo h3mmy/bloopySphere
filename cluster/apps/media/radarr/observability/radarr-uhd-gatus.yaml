@@ -9,8 +9,8 @@ metadata:
 data:
   config.yaml: |
     endpoints:
-      - name: radarr-uhd
-        group: media
+      - name: radarr-uhd (movies 4k)
+        group: media-requests
         url: http://radarr-uhd.media.svc.cluster.local:7878/api/v3/health
         interval: 5m
         ui:

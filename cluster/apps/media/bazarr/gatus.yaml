@@ -9,7 +9,7 @@ metadata:
 data:
   config.yaml: |
     endpoints:
-      - name: bazarr
+      - name: bazarr (subtitles)
         group: media
         url: http://bazarr.media.svc.cluster.local:6767/api/v3/health
         interval: 5m

@@ -10,7 +10,7 @@ data:
   config.yaml: |
     endpoints:
       - name: ghost-server
-        group: media
+        group: blogs
         url:  https://tyg3r.${XYZ_DOMAIN}/ghost/api/admin/site/
         interval: 5m
         ui:

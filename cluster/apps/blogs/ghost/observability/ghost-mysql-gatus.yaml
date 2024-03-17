@@ -10,7 +10,7 @@ data:
   config.yaml: |
     endpoints:
       - name: ghost-database
-        group: media
+        group: blogs
         url:  tcp://ghost-mysql.blogs.svc.cluster.local:3306
         interval: 5m
         ui:
