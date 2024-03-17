@@ -6,9 +6,7 @@ metadata:
   namespace: monitoring
 spec:
   # Ref: https://grafana.com/grafana/dashboards/17346
-  grafanaCom:
-    id: 117346
-    revision: 7
+  url: https://raw.githubusercontent.com/traefik/traefik/master/contrib/grafana/traefik-kubernetes.json
   datasources:
     - datasourceName: Prometheus
       inputName: DS_PROMETHEUS
