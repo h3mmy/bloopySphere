@@ -15,7 +15,7 @@ data:
         interval: 3m
         conditions:
           - "[STATUS] == 200"
-          - "[BODY] == pat(claimed=\"1\")"
+          - "[BODY] == pat(*claimed=\"1\"*)"
         alerts:
           - type: discord
         ui:
