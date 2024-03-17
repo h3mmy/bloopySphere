@@ -1,0 +1,14 @@
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: traefik
+  namespace: monitoring
+spec:
+  # Ref: https://grafana.com/grafana/dashboards/17346
+  grafanaCom:
+    id: 117346
+    revision: 7
+  datasources:
+    - datasourceName: Prometheus
+      inputName: DS_PROMETHEUS
