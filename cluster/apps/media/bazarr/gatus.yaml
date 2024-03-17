@@ -9,7 +9,7 @@ metadata:
 data:
   config.yaml: |
     endpoints:
-      - name: bazarr-uhd
+      - name: bazarr
         group: media
         url: http://bazarr.media.svc.cluster.local:6767/api/v3/health
         interval: 5m
