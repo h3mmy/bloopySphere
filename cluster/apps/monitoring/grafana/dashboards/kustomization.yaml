@@ -8,3 +8,6 @@ resources:
   - ./storage
   - ./system
   - ./database
+  - ./monitoring
+  - ./kyverno
+  - ./media
