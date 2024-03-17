@@ -53,7 +53,9 @@ spec:
               - op: add
                 path: /metadata/annotations/helm.toolkit.fluxcd.io~1driftDetection
                 value: disabled
+  # Important: https://github.com/k3s-io/k3s/issues/3619
   values:
+    cleanPrometheusOperatorObjectNames: true
     crds:
       enabled: true
     fullnameOverride: prometheus
