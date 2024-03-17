@@ -89,7 +89,6 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities:
-                drop: ["ALL"]
                 add: ["NET_RAW"]
               # # Since we're dropping cap_net_raw we will set the sysctl to allow gatus to use icmp
               # # https://github.com/prometheus-community/pro-bing#linux
