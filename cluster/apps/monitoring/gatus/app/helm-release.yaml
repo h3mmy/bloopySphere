@@ -28,6 +28,8 @@ spec:
       gatus:
         annotations:
           reloader.stakater.com/auto: "true"
+          # https://github.com/prometheus-community/pro-bing#linux
+          security.alpha.kubernetes.io/sysctls: net.ipv4.ping_group_range=0 2147483647
         initContainers:
           init-db:
             image:
@@ -92,8 +94,8 @@ spec:
               sysctls:
                 - name: net.ipv4.ping_group_range
                   value: "0 2147483647"
-                - name: net.ipv6.ping_group_range
-                  value: "0 2147483647"
+                # - name: net.ipv6.ping_group_range
+                #   value: "0 2147483647"
             resources: *resources
           config-sync:
             image: *configSyncImage
@@ -112,13 +114,6 @@ spec:
             runAsNonRoot: true
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
-            # Since we're dropping cap_net_raw we will set the sysctl to allow gatus to use icmp
-            # https://github.com/prometheus-community/pro-bing#linux
-            sysctls:
-              - name: net.ipv4.ping_group_range
-                value: "0 2147483647"
-              - name: net.ipv6.ping_group_range
-                value: "0 2147483647"
     service:
       app:
         controller: *app
