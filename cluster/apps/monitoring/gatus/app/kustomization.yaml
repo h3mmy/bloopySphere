@@ -10,7 +10,7 @@ configMapGenerator:
   - name: gatus-configmap
     files:
       - config.yaml=./resources/config.yaml
-      - external-dns-config.yaml=./resources/external-dns-gatus.yaml
+      - external-dns-config.yaml=./resources/external-dns-ep.yaml
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
