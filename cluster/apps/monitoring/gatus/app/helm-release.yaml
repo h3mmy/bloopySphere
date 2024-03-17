@@ -89,14 +89,7 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities:
-                add: ["NET_RAW", "NET_ADMIN"]
-              # # Since we're dropping cap_net_raw we will set the sysctl to allow gatus to use icmp
-              # # https://github.com/prometheus-community/pro-bing#linux
-              # sysctls:
-              #   - name: net.ipv4.ping_group_range
-              #     value: "0 2147483647"
-              #   # - name: net.ipv6.ping_group_range
-              #   #   value: "0 2147483647"
+                drop: [ALL]
             resources: *resources
           config-sync:
             image: *configSyncImage

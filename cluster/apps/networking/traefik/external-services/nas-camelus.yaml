@@ -23,25 +23,26 @@ spec:
     app.kubernetes.io/instance: *app
     app.kubernetes.io/name: *app
     k8s-app: *app
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: camelus-plexii-gatus-ep
-  namespace: networking
-  labels:
-    gatus.io/enabled: "true"
-data:
-  config.yaml: |
-    endpoints:
-      - name: camelus-plexii-ping
-        group: infrastructure
-        url: icmp://${NAS_ADDRESS}
-        interval: 5m
-        ui:
-          hide-url: true
-          hide-hostname: true
-        conditions:
-          - "[CONNECTED] == true"
-        alerts:
-          - type: discord
+# Disabled pending https://github.com/TwiN/gatus/issues/697
+# ---
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: camelus-plexii-gatus-ep
+#   namespace: networking
+#   labels:
+#     gatus.io/enabled: "true"
+# data:
+#   config.yaml: |
+#     endpoints:
+#       - name: camelus-plexii-ping
+#         group: infrastructure
+#         url: icmp://${NAS_ADDRESS}
+#         interval: 5m
+#         ui:
+#           hide-url: true
+#           hide-hostname: true
+#         conditions:
+#           - "[CONNECTED] == true"
+#         alerts:
+#           - type: discord
