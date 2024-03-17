@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pihole-gatus-ep
+  namespace: monitoring
+  labels:
+    gatus.io/enabled: "true"
+data:
+  config.yaml: |
+    endpoints:
+      - name: pihole-udp-external-v4
+        group: networking
+        url: 10.1.0.9:53
+        interval: 1m
+        dns:
+          query-name: "gitlab.com"
+          query-type: "A"
+        ui:
+          hide-url: true
+          hide-hostname: true
+        conditions:
+          - "[DNS_RCODE] == NOERROR"
+        alerts:
+          - type: discord
+      - name: pihole-udp-internal-v4
+        group: networking
+        url: 10.1.0.9:53
+        interval: 1m
+        dns:
+          query-name: "${XYZ_DOMAIN}"
+          query-type: "A"
+        ui:
+          hide-url: true
+          hide-hostname: true
+        conditions:
+          - "[DNS_RCODE] == NOERROR"
+          - "[BODY] == ${LB_V4_TRAEFIK}"
+        alerts:
+          - type: discord
