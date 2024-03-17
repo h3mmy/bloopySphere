@@ -25,7 +25,8 @@ spec:
       retries: 3
   values:
     controllers:
-      uptimerobot-exporter:
+      # Name needs to match *app
+      uptimerobot-prometheus:
         containers:
           app:
             image:
