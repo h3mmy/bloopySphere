@@ -10,13 +10,13 @@ data:
   config.yaml: |
     endpoints:
       - name: plex-server
-          group: media
-          url: https://plex.${XYZ_DOMAIN}/identity
-          interval: 3m
-          conditions:
-            - "[STATUS] == 200"
-            - "[BODY] == pat(claimed=\"1\")"
-          alerts:
-            - type: discord
-          ui:
-            hide-hostname: true
+        group: media
+        url: https://plex.${XYZ_DOMAIN}/identity
+        interval: 3m
+        conditions:
+          - "[STATUS] == 200"
+          - "[BODY] == pat(claimed=\"1\")"
+        alerts:
+          - type: discord
+        ui:
+          hide-hostname: true
