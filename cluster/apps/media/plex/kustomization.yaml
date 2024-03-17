@@ -5,6 +5,7 @@ namespace: media
 resources:
   - helm-release.yaml
   - pdb.yaml
+  - gatus.yaml
 configMapGenerator:
   - name: plex-profile-configmap
     files:

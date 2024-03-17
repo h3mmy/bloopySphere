@@ -9,15 +9,14 @@ metadata:
 data:
   config.yaml: |
     endpoints:
-      - name: plex
-        group: external
-        url: https://plex.${XYZ_DOMAIN}/web/index.html
-        interval: 1m
-        client:
-          dns-resolver: tcp://1.1.1.1:53
-        conditions:
-          - "[STATUS] == 200"
-        alerts:
-          - type: discord
-        ui:
-          hide-hostname: true
+      - name: plex-server
+          group: media
+          url: https://plex.${XYZ_DOMAIN}/identity
+          interval: 3m
+          conditions:
+            - "[STATUS] == 200"
+            - "[BODY] == pat(claimed=\"1\")"
+          alerts:
+            - type: discord
+          ui:
+            hide-hostname: true
