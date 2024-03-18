@@ -47,6 +47,11 @@ jobs:
         run: |
           echo $ALL_CHANGED_FILES
 
+      - name: Install jo
+        uses: awalsh128/cache-apt-pkgs-action@v1.4.2
+        with:
+          packages: jo
+
       - name: Store changed projects
         id: set-matrix
         run: |
@@ -62,6 +67,7 @@ jobs:
       packages: write
       id-token: write
     needs: [changed-files]
+    if: ${{ needs.changed-files.outputs.matrix != '[]' }}
     strategy:
       matrix: ${{ fromJSON(needs.changed-files.outputs.matrix) }}
     steps:
