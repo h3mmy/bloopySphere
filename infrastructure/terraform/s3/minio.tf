@@ -26,7 +26,7 @@ module "minio_bucket_velero_v2" {
   }
 }
 
-# Temporary output forwarding until secret transport is ready
+# Temporary output forwarding until secret transport is ready (TODO: make issue)
 
 output "velero_access_key" {
   value = module.minio_bucket_velero_v2.minio_access_key
