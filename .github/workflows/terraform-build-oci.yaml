@@ -49,10 +49,8 @@ jobs:
 
       - name: Store changed projects
         id: set-matrix
-        env:
-          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
-          if [[ "${ALL_CHANGED_FILES}" == "[]" ]]; then
+          if [[ "${{ steps.changed-files.outputs.all_changed_files }}" == "[]" ]]; then
             echo "matrix={\"project\":$(find infrastructure/terraform -type d -mindepth 1 -maxdepth 1 | jo -a)}" >> "${GITHUB_OUTPUT}"
           else
             echo "matrix={\"project\":${{ steps.changes-files.outputs.all_changed_files }}}" >> "${GITHUB_OUTPUT}"
