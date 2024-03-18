@@ -25,9 +25,9 @@ spec:
   monitoring:
     enablePodMonitor: true
     # Ref: https://github.com/cloudnative-pg/cloudnative-pg/issues/2501
-    podMonitorMetricRelabelings:
-      - { sourceLabels: ["cluster"], targetLabel: cnpg_cluster, action: replace }
-      - { regex: cluster, action: labeldrop }
+    #podMonitorMetricRelabelings:
+    #  - { sourceLabels: ["cluster"], targetLabel: cnpg_cluster, action: replace }
+    #  - { regex: cluster, action: labeldrop }
 
   resources:
     requests:
