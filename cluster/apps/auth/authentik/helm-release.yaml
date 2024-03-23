@@ -28,20 +28,9 @@ spec:
   upgrade:
     remediation:
       retries: 5
-      remediateLastFailure: true
-
-  # valuesFrom:
-  #   - targetPath: geoip.accountId
-  #     kind: Secret
-  #     name: geoip-secrets
-  #     valuesKey: maxmindAccountId
-  #   - targetPath: geoip.licenseKey
-  #     kind: Secret
-  #     name: geoip-secrets
-  #     valuesKey: maxmindLicenseKey
+      remediateLastFailure: false
 
   values:
-
     global:
       fullnameOverride: authentik
       image:
