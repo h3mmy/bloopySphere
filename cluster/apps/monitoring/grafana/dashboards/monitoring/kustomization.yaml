@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./folder.yaml
   - ./gatus.yaml
+  - ./uptimerobot.yaml
 patches:
   - path: patch-folder.yaml
     target:
