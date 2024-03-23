@@ -1,0 +1,37 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zwavejs-gatus-ep
+  namespace: home
+  labels:
+    gatus.io/enabled: "true"
+data:
+  config.yaml: |
+    endpoints:
+      - name: zwave2mqtt-zwave-internal
+        group: home
+        url: http://zwavejs2mqtt.home.svc.cluster.local:8091/health/zwave
+        interval: 6m
+        headers:
+          Accept: text/plain
+        conditions:
+          - "[STATUS] == 200"
+          - "[BODY] == Ok"
+        alerts:
+          - type: discord
+        ui:
+          hide-hostname: true
+      - name: zwave2mqtt-mqtt-internal
+        group: home
+        url: http://zwavejs2mqtt.home.svc.cluster.local:8091/health/mqtt
+        interval: 6m
+        headers:
+          Accept: text/plain
+        conditions:
+          - "[STATUS] == 200"
+          - "[BODY] == Ok"
+        alerts:
+          - type: discord
+        ui:
+          hide-hostname: true
