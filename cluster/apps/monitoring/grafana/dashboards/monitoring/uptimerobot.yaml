@@ -1,0 +1,14 @@
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: uptimerobot
+  namespace: monitoring
+spec:
+  # Ref: https://grafana.com/grafana/dashboards/9955
+  grafanaCom:
+    id: 9955
+    revision: 2
+  datasources:
+    - datasourceName: Prometheus
+      inputName: DS_PROMETHEUS

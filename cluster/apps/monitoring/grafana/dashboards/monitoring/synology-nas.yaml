@@ -1,0 +1,25 @@
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: synology-nas-details
+  namespace: monitoring
+spec:
+  # Defined in snmp-exporter/synology-nas/dashboard
+  configMapRef:
+    name: synology-dashboard
+    key: synology-dashboard-details.json
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: synology-nas-overview
+  namespace: monitoring
+spec:
+  # Ref: https://grafana.com/grafana/dashboards/14364
+  grafanaCom:
+    id: 14364
+    revision: 8
+  datasources:
+    - datasourceName: Prometheus
+      inputName: DS_PROMETHEUS

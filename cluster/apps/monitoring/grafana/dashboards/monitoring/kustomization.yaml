@@ -5,6 +5,7 @@ resources:
   - ./folder.yaml
   - ./gatus.yaml
   - ./uptimerobot.yaml
+  - ./synology-nas.yaml
 patches:
   - path: patch-folder.yaml
     target:
