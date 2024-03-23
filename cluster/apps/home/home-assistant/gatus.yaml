@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: home-assistant-gatus-ep
+  namespace: home
+  labels:
+    gatus.io/enabled: "true"
+data:
+  # https://developers.home-assistant.io/docs/api/rest/
+  config.yaml: |
+    endpoints:
+      - name: home-assistant-rest
+        group: home
+        url: https://home-assistant.${XYZ_DOMAIN}/api/
+        interval: 7m
+        conditions:
+          - "[STATUS] == 200"
+          - "[BODY].message == \"API running.\""
+        alerts:
+          - type: discord
+        headers:
+          Authorization: Bearer ${HASS_API_TOKEN}
+          Content-Type: application/json
+        ui:
+          hide-url: true
+          hide-hostname: true
+      - name: home-assistant-postgres
+        group: home
+        url: tcp://db-home-assistant.home.svc.cluster.local:5432
+        interval: 10m
+        conditions:
+          - "[CONNECTED] == true"
+        alerts:
+          - type: discord
+        ui:
+          hide-url: true
+          hide-hostname: true
