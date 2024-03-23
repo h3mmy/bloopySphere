@@ -146,15 +146,13 @@ spec:
           # traefik.ingress.kubernetes.io/router.priority: "10"
           external-dns.home.arpa/enabled: "true"
           external-dns.target/enabled: "true"
+        # The chart broke this standard ingress schema into it's own version making separate host paths impossible via the chart
         hosts:
-          - host: &host "auth.${XYZ_DOMAIN}"
-            paths:
-              - path: "/"
-                pathType: Prefix
-          - host: &bloop "auth.${SECRET_DOMAIN}"
-            paths:
-              - path: "/"
-                pathType: Prefix
+          - &host "auth.${XYZ_DOMAIN}"
+          - &bloop "auth.${SECRET_DOMAIN}"
+        paths:
+          - "/"
+        pathType: Prefix
         tls:
           - hosts:
               - *host
