@@ -16,7 +16,7 @@ data:
         interval: 7m
         conditions:
           - "[STATUS] == 200"
-          - "[BODY].message == \"API running.\""
+          - "[BODY].message == API running."
         alerts:
           - type: discord
         headers:
