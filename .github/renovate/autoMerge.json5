@@ -5,15 +5,13 @@
         matchDatasources: ["docker"],
         automerge: true,
         automergeType: "branch",
-        requiredStatusChecks: null,
         matchUpdateTypes: ["digest"],
-        matchPackagePattern: ["ghcr.io/k8s-at-home", "ghcr.io/onedr0p"],
+        matchPackagePattern: ["ghcr.io/k8s-at-home", "ghcr.io/onedr0p", "ghcr.io/h3mmy],
       },
       {
         "datasources": ["docker", "github-tags"],
         "automerge": true,
         "automergeType": "branch",
-        "requiredStatusChecks": null,
         "updateTypes": ["minor", "patch"],
         "packageNames": [
           "docker.io/n8nio/n8n",
@@ -39,7 +37,6 @@
       {
         "datasources": ["docker", "github-tags"],
         "automerge": true,
-        "requiredStatusChecks": null,
         "schedule": "after 1am and before 5am",
         "updateTypes": ["minor", "patch"],
         "packageNames": [
@@ -52,7 +49,6 @@
         "datasources": ["helm"],
         "automerge": true,
         "automergeType": "branch",
-        "requiredStatusChecks": null,
         "updateTypes": ["minor", "patch"],
         "packageNames": [
           "grafana",
@@ -71,7 +67,6 @@
         "matchManagers": ["github-actions"],
         "automerge": true,
         "automergeType": "branch",
-        "requiredStatusChecks": null,
         "matchUpdateTypes": ["minor", "patch"],
         "packageNames": [
           "lycheeverse/lychee-action",
