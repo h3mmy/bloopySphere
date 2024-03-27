@@ -1,6 +1,7 @@
 {
   "extends": [
     ":enableRenovate",
+    ":separateMajorMinor",
     "config:base",
     ":semanticCommits",
     ":dependencyDashboard",
