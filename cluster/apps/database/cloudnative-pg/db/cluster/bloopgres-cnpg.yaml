@@ -39,6 +39,8 @@ spec:
     name: cnpg-bloopgres-superuser
 
   bootstrap:
+    recovery:
+      source: backup-schedule-bloopgres-v1-2024031 9000000
     initdb:
       owner: bloopyboi
       database: bloopyboi
