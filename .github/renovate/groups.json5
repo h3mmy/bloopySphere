@@ -1,36 +1,42 @@
 {
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
   packageRules: [
     {
-      "description": "Cert-Manager image (for CRDs) and chart",
-      "groupName": "Cert-Manager",
-      "matchPackagePatterns": ["cert-manager"],
-      "matchDatasources": ["docker", "helm"],
-      "group": { "commitMessageTopic": "{{{groupName}}} group" },
-      "separateMinorPatch": true
+      description: "Cert-Manager image (for CRDs) and chart",
+      groupName: "Cert-Manager",
+      matchPackagePatterns: ["cert-manager"],
+      matchDatasources: ["docker", "helm"],
+      group: {commitMessageTopic: "{{{groupName}}} group"},
+      separateMinorPatch: true,
     },
     {
-      "description": "Node Feature Discovery kustomization (for CRDs) and chart",
-      "groupName": "Node Feature Discovery",
-      "matchPackagePatterns": ["node-feature-discovery"],
-      "matchDatasources": ["helm", "github-tags"],
-      "group": { "commitMessageTopic": "{{{groupName}}} group" },
-      "separateMinorPatch": true
+      description: "Node Feature Discovery kustomization (for CRDs) and chart",
+      groupName: "Node Feature Discovery",
+      matchPackagePatterns: ["node-feature-discovery"],
+      matchDatasources: ["helm", "github-tags"],
+      group: {commitMessageTopic: "{{{groupName}}} group"},
+      separateMinorPatch: true,
     },
     {
       description: "Rook-Ceph image and chart",
       groupName: "Rook Ceph",
       matchPackagePatterns: ["rook.ceph"],
       matchDatasources: ["docker", "helm"],
-      group: { commitMessageTopic: "{{{groupName}}} group" },
+      group: {commitMessageTopic: "{{{groupName}}} group"},
       separateMinorPatch: true,
       stabilityDays: 2,
     },
     {
       description: "linkerd-edge charts",
       groupName: "linkerd",
-      matchPackagePatterns: ["linkerd-control-plane", "linkerd-cni", "linkerd-crds", "linkerd-viz"],
+      matchPackagePatterns: [
+        "linkerd-control-plane",
+        "linkerd-cni",
+        "linkerd-crds",
+        "linkerd-viz",
+      ],
       matchDatasources: ["helm"],
-      group: { commitMessageTopic: "{{{groupName}}} group" },
+      group: {commitMessageTopic: "{{{groupName}}} group"},
       separateMinorPatch: true,
       stabilityDays: 2,
       versioning: "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-edge?$",
@@ -52,7 +58,7 @@
       groupName: "External Snapshotter",
       matchPackagePatterns: ["external-snapshotter", "snapshot-controller"],
       matchDatasources: ["docker", "github-releases"],
-      group: { commitMessageTopic: "{{{groupName}}} group" },
+      group: {commitMessageTopic: "{{{groupName}}} group"},
       separateMinorPatch: true,
       stabilityDays: 2,
     },
@@ -62,7 +68,7 @@
       matchDatasources: ["docker", "github-releases", "helm"],
       matchPackagePatterns: ["quay.io/thanos/thanos", "thanos"],
       matchUpdateTypes: ["minor", "patch"],
-      group: { commitMessageTopic: "{{{groupName}}} group" },
+      group: {commitMessageTopic: "{{{groupName}}} group"},
       separateMinorPatch: false,
       stabilityDays: 2,
     },
@@ -72,7 +78,7 @@
       matchDatasources: ["docker", "github-releases", "helm"],
       matchPackagePatterns: ["vector"],
       matchUpdateTypes: ["minor", "patch"],
-      group: { commitMessageTopic: "{{{groupName}}} group" },
+      group: {commitMessageTopic: "{{{groupName}}} group"},
       separateMinorPatch: false,
       stabilityDays: 2,
     },
@@ -97,16 +103,11 @@
       versioning: "regex:^version-v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
     },
     {
-      "matchDatasources": [
-        "github-tags",
-        "docker"
-      ],
-      "matchPackagePatterns": [
-        "rancher/system-upgrade-controller"
-      ],
-      "groupName": "system-upgrade-controller-suite",
-      "additionalBranchPrefix": "",
-      "separateMinorPatch": true
-    }
+      matchDatasources: ["github-tags", "docker"],
+      matchPackagePatterns: ["rancher/system-upgrade-controller"],
+      groupName: "system-upgrade-controller-suite",
+      additionalBranchPrefix: "",
+      separateMinorPatch: true,
+    },
   ],
 }

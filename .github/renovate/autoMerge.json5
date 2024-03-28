@@ -1,77 +1,79 @@
 {
-    "packageRules": [
-      {
-        description: "Auto merge container digests",
-        matchDatasources: ["docker"],
-        automerge: true,
-        automergeType: "branch",
-        matchUpdateTypes: ["digest"],
-        matchPackagePattern: ["ghcr.io/k8s-at-home", "ghcr.io/onedr0p", "ghcr.io/h3mmy],
-      },
-      {
-        "datasources": ["docker", "github-tags"],
-        "automerge": true,
-        "automergeType": "branch",
-        "updateTypes": ["minor", "patch"],
-        "packageNames": [
-          "docker.io/n8nio/n8n",
-          "ghcr.io/onedr0p/jackett",
-          "ghcr.io/onedr0p/lidarr",
-          "homeassistant/home-assistant",
-          "ghcr.io/onedr0p/radarr",
-          "ghcr.io/onedr0p/radarr-nightly",
-          "ghcr.io/onedr0p/sonarr",
-          "ghcr.io/onedr0p/sonarr-develop",
-          "ghcr.io/onedr0p/bazarr",
-          "ghcr.io/onedr0p/nzbget",
-          "ghcr.io/onedr0p/prowlarr",
-          "ghcr.io/onedr0p/readarr",
-          "ghcr.io/sct/overseerr",
-          "hotio/readarr",
-          "nodered/node-red",
-          "quay.io/minio/minio",
-          "ghcr.io/onedr0p/prowlarr-nightly",
-          "renovatebot/github-action"
-        ]
-      },
-      {
-        "datasources": ["docker", "github-tags"],
-        "automerge": true,
-        "schedule": "after 1am and before 5am",
-        "updateTypes": ["minor", "patch"],
-        "packageNames": [
-          "ghcr.io/onedr0p/plex",
-          "homeassistant/home-assistant",
-          "plexinc/pms-docker"
-        ]
-      },
-      {
-        "datasources": ["helm"],
-        "automerge": true,
-        "automergeType": "branch",
-        "updateTypes": ["minor", "patch"],
-        "packageNames": [
-          "grafana",
-          "thanos",
-          "overseerr",
-          "blocky",
-          "uptimerobot-prometheus",
-          "kube-prometheus-stack",
-          "redis",
-          "node-problem-detector",
-          "prometheus-pushgateway",
-          "velero"
-        ]
-      },
-      {
-        "matchManagers": ["github-actions"],
-        "automerge": true,
-        "automergeType": "branch",
-        "matchUpdateTypes": ["minor", "patch"],
-        "packageNames": [
-          "lycheeverse/lychee-action",
-          "renovatebot/github-action"
-        ]
-      }
-    ]
-  }
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  packageRules: [
+    {
+      description: "Auto merge container digests",
+      matchDatasources: ["docker"],
+      automerge: true,
+      automergeType: "branch",
+      matchUpdateTypes: ["digest"],
+      matchPackagePattern: [
+        "ghcr.io/k8s-at-home",
+        "ghcr.io/onedr0p",
+        "ghcr.io/h3mmy",
+      ],
+    },
+    {
+      datasources: ["docker", "github-tags"],
+      automerge: true,
+      automergeType: "branch",
+      updateTypes: ["minor", "patch"],
+      packageNames: [
+        "docker.io/n8nio/n8n",
+        "ghcr.io/onedr0p/jackett",
+        "ghcr.io/onedr0p/lidarr",
+        "homeassistant/home-assistant",
+        "ghcr.io/onedr0p/radarr",
+        "ghcr.io/onedr0p/radarr-nightly",
+        "ghcr.io/onedr0p/sonarr",
+        "ghcr.io/onedr0p/sonarr-develop",
+        "ghcr.io/onedr0p/bazarr",
+        "ghcr.io/onedr0p/nzbget",
+        "ghcr.io/onedr0p/prowlarr",
+        "ghcr.io/onedr0p/readarr",
+        "ghcr.io/sct/overseerr",
+        "hotio/readarr",
+        "nodered/node-red",
+        "quay.io/minio/minio",
+        "ghcr.io/onedr0p/prowlarr-nightly",
+        "renovatebot/github-action",
+      ],
+    },
+    {
+      datasources: ["docker", "github-tags"],
+      automerge: true,
+      schedule: "after 1am and before 5am",
+      updateTypes: ["minor", "patch"],
+      packageNames: [
+        "ghcr.io/onedr0p/plex",
+        "homeassistant/home-assistant",
+        "plexinc/pms-docker",
+      ],
+    },
+    {
+      datasources: ["helm"],
+      automerge: true,
+      automergeType: "branch",
+      updateTypes: ["minor", "patch"],
+      packageNames: [
+        "grafana",
+        "thanos",
+        "overseerr",
+        "blocky",
+        "uptimerobot-prometheus",
+        "kube-prometheus-stack",
+        "redis",
+        "node-problem-detector",
+        "prometheus-pushgateway",
+        "velero",
+      ],
+    },
+    {
+      matchManagers: ["github-actions"],
+      automerge: true,
+      automergeType: "branch",
+      matchUpdateTypes: ["minor", "patch"],
+      packageNames: ["lycheeverse/lychee-action", "renovatebot/github-action"],
+    },
+  ],
+}

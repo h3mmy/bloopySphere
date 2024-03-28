@@ -1,22 +1,23 @@
 {
-    "commitMessageTopic": "{{depName}}",
-    "commitMessageExtra": "to {{newVersion}}",
-    "commitMessageSuffix": "",
-    "commitBody": "Signed-off-by: Zee Aslam <h3mmy@users.noreply.github.com>",
-    "packageRules": [
-      {
-        "matchDatasources": ["helm"],
-        "commitMessageTopic": "Helm chart {{depName}}"
-      },
-      {
-        "matchDatasources": ["docker"],
-        "commitMessageTopic": "Docker image {{depName}}",
-        "commitMessageExtra": "to {{#if isSingleVersion}}{{{toVersion}}}{{else}}{{{newValue}}}{{/if}}"
-      },
-      {
-          "matchDatasources":["git-releases"],
-          "commitMessageTopic": "container image {{depName}}",
-          "commitMessageExtra": "to {{#if isSingleVersion}}v{{{newVersion}}}{{else}}{{{newValue}}}{{/if}}"
-      }
-    ]
-  }
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "commitMessageTopic": "{{depName}}",
+  "commitMessageExtra": "to {{newVersion}}",
+  "commitMessageSuffix": "",
+  "commitBody": "Signed-off-by: Zee Aslam <h3mmy@users.noreply.github.com>",
+  "packageRules": [
+    {
+      "matchDatasources": ["helm"],
+      "commitMessageTopic": "Helm chart {{depName}}"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "commitMessageTopic": "Docker image {{depName}}",
+      "commitMessageExtra": "to {{#if isSingleVersion}}{{{toVersion}}}{{else}}{{{newValue}}}{{/if}}"
+    },
+    {
+      "matchDatasources": ["git-releases"],
+      "commitMessageTopic": "container image {{depName}}",
+      "commitMessageExtra": "to {{#if isSingleVersion}}v{{{newVersion}}}{{else}}{{{newValue}}}{{/if}}"
+    }
+  ]
+}
