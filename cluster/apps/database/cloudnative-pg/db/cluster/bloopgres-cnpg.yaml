@@ -45,8 +45,8 @@ spec:
       owner: bloopyboi
       database: bloopyboi
       secret:
-      name: bloopgres-user
-      encoding: 'UTF8'
+        name: bloopgres-user
+      #encoding: 'UTF8'
 
   backup:
     retentionPolicy: 30d
