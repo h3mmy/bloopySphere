@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -17,7 +18,7 @@ spec:
     spec:
       # renovate: registryUrl=https://bjw-s.github.io/helm-charts/
       chart: app-template
-      version: 2.4.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -28,9 +29,6 @@ spec:
         runAsUser: 0
         runAsGroup: 0
         fsGroup: 100
-        capabilities:
-          add:
-            - CHOWN
         fsGroupChangePolicy: "OnRootMismatch"
         # Required for passthrough of /dev/dri devices from NFD
         # https://dgpu-docs.intel.com/installation-guides/ubuntu/ubuntu-focal.html
@@ -57,6 +55,18 @@ spec:
               TZ: ${TZ}
               ffmpegPath: "/usr/local/bin/ffmpeg"
               PGID: 65537
+              TDARR__PORT: *web-port
+              TDARR_APPLICATION_URL: &host tdarr.${XYZ_DOMAIN}
+              TDARR_INSTANCE_NAME: Tdarr
+            securityContext:
+              capabilities:
+                add:
+                  - CHOWN
+            ports:
+              - name: http
+                containerPort: *web-port
+              - name: server
+                containerPort: *server-port
             resources:
               requests:
                 cpu: 10m
@@ -80,8 +90,9 @@ spec:
           nfs:
             path: &mediaPath /volume3/Data
             server: ${NAS_ADDRESS}
-        mountPath: *mediaPath
-        readOnly: false
+        globalMounts:
+          - path: *mediaPath
+            readOnly: false
       media2:
         enabled: true
         type: custom
@@ -89,21 +100,27 @@ spec:
           nfs:
             path: &mediaPath2 /volume1/Data2
             server: ${NAS_ADDRESS}
-        mountPath: *mediaPath2
-        readOnly: false
+        globalMounts:
+          - path: *mediaPath2
+            readOnly: false
       cache:
         enabled: true
         type: nfs
         server: "${NAS_ADDRESS}"
         path: /volume3/Data/cache/tdarr
-        mountPath: /cache
+        globalMounts:
+          - path: /cache
 
     service:
       main:
+        controller: main
         ports:
           http:
             port: *web-port
-          server:
+      service:
+        controller: main
+        ports:
+          http:
             enabled: true
             protocol: TCP
             port: *server-port
@@ -111,22 +128,23 @@ spec:
     ingress:
       main:
         enabled: true
+        className: traefik
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth-extra@kubernetescrd"
           hajimari.io/enable: "true"
           hajimari.io/instance: "bloop-quarky"
           hajimari.io/icon: material-symbols:switch-video-outline
           hajimari.io/group: media
         hosts:
-          - host: &host tdarr.${XYZ_DOMAIN}
+          - host: tdarr.${XYZ_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
-                  port: http
+                  identifier: main
+                  port: *web-port
         tls:
           - hosts:
               - *host

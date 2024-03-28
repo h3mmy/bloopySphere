@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -9,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.4.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -47,9 +48,6 @@ spec:
           - 65536
           - 65537
         fsGroupChangePolicy: "OnRootMismatch"
-        capabilities:
-          add:
-            - CHOWN
     controllers:
       main:
         type: deployment
@@ -64,16 +62,23 @@ spec:
               # PUID: "568"
               # PGID: "568"
               serverIP: tdarr.media.svc.cluster.local
-              serverPort: 8266
+              serverPort: &server-port 8266
               ffmpegPath: "/usr/local/bin/ffmpeg"
               nodeName:
                 valueFrom:
                   fieldRef:
                     fieldPath: spec.nodeName
+            ports:
+              - name: http
+                containerPort: *server-port
             resources:
               requests:
                 cpu: 10m
                 memory: 250Mi
+            securityContext:
+              capabilities:
+                add:
+                  - CHOWN
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -97,10 +102,10 @@ spec:
     service:
       main:
         enabled: false
+        controller: main
         ports:
-          enabled: false
           http:
-            port: 8265
+            port: *server-port
 
     persistence:
       media:
@@ -110,8 +115,9 @@ spec:
           nfs:
             path: &mediaPath /volume3/Data
             server: ${NAS_ADDRESS}
-        mountPath: *mediaPath
-        readOnly: false
+        globalMounts:
+          - path: *mediaPath
+            readOnly: false
       media2:
         enabled: true
         type: custom
@@ -119,11 +125,13 @@ spec:
           nfs:
             path: &mediaPath2 /volume1/Data2
             server: ${NAS_ADDRESS}
-        mountPath: *mediaPath2
-        readOnly: false
+        globalMounts:
+          - path: *mediaPath2
+            readOnly: false
       cache:
         enabled: true
         type: nfs
         server: "${NAS_ADDRESS}"
         path: /volume3/Data/cache/tdarr
-        mountPath: /cache
+        globalMounts:
+          - path: /cache
