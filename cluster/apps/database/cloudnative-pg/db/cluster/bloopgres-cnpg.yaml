@@ -39,14 +39,12 @@ spec:
     name: cnpg-bloopgres-superuser
 
   bootstrap:
-    recovery:
-      backup:
-        name: backup-schedule-bloopgres-v1-20240319000000
+    initdb:
       owner: bloopyboi
       database: bloopyboi
       secret:
         name: bloopgres-user
-      #encoding: 'UTF8'
+      encoding: 'UTF8'
 
   backup:
     retentionPolicy: 30d
