@@ -41,7 +41,7 @@ spec:
   bootstrap:
     recovery:
       backup:
-        name: backup-schedule-bloopgres-v1-2024031-9000000
+        name: backup-schedule-bloopgres-v1-20240319000000
       owner: bloopyboi
       database: bloopyboi
       secret:
