@@ -41,12 +41,12 @@ spec:
   bootstrap:
     recovery:
       source: backup-schedule-bloopgres-v1-2024031 9000000
-    initdb:
-      owner: bloopyboi
-      database: bloopyboi
-      secret:
-        name: bloopgres-user
-      encoding: 'UTF8'
+   # initdb:
+ #     owner: bloopyboi
+ #     database: bloopyboi
+#      secret:
+#        name: bloopgres-user
+#      encoding: 'UTF8'
 
   backup:
     retentionPolicy: 30d
