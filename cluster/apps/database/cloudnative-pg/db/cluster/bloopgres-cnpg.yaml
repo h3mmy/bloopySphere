@@ -12,7 +12,7 @@ spec:
   primaryUpdateStrategy: unsupervised
 
   storage:
-    size: 10G
+    size: 15G
     storageClass: ceph-block
   # This is needed in order to use init-db to bootstrap app specific dbs
   enableSuperuserAccess: true
