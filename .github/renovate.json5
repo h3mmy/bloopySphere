@@ -10,7 +10,6 @@
     ":rebaseStalePrs",
     ":automergePatch",
     ":gomod",
-    ":separateMajorMinor",
     "docker:enableMajor",
     "github>h3mmy/bloopysphere//.github/renovate/allowedVersions.json5",
     "github>h3mmy/bloopysphere//.github/renovate/commitMessage",
