@@ -27,5 +27,5 @@ jobs:
       - name: Sync Labels
         uses: EndBug/label-sync@v2
         with:
-          config-file: .github/labels.yaml
+          config-file: https://raw.githubusercontent.com/h3mmy/common-config/main/.github/labels.yaml
           token: "${{ steps.generate-token.outputs.token }}"
