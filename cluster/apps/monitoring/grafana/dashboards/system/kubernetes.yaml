@@ -5,8 +5,13 @@ metadata:
   name: kubernetes-api-server
   namespace: monitoring
 spec:
-  url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-api-server.json
-  #datasource: prometheus
+  # url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-api-server.json
+  # Ref: https://grafana.com/grafana/dashboards/15761
+  grafanaCom:
+    # renovate: depName="Kubernetes / System / API Server"
+    id: 15761
+    revision: 16
+    datasource: Prometheus
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard

@@ -21,6 +21,7 @@ metadata:
 spec:
   # Ref: https://grafana.com/grafana/dashboards/2842
   grafanaCom:
+    # renovate: depName="Ceph Cluster"
     id: 2842
     revision: 17
   datasources:
