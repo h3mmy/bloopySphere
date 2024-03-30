@@ -35,7 +35,7 @@ spec:
       type: statefulset
     image:
       repository: ghcr.io/onedr0p/readarr-nightly
-      tag: 0.3.21.2475@sha256:b5e5fa9aa6bdce3eb195d644f3b3ce1ff1e6a7cecf7f20f7b3956d4222cfd010
+      tag: 0.3.22.2487@sha256:4662314d2cb6005827794b65536949e75d796bd5534e08d5894318d7ce02523b
     env:
       TZ: "${TZ}"
       PGID: ${MEDIA_GID}
