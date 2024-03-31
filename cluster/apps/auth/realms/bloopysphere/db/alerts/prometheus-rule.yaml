@@ -6,7 +6,6 @@ metadata:
   name: kc-cnpg-rules
   namespace: auth
   labels:
-    prometheus: k8s
     role: alert-rules
 spec:
   groups:
