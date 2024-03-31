@@ -49,7 +49,7 @@ spec:
         compression: bzip2
         maxParallel: 5
       destinationPath: s3://kc-postgres-backup
-      endpointURL: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local:8080
+      endpointURL: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local:80
       # credentials are populated via rook-ceph-operator
       s3Credentials:
         accessKeyId:
