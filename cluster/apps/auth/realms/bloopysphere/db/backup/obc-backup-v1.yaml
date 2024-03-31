@@ -10,5 +10,5 @@ spec:
   bucketName: kc-postgres-backup
   storageClassName: ceph-bucket
   additionalConfig:
-    maxObjects: "1000"
-    maxSize: "2G"
+    maxObjects: "2000"
+    maxSize: "3G"
