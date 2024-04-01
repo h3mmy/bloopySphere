@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./obc-backup-v1.yaml
   # Enable after initializing postgres cluster
-  # - ./backup-schedule.yaml
+  - ./backup-schedule.yaml
