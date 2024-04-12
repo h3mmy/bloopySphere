@@ -3,7 +3,7 @@
   packageRules: [
     {
       description: "Auto merge container digests",
-      matchDatasources: ["docker"],
+      matchDatasources: ["docker", "github-tags"],
       automerge: true,
       automergeType: "branch",
       matchUpdateTypes: ["digest"],
