@@ -21,6 +21,12 @@ discord:
             - ${efGoblinRoleId}
             - ${efPlexGangRoleId}
             - ${efDevRoleId}
+        - name: blissfest
+          enabled: true
+          roles:
+            - ${efGoblinRoleId}
+            - ${efBlissRoleId}
+            - ${efDevRoleId}
 logLevel: info
 db:
   name: bloopyboi
