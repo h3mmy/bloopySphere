@@ -34,7 +34,7 @@ spec:
         schedule: 0 6 * * *
     image:
       repository: docker.io/meisnate12/plex-meta-manager
-      tag: v1.20.0
+      tag: v1.21.0
     # https://metamanager.wiki/en/latest/home/environmental.html
     env:
       TZ: "${TZ}"
