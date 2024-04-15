@@ -43,3 +43,8 @@ features:
     data:
       - api_url: "https://inspirobot.me/api?generate=true"
       - backup_image_url: "https://generated.inspirobot.me/a/12PYMWaBPB.jpg"
+  - name: blissfest
+    enabled: true
+    data:
+      - api_url: "https://www.blissfestfestival.org/wp-json/wp/v2"
+      - start_date: "2024-07-12"
