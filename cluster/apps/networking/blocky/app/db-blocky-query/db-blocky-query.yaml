@@ -9,7 +9,7 @@ metadata:
 spec:
   customConfig: blocky-postgres-conf
   replicas: 1
-  image: docker.io/library/postgres:15
+  image: docker.io/library/postgres:16
   scheduler:
     affinity:
       podAntiAffinity:
