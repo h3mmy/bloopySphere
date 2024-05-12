@@ -12,7 +12,7 @@ spec:
   primaryUpdateStrategy: unsupervised
 
   storage:
-    size: 7.3G
+    size: 7.4G
     storageClass: ceph-block
   # This is needed in order to use init-db to bootstrap app specific dbs
   enableSuperuserAccess: true
@@ -23,7 +23,7 @@ spec:
       shared_buffers: 256MB
 
   monitoring:
-    enablePodMonitor: true
+    enablePodMonitor: false
     # Ref: https://github.com/cloudnative-pg/cloudnative-pg/issues/2501
     #podMonitorMetricRelabelings:
     #  - { sourceLabels: ["cluster"], targetLabel: cnpg_cluster, action: replace }
@@ -31,7 +31,7 @@ spec:
 
   resources:
     requests:
-      cpu: 400m
+      cpu: 401m
     limits:
       memory: 4Gi
 

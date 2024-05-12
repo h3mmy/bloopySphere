@@ -33,7 +33,7 @@ spec:
           main:
             image:
               repository: ghcr.io/onedr0p/radarr-develop
-              tag: 5.5.0.8730@sha256:9ca40af1db9d5ed91cd69f7f2ab602ae937c15ee8c792c5226244019fec4862c
+              tag: 5.5.2.8781@sha256:4b7de43df00613272532de7ecfc6a3207cb0a74fdcb2b05dd110ec2ebb493352
               pullPolicy: IfNotPresent
             env:
               # https://github.com/Radarr/Radarr/issues/7030#issuecomment-1039689518
