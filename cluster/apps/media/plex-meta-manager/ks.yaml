@@ -26,17 +26,27 @@ metadata:
   name: cluster-apps-kometa
   namespace: flux-system
 spec:
+  targetNamespace: media
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: kometa
   path: ./cluster/apps/media/plex-meta-manager/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-  wait: true
+  wait: false # no flux ks dependents
   interval: 30m
   retryInterval: 1m
   timeout: 5m
   dependsOn:
     - name: cluster-apps-kometa-secrets
+    # - name: cluster-apps-rook-ceph-cluster
+    # - name: cluster-apps-plex
+    # - name: cluster-apps-tautulli
+    # - name: cluster-apps-radarr
+    # - name: cluster-apps-sonarr
+
   decryption:
     provider: sops
     secretRef:
@@ -50,10 +60,3 @@ spec:
         name: cluster-secrets
       - kind: Secret
         name: pmm-secret
-
-  # dependsOn:
-  #   - name: cluster-apps-rook-ceph-cluster
-    # - name: cluster-apps-plex
-    # - name: cluster-apps-tautulli
-    # - name: cluster-apps-radarr
-    # - name: cluster-apps-sonarr
