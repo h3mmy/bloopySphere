@@ -46,9 +46,9 @@ spec:
               - -c
             args:
               - |
-                python3 kometa.py --run --read-only-config --run-libraries "Music";
-                python3 kometa.py --run --read-only-config --run-libraries "Movies";
-                python3 kometa.py --run --read-only-config --run-libraries "TV Shows";
+                python3 kometa.py --run -c /config/config.yaml --read-only-config --run-libraries "Music";
+                python3 kometa.py --run -c /config/config.yaml --read-only-config --run-libraries "Movies";
+                python3 kometa.py --run -c /config/config.yaml --read-only-config --run-libraries "TV Shows";
             env:
               TZ: "${TZ}"
               PUID: "568"
