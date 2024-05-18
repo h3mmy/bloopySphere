@@ -3,7 +3,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: media
 resources:
-  - ./pmm-secret.sops.yaml
   - ./pvc.yaml
   - ./helm-release.yaml
   # - ./volsync.yaml
@@ -11,9 +10,6 @@ configMapGenerator:
   - name: kometa-configmap
     files:
       - ./config/config.yaml
-    # options:
-    #   labels:
-    #     kustomize.toolkit.fluxcd.io/substitute: disabled
   - name: pmm-prerolls
     files:
       - ./config/Pre-rolls.yaml

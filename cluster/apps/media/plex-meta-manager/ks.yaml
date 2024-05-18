@@ -2,7 +2,28 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-plex-meta-manager
+  name: cluster-apps-kometa-secrets
+  namespace: flux-system
+spec:
+  path: ./cluster/apps/media/plex-meta-manager/config
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-kometa
   namespace: flux-system
 spec:
   path: ./cluster/apps/media/plex-meta-manager/app
@@ -14,6 +35,8 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
+  dependsOn:
+    - name: cluster-apps-kometa-secrets
   decryption:
     provider: sops
     secretRef:
@@ -27,7 +50,6 @@ spec:
         name: cluster-secrets
       - kind: Secret
         name: pmm-secret
-        namespace: media
 
   # dependsOn:
   #   - name: cluster-apps-rook-ceph-cluster
