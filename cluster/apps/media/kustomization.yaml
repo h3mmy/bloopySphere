@@ -20,5 +20,6 @@ resources:
   - ./prowlarr
   - ./tautulli
   - ./plex-meta-manager/ks.yaml
+  - ./plex-trakt-sync
   - ./stash/ks.yaml
   - ./recyclarr/ks.yaml
