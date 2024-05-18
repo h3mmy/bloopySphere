@@ -798,10 +798,6 @@ collections:
 #          ACTORS          #
 ############################
 
-  Adam Sandler:
-    template: {name: Actors, person: 19292}
-  Ben Affleck:
-    template: {name: Actors, person: 880}
   Ben Stiller:
     template: {name: Actors, person: 7399}
   Bill Murray:
@@ -822,24 +818,16 @@ collections:
     template: {name: Actors, person: 18918}
   Gal Gadot:
     template: {name: Actors, person: 90633}
+  Hannah Einbinder:
+    template: {name: Actors, person: 2559506}
   Hugh Jackman:
     template: {name: Actors, person: 6968}
   J.K. Simmons:
     template: {name: Actors, person: 18999}
-  Jackie Chan:
-    template: {name: Actors, person: 18897}
-  James Franco:
-    template: {name: Actors, person: 17051}
   Jason Bateman:
     template: {name: Actors, person: 23532}
   Jason Statham:
     template: {name: Actors, person: 976}
-  Jim Carrey:
-    template: {name: Actors, person: 206}
-  John Goodman:
-    template: {name: Actors, person: 1230}
-  Johnny Depp:
-    template: {name: Actors, person: 85}
   Johnny Knoxville:
     template: {name: Actors, person: 9656}
   Jonah Hill:
@@ -848,10 +836,6 @@ collections:
     template: {name: Actors, person: 6384}
   Leonardo DiCaprio:
     template: {name: Actors, person: 6193}
-  Liam Neeson:
-    template: {name: Actors, person: 3896}
-  Mark Wahlberg:
-    template: {name: Actors, person: 13240}
   Matt Damon:
     template: {name: Actors, person: 1892}
   Michael Caine:
@@ -872,8 +856,6 @@ collections:
     template: {name: Actors, person: 1245}
   Seth Rogen:
     template: {name: Actors, person: 19274}
-  Tom Cruise:
-    template: {name: Actors, person: 500}
   Tom Hanks:
     template: {name: Actors, person: 31}
   Vin Diesel:

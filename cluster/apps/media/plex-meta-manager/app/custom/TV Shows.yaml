@@ -410,6 +410,8 @@ collections:
 
   Jason Bateman:
     template: {name: Actors, person: 23532}
+  Hannah Einbinder:
+    template: {name: Actors, person: 8302925}
 
 ############################
 #        DIRECTORS         #
