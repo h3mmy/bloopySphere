@@ -176,4 +176,8 @@ sonarr:
 trakt:
   client_id: ${TRAKT_CLIENT_ID}
   client_secret: ${TRAKT_CLIENT_SECRET}
-  pin: ${TRAKT_PIN}
+  authorization:
+    access_token: ${TRAKT_ACCESS_TOKEN}
+    token_type: Bearer
+    expires_in: ${TRAKT_EXPIRES_IN}
+    refresh_token: ${TRAKT_REFRESH_TOKEN}
