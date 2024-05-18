@@ -34,6 +34,7 @@ libraries: # This is called out once within the config.yaml file
     collection_files:
       - file: config/Pre-rolls.yaml
       - repo: Movies.yaml
+      - repo: People.yaml
       - repo: Movies - Holidays by Drazzizzi.yaml
       - repo: Movies - Trakt (Unplayed) by Magic815.yaml
       - pmm: basic
@@ -61,8 +62,10 @@ libraries: # This is called out once within the config.yaml file
       - overlays
     collection_files:
       - repo: TV Shows.yaml
-      - pmm: basic
-      - pmm: imdb
+      - repo: People.yaml
+      - default: cannes
+      - default: basic
+      - default: imdb
     overlay_files:
       - remove_overlays: false
       - repo: TV Shows - Overlays - Charts.yaml

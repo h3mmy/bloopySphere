@@ -124,22 +124,7 @@ templates:
     collection_mode: hide
     summary: Random <<show>> episode every time it loads.
     schedule: never                                                     # Not scheduled to run because it only needs to run once
-  Actors:
-    actor: tmdb
-    tmdb_person: <<person>>
-    sort_title: "!16_<<collection_name>>"
-    sync_mode: sync
-    collection_order: release
-    collection_mode: hide
-    schedule: weekly(friday)
-  Directors:
-    director: tmdb
-    tmdb_person: <<person>>
-    sort_title: "!17_<<collection_name>>"
-    sync_mode: sync
-    collection_order: release
-    collection_mode: hide
-    schedule: weekly(friday)
+
   Dolby:
     sort_title: "!18_<<collection_name>>"
     sync_mode: sync
@@ -404,14 +389,6 @@ collections:
   Random Superstore:
     template: {name: Random, show: Superstore}
 
-############################
-#          ACTORS          #
-############################
-
-  Jason Bateman:
-    template: {name: Actors, person: 23532}
-  Hannah Einbinder:
-    template: {name: Actors, person: 8302925}
 
 ############################
 #        DIRECTORS         #
