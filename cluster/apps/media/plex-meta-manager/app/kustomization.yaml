@@ -11,9 +11,9 @@ configMapGenerator:
   - name: kometa-configmap
     files:
       - ./config/config.yaml
-    options:
-      labels:
-        kustomize.toolkit.fluxcd.io/substitute: disabled
+    # options:
+    #   labels:
+    #     kustomize.toolkit.fluxcd.io/substitute: disabled
   - name: pmm-prerolls
     files:
       - ./config/Pre-rolls.yaml
