@@ -2,14 +2,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: plex-meta-manager
+  name: kometa
   namespace: media
 spec:
   interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 3.1.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -26,72 +26,74 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    controller:
-      type: cronjob
-      annotations:
-        secret.reloader.stakater.com/reload: &secret pmm-secret
-      cronjob:
-        schedule: 0 6 * * *
-    image:
-      repository: docker.io/meisnate12/plex-meta-manager
-      tag: v1.21.0
-    # https://metamanager.wiki/en/latest/home/environmental.html
-    env:
-      TZ: "${TZ}"
-      PUID: "568"
-      PGID: "568"
-      PMM_CONFIG: config/config.yaml
-      PMM_READ_ONLY_CONFIG: "true"
-    #envFrom:
-     # - secretRef:
-       # name: pmm-secret
-    initContainers:
-      config-setup:
-        image: ghcr.io/onedr0p/alpine:3.19.1@sha256:3fbc581cb0fe29830376161ae026e2a765dcc11e1747477fe9ebf155720b8638
-        command:
-          - "/bin/sh"
-          - -c
-          - |
-            mkdir -p /config/assets
-            envsubst < /tmp/config-template/config.yaml > /config/config.yaml
-            exit 0
-        envFrom:
-          - secretRef:
-              name: pmm-secret
-        env:
-          SONARR_API_KEY: ${SONARR_API_KEY}
-          RADARR_API_KEY: ${RADARR_API_KEY}
-          TAUTULLI_API_KEY: ${TAUTULLI_API_KEY}
-        volumeMounts:
-          - name: config-template
-            mountPath: /tmp/config-template
-          - name: config
-            mountPath: /config
-    command:
-      - /scripts/run.sh
-    service:
-      main:
-        enabled: false
+    controllers:
+      kometa:
+        type: cronjob
+        annotations:
+          secret.reloader.stakater.com/reload: &secret pmm-secret
+        cronjob:
+          schedule: "@daily"
+          concurrencyPolicy: Forbid
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
+        containers:
+          app:
+            image:
+              repository: kometateam/kometa
+              tag: v2.0.1@sha256:c1f9d1ef49f976377a4bbbe9018bfed9a7057ccf427d10759a8ad975d4505300
+            command:
+              - /bin/sh
+              - -c
+            args:
+              - |
+                python3 kometa.py --run --read-only-config --run-libraries "Music";
+                python3 kometa.py --run --read-only-config --run-libraries "Movies";
+                python3 kometa.py --run --read-only-config --run-libraries "TV Shows";
+            env:
+              TZ: "${TZ}"
+              PUID: "568"
+              PGID: "568"
+            envFrom:
+              - secretRef:
+                  name: pmm-secret
+            resources:
+              requests:
+                cpu: 10m
+                memory: 2G
+              limits:
+                memory: 8G
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
     persistence:
       config:
-        enabled: true
         existingClaim: pmm-config-v1
-      config-template:
-        enabled: true
+      config-file:
         type: configMap
-        name: pmm-config-template
-        readOnly: true
-        mountPath: "-"
+        name: kometa-configmap
+        globalMounts:
+          - path: /config/config.yaml
+            subPath: config.yaml
+            readOnly: true
       config-prerolls:
         enabled: true
         type: configMap
         name: pmm-prerolls
-        mountPath: /config/Pre-rolls.yaml
-        subPath: Pre-rolls.yaml
-        readOnly: true
-      scripts:
-        enabled: true
-        type: configMap
-        name: pmm-scripts
-        mountPath: /scripts
-        defaultMode: 511
+        globalMounts:
+          - path: /config/Pre-rolls.yaml
+            subPath: Pre-rolls.yaml
+            readOnly: true
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /config/logs

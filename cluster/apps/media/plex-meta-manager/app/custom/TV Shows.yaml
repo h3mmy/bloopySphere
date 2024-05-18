@@ -250,7 +250,7 @@ collections:
     template: {name: IMDb Genres, genre: fantasy}
     summary: Fantasy film is a genre that incorporates imaginative and fantastic themes. These themes usually involve magic, supernatural events, or fantasy worlds. Although it is its own distinct genre, these films can overlap into the horror and science fiction genres. Unlike science fiction, a fantasy film does not need to be rooted in fact. This element allows the audience to be transported into a new and unique world. Often, these films center on an ordinary hero in an extraordinary situation.
   Romantic Comedy:
-    template: {name: IMDb Genres, genre: romance,comedy}
+    template: {name: IMDb Genres, genre: romance, comedy}
     summary: Romantic-Comedy is a genre that attempts to catch the viewer's heart with the combination of love and humor. This sub-genre is light-hearted and usually places the two protagonists in humorus situation. Romantic-Comedy film revolves around a romantic ideal, such as true love. In the end, the ideal triumphs over the situation or obstacle, thus creating a happy ending.
   Science Fiction:
     template: {name: IMDb Genres, genre: sci-fi}
@@ -367,16 +367,16 @@ collections:
 #          YEARS           #
 ############################
 
-  2020 Shows:
+  2024 Shows:
     template: {name: Years}
     plex_search:
       all:
-        year: 2020
-  2021 Shows:
+        year: 2024
+  2023 Shows:
     template: {name: Years}
     plex_search:
       all:
-        year: 2021
+        year: 2023
   2022 Shows:
     template: {name: Years}
     plex_search:
