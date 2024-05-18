@@ -10,13 +10,13 @@ resources:
 configMapGenerator:
   - name: kometa-configmap
     files:
-      - ./configs/config.yaml
+      - ./config/config.yaml
     options:
       labels:
         kustomize.toolkit.fluxcd.io/substitute: disabled
   - name: pmm-prerolls
     files:
-      - ./configs/Pre-rolls.yaml
+      - ./config/Pre-rolls.yaml
 generatorOptions:
   disableNameSuffixHash: true
 labels:
