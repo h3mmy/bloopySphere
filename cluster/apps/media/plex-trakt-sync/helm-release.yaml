@@ -37,15 +37,15 @@ spec:
               repository: ghcr.io/taxel/plextraktsync
               tag: 0.30.8
             args:
-              - info && /bin/bash
+              - sync
             env:
               PLEX_BASEURL: http://plex.media.svc.cluster.local:32400
               PLEX_LOCALURL: http://plex.media.svc.cluster.local:32400
-              # PLEX_TOKEN:
-              #   valueFrom:
-              #     secretKeyRef:
-              #       name: plex-trakt-sync-secret
-              #       key: PLEX_TOKEN
+              PLEX_TOKEN:
+                valueFrom:
+                  secretKeyRef:
+                    name: plex-trakt-sync-secret
+                    key: PLEX_TOKEN
               PLEX_USERNAME: h3mmy
               TRAKT_USERNAME: h3mmy
             probes:
