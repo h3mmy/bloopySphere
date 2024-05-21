@@ -59,7 +59,7 @@ templates:
       rating_min: 7
       votes_min: 50000
       limit: 100
-    imdb_list:
+    imdb_search:
       url: https://www.imdb.com/search/title/?title_type=<<type>>,&genres=<<genre>>,&release_date=<<year_min>>-01-01,&user_rating=<<rating_min>>,10&num_votes=<<votes_min>>,&sort=user_rating,desc
       limit: <<limit>>
     sort_title: "!08_<<collection_name>>"
@@ -75,7 +75,7 @@ templates:
       rating_min: 7
       votes_min: 50000
       limit: 100
-    imdb_list:
+    imdb_search:
       url: https://www.imdb.com/search/keyword/?keywords=<<keyword>>&title_type=<<type>>,&release_date=<<year_min>>-01-01,&user_rating=<<rating_min>>,10&num_votes=<<votes_min>>,&sort=user_rating,desc
       limit: <<limit>>
     sort_title: "!09_<<collection_name>>"
@@ -124,22 +124,7 @@ templates:
     collection_mode: hide
     summary: Random <<show>> episode every time it loads.
     schedule: never                                                     # Not scheduled to run because it only needs to run once
-  Actors:
-    actor: tmdb
-    tmdb_person: <<person>>
-    sort_title: "!16_<<collection_name>>"
-    sync_mode: sync
-    collection_order: release
-    collection_mode: hide
-    schedule: weekly(friday)
-  Directors:
-    director: tmdb
-    tmdb_person: <<person>>
-    sort_title: "!17_<<collection_name>>"
-    sync_mode: sync
-    collection_order: release
-    collection_mode: hide
-    schedule: weekly(friday)
+
   Dolby:
     sort_title: "!18_<<collection_name>>"
     sync_mode: sync
@@ -162,7 +147,7 @@ collections:
     imdb_chart: popular_shows
   IMDb Top 250:
     template: {name: Charts}
-    imdb_list: https://www.imdb.com/search/title/?title_type=tv_series,tv_miniseries&num_votes=50000,&sort=user_rating,desc
+    imdb_search: https://www.imdb.com/search/title/?title_type=tv_series,tv_miniseries&num_votes=50000,&sort=user_rating,desc
     limit: 250
   TMDb Most Popular:
     template: {name: Charts}
@@ -250,7 +235,7 @@ collections:
     template: {name: IMDb Genres, genre: fantasy}
     summary: Fantasy film is a genre that incorporates imaginative and fantastic themes. These themes usually involve magic, supernatural events, or fantasy worlds. Although it is its own distinct genre, these films can overlap into the horror and science fiction genres. Unlike science fiction, a fantasy film does not need to be rooted in fact. This element allows the audience to be transported into a new and unique world. Often, these films center on an ordinary hero in an extraordinary situation.
   Romantic Comedy:
-    template: {name: IMDb Genres, genre: romance,comedy}
+    template: {name: IMDb Genres, genre: romance, comedy}
     summary: Romantic-Comedy is a genre that attempts to catch the viewer's heart with the combination of love and humor. This sub-genre is light-hearted and usually places the two protagonists in humorus situation. Romantic-Comedy film revolves around a romantic ideal, such as true love. In the end, the ideal triumphs over the situation or obstacle, thus creating a happy ending.
   Science Fiction:
     template: {name: IMDb Genres, genre: sci-fi}
@@ -367,16 +352,16 @@ collections:
 #          YEARS           #
 ############################
 
-  2020 Shows:
+  2024 Shows:
     template: {name: Years}
     plex_search:
       all:
-        year: 2020
-  2021 Shows:
+        year: 2024
+  2023 Shows:
     template: {name: Years}
     plex_search:
       all:
-        year: 2021
+        year: 2023
   2022 Shows:
     template: {name: Years}
     plex_search:
@@ -404,12 +389,6 @@ collections:
   Random Superstore:
     template: {name: Random, show: Superstore}
 
-############################
-#          ACTORS          #
-############################
-
-  Jason Bateman:
-    template: {name: Actors, person: 23532}
 
 ############################
 #        DIRECTORS         #

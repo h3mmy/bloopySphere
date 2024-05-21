@@ -59,8 +59,13 @@ templates:
       rating_min: 7
       votes_min: 50000
       limit: 100
-    imdb_list:
-      url: https://www.imdb.com/search/title/?title_type=<<type>>,&genres=<<genre>>,&release_date=<<year_min>>-01-01,&user_rating=<<rating_min>>,10&num_votes=<<votes_min>>,&sort=user_rating,desc
+    imdb_search:
+      type: <<type>>
+      genre: <<genre>>
+      release.after: <<year_min>>-01-01
+      rating.gte: <<rating_min>>
+      votes.gte: <<votes_min>>
+      sort_by: rating.desc
       limit: <<limit>>
     sort_title: "!08_<<collection_name>>"
     sync_mode: sync
@@ -75,8 +80,11 @@ templates:
       rating_min: 7
       votes_min: 50000
       limit: 100
-    imdb_list:
-      url: https://www.imdb.com/search/keyword/?keywords=<<keyword>>&title_type=<<type>>,&release_date=<<year_min>>-01-01,&user_rating=<<rating_min>>,10&num_votes=<<votes_min>>,&sort=user_rating,desc
+    imdb_search:
+      type: <<type>>
+      release.after: <<year_min>>-01-01
+      rating.gte: <<rating_min>>
+      votes.gte: <<votes_min>>
       limit: <<limit>>
     sort_title: "!09_<<collection_name>>"
     sync_mode: sync
@@ -124,22 +132,6 @@ templates:
     collection_mode: hide
     summary: Random <<genre>> movies every time it loads.
     schedule: never                                                     # Not scheduled to run because it only needs to run once
-  Actors:
-    actor: tmdb
-    tmdb_person: <<person>>
-    sort_title: "!16_<<collection_name>>"
-    sync_mode: sync
-    collection_order: release
-    collection_mode: hide
-    schedule: weekly(friday)
-  Directors:
-    director: tmdb
-    tmdb_person: <<person>>
-    sort_title: "!17_<<collection_name>>"
-    sync_mode: sync
-    collection_order: release
-    collection_mode: hide
-    schedule: weekly(friday)
   Dolby:
     sort_title: "!18_<<collection_name>>"
     sync_mode: sync
@@ -160,9 +152,13 @@ collections:
   IMDb Most Popular:
     template: {name: Charts}
     imdb_chart: popular_movies
+    collection_order: custom
+    sync_mode: sync
   IMDb Top 250:
     template: {name: Charts}
-    imdb_list: https://www.imdb.com/search/title/?title_type=feature&groups=top_250&sort=user_rating,desc
+    imdb_chart: top_movies
+    collection_order: custom
+    sync_mode: sync
   TMDb Most Popular:
     template: {name: Charts}
     tmdb_popular: 30
@@ -480,8 +476,12 @@ collections:
     summary: Crime film is a genre that revolves around the action of a criminal mastermind. A Crime film will often revolve around the criminal himself, chronicling his rise and fall. Some Crime films will have a storyline that follows the criminal's victim, yet others follow the person in pursuit of the criminal. This genre tends to be fast paced with an air of mystery – this mystery can come from the plot or from the characters themselves.
   Documentary:
     template: {name: IMDb Genres, genre: documentary}
-    imdb_list:
-      url: https://www.imdb.com/search/title/?genres=documentary,&release_date=1990-01-01,&user_rating=7,10&num_votes=50000,&sort=user_rating,desc
+    imdb_search:
+      genres: documentary
+      release.after: 1990-01-01
+      rating.gte: 7
+      votes.gte: 50000
+      sort_by: rating.desc
       limit: 100
     summary: A collection of documentary movies from 1990 to now, with a minimum rating of 7 and at least 50000 votes from IMDb.
   Drama:
@@ -503,7 +503,7 @@ collections:
     template: {name: IMDb Genres, genre: romance}
     summary: "Romance film can be defined as a genre wherein the plot revolves around the love between two protagonists. This genre usually has a theme that explores an issue within love, including but not limited to: love at first sight, forbidden love, love triangles, and sacrificial love. The tone of Romance film can vary greatly. Whether the end is happy or tragic, Romance film aims to evoke strong emotions in the audience."
   Romantic Comedy:
-    template: {name: IMDb Genres, genre: romance,comedy}
+    template: {name: IMDb Genres, genre: romance, comedy}
     summary: Romantic-Comedy is a genre that attempts to catch the viewer's heart with the combination of love and humor. This sub-genre is light-hearted and usually places the two protagonists in humorus situation. Romantic-Comedy film revolves around a romantic ideal, such as true love. In the end, the ideal triumphs over the situation or obstacle, thus creating a happy ending.
   Science Fiction:
     template: {name: IMDb Genres, genre: sci-fi}
@@ -697,21 +697,21 @@ collections:
 #          YEARS           #
 ############################
 
-  2020 Movies:
-    template: {name: Years}
-    plex_search:
-      all:
-        year: 2020
-  2021 Movies:
-    template: {name: Years}
-    plex_search:
-      all:
-        year: 2021
   2022 Movies:
     template: {name: Years}
     plex_search:
       all:
         year: 2022
+  2023 Movies:
+    template: {name: Years}
+    plex_search:
+      all:
+        year: 2023
+  2024 Movies:
+    template: {name: Years}
+    plex_search:
+      all:
+        year: 2024
 
 ############################
 #          AUDIO           #
@@ -777,112 +777,6 @@ collections:
     template: {name: Random, genre: Thriller}
   Random Western:
     template: {name: Random, genre: Western}
-
-############################
-#          ACTORS          #
-############################
-
-  Adam Sandler:
-    template: {name: Actors, person: 19292}
-  Ben Affleck:
-    template: {name: Actors, person: 880}
-  Ben Stiller:
-    template: {name: Actors, person: 7399}
-  Bill Murray:
-    template: {name: Actors, person: 1532}
-  Brad Pitt:
-    template: {name: Actors, person: 287}
-  Bradley Cooper:
-    template: {name: Actors, person: 51329}
-  Bruce Willis:
-    template: {name: Actors, person: 62}
-  Cameron Diaz:
-    template: {name: Actors, person: 6941}
-  Charlize Theron:
-    template: {name: Actors, person: 6885}
-  Chris Evans:
-    template: {name: Actors, person: 16828}
-  Dwayne Johnson:
-    template: {name: Actors, person: 18918}
-  Gal Gadot:
-    template: {name: Actors, person: 90633}
-  Hugh Jackman:
-    template: {name: Actors, person: 6968}
-  J.K. Simmons:
-    template: {name: Actors, person: 18999}
-  Jackie Chan:
-    template: {name: Actors, person: 18897}
-  James Franco:
-    template: {name: Actors, person: 17051}
-  Jason Bateman:
-    template: {name: Actors, person: 23532}
-  Jason Statham:
-    template: {name: Actors, person: 976}
-  Jim Carrey:
-    template: {name: Actors, person: 206}
-  John Goodman:
-    template: {name: Actors, person: 1230}
-  Johnny Depp:
-    template: {name: Actors, person: 85}
-  Johnny Knoxville:
-    template: {name: Actors, person: 9656}
-  Jonah Hill:
-    template: {name: Actors, person: 21007}
-  Keanu Reeves:
-    template: {name: Actors, person: 6384}
-  Leonardo DiCaprio:
-    template: {name: Actors, person: 6193}
-  Liam Neeson:
-    template: {name: Actors, person: 3896}
-  Mark Wahlberg:
-    template: {name: Actors, person: 13240}
-  Matt Damon:
-    template: {name: Actors, person: 1892}
-  Michael Caine:
-    template: {name: Actors, person: 3895}
-  Morgan Freeman:
-    template: {name: Actors, person: 192}
-  Paul Rudd:
-    template: {name: Actors, person: 22226}
-  Robert Downey Jr.:
-    template: {name: Actors, person: 3223}
-  Ryan Reynolds:
-    template: {name: Actors, person: 10859}
-  Samuel L. Jackson:
-    template: {name: Actors, person: 2231}
-  Scarlett Johansson:
-    template: {name: Actors, person: 1245}
-  Seann William Scott:
-    template: {name: Actors, person: 1245}
-  Seth Rogen:
-    template: {name: Actors, person: 19274}
-  Tom Cruise:
-    template: {name: Actors, person: 500}
-  Tom Hanks:
-    template: {name: Actors, person: 31}
-  Vin Diesel:
-    template: {name: Actors, person: 12835}
-  Will Ferrell:
-    template: {name: Actors, person: 23659}
-  Will Smith:
-    template: {name: Actors, person: 2888}
-  Willem Dafoe:
-    template: {name: Actors, person: 5293}
-  Woody Harrelson:
-    template: {name: Actors, person: 57755}
-
-############################
-#        DIRECTORS         #
-############################
-
-  Christopher Nolan:
-    template: {name: Directors, person: 525}
-  Clint Eastwood:
-    template: {name: Directors, person: 190}
-  Jordan Peele:
-    template: {name: Directors, person: 291263}
-  Quentin Tarantino:
-    template: {name: Directors, person: 138}
 
 ############################
 #          DOLBY           #

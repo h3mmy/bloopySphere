@@ -1,0 +1,93 @@
+templates:
+  Person:
+    smart_filter:
+      any:
+        actor: tmdb
+        director: tmdb
+        writer: tmdb
+        producer: tmdb
+      sort_by: random
+      validate: false
+    tmdb_person: <<person>>
+    sort_title: "!16_<<collection_name>>"
+    sync_mode: sync
+    collection_order: release
+    collection_mode: hide
+    schedule: non_existing
+    #schedule: weekly(friday)
+
+collections:
+  Ana De Armas:
+    template: {name: Person, person: 224513}
+  Aubrey Plaza:
+    template: {name: Person, person: 119592}
+  Ayo Edebiri:
+    template: {name: Person, person: 2195140}
+  Brad Pitt:
+    template: {name: Person, person: 287}
+  Christina Hendricks:
+    template: {name: Person, person: 110014}
+  Christopher Nolan:
+    template: {name: Person, person: 525}
+  David Tennant:
+    template: {name: Person, person: 20049}
+  Emma Stone:
+    template: {name: Person, person: 54693}
+  Gal Gadot:
+    template: {name: Person, person: 90633}
+  Greta Gerwig:
+    template: {name: Person, person: 45400}
+  Hannah Einbinder:
+    template: {name: Person, person: 2559506}
+  Henry Cavill:
+    template: {name: Person, person: 73968}
+  Sir Ian Mckellen:
+    template: {name: Person, person: 1327}
+  Jaime Clayton:
+    template: {name: Person, person: 1440698}
+  Jason Bateman:
+    template: {name: Person, person: 23532}
+  Jenna Ortega:
+    template: {name: Person, person: 974169}
+  Jon Hamm:
+    template: {name: Person, person: 65717}
+  Jordan Peele:
+    template: {name: Person, person: 291263}
+  Keanu Reeves:
+    template: {name: Person, person: 6384}
+  Kristen Stewart:
+    template: {name: Person, person: 37917}
+  Matt Berry:
+    template: {name: Person, person: 1488236}
+  Michael Caine:
+    template: {name: Person, person: 3895}
+  Morgan Freeman:
+    template: {name: Person, person: 192}
+  Neil Patrick Harris:
+    template: {name: Person, person: 41686}
+  Ncuti Gatwa:
+    template: {name: Person, person: 1475239}
+  Pedro Pascal:
+    template: {name: Person, person: 1253360}
+  Quentin Tarantino:
+    template: {name: Person, person: 138}
+  Reneé Rapp:
+    template: {name: Person, person: 2872773}
+  Scarlett Johansson:
+    template: {name: Person, person: 1245}
+  Stanley Tucci:
+    template: {name: Person, person: 2283}
+  Sydney Sweeney:
+    template: {name: Person, person: 115440}
+  Timothée Chalamet:
+    template: {name: Person, person: 1190668}
+  Tom Hanks:
+    template: {name: Person, person: 31}
+  Vin Diesel:
+    template: {name: Person, person: 12835}
+  Willem Dafoe:
+    template: {name: Person, person: 5293}
+  Woody Harrelson:
+    template: {name: Person, person: 57755}
+  Zachary Quinto:
+    template: {name: Person, person: 17306}

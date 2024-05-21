@@ -2,10 +2,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-plex-meta-manager
+  name: cluster-apps-kometa-secrets
   namespace: flux-system
 spec:
-  path: ./cluster/apps/media/plex-meta-manager/app
+  path: ./cluster/apps/media/plex-meta-manager/config
   prune: true
   sourceRef:
     kind: GitRepository
@@ -18,6 +18,39 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-kometa
+  namespace: flux-system
+spec:
+  targetNamespace: media
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: kometa
+  path: ./cluster/apps/media/plex-meta-manager/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  wait: false # no flux ks dependents
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+  dependsOn:
+    - name: cluster-apps-kometa-secrets
+    # - name: cluster-apps-rook-ceph-cluster
+    # - name: cluster-apps-plex
+    # - name: cluster-apps-tautulli
+    # - name: cluster-apps-radarr
+    # - name: cluster-apps-sonarr
+
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   postBuild:
     substitute: {}
     substituteFrom:
@@ -25,10 +58,5 @@ spec:
         name: cluster-settings
       - kind: Secret
         name: cluster-secrets
-
-  # dependsOn:
-  #   - name: cluster-apps-rook-ceph-cluster
-    # - name: cluster-apps-plex
-    # - name: cluster-apps-tautulli
-    # - name: cluster-apps-radarr
-    # - name: cluster-apps-sonarr
+      - kind: Secret
+        name: pmm-secret

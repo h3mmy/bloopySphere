@@ -26,14 +26,19 @@ libraries: # This is called out once within the config.yaml file
   #     series_type: anime
 
   Movies:
-    metadata_path:
+    run_order:
+      - collections
+      - metadata
+      - operations
+      - overlays
+    collection_files:
       - file: config/Pre-rolls.yaml
       - repo: Movies.yaml
-      - repo: Movies - Holidays by Drazzizzi.yaml
+      - repo: People.yaml
       - repo: Movies - Trakt (Unplayed) by Magic815.yaml
       - pmm: basic
       - pmm: imdb
-    overlay_path:
+    overlay_files:
       - remove_overlays: false
       - repo: Movies - Overlays - Charts.yaml
       - repo: Movies - Overlays - Oscars.yaml
@@ -43,17 +48,28 @@ libraries: # This is called out once within the config.yaml file
       - repo: Movies - Overlays - Studios.yaml
     operations:
       mass_genre_update: imdb
-      mass_content_rating_update: omdb
-      mass_audience_rating_update: mdb_tomatoesaudience
-      mass_critic_rating_update: mdb_metacritic
-      mass_user_rating_update: imdb
+      mass_content_rating_update: [omdb]
+      mass_audience_rating_update: [mdb_tomatoesaudience]
+      mass_critic_rating_update: [mdb_metacritic]
+      mass_user_rating_update: [imdb]
+      delete_collections:
+        configured: false
+        managed: true
+    minimum_items: 2
 
   TV Shows:
-    metadata_path:
+    run_order:
+      - collections
+      - metadata
+      - operations
+      - overlays
+    collection_files:
       - repo: TV Shows.yaml
-      - pmm: basic
-      - pmm: imdb
-    overlay_path:
+      - repo: People.yaml
+      - default: cannes
+      - default: basic
+      - default: imdb
+    overlay_files:
       - remove_overlays: false
       - repo: TV Shows - Overlays - Charts.yaml
       - repo: TV Shows - Overlays - Networks.yaml
@@ -61,15 +77,19 @@ libraries: # This is called out once within the config.yaml file
       - repo: TV Shows - Overlays - Statuses.yaml
       - repo: TV Shows - Overlays - Streaming Services.yaml
       - repo: TV Shows - Overlays - Studios.yaml
+    minimum_items: 2
     operations:
       mass_genre_update: tmdb
       mass_content_rating_update: omdb
-      mass_audience_rating_update: mdb_tomatoesaudience
-      mass_critic_rating_update: mdb_metacritic
-      mass_user_rating_update: imdb
-      mass_episode_audience_rating_update: mdb_tomatoesaudience
-      mass_episode_critic_rating_update: mdb_metacritic
-      mass_episode_user_rating_update: imdb
+      mass_audience_rating_update: [mdb_tomatoesaudience]
+      mass_critic_rating_update: [mdb_metacritic]
+      mass_user_rating_update: [imdb]
+      mass_episode_audience_rating_update: [mdb_tomatoesaudience]
+      mass_episode_critic_rating_update: [mdb_metacritic]
+      mass_episode_user_rating_update: [imdb]
+      delete_collections:
+        configured: false
+        managed: true
 
 settings:
   cache: true
@@ -124,6 +144,7 @@ tmdb: # REQUIRED for the script to run
   apikey: ${TMDB_API_KEY}
   language: en
   cache_expiration: 60
+  region:
 
 tautulli:
   url: http://tautulli.media.svc.cluster.local:8181
@@ -148,15 +169,15 @@ radarr:
   root_folder_path: "/Data/Movies"
   monitor: true
   availability: announced
-  quality_profile: Combined 1080
+  quality_profile: Combined 1080/720 - English
   tag:
   search: false
   radarr_path:
   plex_path:
-  update_existing: false
+  upgrade_existing: false
 
 sonarr:
-  url: http://sonarr.media.svc.cluster.local:8989
+  url: http://sonarr.media.svc.cluster.local:80
   token: ${SONARR_API_KEY}
   add_missing: false
   add_existing: false
@@ -181,6 +202,3 @@ trakt:
     token_type: Bearer
     expires_in: ${TRAKT_EXPIRES_IN}
     refresh_token: ${TRAKT_REFRESH_TOKEN}
-    scope: public
-    created_at: ${TRAKT_CREATED_AT}
-  pin:

@@ -1,8 +1,10 @@
-# Plex Meta Manager
+# Kometa
 
-## What Can Plex-Meta-Manager Do?
+Formerly known as "Plex Meta Manager"
 
-Plex Meta Manager can
+## What Can Kometa Do?
+
+Kometa can
 
 1. Create and maintain collections in Plex libraries using external lists, Plex searches, or filters.
 
