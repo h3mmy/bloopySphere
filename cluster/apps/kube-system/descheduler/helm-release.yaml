@@ -5,7 +5,7 @@ metadata:
   name: descheduler
   namespace: kube-system
 spec:
-  interval: 5m
+  interval: 45m
   chart:
     spec:
       # renovate: registryUrl=https://kubernetes-sigs.github.io/descheduler
@@ -15,7 +15,7 @@ spec:
         kind: HelmRepository
         name: descheduler-charts
         namespace: flux-system
-      interval: 5m
+      interval: 45m
   install:
     createNamespace: true
   upgrade:
@@ -29,33 +29,48 @@ spec:
         memory: 256Mi
     kind: Deployment
     deschedulerPolicy:
-      strategies:
-        RemovePodsHavingTooManyRestarts:
-          enabled: true
-          params:
-            podsHavingTooManyRestarts:
-              podRestartThreshold: 80
-              includingInitContainers: true
-              nodeFit: true
-        RemoveDuplicates:
-          enabled: false
-        RemovePodsViolatingNodeAffinity:
-          enabled: true
-          params:
-            nodeAffinityType:
-              - requiredDuringSchedulingIgnoredDuringExecution
-        RemovePodsViolatingInterPodAntiAffinity:
-          enabled: true
-          params:
-            nodeFit: true
-            labelSelector:
-              matchExpressions:
-                - key: "app.kubernetes.io/name"
-                  operator: In
-                  values:
-                    - emqx
-                    - vault
-                    - prometheus
-                    - loki
-        LowNodeUtilization:
-          enabled: false
+      # https://github.com/kubernetes-sigs/descheduler/blob/release-1.30/README.md
+      profiles:
+        - name: default
+          pluginConfig:
+            - name: RemoveDuplicates
+              args:
+                excludeOwnerKinds:
+                  - ReplicaSet
+            - name: RemovePodsHavingTooManyRestarts
+              args:
+                podRestartThreshold: 80
+                includingInitContainers: true
+                nodeFit: true
+            - name: RemovePodsViolatingNodeAffinity
+              args:
+                nodeAffinityType:
+                  - requiredDuringSchedulingIgnoredDuringExecution
+            - name: RemovePodsViolatingNodeTaints
+            - name: RemovePodsViolatingInterPodAntiAffinity
+              args:
+                nodeFit: true
+                labelSelector:
+                  matchExpressions:
+                    - key: "app.kubernetes.io/name"
+                      operator: In
+                      values:
+                        - emqx
+                        - vault
+                        - prometheus
+                        - loki
+
+            - name: RemovePodsViolatingTopologySpreadConstraint
+
+          plugins:
+            balance:
+              enabled:
+                - RemovePodsViolatingTopologySpreadConstraint
+                - LowNodeUtilization
+                # - RemoveDuplicates
+            deschedule:
+              enabled:
+                - RemovePodsHavingTooManyRestarts
+                - RemovePodsViolatingNodeTaints
+                - RemovePodsViolatingNodeAffinity
+                - RemovePodsViolatingInterPodAntiAffinity
