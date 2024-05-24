@@ -33,6 +33,10 @@ spec:
       profiles:
         - name: default
           pluginConfig:
+            - name: DefaultEvictor
+              args:
+                nodeFit: true
+                ignorePvcPods: true
             - name: RemoveDuplicates
               args:
                 excludeOwnerKinds:
@@ -41,7 +45,6 @@ spec:
               args:
                 podRestartThreshold: 80
                 includingInitContainers: true
-                nodeFit: true
             - name: RemovePodsViolatingNodeAffinity
               args:
                 nodeAffinityType:
