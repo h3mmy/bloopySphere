@@ -52,7 +52,6 @@ spec:
             - name: RemovePodsViolatingNodeTaints
             - name: RemovePodsViolatingInterPodAntiAffinity
               args:
-                nodeFit: true
                 labelSelector:
                   matchExpressions:
                     - key: "app.kubernetes.io/name"
