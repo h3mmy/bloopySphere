@@ -3,12 +3,36 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: cluster-storage-volsync-config
+  namespace: flux-system
+spec:
+  path: ./cluster/apps/storage/volsync/config
+  targetNamespace: storage
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+  wait: true
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: cluster-storage-volsync-controller
   namespace: flux-system
 spec:
   path: ./cluster/apps/storage/volsync/app
   targetNamespace: storage
   prune: true
+  # dependsOn:
+  #   - name: cluster-storage-volsync-config
   sourceRef:
     kind: GitRepository
     name: flux-system
