@@ -3,23 +3,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-snapshot-controller
+  name: cluster-storage-volsync-controller
   namespace: flux-system
 spec:
-  path: ./cluster/apps/storage/snapshot-controller/app
+  path: ./cluster/apps/storage/volsync/app
+  targetNamespace: storage
   prune: true
   sourceRef:
     kind: GitRepository
-    name: home-ops-kubernetes
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta2
-      kind: HelmRelease
-      name: snapshot-controller
-      namespace: kube-system
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta2
-      kind: HelmRelease
-      name: snapshot-validation-webhook
-      namespace: kube-system
+    name: flux-system
   interval: 30m
   retryInterval: 1m
   timeout: 3m

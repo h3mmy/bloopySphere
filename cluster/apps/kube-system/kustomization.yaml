@@ -10,5 +10,4 @@ resources:
   - ./kured
   - ./descheduler
   - ./reflector
-  - ./volsync
   - ./local-path-provisioner/ks.yaml
