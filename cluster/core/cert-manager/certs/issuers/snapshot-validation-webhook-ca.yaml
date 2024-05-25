@@ -1,0 +1,29 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: snapshot-controller-webhook-selfsigned
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: snapshot-controller-webhook-ca
+  namespace: system
+spec:
+  commonName: snapshot-controller-webhook-ca
+  secretName: snapshot-controller-webhook-ca
+  duration: 2160h
+  isCA: true
+  issuerRef:
+    name: snapshot-controller-webhook-selfsigned
+    kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: snapshot-controller-webhook-ca
+spec:
+  ca:
+    secretName: snapshot-controller-webhook-ca

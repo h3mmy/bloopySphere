@@ -6,3 +6,4 @@ resources:
   - ./letsencrypt-staging.yaml
   - ./secret.sops.yaml
   - ./csi-driver-spiffe-ca.yaml
+  - ./snapshot-validation-webhook-ca.yaml

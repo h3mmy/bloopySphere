@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./intel-device-plugins/ks.yaml
+  - ./snapshot-controller/ks.yaml
