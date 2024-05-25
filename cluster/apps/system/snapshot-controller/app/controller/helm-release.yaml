@@ -47,7 +47,7 @@ spec:
         repository: registry.k8s.io/sig-storage/snapshot-controller
         pullPolicy: IfNotPresent
         # Overrides the image tag whose default is the chart appVersion.
-        tag: &tag "v7.0.1"
+        tag: &tag "v7.0.2"
     webhook:
       enabled: true
       replicaCount: 1
