@@ -6,7 +6,7 @@ metadata:
   name: cluster-storage-snapshot-controller
   namespace: flux-system
 spec:
-  path: ./cluster/apps/kube-system/snapshot-controller/app/controller
+  path: ./cluster/apps/system/snapshot-controller/app/controller
   prune: true
   dependsOn:
     - name: cluster-cert-issuers
