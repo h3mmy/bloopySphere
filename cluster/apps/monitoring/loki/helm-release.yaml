@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -11,7 +12,7 @@ spec:
     spec:
       # renovate: registryUrl=https://grafana.github.io/helm-charts
       chart: loki
-      version: 5.48.0
+      version: 6.5.2
       sourceRef:
         kind: HelmRepository
         name: grafana-charts
@@ -29,8 +30,10 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    lokiCanary:
+      enabled: false
     backend:
-      replicas: 3
+      replicas: 2
       persistence:
         storageClass: ceph-block
       extraVolumeMounts:
@@ -94,15 +97,15 @@ spec:
 
     gateway:
       enabled: true
-      replicas: 3
-      affinity: |
+      replicas: 2
+      affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
             - weight: 1
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    {{- include "loki.gatewaySelectorLabels" . | nindent 12 }}
+                    app.kubernetes.io/component: gateway
                 topologyKey: kubernetes.io/hostname
       ingress:
         enabled: true
@@ -138,6 +141,17 @@ spec:
                     - loki
             topologyKey: "kubernetes.io/hostname"
     loki:
+      analytics:
+        reporting_enabled: false
+      auth_enabled: false
+      storage:
+        type: s3
+        bucketNames:
+          chunks: loki
+        s3:
+          endpoint: "minio.storage.svc.cluster.local:9000"
+          s3forcepathstyle: true
+          insecure: true
       storage_config:
         boltdb_shipper:
           active_index_directory: /var/loki/index
@@ -173,15 +187,13 @@ spec:
           ingestion_rate_mb: 16
           ingestion_burst_size_mb: 24
           retention_period: 14d
+          shard_streams:
+            enabled: true
+
         common:
           path_prefix: /var/loki
           replication_factor: 1
-          storage:
-            s3:
-              bucketnames: loki
-              endpoint: "minio.storage.svc.cluster.local:9000"
-              s3forcepathstyle: true
-              insecure: true
+
           ring:
             kvstore:
               store: memberlist
@@ -234,8 +246,6 @@ spec:
         enabled: false
         grafanaAgent:
           installOperator: false
-      lokiCanary:
-        enabled: false
       rules:
         enabled: true
         alerting: true
@@ -385,10 +395,10 @@ spec:
     - kind: Secret
       name: loki-s3
       valuesKey: minio_access_key
-      targetPath: loki.structuredConfig.common.storage.s3.access_key_id
+      targetPath: loki.storage.s3.access_key_id
       optional: false
     - kind: Secret
       name: loki-s3
       valuesKey: minio_secret_key
-      targetPath: loki.structuredConfig.common.storage.s3.secret_access_key
+      targetPath: loki.storage.s3.secret_access_key
       optional: false
