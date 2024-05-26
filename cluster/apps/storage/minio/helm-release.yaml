@@ -131,7 +131,7 @@ spec:
                 memory: 866M
               limits:
                 cpu: 849m
-                memory: 1258M
+                memory: 1858M
     defaultPodOptions:
       securityContext:
         fsGroup: 65539
