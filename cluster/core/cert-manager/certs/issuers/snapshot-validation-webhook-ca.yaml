@@ -26,6 +26,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: snapshot-controller-webhook-ca
+  namespace: cert-manager
 spec:
   ca:
     secretName: snapshot-controller-trust-roots
