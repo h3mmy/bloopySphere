@@ -196,6 +196,7 @@ spec:
           join_members:
             - loki-memberlist
         limits_config:
+          allow_structured_metadata: false # TODO: Remove this after schema update 
           max_cache_freshness_per_query: 10m
           split_queries_by_interval: 1h
           reject_old_samples: true
