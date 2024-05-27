@@ -196,7 +196,6 @@ spec:
           join_members:
             - loki-memberlist
         limits_config:
-          enforce_metric_name: false
           max_cache_freshness_per_query: 10m
           split_queries_by_interval: 1h
           reject_old_samples: true
