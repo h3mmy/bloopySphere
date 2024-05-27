@@ -23,10 +23,9 @@ spec:
     group: cert-manager.io
 ---
 apiVersion: cert-manager.io/v1
-kind: Issuer
+kind: ClusterIssuer
 metadata:
   name: snapshot-controller-webhook-ca
-  namespace: cert-manager
 spec:
   ca:
     secretName: snapshot-controller-trust-roots
