@@ -6,7 +6,7 @@ metadata:
 spec:
   sources:
     - secret:
-        name: "snapshot-controller-webhook-ca"
+        name: "snapshot-controller-trust-roots"
         key: "ca.crt"
   target:
     configMap:
