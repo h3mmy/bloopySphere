@@ -30,8 +30,12 @@ spec:
   uninstall:
     keepHistory: false
   values:
+
+    deploymentMode: SimpleScalable
+
     lokiCanary:
       enabled: false
+
     backend:
       replicas: 2
       persistence:
@@ -140,10 +144,12 @@ spec:
                   values:
                     - loki
             topologyKey: "kubernetes.io/hostname"
+
     loki:
       analytics:
         reporting_enabled: false
       auth_enabled: false
+
       storage:
         type: s3
         bucketNames:
@@ -157,9 +163,16 @@ spec:
           active_index_directory: /var/loki/index
           cache_location: /var/loki/index_cache
           resync_interval: 5s
-          shared_store: s3
+
       schemaConfig:
         configs:
+          - from: "2024-04-01"
+            store: boltdb-shipper
+            object_store: s3
+            schema: v13
+            index:
+              prefix: loki_index_
+              period: 24h
           - from: "2022-01-11"
             store: boltdb-shipper
             object_store: s3
@@ -167,6 +180,10 @@ spec:
             index:
               prefix: loki_index_
               period: 24h
+
+      ingester:
+        chunk_encoding: snappy
+
       structuredConfig:
         analytics:
           reporting_enabled: false
@@ -181,7 +198,7 @@ spec:
         limits_config:
           enforce_metric_name: false
           max_cache_freshness_per_query: 10m
-          split_queries_by_interval: 15m
+          split_queries_by_interval: 1h
           reject_old_samples: true
           reject_old_samples_max_age: 168h
           ingestion_rate_mb: 16
@@ -204,22 +221,24 @@ spec:
               directory: /rules
           rule_path: /tmp/scratch
           enable_alertmanager_v2: true
-          alertmanager_url: http://prometheus-alertmanager:9093
+          alertmanager_url: http://prometheus-alertmanager.monitoring.svc:9093
           ring:
             kvstore:
               store: memberlist
           enable_api: true
+
         distributor:
           ring:
             kvstore:
               store: memberlist
+
         compactor:
           working_directory: /var/loki/boltdb-shipper-compactor
-          shared_store: s3
           compaction_interval: 5m
           retention_enabled: true
           retention_delete_delay: 2h
           retention_delete_worker_count: 150
+
         ingester:
           max_chunk_age: 1h
           lifecycler:
@@ -230,6 +249,8 @@ spec:
             final_sleep: 0s
           chunk_idle_period: 5m
           chunk_retain_period: 30s
+        frontend:
+          max_outstanding_per_tenant: 4096
     test:
       enabled: false
 
@@ -242,6 +263,8 @@ spec:
           grafana_dashboard: "1"
       serviceMonitor:
         enabled: true
+        metricsInstance:
+          enabled: false
       selfMonitoring:
         enabled: false
         grafanaAgent:
@@ -251,146 +274,6 @@ spec:
         alerting: true
       alerts:
         enabled: true
-        # additionalGroups:
-        #   #
-        #   # SMART Failures
-        #   #
-        #   - name: smart-failure
-        #     rules:
-        #       - alert: SmartFailures
-        #         expr: |
-        #           sum by (hostname) (count_over_time({hostname=~".+"} |~ "(?i).*smartd.*(error|fail).*"[2m])) > 0
-        #         for: 10s
-        #         labels:
-        #           severity: critical
-        #           category: logs
-        #         annotations:
-        #           # TODO: Figure out how to use hostname in summary
-        #           summary: "SMART has reported failures"
-        #   #
-        #   # zigbee2mqtt
-        #   #
-        #   - name: zigbee2mqtt
-        #     rules:
-        #       - alert: ZigbeeUnableToReachMQTT
-        #         expr: |
-        #           sum(count_over_time({app="zigbee2mqtt"} |~ "(?i)not connected to mqtt server"[2m])) > 0
-        #         for: 10s
-        #         labels:
-        #           severity: critical
-        #           category: logs
-        #         annotations:
-        #           summary: "Zigbee2mqtt is unable to reach MQTT"
-        #   #
-        #   # zwavejs2mqtt
-        #   #
-        #   - name: zwavejs2mqtt
-        #     rules:
-        #       - alert: ZwaveUnableToReachMQTT
-        #         expr: |
-        #           sum(count_over_time({app="zwavejs2mqtt"} |~ "(?i)error while connecting mqtt"[2m])) > 0
-        #         for: 10s
-        #         labels:
-        #           severity: critical
-        #           category: logs
-        #         annotations:
-        #           summary: "Zwavejs2mqtt is unable to reach MQTT"
-        #   #
-        #   # frigate
-        #   #
-        #   - name: frigate
-        #     rules:
-        #       - alert: FrigateUnableToReachMQTT
-        #         expr: |
-        #           sum(count_over_time({app="frigate"} |~ "(?i)unable to connect to mqtt server"[2m])) > 0
-        #         for: 10s
-        #         labels:
-        #           severity: critical
-        #           category: logs
-        #         annotations:
-        #           summary: "Frigate is unable to reach MQTT"
-        #   #
-        #   # *arr applications
-        #   #
-        #   - name: arr
-        #     rules:
-        #       - alert: ArrDatabaseIsLocked
-        #         expr: |
-        #           sum by (app) (count_over_time({app=~".*arr"} |~ "(?i)database is locked"[2m])) > 0
-        #         for: 10s
-        #         labels:
-        #           severity: critical
-        #           category: logs
-        #         annotations:
-        #           # TODO: Figure out how to use hostname in summary
-        #           summary: "An arr app is experiencing locked database issues"
-        #       - alert: ArrDatabaseIsMalformed
-        #         expr: |
-        #           sum by (app) (count_over_time({app=~".*arr"} |~ "(?i)database disk image is malformed"[2m])) > 0
-        #         for: 10s
-        #         labels:
-        #           severity: critical
-        #           category: logs
-        #         annotations:
-        #           # TODO: Figure out how to use hostname in summary
-        #           summary: "An arr app is experiencing malformed database disk image issues"
-        #   #
-        #   # home-assistant
-        #   #
-        #   - name: home-assistant
-        #     rules:
-        #       - alert: HomeAssistantUnableToReachPostgresql
-        #         expr: |
-        #           sum by (app) (count_over_time({app="home-assistant"} |~ "(?i)error in database connectivity"[2m])) > 0
-        #         for: 10s
-        #         labels:
-        #           severity: critical
-        #           category: logs
-        #         annotations:
-        #           summary: "Home Assistant is unable to connect to postgresql"
-        #   #
-        #   # vaultwarden
-        #   #
-        #   - name: vaultwarden
-        #     rules:
-        #       - alert: VaultwardenUnableToReachPostgresql
-        #         expr: |
-        #           sum by (app) (count_over_time({app="vaultwarden"} |~ "(?i)could not connect to server"[2m])) > 0
-        #         for: 10s
-        #         labels:
-        #           severity: critical
-        #           category: logs
-        #         annotations:
-        #           summary: "Vaultwarden is unable to connect to postgresql"
-        #   #
-        #   # valetudo
-        #   #
-        #   - name: valetudo
-        #     rules:
-        #       - alert: ValetudoUnableToReachMQTT
-        #         expr: |
-        #           sum by (hostname) (count_over_time({hostname="valetudo"} |~ "(?i).*error.*mqtt.*"[2m])) > 0
-        #         for: 10s
-        #         labels:
-        #           severity: critical
-        #           category: logs
-        #         annotations:
-        #           summary: "Valetudo is unable to connect to mqtt"
-        #   #
-        #   # node-red
-        #   #
-        #   - name: node-red
-        #     rules:
-        #       - alert: NodeRedUnableToReachHomeAssistant
-        #         expr: |
-        #           sum by (app) (count_over_time({app="node-red"} |~ "(?i)home assistant.*connecting to undefined"[2m])) > 0
-        #         for: 10s
-        #         labels:
-        #           severity: critical
-        #           category: logs
-        #         annotations:
-        #           summary: "Node-Red is unable to connect to Home Assistant"
-
   valuesFrom:
     - kind: Secret
       name: loki-s3
