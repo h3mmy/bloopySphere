@@ -155,7 +155,7 @@ spec:
         bucketNames:
           chunks: loki
         s3:
-          endpoint: "minio.storage.svc.cluster.local:9000"
+          endpoint: "http://minio.storage.svc.cluster.local:9000"
           s3forcepathstyle: true
           insecure: true
       storage_config:
