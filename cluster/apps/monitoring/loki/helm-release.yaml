@@ -279,10 +279,10 @@ spec:
     - kind: Secret
       name: loki-s3
       valuesKey: minio_access_key
-      targetPath: loki.storage.s3.access_key_id
+      targetPath: loki.storage.s3.accessKeyId
       optional: false
     - kind: Secret
       name: loki-s3
       valuesKey: minio_secret_key
-      targetPath: loki.storage.s3.secret_access_key
+      targetPath: loki.storage.s3.secretAccessKey
       optional: false
