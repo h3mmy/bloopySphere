@@ -210,6 +210,11 @@ spec:
         common:
           path_prefix: /var/loki
           replication_factor: 1
+          storage:
+            s3:
+              endpoint: "minio.storage.svc.cluster.local:9000"
+              s3forcepathstyle: true
+              insecure: true
 
           ring:
             kvstore:
