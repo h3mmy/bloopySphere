@@ -33,17 +33,21 @@ spec:
     # Provided by rook-ceph-operator. See https://rook.io/docs/rook/v1.9/Storage-Configuration/Object-Storage-RGW/ceph-object-bucket-claim/
     - targetPath: loki.storage.bucketNames.chunks
       kind: ConfigMap
-      name: &cephBucket loki-chunks-bucket-v1
+      name: &cephBucket loki-bucket-v1
       valuesKey: BUCKET_NAME
-    #   # This one is needed to avoid the loki helm chart magically prepending the bucket name to the endpoint
-    # - targetPath: loki.structuredConfig.common.storage.s3.endpoint
-    #   kind: ConfigMap
-    #   name: *cephBucket
-    #   valuesKey: BUCKET_HOST
-    # - targetPath: loki.structuredConfig.common.storage.bucketNames.chunks
-    #   kind: ConfigMap
-    #   name: *cephBucket
-    #   valuesKey: BUCKET_NAME
+    - targetPath: loki.storage.bucketNames.ruler
+      kind: ConfigMap
+      name: *cephBucket
+      valuesKey: BUCKET_NAME
+    - targetPath: loki.storage.bucketNames.admin
+      kind: ConfigMap
+      name: *cephBucket
+      valuesKey: BUCKET_NAME
+    # This one is needed to avoid the loki helm chart magically prepending the bucket name to the endpoint
+    - targetPath: loki.structuredConfig.common.storage.s3.endpoint
+      kind: ConfigMap
+      name: *cephBucket
+      valuesKey: BUCKET_HOST
     - targetPath: loki.storage.s3.endpoint
       kind: ConfigMap
       name: *cephBucket
@@ -182,12 +186,6 @@ spec:
         reporting_enabled: false
       auth_enabled: false
 
-      storage:
-        type: s3
-        s3:
-          s3forcepathstyle: true
-          insecure: true
-
       schemaConfig:
         configs:
           - from: "2024-05-30"
@@ -197,6 +195,12 @@ spec:
             index:
               prefix: loki_index_
               period: 24h
+
+      storage:
+        type: s3
+        s3:
+          s3forcepathstyle: true
+          insecure: true
 
       ingester:
         chunk_encoding: snappy
