@@ -223,14 +223,6 @@ spec:
         alertmanager_url: http://prometheus-alertmanager.monitoring.svc:9093
         enable_api: true
 
-      compactor:
-        working_directory: /var/loki/boltdb-shipper-compactor
-        compaction_interval: 5m
-        retention_enabled: true
-        delete_request_store: s3
-        retention_delete_delay: 2h
-        retention_delete_worker_count: 150
-
       query_scheduler:
         max_outstanding_requests_per_tenant: 4096
       frontend:
