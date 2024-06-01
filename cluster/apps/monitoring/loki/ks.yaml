@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: rook-ceph-operator
+    - name: cluster-core-rook-ceph-cluster
   path: ./cluster/apps/monitoring/loki/app
   prune: true
   sourceRef:
