@@ -6,5 +6,4 @@ resources:
   - ./grafana-agent-operator/crds.yaml
   - ./external-snapshotter/crds.yaml
   - ./external-dns/crds.yaml
-  - ./tf-controller/crds.yaml
   - ./velero/crds.yaml
