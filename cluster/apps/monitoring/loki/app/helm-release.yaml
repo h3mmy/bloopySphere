@@ -182,7 +182,7 @@ spec:
 
       schemaConfig:
         configs:
-          - from: "2024-05-31" # quote
+          - from: "2024-05-30"
             store: tsdb
             object_store: s3
             schema: v13
