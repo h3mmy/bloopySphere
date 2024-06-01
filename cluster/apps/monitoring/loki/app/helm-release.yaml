@@ -35,11 +35,11 @@ spec:
       kind: ConfigMap
       name: &cephBucket loki-chunks-bucket-v1
       valuesKey: BUCKET_NAME
-      # This one is needed to avoid the loki helm chart magically prepending the bucket name to the endpoint
-    - targetPath: loki.structuredConfig.common.storage.s3.endpoint
-      kind: ConfigMap
-      name: *cephBucket
-      valuesKey: BUCKET_HOST
+    #   # This one is needed to avoid the loki helm chart magically prepending the bucket name to the endpoint
+    # - targetPath: loki.structuredConfig.common.storage.s3.endpoint
+    #   kind: ConfigMap
+    #   name: *cephBucket
+    #   valuesKey: BUCKET_HOST
     - targetPath: loki.storage.s3.endpoint
       kind: ConfigMap
       name: *cephBucket
@@ -195,56 +195,46 @@ spec:
               prefix: loki_index_
               period: 24h
 
-
       ingester:
         chunk_encoding: snappy
 
-      structuredConfig:
-        analytics:
-          reporting_enabled: false
-        auth_enabled: false
-        server:
-          log_level: info
-          http_listen_port: 3100
-          grpc_listen_port: 9095
-          grpc_server_max_recv_msg_size: 8388608
-          grpc_server_max_send_msg_size: 8388608
-        limits_config:
-          split_queries_by_interval: 1h
-          reject_old_samples: true
-          reject_old_samples_max_age: 168h
-          ingestion_rate_mb: 16
-          ingestion_burst_size_mb: 32
-          retention_period: 14d
-          shard_streams:
-            enabled: true
-        ruler:
-          storage:
-            type: local
-            local:
-              directory: /rules
-          rule_path: /tmp/scratch
-          enable_alertmanager_v2: true
-          alertmanager_url: http://prometheus-alertmanager.monitoring.svc:9093
-          enable_api: true
+      server:
+        log_level: info
+        http_listen_port: 3100
+        grpc_listen_port: 9095
+        grpc_server_max_recv_msg_size: 8388608
+        grpc_server_max_send_msg_size: 8388608
+      limits_config:
+        split_queries_by_interval: 1h
+        reject_old_samples: true
+        reject_old_samples_max_age: 168h
+        ingestion_rate_mb: 16
+        ingestion_burst_size_mb: 32
+        retention_period: 14d
+        shard_streams:
+          enabled: true
+      ruler:
+        storage:
+          type: local
+          local:
+            directory: /rules
+        rule_path: /tmp/scratch
+        enable_alertmanager_v2: true
+        alertmanager_url: http://prometheus-alertmanager.monitoring.svc:9093
+        enable_api: true
 
-        compactor:
-          working_directory: /var/loki/boltdb-shipper-compactor
-          compaction_interval: 5m
-          retention_enabled: true
-          delete_request_store: s3
-          retention_delete_delay: 2h
-          retention_delete_worker_count: 150
+      compactor:
+        working_directory: /var/loki/boltdb-shipper-compactor
+        compaction_interval: 5m
+        retention_enabled: true
+        delete_request_store: s3
+        retention_delete_delay: 2h
+        retention_delete_worker_count: 150
 
-        ingester:
-          max_chunk_age: 1h
-          chunk_encoding: snappy
-          chunk_idle_period: 5m
-          chunk_retain_period: 30s
-        query_scheduler:
-          max_outstanding_requests_per_tenant: 4096
-        frontend:
-          max_outstanding_per_tenant: 4096
+      query_scheduler:
+        max_outstanding_requests_per_tenant: 4096
+      frontend:
+        max_outstanding_per_tenant: 4096
     test:
       enabled: false
 
