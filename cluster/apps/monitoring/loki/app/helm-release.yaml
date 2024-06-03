@@ -210,6 +210,11 @@ spec:
         ingester:
           chunk_encoding: snappy
 
+        common:
+          storage:
+            s3:
+              s3forcepathstyle: true
+              
         server:
           log_level: info
           http_listen_port: 3100
