@@ -3,7 +3,7 @@ apiVersion: infra.contrib.fluxcd.io/v1alpha2
 kind: Terraform
 metadata:
   name: cloudflare
-  namespace: flux-system
+  namespace: infrastructure
 spec:
   interval: 30m
   approvePlan: "auto"

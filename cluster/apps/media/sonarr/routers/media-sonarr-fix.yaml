@@ -14,7 +14,7 @@ spec:
       services:
         - kind: Service
           name: sonarr
-          port: 8989
+          port: 80
       middlewares:
         - name: networking-bloopnet-xyz-auth@kubernetescrd
   tls:

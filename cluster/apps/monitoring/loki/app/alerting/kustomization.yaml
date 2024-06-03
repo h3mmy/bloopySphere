@@ -4,9 +4,6 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./prometheus-rule.yaml
-  - ./secret.sops.yaml
-  - ./dashboard
-  - ./helm-release.yaml
 configMapGenerator:
   - name: loki-alerting-rules
     files:

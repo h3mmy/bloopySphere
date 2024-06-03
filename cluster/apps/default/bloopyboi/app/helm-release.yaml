@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.5.0
+      version: 2.6.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -30,7 +30,7 @@ spec:
           main:
             image:
               repository: ghcr.io/h3mmy/bloopyboi
-              tag: dev@sha256:d6f9088cc5e5d3b03709c62e713b353269b5317a240bb3c7683b6f101d315552
+              tag: dev@sha256:81a6059c50530aabe50d3c325ba66ea557221b6f6ddfd44f23c0e8b000bcb475
             env:
               TZ: ${TZ}
               GOOGLE_APPLICATION_CREDENTIALS: &svc-keyfile /bloopy-ops-dev.json

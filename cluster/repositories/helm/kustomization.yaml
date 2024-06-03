@@ -45,7 +45,7 @@ resources:
   - ricoberger-charts.yaml
   - rook-ceph-charts.yaml
   - stakater-charts.yaml
-  - tf-controller.yaml
+  - tofu-controller.yaml
   - traefik-charts.yaml
   - vector-charts.yaml
   - vmware-tanzu-charts.yaml
