@@ -207,6 +207,8 @@ spec:
 
       structuredConfig:
         auth_enabled: false
+        ingester:
+          chunk_encoding: snappy
 
         server:
           log_level: info
@@ -228,7 +230,7 @@ spec:
           shard_streams:
             enabled: true
           split_queries_by_interval: 1h
-
+        # If this is configured at all, it gets mistemplated and tries using bucketname.bucketendpoint instead of bucketendpoint/bucketname
         # compactor:
         #   working_directory: /var/loki/compactor/retention
         #   delete_request_store: s3
