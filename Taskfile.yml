@@ -8,6 +8,7 @@ vars:
   ANSIBLE_DIR: "{{.PROJECT_DIR}}/provision/ansible"
   TERRAFORM_DIR: "{{.PROJECT_DIR}}/provision/terraform"
   STATIC_DIR: "{{.PROJECT_DIR}}/static"
+  KUBERNETES_DIR: "{{.PROJECT_DIR}}/k8s"
 
 env:
   KUBECONFIG: "{{.PROJECT_DIR}}/provision/kubeconfig"
@@ -18,5 +19,6 @@ includes:
   format: .taskfiles/format.yml
   lint: .taskfiles/lint.yml
   pre-commit: .taskfiles/pre-commit.yml
+  talos: .taskfiles/Talos
   terraform: .taskfiles/terraform.yml
   system: .taskfiles/system.yml
