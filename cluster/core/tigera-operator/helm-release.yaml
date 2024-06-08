@@ -76,11 +76,12 @@ spec:
         metadata:
           labels:
             goldilocks.fairwinds.com/enabled: "true"
-        # tolerations:
-        #   - key: "kubernetes.io/arch"
-        #     operator: "Equal"
-        #     value: "arm64"
-        #     effect: "NoSchedule"
+        spec:
+          tolerations:
+            - key: "kubernetes.io/arch"
+              operator: "Equal"
+              value: "arm64"
+              effect: "NoSchedule"
 
     # Configures general installation parameters for Calico. Schema is based
     # on the operator.tigera.io/Installation API documented
