@@ -157,6 +157,7 @@ spec:
                     values:
                       - k8s-2
                       - k8s-3
+                      - k8s-6
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
