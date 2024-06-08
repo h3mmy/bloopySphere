@@ -76,12 +76,20 @@ spec:
         metadata:
           labels:
             goldilocks.fairwinds.com/enabled: "true"
-        spec:
-          tolerations:
-            - key: "kubernetes.io/arch"
-              operator: "Equal"
-              value: "arm64"
-              effect: "NoSchedule"
+        # spec:
+        #   tolerations:
+        #     # Make sure {{include "nodeName" . }} gets scheduled on all nodes.
+        #     - effect: NoSchedule
+        #       operator: Exists
+        #     # Mark the pod as a critical add-on for rescheduling.
+        #     - key: CriticalAddonsOnly
+        #       operator: Exists
+        #     - effect: NoExecute
+        #       operator: Exists
+        #     # - key: "kubernetes.io/arch"
+        #     #   operator: "Equal"
+        #     #   value: "arm64"
+        #     #   effect: "NoSchedule"
 
     # Configures general installation parameters for Calico. Schema is based
     # on the operator.tigera.io/Installation API documented

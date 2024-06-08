@@ -40,17 +40,3 @@ spec:
         kubernetes.io/hostname: k8s-2
   interfaces:
     - eno1
----
-apiVersion: metallb.io/v1beta1
-kind: L2Advertisement
-metadata:
-  name: l2-advertisement-0
-  namespace: metallb-system
-spec:
-  ipAddressPools:
-    - default
-  nodeSelectors:
-    - matchLabels:
-        kubernetes.io/hostname: k8s-5
-  interfaces:
-    - eth0
