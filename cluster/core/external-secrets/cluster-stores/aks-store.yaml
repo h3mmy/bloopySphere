@@ -1,0 +1,25 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ClusterSecretStore
+metadata:
+  name: azure-keyvault-bloopnet
+spec:
+  provider:
+    azurekv:
+      # PublicCloud, USGovernmentCloud, ChinaCloud, GermanCloud
+      environmentType: PublicCloud # default
+      # azure tenant ID, see: https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant
+      tenantId: ${AZURE_TENANT_ID}
+      # URL of your vault instance, see: https://docs.microsoft.com/en-us/azure/key-vault/general/about-keys-secrets-certificates
+      vaultUrl: https://bloopnet.vault.azure.net/
+      authSecretRef:
+        # points to the secret that contains
+        # the azure service principal credentials
+        clientId:
+          name: aks-bloopysphere-eso
+          key: client-id
+          namespace: system
+        clientSecret:
+          name: aks-bloopysphere-eso
+          key: client-secret
+          namespace: system
