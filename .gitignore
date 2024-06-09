@@ -62,5 +62,4 @@ whisparr_backup.zip
 kc-metadata-saml.xml
 update_plex_plugins.sh
 test-grafana-api.sh
-infrastructure/terraform/azure
 merms/*
