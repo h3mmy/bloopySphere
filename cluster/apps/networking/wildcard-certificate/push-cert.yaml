@@ -1,0 +1,25 @@
+---
+apiVersion: external-secrets.io/v1alpha1
+kind: PushSecret
+metadata:
+  name: push-wildcard-cert
+  namespace: networking
+spec:
+  refreshInterval: 60h # Refresh interval for which push secret will reconcile
+  deletionPolicy: Delete
+  secretStoreRefs: # A list of secret stores to push secrets to
+    - name: zure-keyvault-bloopnet
+      kind: ClusterSecretStore
+  selector:
+    secret:
+      name: tls.bloopnet-xyz
+      namespace: networking
+  data:
+    - match:
+        secretKey: tls.crt
+        remoteRef:
+          remoteKey: cert/tls-bloopnet-xyz
+    - match:
+        secretKey: tls.key
+        remoteRef:
+          remoteKey: key/tls-bloopnet-xyz
