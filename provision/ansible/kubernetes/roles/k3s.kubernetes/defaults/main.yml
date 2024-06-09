@@ -1,5 +1,5 @@
 ---
-k3s_etcd_s3: false
+k3s_etcd_s3: true
 k3s_etcd_s3_insecure: false
 k3s_etcd_snapshot_schedule_cron: 0 0 * * 0
 k3s_etcd_snapshot_retention: 5

@@ -32,6 +32,7 @@ k3s_registration_address: "{{ kubevip_address }}"
 # /etc/rancher/k3s/config.yaml.d
 k3s_server_config_yaml_d_files:
   - "k3s/10-etcd-snapshots.yaml.j2"
+  # - "k3s/10-kube-vip-ds.yaml.j2"
 
 # (list) A list of URLs to deploy on the primary control plane. Read notes below.
 #k3s_server_manifests_urls: []
