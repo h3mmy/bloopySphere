@@ -3,6 +3,7 @@ apiVersion: external-secrets.io/v1alpha1
 kind: PushSecret
 metadata:
   name: push-wildcard-cert
+  namespace: networking
 spec:
   refreshInterval: 60h # Refresh interval for which push secret will reconcile
   deletionPolicy: Delete
