@@ -2,7 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
-  name: flux-system
+  name: bloopysphere
   namespace: flux-system
 spec:
   interval: 1m0s
@@ -10,4 +10,4 @@ spec:
     branch: main
   url: ssh://git@github.com/h3mmy/bloopySphere.git
   secretRef:
-    name: flux-system
+    name: bloopysphere
