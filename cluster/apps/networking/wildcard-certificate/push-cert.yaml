@@ -13,7 +13,6 @@ spec:
   selector:
     secret:
       name: tls.bloopnet-xyz
-      namespace: networking
   data:
     - match:
         secretKey: tls.crt
