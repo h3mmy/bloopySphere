@@ -9,7 +9,7 @@ spec:
   path: "./cluster/core/external-secrets/cluster-stores"
   prune: true
   dependsOn:
-    - external-secrets-operator
+    - name: external-secrets-operator
   sourceRef:
     kind: GitRepository
     name: flux-system
