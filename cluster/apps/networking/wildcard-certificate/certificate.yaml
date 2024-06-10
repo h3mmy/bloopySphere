@@ -24,3 +24,5 @@ spec:
     - "*.${TGR_DOMAIN}"
     - "${LILJ_DOMAIN}"
     - "*.${LILJ_DOMAIN}"
+  additionalOutputFormats:
+    - type: CombinedPEM
