@@ -8,7 +8,7 @@ spec:
   refreshInterval: 60h # Refresh interval for which push secret will reconcile
   deletionPolicy: Delete
   secretStoreRefs: # A list of secret stores to push secrets to
-    - name: zure-keyvault-bloopnet
+    - name: azure-keyvault-bloopnet
       kind: ClusterSecretStore
   selector:
     secret:
