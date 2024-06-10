@@ -15,7 +15,10 @@ spec:
       name: tls.bloopnet-xyz
   data:
     - match:
-        secretKey: tls-combined.pem
+        secretKey: tls.crt
         remoteRef:
-          remoteKey: cert/tls-bloopnet-xyz
-          decodingStrategy: Base64
+          remoteKey: tls-bloopnet-xyz-crt
+    - match:
+        secretKey: tls.key
+        remoteRef:
+          remoteKey: key/tls-bloopnet-xyz
