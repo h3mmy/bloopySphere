@@ -15,6 +15,6 @@ spec:
       name: tls.bloopnet-xyz
   data:
     - match:
-        secretKey: tls.combined-pem
+        secretKey: tls-combined.pem
         remoteRef:
           remoteKey: cert/tls-bloopnet-xyz
