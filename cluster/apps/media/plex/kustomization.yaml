@@ -6,7 +6,7 @@ resources:
   - ./helm-release.yaml
   - ./pdb.yaml
   - ./alerts/gatus.yaml
-  - ./volsync-config.yaml
+ # - ./volsync-config.yaml
 configMapGenerator:
   - name: plex-profile-configmap
     files:
