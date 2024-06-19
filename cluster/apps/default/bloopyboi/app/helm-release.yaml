@@ -30,7 +30,7 @@ spec:
           main:
             image:
               repository: ghcr.io/h3mmy/bloopyboi
-              tag: dev@sha256:a41825946599b0421d425359ad3492278b4cb30afd798cc913af1772ecd87a97
+              tag: dev@sha256:bac7099428597bb5b6432830640bda9790cf5ca74b5edbd10f074d8422be0ee8
             env:
               TZ: ${TZ}
               GOOGLE_APPLICATION_CREDENTIALS: &svc-keyfile /bloopy-ops-dev.json
