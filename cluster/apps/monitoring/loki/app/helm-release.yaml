@@ -213,7 +213,7 @@ spec:
         common:
           storage:
             s3:
-              s3forcepathstyle: true       
+              s3forcepathstyle: true      
         server:
           log_level: info
           http_listen_port: 3100
