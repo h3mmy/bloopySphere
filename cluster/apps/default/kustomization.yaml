@@ -4,7 +4,8 @@ kind: Kustomization
 resources:
   - hajimari-bloop
   - hajimari-xyz
-  - jupyterhub
+  # Temporarily disabling pending #4771
+#  - jupyterhub
   - ./bloopyboi/ks.yaml
   - minecraft
   - ./wiki

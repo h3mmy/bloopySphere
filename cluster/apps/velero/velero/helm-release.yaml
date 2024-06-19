@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://vmware-tanzu.github.io/helm-charts
       chart: velero
-      version: 6.6.0
+      version: 6.7.0
       sourceRef:
         kind: HelmRepository
         name: vmware-tanzu-charts
@@ -38,7 +38,7 @@ spec:
 
     initContainers:
       - name: velero-plugin-for-aws
-        image: velero/velero-plugin-for-aws:v1.9.2
+        image: velero/velero-plugin-for-aws:v1.10.0
         imagePullPolicy: IfNotPresent
         volumeMounts:
           - mountPath: /target
