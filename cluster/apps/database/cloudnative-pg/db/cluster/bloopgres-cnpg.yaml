@@ -69,15 +69,15 @@ spec:
       wal:
         compression: bzip2
         maxParallel: 5
-      destinationPath: s3://bloopgres-backup-2
+      destinationPath: s3://bloopgres-backup-3
       endpointURL: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local
       # credentials are populated via rook-ceph-operator
       s3Credentials:
         accessKeyId:
-          name: cnpg-bloopgres-backup-v1
+          name: cnpg-bloopgres-backup-v2
           key: AWS_ACCESS_KEY_ID
         secretAccessKey:
-          name: cnpg-bloopgres-backup-v1
+          name: cnpg-bloopgres-backup-v2
           key: AWS_SECRET_ACCESS_KEY
 
   externalClusters: []
