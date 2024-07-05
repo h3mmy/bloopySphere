@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.traefik.io/traefik
       chart: traefik
-      version: 27.0.2
+      version: 28.1.0
       sourceRef:
         kind: HelmRepository
         name: traefik-charts
@@ -19,6 +19,8 @@ spec:
     - name: cert-manager
       namespace: cert-manager
   values:
+    core:
+      defaultRuleSyntax: v2
     image:
       name: traefik
     deployment:
