@@ -12,8 +12,25 @@ spec:
   primaryUpdateStrategy: unsupervised
 
   storage:
-    size: 7.5G
-    storageClass: ceph-block
+    pvcTemplate:
+      accessModes:
+        - ReadWriteOnce
+        - ReadWriteManxy
+      resources:
+        requests:
+          storage: 5Gi
+      storageClassName: ceph-block
+      volumeMode: Filesystem
+  walStorage:
+    pvcTemplate:
+      accessModes:
+        - ReadWriteOnce
+        - ReadWriteManxy
+      resources:
+        requests:
+          storage: 5Gi
+      storageClassName: ceph-block
+      volumeMode: Filesystem
   # This is needed in order to use init-db to bootstrap app specific dbs
   enableSuperuserAccess: true
 
