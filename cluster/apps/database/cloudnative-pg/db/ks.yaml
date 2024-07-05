@@ -49,7 +49,7 @@ spec:
   healthChecks:
     - apiVersion: objectbucket.io/v1alpha1
       kind: ObjectBucketClaim
-      name: cnpg-bloopgres-backup-v1
+      name: cnpg-bloopgres-backup-v2
       namespace: database
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
