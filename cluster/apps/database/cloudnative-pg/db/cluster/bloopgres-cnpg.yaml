@@ -15,7 +15,7 @@ spec:
     pvcTemplate:
       accessModes:
         - ReadWriteOnce
-        - ReadWriteManxy
+        - ReadWriteMany
       resources:
         requests:
           storage: 5Gi
@@ -25,7 +25,7 @@ spec:
     pvcTemplate:
       accessModes:
         - ReadWriteOnce
-        - ReadWriteManxy
+        - ReadWriteMany
       resources:
         requests:
           storage: 5Gi
