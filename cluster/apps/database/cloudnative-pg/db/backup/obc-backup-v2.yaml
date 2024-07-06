@@ -2,12 +2,12 @@
 apiVersion: objectbucket.io/v1alpha1
 kind: ObjectBucketClaim
 metadata:
-  name: cnpg-bloopgres-backup-v1
+  name: cnpg-bloopgres-backup-v2
   namespace: database
 spec:
  # generateBucketName would work but it adds that annoying suffix
  # As long as this name is unique in the object store it is okay
-  bucketName: bloopgres-backup-2
+  bucketName: bloopgres-backup-3
   storageClassName: ceph-bucket
   additionalConfig:
     maxObjects: "9000"

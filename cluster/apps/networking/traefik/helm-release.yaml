@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.traefik.io/traefik
       chart: traefik
-      version: 26.1.0
+      version: 28.1.0
       sourceRef:
         kind: HelmRepository
         name: traefik-charts
@@ -19,6 +19,8 @@ spec:
     - name: cert-manager
       namespace: cert-manager
   values:
+    core:
+      defaultRuleSyntax: v2
     image:
       name: traefik
     deployment:
@@ -113,10 +115,13 @@ spec:
 
     ports:
       traefik:
-        expose: true
+        expose:
+          default: true
+          internal: true
       web:
         port: 8000
-        expose: true
+        expose:
+          default: true
         exposedPort: 80
         protocol: TCP
         # Port Redirections
@@ -137,9 +142,10 @@ spec:
       websecure:
         port: 8443
         # hostPort: 8443
-        expose: true
+        expose:
+          default: true
+          internal: true
         exposedPort: 443
-        exposeInternal: true
         # The port protocol (TCP/UDP)
         protocol: TCP
         # nodePort: 32443
@@ -214,39 +220,45 @@ spec:
           stores: networking-default@kubernetescrd
       dns-tls:
         port: 8853
-        expose: true
+        expose:
+          default: true
         exposedPort: 853
         tls:
           enabled: true
           options: default
       wss:
         port: 8284
-        expose: true
+        expose:
+          default: true
         exposedPort: 8084
         tls:
           enabled: true
           options: default
       mqtts:
         port: 8183
-        expose: true
+        expose:
+          default: true
         exposedPort: 8883
         tls:
           enabled: true
           options: default
       ldaps:
         port: 8636
-        expose: true
+        expose:
+          default: true
         exposedPort: 636
         tls:
           enabled: true
           options: default
       metrics:
         port: 8082
-        expose: true
+        expose:
+          default: true
         exposedPort: 8082
       postgres:
         port: 5432
-        expose: true
+        expose:
+          default: true
         expostedPort: 5432
         tls:
           enabled: false
