@@ -11,7 +11,7 @@ spec:
     name: flux-system
   ref:
     # renovate: registryUrl=https://helm.traefik.io/traefik chart=traefik
-    tag: v29.0.0
+    tag: v29.0.1
   ignore: |
     # exclude all
     /*
