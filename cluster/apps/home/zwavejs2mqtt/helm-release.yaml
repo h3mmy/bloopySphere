@@ -31,7 +31,7 @@ spec:
     priorityClassName: home-cluster-critical
     image:
       repository: ghcr.io/zwave-js/zwave-js-ui
-      tag: 9.14.4
+      tag: 9.14.5
       imagePullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"
