@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: audiobookshelf-gatus-ep
+  namespace: media
+  labels:
+    gatus.io/enabled: "true"
+data:
+  config.yaml: |
+    endpoints:
+      - name: audiobookshelf
+        group: media
+        url: http://audiobookshelf.media.svc.cluster.local:80/ping
+        interval: 5m
+        ui:
+          hide-url: true
+          hide-hostname: true
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: discord

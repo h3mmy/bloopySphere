@@ -5,6 +5,7 @@ resources:
   - ./priority-class.yaml
   - ./media-pv
   - ./plex
+  - ./books/audiobookshelf/ks.yaml
   - ./books/calibre
   - ./books/calibre-web
   - ./books/lazylibrarian
