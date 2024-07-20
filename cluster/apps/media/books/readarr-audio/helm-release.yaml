@@ -37,12 +37,12 @@ spec:
     env:
       TZ: "${TZ}"
       PGID: ${MEDIA_GID}
-      READARR__INSTANCE_NAME: Readarr (Audio)
+      READARR__APP__INSTANCENAME: Readarr (Audio)
       READARR__PORT: &port 80
-      READARR__LOG_LEVEL: info
-      READARR__AUTHENTICATION_METHOD: External
-      READARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
-      READARR__APPLICATION_URL: https://readarr-audio.${XYZ_DOMAIN}
+      READARR__LOG__LEVEL: info
+      READARR__AUTHENTICATION__METHOD: External
+      READARR__AUTHENTICATION__REQUIRED: DisabledForLocalAddresses
+      READARR__APPLICATION__URL: https://readarr-audio.${XYZ_DOMAIN}
     service:
       main:
         ports:

@@ -39,11 +39,12 @@ spec:
     env:
       TZ: "${TZ}"
       PGID: ${MEDIA_GID}
-      READARR__INSTANCE_NAME: Readarr
-      READARR__PORT: &port 80
+      READARR__APP__INSTANCENAME: Readarr
+      READARR__SERVER__PORT: &port 80
+      READARR__PORT: *port
       READARR__LOG_LEVEL: info
-      READARR__AUTHENTICATION_METHOD: External
-      READARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
+      READARR__AUTHENTICATION__METHOD: External
+      READARR__AUTHENTICATION__REQUIRED: DisabledForLocalAddresses
       READARR__APPLICATION_URL: https://readarr.${XYZ_DOMAIN}
 
     service:
