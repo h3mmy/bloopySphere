@@ -43,7 +43,9 @@ spec:
       READARR__PORT: &port 80
       READARR__LOG_LEVEL: info
       READARR__AUTHENTICATION_METHOD: External
+      READARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
       READARR__APPLICATION_URL: https://readarr.${XYZ_DOMAIN}
+
     service:
       main:
         ports:
