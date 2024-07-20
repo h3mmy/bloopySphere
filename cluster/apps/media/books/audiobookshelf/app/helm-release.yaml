@@ -83,7 +83,7 @@ spec:
           hajimari.io/icon: "book-open-page-variant"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure,wss"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-bloopnet-xyz-auth@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth@kubernetescrd"
         hosts:
           - host: audiobooks.${XYZ_DOMAIN}
             paths:
