@@ -80,7 +80,9 @@ spec:
         className: traefik
         annotations:
           hajimari.io/enable: "true"
-          hajimari.io/icon: "book-open-page-variant"
+          hajimari.io/icon: "book-play"
+          hajimari.io/instance: "bloop-xyz,bloop-quarky"
+          hajimari.io/appName: "Audiobooks"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure,wss"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-no-auth@kubernetescrd"
