@@ -82,7 +82,7 @@ spec:
         annotations:
           hajimari.io/enable: "true"
           hajimari.io/appName: "Stash"
-          hajimari.io/icon: mdi:box
+          hajimari.io/icon: uil:18-plus
           hajimari.io/group: "media"
           hajimari.io/instance: "bloop-quarky"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
