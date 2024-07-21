@@ -102,17 +102,17 @@ spec:
         existingClaim: audiobookshelf-metadata
         globalMounts:
           - path: /config/metadata
-      audiobooks:
+      backup:
         type: nfs
         server: "${NAS_ADDRESS}"
         path: /volume3/Data/Backups/app/audiobookshelf
         globalMounts:
-          - path: /audiobooks
+          - path: /config/metadata/backups
             readOnly: false
-      backup:
+      audiobooks:
         type: nfs
         server: "${NAS_ADDRESS}"
         path: /volume3/Data/Audiobooks
         globalMounts:
-          - path: /config/metadata/backups
+          - path: /audiobooks
             readOnly: false
