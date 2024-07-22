@@ -95,7 +95,7 @@ spec:
         nodeDriverRegistrarImage:
           # -- Target image repository.
           repository: registry.k8s.io/sig-storage/csi-node-driver-registrar
-          tag: v2.10.1
+          tag: v2.11.1
           # -- Kubernetes imagePullPolicy on node-driver.
           pullPolicy: IfNotPresent
 
