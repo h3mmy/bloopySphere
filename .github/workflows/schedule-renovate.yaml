@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
 
       - name: Verify Renovate Configuration
-        uses: suzuki-shunsuke/github-action-renovate-config-validator@v1.0.1
+        uses: suzuki-shunsuke/github-action-renovate-config-validator@v1.1.0
 
       - name: Generate Token
         uses: tibdex/github-app-token@v2
