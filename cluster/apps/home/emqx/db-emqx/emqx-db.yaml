@@ -7,7 +7,7 @@ metadata:
 spec:
   customConfig: emqx-postgres-conf
   replicas: 1
-  image: docker.io/library/postgres:15
+  image: docker.io/library/postgres:16
   database:
     size: 256Mi
     storageClassName: ceph-block
