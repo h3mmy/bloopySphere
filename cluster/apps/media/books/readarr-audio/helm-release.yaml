@@ -69,22 +69,22 @@ spec:
           - hosts:
               - *host
             secretName: tls.readarr-audio
-      api:
-        enabled: true
-        nameSuffix: api
-        annotations:
-          external-dns.alpha.kubernetes.io/target: ${XYZ_DOMAIN}
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
-        hosts:
-          - host: *host
-            paths:
-              - path: /api
-                pathType: Prefix
-        tls:
-          - hosts:
-              - *host
-            secretName: tls.readarr-audio
+      # api:
+      #   enabled: true
+      #   nameSuffix: api
+      #   annotations:
+      #     external-dns.alpha.kubernetes.io/target: ${XYZ_DOMAIN}
+      #     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+      #     traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+      #   hosts:
+      #     - host: *host
+      #       paths:
+      #         - path: /api
+      #           pathType: Prefix
+      #   tls:
+      #     - hosts:
+      #         - *host
+      #       secretName: tls.readarr-audio
 
     podSecurityContext:
       runAsUser: 568
