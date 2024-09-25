@@ -6,11 +6,11 @@ terraform {
     }
     minio = {
       source  = "aminueza/minio"
-      version = "2.4.0"
+      version = "2.5.0"
     }
     sops = {
       source  = "carlpett/sops"
-      version = "1.0.0"
+      version = "1.1.1"
     }
   }
 }

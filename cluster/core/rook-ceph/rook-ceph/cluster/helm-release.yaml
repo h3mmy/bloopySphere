@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.rook.io/release
       chart: rook-ceph-cluster
-      version: v1.14.8
+      version: v1.14.11
       sourceRef:
         kind: HelmRepository
         name: rook-ceph-charts
@@ -52,7 +52,7 @@ spec:
     cephClusterSpec:
       # continueUpgradeAfterChecksEvenIfNotHealthy: true
       cephVersion:
-        image: quay.io/ceph/ceph:v18.2.2
+        image: quay.io/ceph/ceph:v18.2.4
 
       healthCheck:
         daemonHealth:
