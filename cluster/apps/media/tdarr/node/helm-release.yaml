@@ -55,7 +55,7 @@ spec:
           main:
             image:
               repository: ghcr.io/haveagitgat/tdarr_node_acc
-              tag: 2.25.01
+              tag: 2.26.01
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
