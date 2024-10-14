@@ -44,10 +44,11 @@ spec:
 
   values:
     installCRDs: true
-    #webhook:
-     # enabled: true
-   # podSecurityPolicy:
-     # enabled: false
+    global:
+      webhook:
+        enabled: true
+      podSecurityPolicy:
+        enabled: false
 
     extraArgs:
       #- --controllers='*,-certificaterequests-approver'
