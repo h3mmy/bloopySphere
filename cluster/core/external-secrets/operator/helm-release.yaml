@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.external-secrets.io
       chart: external-secrets
-      version: 0.10.4
+      version: 0.10.5
       sourceRef:
         kind: HelmRepository
         name: external-secrets
