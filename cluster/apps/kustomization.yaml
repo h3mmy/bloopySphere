@@ -19,7 +19,7 @@ resources:
   # - rook-ceph
   - home
   - blogs
-  - cert-manager
+  # - cert-manager # dashboard only
   - ./kyverno/namespace.yaml
   - ./kyverno/ks.yaml
   - vault
