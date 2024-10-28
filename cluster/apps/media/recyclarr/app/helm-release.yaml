@@ -36,7 +36,7 @@ spec:
           main:
             image:
               repository: ghcr.io/recyclarr/recyclarr
-              tag: 7.2.4
+              tag: 7.3.0
             env:
               TZ: ${TZ}
               SONARR_API_KEY: ${SONARR_API_KEY}
