@@ -11,7 +11,7 @@ spec:
       reconcileStrategy: Revision
       # renovate: registryUrl=https://repos.emqx.io/charts
       chart: emqx
-      version: 5.8.2
+      version: 5.8.3
       sourceRef:
         kind: HelmRepository
         name: emqx-charts
