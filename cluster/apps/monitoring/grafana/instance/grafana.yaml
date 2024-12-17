@@ -35,7 +35,7 @@ spec:
                   name: dashboards
             # This container watches the namespace for configmaps with the `dashboards` label
             # and creates files for all their keys under `FOLDER`
-            - image: 'ghcr.io/kiwigrid/k8s-sidecar:1.28.2'
+            - image: 'ghcr.io/kiwigrid/k8s-sidecar:1.28.3'
               name: k8s-sidecar
               env:
                 - name: LABEL
