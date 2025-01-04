@@ -9,7 +9,7 @@ spec:
   ref:
     branch: main
     # renovate: datasource=github-releases depName=reactive-tech/kubegres versioning=loose
-    tag: v1.18
+    tag: v1.19
   secretRef:
     name: flux-system
   url: ssh://git@github.com/reactive-tech/kubegres.git
