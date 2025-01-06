@@ -28,7 +28,7 @@ spec:
         - ReadWriteMany
       resources:
         requests:
-          storage: 5Gi
+          storage: 6Gi
       storageClassName: ceph-block
       volumeMode: Filesystem
   # This is needed in order to use init-db to bootstrap app specific dbs
