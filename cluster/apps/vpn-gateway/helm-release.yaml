@@ -100,8 +100,9 @@ spec:
             repository: docker.io/qmcgaw/gluetun
             tag: v3.40.0
         securityContext:
-          capabilities:
-            add: ["NET_ADMIN"]
+          privileged: true
+          # capabilities:
+          #  add: ["NET_ADMIN"]
 
         env:
           - name: VPN_SERVICE_PROVIDER
