@@ -46,7 +46,7 @@ spec:
             dependsOn: init-db
             image: &configSyncImage
               repository: ghcr.io/kiwigrid/k8s-sidecar
-              tag: 1.28.4@sha256:20caf4e241e1f9f9231527db5e75b735aa7b0da7bee3d262cbe369bb9b33469f
+              tag: 1.30.0@sha256:9a326271c439b6f9e174f3b48ed132bbff71c00592c7dbd072ccdc334445bde2
             env: &configSyncEnv
               FOLDER: /config
               LABEL: gatus.io/enabled
