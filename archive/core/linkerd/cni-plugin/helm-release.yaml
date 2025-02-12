@@ -12,7 +12,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.linkerd.io/edge
       chart: linkerd2-cni
-      version: 2025.1.2
+      version: 2025.2.1
       sourceRef:
         kind: HelmRepository
         name: linkerd-edge-charts
