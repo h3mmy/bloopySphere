@@ -47,4 +47,4 @@ features:
     enabled: true
     data:
       - api_url: "https://www.blissfestfestival.org/wp-json/wp/v2"
-      - start_date: "2024-07-12"
+      - start_date: "2025-07-11"
