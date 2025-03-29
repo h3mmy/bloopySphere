@@ -31,7 +31,7 @@ spec:
         secret.reloader.stakater.com/reload: radarr
     image:
       repository: ghcr.io/onedr0p/exportarr
-      tag: v2.0.1
+      tag: v2.1.0
     env:
       TZ: "${TZ}"
       PORT: "7373"
