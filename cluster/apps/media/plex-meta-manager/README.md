@@ -24,7 +24,7 @@ Kometa can
 
 ## Trakt
 
-[PMM Instructions](https://metamanager.wiki/en/latest/config/trakt.html)
+[PMM Instructions](https://metamanager.wiki/en/latest/config/trakt/)
 [Online Auth Script](https://replit.com/@chazlarson/TraktAuth)
 
 ## Pre-rolls
