@@ -38,7 +38,7 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/onedr0p/intel-gpu-exporter
+              repository: ghcr.io/home-operations/intel-gpu-exporter
               tag: rolling@sha256:5782b746f507149e7c3d5f7b19fe8d834fda854f117afcbdd21ecf822ef1ee02
             securityContext:
               privileged: true
