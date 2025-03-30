@@ -30,7 +30,7 @@ spec:
       annotations:
         secret.reloader.stakater.com/reload: radarr
     image:
-      repository: ghcr.io/onedr0p/exportarr
+      repository: ghcr.io/home-operations/exportarr
       tag: v2.0.1
     env:
       TZ: "${TZ}"
