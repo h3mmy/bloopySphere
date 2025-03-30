@@ -33,7 +33,7 @@ spec:
 
     image:
       # https://github.com/vectordotdev/vector/issues/6715
-      repository: ghcr.io/onedr0p/vector
+      repository: ghcr.io/home-operations/vector
       tag: 0.34.1-debian
     args: ["--config", "/etc/vector/vector.yaml"]
 

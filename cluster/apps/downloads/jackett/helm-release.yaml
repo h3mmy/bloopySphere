@@ -22,7 +22,7 @@ spec:
       namespace: vpn-gateway
   values:
     image:
-      repository: ghcr.io/onedr0p/jackett
+      repository: ghcr.io/home-operations/jackett
       tag: 0.20.2297
     env:
       TZ: ${TZ}

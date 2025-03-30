@@ -26,7 +26,7 @@ spec:
       namespace: rook-ceph
   values:
     image:
-      repository: ghcr.io/onedr0p/tautulli
+      repository: ghcr.io/home-operations/tautulli
       tag: 2.15.1@sha256:c2d617ebc489ba894e728cbdbc7e135383c26b7e218f071f1bb1bd9b5656a58d
     env:
       TZ: "${TZ}"
