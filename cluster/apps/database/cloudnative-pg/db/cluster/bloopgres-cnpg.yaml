@@ -28,7 +28,7 @@ spec:
         - ReadWriteMany
       resources:
         requests:
-          storage: 6Gi
+          storage: 6.5Gi
       storageClassName: ceph-block
       volumeMode: Filesystem
   # This is needed in order to use init-db to bootstrap app specific dbs
@@ -66,6 +66,8 @@ spec:
   backup:
     retentionPolicy: 20d
     barmanObjectStore:
+      tags:
+        backupRetentionPolicy: "expire"
       wal:
         compression: bzip2
         maxParallel: 5
