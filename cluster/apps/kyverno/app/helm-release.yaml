@@ -123,7 +123,7 @@ spec:
         enabled: true
         # image:
         #   registry: ghcr.io
-        #   repository: onedr0p/kubernetes-kubectl
+        #   repository: home-operations/kubernetes-kubectl
         #   tag: '1.27.4'
         #   pullPolicy: IfNotPresent
         threshold: 5000 # Default is 10k
@@ -132,7 +132,7 @@ spec:
         enabled: true
         # image:
         #   registry: ghcr.io
-        #   repository: onedr0p/kubernetes-kubectl
+        #   repository: home-operations/kubernetes-kubectl
         #   tag: '1.27.4'
         #   pullPolicy: IfNotPresent
         threshold: 5000 # Default is 10k

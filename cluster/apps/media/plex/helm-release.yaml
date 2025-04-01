@@ -28,8 +28,8 @@ spec:
       namespace: kube-system
   values:
     image:
-      repository: ghcr.io/onedr0p/plex # {"$imagepolicy": "flux-system:plex:name"}
-      tag: "1.41.5.9522" # {"$imagepolicy": "flux-system:plex:tag"}
+      repository: ghcr.io/home-operations/plex # {"$imagepolicy": "flux-system:plex:name"}
+      tag: "1.41.5.9522-a96edc606" # {"$imagepolicy": "flux-system:plex:tag"}
       imagePullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"

@@ -63,7 +63,7 @@ jobs:
           diff="${diff//'%'/'%25'}"
           diff="${diff//$'\n'/'%0A'}"
           diff="${diff//$'\r'/'%0D'}"
-          echo "::set-output name=diff::$(echo ${diff})"
+          echo "diff=$(echo ${diff})" >> $GITHUB_OUTPUT
       - name: Find Comment
         uses: peter-evans/find-comment@v3
         id: find-comment
