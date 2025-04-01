@@ -11,4 +11,4 @@ spec:
   storageClassName: ceph-bucket
   additionalConfig:
     maxObjects: "5000"
-    maxSize: "3G"
+    maxSize: "3.5G"

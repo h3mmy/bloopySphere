@@ -28,8 +28,8 @@ spec:
       namespace: vpn-gateway
   values:
     image:
-      repository: ghcr.io/onedr0p/sabnzbd
-      tag: 4.4.1@sha256:fd85776610865ba5bd8da40415759871ee70dfe9371f88ee88f18a847391ce6a
+      repository: ghcr.io/home-operations/sabnzbd
+      tag: 4.5.0@sha256:9892fb7cd246b64de151f9200e0882d558b19808f9157f37c4d74b13fa29857b
     env:
       TZ: "${TZ}"
       SABNZBD__PORT: &port 80

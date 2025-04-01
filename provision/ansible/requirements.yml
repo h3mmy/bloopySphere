@@ -3,7 +3,7 @@ collections:
   - name: community.general
     version: 10.1.0
   - name: community.sops
-    version: 2.0.2
+    version: 2.0.3
   - name: ansible.posix
     version: 1.6.2
   - name: kubernetes.core
@@ -17,4 +17,4 @@ roles:
   - src: geerlingguy.pip
     version: 3.1.0
   - src: geerlingguy.docker
-    version: 7.4.5
+    version: 7.4.7
