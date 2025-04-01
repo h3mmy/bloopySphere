@@ -64,13 +64,15 @@ spec:
       encoding: 'UTF8'
 
   backup:
-    retentionPolicy: 20d
+    retentionPolicy: 19d
     barmanObjectStore:
       tags:
         backupRetentionPolicy: "expire"
       wal:
         compression: bzip2
         maxParallel: 5
+      data:
+        compression: bzip2
       destinationPath: s3://bloopgres-backup-4
       endpointURL: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local
       # credentials are populated via rook-ceph-operator
