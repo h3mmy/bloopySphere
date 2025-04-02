@@ -30,7 +30,7 @@ spec:
       repository: ghcr.io/cloudnative-pg/cloudnative-pg
       pullPolicy: IfNotPresent
       # -- Overrides the image tag whose default is the chart appVersion.
-      tag: "v1.24.3"
+      tag: "1.25.1"
     crds:
       create: true
     config:
