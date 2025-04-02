@@ -22,7 +22,10 @@ spec:
     name: plex
     namespace: flux-system
   filterTags:
-    pattern: '^(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)\.(?P<mod>\d+)-(?P<hash>[\d\w]+)$'
+    # onedr0p version
+    # pattern: '^(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)\.(?P<mod>\d+)-(?P<hash>[\d\w]+)$'
+    # home-operations version
+    pattern: '^(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)\.(?P<mod>\d+)$'
     extract: "$major$minor$patch$mod"
   policy:
     numerical:
