@@ -43,7 +43,7 @@ spec:
       encoding: 'UTF8'
 
   backup:
-    retentionPolicy: 30d
+    retentionPolicy: 21d
     barmanObjectStore:
       wal:
         compression: bzip2
