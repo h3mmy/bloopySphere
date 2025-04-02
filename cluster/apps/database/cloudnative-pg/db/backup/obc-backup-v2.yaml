@@ -12,3 +12,18 @@ spec:
   additionalConfig:
     maxObjects: "12000"
     maxSize: "3G"
+    bucketLifecycle: |
+      {
+        "Rules": [
+          {
+            "Filter": {
+              "Prefix": "bloopgres/wals/"
+            },
+            "Status": "Enabled",
+            "Expiration": {
+               "Days": 30
+             },
+             "ID": "WALBackupExpiration"
+            }
+        ]
+      }
