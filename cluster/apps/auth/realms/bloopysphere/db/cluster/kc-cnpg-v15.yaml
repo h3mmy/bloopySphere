@@ -45,6 +45,10 @@ spec:
   backup:
     retentionPolicy: 21d
     barmanObjectStore:
+      tags:
+        backupRetentionPolicy: "expire"
+      data:
+        compression: bzip2
       wal:
         compression: bzip2
         maxParallel: 5

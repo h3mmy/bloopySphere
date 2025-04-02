@@ -12,3 +12,18 @@ spec:
   additionalConfig:
     maxObjects: "5000"
     maxSize: "3.5G"
+    bucketLifecycle: |
+      {
+        "Rules": [
+          {
+            "Filter": {
+              "Prefix": "kc-postgres/wals/"
+            },
+            "Status": "Enabled",
+            "Expiration": {
+               "Days": 30
+             },
+             "ID": "WALBackupExpiration"
+            }
+        ]
+      }
