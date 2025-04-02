@@ -52,7 +52,7 @@ spec:
     cephClusterSpec:
       # continueUpgradeAfterChecksEvenIfNotHealthy: true
       cephVersion:
-        image: quay.io/ceph/ceph:v18.2.4
+        image: quay.io/ceph/ceph:v19.2.1
 
       healthCheck:
         daemonHealth:
