@@ -32,8 +32,8 @@ spec:
       enableVolumeGroupSnapshot: false # TODO: enable this when v1beta1 CRDs are available
       cephFSKernelMountOptions: ms_mode=secure # Set when encryption/compression is enabled
       enableLiveness: true
-#      provisioner:
-#        image: registry.k8s.io/sig-storage/csi-provisioner:v3.6.1 # See https://github.com/rook/rook/issues/13458
+      provisioner:
+        image: registry.k8s.io/sig-storage/csi-provisioner:v5.2.0 # See https://github.com/rook/rook/issues/13458
       snapshotter:
         repository: registry.k8s.io/sig-storage/csi-snapshotter
         tag: v8.2.0
