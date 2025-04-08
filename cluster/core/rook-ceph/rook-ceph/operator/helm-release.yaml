@@ -38,7 +38,7 @@ spec:
         repository: registry.k8s.io/sig-storage/csi-snapshotter
         tag: v8.2.0
       enableCephfsDriver: false
-      enableCephfsSnapshotter: false
+      enableCephfsSnapshotter: true
       provisionerTolerations:
         - key: "arm"
           operator: "Exists"
