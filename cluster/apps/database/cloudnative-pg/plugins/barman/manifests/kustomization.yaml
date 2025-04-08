@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: database
 # TODO: Update to use OCI repo when available
 resources:
-  - https://ghcr.io/cloudnative-pg/plugin-barman-cloud/releases/download/v0.3.0/manifest.yaml
+  - https://raw.githubusercontent.com/cloudnative-pg/plugin-barman-cloud/refs/tags/v0.3.0/manifest.yaml
