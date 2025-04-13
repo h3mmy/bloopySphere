@@ -36,7 +36,7 @@ spec:
         image: registry.k8s.io/sig-storage/csi-provisioner:v5.2.0 # See https://github.com/rook/rook/issues/13458
       snapshotter:
         repository: registry.k8s.io/sig-storage/csi-snapshotter
-        tag: v8.2.0
+        tag: v8.1.0 # https://github.com/rook/rook/issues/15234
       enableCephfsDriver: false
       enableCephfsSnapshotter: false
       provisionerTolerations:
