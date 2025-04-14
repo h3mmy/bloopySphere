@@ -33,7 +33,7 @@ spec:
           main:
             image:
               repository: ghcr.io/onedr0p/sonarr-develop #ghcr.io/home-operations/sonarr
-              tag: 4.0.13.2934
+              tag: 4.0.14.2938
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
