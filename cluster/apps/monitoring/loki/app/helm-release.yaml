@@ -12,13 +12,13 @@ spec:
     spec:
       # renovate: registryUrl=https://grafana.github.io/helm-charts
       chart: loki
-      version: 6.24.1
+      version: 6.29.0
       sourceRef:
         kind: HelmRepository
         name: grafana-charts
         namespace: flux-system
 
-  maxHistory: 5
+  maxHistory: 3
   install:
     remediation:
       retries: 4
@@ -27,13 +27,19 @@ spec:
     timeout: 15m
     remediation:
       remediateLastFailure: true
+      strategy: rollback
+      retries: 3
   uninstall:
     keepHistory: false
+  rollback:
+    recreate: true
+    force: true
+    cleanupOnFail: true
   valuesFrom:
     # Provided by rook-ceph-operator. See https://rook.io/docs/rook/v1.9/Storage-Configuration/Object-Storage-RGW/ceph-object-bucket-claim/
     - targetPath: loki.storage.bucketNames.chunks
       kind: ConfigMap
-      name: &cephBucket loki-bucket-v1
+      name: &cephBucket loki-bucket-v2
       valuesKey: BUCKET_NAME
     - targetPath: loki.storage.bucketNames.ruler
       kind: ConfigMap
@@ -197,6 +203,8 @@ spec:
               period: 24h
 
       storage:
+        bucketNames:
+          chunks: *cephBucket
         type: s3
         s3:
           s3forcepathstyle: true
@@ -230,7 +238,7 @@ spec:
           per_stream_rate_limit_burst: 128M
           reject_old_samples: true
           reject_old_samples_max_age: 168h
-          retention_period: 30d
+          retention_period: 20d
           shard_streams:
             enabled: true
           split_queries_by_interval: 1h

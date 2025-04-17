@@ -17,7 +17,26 @@ module "minio_bucket_velero_v2" {
   }
 }
 
+module "minio_bucket_cnpg_backups_v1" {
+  source      = "./modules/minio_bucket"
+  bucket_name = "cnpg-backup"
+  user_name = "cnpg-backup"
+  user_secret = data.sops_file.s3_secrets.data["cnpg_minio_password"]
+  providers = {
+    minio = minio.bloop
+  }
+}
+
 # Temporary output forwarding until secret transport is ready (TODO: make issue)
+
+output "cnpg_access_key" {
+  value = module.minio_bucket_cnpg_backups_v1.minio_access_key
+}
+
+output "cnpg_secret_key" {
+  value = module.minio_bucket_cnpg_backups_v1.minio_secret_key
+  sensitive = true
+}
 
 output "velero_access_key" {
   value = module.minio_bucket_velero_v2.minio_access_key

@@ -10,5 +10,20 @@ spec:
   bucketName: bloopgres-backup-4
   storageClassName: ceph-bucket
   additionalConfig:
-    maxObjects: "9000"
+    maxObjects: "12000"
     maxSize: "3G"
+    bucketLifecycle: |
+      {
+        "Rules": [
+          {
+            "Filter": {
+              "Prefix": "bloopgres/wals/"
+            },
+            "Status": "Enabled",
+            "Expiration": {
+               "Days": 30
+             },
+             "ID": "WALBackupExpiration"
+            }
+        ]
+      }

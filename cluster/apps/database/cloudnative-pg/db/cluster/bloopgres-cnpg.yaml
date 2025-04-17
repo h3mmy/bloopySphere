@@ -5,9 +5,9 @@ metadata:
   name: bloopgres
   namespace: database
 spec:
-  instances: 1
+  instances: 2
 
-  imageName: ghcr.io/cloudnative-pg/postgresql:16.3-7
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.8-8
 
   primaryUpdateStrategy: unsupervised
 
@@ -28,7 +28,7 @@ spec:
         - ReadWriteMany
       resources:
         requests:
-          storage: 6Gi
+          storage: 6.5Gi
       storageClassName: ceph-block
       volumeMode: Filesystem
   # This is needed in order to use init-db to bootstrap app specific dbs
@@ -64,11 +64,15 @@ spec:
       encoding: 'UTF8'
 
   backup:
-    retentionPolicy: 20d
+    retentionPolicy: 19d
     barmanObjectStore:
+      tags:
+        backupRetentionPolicy: "expire"
       wal:
         compression: bzip2
         maxParallel: 5
+      data:
+        compression: bzip2
       destinationPath: s3://bloopgres-backup-4
       endpointURL: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local
       # credentials are populated via rook-ceph-operator

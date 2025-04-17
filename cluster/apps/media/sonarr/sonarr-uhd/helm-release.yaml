@@ -34,8 +34,8 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/onedr0p/sonarr-develop
-              tag: 4.0.12.2892@sha256:656492266c4f59b1e702277e8c25c7727e48f8fc21443c823afa4333e6d5549c
+              repository: ghcr.io/home-operations/sonarr
+              tag: 4.0.14.2938@sha256:acd5416ab9c36d017687820a32f09d09a4e25a5754aa5ebeae2e7c63d7609c13
               pullPolicy: IfNotPresent
 
             env:

@@ -32,8 +32,8 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/onedr0p/radarr-develop
-              tag: 5.18.1.9612@sha256:f19b5e8f22e1b807a563d50ebef0b47aca1a2d61cea63599c2c4ca85425a2320
+              repository: ghcr.io/home-operations/radarr
+              tag: 5.22.2.9862
               pullPolicy: IfNotPresent
             env:
               # https://github.com/Radarr/Radarr/issues/7030#issuecomment-1039689518

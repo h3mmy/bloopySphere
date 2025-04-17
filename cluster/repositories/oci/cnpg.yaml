@@ -1,0 +1,12 @@
+---
+# yaml-language-server: $schema=https://crd.movishell.pl/source.toolkit.fluxcd.io/ocirepository_v1beta2.json
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: cnpg-plugin-barman-cloud
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: oci://ghcr.io/cloudnative-pg/plugin-barman-cloud
+  ref:
+    tag: 0.3.0

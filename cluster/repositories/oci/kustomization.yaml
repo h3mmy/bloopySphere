@@ -6,3 +6,4 @@ resources:
   - terraform-gcp.yaml
   - terraform-oci.yaml
   - terraform-s3.yaml
+  # - cnpg.yaml

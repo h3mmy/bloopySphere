@@ -32,8 +32,8 @@ spec:
     global:
       nameOverride: *app
     image:
-      repository: ghcr.io/onedr0p/prowlarr-nightly
-      tag: 1.31.0.4941@sha256:971b1fcee5c9a6bffe781bbbc22f9c3181f32099a766ec6d1e7ea54ee317b09b
+      repository: ghcr.io/home-operations/prowlarr-nightly
+      tag: 1.33.0.4991@sha256:d28c4bf4276143c5b9a51452ef9710f7d65944b32432aeb5443a0e1641d7eb5f
     env:
       TZ: "${TZ}"
       PROWLARR__INSTANCE_NAME: Prowlarr
@@ -41,7 +41,7 @@ spec:
       PROWLARR__LOG_LEVEL: info
       PROWLARR__APPLICATION_URL: https://prowlarr.${XYZ_DOMAIN}
       # https://wiki.servarr.com/prowlarr/faq#can-i-disable-forced-authentication
-      # https://github.com/onedr0p/containers/blob/main/apps/prowlarr/config.xml.tmpl
+      # https://github.com/home-operations/containers/blob/main/apps/prowlarr/config.xml.tmpl
       PROWLARR__AUTHENTICATION_METHOD: External
       # For potential future shift to kubegres managed db
       # PROWLARR__POSTGRES_HOST: postgres-rw.database
