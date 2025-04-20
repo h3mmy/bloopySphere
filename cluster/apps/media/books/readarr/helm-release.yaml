@@ -35,7 +35,7 @@ spec:
       type: statefulset
     image:
       repository: ghcr.io/home-operations/readarr
-      tag: 0.4.14.2782@sha256:a3078952ed42f18f0af62610406133fba94ee01804793cf97dea2a7fc72f6b7a
+      tag: 0.4.15.2787@sha256:919ff1f59157f760017a2ce525b22ab2586ca4c49bae728ed88c58f3ae17ed40
     env:
       TZ: "${TZ}"
       PGID: ${MEDIA_GID}
