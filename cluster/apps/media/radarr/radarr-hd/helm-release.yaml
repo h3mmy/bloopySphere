@@ -33,7 +33,7 @@ spec:
           main:
             image:
               repository: ghcr.io/home-operations/radarr
-              tag: 5.22.2.9862
+              tag: 5.22.3.9889
               pullPolicy: IfNotPresent
             env:
               # https://github.com/Radarr/Radarr/issues/7030#issuecomment-1039689518
