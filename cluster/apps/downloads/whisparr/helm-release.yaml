@@ -38,8 +38,8 @@ spec:
     controller:
       type: statefulset
     image:
-      repository: ghcr.io/h3mmy/whisparr-nightly
-      tag: 2.0.0.548@sha256:7d06c581f15ec39a983828cba0c752eac982cc84b45e7e2a3d977ff3e8b06fed
+      repository: ghcr.io/drag0n141/whisparr-nightly
+      tag: 2.0.0.987@sha256:5928e503887b1b053986550ca5fbd2b039732ec3fd94a7e1675d9a41f3fd576f
     env:
       TZ: "${TZ}"
       PGID: ${MEDIA_GID}
