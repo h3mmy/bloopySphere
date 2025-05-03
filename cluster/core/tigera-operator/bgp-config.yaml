@@ -4,7 +4,7 @@ kind: BGPConfiguration
 metadata:
   name: default
 spec:
-  asNumber: 64512
+  asNumber: 64514
   nodeToNodeMeshEnabled: true
   serviceClusterIPs:
     - cidr: "${NETWORK_K8S_SERVICE_CIDR}"
