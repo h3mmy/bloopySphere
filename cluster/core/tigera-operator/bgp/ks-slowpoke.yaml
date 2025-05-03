@@ -11,7 +11,7 @@ spec:
       component.bloopysphere-0/segment: networking
   path: ./cluster/core/tigera-operator/bgp/bgp-peers-internal
   components:
-    - ../../../components/bgp-peer-v4.yaml
+    # - ../../../components/bgp-peer-v4.yaml
     - ../../../components/bgp-peer-v6.yaml
   interval: 30m
   postBuild:
