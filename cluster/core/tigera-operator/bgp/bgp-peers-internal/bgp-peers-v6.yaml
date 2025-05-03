@@ -1,9 +1,0 @@
----
-apiVersion: crd.projectcalico.org/v1
-kind: BGPPeer
-metadata:
-  name: ipv6-${NODE_NAME}
-spec:
-  peerIP: ${NODE_IPV6}
-  asNumber: ${ASN:=65413}
-  keepOriginalNextHop: true
