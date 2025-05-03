@@ -1,0 +1,26 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: bgp-peers-slowpoke
+  namespace: flux-system
+spec:
+  commonMetadata:
+    labels:
+      component.bloopysphere-0/segment: networking
+  path: ./cluster/core/tigera-operator/bgp/bgp-peers-internal
+  components:
+    - ../../../components/bgp-peer-v4.yaml
+    - ../../../components/bgp-peer-v6.yaml
+  interval: 30m
+  postBuild:
+    substitute:
+      NODE_NAME: slowpoke
+      ASN: "64514"
+      NODE_IPV4: 10.1.0.87
+      NODE_IPV6: fe80::aaa1:59ff:fe9c:28c2/64
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  prune: true

@@ -4,8 +4,9 @@ kind: Kustomization
 namespace: tigera-operator
 resources:
   - helm-release.yaml
-  - bgp-config.yaml
-  - bgp-peers.yaml
+  - ./bgp/bgp-config.yaml
+  - ./bgp/bgp-peers-external.yaml
+  - ./bgp/bgp-peers-internal/ks-slowpoke.yaml
 configMapGenerator:
   - name: kubernetes-service-endpoint
     literals:
