@@ -6,6 +6,6 @@ metadata:
   namespace: metallb-system
 spec:
   peerAddress: ${LOCAL_GATEWAY_BGP}
-  peerASN: 64514
-  myASN: 64514
+  peerASN: ${NETWORK_BGP_ROUTER_ASN}
+  myASN: ${NETWORK_BGP_K8S_ASN}
   holdTime: 1m30s

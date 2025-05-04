@@ -4,5 +4,5 @@ kind: BGPPeer
 metadata:
   name: global
 spec:
-  peerIP: ${NETWORK_BGP_ROUTER_ID}
-  asNumber: ${NETWORK_BGP_ROUTER_ASN}
+  peerIP: ${NETWORK_BGP_ROUTER_ID} # Should match ip used by router in router-id block
+  asNumber: ${NETWORK_BGP_ROUTER_ASN} # Should match asn in router-id block
