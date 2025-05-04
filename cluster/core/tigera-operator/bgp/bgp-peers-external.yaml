@@ -5,4 +5,4 @@ metadata:
   name: global
 spec:
   peerIP: ${NETWORK_BGP_ROUTER_ID}
-  asNumber: 64513
+  asNumber: ${NETWORK_BGP_ROUTER_ASN}
