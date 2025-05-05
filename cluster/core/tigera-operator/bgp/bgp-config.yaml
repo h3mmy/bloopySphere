@@ -19,3 +19,4 @@ spec:
     - cidr: 10.1.0.104/29
     - cidr: 10.1.0.112/28
     - cidr: 10.1.0.128/25
+    - cidr: "${METALLB_LB_IP6_RANGE}"
