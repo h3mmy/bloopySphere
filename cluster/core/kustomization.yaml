@@ -5,7 +5,8 @@ resources:
   - ./namespaces
   - ./monitoring
   - ./cert-manager
-  - ./kube-system
+  # disable kube-vip after editing svc/kubernetes 
+  # - ./kube-system
   - ./metallb-system
   - ./rook-ceph
   - ./kubegres
