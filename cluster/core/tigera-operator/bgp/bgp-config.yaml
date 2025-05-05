@@ -13,3 +13,9 @@ spec:
     - cidr: "${NETWORK_BGP_BLOCK_V4}"
     - cidr: "${NETWORK_BGP_BLOCK_V6}"
     - cidr: "${LOCAL_CIDR_2}" # Refine to avoid collisions
+  serviceLoadBalancerIPs:
+    # metallb v4 range 10.1.0.100-10.1.0.255
+    - cidr: 10.1.0.100/30
+    - cidr: 10.1.0.104/29
+    - cidr: 10.1.0.112/28
+    - cidr: 10.1.0.128/25
