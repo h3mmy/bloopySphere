@@ -12,7 +12,7 @@ spec:
   serviceExternalIPs:
     - cidr: "${NETWORK_BGP_BLOCK_V4}"
     - cidr: "${NETWORK_BGP_BLOCK_V6}"
-    - cidr: "${LOCAL_CIDR_2}" # Refine to avoid collisions
+    - cidr: 10.1.0.1/24 # Refine to avoid collisions
   serviceLoadBalancerIPs:
     # metallb v4 range 10.1.0.100-10.1.0.255
     - cidr: 10.1.0.100/30
