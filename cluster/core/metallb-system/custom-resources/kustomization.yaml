@@ -5,4 +5,4 @@ resources:
   - ip-address-pools.yaml
   - layer2-advertisement.yaml
   - bgp-peers.yaml
-  - bgp-advertisement.yaml
+  #- bgp-advertisement.yaml
