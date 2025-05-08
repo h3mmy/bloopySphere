@@ -132,8 +132,7 @@ spec:
       name: *app
     persistence:
       data:
-        type: existingClaim
-        name: gatus-data-v1
+        existingClaim: gatus-data-v1
         globalMounts:
           - path: /data
       config:
