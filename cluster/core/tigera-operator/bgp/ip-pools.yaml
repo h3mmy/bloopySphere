@@ -1,0 +1,84 @@
+---
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: lb-v4-class-b-0
+spec:
+  cidr: 10.1.0.100/30"
+  ipipMode: CrossSubnet
+  natOutgoing: true
+  disabled: false
+  nodeSelector: all()
+  allowedUses:
+    - LoadBalancer
+  assignmentMode: Manual
+---
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: lb-v4-class-b-1
+spec:
+  cidr: 10.1.0.104/29
+  ipipMode: CrossSubnet
+  natOutgoing: true
+  disabled: false
+  nodeSelector: all()
+  allowedUses:
+    - LoadBalancer
+  assignmentMode: Manual
+---
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: lb-v4-class-b-2
+spec:
+  cidr: 10.1.0.112/28
+  ipipMode: CrossSubnet
+  natOutgoing: true
+  disabled: false
+  nodeSelector: all()
+  allowedUses:
+    - LoadBalancer
+  assignmentMode: Manual
+---
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: lb-v4-class-b-3
+spec:
+  cidr: 10.1.0.128/25
+  ipipMode: CrossSubnet
+  natOutgoing: true
+  disabled: false
+  nodeSelector: all()
+  allowedUses:
+    - LoadBalancer
+  assignmentMode: Manual
+---
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: lb-v4-class-b-3
+spec:
+  cidr: 10.1.0.128/25
+  ipipMode: CrossSubnet
+  natOutgoing: true
+  disabled: false
+  nodeSelector: all()
+  allowedUses:
+    - LoadBalancer
+  assignmentMode: Manual
+---
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: lb-v6-class-b-0
+spec:
+  cidr: "${METALLB_LB_IP6_RANGE}"
+  ipipMode: CrossSubnet
+  natOutgoing: true
+  disabled: false
+  nodeSelector: all()
+  allowedUses:
+    - LoadBalancer
+  assignmentMode: Manual
