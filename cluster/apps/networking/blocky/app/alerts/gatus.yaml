@@ -25,7 +25,7 @@ data:
           - type: discord
       - name: blocky-udp-external-v6
         group: networking-dns
-        url: [${LB_V6_BLOCKY}]:53
+        url: "[${LB_V6_BLOCKY}]:53"
         interval: 5m
         dns:
           query-name: "cloudflare.com"
