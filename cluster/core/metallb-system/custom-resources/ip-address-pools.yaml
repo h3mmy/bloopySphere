@@ -16,6 +16,7 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
+    - "10.1.0.65/32"
     - "${NETWORK_BGP_BLOCK_V4}"
     - "${NETWORK_BGP_BLOCK_V6}"
   autoAssign: false
