@@ -7,10 +7,10 @@ metadata:
 spec:
  # generateBucketName would work but it adds that annoying suffix
  # As long as this name is unique in the object store it is okay
-  bucketName: bloopgres-backup-4
+  bucketName: bloopgres-backup-5
   storageClassName: ceph-bucket
   additionalConfig:
-    maxObjects: "17000"
+    maxObjects: "12000"
     maxSize: "3G"
     bucketLifecycle: |
       {
