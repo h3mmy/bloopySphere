@@ -6,9 +6,7 @@ metadata:
 spec:
   asNumber: ${NETWORK_BGP_K8S_ASN}
   nodeToNodeMeshEnabled: true
-  serviceClusterIPs:
-    - cidr: "${NETWORK_K8S_SERVICE_CIDR}"
-    - cidr: "${NETWORK_K8S_SERVICE_CIDR_V6}"
+  serviceClusterIPs: []
   serviceExternalIPs:
     - cidr: "${NETWORK_BGP_BLOCK_V4}"
     - cidr: "${NETWORK_BGP_BLOCK_V6}"
