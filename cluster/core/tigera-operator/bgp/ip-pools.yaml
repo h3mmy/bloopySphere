@@ -4,7 +4,7 @@ kind: IPPool
 metadata:
   name: lb-v4-class-b-0
 spec:
-  cidr: 10.1.0.100/30"
+  cidr: 10.1.0.100/30
   ipipMode: CrossSubnet
   natOutgoing: true
   disabled: false
