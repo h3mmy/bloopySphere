@@ -58,20 +58,6 @@ spec:
 apiVersion: projectcalico.org/v3
 kind: IPPool
 metadata:
-  name: lb-v4-class-b-3
-spec:
-  cidr: 10.1.0.128/25
-  ipipMode: CrossSubnet
-  natOutgoing: true
-  disabled: false
-  nodeSelector: all()
-  allowedUses:
-    - LoadBalancer
-  assignmentMode: Manual
----
-apiVersion: projectcalico.org/v3
-kind: IPPool
-metadata:
   name: lb-v6-class-b-0
 spec:
   cidr: "${METALLB_LB_IP6_RANGE}"
