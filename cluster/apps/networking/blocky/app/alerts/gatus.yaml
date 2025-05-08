@@ -10,7 +10,7 @@ data:
   config.yaml: |
     endpoints:
       - name: blocky-udp-external-v4
-        group: networking
+        group: networking-dns
         url: ${LB_V4_BLOCKY}:53
         interval: 1m
         dns:
@@ -23,8 +23,22 @@ data:
           - "[DNS_RCODE] == NOERROR"
         alerts:
           - type: discord
+      - name: blocky-udp-external-v6
+        group: networking-dns
+        url: ${LB_V6_BLOCKY}:53
+        interval: 5m
+        dns:
+          query-name: "cloudflare.com"
+          query-type: "AAAA"
+        ui:
+          hide-url: true
+          hide-hostname: true
+        conditions:
+          - "[DNS_RCODE] == NOERROR"
+        alerts:
+          - type: discord
       - name: blocky-udp-internal-v4
-        group: networking
+        group: networking-dns
         url: ${LB_V4_BLOCKY}:53
         interval: 1m
         dns:
