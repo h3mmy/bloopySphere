@@ -5,7 +5,7 @@ metadata:
   name: lb-v4-class-b-0
 spec:
   cidr: 10.1.0.96/27 # 10.1.0.97-10.1.0.126
-  ipipMode: CrossSubnet
+  # ipipMode: CrossSubnet
   blockSize: 27
   natOutgoing: true
   disabled: false
@@ -20,7 +20,7 @@ metadata:
   name: lb-v4-class-b-1
 spec:
   cidr: 10.1.0.128/25
-  ipipMode: CrossSubnet
+  # ipipMode: CrossSubnet
   natOutgoing: true
   disabled: false
   nodeSelector: all()
@@ -34,7 +34,7 @@ metadata:
   name: lb-v6-class-b-0
 spec:
   cidr: "${METALLB_LB_IP6_RANGE}"
-  ipipMode: CrossSubnet
+  # ipipMode: CrossSubnet
   natOutgoing: true
   disabled: false
   nodeSelector: all()
