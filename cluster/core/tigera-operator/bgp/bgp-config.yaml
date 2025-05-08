@@ -6,15 +6,14 @@ metadata:
 spec:
   asNumber: ${NETWORK_BGP_K8S_ASN}
   nodeToNodeMeshEnabled: true
-  serviceClusterIPs:
-    - cidr: "${NETWORK_K8S_SERVICE_CIDR}"
-    - cidr: "${NETWORK_K8S_SERVICE_CIDR_V6}"
+  serviceClusterIPs: []
   serviceExternalIPs:
     - cidr: "${NETWORK_BGP_BLOCK_V4}"
     - cidr: "${NETWORK_BGP_BLOCK_V6}"
-    - cidr: "10.1.0.65/32" # VIP kube-api
-  serviceLoadBalancerIPs:
     #- cidr: "10.1.0.65/32" # VIP kube-api
+    - cidr: "10.1.0.1/24" # Experiment
+  serviceLoadBalancerIPs:
+    - cidr: "10.1.0.65/32" # VIP kube-api
     # metallb v4 range 10.1.0.100-10.1.0.255
     - cidr: "10.1.0.100/30"
     - cidr: "10.1.0.104/29"
