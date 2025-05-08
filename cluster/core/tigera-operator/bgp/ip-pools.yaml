@@ -4,8 +4,9 @@ kind: IPPool
 metadata:
   name: lb-v4-class-b-0
 spec:
-  cidr: 10.1.0.100/30
+  cidr: 10.1.0.96/27 # 10.1.0.97-10.1.0.126
   ipipMode: CrossSubnet
+  blockSize: 27
   natOutgoing: true
   disabled: false
   nodeSelector: all()
@@ -17,34 +18,6 @@ apiVersion: projectcalico.org/v3
 kind: IPPool
 metadata:
   name: lb-v4-class-b-1
-spec:
-  cidr: 10.1.0.104/29
-  ipipMode: CrossSubnet
-  natOutgoing: true
-  disabled: false
-  nodeSelector: all()
-  allowedUses:
-    - LoadBalancer
-  assignmentMode: Manual
----
-apiVersion: projectcalico.org/v3
-kind: IPPool
-metadata:
-  name: lb-v4-class-b-2
-spec:
-  cidr: 10.1.0.112/28
-  ipipMode: CrossSubnet
-  natOutgoing: true
-  disabled: false
-  nodeSelector: all()
-  allowedUses:
-    - LoadBalancer
-  assignmentMode: Manual
----
-apiVersion: projectcalico.org/v3
-kind: IPPool
-metadata:
-  name: lb-v4-class-b-3
 spec:
   cidr: 10.1.0.128/25
   ipipMode: CrossSubnet
