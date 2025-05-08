@@ -31,7 +31,7 @@ spec:
           # https://github.com/prometheus-community/pro-bing#linux
           security.alpha.kubernetes.io/sysctls: net.ipv4.ping_group_range=0 2147483647
         initContainers:
-          #init-db:
+          # init-db:
           #  image:
           #    repository: ghcr.io/home-operations/postgres-init
           #    tag: 16
