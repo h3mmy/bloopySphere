@@ -31,16 +31,16 @@ spec:
           # https://github.com/prometheus-community/pro-bing#linux
           security.alpha.kubernetes.io/sysctls: net.ipv4.ping_group_range=0 2147483647
         initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/home-operations/postgres-init
-              tag: 16
-            envFrom: &envFrom
-              - secretRef:
-                  name: gatus-secret
-            env:
-              INIT_POSTGRES_DBNAME: *app
-              INIT_POSTGRES_HOST: &pghost bloopgres-rw.database.svc.cluster.local
+          # init-db:
+          #  image:
+          #    repository: ghcr.io/home-operations/postgres-init
+          #    tag: 16
+          #  envFrom: &envFrom
+          #    - secretRef:
+          #        name: gatus-secret
+          #  env:
+          #    INIT_POSTGRES_DBNAME: *app
+          #    INIT_POSTGRES_HOST: &pghost bloopgres-rw.database.svc.cluster.local
           # TODO: Convert this to a proper 'sidecar' container someday
           init-config:
             dependsOn: init-db
@@ -66,8 +66,8 @@ spec:
               #tag: experimental
               tag: v5.17.0@sha256:a8c53f9e9f1a3876cd00e44a42c80fc984e118d5ba0bdbaf08980cb627d61512
             env:
-              INIT_POSTGRES_DBNAME: *app
-              INIT_POSTGRES_HOST: *pghost
+          #    INIT_POSTGRES_DBNAME: *app
+          #    INIT_POSTGRES_HOST: *pghost
               TZ: ${TZ}
               GATUS_CONFIG_PATH: /config
               CUSTOM_WEB_PORT: &port 80
@@ -129,6 +129,11 @@ spec:
       create: true
       name: *app
     persistence:
+      data:
+        type: existingClaim
+        name: gatus-data-v1
+        globalMounts:
+          - path: /data
       config:
         type: emptyDir
       config-file:
