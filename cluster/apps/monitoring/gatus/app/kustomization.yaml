@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - ./rbac.yaml
   - ./helm-release.yaml
+  - pvc-data-v1.yaml
   - ./secrets.sops.yaml
 configMapGenerator:
   - name: gatus-configmap
