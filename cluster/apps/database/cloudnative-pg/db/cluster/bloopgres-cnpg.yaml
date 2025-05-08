@@ -73,7 +73,7 @@ spec:
         maxParallel: 5
       data:
         compression: bzip2
-      destinationPath: s3://bloopgres-backup-4
+      destinationPath: s3://bloopgres-backup-5
       endpointURL: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local
       # credentials are populated via rook-ceph-operator
       s3Credentials:
