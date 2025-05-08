@@ -63,8 +63,8 @@ spec:
           app:
             image:
               repository: twinproduction/gatus
-              tag: experimental
-              #tag: v5.11.0@sha256:eb0374eb55e3ff84ec8f9ea10342ddb623cfba23e5836138896cde01f11cf23d
+              #tag: experimental
+              tag: v5.11.0@sha256:eb0374eb55e3ff84ec8f9ea10342ddb623cfba23e5836138896cde01f11cf23d
             env:
               INIT_POSTGRES_DBNAME: *app
               INIT_POSTGRES_HOST: *pghost
