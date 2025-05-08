@@ -9,7 +9,7 @@ data:
   BLOCKY_QUERY_DB_NAME: blocky_log_db
   BLOCKY_QUERY_DB_USER: blocky
   CALIBRE_WEB_PID: "1061"
-  CALICO_NODE_CIDR: "10.1.0.0/24"
+  CALICO_NODE_CIDR: "10.1.0.0/25"
   CLUSTER_NAME: bloopySphere
   DOMAIN_BIG_BLOOP: "bigbloop"
   DOMAIN_CORE_BLOOP: "bloopycore"
