@@ -10,7 +10,7 @@ spec:
   bucketName: bloopgres-backup-4
   storageClassName: ceph-bucket
   additionalConfig:
-    maxObjects: "12000"
+    maxObjects: "17000"
     maxSize: "3G"
     bucketLifecycle: |
       {
