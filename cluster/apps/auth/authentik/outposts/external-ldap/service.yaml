@@ -5,7 +5,7 @@ metadata:
   name: &fullname ak-outpost-ldap-external
   namespace: auth
   annotations:
-    metallb.universe.tf/loadBalancerIPs: "${LB_V4_AK_LDAP}"
+    projectcalico.org/loadBalancerIPs: "${LB_V4_AK_LDAP}"
     metallb.universe.tf/allow-shared-ip: *fullname
 spec:
   ports:
