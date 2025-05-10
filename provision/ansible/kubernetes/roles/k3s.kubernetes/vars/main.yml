@@ -5,7 +5,7 @@
 #
 # (string) Use a specific version of k3s
 # renovate: datasource=github-releases depName=k3s-io/k3s
-k3s_release_version: "v1.31.8+k3s1"
+k3s_release_version: "v1.32.4+k3s1"
 
 # (bool) Install using hard links rather than symbolic links.
 k3s_install_hard_links: true
@@ -57,11 +57,11 @@ k3s_server_manifests_templates: []
 calico_encapsulation: "VXLANCrossSubnet"
 calico_encapsulation_ipv6: "None"
 # -- CIDR of the host node interface Calico should use
-calico_node_cidr: 10.1.0.0/24
+calico_node_cidr: 10.1.0.0/25
 # -- CIDR of the host node interface Calico should use ipv6
 calico_node_cidr_ipv6: "{ipv6_node_cidr}"
 
 # # (string) The interface on the host kube-vip should attach to
 # kubevip_interface: "enp89s0"
 # # (string) The ARP address kube-vip broadcasts
-kubevip_address: "10.1.0.65"
+kubevip_address: "10.1.0.165"
