@@ -33,7 +33,7 @@ spec:
   values:
     image:
       repository: ghcr.io/home-operations/readarr
-      tag:  0.4.15.2787@sha256:919ff1f59157f760017a2ce525b22ab2586ca4c49bae728ed88c58f3ae17ed40
+      tag:  0.4.15.2787@sha256:0ec0299f60127cd5e73f6e0218d717dfc34c62f461309ee5b37cd075df2dbcd7
     env:
       TZ: "${TZ}"
       PGID: ${MEDIA_GID}
