@@ -1,0 +1,36 @@
+---
+apiVersion: projectcalico.org/v3
+kind: CalicoNodeStatus
+metadata:
+  name: &node slowpoke
+spec:
+  classes:
+    - Agent
+    - BGP
+    - Routes
+  node: *node
+  updatePeriodSeconds: 10
+---
+apiVersion: projectcalico.org/v3
+kind: CalicoNodeStatus
+metadata:
+  name: &node k8s-2
+spec:
+  classes:
+    - Agent
+    - BGP
+    - Routes
+  node: *node
+  updatePeriodSeconds: 10
+---
+apiVersion: projectcalico.org/v3
+kind: CalicoNodeStatus
+metadata:
+  name: &node k8s-3
+spec:
+  classes:
+    - Agent
+    - BGP
+    - Routes
+  node: *node
+  updatePeriodSeconds: 10
