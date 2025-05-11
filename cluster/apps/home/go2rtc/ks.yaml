@@ -10,7 +10,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   components:
-    - ../../../components/gatus/guarded
+    - ../../../../components/gatus/guarded
   interval: 1h
   path: ./cluster/apps/home/go2rtc/app
   postBuild:
