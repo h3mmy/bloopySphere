@@ -16,11 +16,10 @@ spec:
   postBuild:
     substitute:
       APP: *app
-    substituteFrom:
-      - kind: ConfigMap
-        name: cluster-settings
-      - kind: Secret
-        name: cluster-secrets
+      XYZ_DOMAIN: ${XYZ_DOMAIN}
+      LOCAL_GATEWAY_BIG_BLOOP: ${LOCAL_GATEWAY_BIG_BLOOP}
+      LB_V4_GO2RTC: ${LB_V4_GO2RTC}
+      LB_V6_GO2RTC: ${LB_V6_GO2RTC}
   prune: true
   retryInterval: 2m
   sourceRef:
