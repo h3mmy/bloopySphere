@@ -130,4 +130,6 @@ spec:
     # Also see https://docs.rke2.io/known_issues/#calico-with-vxlan-encapsulation
     felixConfiguration:
       featureDetectOverride: "ChecksumOffloadBroken=true"
-      ipv6Support: true
+      ipv6Support: "true"
+      bpfLogLevel: "Off"
+      bpfEnabled: "false"
