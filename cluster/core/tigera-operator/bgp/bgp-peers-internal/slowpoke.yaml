@@ -7,12 +7,12 @@ spec:
   peerIP: 10.1.0.87
   asNumber: ${NETWORK_BGP_K8S_ASN}
   keepOriginalNextHop: true
----
-apiVersion: crd.projectcalico.org/v1
-kind: BGPPeer
-metadata:
-  name: ipv6-slowpoke
-spec:
-  peerIP: fe80::aaa1:59ff:fe9c:28c2/64
-  asNumber: ${NETWORK_BGP_K8S_ASN}
-  keepOriginalNextHop: true
+# ---
+# apiVersion: crd.projectcalico.org/v1
+# kind: BGPPeer
+# metadata:
+#   name: ipv6-slowpoke
+# spec:
+#   peerIP: fe80::aaa1:59ff:fe9c:28c2%enp89s0
+#   asNumber: ${NETWORK_BGP_K8S_ASN}
+#   keepOriginalNextHop: true
