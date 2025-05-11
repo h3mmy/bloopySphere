@@ -1,0 +1,18 @@
+---
+api:
+  listen: :80
+rtsp:
+  listen: :554
+webrtc:
+  listen: :8555
+  candidates:
+    - ${LB_V4_GO2RTC}:8555
+    - stun:8555
+  ice_servers:
+    - urls:
+        - stun:stun.cloudflare.com:3478
+streams:
+  backdoor:
+    - rtsps://${LOCAL_GATEWAY_BIG_BLOOP}:7441/wZV1YtrUa1IMP0AZ?enableSrtp
+  living_room:
+    - rtsps://${LOCAL_GATEWAY_BIG_BLOOP}:7441/eh9U3hNIIpurmCIO?enableSrtp
