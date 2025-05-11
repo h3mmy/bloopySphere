@@ -8,4 +8,4 @@ resources:
   - ./ser2sock
   # - ./network-ups-tools
   - ./emqx
-  - ./go2rtc
+  - ./go2rtc/ks.yaml
