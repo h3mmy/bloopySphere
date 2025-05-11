@@ -8,3 +8,4 @@ resources:
   - ./ser2sock
   # - ./network-ups-tools
   - ./emqx
+  - ./go2rtc
