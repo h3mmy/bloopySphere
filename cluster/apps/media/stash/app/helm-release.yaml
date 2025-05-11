@@ -86,6 +86,7 @@ spec:
           hajimari.io/group: "media"
           hajimari.io/instance: "bloop-quarky"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
+          cert-manager.io/ip-sans: "127.0.0.1"
           traefik.ingress.kubernetes.io/service.passhostheader: "true"
           traefik.ingress.kubernetes.io/router.priority: "99"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
