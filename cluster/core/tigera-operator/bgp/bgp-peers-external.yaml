@@ -6,7 +6,7 @@ metadata:
 spec:
   peerIP: ${NETWORK_BGP_ROUTER_ID} # Should match ip used by router in router-id block
   asNumber: ${NETWORK_BGP_ROUTER_ASN} # Should match asn in router-id block
-  keepOriginalNextHop: true
+  #keepOriginalNextHop: true
 #---
 #apiVersion: crd.projectcalico.org/v1
 #kind: BGPPeer
