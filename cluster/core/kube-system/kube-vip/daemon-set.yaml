@@ -47,6 +47,10 @@ spec:
               value: "64514"
             - name: bgp_peeras
               value: "64513"
+            - name: bgp_routerid
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
           securityContext:
             capabilities:
               add:
