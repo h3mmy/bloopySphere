@@ -63,7 +63,7 @@ k3s_server:
     # - "feature-gates=ReadWriteOncePod=true"
     # Required to monitor component with kube-prometheus-stack
     - "metrics-bind-address=0.0.0.0"
-    # - "proxy-mode=nftables"
+    - "proxy-mode=nftables"
   kube-scheduler-arg:
     # Enable Alpha/Beta features
     # - "feature-gates=ReadWriteOncePod=true"
