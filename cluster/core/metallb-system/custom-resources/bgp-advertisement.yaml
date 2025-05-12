@@ -6,6 +6,6 @@ metadata:
   namespace: metallb-system
 spec:
   ipAddressPools:
-    - default
+    - bgp-pool
   peers:
     - gateway
