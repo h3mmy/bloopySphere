@@ -13,6 +13,8 @@ spec:
   allowedUses:
     - LoadBalancer
   assignmentMode: Manual
+  vxlanMode: CrossSubnet
+  disableBGPExport: false
 ---
 apiVersion: projectcalico.org/v3
 kind: IPPool
@@ -27,7 +29,8 @@ spec:
   allowedUses:
     - LoadBalancer
   assignmentMode: Manual
-  # vxlanMode: CrossSubnet
+  vxlanMode: CrossSubnet
+  disableBGPExport: false
 #---
 # apiVersion: projectcalico.org/v3
 #kind: IPPool
