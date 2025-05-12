@@ -66,9 +66,9 @@ spec:
         externalTrafficPolicy: Local
         ipFamilyPolicy: SingleStack
         annotations:
-          # projectcalico.org/loadBalancerIPs: '["${LB_V4_ZWAVEJS}"]'
-          metallb.universe.tf/loadBalancerIPs: "${LB_V4_ZWAVEJS}"
-          metallb.universe.tf/allow-shared-ip: zwavejs
+          projectcalico.org/loadBalancerIPs: '["${LB_V4_ZWAVEJS}"]'
+          #metallb.universe.tf/loadBalancerIPs: "${LB_V4_ZWAVEJS}"
+         # metallb.universe.tf/allow-shared-ip: zwavejs
           coredns.io/hostname: *host
           external-dns.alpha.kubernetes.io/hostname: *host
           # traefik.ingress.kubernetes.io/service.serversscheme: tcp
