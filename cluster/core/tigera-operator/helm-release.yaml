@@ -131,6 +131,6 @@ spec:
     felixConfiguration:
       featureDetectOverride: "ChecksumOffloadBroken=true"
       ipv6Support: "true"
-      iptablesBackend: NFT
+      nftablesMode: Enabled
       bpfLogLevel: "Off"
       bpfEnabled: "false"
