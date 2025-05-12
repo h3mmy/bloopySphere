@@ -26,7 +26,7 @@ spec:
             - manager
           env:
             - name: vip_arp
-              value: "true"
+              value: "false"
             - name: port
               value: "6443"
             - name: vip_cidr
@@ -38,7 +38,15 @@ spec:
             - name: svc_enable
               value: "false"
             - name: vip_address
-              value: "10.1.0.65"
+              value: "10.1.0.165"
+            - name: bgp_enable
+              value: "true"
+            - name: bgp_peeraddress
+              value: "${NETWORK_BGP_ROUTER_ID}"
+            - name: bgp_localas
+              value: "${NETWORK_BGP_K8S_ASN}"
+            - name: bgp_peeras
+              value: "${NETWORK_BGP_ROUTER_ASN}"
           securityContext:
             capabilities:
               add:
