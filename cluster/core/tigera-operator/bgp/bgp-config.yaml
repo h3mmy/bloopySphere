@@ -5,7 +5,7 @@ metadata:
   name: default
 spec:
   asNumber: ${NETWORK_BGP_K8S_ASN}
-  nodeToNodeMeshEnabled: false
+  nodeToNodeMeshEnabled: true
   serviceClusterIPs:
     - cidr: 10.43.0.0/16
     - cidr: ${NETWORK_K8S_SERVICE_CIDR_V6}
