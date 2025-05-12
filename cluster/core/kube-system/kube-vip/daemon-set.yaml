@@ -42,11 +42,11 @@ spec:
             - name: bgp_enable
               value: "true"
             - name: bgp_peeraddress
-              value: "${NETWORK_BGP_ROUTER_ID}"
+              value: "10.1.0.1"
             - name: bgp_localas
-              value: "${NETWORK_BGP_K8S_ASN}"
+              value: "64514"
             - name: bgp_peeras
-              value: "${NETWORK_BGP_ROUTER_ASN}"
+              value: "64513"
           securityContext:
             capabilities:
               add:
