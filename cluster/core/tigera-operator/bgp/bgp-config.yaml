@@ -18,7 +18,7 @@ spec:
     # metallb v4 range 10.1.0.100-10.1.0.255
     - cidr: "10.1.0.96/27"
     - cidr: "10.1.0.128/25"
-    - cidr: "${METALLB_LB_IP6_RANGE}"
+    #- cidr: "${METALLB_LB_IP6_RANGE}"
 # ---
 # apiVersion: crd.projectcalico.org/v1
 # kind: BGPConfiguration
