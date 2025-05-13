@@ -4,7 +4,7 @@ kind: BGPConfiguration
 metadata:
   name: default
 spec:
-  logSeverityScreen: Debug
+  logSeverityScreen: Info
   asNumber: ${NETWORK_BGP_K8S_ASN}
   nodeToNodeMeshEnabled: true
   serviceClusterIPs:
