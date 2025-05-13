@@ -39,13 +39,13 @@ customDNS:
     mqtt.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
     wss.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
     dns.${XYZ_DOMAIN}: ${SVC_BLOCKY_ADDR_V4},${SVC_BLOCKY_ADDR_V6}
-    go2rtc-streams.${XYZ_DOMAIN}: ${LB_V4_GO2RTC}
+    go2rtc-streams.${XYZ_DOMAIN}: ${LB_V4_GO2RTC},${LB_V4_GO2RTC}
 blocking:
   blockType: zeroIp
   # failStartOnListError: true
   loading:
     strategy: failOnError
-  denyLists:
+  denylists:
     ads:
       - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
       - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
@@ -60,7 +60,7 @@ blocking:
       - https://raw.githubusercontent.com/Sekhan/TheGreatWall/master/TheGreatWall.txt
       - https://gist.githubusercontent.com/ckuethe/f71185f604be9cde370e702aa179fc2e/raw/53fe52046836ac3009e9505b7b8b8b5de42d84e3/doh-blocklist.txt
     none:
-  allowLists:
+  allowlists:
     ads:
       - /app/whitelists/whitelist.txt
       - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
