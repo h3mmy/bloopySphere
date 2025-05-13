@@ -19,6 +19,9 @@ data:
         ui:
           hide-url: true
           hide-hostname: true
+          badge:
+            response-time:
+              thresholds: [200, 400, 750, 1500, 5100]
         conditions:
           - "[DNS_RCODE] == NOERROR"
         alerts:
@@ -33,6 +36,9 @@ data:
         ui:
           hide-url: true
           hide-hostname: true
+          badge:
+            response-time:
+              thresholds: [200, 400, 750, 1500, 5100]
         conditions:
           - "[DNS_RCODE] == NOERROR"
         alerts:
@@ -47,6 +53,9 @@ data:
         ui:
           hide-url: true
           hide-hostname: true
+          badge:
+            response-time:
+              thresholds: [200, 400, 750, 1500, 5100]
         conditions:
           - "[DNS_RCODE] == NOERROR"
           - "[BODY] == ${LB_V4_TRAEFIK}"
@@ -59,6 +68,9 @@ data:
         ui:
           hide-url: true
           hide-hostname: true
+          badge:
+            response-time:
+              thresholds: [200, 400, 750, 1500, 5100]
         conditions:
           - "[STATUS] == 200"
         alerts:
