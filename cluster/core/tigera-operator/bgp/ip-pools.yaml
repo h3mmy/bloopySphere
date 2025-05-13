@@ -5,7 +5,6 @@ metadata:
   name: lb-v4-class-b-0
 spec:
   cidr: 10.1.0.96/27 # 10.1.0.97-10.1.0.126
-  # ipipMode: CrossSubnet
   blockSize: 27
   natOutgoing: true
   disabled: false
@@ -13,7 +12,6 @@ spec:
   allowedUses:
     - LoadBalancer
   assignmentMode: Manual
-  # vxlanMode: CrossSubnet
   disableBGPExport: false
 ---
 apiVersion: projectcalico.org/v3
@@ -22,14 +20,12 @@ metadata:
   name: lb-v4-class-b-1
 spec:
   cidr: 10.1.0.128/25
-  # ipipMode: CrossSubnet
   natOutgoing: true
   disabled: false
   nodeSelector: all()
   allowedUses:
     - LoadBalancer
   assignmentMode: Manual
-  # vxlanMode: CrossSubnet
   disableBGPExport: false
 #---
 # apiVersion: projectcalico.org/v3
