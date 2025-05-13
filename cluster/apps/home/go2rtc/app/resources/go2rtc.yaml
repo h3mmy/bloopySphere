@@ -12,7 +12,8 @@ webrtc:
     - urls:
         - stun:stun.cloudflare.com:3478
 streams:
+  # Change rtsps to rtspx and strip the ?enableSrtp query param
   backdoor:
-    - rtsps://${LOCAL_GATEWAY_BIG_BLOOP}:7441/wZV1YtrUa1IMP0AZ?enableSrtp
+    - rtspx://${LOCAL_GATEWAY_BIG_BLOOP}:7441/wZV1YtrUa1IMP0AZ
   living_room:
-    - rtsps://${LOCAL_GATEWAY_BIG_BLOOP}:7441/eh9U3hNIIpurmCIO?enableSrtp
+    - rtspx://${LOCAL_GATEWAY_BIG_BLOOP}:7441/eh9U3hNIIpurmCIO

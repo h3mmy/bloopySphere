@@ -39,6 +39,7 @@ customDNS:
     mqtt.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
     wss.${XYZ_DOMAIN}: ${LB_V4_TRAEFIK},${LB_V6_TRAEFIK}
     dns.${XYZ_DOMAIN}: ${SVC_BLOCKY_ADDR_V4},${SVC_BLOCKY_ADDR_V6}
+    go2rtc-streams.${XYZ_DOMAIN}: ${LB_V4_GO2RTC},${LB_V6_GO2RTC}
 blocking:
   blockType: zeroIp
   # failStartOnListError: true
