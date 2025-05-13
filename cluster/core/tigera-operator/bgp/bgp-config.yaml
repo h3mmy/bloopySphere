@@ -17,6 +17,8 @@ spec:
     - cidr: "10.1.0.96/27"
     - cidr: "10.1.0.128/25"
     - cidr: "${METALLB_LB_IP6_RANGE}"
+    - cidr: "${NETWORK_BGP_BLOCK_V6}"
+
 # ---
 # apiVersion: crd.projectcalico.org/v1
 # kind: BGPConfiguration
