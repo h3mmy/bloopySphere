@@ -22,6 +22,17 @@ data:
           - type: discord
         ui:
           hide-hostname: true
+      - name: zwave2mqtt-ws
+        group: home
+        url: ws://${LB_V4_ZWAVEJS}:3000
+        interval: 15m
+        conditions:
+          - "[CONNECTED] == true"
+          - "[BODY].result >= 0"
+        alerts:
+          - type: discord
+        ui:
+          hide-hostname: true
       - name: zwave2mqtt-mqtt-internal
         group: home
         url: http://zwavejs2mqtt.home.svc.cluster.local:8091/health/mqtt
