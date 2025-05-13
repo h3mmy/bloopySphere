@@ -43,7 +43,7 @@ spec:
               value: "true"
             - name: bgp_peeraddress
               value: "10.1.0.1"
-            - name: bgp_localas
+            - name: bgp_as
               value: "64514"
             - name: bgp_peeras
               value: "64513"
