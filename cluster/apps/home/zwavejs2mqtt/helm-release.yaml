@@ -66,7 +66,7 @@ spec:
         externalTrafficPolicy: Local
         ipFamilyPolicy: SingleStack
         annotations:
-          projectcalico.org/loadBalancerIPs: '["${LB_V4_ZWAVEJS}"]'
+          # projectcalico.org/loadBalancerIPs: '["${LB_V4_ZWAVEJS}"]'
           metallb.universe.tf/loadBalancerIPs: "${LB_V4_ZWAVEJS}"
           metallb.universe.tf/allow-shared-ip: zwavejs
           coredns.io/hostname: *host
