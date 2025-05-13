@@ -10,9 +10,24 @@ data:
   # https://developers.home-assistant.io/docs/api/rest/
   config.yaml: |
     endpoints:
-      - name: home-assistant-rest
+      - name: home-assistant-rest-https-url
         group: home
         url: https://home-assistant.${XYZ_DOMAIN}/api/
+        interval: 7m
+        conditions:
+          - "[STATUS] == 200"
+          - "[BODY].message == API running."
+        alerts:
+          - type: discord
+        headers:
+          Authorization: Bearer ${HASS_API_TOKEN}
+          Content-Type: application/json
+        ui:
+          hide-url: true
+          hide-hostname: true
+      - name: home-assistant-rest-http-ip
+        group: home
+        url: http://${HASS_DIRECT}:8123/api/
         interval: 7m
         conditions:
           - "[STATUS] == 200"
