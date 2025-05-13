@@ -6,7 +6,7 @@ metadata:
 spec:
   logSeverityScreen: Info
   asNumber: ${NETWORK_BGP_K8S_ASN}
-  nodeToNodeMeshEnabled: true
+  nodeToNodeMeshEnabled: false
   serviceClusterIPs:
     - cidr: 10.43.0.0/16
     - cidr: ${NETWORK_K8S_SERVICE_CIDR_V6}
