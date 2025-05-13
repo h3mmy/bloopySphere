@@ -6,8 +6,8 @@ metadata:
   namespace: auth
   annotations:
     projectcalico.org/loadBalancerIPs: "[${LB_V4_AK_LDAP}]"
-    metallb.universe.tf/loadBalancerIPs: "${LB_V4_AK_LDAP}"
-    metallb.universe.tf/allow-shared-ip: *fullname
+    metallb.io/loadBalancerIPs: "${LB_V4_AK_LDAP}"
+    metallb.io/allow-shared-ip: *fullname
 spec:
   ports:
     - name: ldap

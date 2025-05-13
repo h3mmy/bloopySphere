@@ -57,7 +57,7 @@ spec:
         #   - "IPv4"
         #   - "IPv6"
         annotations:
-          metallb.universe.tf/allow-shared-ip: calibre
+          metallb.io/allow-shared-ip: calibre
       webserver:
         enabled: true
         controller: main
