@@ -6,4 +6,4 @@ components:
   - ../../../../components/common
 resources:
   - ./helm-release.yaml
-  - ./rbac.yaml
+  # - ./rbac.yaml
