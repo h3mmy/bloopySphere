@@ -93,7 +93,7 @@ spec:
               readOnlyRootFilesystem: true
               capabilities:
                 drop: [ALL]
-                add: ["NET_RAW"] # Required with non-experimental image. See https://github.com/TwiN/gatus/issues/697#issuecomment-2439655418
+                add: [NET_RAW] # Required with non-experimental image. See https://github.com/TwiN/gatus/issues/697#issuecomment-2439655418
             resources: *resources
           config-sync:
             image: *configSyncImage
