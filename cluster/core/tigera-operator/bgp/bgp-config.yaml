@@ -16,8 +16,9 @@ spec:
     # metallb v4 range 10.1.0.100-10.1.0.255
     - cidr: "10.1.0.96/27"
     - cidr: "10.1.0.128/25"
-    - cidr: "${METALLB_LB_IP6_RANGE}"
-    - cidr: "${NETWORK_BGP_BLOCK_V6}"
+    # Don't try to advertise ipv6 without ipv6 peers. It causes bird to stall
+    #- cidr: "${METALLB_LB_IP6_RANGE}"
+    #- cidr: "${NETWORK_BGP_BLOCK_V6}"
 
 # ---
 # apiVersion: crd.projectcalico.org/v1
