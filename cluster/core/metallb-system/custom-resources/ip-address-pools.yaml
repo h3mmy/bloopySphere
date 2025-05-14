@@ -10,7 +10,7 @@ spec:
     - "10.1.0.100-10.1.0.105"
     - "10.1.0.110-10.1.0.117"
     - "${METALLB_LB_IP6_RANGE}"
-    - "${NETWORK_BGP_BLOCK_V6}"
+    #- "${NETWORK_BGP_BLOCK_V6}"
 ---
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
