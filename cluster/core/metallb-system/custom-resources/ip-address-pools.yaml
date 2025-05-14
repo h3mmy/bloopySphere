@@ -22,6 +22,6 @@ spec:
     - "10.1.0.107/32"
     - "10.1.0.108/32"
     - "${NETWORK_BGP_BLOCK_V4}"
-    #- "${NETWORK_BGP_BLOCK_V6}"
+    - "${NETWORK_BGP_BLOCK_V6}"
   autoAssign: false
   avoidBuggyIPs: true
