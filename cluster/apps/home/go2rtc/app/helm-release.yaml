@@ -66,7 +66,7 @@ spec:
         externalTrafficPolicy: Local
         annotations:
           external-dns.alpha.kubernetes.io/hostname: go2rtc-streams.${XYZ_DOMAIN}
-          metallb.universe.tf/loadBalancerIPs: "${LB_V4_GO2RTC}, ${LB_V6_GO2RTC}"
+          metallb.io/loadBalancerIPs: "${LB_V4_GO2RTC}, ${LB_V6_GO2RTC}"
         ports:
           http:
             primary: true

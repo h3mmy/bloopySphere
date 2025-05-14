@@ -42,7 +42,7 @@ spec:
         externalTrafficPolicy: Local
         # ipFamilyPolicy: PreferDualStack
         annotations:
-          metallb.universe.tf/loadBalancerIPs: "${LB_NUT_V4}"
+          metallb.io/loadBalancerIPs: "${LB_NUT_V4}"
           external-dns.alpha.kubernetes.io/hostname: "exporters.${XYZ_DOMAIN}"
       metrics:
         enabled: true

@@ -74,8 +74,8 @@ spec:
         annotations:
           corends.io/hostname: &ldaps "lldaps.${XYZ_DOMAIN}"
           external-dns.alpha.kubernetes.io/hostname: *ldaps
-          metallb.universe.tf/loadBalancerIPs: "${LB_V4_LLDAP}, ${LB_V6_LLDAP}"
-          metallb.universe.tf/allow-shared-ip: lldap
+          metallb.io/loadBalancerIPs: "${LB_V4_LLDAP}, ${LB_V6_LLDAP}"
+          metallb.io/allow-shared-ip: lldap
         ports:
           ldaps:
             enabled: true

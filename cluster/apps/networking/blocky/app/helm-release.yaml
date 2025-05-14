@@ -144,8 +144,8 @@ spec:
           - "IPv4"
           - "IPv6"
         annotations:
-          metallb.universe.tf/loadBalancerIPs: &lbs "${LB_V4_BLOCKY}, ${SVC_BLOCKY_ADDR_V6}"
-          metallb.universe.tf/allow-shared-ip: *app
+          metallb.io/loadBalancerIPs: &lbs "${LB_V4_BLOCKY}, ${SVC_BLOCKY_ADDR_V6}"
+          metallb.io/allow-shared-ip: *app
           coredns.io/hostname: &hostsvc "dns.${XYZ_DOMAIN}"
 
     ingress:
