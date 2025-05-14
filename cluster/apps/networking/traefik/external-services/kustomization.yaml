@@ -5,4 +5,4 @@ resources:
   - classic-svc.yaml
   - home-assistant.yaml
   - nas-camelus.yaml
-  - pihole-svc.yaml
+ # - pihole-svc.yaml
