@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - pvc-minecraft-data-v1.yaml
   - pvc-mcsv-backups-v1.yaml
-  - helm-release.yaml
+  #- helm-release.yaml
