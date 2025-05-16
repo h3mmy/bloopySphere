@@ -7,7 +7,7 @@ collections:
   - name: ansible.posix
     version: 1.6.2
   - name: kubernetes.core
-    version: 5.2.0
+    version: 5.3.0
 roles:
   - name: xanmanning.k3s
     src: https://github.com/PyratLabs/ansible-role-k3s.git
