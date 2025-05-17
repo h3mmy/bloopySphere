@@ -41,7 +41,7 @@ spec:
           main:
             image:
               repository: ghcr.io/home-operations/radarr
-              tag: 5.23.1.9914
+              tag: 5.23.3.9987
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
