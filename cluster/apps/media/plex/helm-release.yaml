@@ -29,7 +29,7 @@ spec:
   values:
     image:
       repository: ghcr.io/home-operations/plex # {"$imagepolicy": "flux-system:plex:name"}
-      tag: "1.41.7.9799" # {"$imagepolicy": "flux-system:plex:tag"}
+      tag: "1.41.6.9685" # {"$imagepolicy": "flux-system:plex:tag"}
       imagePullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"
