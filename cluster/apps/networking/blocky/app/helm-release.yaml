@@ -84,7 +84,7 @@ spec:
           main:
             image:
               repository: ghcr.io/0xerr0r/blocky
-              tag: v0.25
+              tag: v0.26
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
