@@ -63,6 +63,7 @@ spec:
                 memory: 1500Mi
         pod:
           securityContext:
+            runAsUser: 568
             fsGroup: "${MEDIA_GID}"
             fsGroupChangePolicy: "OnRootMismatch"
             supplementalGroups:
