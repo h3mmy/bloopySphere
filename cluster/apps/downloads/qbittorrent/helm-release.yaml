@@ -28,7 +28,7 @@ spec:
   values:
     image:
       repository: ghcr.io/home-operations/qbittorrent
-      tag: 4.6.7@sha256:5391f94b321d563c3b44136a5e799b7e4e4888926c1c31d3081a1cf3e74a9aec
+      tag: 5.1.0@sha256:37aefd713ba31d51255995261616f1144378887bc5f21665a0ebf851fb85f69a
 
     # Adding false for CSRF and Clickjacking else it gives a 401 to browsers and prometheus-exporter (unreliably)
     # This is only okay for my particular use case
