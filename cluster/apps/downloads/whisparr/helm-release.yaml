@@ -39,7 +39,7 @@ spec:
       type: statefulset
     image:
       repository: ghcr.io/drag0n141/whisparr-nightly
-      tag: 2.0.0.987@sha256:7fbd3403e6ed5c151f40de26e0f11c33d8dbfe1e455252602aff10ee8cd9f77e
+      tag: 2.0.0.987@sha256:1ca33e6f640fe962a9e96e415ad29204180f7dea1152bdae2144897b08d3da4e
     env:
       TZ: "${TZ}"
       PGID: ${MEDIA_GID}
