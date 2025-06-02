@@ -32,7 +32,7 @@ spec:
       cephFSKernelMountOptions: ms_mode=secure # Set when encryption/compression is enabled
       enableLiveness: true
       provisioner:
-        image: registry.k8s.io/sig-storage/csi-provisioner:v5.2.0 # See https://github.com/rook/rook/issues/13458
+        image: registry.k8s.io/sig-storage/csi-provisioner:v5.3.0 # See https://github.com/rook/rook/issues/13458
       #snapshotter:
         #repository: registry.k8s.io/sig-storage/csi-snapshotter
         #tag: v8.1.0 # https://github.com/rook/rook/issues/15234
