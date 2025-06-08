@@ -32,18 +32,20 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/onedr0p/sonarr-develop #ghcr.io/home-operations/sonarr
-              tag: 4.0.14.2938
+              repository: ghcr.io/home-operations/sonarr
+              tag: 4.0.14.2938@sha256:5126f7ae94745a8e58e6963e1f67e905766c096832eff08b0678355ad0cdecee
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
               PGID: ${MEDIA_GID}
               PUID: ${SONARR_PUID}
               SONARR__PORT: &port 80
-              SONARR__APPLICATION_URL: https://sonarr.${XYZ_DOMAIN}
+              SONARR__APPLICATION__URL: https://sonarr.${XYZ_DOMAIN}
               SONARR__AUTH__METHOD: External
               SONARR__AUTH__REQUIRED: DisabledForLocalAddresses
               SONARR__API__KEY: ${SONARR_API_KEY}
+              SONARR__SERVER__PORT: &port 80
+              SONARR__UPDATE__BRANCH: develop
             securityContext:
               runAsUser: 0
               runAsGroup: 0
