@@ -41,8 +41,8 @@ spec:
               PUID: ${SONARR_PUID}
               SONARR__PORT: &port 80
               SONARR__APPLICATION_URL: https://sonarr.${XYZ_DOMAIN}
-              SONARR__AUTHENTICATION_METHOD: External
-              SONARR__API_KEY: ${SONARR_API_KEY}
+              SONARR__AUTH__METHOD: External
+              SONARR__API__KEY: ${SONARR_API_KEY}
             securityContext:
               runAsUser: 0
               runAsGroup: 0
