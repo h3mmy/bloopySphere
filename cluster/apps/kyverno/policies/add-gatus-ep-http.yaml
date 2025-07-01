@@ -38,7 +38,7 @@ spec:
             jmesPath: "to_string(@) || ''"
         - name: GATUS_GROUP
           variable:
-            value: "{{ request.object.metadata.annotations.\"gatus.io/group\" }}"
+            value: "{{ request.object.metadata.annotations.\"gatus.io/group\" || request.namespace }}"
             default: "{{ request.namespace }}"
             jmesPath: "to_string(@)"
         - name: GATUS_STATUS_CODE

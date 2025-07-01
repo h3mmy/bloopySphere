@@ -1,0 +1,31 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app go2rtc
+  namespace: &namespace home
+spec:
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  # components:
+  #   - ../../../../components/gatus/guarded
+  interval: 1h
+  path: ./cluster/apps/home/go2rtc/app
+  postBuild:
+    substitute:
+      APP: *app
+      XYZ_DOMAIN: ${XYZ_DOMAIN}
+      LOCAL_GATEWAY_BIG_BLOOP: ${LOCAL_GATEWAY_BIG_BLOOP}
+      LB_V4_GO2RTC: ${LB_V4_GO2RTC}
+      LB_V6_GO2RTC: ${LB_V6_GO2RTC}
+  prune: true
+  retryInterval: 2m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: *namespace
+  timeout: 5m
+  wait: false

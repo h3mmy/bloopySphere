@@ -63,3 +63,4 @@ kc-metadata-saml.xml
 update_plex_plugins.sh
 test-grafana-api.sh
 merms/*
+bgp.conf

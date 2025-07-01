@@ -1,0 +1,17 @@
+---
+apiVersion: crd.projectcalico.org/v1
+kind: BGPFilter
+metadata:
+  name: drop-pod-network
+spec:
+  exportV4:
+    - action: Accept
+      matchOperator: In
+      cidr: ${CALICO_NODE_CIDR}
+    - action: Reject
+      matchOperator: In
+      cidr: ${NETWORK_K8S_CLUSTER_CIDR}
+  exportV6:
+    - action: Accept
+      matchOperator: In
+      cidr: ${CALICO_NODE_CIDR_IPV6}

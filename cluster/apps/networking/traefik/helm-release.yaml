@@ -43,8 +43,8 @@ spec:
         - "IPv4"
         - "IPv6"
       annotations:
-        metallb.universe.tf/loadBalancerIPs: "${LB_V4_TRAEFIK}, ${LB_V6_TRAEFIK}"
-        metallb.universe.tf/allow-shared-ip: traefik
+        metallb.io/loadBalancerIPs: "${LB_V4_TRAEFIK}, ${LB_V6_TRAEFIK}"
+        metallb.io/allow-shared-ip: traefik
     logs:
       general:
         format: json

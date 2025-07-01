@@ -84,7 +84,7 @@ spec:
           main:
             image:
               repository: ghcr.io/0xerr0r/blocky
-              tag: v0.25
+              tag: v0.26
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
@@ -144,8 +144,8 @@ spec:
           - "IPv4"
           - "IPv6"
         annotations:
-          metallb.universe.tf/loadBalancerIPs: &lbs "${LB_V4_BLOCKY}, ${SVC_BLOCKY_ADDR_V6}"
-          metallb.universe.tf/allow-shared-ip: *app
+          metallb.io/loadBalancerIPs: &lbs "${LB_V4_BLOCKY}, ${SVC_BLOCKY_ADDR_V6}"
+          metallb.io/allow-shared-ip: *app
           coredns.io/hostname: &hostsvc "dns.${XYZ_DOMAIN}"
 
     ingress:

@@ -83,8 +83,8 @@ spec:
     serviceAnnotations:
       mc-router.itzg.me/externalServerName: &mchost minecraft.${XYZ_DOMAIN}
       coredns.io/hostname: *mchost
-      metallb.universe.tf/loadBalancerIPs: "${LB_V4_MINECRAFT}"
-      metallb.universe.tf/allow-shared-ip: mcsv
+      metallb.io/loadBalancerIPs: "${LB_V4_MINECRAFT}"
+      metallb.io/allow-shared-ip: mcsv
     extraEnv:
       TZ: ${TZ}
       # ,https://cdn.modrinth.com/data/fRQREgAc/versions/YsFoYsPV/Dynmap-3.5-spigot.jar

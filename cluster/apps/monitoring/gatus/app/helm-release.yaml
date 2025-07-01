@@ -31,22 +31,22 @@ spec:
           # https://github.com/prometheus-community/pro-bing#linux
           security.alpha.kubernetes.io/sysctls: net.ipv4.ping_group_range=0 2147483647
         initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/home-operations/postgres-init
-              tag: 16
-            envFrom: &envFrom
-              - secretRef:
-                  name: gatus-secret
-            env:
-              INIT_POSTGRES_DBNAME: *app
-              INIT_POSTGRES_HOST: &pghost bloopgres-rw.database.svc.cluster.local
+          # init-db:
+          #  image:
+          #    repository: ghcr.io/home-operations/postgres-init
+          #    tag: 16
+          #  envFrom: &envFrom
+          #    - secretRef:
+          #        name: gatus-secret
+          #  env:
+          #    INIT_POSTGRES_DBNAME: *app
+          #    INIT_POSTGRES_HOST: &pghost bloopgres-rw.database.svc.cluster.local
           # TODO: Convert this to a proper 'sidecar' container someday
           init-config:
-            dependsOn: init-db
+            #dependsOn: init-db
             image: &configSyncImage
               repository: ghcr.io/kiwigrid/k8s-sidecar
-              tag: 1.28.4@sha256:20caf4e241e1f9f9231527db5e75b735aa7b0da7bee3d262cbe369bb9b33469f
+              tag: 1.30.5@sha256:b50fb46b5b3291fb82e85429781a27a5c36fe97f330908afe00652ee6c425459
             env: &configSyncEnv
               FOLDER: /config
               LABEL: gatus.io/enabled
@@ -63,16 +63,18 @@ spec:
           app:
             image:
               repository: twinproduction/gatus
-              tag: experimental
-              #tag: v5.11.0@sha256:eb0374eb55e3ff84ec8f9ea10342ddb623cfba23e5836138896cde01f11cf23d
+              # tag: experimental
+              tag: v5.18.1@sha256:97525568fdef34539b1b4d015aef2d1cf6f58f1bc087443387b349940544394d
             env:
-              INIT_POSTGRES_DBNAME: *app
-              INIT_POSTGRES_HOST: *pghost
+          #    INIT_POSTGRES_DBNAME: *app
+          #    INIT_POSTGRES_HOST: *pghost
               TZ: ${TZ}
               GATUS_CONFIG_PATH: /config
               CUSTOM_WEB_PORT: &port 80
               XYZ_DOMAIN: ${XYZ_DOMAIN}
-            envFrom: *envFrom
+            envFrom:
+              - secretRef:
+                  name: gatus-secret
             probes:
               liveness: &probes
                 enabled: true
@@ -91,6 +93,9 @@ spec:
               readOnlyRootFilesystem: true
               capabilities:
                 drop: [ALL]
+                add: # Required with non-experimental image. See https://github.com/TwiN/gatus/issues/697#issuecomment-2439655418
+                  - NET_ADMIN
+                  - NET_RAW
             resources: *resources
           config-sync:
             image: *configSyncImage
@@ -129,6 +134,10 @@ spec:
       create: true
       name: *app
     persistence:
+      data:
+        existingClaim: gatus-data-v1
+        globalMounts:
+          - path: /data
       config:
         type: emptyDir
       config-file:

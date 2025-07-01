@@ -62,7 +62,7 @@ spec:
         enabled: true
         type: LoadBalancer
         annotations:
-          metallb.universe.tf/loadBalancerIPs: ${SVC_QBITTORRENT_ADDR}
+          metallb.io/loadBalancerIPs: ${SVC_QBITTORRENT_ADDR}
         loadBalancerIPs: ["${SVC_QBITTORRENT_ADDR}"]
         # For BGP mode
         # externalIPs:

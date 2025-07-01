@@ -43,11 +43,6 @@ resource "cloudflare_zone_settings_override" "cloudflare_settings" {
     security_level = "medium"
     # /speed/optimization
     brotli = "on"
-    minify {
-      css  = "on"
-      js   = "on"
-      html = "on"
-    }
     rocket_loader = "on"
     # /caching/configuration
     always_online    = "off"

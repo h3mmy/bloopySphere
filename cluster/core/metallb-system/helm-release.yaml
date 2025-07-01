@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://metallb.github.io/metallb
       chart: metallb
-      version: 0.13.7
+      version: 0.14.9
       sourceRef:
         kind: HelmRepository
         name: metallb-charts
@@ -46,10 +46,6 @@ spec:
       # for speaker running alongside FRR.
       frr:
         enabled: false
-        image:
-          repository: frrouting/frr
-          tag: v8.4.1
-          pullPolicy:
         metricsPort: 7473
         resources: {}
       tolerateMaster: true

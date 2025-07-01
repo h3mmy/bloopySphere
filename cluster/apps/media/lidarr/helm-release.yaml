@@ -37,8 +37,8 @@ spec:
             image:
               #repository: ghcr.io/home-operations/lidarr
               #tag: 2.11.1.4621@sha256:6eb5615d9fe120fad8dde2687d45718517bdb6983f4f3a66d86e53fe0bfca597
-              repository: ghcr.io/onedr0p/lidarr-develop
-              tag: 2.4.3.4248@sha256:fcf7417a7dfa9967a78d668904c62888272bd6dd814b4b9c4500618f51be6b86
+              repository: ghcr.io/home-operations/lidarr
+              tag: 2.13.0.4664@sha256:b2dec31a6ff0a5c99703eea84caf1a9b285fe01c31bc1224641b2c78989b1008
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
@@ -63,6 +63,7 @@ spec:
                 memory: 1500Mi
         pod:
           securityContext:
+            runAsUser: 568
             fsGroup: "${MEDIA_GID}"
             fsGroupChangePolicy: "OnRootMismatch"
             supplementalGroups:

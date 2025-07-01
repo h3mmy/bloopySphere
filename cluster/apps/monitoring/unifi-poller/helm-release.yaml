@@ -27,7 +27,7 @@ spec:
   values:
     image:
       repository: ghcr.io/unpoller/unpoller
-      tag: v2.14.1
+      tag: v2.15.3
     env:
       TZ: "${TZ}"
       UP_UNIFI_DEFAULT_ROLE: "bloopnet-controller"

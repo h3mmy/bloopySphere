@@ -2,7 +2,7 @@
 fail_fast: false
 repos:
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.37.0
+    rev: v1.37.1
     hooks:
       - args:
           - --config-file
@@ -35,7 +35,7 @@ repos:
       - id: forbid-secrets
 
   - repo: https://github.com/tarioch/flux-check-hook
-    rev: v0.6.0
+    rev: v0.8.0
     hooks:
       - id: check-flux-helm-values
         exclude: "^cluster/core/cert-manager/trust-manager/helm-release.yaml$"

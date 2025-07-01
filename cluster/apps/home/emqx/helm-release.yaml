@@ -33,6 +33,7 @@ spec:
   #    valuesKey: bootstrap_file
   values:
     image:
+      # 5.9.x+ will start to require a license for multi node clusters.
       repository: emqx/emqx
     replicaCount: 3
     recreatePods: true

@@ -4,13 +4,16 @@ kind: Kustomization
 namespace: tigera-operator
 resources:
   - helm-release.yaml
-  - bgp-config.yaml
-  - bgp-peers.yaml
+  - ./bgp/bgp-config.yaml
+  - ./bgp/bgp-peers-external.yaml
+  # - ./bgp/bgp-peers-internal
+  - ./bgp/ip-pools.yaml
+  - ./node-status.yaml
 configMapGenerator:
   - name: kubernetes-service-endpoint
     literals:
       # Kube-VIP address
-      - KUBERNETES_SERVICE_HOST="10.1.0.65"
+      - KUBERNETES_SERVICE_HOST="10.1.0.165"
       - KUBERNETES_SERVICE_PORT="6443"
 generatorOptions:
   disableNameSuffixHash: true
