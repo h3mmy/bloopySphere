@@ -27,7 +27,7 @@ jobs:
           private_key: "${{ secrets.APP_PRIVATE_KEY }}"
 
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
         with:
           token: "${{ steps.generate-token.outputs.token }}"
 
@@ -48,7 +48,7 @@ jobs:
           echo $ALL_CHANGED_FILES
 
       - name: Install jo
-        uses: awalsh128/cache-apt-pkgs-action@v1.5.1
+        uses: awalsh128/cache-apt-pkgs-action@v1.5.3
         with:
           packages: jo
 

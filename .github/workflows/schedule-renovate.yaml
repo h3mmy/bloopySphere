@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
 
       - name: Verify Renovate Configuration
         uses: suzuki-shunsuke/github-action-renovate-config-validator@v1.1.1
@@ -51,7 +51,7 @@ jobs:
           echo "DRY_RUN=${{ github.event.inputs.dryRun || env.DRY_RUN }}" >> "${GITHUB_ENV}"
           echo "LOG_LEVEL=${{ github.event.inputs.logLevel || env.LOG_LEVEL }}" >> "${GITHUB_ENV}"
       - name: Renovate
-        uses: renovatebot/github-action@v43.0.5
+        uses: renovatebot/github-action@v43.0.7
         with:
           configurationFile: "${{ env.RENOVATE_CONFIG_FILE }}"
           token: "x-access-token:${{ steps.generate-token.outputs.token }}"
