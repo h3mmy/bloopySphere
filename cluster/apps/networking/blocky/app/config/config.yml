@@ -24,8 +24,8 @@ conditional:
     status.${XYZ_DOMAIN}: tcp+udp:1.1.1.1
     # DoH canary domains. Forward to pihole for NODATA or NXDOMAIN
     use-application-dns.net: tcp+udp:10.1.0.9
-    mask.icloud.com: tcp+udp:10.1.0.9
-    mask-h2.icloud.com: tcp+udp:10.1.0.9
+    #mask.icloud.com: tcp+udp:10.1.0.9
+    #mask-h2.icloud.com: tcp+udp:10.1.0.9
     # For reverse DNS lookups
     ${LB_V4_BLOCKY_PTR}: ${LB_V4_BLOCKY}
 customDNS:
@@ -58,6 +58,8 @@ blocking:
       - |
         doh.dns.apple.com.v.aaplimg.com
       - https://raw.githubusercontent.com/Sekhan/TheGreatWall/master/TheGreatWall.txt
+      - mask.icloud.com
+      - mask-h2.icloud.com
       - https://gist.githubusercontent.com/ckuethe/f71185f604be9cde370e702aa179fc2e/raw/53fe52046836ac3009e9505b7b8b8b5de42d84e3/doh-blocklist.txt
     none:
   allowlists:
