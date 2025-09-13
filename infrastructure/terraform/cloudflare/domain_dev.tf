@@ -99,7 +99,7 @@ module "cf_domain_dev" {
 #   title = "__STATIC_CONTENT"
 # }
 
-resource "cloudflare_worker_route" "cf_domain_dev_status_route" {
+resource "cloudflare_workers_route" "cf_domain_dev_status_route" {
   zone_id     = module.cf_domain_dev.zone_id
   pattern     = "status.${local.domains["dev"]}/*"
   script_name = "leafybloop-production"

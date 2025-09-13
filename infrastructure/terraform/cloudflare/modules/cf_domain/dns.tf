@@ -3,7 +3,7 @@ resource "cloudflare_record" "dns_records" {
 
   name    = each.value.name
   zone_id = cloudflare_zone.zone.id
-  value   = each.value.value
+  content   = each.value.value
   priority = each.value.priority
   proxied  = contains(["A", "AAAA", "CNAME"], each.value.type) ? each.value.proxied : false
   type     = each.value.type
