@@ -15,5 +15,6 @@ streams:
   # Change rtsps to rtspx and strip the ?enableSrtp query param
   backdoor:
     - rtspx://${LOCAL_GATEWAY_BIG_BLOOP}:7441/wZV1YtrUa1IMP0AZ
+    - rtspx://${LOCAL_GATEWAY_BIG_BLOOP}:7441/aatTGTxvMk28IIga
   living_room:
     - rtspx://${LOCAL_GATEWAY_BIG_BLOOP}:7441/eh9U3hNIIpurmCIO
