@@ -100,3 +100,15 @@ spec:
           - path: /config/go2rtc.yaml
             subPath: go2rtc.yaml
             readOnly: true
+      tls-crt:
+        name: tls.go2rtc
+        type: secret
+        globalMounts:
+          - subPath: tls.crt
+            path: /config/ssl/go2rtc.crt
+      tls-key:
+        name: tls.go2rtc
+        type: secret
+        globalMounts:
+          - subPath: tls.key
+            path: /config/ssl/go2rtc.key
