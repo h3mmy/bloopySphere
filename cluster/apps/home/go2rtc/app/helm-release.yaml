@@ -82,6 +82,8 @@ spec:
     route:
       app:
         hostnames: ["{{ .Release.Name }}.${XYZ_DOMAIN}"]
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
         parentRefs:
           - name: internal
             namespace: kube-system
