@@ -57,7 +57,7 @@ spec:
         runAsGroup: 1000
     service:
       app:
-        controller: go2rtc
+        controller: *app
         type: LoadBalancer
         ipFamilyPolicy: PreferDualStack
         ipFamilies:
@@ -65,8 +65,8 @@ spec:
           - "IPv6"
         externalTrafficPolicy: Local
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: go2rtc-streams.${XYZ_DOMAIN}
-          metallb.io/loadBalancerIPs: "${LB_V4_GO2RTC}, ${LB_V6_GO2RTC}"
+          external-dns.alpha.kubernetes.io/hostname: &host go2rtc-streams.${XYZ_DOMAIN}
+          metallb.io/loadBalancerIPs: &lbs "${LB_V4_GO2RTC}, ${LB_V6_GO2RTC}"
         ports:
           http:
             primary: true
@@ -79,19 +79,35 @@ spec:
           webrtc-udp:
             port: 8555
             protocol: UDP
-    route:
+    ingress:
       app:
-        hostnames: ["{{ .Release.Name }}.${XYZ_DOMAIN}"]
+        ingressClassName: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
-        parentRefs:
-          - name: internal
-            namespace: kube-system
-            sectionName: https
-        rules:
-          - backendRefs:
-              - name: *app
-                port: *port
+          cert-manager.io/ip-sans: *lbs
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
+        hosts:
+          - host: *host
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: tls.go2rtc
+    # Re-enable after API Gateway setup
+    # route:
+    #   app:
+    #     hostnames: ["{{ .Release.Name }}.${XYZ_DOMAIN}"]
+    #     parentRefs:
+    #       - name: internal
+    #         namespace: kube-system
+    #         sectionName: https
+    #     rules:
+    #       - backendRefs:
+    #           - name: *app
+    #             port: *port
     persistence:
       config-file:
         type: configMap
