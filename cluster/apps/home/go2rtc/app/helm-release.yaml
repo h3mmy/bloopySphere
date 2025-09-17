@@ -81,7 +81,7 @@ spec:
             protocol: UDP
     ingress:
       app:
-        ingressClassName: "traefik"
+        className: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
           cert-manager.io/ip-sans: *lbs
@@ -92,6 +92,9 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
         tls:
           - hosts:
               - *host
