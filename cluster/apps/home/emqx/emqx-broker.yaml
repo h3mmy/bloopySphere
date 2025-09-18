@@ -6,7 +6,7 @@ metadata:
   namespace: home
 spec:
   serviceAccountName: "emqx"
-  image: emqx/emqx:5.8.8
+  image: emqx/emqx:5.10.1
   imagePullPolicy: IfNotPresent
   updateStrategy:
     evacuationStrategy:
