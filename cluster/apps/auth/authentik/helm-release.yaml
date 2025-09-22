@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.goauthentik.io/
       chart: authentik
-      version: 2024.8.4
+      version: 2025.8.3
       sourceRef:
         kind: HelmRepository
         name: authentik-charts
@@ -129,6 +129,14 @@ spec:
       metrics:
         serviceMonitor:
           create: true
+      volumes:
+        - name: postgres-creds
+          secret:
+            secretName: authentik-postgres-credentials
+      volumeMounts:
+        - name: postgres-creds
+          mountPath: /postgres-creds
+          readOnly: true
       ingress:
         enabled: true
         ingressClassName: "traefik"
@@ -169,6 +177,14 @@ spec:
 
     worker:
       replicas: 2
+      volumes:
+        - name: postgres-creds
+          secret:
+            secretName: authentik-postgres-credentials
+      volumeMounts:
+        - name: postgres-creds
+          mountPath: /postgres-creds
+          readOnly: true
 
     serviceAccount:
       # -- Service account is needed for managed outposts
