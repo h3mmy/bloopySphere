@@ -51,14 +51,14 @@ jobs:
           text: ${{ github.event.pull_request.title }}
           regex: '^.*to v?(?<major>[\d]+)\.(?<minor>[\d]+).(?<patch>[\d]+).*$'
       - name: Find Comment
-        uses: peter-evans/find-comment@v3
+        uses: peter-evans/find-comment@v4
         id: find-comment
         with:
           issue-number: "${{ github.event.pull_request.number }}"
           comment-author: "${{ env.BOT_USERNAME }}"
           body-includes: "External Release Notes"
       - name: Create or update comment
-        uses: peter-evans/create-or-update-comment@v4
+        uses: peter-evans/create-or-update-comment@v5
         with:
           token: "${{ steps.generate-token.outputs.token }}"
           comment-id: "${{ steps.find-comment.outputs.comment-id }}"

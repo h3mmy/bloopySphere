@@ -20,6 +20,13 @@
         "matchDatasources": ["docker"],
         "matchPackageNames": ["registry.gitlab.com/h3mmy/bloopyboi"],
         "allowedVersions": ">=0.4.0"
+      },
+      {
+        // emqx 5.9.0+ requires a license for clustering 
+        // https://github.com/emqx/emqx/tree/39714d4e9c7cdbf7a7b380070d55de6df515d84c#license-requirement-for-clustering-v590
+        "matchDatasources": ["docker", "helm"],
+        "matchPackageNames": ["emqx/emqx"],
+        "allowedVersions": "<5.9.0"
       }
     ]
   }
