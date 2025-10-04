@@ -33,9 +33,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/lldap/lldap
-      # tag: v0.4.32@sha256:a2ac9a9a63fd7e926ee7b3bedafc77d428a2e8c80131853071f29234d85efa96
-      # TODO: Switch to release tag on next release
-      tag: latest-alpine@sha256:e4b9a03c5be3495607f21cfe4fea27b0ee6cd9a50f2213d2737ad253851651f4
+      tag: v0.6.2@sha256:9e605a66c02514bfcffd1b67cafb1e98d50992216bb2871d7ae44622047dd09d
     env:
       TZ: ${TZ}
       LLDAP_HTTP_PORT: &port 80
