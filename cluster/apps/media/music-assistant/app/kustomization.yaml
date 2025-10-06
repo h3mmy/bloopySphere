@@ -8,4 +8,4 @@ commonLabels:
   app.kubernetes.io/instance: music-assistant
 resources:
   - ./helm-release.yaml
-  - ./pvc-config-v1.yaml
+  - ./pvc-data-v1.yaml
