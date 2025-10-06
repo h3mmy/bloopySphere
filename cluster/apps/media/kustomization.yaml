@@ -24,3 +24,4 @@ resources:
   - ./plex-trakt-sync
   - ./stash/ks.yaml
   - ./recyclarr/ks.yaml
+  - ./music-assistant/ks.yaml

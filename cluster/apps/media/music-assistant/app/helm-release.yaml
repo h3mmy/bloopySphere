@@ -1,0 +1,124 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app music-assistant
+  namespace: media
+spec:
+  interval: 30m
+  chart:
+    spec:
+      # renovate: registryUrl=https://bjw-s-labs.github.io/helm-charts/
+      chart: app-template
+      version: 4.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+
+  maxHistory: 3
+
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+
+  uninstall:
+    keepHistory: false
+
+  values:
+    controllers:
+      main:
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1001
+            fsGroup: 1001
+            fsGroupChangePolicy: "OnRootMismatch"
+            supplementalGroups:
+              - 100
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/music-assistant/server
+              tag: 2.7.0b3
+
+            resources:
+              requests:
+                cpu: 15m
+                memory: 500M
+              limits:
+                memory: 1Gi
+
+    service:
+      main:
+        controller: main
+        type: LoadBalancer
+        ipFamilyPolicy: PreferDualStack
+        ipFamilies:
+          - "IPv4"
+          - "IPv6"
+        externalTrafficPolicy: Local
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: &host "{{ .Release.Name }}.${XYZ_DOMAIN}"
+          metallb.io/loadBalancerIPs: &lbs "${LB_V4_MASS}, ${LB_V6_MASS}"
+        ports:
+          http:
+            port: &httpPort 8095
+          http2:
+            port: 1780
+          snapserver:
+            port: 1704
+
+    ingress:
+      main:
+        className: traefik
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Music Assistant"
+          hajimari.io/icon: "mdi:headphones"
+          hajimari.io/group: "media"
+          hajimari.io/instance: "admin,user"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          cert-manager.io/ip-sans: *lbs
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc-1918@kubernetescrd"
+        hosts:
+          - host: *host
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: *httpPort
+        tls:
+          - hosts:
+              - *host
+            secretName: tls.music-assistant
+
+    persistence:
+      media:
+        enabled: true
+        existingClaim: nfs-media-pvc
+        globalMounts:
+          - path: /Data
+            readOnly: false
+
+      data:
+        existingClaim: music-assistant-data-v1
+
+      tmpfs:
+        type: emptyDir
+        globalMounts:
+          - path: /.audio
+            subPath: .audio
