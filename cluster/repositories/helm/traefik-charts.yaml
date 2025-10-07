@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/refs/heads/main/helmrepository-source-v1.json
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
@@ -5,6 +6,7 @@ metadata:
   name: traefik-charts
   namespace: flux-system
 spec:
+  type: oci
   interval: 25m
-  url: https://helm.traefik.io/traefik
+  url: oci://ghcr.io/traefik/helm/traefik
   timeout: 3m

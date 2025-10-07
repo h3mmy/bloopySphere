@@ -1,5 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &name traefik
@@ -9,8 +10,8 @@ spec:
   chart:
     spec:
       # renovate: registryUrl=https://helm.traefik.io/traefik
-      chart: traefik
-      version: 29.0.1
+      chart: *name
+      version: 37.1.2
       sourceRef:
         kind: HelmRepository
         name: traefik-charts
@@ -18,6 +19,32 @@ spec:
   dependsOn:
     - name: cert-manager
       namespace: cert-manager
+    - name: traefik-crds
+      namespace: networking
+  install:
+    timeout: 10m
+    replace: true
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+      retries: 3
+      strategy: rollback
+    cleanupOnFail: true
+    crds: CreateReplace
+  test:
+    enable: true
+  rollback:
+    recreate: true
+    force: true
+    cleanupOnFail: true
+  uninstall:
+    keepHistory: false
+  driftDetection:
+    mode: enabled
+  maxHistory: 5
   values:
     core:
       defaultRuleSyntax: v2
@@ -112,14 +139,15 @@ spec:
           # Published Kubernetes Service to copy status from. Format: namespace/servicename
           # By default this Traefik service
           # pathOverride: ""
-
+      kubernetesGateway:
+        enabled: false
     ports:
       traefik:
         expose:
           default: true
           internal: true
       web:
-        port: 8000
+        port: &webPort 8000
         expose:
           default: true
         exposedPort: 80
@@ -130,8 +158,7 @@ spec:
         redirectTo:
           port: websecure
           priority: 10
-        #
-        # Trust forwarded  headers information (X-Forwarded-*).
+        # Trust forwarded  headers information (X-Forwarded-*)
         # forwardedHeaders:
 
         #
@@ -140,7 +167,7 @@ spec:
         #   trustedIPs: []
         #   insecure: false
       websecure:
-        port: 8443
+        port: &websecurePort 8443
         # hostPort: 8443
         expose:
           default: true
@@ -270,6 +297,22 @@ spec:
       plex:
         minVersion: VersionTLS12
         maxVersion: VersionTLS13
+    gateway:
+      enabled: true
+      listeners:
+        web:
+          port: *webPort
+          protocol: HTTP
+          namespacePolicy:
+            from: All
+        websecure:
+          port: *websecurePort
+          protocol: HTTPS
+          namespacePolicy:
+            from: All
+          certificateRefs:
+            - kind: Secret
+              name: "tls.${XYZ_DOMAIN/./-}"
     pilot:
       enabled: false
 
