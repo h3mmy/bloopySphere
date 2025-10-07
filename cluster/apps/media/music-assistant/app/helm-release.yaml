@@ -52,8 +52,9 @@ spec:
           main:
             image:
               repository: ghcr.io/music-assistant/server
-              tag: 2.7.0b3
-
+              tag: 2.6.0@sha256:9b0b0c8476e5b208265cbede313558ca20202bbeaebfd70a3467081e75827e67
+            env:
+              TZ: "${TZ}"
             resources:
               requests:
                 cpu: 15m
@@ -72,6 +73,7 @@ spec:
         externalTrafficPolicy: Local
         annotations:
           external-dns.alpha.kubernetes.io/hostname: &host "{{ .Release.Name }}.${XYZ_DOMAIN}"
+          coredns.io/hostname: *host
           metallb.io/loadBalancerIPs: &lbs "${LB_V4_MASS}, ${LB_V6_MASS}"
         ports:
           http:
@@ -89,11 +91,11 @@ spec:
           hajimari.io/appName: "Music Assistant"
           hajimari.io/icon: "mdi:headphones"
           hajimari.io/group: "media"
-          hajimari.io/instance: "admin,user"
+          hajimari.io/instance: "bloop-quarky"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           cert-manager.io/ip-sans: *lbs
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc-1918@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-bloopnet-xyz-auth@kubernetescrd
         hosts:
           - host: *host
             paths:
