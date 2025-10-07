@@ -99,18 +99,17 @@ spec:
           - hosts:
               - *host
             secretName: tls.go2rtc
-    # Re-enable after API Gateway setup
-    # route:
-    #   app:
-    #     hostnames: ["{{ .Release.Name }}.${XYZ_DOMAIN}"]
-    #     parentRefs:
-    #       - name: internal
-    #         namespace: kube-system
-    #         sectionName: https
-    #     rules:
-    #       - backendRefs:
-    #           - name: *app
-    #             port: *port
+    route:
+      app:
+        hostnames: ["{{ .Release.Name }}.${XYZ_DOMAIN}"]
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
     persistence:
       config-file:
         type: configMap

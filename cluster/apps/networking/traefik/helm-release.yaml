@@ -139,7 +139,7 @@ spec:
           # By default this Traefik service
           # pathOverride: ""
       kubernetesGateway:
-        enabled: false
+        enabled: true
     ports:
       traefik:
         expose:
