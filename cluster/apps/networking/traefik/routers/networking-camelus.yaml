@@ -8,6 +8,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
     cert-manager.io/cluster-issuer: letsencrypt-production
+    cert-manager.io/ip-sans: ${NAS_ADDRESS}
     hajimari.io/appName: camelus-plexii
     hajimari.io/instance: bloop-xyz
     hajimari.io/enable: "true"
