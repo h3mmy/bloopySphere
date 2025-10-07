@@ -113,6 +113,7 @@ spec:
       dashboard:
         enabled: false
     globalArguments:
+      - "--api=true"
       - "--api.dashboard=true"
       - "--api.insecure=true"
       - "--serverstransport.insecureskipverify=true"
