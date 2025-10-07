@@ -57,6 +57,11 @@ spec:
       #   linkerd.io/inject: ingress
     podSecurityPolicy:
       enabled: false
+    api:
+      dashboard:
+        enabled: true
+      disabledashboardad: true
+      insecure: true
     service:
       enabled: true
       type: LoadBalancer
@@ -108,7 +113,6 @@ spec:
       dashboard:
         enabled: false
     globalArguments:
-      - "--api.insecure=true"
       - "--serverstransport.insecureskipverify=true"
       - "--global.checknewversion=true"
       - "--global.sendanonymoususage=false"
