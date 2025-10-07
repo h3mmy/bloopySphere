@@ -11,3 +11,4 @@ resources:
   # - ddns
   - ./k8s-gateway
   # - zero-trust
+  - ./gateway/gateway-class.yaml
