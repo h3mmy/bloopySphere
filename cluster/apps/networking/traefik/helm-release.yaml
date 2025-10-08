@@ -306,19 +306,19 @@ spec:
         minVersion: VersionTLS12
         maxVersion: VersionTLS13
     gateway:
-      enabled: true
+      name: traefik
       # annotations:
       #   external-dns.alpha.kubernetes.io/target: &hostname "in.${XYZ_DOMAIN}"
       # infrastructure:
       #   annotations:
       #     external-dns.alpha.kubernetes.io/hostname: *hostname
       listeners:
-        web:
+        http:
           port: *webPort
           protocol: HTTP
           namespacePolicy:
             from: All
-        websecure:
+        https:
           port: *websecurePort
           protocol: HTTPS
           namespacePolicy:

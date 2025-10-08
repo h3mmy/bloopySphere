@@ -103,8 +103,8 @@ spec:
       app:
         hostnames: ["{{ .Release.Name }}.${XYZ_DOMAIN}"]
         parentRefs:
-          - name: internal
-            namespace: kube-system
+          - name: traefik-gateway
+            namespace: networking
             sectionName: https
         rules:
           - backendRefs:
