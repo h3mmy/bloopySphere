@@ -31,6 +31,7 @@ spec:
       retries: 5
 
   upgrade:
+    force: true
     crds: CreateReplace
     remediation: # perform remediation when helm upgrade fails
       retries: 5
@@ -43,10 +44,10 @@ spec:
     cleanupOnFail: true
 
   values:
-    installCRDs: true
-    # crds:
-    #   enabled: true
-    #   keep: true
+    # installCRDs: true
+    crds:
+      enabled: true
+      keep: true
     #webhook:
      # enabled: true
     # block to enable gateway resource features
