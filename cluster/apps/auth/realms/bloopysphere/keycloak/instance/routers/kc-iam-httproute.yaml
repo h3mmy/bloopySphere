@@ -1,0 +1,27 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: kc-route
+  namespace: auth
+spec:
+  parentRefs:
+    - name: traefik
+      sectionName: websecure
+      namespace: networking
+  hostnames:
+    - iam.${XYZ_DOMAIN}
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: kc-instance-service
+          port: 8443
+      filters:
+        - type: ExtensionRef
+          extensionRef:
+            group: traefik.io
+            kind: Middleware
+            name: networking-chain-no-auth

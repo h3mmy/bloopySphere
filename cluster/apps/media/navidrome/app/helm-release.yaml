@@ -1,0 +1,91 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app navidrome
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    defaultPodOptions:
+      enableServiceLinks: false
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        
+    controllers:
+      navidrome:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/navidrome/navidrome
+              tag: 0.58.0@sha256:2ae037d464de9f802d047165a13b1c9dc2bdbb14920a317ae4aef1233adc0a3c
+            env:
+              TZ: "${TZ}"
+              ND_BASEURL: "https://{{ .Release.Name }}.${XYZ_DOMAIN}"
+              ND_DATAFOLDER: /config
+              ND_ENABLEGRAVATAR: "true"
+              ND_LOGLEVEL: info
+              ND_MUSICFOLDER: /Data/Music
+              ND_PORT: &port 8080
+              ND_PROMETHEUS_ENABLED: "true"
+              ND_REVERSEPROXYUSERHEADER: Remote-User
+              ND_REVERSEPROXYWHITELIST: 0.0.0.0/0
+              ND_SCANSCHEDULE: "@every 1h"
+              ND_SESSIONTIMEOUT: 24h
+            resources:
+              requests:
+                cpu: 10m
+                memory: 250Mi
+              limits:
+                memory: 750Mi
+        pod:
+          securityContext:
+            fsGroup: "${MEDIA_GID}"
+            fsGroupChangePolicy: "OnRootMismatch"
+            supplementalGroups:
+              - 100
+              # Custom Camelus Group(s)
+              - 65541
+              - 65536
+              - 65537
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        hostnames: ["{{ .Release.Name }}.${XYZ_DOMAIN}"]
+        parentRefs:
+          - name: traefik
+            namespace: networking
+            sectionName: websecure
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+    persistence:
+      config:
+        enabled: true
+        existingClaim: config-navidrome-v1
+        globalMounts:
+          - path: /config
+      music:
+        enabled: true
+        existingClaim: nfs-media-pvc
+        globalMounts:
+          - path: /Data
+            readOnly: true

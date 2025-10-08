@@ -21,6 +21,6 @@ spec:
           name: kc-instance-service
           port: 8443
       middlewares:
-        - name: networking-rate-limit@kubernetescrd
+        - name: networking-chain-no-auth@kubernetescrd
   tls:
     secretName: "tls.${XYZ_DOMAIN/./-}"

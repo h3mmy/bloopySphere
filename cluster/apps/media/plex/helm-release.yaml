@@ -71,7 +71,7 @@ spec:
           - ${LB_V4_PLEX}
         externalTrafficPolicy: Local
         annotations:
-          metallb.io/loadBalancerIPs: "${LB_V4_PLEX}"
+          metallb.io/loadBalancerIPs: &ips "${LB_V4_PLEX}"
           metallb.io/allow-shared-ip: plex
           traefik.ingress.kubernetes.io/service.serversscheme: https
           coredns.io/hostname: plex
@@ -84,12 +84,13 @@ spec:
         ingressClassName: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
+          cert-manager.io/ip-sans: *ips
           hajimari.io/instance: "bloop-xyz,bloop-quarky"
           hajimari.io/enable: "true"
           hajimari.io/icon: "plex"
           hajimari.io/appName: "Plex"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.priority: "150"
+          # traefik.ingress.kubernetes.io/router.priority: "150"
           # traefik.ingress.kubernetes.io/router.middlewares: "networking-plex-add-web@kubernetescrd"
         hosts:
           - host: "plex.${XYZ_DOMAIN}"
@@ -100,6 +101,7 @@ spec:
           - hosts:
               - "{{ (index .Values.ingress.main.hosts 0).host }}"
             secretName: "tls.plex"
+    # /config/Library/Application Support/Plex Media Server/Plug-in Support/Databases$ '/usr/lib/plexmediaserver/Plex SQLite' com.plexapp.plugins.library.db
     persistence:
       config:
         enabled: true

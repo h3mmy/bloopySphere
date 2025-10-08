@@ -6,7 +6,6 @@ metadata:
   name: traefik-charts
   namespace: flux-system
 spec:
-  type: oci
   interval: 25m
-  url: oci://ghcr.io/traefik/helm/traefik
+  url: https://traefik.github.io/charts
   timeout: 3m

@@ -25,3 +25,4 @@ resources:
   - ./stash/ks.yaml
   - ./recyclarr/ks.yaml
   - ./music-assistant/ks.yaml
+  - ./navidrome/ks.yaml

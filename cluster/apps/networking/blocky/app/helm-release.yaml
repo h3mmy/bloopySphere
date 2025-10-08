@@ -163,7 +163,7 @@ spec:
               - path: /dns-query
                 pathType: Prefix
                 service:
-                  name: dns-https
+                  name: dns
                   port: 443
               - path: /
                 pathType: Prefix

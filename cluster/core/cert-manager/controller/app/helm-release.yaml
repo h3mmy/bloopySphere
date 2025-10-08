@@ -12,7 +12,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.jetstack.io/
       chart: cert-manager
-      version: v1.16.5
+      version: v1.19.0
       sourceRef:
         kind: HelmRepository
         name: jetstack
@@ -26,7 +26,7 @@ spec:
       namespace: tigera-operator
 
   install:
-    crds: Create
+    crds: CreateReplace
     remediation: # perform remediation when helm install fails
       retries: 5
 
@@ -43,11 +43,17 @@ spec:
     cleanupOnFail: true
 
   values:
-    installCRDs: true
+    # installCRDs: true
+    crds:
+      enabled: true
+      keep: true
     #webhook:
      # enabled: true
-   # podSecurityPolicy:
-     # enabled: false
+    # block to enable gateway resource features
+    config:
+      apiVersion: controller.config.cert-manager.io/v1alpha1
+      kind: ControllerConfiguration
+      enableGatewayAPI: true
 
     extraArgs:
       #- --controllers='*,-certificaterequests-approver'

@@ -44,12 +44,16 @@ spec:
     keepHistory: false
   driftDetection:
     mode: enabled
+    ignore:
+     - paths: ["/spec/replicas"]
+       target:
+         kind: Deployment
   maxHistory: 5
   values:
     core:
       defaultRuleSyntax: v2
     image:
-      name: traefik
+      repository: traefik
     deployment:
       kind: Deployment
       replicas: 2
@@ -57,6 +61,11 @@ spec:
       #   linkerd.io/inject: ingress
     podSecurityPolicy:
       enabled: false
+    api:
+      dashboard:
+        enabled: true
+      disabledashboardad: true
+      insecure: true
     service:
       enabled: true
       type: LoadBalancer
@@ -104,12 +113,11 @@ spec:
     ingressClass:
       enabled: true
       isDefaultClass: true
-      fallbackApiVersion: v1
     ingressRoute:
       dashboard:
         enabled: false
     globalArguments:
-      - "--api.insecure=true"
+      - "--api.dashboard=true"
       - "--serverstransport.insecureskipverify=true"
       - "--global.checknewversion=true"
       - "--global.sendanonymoususage=false"
@@ -140,7 +148,7 @@ spec:
           # By default this Traefik service
           # pathOverride: ""
       kubernetesGateway:
-        enabled: false
+        enabled: true
     ports:
       traefik:
         expose:
@@ -155,9 +163,12 @@ spec:
         # Port Redirections
         # Added in 2.2, you can make permanent redirects via entrypoints.
         # https://docs.traefik.io/routing/entrypoints/#redirection
-        redirectTo:
-          port: websecure
-          priority: 10
+        redirections:
+          entryPoint:
+            to: websecure
+            scheme: https
+            permanent: true
+            priority: 10
         # Trust forwarded  headers information (X-Forwarded-*)
         # forwardedHeaders:
 
@@ -298,7 +309,12 @@ spec:
         minVersion: VersionTLS12
         maxVersion: VersionTLS13
     gateway:
-      enabled: true
+      name: traefik
+      # annotations:
+      #   external-dns.alpha.kubernetes.io/target: &hostname "in.${XYZ_DOMAIN}"
+      # infrastructure:
+      #   annotations:
+      #     external-dns.alpha.kubernetes.io/hostname: *hostname
       listeners:
         web:
           port: *webPort

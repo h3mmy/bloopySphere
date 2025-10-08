@@ -9,7 +9,7 @@ metadata:
 spec:
   gatewayClassName: traefik
   listeners:
-    - name: websecure
+    - name: https
       hostname: '*.${XYZ_DOMAIN}'
       port: 8443
       protocol: HTTPS
