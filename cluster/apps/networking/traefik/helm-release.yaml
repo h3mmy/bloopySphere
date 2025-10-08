@@ -65,6 +65,7 @@ spec:
       dashboard:
         enabled: true
       disabledashboardad: true
+      insecure: true
     service:
       enabled: true
       type: LoadBalancer
