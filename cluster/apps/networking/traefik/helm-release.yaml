@@ -129,7 +129,7 @@ spec:
         allowCrossNamespace: true
         allowExternalNameServices: true
         allowEmptyServices: false
-        # ingressClass: traefik-internal
+        ingressClass: traefik
         # labelSelector: environment=production,method=traefik
         namespaces: []
       kubernetesIngress:
@@ -308,6 +308,21 @@ spec:
       plex:
         minVersion: VersionTLS12
         maxVersion: VersionTLS13
+    extraObjects:
+      - apiVersion: v1
+        kind: Service
+        metadata:
+          name: traefik-api
+        spec:
+          type: ClusterIP
+          selector:
+            app.kubernetes.io/name: traefik
+            app.kubernetes.io/instance: traefik-default
+          ports:
+          - port: 8080
+            name: traefik
+            targetPort: 8080
+            protocol: TCP        
     gateway:
       name: traefik
       # annotations:
