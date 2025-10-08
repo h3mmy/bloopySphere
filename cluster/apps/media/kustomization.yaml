@@ -26,3 +26,6 @@ resources:
   - ./recyclarr/ks.yaml
   - ./music-assistant/ks.yaml
   - ./navidrome/ks.yaml
+  # temporary until I figure out a sustainable way to do cross-namespace extensionRefs
+  - ./middleware/chain-no-auth.yaml
+  - ./middleware/bloopnet-xyz-auth.yaml

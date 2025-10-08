@@ -1,0 +1,12 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: chain-no-auth
+  namespace: media
+spec:
+  chain:
+    middlewares:
+      - name: networking-rate-limit@kubernetescrd
+      - name: networking-secure-headers@kubernetescrd
+      # - name: networking-error-pages@kubernetescrd
