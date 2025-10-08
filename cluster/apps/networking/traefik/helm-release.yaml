@@ -61,7 +61,6 @@ spec:
       dashboard:
         enabled: true
       disabledashboardad: true
-      insecure: true
     service:
       enabled: true
       type: LoadBalancer
@@ -114,7 +113,6 @@ spec:
         enabled: false
     globalArguments:
       - "--api.dashboard=true"
-      - "--api.insecure=true"
       - "--serverstransport.insecureskipverify=true"
       - "--global.checknewversion=true"
       - "--global.sendanonymoususage=false"
