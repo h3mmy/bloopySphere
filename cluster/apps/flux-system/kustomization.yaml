@@ -5,3 +5,4 @@ resources:
   - notifications
   - monitoring
   - image-update-automation.yaml
+  - image-policies.yaml

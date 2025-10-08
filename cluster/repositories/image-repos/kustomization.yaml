@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - credentials
   - home-operations
-  - gitlab
+  # - gitlab
