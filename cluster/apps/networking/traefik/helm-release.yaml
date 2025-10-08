@@ -44,6 +44,10 @@ spec:
     keepHistory: false
   driftDetection:
     mode: enabled
+    ignore:
+     - paths: ["/spec/replicas"]
+       target:
+         kind: Deployment
   maxHistory: 5
   values:
     core:
