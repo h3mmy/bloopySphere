@@ -3,12 +3,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app navidrome
+  name: cluster-media-navidrome
   namespace: &namespace media
 spec:
   commonMetadata:
     labels:
-      app.kubernetes.io/name: *app
+      app.kubernetes.io/name: navidrome
   dependsOn:
     # - name: external-secrets-stores
     #   namespace: external-secrets
