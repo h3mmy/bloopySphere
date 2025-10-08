@@ -19,4 +19,4 @@ spec:
   values:
     traefik: true
     gatewayAPI: true
-    hub: false
+    hub: true
