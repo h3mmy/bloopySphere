@@ -90,7 +90,7 @@ spec:
           hajimari.io/icon: "plex"
           hajimari.io/appName: "Plex"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.priority: "150"
+          # traefik.ingress.kubernetes.io/router.priority: "150"
           # traefik.ingress.kubernetes.io/router.middlewares: "networking-plex-add-web@kubernetescrd"
         hosts:
           - host: "plex.${XYZ_DOMAIN}"
