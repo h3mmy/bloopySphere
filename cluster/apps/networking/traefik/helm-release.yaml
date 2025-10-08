@@ -315,12 +315,12 @@ spec:
       #   annotations:
       #     external-dns.alpha.kubernetes.io/hostname: *hostname
       listeners:
-        http:
+        web:
           port: *webPort
           protocol: HTTP
           namespacePolicy:
             from: All
-        https:
+        websecure:
           port: *websecurePort
           protocol: HTTPS
           namespacePolicy:
