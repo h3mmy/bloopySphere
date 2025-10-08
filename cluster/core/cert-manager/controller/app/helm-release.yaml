@@ -12,7 +12,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.jetstack.io/
       chart: cert-manager
-      version: v1.16.5
+      version: v1.18.2
       sourceRef:
         kind: HelmRepository
         name: jetstack
@@ -26,7 +26,7 @@ spec:
       namespace: tigera-operator
 
   install:
-    crds: Create
+    crds: CreateReplace
     remediation: # perform remediation when helm install fails
       retries: 5
 
