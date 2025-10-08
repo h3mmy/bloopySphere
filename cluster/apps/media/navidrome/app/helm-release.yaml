@@ -40,7 +40,7 @@ spec:
               ND_MUSICFOLDER: /Data/Music
               ND_PORT: &port 8080
               ND_PROMETHEUS_ENABLED: "true"
-              ND_REVERSEPROXYUSERHEADER: Remote-User
+              ND_REVERSEPROXYUSERHEADER: X-authentik-username
               ND_REVERSEPROXYWHITELIST: 0.0.0.0/0
               ND_SCANSCHEDULE: "@every 1h"
               ND_SESSIONTIMEOUT: 24h
