@@ -27,3 +27,5 @@ resources:
   - ./iam/ks.yaml
   - ./database
   - ./system
+  - ./media/navidrome/ks.yaml
+  - ./media/music-assistant/ks.yaml
