@@ -78,6 +78,29 @@ spec:
           - backendRefs:
               - name: *app
                 port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /share/
+            filters:
+              - type: ExtensionRef
+                extensionRef:
+                  group: traefik.io
+                  kind: Middleware
+                  name: chain-no-auth
+          - backendRefs:
+              - name: *app
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            filters:
+              - type: ExtensionRef
+                extensionRef:
+                  group: traefik.io
+                  kind: Middleware
+                  name: networking-bloopnet-xyz-auth
     persistence:
       config:
         enabled: true
