@@ -135,7 +135,7 @@ spec:
       kubernetesIngress:
         enabled: true
         allowExternalNameServices: true
-        allowEmptyServices: true
+        allowEmptyServices: false
         ingressClass: traefik
         # labelSelector: environment=production,method=traefik
         namespaces:
@@ -322,7 +322,7 @@ spec:
           - port: 8080
             name: traefik
             targetPort: 8080
-            protocol: TCP        
+            protocol: TCP
     gateway:
       name: traefik
       # annotations:
