@@ -12,7 +12,7 @@ spec:
   dependsOn:
     # - name: external-secrets-stores
     #   namespace: external-secrets
-    - name: rook-ceph-cluster
+    - name: core
       namespace: flux-system
   # components:
   #   - ../../../../components/gatus/external
