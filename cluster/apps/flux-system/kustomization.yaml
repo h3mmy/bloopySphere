@@ -5,4 +5,4 @@ resources:
   - notifications
   - monitoring
   - image-update-automation.yaml
-  - image-policies.yaml
+  - image-policies/plex.yaml
