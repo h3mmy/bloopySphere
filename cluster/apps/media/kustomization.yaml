@@ -27,5 +27,5 @@ resources:
   - ./music-assistant/ks.yaml
   - ./navidrome/ks.yaml
   # temporary until I figure out a sustainable way to do cross-namespace extensionRefs
-  - ./middleware/chain-no-auth.yaml
-  - ./middleware/bloopnet-xyz-auth.yaml
+  - ./middlewares/chain-no-auth.yaml
+  - ./middlewares/bloopnet-xyz-auth.yaml
