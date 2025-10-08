@@ -23,6 +23,7 @@ spec:
       securityContext:
         runAsUser: 568
         runAsGroup: 568
+        
     controllers:
       navidrome:
         containers:
@@ -49,6 +50,16 @@ spec:
                 memory: 250Mi
               limits:
                 memory: 750Mi
+        pod:
+          securityContext:
+            fsGroup: "${MEDIA_GID}"
+            fsGroupChangePolicy: "OnRootMismatch"
+            supplementalGroups:
+              - 100
+              # Custom Camelus Group(s)
+              - 65541
+              - 65536
+              - 65537
     service:
       app:
         controller: *app
