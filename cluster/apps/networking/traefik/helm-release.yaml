@@ -117,7 +117,7 @@ spec:
       dashboard:
         enabled: false
     globalArguments:
-      - "--api.dashboard=true"
+      - "--api.insecure=true"
       - "--serverstransport.insecureskipverify=true"
       - "--global.checknewversion=true"
       - "--global.sendanonymoususage=false"
@@ -135,7 +135,7 @@ spec:
       kubernetesIngress:
         enabled: true
         allowExternalNameServices: true
-        allowEmptyServices: false
+        allowEmptyServices: true
         ingressClass: traefik
         # labelSelector: environment=production,method=traefik
         namespaces:
