@@ -30,7 +30,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: traefik
+                name: traefik-api
                 port:
                   number: 8080
     - host: "traefik.${XYZ_DOMAIN}"
@@ -40,6 +40,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: traefik
+                name: traefik-api
                 port:
                   number: 8080
