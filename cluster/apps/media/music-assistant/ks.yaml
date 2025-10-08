@@ -28,3 +28,4 @@ spec:
         name: cluster-secrets
   dependsOn:
     - name: core
+      namespace: flux-system
