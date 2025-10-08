@@ -23,7 +23,7 @@ spec:
       securityContext:
         runAsUser: 568
         runAsGroup: 568
-        
+
     controllers:
       navidrome:
         containers:
@@ -52,6 +52,19 @@ spec:
               limits:
                 memory: 750Mi
         pod:
+          affinity:
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - weight: 100
+                  podAffinityTerm:
+                    labelSelector:
+                      matchExpressions:
+                        - key: app.kubernetes.io/name
+                          operator: In
+                          values:
+                            - *app
+                            - plex
+                    topologyKey: kubernetes.io/hostname
           securityContext:
             fsGroup: "${MEDIA_GID}"
             fsGroupChangePolicy: "OnRootMismatch"
