@@ -44,6 +44,7 @@ spec:
               ND_REVERSEPROXYWHITELIST: 0.0.0.0/0
               ND_SCANSCHEDULE: "@every 1h"
               ND_SESSIONTIMEOUT: 24h
+              ND_JUKEBOX_ENABLED: "true"
             resources:
               requests:
                 cpu: 10m
