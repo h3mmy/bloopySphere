@@ -84,7 +84,7 @@ spec:
     logs:
       general:
         format: json
-        level: DEBUG
+        level: WARN
       access:
         enabled: true
         format: json
@@ -167,7 +167,7 @@ spec:
           entryPoint:
             to: websecure
             scheme: https
-            permanent: true
+            # permanent: true
             priority: 10
         # Trust forwarded  headers information (X-Forwarded-*)
         # forwardedHeaders:
