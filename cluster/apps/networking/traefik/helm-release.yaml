@@ -308,11 +308,11 @@ spec:
         maxVersion: VersionTLS13
     gateway:
       enabled: true
-      annotations:
-        external-dns.alpha.kubernetes.io/target: &hostname "in.${XYZ_DOMAIN}"
-      infrastructure:
-        annotations:
-          external-dns.alpha.kubernetes.io/hostname: *hostname
+      # annotations:
+      #   external-dns.alpha.kubernetes.io/target: &hostname "in.${XYZ_DOMAIN}"
+      # infrastructure:
+      #   annotations:
+      #     external-dns.alpha.kubernetes.io/hostname: *hostname
       listeners:
         web:
           port: *webPort
