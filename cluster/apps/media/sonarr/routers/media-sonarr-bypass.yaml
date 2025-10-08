@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`sonarr.${XYZ_DOMAIN}`) && (Headers(`X-Api-Key`, `${SONARR_API_KEY}`) || Query(`apikey`, `${SONARR_API_KEY}`))
+      match: Host(`sonarr.${XYZ_DOMAIN}`) && (Header(`X-Api-Key`, `${SONARR_API_KEY}`) || Query(`apikey`, `${SONARR_API_KEY}`))
       priority: 100
       services:
         - kind: Service

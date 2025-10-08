@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`whisparr.${XYZ_DOMAIN}`) && (Headers(`X-Api-Key`, `${WHISPARR_API_KEY}`) || Query(`apikey`, `${WHISPARR_API_KEY}`))
+      match: Host(`whisparr.${XYZ_DOMAIN}`) && (Header(`X-Api-Key`, `${WHISPARR_API_KEY}`) || Query(`apikey`, `${WHISPARR_API_KEY}`))
       priority: 100
       services:
         - kind: Service

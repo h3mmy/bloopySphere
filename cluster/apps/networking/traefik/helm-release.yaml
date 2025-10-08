@@ -45,13 +45,11 @@ spec:
   driftDetection:
     mode: enabled
     ignore:
-     - paths: ["/spec/replicas"]
-       target:
-         kind: Deployment
+      - paths: ["/spec/replicas"]
+        target:
+          kind: Deployment
   maxHistory: 5
   values:
-    core:
-      defaultRuleSyntax: v2
     image:
       repository: traefik
     deployment:
@@ -319,10 +317,10 @@ spec:
             app.kubernetes.io/name: traefik
             app.kubernetes.io/instance: traefik-default
           ports:
-          - port: 8080
-            name: traefik
-            targetPort: 8080
-            protocol: TCP
+            - port: 8080
+              name: traefik
+              targetPort: 8080
+              protocol: TCP
     gateway:
       name: traefik
       # annotations:

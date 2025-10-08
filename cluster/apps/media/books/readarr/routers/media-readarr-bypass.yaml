@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`readarr.${XYZ_DOMAIN}`) && (Headers(`X-Api-Key`, `${READARR_API_KEY}`) || Query(`apikey`, `${READARR_API_KEY}`))
+      match: Host(`readarr.${XYZ_DOMAIN}`) && (Header(`X-Api-Key`, `${READARR_API_KEY}`) || Query(`apikey`, `${READARR_API_KEY}`))
       priority: 100
       services:
         - kind: Service

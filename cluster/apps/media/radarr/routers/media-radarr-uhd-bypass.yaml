@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`radarr-uhd.${XYZ_DOMAIN}`) && (Headers(`X-Api-Key`, `${RADARR_UHD_API_KEY}`) || Query(`apikey`, `${RADARR_UHD_API_KEY}`))
+      match: Host(`radarr-uhd.${XYZ_DOMAIN}`) && (Header(`X-Api-Key`, `${RADARR_UHD_API_KEY}`) || Query(`apikey`, `${RADARR_UHD_API_KEY}`))
       priority: 100
       services:
         - kind: Service
