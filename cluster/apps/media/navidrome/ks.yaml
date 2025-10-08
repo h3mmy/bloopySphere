@@ -13,6 +13,7 @@ spec:
     # - name: external-secrets-stores
     #   namespace: external-secrets
     - name: core
+      namespace: flux-system
   # components:
   #   - ../../../../components/gatus/external
   #   - ../../../../components/volsync
