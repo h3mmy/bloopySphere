@@ -43,11 +43,16 @@ spec:
     cleanupOnFail: true
 
   values:
-    installCRDs: true
+    crds:
+      enabled: true
+      keep: true
     #webhook:
      # enabled: true
-   # podSecurityPolicy:
-     # enabled: false
+    # block to enable gateway resource features
+    config:
+      apiVersion: controller.config.cert-manager.io/v1alpha1
+      kind: ControllerConfiguration
+      enableGatewayAPI: true
 
     extraArgs:
       #- --controllers='*,-certificaterequests-approver'
