@@ -129,7 +129,7 @@ spec:
         allowCrossNamespace: true
         allowExternalNameServices: true
         allowEmptyServices: false
-        ingressClass: traefik
+        # ingressClass: traefik
         # labelSelector: environment=production,method=traefik
         namespaces: []
       kubernetesIngress:
