@@ -54,7 +54,7 @@ spec:
       repository: traefik
     deployment:
       kind: Deployment
-      replicas: 1
+      replicas: 2
       # podAnnotations:
       #   linkerd.io/inject: ingress
     podSecurityPolicy:
