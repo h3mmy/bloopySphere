@@ -111,7 +111,7 @@ spec:
     ingressRoute:
       dashboard:
         enabled: false
-    globalArguments:
+    additionalArguments:
       - "--api.insecure=true"
       - "--serverstransport.insecureskipverify=true"
       - "--global.checknewversion=true"
