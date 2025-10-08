@@ -31,7 +31,6 @@ spec:
       retries: 5
 
   upgrade:
-    force: true
     crds: CreateReplace
     remediation: # perform remediation when helm upgrade fails
       retries: 5
