@@ -151,7 +151,6 @@ spec:
       traefik:
         expose:
           default: true
-          internal: true
       web:
         port: &webPort 8000
         expose:
