@@ -28,13 +28,13 @@ spec:
         name: cluster-settings
       - kind: Secret
         name: cluster-secrets
-  healthChecks:
+  # healthChecks:
     # Re-enable after it becomes compatible with kstatus
     # - apiVersion: k8s.keycloak.org/v2alpha1
     #   kind: Keycloak
     #   name: kc-instance
     #   namespace: auth
-    - apiVersion: networking.k8s.io/v1
-      kind: Ingress
-      name: iam-ingress
-      namespace: auth
+   # - apiVersion: networking.k8s.io/v1
+    #  kind: Ingress
+   #   name: iam-ingress
+   #   namespace: auth
