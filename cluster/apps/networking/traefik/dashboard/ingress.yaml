@@ -40,6 +40,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: traefik-api
+                name: traefik
                 port:
                   number: 8080
