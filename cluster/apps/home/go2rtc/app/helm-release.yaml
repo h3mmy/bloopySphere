@@ -103,9 +103,9 @@ spec:
       app:
         hostnames: ["{{ .Release.Name }}.${XYZ_DOMAIN}"]
         parentRefs:
-          - name: traefik-gateway
+          - name: traefik
             namespace: networking
-            sectionName: https
+            sectionName: websecure
         rules:
           - backendRefs:
               - name: *app
