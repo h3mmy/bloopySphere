@@ -19,6 +19,10 @@ spec:
   #   - ../../../../components/volsync
   interval: 1h
   path: ./cluster/apps/media/navidrome/app
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   postBuild:
     substitute: {}
     substituteFrom:
