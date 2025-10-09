@@ -113,7 +113,7 @@ spec:
                 extensionRef:
                   group: traefik.io
                   kind: Middleware
-                  name: networking-bloopnet-xyz-auth
+                  name: bloopnet-xyz-auth
     persistence:
       config:
         enabled: true
