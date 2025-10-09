@@ -98,6 +98,10 @@ spec:
               - path:
                   type: PathPrefix
                   value: /share/
+              # Until better auth solution, we'll pass the subsonic auth to navidrome 
+              - path:
+                  type: PathPrefix
+                  value: /rest/
             filters:
               - type: ExtensionRef
                 extensionRef:
