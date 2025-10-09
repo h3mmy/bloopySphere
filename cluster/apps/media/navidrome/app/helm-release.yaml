@@ -41,10 +41,13 @@ spec:
               ND_PORT: &port 8080
               ND_PROMETHEUS_ENABLED: "true"
               ND_REVERSEPROXYUSERHEADER: X-authentik-username
-              ND_REVERSEPROXYWHITELIST: 0.0.0.0/0
+              ND_REVERSEPROXYWHITELIST: 10.0.0.0/8
               ND_SCANSCHEDULE: "@every 1h"
               ND_SESSIONTIMEOUT: 24h
               ND_JUKEBOX_ENABLED: "true"
+              ND_JUKEBOX_ADMINONLY: "false"
+              ND_ENABLEUSEREDITING: "false"
+              ND_PASSWORDENCRYPTIONKEY: "${ND_ENCRYPTION_KEY}"
             resources:
               requests:
                 cpu: 10m
