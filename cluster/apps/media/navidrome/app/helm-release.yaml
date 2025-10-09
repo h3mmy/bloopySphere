@@ -46,7 +46,7 @@ spec:
               ND_SESSIONTIMEOUT: 24h
               ND_JUKEBOX_ENABLED: "true"
               ND_JUKEBOX_ADMINONLY: "false"
-              ND_ENABLEUSEREDITING: "false"
+              ND_ENABLEUSEREDITING: "true"
               ND_PASSWORDENCRYPTIONKEY: "${ND_ENCRYPTION_KEY}"
             resources:
               requests:
