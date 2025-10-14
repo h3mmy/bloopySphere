@@ -1,0 +1,4 @@
+raspy_gravely_main_list:
+  preset: "yt_music"
+  download:
+    url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1Ay8EOoTZq_k0CE8GTjLAKV"

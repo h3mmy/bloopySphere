@@ -1,0 +1,222 @@
+configuration:
+  working_directory: "/tmp/ytdl-sub/"
+
+presets:
+  yt_music:
+    preset:
+      - "_music_base"
+    ytdl_options:
+      ignoreerrors: True
+      break_on_existing: False
+      cachedir: "/tmp/ytdl-sub/"
+      cookiefile: "/config/cookies-rw.txt"
+    throttle_protection:
+      sleep_per_download_s:
+        min: 2.2
+        max: 14.8
+      sleep_per_subscription_s:
+        min: 9.0
+        max: 14.1
+      max_downloads_per_subscription:
+        min: 30
+        max: 78
+      subscription_download_probability: 1.0
+    output_options:
+      maintain_download_archive: True
+      output_directory: /Data/youtube/music
+  yt_video:
+    throttle_protection:
+      sleep_per_download_s:
+        min: 2.2
+        max: 14.8
+      sleep_per_subscription_s:
+        min: 9.0
+        max: 14.1
+      max_downloads_per_subscription:
+        min: 30
+        max: 78
+      subscription_download_probability: 1.0
+    ytdl_options:
+      # Inspired from https://github.com/npawelek/k8s-gitops/blob/4e92f498939b2b956455f9185cf58ed8d8c7726a/cluster/apps/ytdl-sub/cm.yaml#L18
+      # format: "bestvideo[ext=webm][height<=1440]+bestaudio[ext=webm]/best[ext=webm]/best"
+      # format: "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b"
+      format: "(bv*[vcodec~='^((he|a)vc|h26[45])']+ba) / (bv*+ba/b)"
+      ignoreerrors: True
+      break_on_existing: False
+      break_on_reject: False
+      final_ext: mp4
+      cachedir: "/tmp/ytdl-sub/"
+      cookiefile: "/config/cookies-rw.txt"
+
+    date_range:
+      before: "{download_before}"
+      after: "{download_after}"
+
+    output_options:
+      maintain_download_archive: True
+      output_directory: "/Data/youtube"
+      file_name: "{video_path}.{ext}"
+      thumbnail_name: "{video_path}-thumb.{thumbnail_ext}"
+      keep_files_after: "{download_after}"
+      download_archive_name: ".{tv_show_name_sanitized}-download-archive.json"
+
+    overrides:
+      video_name: "{upload_date}-{title_sanitized}"
+      video_type: "{channel}"
+      video_path: "{video_type_sanitized}/{video_name}"
+      download_before: "now"
+      download_after: "19000101"
+
+    nfo_tags:
+      nfo_name: "{video_path}.nfo"
+      nfo_root: "episodedetails"
+      tags:
+        title: "{title}"
+        season: "{season}"
+        episode: "{episode}"
+        year: "{upload_year}"
+        aired: "{upload_date_standardized}"
+
+    chapters:
+      embed_chapters: True
+      allow_chapters_from_comments: False
+      remove_chapters_regex:
+        - "Intro"
+        - "Outro"
+      sponsorblock_categories:
+        - "outro"
+        - "selfpromo"
+        - "preview"
+        - "interaction"
+        - "sponsor"
+        - "music_offtopic"
+        - "intro"
+      remove_sponsorblock_categories: "all"
+
+    subtitles:
+      subtitles_name: "{video_path}.{lang}.{subtitles_ext}"
+      subtitles_type: "srt"
+      embed_subtitles: False
+      languages:
+        - "en"  # supports multiple languages
+      allow_auto_generated_subtitles: False
+
+    video_tags:
+      title: "{title}"
+      date: "{upload_date}"
+      description: |
+        Original URL: {webpage_url}
+        Original Channel: {channel_sanitized}
+        Downloaded from playlist: {playlist_title_sanitized}
+        Playlist URL: {playlist_webpage_url}
+
+        Video Description:
+        {description}
+
+  yt_playlist:
+    preset:
+      - yt_video
+      - season_by_year__episode_by_download_index
+
+    download:
+      playlist_thumbnails:
+        - name: "poster.jpg"
+          uid: "avatar_uncropped"
+        - name: "banner.jpg"
+          uid: "banner_uncropped"
+
+    output_options:
+      output_directory: "/Data/youtube/playlists/{tv_show_name_sanitized}"
+      file_name: "{episode_path}.{ext}"
+      thumbnail_name: "{episode_path}-thumb.{thumbnail_ext}"
+
+    overrides:
+      date: "{upload_date}"
+      episode: "{download_index}"
+      episode_padded: "{download_index_padded6}"
+      episode_file_name: "S{season}E{episode_padded} - {title_sanitized}"
+      episode_path: "{episode_file_name}"
+
+    output_directory_nfo_tags:
+      nfo_name: "tvshow.nfo"
+      nfo_root: "tvshow"
+      tags:
+        title: "{tv_show_name}"
+
+    nfo_tags:
+      nfo_name: "{episode_path}.nfo"
+      nfo_root: "episodedetails"
+      tags:
+        title: "{title}"
+        season: "{season}"
+        episode: "{episode}"
+        year: "{upload_year}"
+        aired: "{upload_date_standardized}"
+
+    video_tags:
+      episode: "{episode}"
+      season: "{season_number}"
+
+  yt_playlist_one_season:
+    preset: yt_playlist
+    overrides:
+      season: "00"
+      tv_show_name: "{subscription_name}"
+
+  yt_videos:
+    preset: yt_playlist
+    overrides:
+      season: "00"
+    output_options:
+      output_directory: "/Data/youtube/videos"
+      download_archive_name: ".{subscription_name_sanitized}-download-archive.json"
+
+  yt_playlist_reversed:
+    preset: "yt_video"
+
+    ytdl_options:
+      format: "(bv*[vcodec~='^((he|a)vc|h26[45])']+ba) / (bv*+ba/b)"
+      ignoreerrors: True
+      break_on_existing: True
+      break_on_reject: True
+      final_ext: mkv
+      cachedir: "/tmp/ytdl-sub"
+      playlistreverse: True
+
+    output_options:
+      output_directory: "/Data/youyube/{tv_show_name_sanitized}"
+      file_name: "{episode_path}.{ext}"
+      thumbnail_name: "{episode_path}-thumb.{thumbnail_ext}"
+
+    overrides:
+      tv_show_name: "OVERRIDE IN SUBSCRIPTION"
+      season: "{upload_year}"
+      episode: "{upload_month}{upload_day_padded}"
+      episode_padded: "{upload_month_padded}{upload_day_padded}"
+      episode_file_name: "S{season}E{episode_padded} {title_sanitized}"
+      episode_path: "Season {season}/{episode_file_name}"
+
+    output_directory_nfo_tags:
+      nfo_name: "tvshow.nfo"
+      nfo_root: "tvshow"
+      tags:
+        title: "{tv_show_name}"
+
+    nfo_tags:
+      nfo_name: "{episode_path}.nfo"
+      nfo_root: "episodedetails"
+      tags:
+        title: "{title}"
+        season: "{season}"
+        episode: "{episode}"
+        year: "{upload_year}"
+        aired: "{upload_date_standardized}"
+
+  yt_channel:
+    preset: yt_playlist
+    overrides:
+      tv_show_name: "{subscription_name}"
+    match_filters:
+      filters:
+        - "original_url!*=/shorts/"
+        - "!is_live"

@@ -29,3 +29,4 @@ resources:
   # temporary until I figure out a sustainable way to do cross-namespace extensionRefs
   - ./middlewares/chain-no-auth.yaml
   - ./middlewares/bloopnet-xyz-auth.yaml
+  - ./ytdlp-sub/ks.yaml
