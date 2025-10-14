@@ -11,8 +11,6 @@ configMapGenerator:
   - name: ytdl-sub-config
     files:
       - ./config/config.yaml
-  - name: ytdl-sub-config
-    files:
       - ./config/subscriptions.yaml
 generatorOptions:
   disableNameSuffixHash: true
