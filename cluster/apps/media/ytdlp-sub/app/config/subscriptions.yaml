@@ -2,3 +2,31 @@ raspy_gravely_main_list:
   preset: "yt_music"
   download:
     url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1Ay8EOoTZq_k0CE8GTjLAKV"
+symphony_for_the_villian:
+  preset: "yt_music"
+  download:
+    url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1A1VlPBbWXgz-wxtncm2XEK&si=yWt7erWPljNTdGmQ"
+wubby_masterlist:
+  preset: "yt_music"
+  download:
+    url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1CWIOSnXZjwq1UWQxD4j09V&si=OUgnXiou849GHFHI"
+thumpy_masterlist:
+  preset: "yt_music"
+  download:
+    url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1BS24yYG4wzV5gnrs6ZfSBf&si=fg8mydvCrwDEjbaa"
+electroswing_masterlist:
+  preset: "yt_music"
+  download:
+    url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1AiXEG46YCXqwMC_0H2w3tw&si=XnmaOyaYCfmLfhUb"
+desi_vibe:
+  preset: "yt_music"
+  download:
+    url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1BLC4XVoRZmYL386vrEY1Db&si=ZwHS0yWx3IPIg4X2"
+steamed_list:
+  preset: "yt_music"
+  download:
+    url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1BWK3csK48gUdL1B7Rj-OUN&si=YPJzzTb34uDy3-Ty"
+sing_a_longs:
+  preset: "yt_music"
+  download:
+    url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1DgB2vZSl3StCo5gN3Avk8e&si=hNtB1BUt3Mgm667q"
