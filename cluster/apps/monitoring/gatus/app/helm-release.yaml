@@ -114,7 +114,6 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
         serviceAccount:
-          enabled: true
           name: *app
     service:
       app:
