@@ -68,7 +68,7 @@ spec:
       ## yt-dlp doesn't like a readonly cookies file. Changing readOnly has no
       ## effect.
       cookies:
-        name: ytdl-sub-cookies
+        name: ytdlp-sub-cookies
         type: secret
         advancedMounts:
           *app :
