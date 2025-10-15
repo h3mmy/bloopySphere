@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 3.7.3
+      version: 4.3.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -47,6 +47,7 @@ spec:
             image: &configSyncImage
               repository: ghcr.io/kiwigrid/k8s-sidecar
               tag: 1.30.11@sha256:91b49e5b6d2fb03e7a9014f8b072d0de199987845b02d96ce458dd9f14e753f5
+              pullPolicy: IfNotPresent
             env: &configSyncEnv
               FOLDER: /config
               LABEL: gatus.io/enabled
@@ -89,8 +90,6 @@ spec:
                   failureThreshold: 3
               readiness: *probes
             securityContext: &securityContext
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
               capabilities:
                 drop: [ALL]
                 add: # Required with non-experimental image. See https://github.com/TwiN/gatus/issues/697#issuecomment-2439655418
@@ -114,6 +113,9 @@ spec:
             runAsNonRoot: true
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
+        serviceAccount:
+          enabled: true
+          name: *app
     service:
       app:
         controller: *app
@@ -130,15 +132,13 @@ spec:
             path: /metrics
             interval: 1m
             scrapeTimeout: 10s
-    serviceAccount:
-      create: true
-      name: *app
     persistence:
       data:
         existingClaim: gatus-data-v1
         globalMounts:
           - path: /data
       config:
+        enabled: true
         type: emptyDir
       config-file:
         type: configMap
