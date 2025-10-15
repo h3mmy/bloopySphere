@@ -24,6 +24,14 @@ presets:
     output_options:
       maintain_download_archive: True
       output_directory: /Data/youtube/music
+    nfo_tags:
+      nfo_name: {track_full_path}.nfo
+      nfo_root: trackdetails
+      nfo_tags:
+        artist: {track_artist}
+        album: {track_album}
+        year: {track_year}
+        title: {track_title}
   yt_video:
     throttle_protection:
       sleep_per_download_s:
