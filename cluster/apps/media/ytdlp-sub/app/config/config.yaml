@@ -10,6 +10,8 @@ presets:
       break_on_existing: False
       cachedir: "/tmp/ytdl-sub/"
       cookiefile: "/config/cookies-rw.txt"
+    overrides:
+      track_artist: {track_artist}
     throttle_protection:
       sleep_per_download_s:
         min: 2.2
