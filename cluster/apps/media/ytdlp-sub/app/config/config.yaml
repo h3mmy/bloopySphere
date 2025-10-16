@@ -25,9 +25,9 @@ presets:
       subscription_download_probability: 1.0
     output_options:
       maintain_download_archive: True
-      output_directory: "/Data/youtube/music#
+      output_directory: "/Data/youtube/music"
     nfo_tags:
-      nfo_name: #{track_full_path}.nfo"
+      nfo_name: "{track_full_path}.nfo"
       nfo_root: "trackdetails"
       tags:
         artist: "{track_artist}"
