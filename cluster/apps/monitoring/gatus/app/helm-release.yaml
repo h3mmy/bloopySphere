@@ -114,8 +114,8 @@ spec:
             runAsNonRoot: true
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
-        serviceAccount:
-          name: *app
+        # serviceAccount:
+        #   name: *app
     service:
       app:
         controller: *app
@@ -132,6 +132,9 @@ spec:
             path: /metrics
             interval: 1m
             scrapeTimeout: 10s
+    serviceAccount:
+      create: true
+      name: *app
     persistence:
       data:
         existingClaim: gatus-data-v1
