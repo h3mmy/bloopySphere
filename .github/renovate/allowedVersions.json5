@@ -4,7 +4,12 @@
       {
         "matchDatasources": ["docker"],
         "matchPackageNames": ["ghcr.io/linuxserver/calibre"],
-        "allowedVersions": "<=6.4.0",
+        "allowedVersions": "<=6.4.0"
+      },
+      {
+        "matchDatasources": ["docker","github-releases"],
+        "matchPackageNames": ["kiwigrid/k8s-sidecar"],
+        "allowedVersions": "<=1.30.9" // https://github.com/kiwigrid/k8s-sidecar/issues/431
       },
       {
         "matchDatasources": ["docker"],
