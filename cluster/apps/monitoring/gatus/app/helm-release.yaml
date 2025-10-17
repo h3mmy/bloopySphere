@@ -133,9 +133,8 @@ spec:
             interval: 1m
             scrapeTimeout: 10s
     serviceAccount:
-      default:
+      *app :
         enabled: true
-        name: *app
     persistence:
       data:
         existingClaim: gatus-data-v1
