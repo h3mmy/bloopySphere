@@ -10,8 +10,6 @@ presets:
       break_on_existing: False
       cachedir: "/tmp/ytdl-sub/"
       cookiefile: "/config/cookies-rw.txt"
-    overrides:
-      track_artist: {track_artist}
     throttle_protection:
       sleep_per_download_s:
         min: 2.2
@@ -26,6 +24,22 @@ presets:
     output_options:
       maintain_download_archive: True
       output_directory: "/Data/youtube/music"
+    music_tags:
+      title: "{track_title}"
+      artist: "{track_artist}"
+      album: "{track_album}"
+      album_artist: "{track_album_artist}"
+      track_number: "{track_number}"
+      disc_number: "{track_disc_number}"
+      genre: "{track_genre}"
+      date: "{track_year}"
+      comment: "subscription: {subscription_name} | original_url: {webpage_url}"
+      artists:
+        - "{track_artist}"
+      albumartists:
+        - "{track_album_artist}"
+      genres:
+        - "{track_genre}"
     nfo_tags:
       nfo_name: "{track_full_path}.nfo"
       nfo_root: "trackdetails"
@@ -34,6 +48,21 @@ presets:
         album: "{track_album}"
         year: "{track_year}"
         title: "{track_title}"
+  yt_music_playlist:
+    preset:
+      - yt_music
+    output_options:
+      output_directory: "/Data/youtube/music/{playlist_name_sanitized}"
+    overrides:
+      playlist_name: "{subscription_name}"
+      track_artist: "{artist}"
+  yt_music_channel:
+    preset:
+      - yt_music
+    output_options:
+      output_directory: "/Data/youtube/music/{track_artist_sanitized}"
+    overrides:
+      track_artist: "{subscription_name}"
   yt_video:
     throttle_protection:
       sleep_per_download_s:

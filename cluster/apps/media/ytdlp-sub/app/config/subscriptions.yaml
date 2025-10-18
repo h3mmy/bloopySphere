@@ -1,32 +1,56 @@
 raspy_gravely_main_list:
-  preset: "yt_music"
+  preset: "yt_music_playlist"
   download:
     url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1Ay8EOoTZq_k0CE8GTjLAKV"
 symphony_for_the_villian:
-  preset: "yt_music"
+  preset: "yt_music_playlist"
   download:
     url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1A1VlPBbWXgz-wxtncm2XEK&si=yWt7erWPljNTdGmQ"
 wubby_masterlist:
-  preset: "yt_music"
+  preset: "yt_music_playlist"
   download:
     url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1CWIOSnXZjwq1UWQxD4j09V&si=OUgnXiou849GHFHI"
 thumpy_masterlist:
-  preset: "yt_music"
+  preset: "yt_music_playlist"
   download:
     url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1BS24yYG4wzV5gnrs6ZfSBf&si=fg8mydvCrwDEjbaa"
 electroswing_masterlist:
-  preset: "yt_music"
+  preset: "yt_music_playlist"
   download:
     url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1AiXEG46YCXqwMC_0H2w3tw&si=XnmaOyaYCfmLfhUb"
 desi_vibe:
-  preset: "yt_music"
+  preset: "yt_music_playlist"
   download:
     url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1BLC4XVoRZmYL386vrEY1Db&si=ZwHS0yWx3IPIg4X2"
 steamed_list:
-  preset: "yt_music"
+  preset: "yt_music_playlist"
   download:
     url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1BWK3csK48gUdL1B7Rj-OUN&si=YPJzzTb34uDy3-Ty"
 sing_a_longs:
-  preset: "yt_music"
+  preset: "yt_music_playlist"
   download:
     url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1DgB2vZSl3StCo5gN3Avk8e&si=hNtB1BUt3Mgm667q"
+epic_concept_album:
+  preset: "yt_music_playlist"
+  download:
+    url: "https://music.youtube.com/playlist?list=PLbqsLXjyXw3iDPFOcGU13VL0E7lEtlup7"
+dounia:
+  preset: "yt_music_channel"
+  download:
+    url: "https://music.youtube.com/channel/UC6uSQ4DFpZF02O7bZR6_jpQ"
+yeah_yeah_yeahs:
+  preset: "yt_music_channel"
+  download:
+    url: "https://music.youtube.com/channel/UCK49WVAaBRnVci8fmM4NiLQ"
+marian_hill:
+  preset: "yt_music_channel"
+  download:
+    url: "https://music.youtube.com/channel/UCMMARWqBUCQJ5MQ1pRg1q-w"
+xana:
+  preset: "yt_music_channel"
+  download:
+    url: "https://music.youtube.com/channel/UCVJKCX0CXT8k9w-ckp7OBhA"
+ella_red:
+  preset: "yt_music_channel"
+  download:
+    url: "https://music.youtube.com/channel/UCLbUxkwto52zdUrCyiPhutQ"
