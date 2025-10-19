@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 4.3.0
+      version: 4.4.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -23,6 +23,10 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  rollback:
+    timeout: 10m
+    recreate: true
+    cleanupOnFail: true
   values:
     controllers:
       gatus:
@@ -133,9 +137,39 @@ spec:
             path: /metrics
             interval: 1m
             scrapeTimeout: 10s
+    rbac:
+      roles:
+        gatus:
+          type: ClusterRole
+          rules:
+            - apiGroups:
+                - ""
+              resources:
+                - services
+                - configmaps
+                - secrets
+              verbs:
+                - get
+                - watch
+                - list
+            - apiGroups:
+                - gateway.networking.k8s.io
+              resources:
+                - gateways
+                - httproutes
+              verbs:
+                - get
+                - watch
+                - list
+      bindings:
+        gatus:
+          type: ClusterRoleBinding
+          roleRef:
+            identifier: gatus
+          subjects:
+            - identifier: gatus
     serviceAccount:
-      gatus:
-        enabled: true
+      gatus: {}
     persistence:
       data:
         existingClaim: gatus-data-v1
