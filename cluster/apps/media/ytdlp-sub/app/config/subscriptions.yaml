@@ -66,3 +66,7 @@ baby_bugs:
   preset: "yt_music_channel"
   download:
     url: "https://music.youtube.com/channel/UC-zQkGrjPefVxEiEx26XPiA"
+madylin_mei:
+  preset: "yt_music_channel"
+  download:
+    url: "https://music.youtube.com/channel/UCsU1kV441-MiUcDTbOSwhtw"
