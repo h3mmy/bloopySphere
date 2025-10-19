@@ -60,7 +60,7 @@ presets:
     output_options:
       output_directory: "/Data/youtube/music/{track_artist_sanitized}"
     overrides:
-      track_artist: "{subscription_name}"
+      track_artist: "{channel}"
   yt_video:
     throttle_protection:
       sleep_per_download_s:
