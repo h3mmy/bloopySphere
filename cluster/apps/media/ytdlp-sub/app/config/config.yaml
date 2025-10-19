@@ -53,7 +53,7 @@ presets:
       output_directory: "/Data/youtube/music/{playlist_name_sanitized}"
     overrides:
       playlist_name: "{subscription_name}"
-      track_artist: "{source_uploader}"
+      track_artist: "Unknown"
   yt_music_channel:
     preset:
       - yt_music

@@ -34,6 +34,14 @@ epic_concept_album:
   preset: "yt_music_playlist"
   download:
     url: "https://music.youtube.com/playlist?list=PLbqsLXjyXw3iDPFOcGU13VL0E7lEtlup7"
+hallowed_weenie:
+  preset: "yt_music_playlist"
+  download:
+    url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1C7eEaBJqmggdVBEOjSu9zN"
+punkish:
+  preset: "yt_music_playlist"
+  download:
+    url: "https://music.youtube.com/playlist?list=PLEWd9S4sEt1A4yYJalehcXgRWu2T9IEoI"
 dounia:
   preset: "yt_music_channel"
   download:
@@ -54,3 +62,7 @@ ella_red:
   preset: "yt_music_channel"
   download:
     url: "https://music.youtube.com/channel/UCLbUxkwto52zdUrCyiPhutQ"
+baby_bugs:
+  preset: "yt_music_channel"
+  download:
+    url: "https://music.youtube.com/channel/UC-zQkGrjPefVxEiEx26XPiA"
