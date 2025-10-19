@@ -30,7 +30,8 @@ presets:
       album: "{track_album}"
       albumartist: "{track_album_artist}"
       genre: "{track_genre}"
-      comment: "subscription: {subscription_name} | original_url: {webpage_url}"
+      comments:
+        - "subscription: {subscription_name} | original_url: {webpage_url}"
       artists:
         - "{track_artist}"
       albumartists:
