@@ -28,11 +28,8 @@ presets:
       title: "{track_title}"
       artist: "{track_artist}"
       album: "{track_album}"
-      album_artist: "{track_album_artist}"
-      track_number: "{track_number}"
-      disc_number: "{track_disc_number}"
+      albumartist: "{track_album_artist}"
       genre: "{track_genre}"
-      date: "{track_year}"
       comment: "subscription: {subscription_name} | original_url: {webpage_url}"
       artists:
         - "{track_artist}"
