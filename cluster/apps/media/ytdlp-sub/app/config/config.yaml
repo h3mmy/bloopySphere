@@ -58,7 +58,7 @@ presets:
     preset:
       - yt_music
     output_options:
-      output_directory: "/Data/youtube/music/{track_artist_sanitized}"
+      output_directory: "/Data/youtube/music/{subscription_name_sanitized}"
     overrides:
       track_artist: "{channel}"
   yt_video:
