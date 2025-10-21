@@ -6,25 +6,29 @@ presets:
     preset:
       - "_music_base"
     ytdl_options:
+      max_downloads: 20
+      playlistreverse: True
       ignoreerrors: True
       break_on_existing: False
       cachedir: "/tmp/ytdl-sub/"
       cookiefile: "/config/cookies-rw.txt"
     throttle_protection:
       sleep_per_download_s:
-        min: 2.2
-        max: 14.8
+        min: 12.2
+        max: 30.8
       sleep_per_subscription_s:
         min: 9.0
-        max: 14.1
+        max: 24.1
       max_downloads_per_subscription:
-        min: 30
-        max: 78
+        min: 20
+        max: 58
       subscription_download_probability: 1.0
     output_options:
       maintain_download_archive: True
       keep_max_files: 0
       output_directory: "/Data/youtube/music"
+    overrides:
+      enable_throttle_protection: True
     music_tags:
       title: "{track_title}"
       artist: "{track_artist}"
