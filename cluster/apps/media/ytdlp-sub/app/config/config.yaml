@@ -23,6 +23,7 @@ presets:
       subscription_download_probability: 1.0
     output_options:
       maintain_download_archive: True
+      keep_max_files: 0
       output_directory: "/Data/youtube/music"
     music_tags:
       title: "{track_title}"
