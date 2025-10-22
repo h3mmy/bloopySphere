@@ -48,6 +48,7 @@ spec:
               ND_JUKEBOX_ADMINONLY: "false"
               ND_ENABLEUSEREDITING: "true"
               ND_ENABLESHARING: "true"
+              ND_DEFAULTSHAREEXPIRATION: 760h
               ND_PASSWORDENCRYPTIONKEY: "${ND_ENCRYPTION_KEY}"
             resources:
               requests:
