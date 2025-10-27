@@ -42,12 +42,14 @@ spec:
               ND_PROMETHEUS_ENABLED: "true"
               ND_REVERSEPROXYUSERHEADER: X-authentik-username
               ND_REVERSEPROXYWHITELIST: 10.0.0.0/8
-              ND_SCANSCHEDULE: "@every 1h"
+              ND_SCANSCHEDULE: "0 */2 * * *"
               ND_SESSIONTIMEOUT: 24h
+              ND_SCANNER_PURGEMISSING: "full"
               ND_JUKEBOX_ENABLED: "true"
               ND_JUKEBOX_ADMINONLY: "false"
               ND_ENABLEUSEREDITING: "true"
               ND_ENABLESHARING: "true"
+              ND_SUBSONIC_ARTISTPARTICIPATIONS: "true"
               ND_DEFAULTSHAREEXPIRATION: 760h
               ND_PASSWORDENCRYPTIONKEY: "${ND_ENCRYPTION_KEY}"
             resources:
