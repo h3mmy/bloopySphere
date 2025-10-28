@@ -52,7 +52,7 @@ spec:
           main:
             image:
               repository: ghcr.io/music-assistant/server
-              tag: 2.7.0b7@sha256:e5970a365329669be66fc24651e5d06a00167a9ad23930c27ea8f3db0731bcd7
+              tag: 2.7.0b8@sha256:f61245b2063e6ede97a3f5db0ed8134effa44c306a154ab4b8d0a13cc9433dc0
             env:
               TZ: "${TZ}"
             resources:
