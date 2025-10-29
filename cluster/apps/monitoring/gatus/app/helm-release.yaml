@@ -51,7 +51,7 @@ spec:
             image: &configSyncImage
               repository: ghcr.io/kiwigrid/k8s-sidecar
               # don't use 1.30.10 or 1.30.11 due to https://github.com/kiwigrid/k8s-sidecar/issues/431
-              tag: 1.30.9@sha256:8c06e1ba643a4625de14b2db65c356f5db6b1482a25fce4754380a2936207338
+              tag: 2.0.3@sha256:0927d32e384d2ee38d861ea9de23acb3db8a6ac89ad1334d7cd4aacd2b3bf5ab
               pullPolicy: IfNotPresent
             env: &configSyncEnv
               FOLDER: /config
