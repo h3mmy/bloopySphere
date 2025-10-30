@@ -30,4 +30,4 @@ resources:
   - ./middlewares/chain-no-auth.yaml
   - ./middlewares/bloopnet-xyz-auth.yaml
   # disable until account detangling is figured out
-  # - ./ytdlp-sub/ks.yaml
+  - ./ytdlp-sub/ks.yaml
