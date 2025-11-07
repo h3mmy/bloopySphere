@@ -11,10 +11,16 @@ subjects:
   - kind: ServiceAccount
     name: system-upgrade-controller
     namespace: system-upgrade
+# ---
+# apiVersion: talos.dev/v1alpha1
+# kind: ServiceAccount
+# metadata:
+#   name: system-upgrade-controller
+# spec:
+#   roles: ["os:admin"]
 ---
-apiVersion: talos.dev/v1alpha1
+apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: system-upgrade-controller
-spec:
-  roles: ["os:admin"]
+  namespace: system-upgrade
