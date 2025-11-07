@@ -90,7 +90,7 @@ spec:
                       - x86
 
     geoip:
-      enabled: true
+      enabled: false
       existingSecret:
         secretName: geoip-secrets
         accountId: maxmindAccountId
