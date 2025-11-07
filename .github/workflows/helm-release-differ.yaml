@@ -78,7 +78,5 @@ jobs:
           comment-id: "${{ steps.find-comment.outputs.comment-id }}"
           issue-number: "${{ github.event.pull_request.number }}"
           body: |
-            ```diff
-            ${{ steps.diff.outputs.diff }}
-            ```
+            ${{ steps.diff.outputs.diff }}   
           edit-mode: replace
