@@ -55,7 +55,7 @@ jobs:
             test
             --all-namespaces
             --enable-helm
-            --path /github/workspace/cluster/flux/base/flux-system
+            --path /github/workspace/cluster/base/flux-system
             --verbose
 
   diff:
