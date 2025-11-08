@@ -24,7 +24,7 @@
       matchDatasources: ["docker", "helm"],
       group: {commitMessageTopic: "{{{groupName}}} group"},
       separateMinorPatch: true,
-      stabilityDays: 2,
+      minimumReleaseAge: 2,
     },
     {
       description: "linkerd-edge charts",
@@ -38,7 +38,7 @@
       matchDatasources: ["helm"],
       group: {commitMessageTopic: "{{{groupName}}} group"},
       separateMinorPatch: true,
-      stabilityDays: 2,
+      minimumReleaseAge: 2,
       versioning: "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-edge?$",
     },
     {
@@ -51,7 +51,7 @@
       groupName: "cilium",
       additionalBranchPrefix: "",
       separateMinorPatch: true,
-      stabilityDays: 2,
+      minimumReleaseAge: 2,
     },
     {
       description: "External Snapshotter image and kustomization",
@@ -60,7 +60,7 @@
       matchDatasources: ["docker", "github-releases"],
       group: {commitMessageTopic: "{{{groupName}}} group"},
       separateMinorPatch: true,
-      stabilityDays: 2,
+      minimumReleaseAge: 2,
     },
     {
       description: "Thanos image and chart - versions do not match",
@@ -70,7 +70,7 @@
       matchUpdateTypes: ["minor", "patch"],
       group: {commitMessageTopic: "{{{groupName}}} group"},
       separateMinorPatch: false,
-      stabilityDays: 2,
+      minimumReleaseAge: 2,
     },
     {
       description: "Vector image and chart - versions do not match",
@@ -80,7 +80,7 @@
       matchUpdateTypes: ["minor", "patch"],
       group: {commitMessageTopic: "{{{groupName}}} group"},
       separateMinorPatch: false,
-      stabilityDays: 2,
+      minimumReleaseAge: 2,
     },
     {
       matchDatasources: ["docker"],
