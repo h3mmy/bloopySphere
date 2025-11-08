@@ -37,7 +37,8 @@ spec:
               repository: ghcr.io/taxel/plextraktsync
               tag: 0.34.18
             args:
-              - sync
+              - info && /bin/bash
+              # - sync
             env:
               PLEX_BASEURL: http://plex.media.svc.cluster.local:32400
               PLEX_LOCALURL: http://plex.media.svc.cluster.local:32400
