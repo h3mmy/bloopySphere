@@ -176,7 +176,7 @@ spec:
         enabled: true
 
     worker:
-      replicas: 2
+      replicas: 1
       # volumes:
       #   - name: postgres-creds
       #     secret:
