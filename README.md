@@ -106,6 +106,11 @@ Loki snippets. If you know you know.
 
 `kubectl get namespace "monitoring" -o json   | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/"   | kubectl replace --raw /api/v1/namespaces/monitoring/finalize -f -`
 
+Delete error pods
+
+```bash
+kubectl delete pods --field-selector status.phase=Failed -A
+```
 
 Publicly available DoH server lists
 
