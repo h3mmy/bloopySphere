@@ -33,7 +33,7 @@ spec:
             image:
               pullPolicy: IfNotPresent
               repository: ghcr.io/jmbannon/ytdl-sub
-              tag: 2025.10.23@sha256:356c381c1074880b31053babec5cab8c3de00cb810e96f60a4669d9da93fdba1
+              tag: 2025.11.08@sha256:4ea1657b8f69d5305a2fea87e6c55236dc803eaa0253406afb93fb7145853439
             command:
               - bash
               - -c
