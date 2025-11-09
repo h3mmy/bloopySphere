@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: cloudnative-pg
-      version: 0.24.0
+      version: 0.26.1
       sourceRef:
         kind: HelmRepository
         name: cloudnative-pg
@@ -30,7 +30,7 @@ spec:
       repository: ghcr.io/cloudnative-pg/cloudnative-pg
       pullPolicy: IfNotPresent
       # -- Overrides the image tag whose default is the chart appVersion.
-      tag: "1.26.1"
+      tag: "1.26.2"
     crds:
       create: true
     config:

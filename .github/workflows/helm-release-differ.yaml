@@ -58,12 +58,13 @@ jobs:
         id: diff
         run: |
           chmod +x .github/scripts/helm-release-differ.sh
-          diff=$(.github/scripts/helm-release-differ.sh --source-file "default/${{ matrix.file }}" --target-file "${{ matrix.file }}" --remove-common-labels)
-          echo "${diff}"
-          diff="${diff//'%'/'%25'}"
-          diff="${diff//$'\n'/'%0A'}"
-          diff="${diff//$'\r'/'%0D'}"
-          echo "diff=$(echo ${diff})" >> $GITHUB_OUTPUT
+          # diff=
+          $(.github/scripts/helm-release-differ.sh --source-file "default/${{ matrix.file }}" --target-file "${{ matrix.file }}" --remove-common-labels) >> $GITHUB_OUTPUT
+          # echo "${diff}"
+          # diff="${diff//'%'/'%25'}"
+          # diff="${diff//$'\n'/'%0A'}"
+          # diff="${diff//$'\r'/'%0D'}"
+          # echo "diff=$(echo ${diff})" >> $GITHUB_OUTPUT
       - name: Find Comment
         uses: peter-evans/find-comment@v4
         id: find-comment
@@ -77,5 +78,6 @@ jobs:
           token: "${{ steps.generate-token.outputs.token }}"
           comment-id: "${{ steps.find-comment.outputs.comment-id }}"
           issue-number: "${{ github.event.pull_request.number }}"
-          body: "${{ steps.diff.outputs.diff }}"
+          body: |
+            ${{ steps.diff.outputs.diff }}   
           edit-mode: replace

@@ -18,7 +18,6 @@ resources:
   - descheduler-charts.yaml
   - emberstack-charts.yaml
   - emqx-charts.yaml
-  - external-dns-charts.yaml
   - external-secrets.yaml
   - fairwinds-charts.yaml
   - grafana-charts.yaml

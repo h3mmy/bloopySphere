@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.linkerd.io/edge
       chart: linkerd-viz
-      version: 30.14.0-edge
+      version: 30.14.11-edge
       sourceRef:
         kind: HelmRepository
         name: linkerd-edge-charts

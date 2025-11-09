@@ -18,7 +18,7 @@ jobs:
       matrix: ${{ steps.changed-clusters.outputs.all_changed_and_modified_files }}
     steps:
       - name: Generate Token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@v2
         id: app-token
         with:
           app-id: "${{ secrets.APP_ID }}"
@@ -58,7 +58,7 @@ jobs:
       matrix: ${{ steps.extract-images.outputs.images }}
     steps:
       - name: Generate Token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@v2
         id: app-token
         with:
           app-id: "${{ secrets.APP_ID }}"
@@ -85,7 +85,7 @@ jobs:
           path: pull
 
       - name: Gather Images in Default Branch
-        uses: docker://ghcr.io/allenporter/flux-local:v7.10.1
+        uses: docker://ghcr.io/allenporter/flux-local:v7.11.0
         with:
           args: >-
             get cluster
@@ -95,7 +95,7 @@ jobs:
             --output-file default.yaml
 
       - name: Gather Images in Pull Request Branch
-        uses: docker://ghcr.io/allenporter/flux-local:v7.10.1
+        uses: docker://ghcr.io/allenporter/flux-local:v7.11.0
         with:
           args: >-
             get cluster
