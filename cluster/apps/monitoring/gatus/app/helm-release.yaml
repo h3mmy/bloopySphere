@@ -63,7 +63,7 @@ spec:
               requests:
                 cpu: 10m
               limits:
-                memory: 200Mi
+                memory: 250Mi
         containers:
           app:
             image:
