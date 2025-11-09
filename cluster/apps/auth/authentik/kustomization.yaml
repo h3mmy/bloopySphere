@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: auth
 resources:
   - geoip-secrets.sops.yaml
-  - redis
+  # - redis
   - postgres
   - media
   # Additional RBAC needed for spiffe

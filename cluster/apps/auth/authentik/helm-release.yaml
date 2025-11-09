@@ -19,8 +19,6 @@ spec:
   dependsOn:
     - name: cert-manager
       namespace: cert-manager
-    - name: authentik-redis
-      namespace: auth
 
   install:
     remediation:
@@ -112,9 +110,6 @@ spec:
           bucket: "authentik-postgresql-backup"
           secret_key: "${AUTHENTIK_S3_SECRET}"
           host: http://s3.minio.storage
-      redis:
-        host: "authentik-redis-headless.auth.svc.cluster.local"
-        password: ${AUTHENTIK_REDIS_PASSWORD}
       email:
         host: "smtp.sendgrid.net"
         port: 587
