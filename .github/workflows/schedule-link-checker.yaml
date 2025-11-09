@@ -32,7 +32,6 @@ jobs:
           args: >
             --verbose
             --no-progress
-            --exclude-mail
             './**/*.md'
 
       - name: Find Link Checker Issue
