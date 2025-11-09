@@ -17,6 +17,16 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    # Allow using official upstream Thanos images instead of Bitnami images
+    global:
+      security:
+        allowInsecureImages: true
+
+    # Use official upstream Thanos images, not Bitnami
+    image:
+      registry: quay.io
+      repository: thanos/thanos
+      tag: v0.40.1
     query:
       enabled: true
       replicaCount: 1
