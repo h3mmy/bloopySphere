@@ -22,6 +22,7 @@ spec:
     remediation:
       remediateLastFailure: true
   values:
+
     global:
       redis:
         password: ${BLOCKY_REDIS_PASSWORD}
