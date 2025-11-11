@@ -202,3 +202,11 @@ trakt:
     token_type: Bearer
     expires_in: ${TRAKT_EXPIRES_IN}
     refresh_token: ${TRAKT_REFRESH_TOKEN}
+
+webhooks:
+  error: ${DISCORD_WEBHOOK_URL}
+  version: ${DISCORD_WEBHOOK_URL}
+  run_start: ${DISCORD_WEBHOOK_URL}
+  run_end: ${DISCORD_WEBHOOK_URL}
+  delete: ${DISCORD_WEBHOOK_URL}
+  changes: ${DISCORD_WEBHOOK_URL}
