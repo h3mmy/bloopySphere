@@ -1,6 +1,6 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: plex-trakt-sync
@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 3.7.3
+      version: 4.4.0
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -18,14 +18,10 @@ spec:
   values:
     controllers:
       plex-trakt-sync:
+        type: statefulset
+        replicas: 1
         annotations:
           reloader.stakater.com/auto: "true"
-        # cronjob:
-        #   schedule: "@daily"
-        #   timeZone: ${TZ}
-        #   concurrencyPolicy: Forbid
-        #   successfulJobsHistory: 1
-        #   failedJobsHistory: 1
         pod:
           enableServiceLinks: false
           labels:
@@ -44,6 +40,7 @@ spec:
             args:
               - watch
             env:
+              TZ: ${TZ}
               PLEX_BASEURL: http://plex.media.svc.cluster.local:32400
               PLEX_LOCALURL: http://plex.media.svc.cluster.local:32400
               PLEX_TOKEN:
