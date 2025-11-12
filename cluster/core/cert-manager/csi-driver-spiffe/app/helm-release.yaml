@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: csi-driver-spiffe
@@ -12,7 +12,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.jetstack.io/
       chart: cert-manager-csi-driver-spiffe
-      version: v0.8.2
+      version: v0.10.1
       sourceRef:
         kind: HelmRepository
         name: jetstack
@@ -86,7 +86,7 @@ spec:
         volumes:
           - name: root-cas
             secret:
-              secretName: csi-driver-spiffe
+              secretName: csi-driver-spiffe-ca
         # -- Optional extra volume mounts. Useful for mounting root CAs
         volumeMounts:
           - name: root-cas
