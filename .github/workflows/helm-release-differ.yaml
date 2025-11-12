@@ -60,9 +60,9 @@ jobs:
           chmod +x .github/scripts/helm-release-differ.sh
           diff=$(.github/scripts/helm-release-differ.sh --source-file "default/${{ matrix.file }}" --target-file "${{ matrix.file }}" --remove-common-labels)
           echo "${diff}"
-          # diff="${diff//'%'/'%25'}"
-          # diff="${diff//$'\n'/'%0A'}"
-          # diff="${diff//$'\r'/'%0D'}"
+          diff="${diff//'%'/'%25'}"
+          diff="${diff//$'\n'/'%0A'}"
+          diff="${diff//$'\r'/'%0D'}"
           echo "diff=$(echo ${diff})" >> $GITHUB_OUTPUT
       - name: Find Comment
         uses: peter-evans/find-comment@v4
