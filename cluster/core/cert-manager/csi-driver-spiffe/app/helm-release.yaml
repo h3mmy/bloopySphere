@@ -86,7 +86,7 @@ spec:
         volumes:
           - name: root-cas
             secret:
-              secretName: csi-driver-spiffe-ca
+              secretName: csi-driver-spiffe
         # -- Optional extra volume mounts. Useful for mounting root CAs
         volumeMounts:
           - name: root-cas
