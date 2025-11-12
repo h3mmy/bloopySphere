@@ -66,7 +66,9 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: media-imagemaid
+  namespace: flux-system
 spec:
+  targetNamespace: media
   dependsOn:
     - name: apps
   interval: 1h
