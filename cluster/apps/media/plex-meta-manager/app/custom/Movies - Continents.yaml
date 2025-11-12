@@ -1,0 +1,13 @@
+metadata_path:
+  - git: Adam-Pope/Movies/continents.yml
+    template_variables:
+      style: color  # defaults to white
+      collection_section: "080" # puts continents before regions
+  - git: Adam-Pope/Movies/regions.yml
+    template_variables:
+      style: color  # defaults to white
+  - default: country
+    template_variables:
+      style: color
+      collection_section: "!082"
+  - git: Adam-Pope/Movies/international_feature.yml
