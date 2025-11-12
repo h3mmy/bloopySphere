@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: csi-driver-spiffe
@@ -86,7 +86,7 @@ spec:
         volumes:
           - name: root-cas
             secret:
-              secretName: csi-driver-spiffe
+              secretName: csi-driver-spiffe-ca
         # -- Optional extra volume mounts. Useful for mounting root CAs
         volumeMounts:
           - name: root-cas
