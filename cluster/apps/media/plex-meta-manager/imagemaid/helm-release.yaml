@@ -1,0 +1,97 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: imagemaid
+  namespace: media
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 4.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: plex
+  interval: 35m
+  values:
+    controllers:
+      imagemaid:
+        type: cronjob
+        annotations:
+          reloader.stakater.com/auto: "true"
+        cronjob:
+          schedule: "5 4 * * *"
+          timeZone: ${TZ}
+          concurrencyPolicy: Forbid
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
+        containers:
+          app:
+            image:
+              repository: kometateam/imagemaid
+              tag: v1.1.1
+            env:
+              PLEX_URL: http://plex.media.svc.cluster.local:32400
+              PLEX_PATH: /config/Library/Application Support/Plex Media Server
+              MODE: remove
+              PHOTO_TRANSCODER: true
+              PLEX_TOKEN: ${PLEX_TOKEN}
+              TZ: ${TZ}
+              DISCORD: ${DISCORD_WEBHOOK_URL}
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+            resources:
+              requests:
+                cpu: 25m
+              limits:
+                memory: 400Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 100
+        fsGroup: 100
+        fsGroupChangePolicy: OnRootMismatch
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values: ["plex"]
+              topologyKey: kubernetes.io/hostname
+    persistence:
+      plex-config:
+        existingClaim: plex-config
+        globalMounts:
+          - path: /config
+      tmpfs:
+        type: emptyDir
+        advancedMounts:
+          imagemaid:
+            app:
+              - path: /config
+                subPath: config
