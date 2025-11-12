@@ -52,6 +52,10 @@ spec:
                     - i686
                     - x86
     metrics:
-      enabled: true
+      enabled: true  
+      image:
+        registry: docker.io
+        repository: bitnamilegacy/redis-exporter
+        tag: 1.76.0-debian-12-r0
       serviceMonitor:
         enabled: true

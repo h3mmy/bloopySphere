@@ -1,6 +1,9 @@
 cache:
   path: $PTS_CACHE_DIR/trakt_cache
 
+excluded-libraries:
+  - MiscX
+
 libraries:
   - Movies
   - TV Shows
