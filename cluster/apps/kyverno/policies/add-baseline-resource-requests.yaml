@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://github.com/kyverno/playground/raw/refs/heads/main/frontend/src/schemas/clusterpolicy-kyverno.io-v1.json
 ---
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
