@@ -8,6 +8,16 @@ discord:
         channel:
           name: bot-announcements
           id: ${efAnnounce}
+      roleSelection:
+        channel:
+          name: role-selection
+          id: ${efRoleSelection}
+        prompts:
+          - message: These roles grant access to specific channels (set 1)
+            options:
+              - emojiId: 📰
+                roleId: ${efNewsRoleId}
+                description: "Provides Access to the <#${efNewsChannelId}> channel (News incl. political news)"
       commands:
         - name: book
           enabled: true
@@ -20,6 +30,10 @@ discord:
           roles:
             - ${efGoblinRoleId}
             - ${efPlexGangRoleId}
+            - ${efDevRoleId}
+        - name: analyze
+          enabled: true
+          roles: 
             - ${efDevRoleId}
         - name: blissfest
           enabled: true

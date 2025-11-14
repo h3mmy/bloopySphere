@@ -6,10 +6,10 @@ metadata:
   name: grafana
   namespace: flux-system
 spec:
-  interval: 1h
+  interval: 5h
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
   ref:
-    tag: 8.11.4
+    tag: 10.1.4
   url: oci://ghcr.io/grafana/helm-charts/grafana

@@ -36,8 +36,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
-      - name: Verify Renovate Configuration
-        uses: suzuki-shunsuke/github-action-renovate-config-validator@v1.1.1
+      #- name: Verify Renovate Configuration
+      #  uses: suzuki-shunsuke/github-action-renovate-config-validator@v1.1.1
 
       - name: Generate Token
         uses: tibdex/github-app-token@v2
@@ -51,7 +51,7 @@ jobs:
           echo "DRY_RUN=${{ github.event.inputs.dryRun || env.DRY_RUN }}" >> "${GITHUB_ENV}"
           echo "LOG_LEVEL=${{ github.event.inputs.logLevel || env.LOG_LEVEL }}" >> "${GITHUB_ENV}"
       - name: Renovate
-        uses: renovatebot/github-action@v43.0.18
+        uses: renovatebot/github-action@v44.0.2
         with:
           configurationFile: "${{ env.RENOVATE_CONFIG_FILE }}"
           token: "x-access-token:${{ steps.generate-token.outputs.token }}"

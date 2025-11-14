@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://github.com/kyverno/playground/raw/refs/heads/main/frontend/src/schemas/clusterpolicy-kyverno.io-v1.json
 ---
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
@@ -10,8 +11,6 @@ metadata:
       This policy creates TLS annotations on services.
       This applies to the traffic between the ingress and pod endpoint
 spec:
-  mutateExistingOnPolicyUpdate: true
-  generateExistingOnPolicyUpdate: true
   rules:
     - name: keycloak
       match:
@@ -20,6 +19,7 @@ spec:
               kinds: ["Service"]
               name: kc-instance-service
       mutate:
+        mutateExistingOnPolicyUpdate: true
         targets:
           - apiVersion: v1
             kind: Service

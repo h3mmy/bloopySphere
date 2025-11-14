@@ -10,8 +10,6 @@ metadata:
       This policy adds prometheus probes annotations to all ingress
       except for ingress with `probe.home.arpa/enabled: "false"`.
 spec:
-  mutateExistingOnPolicyUpdate: true
-  generateExistingOnPolicyUpdate: true
   rules:
     - name: add-prom-probes
       match:
@@ -28,6 +26,7 @@ spec:
               annotations:
                 probe.bloopysphere.arpa/enabled: "false"
       mutate:
+        mutateExistingOnPolicyUpdate: true
         targets:
           - apiVersion: networking.k8s.io/v1
             kind: Ingress

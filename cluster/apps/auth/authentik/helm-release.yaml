@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.goauthentik.io/
       chart: authentik
-      version: 2025.6.4
+      version: 2025.10.1
       sourceRef:
         kind: HelmRepository
         name: authentik-charts
@@ -19,8 +19,6 @@ spec:
   dependsOn:
     - name: cert-manager
       namespace: cert-manager
-    - name: authentik-redis
-      namespace: auth
 
   install:
     remediation:
@@ -35,7 +33,7 @@ spec:
       fullnameOverride: authentik
       image:
         repository: ghcr.io/goauthentik/server
-        tag: 2025.8.4 # default follows chart version
+        tag: 2025.10.1 # default follows chart version
         # repository: ghcr.io/goauthentik/dev-server
         # tag: gh-providers-proxy-rework-endpoints-1679090841-c08a9a2
       revisionHistoryLimit: 3
@@ -90,7 +88,7 @@ spec:
                       - x86
 
     geoip:
-      enabled: true
+      enabled: false
       existingSecret:
         secretName: geoip-secrets
         accountId: maxmindAccountId
@@ -112,9 +110,6 @@ spec:
           bucket: "authentik-postgresql-backup"
           secret_key: "${AUTHENTIK_S3_SECRET}"
           host: http://s3.minio.storage
-      redis:
-        host: "authentik-redis-headless.auth.svc.cluster.local"
-        password: ${AUTHENTIK_REDIS_PASSWORD}
       email:
         host: "smtp.sendgrid.net"
         port: 587
@@ -176,7 +171,7 @@ spec:
         enabled: true
 
     worker:
-      replicas: 2
+      replicas: 1
       # volumes:
       #   - name: postgres-creds
       #     secret:

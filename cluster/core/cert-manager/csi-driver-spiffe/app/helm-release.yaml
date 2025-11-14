@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: csi-driver-spiffe
@@ -12,7 +12,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.jetstack.io/
       chart: cert-manager-csi-driver-spiffe
-      version: v0.8.2
+      version: v0.10.1
       sourceRef:
         kind: HelmRepository
         name: jetstack
@@ -74,23 +74,23 @@ spec:
       driver:
         # -- Optional file containing a CA bundle that will be propagated to
         # managed volumes.
-        sourceCABundle: /var/run/secrets/spiffe.io/ca.pem
-        volumeFileName:
+        # sourceCABundle: /var/run/secrets/spiffe.io/ca.pem
+        # volumeFileName:
           # -- File name which signed certificates are written to in volumes.
-          cert: tls.crt
+        #   cert: tls.crt
           # -- File name which private keys are written to in volumes.
-          key: tls.key
+        #   key: tls.key
           # -- File name where the CA bundles are written to, if enabled.
-          ca: ca.crt
+        #   ca: ca.crt
         # -- Optional extra volumes. Useful for mounting root CAs
-        volumes:
-          - name: root-cas
-            secret:
-              secretName: csi-driver-spiffe
+        # volumes:
+        #   - name: root-cas
+        #     secret:
+        #       secretName: csi-driver-spiffe-ca # https://github.com/h3mmy/bloopySphere/blob/587e850a98f38efdecf7f7999e39c3f93eae1c7d/cluster/core/cert-manager/certs/issuers/csi-driver-spiffe-ca.yaml#L16
         # -- Optional extra volume mounts. Useful for mounting root CAs
-        volumeMounts:
-          - name: root-cas
-            mountPath: /var/run/secrets/spiffe.io
+        # volumeMounts:
+        #   - name: root-cas
+        #     mountPath: /var/run/secrets/spiffe.io
 
         nodeDriverRegistrarImage:
           # -- Target image repository.

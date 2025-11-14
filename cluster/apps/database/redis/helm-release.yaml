@@ -16,6 +16,10 @@ spec:
         name: bitnami-charts
         namespace: flux-system
   values:
+    image:
+      registry: docker.io
+      repository: bitnamilegacy/redis
+      tag: 8.0.3-debian-12-r3
     architecture: standalone
     auth:
       enabled: true
@@ -48,6 +52,10 @@ spec:
                     - i686
                     - x86
     metrics:
-      enabled: true
+      enabled: true  
+      image:
+        registry: docker.io
+        repository: bitnamilegacy/redis-exporter
+        tag: 1.76.0-debian-12-r0
       serviceMonitor:
         enabled: true

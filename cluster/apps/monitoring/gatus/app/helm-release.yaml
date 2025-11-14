@@ -49,8 +49,9 @@ spec:
           init-config:
             #dependsOn: init-db
             image: &configSyncImage
+              # repository: ghcr.io/home-operations/k8s-sidecar
+              # tag: 2.1.2@sha256:d9e169add4e71fd5931a24e11696853f3d804ebc2022cd81f038e7ef22f4d626
               repository: ghcr.io/kiwigrid/k8s-sidecar
-              # don't use 1.30.10 or 1.30.11 due to https://github.com/kiwigrid/k8s-sidecar/issues/431
               tag: 1.30.9@sha256:8c06e1ba643a4625de14b2db65c356f5db6b1482a25fce4754380a2936207338
               pullPolicy: IfNotPresent
             env: &configSyncEnv
@@ -64,14 +65,12 @@ spec:
               requests:
                 cpu: 10m
               limits:
-                memory: 128Mi
+                memory: 250Mi
         containers:
           app:
             image:
-              repository: ghcr.io/h3mmy/gatus
-              tag: testing@sha256:87f8e8ea0073d69dd6eecacecf93c55699f2ee9e2e062e547ce4b10b536743d1
-              # repository: twinproduction/gatus
-              # tag: v5.26.0@sha256:3c0314bd1b1e9d7c34d8f2efee16b380770a9639ec5386cc305e8df104e097dc
+              repository: twinproduction/gatus
+              tag: v5.31.0@sha256:3a432fcc2826b8eb2b38caceb83e7777fda139b8058b1d022c73a82be7342682
             env:
           #    INIT_POSTGRES_DBNAME: *app
           #    INIT_POSTGRES_HOST: *pghost

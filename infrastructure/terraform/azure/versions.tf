@@ -2,11 +2,11 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "4.28.0"
+      version = "4.52.0"
     }
     sops = {
       source  = "carlpett/sops"
-      version = "1.2.1"
+      version = "1.3.0"
     }
     http = {
       source  = "hashicorp/http"
