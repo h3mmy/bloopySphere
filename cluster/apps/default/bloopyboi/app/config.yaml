@@ -31,6 +31,10 @@ discord:
             - ${efGoblinRoleId}
             - ${efPlexGangRoleId}
             - ${efDevRoleId}
+        - name: analyze
+          enabled: true
+          roles: 
+            - ${efDevRoleId}
         - name: blissfest
           enabled: true
           roles:
