@@ -23,6 +23,10 @@ spec:
     cleanupOnFail: true
     remediation:
       remediateLastFailure: true
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: ["/spec/replicas"]
   values:
     controllers:
       bloopyboi:
