@@ -49,6 +49,9 @@ discord:
             - ${efBlissRoleId}
             - ${efDevRoleId}
 logLevel: info
+http:
+  hostname: "bloopyboi.${XYZ_DOMAIN}"
+  port: 8080
 db:
   name: bloopyboi
   type: postgres
