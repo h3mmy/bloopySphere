@@ -2,6 +2,7 @@ discord:
   token: ${botToken}
   name: BloopyBoi
   appId: ${appId}
+  clientSecret: ${discordClientSecret}
   guilds:
     - id: ${efGuildId}
       announcement:
@@ -17,7 +18,13 @@ discord:
             options:
               - emojiId: 📰
                 roleId: ${efNewsRoleId}
-                description: "Provides Access to the <#${efNewsChannelId}> channel (News incl. political news)"
+                description: "Provides Access to <#${efNewsChannelId}> (News incl. political news)"
+              - emojiId: 🎓
+                roleId: ${efScholarRoleId}
+                description: "Provides Access to our <#${efLibraryCategoryId}> (books, research, educational content, etc.)"
+              - emojiId: 🎍
+                roleId: ${efGardenCreatureRoleId}
+                description: "Provides Access to our <#${efGardenCategoryId}> (deep discussions, community bonding, etc.)"
       commands:
         - name: book
           enabled: true
@@ -33,7 +40,7 @@ discord:
             - ${efDevRoleId}
         - name: analyze
           enabled: true
-          roles: 
+          roles:
             - ${efDevRoleId}
         - name: blissfest
           enabled: true
