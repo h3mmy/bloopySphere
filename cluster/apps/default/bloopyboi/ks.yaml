@@ -39,7 +39,7 @@ spec:
     name: flux-system
   wait: true
   dependsOn:
-    - name: cluster-apps-bloopyboi-config
+    - name: bloopyboi-config
     - name: config
   decryption:
     provider: sops
