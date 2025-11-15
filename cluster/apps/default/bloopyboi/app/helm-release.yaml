@@ -97,7 +97,7 @@ spec:
                   value: /discord/linked-roles
               - path:
                   type: PathPrefix
-                  value: /discord/linked-roles/
+                  value: /discord/linked-roles/callback
             filters:
               - type: ExtensionRef
                 extensionRef:
