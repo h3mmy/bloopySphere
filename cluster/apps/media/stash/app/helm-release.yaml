@@ -32,6 +32,23 @@ spec:
     keepHistory: false
 
   values:
+    defaultPodOptions:
+      affinity:
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 100
+                podAffinityTerm:
+                  labelSelector:
+                    matchExpressions:
+                      - key: app.kubernetes.io/name
+                        operator: In
+                        values:
+                          - plex
+                      - key: kubernetes.io/hostname
+                        operator: In
+                        values:
+                          - k8s-0
+                  topologyKey: kubernetes.io/hostname
     controllers:
       main:
         type: statefulset
