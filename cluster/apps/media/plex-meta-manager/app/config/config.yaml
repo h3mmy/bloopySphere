@@ -48,7 +48,7 @@ libraries: # This is called out once within the config.yaml file
       - repo: Movies - Overlays - Studios.yaml
       - repo: Movies - Continents.yaml
     operations:
-      mass_genre_update: imdb
+      mass_genre_update: [imdb, tmdb]
       mass_content_rating_update: [omdb]
       mass_audience_rating_update: [mdb_tomatoesaudience]
       mass_critic_rating_update: [mdb_metacritic]
@@ -81,7 +81,7 @@ libraries: # This is called out once within the config.yaml file
       - repo: TV Shows - Continents.yaml
     minimum_items: 2
     operations:
-      mass_genre_update: tmdb
+      mass_genre_update: [tvdb, tmdb]
       mass_content_rating_update: omdb
       mass_audience_rating_update: [mdb_tomatoesaudience]
       mass_critic_rating_update: [mdb_metacritic]
