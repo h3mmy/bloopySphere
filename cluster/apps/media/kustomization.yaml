@@ -24,7 +24,7 @@ resources:
   - ./plex-trakt-sync
   - ./stash/ks.yaml
   - ./recyclarr/ks.yaml
-  - ./music-assistant/ks.yaml
+  # - ./music-assistant/ks.yaml
   - ./navidrome/ks.yaml
   # temporary until I figure out a sustainable way to do cross-namespace extensionRefs
   - ./middlewares/chain-no-auth.yaml
