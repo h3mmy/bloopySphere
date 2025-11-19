@@ -98,7 +98,7 @@ spec:
         gluetun:
           image:
             repository: docker.io/qmcgaw/gluetun
-            tag: v3.40.1
+            tag: v3.40.3
         securityContext:
           privileged: true
           # capabilities:
