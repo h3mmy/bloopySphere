@@ -74,6 +74,6 @@ spec:
                   name: bloopnet-xyz-auth
     persistence:
       data:
-        existingClaim: "{{ .Release.Name }}-v1"
+        existingClaim: {{ .Release.Name }}-v1
         globalMounts:
           - path: /opt/data
