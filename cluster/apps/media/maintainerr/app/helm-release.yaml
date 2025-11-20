@@ -47,6 +47,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
+        controller: "{{ .Release.Name }}" 
         ports:
           http:
             port: &port 6246
