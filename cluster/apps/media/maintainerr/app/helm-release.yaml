@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: maintainerr
+  name: &app maintainerr
 spec:
   chartRef:
     kind: OCIRepository
@@ -47,7 +47,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: "{{ .Release.Name }}" 
+        controller: *app
         ports:
           http:
             port: &port 6246
@@ -60,7 +60,7 @@ spec:
             sectionName: websecure
         rules:
           - backendRefs:
-              - name: "{{ .Release.Name }}"
+              - name: *app
                 port: *port
             matches:
               - path:
