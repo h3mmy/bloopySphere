@@ -5,8 +5,8 @@ kind: Kustomization
 components:
   - ../../../../components/common
 commonLabels:
-  app.kubernetes.io/name: navidrome
-  app.kubernetes.io/instance: navidrome
+  app.kubernetes.io/name: maintainerr
+  app.kubernetes.io/instance: maintainerr
 resources:
   - ./pvc-data-v1.yaml
   - ./helm-release.yaml
