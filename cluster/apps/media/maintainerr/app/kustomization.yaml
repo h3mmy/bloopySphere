@@ -2,6 +2,11 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+components:
+  - ../../../../components/common
+commonLabels:
+  app.kubernetes.io/name: navidrome
+  app.kubernetes.io/instance: navidrome
 resources:
   - ./pvc-data-v1.yaml
   - ./helm-release.yaml
