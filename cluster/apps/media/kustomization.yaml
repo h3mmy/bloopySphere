@@ -31,3 +31,4 @@ resources:
   - ./middlewares/bloopnet-xyz-auth.yaml
   # disable until account detangling is figured out
   - ./ytdlp-sub/ks.yaml
+  - ./maintainerr.yaml
