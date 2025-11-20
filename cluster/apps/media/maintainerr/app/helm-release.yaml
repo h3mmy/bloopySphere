@@ -53,7 +53,7 @@ spec:
             port: &port 6246
     route:
       app:
-        hostnames: ["{{ .Release.Name }}.${XYZ_DOMAIN}"]
+        hostnames: ["maintainerr.${XYZ_DOMAIN}"]
         parentRefs:
           - name: traefik
             namespace: networking
@@ -74,6 +74,6 @@ spec:
                   name: bloopnet-xyz-auth
     persistence:
       data:
-        existingClaim: {{ .Release.Name }}-v1
+        existingClaim: maintainerr-v1
         globalMounts:
           - path: /opt/data
