@@ -47,7 +47,7 @@ spec:
               tag: v1.1.1
             env:
               PLEX_URL: http://plex.media.svc.cluster.local:32400
-              PLEX_PATH: /config/Library/Application Support/Plex Media Server
+              PLEX_PATH: /plex_config/Library/Application Support/Plex Media Server
               MODE: remove
               PHOTO_TRANSCODER: true
               PLEX_TOKEN: ${PLEX_TOKEN}
@@ -87,7 +87,7 @@ spec:
       plex-config:
         existingClaim: plex-config
         globalMounts:
-          - path: /config
+          - path: /plex_config
       tmpfs:
         type: emptyDir
         advancedMounts:
