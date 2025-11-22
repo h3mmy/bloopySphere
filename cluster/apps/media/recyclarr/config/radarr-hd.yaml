@@ -68,7 +68,7 @@ radarr:
               - WEBDL-720p
               - WEBRip-720p
               - HDTV-720p
-      - name: HD - Anime
+      - name: Remux-1080p - Anime
         reset_unmatched_scores:
           enabled: true
         upgrade:
@@ -107,7 +107,6 @@ radarr:
 
     quality_definition:
       type: movie
-      preferred_ratio: 0.8
 
     custom_formats:
 
@@ -164,6 +163,18 @@ radarr:
         assign_scores_to:
           - name: HD
           - name: SD
+
+      - trash_ids:
+          - 064af5f084a0a24458cc8ecd3220f93f # Uncensored
+        assign_scores_to:
+          - name: Remux-1080p - Anime
+            score: 100 # Adjust scoring as desired
+
+      - trash_ids:
+          - 4a3b087eea2ce012fcc1ce319259a3be # Anime Dual Audio
+        assign_scores_to:
+          - name: Remux-1080p - Anime
+            score: 150 # Adjust scoring as desired
 
       - trash_ids:
           # Unwanted
