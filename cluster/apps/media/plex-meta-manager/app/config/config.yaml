@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/kometa-team/kometa/nightly/json-schema/config-schema.json
 libraries: # This is called out once within the config.yaml file
   # Anime:     # this library overrides sonarr root path and profile
   #   metadata_path:
@@ -46,6 +47,7 @@ libraries: # This is called out once within the config.yaml file
       - repo: Movies - Overlays - Stand-up.yaml
       - repo: Movies - Overlays - Streaming Services.yaml
       - repo: Movies - Overlays - Studios.yaml
+    metadata_files:
       - repo: Movies - Continents.yaml
     operations:
       mass_genre_update: [imdb, tmdb]
@@ -56,7 +58,6 @@ libraries: # This is called out once within the config.yaml file
       delete_collections:
         configured: false
         managed: true
-    minimum_items: 2
 
   TV Shows:
     run_order:
@@ -78,11 +79,11 @@ libraries: # This is called out once within the config.yaml file
       - repo: TV Shows - Overlays - Statuses.yaml
       - repo: TV Shows - Overlays - Streaming Services.yaml
       - repo: TV Shows - Overlays - Studios.yaml
+    metadata_files:
       - repo: TV Shows - Continents.yaml
-    minimum_items: 2
     operations:
       mass_genre_update: [tvdb, tmdb]
-      mass_content_rating_update: omdb
+      mass_content_rating_update: [omdb]
       mass_audience_rating_update: [mdb_tomatoesaudience]
       mass_critic_rating_update: [mdb_metacritic]
       mass_user_rating_update: [imdb]
@@ -99,7 +100,6 @@ settings:
   asset_folders: false
   cache_expiration: 60
   cache: true
-  check_nightly: false
   create_asset_folders: false
   custom_repo: https://github.com/h3mmy/bloopysphere/tree/main/cluster/apps/media/plex-meta-manager/app/custom/
   default_collection_order:
@@ -112,12 +112,9 @@ settings:
   item_refresh_delay: 0
   minimum_items: 1
   missing_only_released: false
-  missing_path: config/missing
   only_filter_missing: false
-  playlist_exclude_user:
   playlist_exclude_users:
   playlist_report: false
-  playlist_sync_to_user: all
   playlist_sync_to_users: all
   prioritize_assets: false
   run_again_delay: 2
@@ -148,7 +145,7 @@ tmdb: # REQUIRED for the script to run
   apikey: ${TMDB_API_KEY}
   language: en
   cache_expiration: 60
-  region:
+  region: ""
 
 tautulli:
   url: http://tautulli.media.svc.cluster.local:8181
