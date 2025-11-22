@@ -13,8 +13,22 @@
 # Instance Definition: https://recyclarr.dev/wiki/yaml/config-reference/basic/
 radarr:
   standard:
-    base_url: http://radarr.media.svc.cluster.local
+    base_url: http://radarr.media.svc.cluster.local:7878
     api_key: !env_var RADARR_API_KEY
+
+    # include:
+    #   # Comment out any of the following includes to disable them
+    #   - template: radarr-quality-definition-movie
+    #   # HD Bluray + WEB
+    #   - template: radarr-quality-profile-hd-bluray-web
+    #   - template: radarr-custom-formats-hd-bluray-web
+
+    #   - template: radarr-quality-definition-anime
+    #   - template: radarr-quality-profile-anime
+    #   - template: radarr-custom-formats-anime
+    #   # Remuxes + WEB 1080p
+    #   - template: radarr-quality-profile-remux-web-1080p
+    #   - template: radarr-custom-formats-remux-web-1080p
 
     # Define Quality Profiles
     quality_profiles:
