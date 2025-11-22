@@ -16,13 +16,13 @@ jobs:
         uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
 
       - name: Generate Token
-        uses: tibdex/github-app-token@v2
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2
         id: generate-token
         with:
           app_id: "${{ secrets.APP_ID }}"
           private_key: "${{ secrets.APP_PRIVATE_KEY }}"
 
-      - uses: repo-sync/pull-request@v2
+      - uses: repo-sync/pull-request@7e79a9f5dc3ad0ce53138f01df2fad14a04831c5 # v2
         name: pull-request
         with:
           destination_branch: ${{ env.DEPLOY_BRANCH }}

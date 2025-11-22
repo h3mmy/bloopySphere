@@ -23,7 +23,7 @@ jobs:
           fetch-depth: 1
 
       - name: markdownlint-cli
-        uses: nosborn/github-action-markdown-cli@v3.5.0
+        uses: nosborn/github-action-markdown-cli@508d6cefd8f0cc99eab5d2d4685b1d5f470042c1 # v3.5.0
         with:
           files: "README.md docs/**"
           ignore_files: "docs/_*"
@@ -38,7 +38,7 @@ jobs:
         with:
           fetch-depth: 1
 
-      - uses: gaurav-nelson/github-action-markdown-link-check@v1
+      - uses: gaurav-nelson/github-action-markdown-link-check@5c5dfc0ac2e225883c0e5f03a85311ec2830d368 # v1
         with:
           config-file: ".github/markdown-link-check_config.json"
           file-path: "./README.md"
@@ -54,7 +54,7 @@ jobs:
     steps:
       - name: Get bloopy-boi token
         id: get-app-token
-        uses: getsentry/action-github-app-token@v3
+        uses: getsentry/action-github-app-token@d4b5da6c5e37703f8c3b3e43abb5705b46e159cc # v3
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
@@ -63,7 +63,7 @@ jobs:
         with:
           token: ${{ steps.get-app-token.outputs.token }}
 
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6
         with:
           python-version: 3.x
 

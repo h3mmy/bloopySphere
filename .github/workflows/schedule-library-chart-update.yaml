@@ -14,13 +14,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
       - name: Generate Token
-        uses: tibdex/github-app-token@v2
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2
         id: generate-token
         with:
           app_id: "${{ secrets.APP_ID }}"
           private_key: "${{ secrets.APP_PRIVATE_KEY }}"
       - name: Install Helm
-        uses: azure/setup-helm@v4
+        uses: azure/setup-helm@1a275c3b69536ee54be43f2070a358922e12c8d4 # v4
         with:
           version: v3.6.3
       - name: Add library chart
@@ -31,7 +31,7 @@ jobs:
         run: helm dep update
         working-directory: charts/kah-common
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
         with:
           token: "${{ steps.generate-token.outputs.token }}"
           branch: github-action/renovate-kah-library-chart
