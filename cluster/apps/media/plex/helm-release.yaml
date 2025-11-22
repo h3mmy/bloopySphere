@@ -108,6 +108,14 @@ spec:
         storageClass: "local-path"
         accessMode: ReadWriteOnce
         size: 20Gi
+      config-cache:
+        enabled: true
+        readOnly: false
+        existingClaim: plex-cache
+        # Uncomment when upgrading to v2.0.0+ of the chart
+        # globalMounts:
+        #   - path: /config/Library/Application Support/Plex Media Server/Cache
+        mountPath: /config/Library/Application Support/Plex Media Server/Cache
       transcode:
         enabled: true
         type: emptyDir
