@@ -29,9 +29,13 @@ radarr:
       # Remuxes + WEB 1080p
       - template: radarr-quality-profile-remux-web-1080p
       - template: radarr-custom-formats-remux-web-1080p
-
+      # SQP ??
+      - template: radarr-quality-definition-sqp-streaming
+      - template: radarr-quality-profile-sqp-1-web-1080p
+      - template: radarr-custom-formats-sqp-1-web-1080p
     # Define Quality Profiles
     quality_profiles:
+      - name: SQP-1 WEB 1080p
       - name: HD
         reset_unmatched_scores:
           enabled: true

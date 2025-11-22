@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/recyclarr/recyclarr/master/schemas/config-schema.json
 sonarr:
   standard:
-    base_url: http://sonarr.media.svc.cluster.local:8989
+    base_url: http://sonarr.media.svc.cluster.local:80
     api_key: ${SONARR_API_KEY}
     delete_old_custom_formats: true
     quality_definition:
@@ -27,7 +27,7 @@ sonarr:
           enabled: true
     custom_formats:
       # Common
-      - quality_profiles:
+      - assign_scores_to:
           - name: WEB 1080p
           - name: WEB 1080p - French
           - name: WEB 2160p
@@ -66,14 +66,14 @@ sonarr:
           - d84935abd3f8556dcd51d4f27e22d0a6  # WEB Tier 03
           - d0c516558625b04b363fa6c5c2c7cfd4  # WEB Scene
       # Common 1080p
-      - quality_profiles:
+      - assign_scores_to:
           - name: WEB 1080p
           - name: WEB 1080p - French
         trash_ids:
           # Unwanted
           - 47435ece6b99a0b477caf360e79ba0bb  # x265 (HD)
       # Common 2160p
-      - quality_profiles:
+      - assign_scores_to:
           - name: WEB 2160p
           - name: WEB 2160p - French
         trash_ids:
@@ -93,7 +93,7 @@ sonarr:
           # Optional UHD
           - 2016d1676f5ee13a5b7257ff86ac9a93  # SDR
       # Common French
-      - quality_profiles:
+      - assign_scores_to:
           - name: WEB 1080p - French
           - name: WEB 2160p - French
         trash_ids:
@@ -122,7 +122,7 @@ sonarr:
           - dbfc0a4b5cb4cbd693311c4482ae9683  # FR WEB Tier 03
           - 2f3422339d185eb227a324644a2fbfca  # FR Scene Groups
       # Common Anime
-      - quality_profiles:
+      - assign_scores_to:
           - name: Remux 1080p - Anime
           - name: Remux 1080p - VOSTFR Anime
         trash_ids:
@@ -168,7 +168,7 @@ sonarr:
           - 570b03b3145a25011bf073274a407259  # HIDIVE
           - d34870697c9db575f17700212167be23  # NF
           # - 44a8ee6403071dd7b8a3a8dd3fe8cb20  # VRV
-      - quality_profiles:
+      - assign_scores_to:
           - name: Remux 1080p - VOSTFR Anime
         trash_ids:
           # Unwanted
@@ -184,7 +184,7 @@ sonarr:
           - ddb8eaa9c85a549c50034d280539d54d  # FR WEB Tier 01
           - a4c51febd4d8b2a0db10a3c974f21d92  # FR WEB Tier 02
           - dbfc0a4b5cb4cbd693311c4482ae9683  # FR WEB Tier 03
-      - quality_profiles:
+      - assign_scores_to:
           - name: Remux 1080p - VOSTFR Anime
             score: 101
         trash_ids:
@@ -236,7 +236,7 @@ sonarr:
           - e1a997ddb54e3ecbfe06341ad323c458 # Obfuscated
           - 06d66ab109d4d2eddb2794d21526d140 # Retags
           - 47435ece6b99a0b477caf360e79ba0bb # x265 (HD)
-        quality_profiles:
+        assign_scores_to:
           - name: Any
             reset_unmatched_scores: true
           - name: HD
