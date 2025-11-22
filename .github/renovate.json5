@@ -9,6 +9,7 @@
     ':rebaseStalePrs',
     ':automergePatch',
     ':gomod',
+    'helpers:pinGitHubActionDigests',
     'docker:enableMajor',
     'github>h3mmy/bloopysphere//.github/renovate/allowedVersions.json5',
     'github>h3mmy/bloopysphere//.github/renovate/commitMessage',
@@ -19,9 +20,10 @@
     'github>h3mmy/bloopysphere//.github/renovate/semanticCommits',
   ],
   timezone: 'America/Detroit',
-  dependencyDashboardTitle: 'Renovate Dashboard',
+  dependencyDashboardTitle: 'Renovate Dashboard 👾',
   suppressNotifications: [
     'prIgnoreNotification',
+    'prEditedNotification',
   ],
   rebaseWhen: 'conflicted',
   ignoreDeps: [
