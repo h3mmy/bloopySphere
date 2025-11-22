@@ -33,21 +33,21 @@ jobs:
           fetch-depth: 0
 
       - name: Generate Token
-        uses: tibdex/github-app-token@v2
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2
         id: generate-token
         with:
           app_id: "${{ secrets.APP_ID }}"
           private_key: "${{ secrets.APP_PRIVATE_KEY }}"
 
       - name: Lint
-        uses: megalinter/megalinter/flavors/terraform@v9
+        uses: megalinter/megalinter/flavors/terraform@62c799d895af9bcbca5eacfebca29d527f125a57 # v9
         env:
           GITHUB_TOKEN: "${{ steps.generate-token.outputs.token }}"
           MEGALINTER_CONFIG: ${{ env.MEGALINTER_CONFIG }}
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'workflow_dispatch' }}
       - name: Archive production artifacts
         if: ${{ success() }} || ${{ failure() }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
         with:
           name: MegaLinter reports
           path: |
@@ -58,7 +58,7 @@ jobs:
       - name: Create Pull Request with applied fixes
         id: cpr
         if: steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT == 'all' || env.APPLY_FIXES_EVENT == github.event_name) && env.APPLY_FIXES_MODE == 'pull_request' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
         with:
           token: ${{ steps.generate-token.outputs.token }}
           commit-message: "[MegaLinter] Apply linters automatic fixes"
@@ -76,7 +76,7 @@ jobs:
         run: sudo chown -Rc $UID .git/
       - name: Commit and push applied linter fixes
         if: steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT == 'all' || env.APPLY_FIXES_EVENT == github.event_name) && env.APPLY_FIXES_MODE == 'commit' && github.ref != 'refs/heads/main' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
-        uses: stefanzweifel/git-auto-commit-action@v7
+        uses: stefanzweifel/git-auto-commit-action@28e16e81777b558cc906c8750092100bbb34c5e3 # v7
         with:
           branch: ${{ github.event.pull_request.head.ref || github.head_ref || github.ref }}
           commit_message: "[MegaLinter] Apply linters fixes"
