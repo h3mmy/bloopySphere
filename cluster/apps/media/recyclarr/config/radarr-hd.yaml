@@ -35,7 +35,7 @@ radarr:
       - template: radarr-custom-formats-sqp-1-web-1080p
     # Define Quality Profiles
     quality_profiles:
-      - name: SQP-1 WEB 1080p
+      - name: SQP-1 WEB (1080p)
       - name: HD
         reset_unmatched_scores:
           enabled: true
@@ -173,6 +173,7 @@ radarr:
           - 7357cf5161efbf8c4d5d0c30b4815ee2 # Obfuscated
           - 5c44f52a8714fdd79bb4d98e2673be1f # Retags
           - f537cf427b64c38c8e36298f657e4828 # Scene
+          - dc98083864ea246d05a42df0d05f81cc # x265 (HD)
         assign_scores_to:
           - name: HD Bluray + WEB
     # release_profiles:
