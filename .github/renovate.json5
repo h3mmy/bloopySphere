@@ -16,7 +16,7 @@
     'github>h3mmy/bloopysphere//.github/renovate/autoMerge.json5',
     'github>h3mmy/bloopysphere//.github/renovate/labels.json5',
     'github>h3mmy/bloopysphere//.github/renovate/groups.json5',
-    'github>h3mmy/bloopysphere//.github/renovate/custom managers.json5',
+    'github>h3mmy/bloopysphere//.github/renovate/customManagers.json5',
     'github>h3mmy/bloopysphere//.github/renovate/disabledDatasources.json5',
     'github>h3mmy/bloopysphere//.github/renovate/semanticCommits',
   ],
