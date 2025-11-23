@@ -35,6 +35,7 @@ spec:
         containers:
           app:
             image:
+              # renovate datasource=docker depName=h3mmy/bloopyboi
               repository: ghcr.io/h3mmy/bloopyboi
               tag: dev@sha256:62c0d2138263c6ce19ac8ab16dea2bf676895ed2e55de47c50a678a3a27096a0
             env:
