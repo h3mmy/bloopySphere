@@ -37,7 +37,7 @@ spec:
             image:
               # renovate datasource=docker depName=h3mmy/bloopyboi
               repository: ghcr.io/h3mmy/bloopyboi
-              tag: dev@sha256:62c0d2138263c6ce19ac8ab16dea2bf676895ed2e55de47c50a678a3a27096a0
+              tag: dev@sha256:acfb3397f5ee927ea07faeff6531c2c84a29bde7080bcbb4e30b317635686f58
             env:
               TZ: ${TZ}
               GOOGLE_APPLICATION_CREDENTIALS: &svc-keyfile /bloopy-ops-dev.json
