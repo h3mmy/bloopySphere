@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: tofu-controller
-      version: 0.16.0-rc.6
+      version: 0.16.0-rc.7
       sourceRef:
         kind: HelmRepository
         name: tofu-controller
