@@ -19,7 +19,7 @@ spec:
           app:
             image:
               repository: ghcr.io/maintainerr/maintainerr
-              tag: 2.21.0@sha256:c107c09da8c5dd2f6336c04f41c04c2da1fb8274c357f8680ebf79652d810df4
+              tag: 2.25.0@sha256:7c2899994a471df176b685c751b48f8881abe0fd8f2f14c8301532b3d963cb6d
             env:
               TZ: ${TZ}
             probes:
