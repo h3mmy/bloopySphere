@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: stash
@@ -47,7 +47,7 @@ spec:
                       - key: kubernetes.io/hostname
                         operator: In
                         values:
-                          - k8s-0
+                          - slowpoke
                   topologyKey: kubernetes.io/hostname
     controllers:
       main:
