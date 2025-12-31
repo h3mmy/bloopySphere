@@ -52,7 +52,7 @@ spec:
               # repository: ghcr.io/home-operations/k8s-sidecar
               # tag: 2.1.2@sha256:d9e169add4e71fd5931a24e11696853f3d804ebc2022cd81f038e7ef22f4d626
               repository: ghcr.io/kiwigrid/k8s-sidecar
-              tag: 1.30.9@sha256:8c06e1ba643a4625de14b2db65c356f5db6b1482a25fce4754380a2936207338
+              tag: 2.1.4@sha256:0b56b3ef7efc0c47f87c2230c4dfdcfb5b4b7399132cd7daecede82f85d7e342
               pullPolicy: IfNotPresent
             env: &configSyncEnv
               FOLDER: /config
