@@ -102,7 +102,7 @@ spec:
           traefik.ingress.kubernetes.io/service.passhostheader: "true"
           traefik.ingress.kubernetes.io/router.priority: "99"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          ingress.kubernetes.io/protocol: https
+          #ingress.kubernetes.io/protocol: https
           #raefik.ingress.kubernetes.io/service.serversscheme: https
           traefik.ingress.kubernetes.io/router.middlewares: networking-bloopnet-xyz-auth@kubernetescrd
         hosts:
