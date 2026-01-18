@@ -130,13 +130,13 @@ spec:
         globalMounts:
           - subPath: tls.crt
             path: /root/.stash/stash.crt
-       tls-key:
-         enabled: true
-         name: tls.stash
-         type: secret
-         globalMounts:
-           - subPath: tls.key
-             path: /root/.stash/stash.key
+      tls-key:
+        enabled: true
+        name: tls.stash
+        type: secret
+        globalMounts:
+          - subPath: tls.key
+            path: /root/.stash/stash.key
       media:
         enabled: true
         type: custom
