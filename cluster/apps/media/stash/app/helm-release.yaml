@@ -79,9 +79,9 @@ spec:
     service:
       main:
         ports:
-          https:
-            enabled: false
           http:
+            enabled: false
+          https:
             enabled: true
             port: 9999
             protocol: TCP
