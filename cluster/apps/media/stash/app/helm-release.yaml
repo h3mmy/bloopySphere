@@ -111,7 +111,7 @@ spec:
               - path: /
                 service:
                   name: main
-                  port: https
+                  port: http
         tls:
           - hosts:
               - *host
@@ -123,20 +123,20 @@ spec:
         existingClaim: stash-config-v1
         globalMounts:
           - path: /root/.stash
-      #tls-crt:
-      #  enabled: true
-      #  name: tls.stash
-      #  type: secret
-      #  globalMounts:
-      #    - subPath: tls.crt
-      #      path: /root/.stash/stash.crt
-     # tls-key:
-    #    enabled: true
-     #   name: tls.stash
-     #   type: secret
-     #   globalMounts:
-     #     - subPath: tls.key
-    #        path: /root/.stash/stash.key
+      tls-crt:
+        enabled: true
+        name: tls.stash
+        type: secret
+        globalMounts:
+          - subPath: tls.crt
+            path: /root/.stash/stash.crt
+       tls-key:
+         enabled: true
+         name: tls.stash
+         type: secret
+         globalMounts:
+           - subPath: tls.key
+             path: /root/.stash/stash.key
       media:
         enabled: true
         type: custom
