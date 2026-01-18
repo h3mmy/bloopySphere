@@ -111,7 +111,7 @@ spec:
               - path: /
                 service:
                   name: main
-                  port: http
+                  port: https
         tls:
           - hosts:
               - *host
