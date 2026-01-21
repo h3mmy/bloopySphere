@@ -31,7 +31,7 @@ jobs:
         run: helm dep update
         working-directory: charts/kah-common
       - name: Create pull request
-        uses: peter-evans/create-pull-request@98357b18bf14b5342f975ff684046ec3b2a07725 # v8
+        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8
         with:
           token: "${{ steps.generate-token.outputs.token }}"
           branch: github-action/renovate-kah-library-chart
