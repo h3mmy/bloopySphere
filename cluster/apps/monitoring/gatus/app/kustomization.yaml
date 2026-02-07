@@ -23,5 +23,5 @@ patches:
     kind: ConfigMap
     metadata:
       name: gatus-announcememts
-     annotations:
-       gatus.io/enabled: true
+      annotations:
+        gatus.io/enabled: true
