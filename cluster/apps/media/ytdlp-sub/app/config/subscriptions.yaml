@@ -70,3 +70,15 @@ madylin_mei:
   preset: "yt_music_channel"
   download:
     url: "https://music.youtube.com/channel/UCsU1kV441-MiUcDTbOSwhtw"
+blackpink:
+  preset: "yt_music_channel"
+  download:
+    url: "https://music.youtube.com/channel/UCkbbMCA40i18i7UdjayMPAg"
+hazbin_hotel:
+  preset: "yt_music_channel"
+  download:
+    url: "https://music.youtube.com/channel/UCFZWwdDTeBrTWJs0v1_GHpg"
+loris:
+  preset: "yt_music_channel"
+  download:
+    url: "https://music.youtube.com/channel/UCDAx8k9F4lg4RmizDADkWfg"
