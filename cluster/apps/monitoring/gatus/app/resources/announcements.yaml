@@ -1,0 +1,4 @@
+announcements:
+  - timestamp: "2026-02-06T21:29:48-05:00"
+    type: warning
+    message: "After RCA of the brief outage, some temporary adjustments were made to ensure priority services remain stable. You may see some non-critical services appear to be down on this status page, and can be safely ignored for as long as this message is active. Reach out to Kat with any questions or concerns."

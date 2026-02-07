@@ -10,7 +10,18 @@ configMapGenerator:
   - name: gatus-configmap
     files:
       - config.yaml=./resources/config.yaml
+  - name: gatus-announcememts
+    files:
+      - config.yaml=./resources/config.yaml
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
     kustomize.toolkit.fluxcd.io/substitute: disabled
+patches:
+- patch: |-
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: gatus-announcememts
+     annotations:
+       gatus.io/enabled: true
