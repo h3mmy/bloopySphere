@@ -10,7 +10,7 @@ on:
 
 jobs:
   support:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: dessant/support-requests@47d5ea12f6c9e4a081637de9626b7319b415a3bf # v4
         with:
