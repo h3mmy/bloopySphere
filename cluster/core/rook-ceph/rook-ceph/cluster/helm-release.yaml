@@ -21,6 +21,7 @@ spec:
       retries: 7
     # crds: CreateReplace
   upgrade:
+    cleanupOnFail: true
     remediation:
       retries: 7
       remediateLastFailure: false # remediate the last failure, when no retries remain
