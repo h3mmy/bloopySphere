@@ -37,7 +37,7 @@ spec:
               value: kube-system
             - name: svc_enable
               value: "false"
-            - name: vip_address
+            - name: address
               value: "10.1.0.165/32"
             - name: bgp_enable
               value: "true"
