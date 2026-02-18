@@ -47,10 +47,6 @@ spec:
               value: "64515" # avoid using same asn as calico so they aren't competing
             - name: bgp_peeras
               value: "64513"
-            - name: bgp_sourceip
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
             - name: bgp_routerid
               valueFrom:
                 fieldRef:
