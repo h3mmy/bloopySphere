@@ -44,7 +44,7 @@ spec:
             - name: bgp_peeraddress
               value: "10.1.0.1"
             - name: bgp_as
-              value: "64514"
+              value: "64515" # avoid using same asn as calico so they aren't competing
             - name: bgp_peeras
               value: "64513"
             - name: bgp_routerid
