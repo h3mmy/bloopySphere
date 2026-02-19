@@ -13,20 +13,21 @@ spec:
     - LoadBalancer
   assignmentMode: Manual
   disableBGPExport: false
----
-apiVersion: projectcalico.org/v3
-kind: IPPool
-metadata:
-  name: lb-v4-class-b-1
-spec:
-  cidr: 10.1.0.128/25
-  natOutgoing: true
-  disabled: false
-  nodeSelector: all()
-  allowedUses:
-    - LoadBalancer
-  assignmentMode: Manual
-  disableBGPExport: false
+#---
+# disabling as this will be used by externalIPs which should not have an IPAM config here
+#apiVersion: projectcalico.org/v3
+#kind: IPPool
+#metadata:
+#  name: lb-v4-class-b-1
+#spec:
+#  cidr: 10.1.0.128/25
+#  natOutgoing: true
+#  disabled: false
+#  nodeSelector: all()
+#  allowedUses:
+#    - LoadBalancer
+#  assignmentMode: Manual
+#  disableBGPExport: false
 #---
 # apiVersion: projectcalico.org/v3
 #kind: IPPool
