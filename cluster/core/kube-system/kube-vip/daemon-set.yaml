@@ -27,12 +27,12 @@ spec:
           env:
             - name: vip_arp
               value: "false"
-            - name: vip_interface
-              value: lo
+            # - name: vip_interface
+            #   value: lo
             - name: port
               value: "6443"
             - name: vip_cidr
-              value: "32"
+              value: "32,auto"
             - name: cp_enable
               value: "true"
             - name: cp_namespace
@@ -55,6 +55,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
+            - name: bgp_sourceip
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: bgp_peers
+              value: "10.1.0.85:65414::false,10.1.0.87:65414::false,10.1.0.91:65414::false"
           securityContext:
             capabilities:
               add:
