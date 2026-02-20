@@ -27,7 +27,7 @@ spec:
           env:
             - name: vip_arp
               value: "false"
-            - name: interface
+            - name: vip_interface
               value: lo
             - name: port
               value: "6443"
