@@ -41,7 +41,7 @@ spec:
             #  value: "eno1" # will only work for some nodes because they have different names, but this is theoretically overwritten by the routerId. Fortunately this is only needed until I figure out address assignment without manual steps for calico to use bgp anycast
             - name: svc_enable
               value: "false"
-            - name: address
+            - name: vip_address
               value: "10.1.0.165/32"
             - name: bgp_enable
               value: "true"
