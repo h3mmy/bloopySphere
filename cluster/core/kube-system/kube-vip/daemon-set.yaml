@@ -27,6 +27,8 @@ spec:
           env:
             - name: vip_arp
               value: "false"
+            - name: interface
+              value: lo
             - name: port
               value: "6443"
             - name: vip_cidr
@@ -35,8 +37,8 @@ spec:
               value: "true"
             - name: cp_namespace
               value: kube-system
-            - name: bgp_routerinterface
-              value: "eno1" # will only work for some nodes because they have different names, but this is theoretically overwritten by the routerId. Fortunately this is only needed until I figure out address assignment without manual steps for calico to use bgp anycast
+            # - name: bgp_routerinterface
+            #  value: "eno1" # will only work for some nodes because they have different names, but this is theoretically overwritten by the routerId. Fortunately this is only needed until I figure out address assignment without manual steps for calico to use bgp anycast
             - name: svc_enable
               value: "false"
             - name: address
