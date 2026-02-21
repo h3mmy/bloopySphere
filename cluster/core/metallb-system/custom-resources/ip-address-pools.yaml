@@ -25,13 +25,13 @@ spec:
     - "${NETWORK_BGP_BLOCK_V6}"
   autoAssign: false
   avoidBuggyIPs: true
----
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
-  name: vip
-  namespace: metallb-system
-spec:
-  addresses:
-    - "10.1.0.165/32"
-  autoAssign: false
+# ---
+# apiVersion: metallb.io/v1beta1
+# kind: IPAddressPool
+# metadata:
+#   name: vip
+#   namespace: metallb-system
+# spec:
+#   addresses:
+#     - "10.1.0.165/32"
+#   autoAssign: false

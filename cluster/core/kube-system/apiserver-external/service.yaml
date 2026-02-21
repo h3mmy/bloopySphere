@@ -7,7 +7,7 @@ metadata:
   labels:
     component: apiserver
   annotations:
-    metallb.io/addressPool: vip
+    metallb.io/address-pool: vip
     metallb.io/loadBalancerIPs: "10.1.0.165"
 spec:
   # The essential requirement
@@ -21,5 +21,5 @@ spec:
   ipFamilyPolicy: SingleStack
   ports:
     - protocol: TCP
-      port: 6443
+      port: 443
       targetPort: 6443

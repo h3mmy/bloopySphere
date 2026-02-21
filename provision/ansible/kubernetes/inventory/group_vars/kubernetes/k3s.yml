@@ -27,7 +27,7 @@ k3s_etcd_datastore: true
 k3s_use_unsupported_config: true
 
 # (string) Control Plane registration address
-k3s_registration_address: "10.1.0.165"
+k3s_registration_address: "10.1.0.65"
 
 # /etc/rancher/k3s/config.yaml.d
 k3s_server_config_yaml_d_files:
