@@ -11,6 +11,7 @@ spec:
     # - cidr: "10.43.0.1/32"
   serviceLoadBalancerIPs:
     - cidr: "${NETWORK_BGP_BLOCK_V4}" # Needs to line up with what metallb has since we only do bgp advertisement from calico. Metallb acts like IPAM
+    - cidr: "10.1.0.165/32"
     # metallb v4 range 10.1.0.100-10.1.0.255
     - cidr: "10.1.0.96/27"
   serviceExternalIPs: []
