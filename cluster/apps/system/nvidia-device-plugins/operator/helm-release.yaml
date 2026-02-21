@@ -42,7 +42,7 @@ spec:
       enabled: true
     driver:
       enabled: false
-      version: 590.48.01
+      version: "590.48.01"
     toolkit:
       enabled: true
       env:
