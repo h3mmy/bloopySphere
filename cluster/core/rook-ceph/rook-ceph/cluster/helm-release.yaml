@@ -161,6 +161,9 @@ spec:
           - name: "${NODE_2_NAME}"
             devices:
               - name: "${NODE_2_DEVICE_0}"
+          - name: "${NODE_5_NAME}"
+            devices:
+              - name: "${NODE_5_DEVICE_0}"
         # The section for configuring management of daemon disruptions during upgrade or fencing.
       disruptionManagement:
         # If true, the operator will create and manage PodDisruptionBudgets for OSD, Mon, RGW, and MDS daemons. OSD PDBs are managed dynamically

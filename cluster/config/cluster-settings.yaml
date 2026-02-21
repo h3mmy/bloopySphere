@@ -75,6 +75,8 @@ data:
   NODE_2_NAME: "k8s-2"
   NODE_2_DEVICE_0: "nvme0n1"
   NODE_3_NAME: "k8s-0"
+  NODE_5_NAME: "k8s-5"
+  NODE_5_DEVICE_0: "/dev/disk/by-id/nvme-Samsung_SSD_990_EVO_Plus_1TB_S7U5NJ0YA11983K"
   LB_NUT_V4: "10.1.0.118"
   PLEX_NOAUTH_NETWORKS: "10.0.0.0/8,172.16.0.0/16,192.168.83.89/255.255.255.254"
   PROMETHEUS_PROFILE_IMG_URL: https://avatars3.githubusercontent.com/u/3380462
