@@ -20,7 +20,7 @@ spec:
   chart:
     spec:
       chart: gpu-operator
-      version: v24.9.2
+      version: v25.10.1
       sourceRef:
         kind: HelmRepository
         name: nvidia
@@ -42,8 +42,7 @@ spec:
       enabled: true
     driver:
       enabled: false
-      repository: registry.skysolutions.fi/library/nvidia
-      version: 550.90.07
+      version: "590.48.01"
     toolkit:
       enabled: true
       env:
