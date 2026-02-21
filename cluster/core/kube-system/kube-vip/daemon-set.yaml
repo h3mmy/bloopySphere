@@ -54,7 +54,7 @@ spec:
             - name: svc_enable
               value: "false"
             - name: vip_address
-              value: "10.1.0.65/32"
+              value: "10.1.0.65"
             # - name: bgp_enable
             #   value: "true"
             # - name: bgp_peeraddress
