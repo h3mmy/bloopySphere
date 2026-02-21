@@ -37,8 +37,18 @@ spec:
               value: "32,auto"
             - name: cp_enable
               value: "true"
+            - name: lb_enable
+              value: "true"
             - name: cp_namespace
               value: kube-system
+            - name: vip_leaderelection
+              value: "true"
+            - name: vip_leaseduration
+              value: "15"
+            - name: vip_renewdeadline
+              value: "10"
+            - name: vip_retryperiod
+              value: "2"
             # - name: bgp_routerinterface
             #  value: "eno1" # will only work for some nodes because they have different names, but this is theoretically overwritten by the routerId. Fortunately this is only needed until I figure out address assignment without manual steps for calico to use bgp anycast
             - name: svc_enable
