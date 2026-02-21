@@ -39,6 +39,7 @@ resources:
   - mysql-charts.yaml
   - nfs-subdir-external-provisioner-charts.yaml
   - node-feature-discovery-charts.yaml
+  - nvidia.yaml
   - oauth2-proxy-charts.yaml
   - piraeus.yaml
   - prometheus-community-charts.yaml
