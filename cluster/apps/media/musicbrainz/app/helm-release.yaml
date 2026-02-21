@@ -25,7 +25,7 @@ spec:
         runAsGroup: 568
 
     controllers:
-      navidrome:
+      musuicbrainz-picard:
         containers:
           app:
             image:
