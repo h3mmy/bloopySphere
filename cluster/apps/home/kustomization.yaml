@@ -12,3 +12,4 @@ resources:
   # - ./network-ups-tools
   - ./emqx
   - ./go2rtc/ks.yaml
+  - ./voice
