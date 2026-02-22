@@ -88,7 +88,7 @@ spec:
 
     persistence:
       data:
-        existingClaim: config-whisper-v1
+        existingClaim: whisper-data-v1
         globalMounts:
           - path: /data
 
