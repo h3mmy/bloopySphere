@@ -22,3 +22,7 @@ spec:
   postBuild:
     substitute:
       APP: *app
+      TZ: ${TZ}
+      LB_V4_WHISPER: ${LB_V4_WHISPER}
+      LB_V6_WHISPER: ${LB_V6_WHISPER}
+      XYZ_DOMAIN: ${XYZ_DOMAIN}

@@ -81,6 +81,13 @@ spec:
 
     service:
       app:
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        ipFamilyPolicy: PreferDualStack
+        annotations:
+          metallb.io/loadBalancerIPs: "${LB_NUT_V4}"
+          external-dns.alpha.kubernetes.io/hostname: "whisper.${XYZ_DOMAIN}"
+
         controller: *app
         ports:
           wyoming:
