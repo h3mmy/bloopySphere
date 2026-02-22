@@ -85,7 +85,7 @@ spec:
         externalTrafficPolicy: Local
         ipFamilyPolicy: PreferDualStack
         annotations:
-          metallb.io/loadBalancerIPs: "${LB_NUT_V4}"
+          metallb.io/loadBalancerIPs: "${LB_V4_WHISPER},${LB_V6_WHISPER}"
           external-dns.alpha.kubernetes.io/hostname: "whisper.${XYZ_DOMAIN}"
 
         controller: *app
