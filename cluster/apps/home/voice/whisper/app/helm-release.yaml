@@ -100,8 +100,10 @@ spec:
         existingClaim: whisper-cache-v1
         globalMounts:
           - path: /root/.cache/whisper
+            readOnly: false
 
       tmp:
         type: emptyDir
         globalMounts:
           - path: /tmp
+            readOnly: false
