@@ -43,10 +43,6 @@ spec:
               TZ: "${TZ}"
               ASR_MOdE: =base
               ASR_ENGINE: faster_whisper # openai_whisper, faster_whisper
-              #AS
-            args:
-              - --language
-              - en
             resources:
               requests:
                 cpu: 200m
