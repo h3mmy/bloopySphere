@@ -41,12 +41,12 @@ spec:
             env: #https://ahmetoner.com/whisper-asr-webservice/environmental-variables/#faster_whisper
               # HF_HOME: /data/huggingface
               TZ: "${TZ}"
-              ASR_MOdE: =base
+              ASR_MODE: small
               ASR_ENGINE: faster_whisper # openai_whisper, faster_whisper
             resources:
               requests:
                 cpu: 200m
-                memory: 300Mi
+                memory: 600Mi
             probes:
               startup:
                 enabled: true
@@ -90,7 +90,29 @@ spec:
         controller: *app
         ports:
           wyoming:
-            port: 9000
+            port: &port 9000
+
+    route:
+      app:
+        hostnames: ["{{ .Release.Name }}.${XYZ_DOMAIN}"]
+        parentRefs:
+          - name: traefik
+            namespace: networking
+            sectionName: websecure
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            filters:
+              - type: ExtensionRef
+                extensionRef:
+                  group: traefik.io
+                  kind: Middleware
+                  name: rfc-1918
 
     persistence:
       cache:
