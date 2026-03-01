@@ -67,6 +67,7 @@ spec:
           terminationGracePeriodSeconds: 1
 
     defaultPodOptions:
+      runtimeClassName: nvidia
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -99,8 +100,10 @@ spec:
       cache:
         existingClaim: whisper-cache-v1
         globalMounts:
-          - path: /root/.cache/whisper
-            readOnly: false
+          - path: /root/.cache
+            subPath: cache
+          - path: /root/.config
+            subPath: config
 
       tmp:
         type: emptyDir
