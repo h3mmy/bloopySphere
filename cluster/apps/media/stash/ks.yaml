@@ -24,7 +24,7 @@ spec:
       - kind: Secret
         name: cluster-secrets
   healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta2
+    - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: stash
       namespace: media
