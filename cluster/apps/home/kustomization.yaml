@@ -13,3 +13,4 @@ resources:
   - ./emqx
   - ./go2rtc/ks.yaml
   - ./voice
+  - ./middlewares/rfc-1918.yaml
