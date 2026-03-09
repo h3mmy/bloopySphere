@@ -63,7 +63,8 @@ spec:
           terminationGracePeriodSeconds: 1
 
     defaultPodOptions:
-      runtimeClassName: nvidia
+      # Not required with operator v25+ since CDI is used by default 
+      # runtimeClassName: nvidia
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
