@@ -64,6 +64,11 @@ spec:
       runAsGroup: 568
       fsGroup: 568
       fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        # Custom Camelus Group(s)
+        - 65541
+        - 65536
+        - 65537
     persistence:
       config:
         enabled: true
