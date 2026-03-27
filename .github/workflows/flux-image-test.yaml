@@ -65,7 +65,7 @@ jobs:
           private-key: "${{ secrets.APP_PRIVATE_KEY }}"
 
       - name: Setup Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+        uses: Homebrew/actions/setup-homebrew@b2a302b9a642580cae998e6ba2076ffd28e61317 # master
 
       - name: Setup Workflow Tools
         shell: bash
