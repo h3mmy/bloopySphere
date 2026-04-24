@@ -86,7 +86,7 @@ jobs:
           token: "${{ steps.generate-token.outputs.token }}"
 
       - name: Setup Homebrew
-        uses: Homebrew/actions/setup-homebrew@6fa4c8300154020277b11ecfbab85263ca1d5a5a # master
+        uses: Homebrew/actions/setup-homebrew@98cfa07b984a61682e6cd3a0833fad2006cc84ba # master
 
       - name: Setup Tools
         run: |
