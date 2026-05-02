@@ -7,7 +7,7 @@ metadata:
 spec:
   instances: 3
 
-  imageName: ghcr.io/cloudnative-pg/postgresql:16.13
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.9
 
   primaryUpdateStrategy: unsupervised
 
