@@ -30,7 +30,7 @@ spec:
           app:
             image:
               repository: ghcr.io/jlesage/musicbrainz-picard
-              tag: v26.02.2@sha256:46d1f7b1dff908f23bd27a9c017287ec2b11ee86b6ee3b15f7cb89ae35a034c9
+              tag: v26.05.2@sha256:130ab9790d6303c2534dbfcc59d136b010c43d021cfdedf37f76935300698996
             env:
               TZ: "${TZ}"
               USER_ID: "568"
