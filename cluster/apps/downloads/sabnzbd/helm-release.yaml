@@ -29,7 +29,7 @@ spec:
   values:
     image:
       repository: ghcr.io/home-operations/sabnzbd
-      tag: 4.5.5@sha256:f5570c0a370596ab656db6d3baa830b90a6fd9952b71ae805d022a2dcb3db12f
+      tag: 5.0.3@sha256:53064020792b2e21305c892c11aaa1eb32af2141cbd59119b52df226d664cd05
     env:
       TZ: "${TZ}"
       SABNZBD__PORT: &port 80
