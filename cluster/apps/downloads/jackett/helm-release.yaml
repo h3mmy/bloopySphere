@@ -23,7 +23,7 @@ spec:
   values:
     image:
       repository: ghcr.io/home-operations/jackett
-      tag: 0.24.1914
+      tag: 0.24.1974
     env:
       TZ: ${TZ}
     service:
