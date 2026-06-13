@@ -55,33 +55,40 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/sct/overseerr
-              tag: 1.35.0
+              repository: ghcr.io/seerr-team/seerr
+              tag: tag: v3.3.0@sha256:c92d2dc117f62185e7bcb88cd56efd374ea79210eaf433275449e8d5988eb5a8
             env:
               TZ: ${TZ}
               LOG_LEVEL: debug
               PORT: &port 5055
             probes:
-              liveness: &probes
+              liveness:
+                enabled: true
+                spec:
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              readiness:
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
                     path: /api/v1/status
                     port: *port
-                  initialDelaySeconds: 0
                   periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
-              readiness: *probes
+                  timeoutSeconds: 5
+                  failureThreshold: 5
               startup:
-                enabled: false
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 10
             resources:
               requests:
                 memory: 250Mi
                 cpu: 100m
               limits:
-                memory: 750Mi
+                memory: 1500Mi
         pod:
           securityContext:
             runAsUser: 568
@@ -93,7 +100,7 @@ spec:
       main:
         ports:
           http:
-            port: 5055
+            port: *port
 
     ingress:
       main:
