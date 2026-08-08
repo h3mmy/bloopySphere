@@ -15,10 +15,10 @@ spec:
       - "${CIDR_V6_SN_1}"
       - "${CIDR_V6_SN_2}"
     # Don't treat traefik LB IPs as client IPs
-    ipStrategy:
-      excludedIPs:
-        - "${LB_V4_TRAEFIK}"
-        - "${LB_V6_TRAEFIK}"
+    #ipStrategy:
+    #  excludedIPs:
+    #    - "${LB_V4_TRAEFIK}"
+    #    - "${LB_V6_TRAEFIK}"
 ---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
