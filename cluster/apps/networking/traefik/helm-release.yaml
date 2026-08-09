@@ -11,7 +11,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.traefik.io/traefik
       chart: *name
-      version: 37.4.0
+      version: 39.0.9
       sourceRef:
         kind: HelmRepository
         name: traefik-charts
@@ -49,6 +49,7 @@ spec:
         target:
           kind: Deployment
   maxHistory: 5
+  # helm-values schema=https://raw.githubusercontent.com/traefik/traefik-helm-chart/refs/heads/v39.0/traefik/values.schema.json
   values:
     image:
       repository: traefik
@@ -117,7 +118,7 @@ spec:
       - "--global.checknewversion=true"
       - "--global.sendanonymoususage=false"
       - "--metrics.prometheus=true"
-      - "--entryPoints.websecure.forwardedHeaders.trustedIPs=10.0.0.0/8,192.168.0.0/16,172.16.0.0/12,${NETWORK_K8S_CLUSTER_CIDR_V6},${CALICO_NODE_CIDR_IPV6},${CIDR_V6_SN_1},${CIDR_V6_SN_2},103.21.244.0/22,103.22.200.0/22,103.31.4.0/22,104.16.0.0/13,104.24.0.0/14,108.162.192.0/18,131.0.72.0/22,141.101.64.0/18,162.158.0.0/15,172.64.0.0/13,173.245.48.0/20,188.114.96.0/20,190.93.240.0/20,197.234.240.0/22,198.41.128.0/17,2400:cb00::/32,2606:4700::/32,2803:f800::/32,2405:b500::/32,2405:8100::/32,2a06:98c0::/29,2c0f:f248::/32"
+      - "--entryPoints.websecure.forwardedHeaders.trustedIPs=${CALICO_NODE_CIDR},${NETWORK_K8S_CLUSTER_CIDR_V6},${CALICO_NODE_CIDR_IPV6},${CIDR_V6_SN_1},${CIDR_V6_SN_2},103.21.244.0/22,103.22.200.0/22,103.31.4.0/22,104.16.0.0/13,104.24.0.0/14,108.162.192.0/18,131.0.72.0/22,141.101.64.0/18,162.158.0.0/15,172.64.0.0/13,173.245.48.0/20,188.114.96.0/20,190.93.240.0/20,197.234.240.0/22,198.41.128.0/17,2400:cb00::/32,2606:4700::/32,2803:f800::/32,2405:b500::/32,2405:8100::/32,2a06:98c0::/29,2c0f:f248::/32"
     providers:
       kubernetesCRD:
         enabled: true
@@ -154,15 +155,16 @@ spec:
           default: true
         exposedPort: 80
         protocol: TCP
-        # Port Redirections
-        # Added in 2.2, you can make permanent redirects via entrypoints.
-        # https://docs.traefik.io/routing/entrypoints/#redirection
-        redirections:
-          entryPoint:
-            to: websecure
-            scheme: https
-            # permanent: true
-            priority: 10
+        http:
+          # Port Redirections
+          # Added in 2.2, you can make permanent redirects via entrypoints.
+          # https://docs.traefik.io/routing/entrypoints/#redirection
+          redirections:
+            entryPoint:
+              to: websecure
+              scheme: https
+              # permanent: true
+              priority: 10
         # Trust forwarded  headers information (X-Forwarded-*)
         # forwardedHeaders:
 
@@ -213,7 +215,7 @@ spec:
           - 190.93.240.0/20
           - 197.234.240.0/22
           - 198.41.128.0/17
-          - 2400:cb00::/32
+          - 2400:cb00::/3 2
           - 2606:4700::/32
           - 2803:f800::/32
           - 2405:b500::/32
@@ -231,25 +233,26 @@ spec:
         http3:
           enabled: true
           # advertisedPort: 4443
-        ## Set TLS at the entrypoint
-        ## https://doc.traefik.io/traefik/routing/entrypoints/#tls
-        tls:
-          enabled: true
-          options: default
-          domains:
-            - main: "${XYZ_DOMAIN}"
-              sans:
-                - "*.${XYZ_DOMAIN}"
-            - bloop: "${SECRET_DOMAIN}"
-              sans:
-                - "*.${SECRET_DOMAIN}"
-            - tyg3r: "${TGR_DOMAIN}"
-              sans:
-                - "*.${TGR_DOMAIN}"
-            - lilj: "${LILJ_DOMAIN}"
-              sans:
-                - "*.${LILJ_DOMAIN}"
-          stores: networking-default@kubernetescrd
+        http:
+          ## Set TLS at the entrypoint
+          ## https://doc.traefik.io/traefik/routing/entrypoints/#tls
+          tls:
+            enabled: true
+            options: default
+            domains:
+              - main: "${XYZ_DOMAIN}"
+                sans:
+                  - "*.${XYZ_DOMAIN}"
+              - bloop: "${SECRET_DOMAIN}"
+                sans:
+                  - "*.${SECRET_DOMAIN}"
+              - tyg3r: "${TGR_DOMAIN}"
+                sans:
+                  - "*.${TGR_DOMAIN}"
+              - lilj: "${LILJ_DOMAIN}"
+                sans:
+                  - "*.${LILJ_DOMAIN}"
+            stores: networking-default@kubernetescrd
       dns-tls:
         port: 8853
         expose:
