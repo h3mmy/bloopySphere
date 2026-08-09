@@ -1,0 +1,40 @@
+---
+# yaml-language-server: $schema=https://k8s-schemas.bjw-s.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: forgejo
+spec:
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: forgejo
+  components:
+    - ../../../../components/anubis
+    - ../../../../components/dragonfly
+    - ../../../../components/volsync
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+  healthCheckExprs:
+    - apiVersion: dragonflydb.io/v1alpha1
+      kind: Dragonfly
+      failed: status.phase != 'ready'
+      current: status.phase == 'ready'
+  interval: 1h
+  path: "./cluster/apps/dev/forgejo/app"
+  postBuild:
+    substitute:
+      APP: forgejo
+      APP_UID: "1000"
+      APP_GID: "1000"
+      VOLSYNC_CAPACITY: 10Gi
+      ANUBIS_TARGET: http://forgejo-http.dev.svc.cluster.local:3000
+      ANUBIS_MEM_LIMIT: 384Mi
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: dev
+  timeout: 5m
+  wait: false
