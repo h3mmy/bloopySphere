@@ -151,9 +151,9 @@ spec:
           default: true
       web:
         port: &webPort 8000
-          expose:
-            default: true
-          exposedPort: 80
+        expose:
+          default: true
+        exposedPort: 80
         protocol: TCP
         http:
           # Port Redirections
