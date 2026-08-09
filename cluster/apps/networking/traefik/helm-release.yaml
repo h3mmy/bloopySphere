@@ -258,33 +258,37 @@ spec:
         expose:
           default: true
         exposedPort: 853
-        tls:
-          enabled: true
-          options: default
+        http:
+          tls:
+            enabled: true
+            options: default
       wss:
         port: 8284
         expose:
           default: true
         exposedPort: 8084
-        tls:
-          enabled: true
-          options: default
+        http:
+          tls:
+            enabled: true
+            options: default
       mqtts:
         port: 8183
         expose:
           default: true
         exposedPort: 8883
-        tls:
-          enabled: true
-          options: default
+        http:
+          tls:
+            enabled: true
+            options: default
       ldaps:
         port: 8636
         expose:
           default: true
         exposedPort: 636
-        tls:
-          enabled: true
-          options: default
+        http:
+          tls:
+            enabled: true
+            options: default
       metrics:
         port: 8082
         expose:
@@ -295,8 +299,9 @@ spec:
         expose:
           default: true
         expostedPort: 5432
-        tls:
-          enabled: false
+        http:
+          tls:
+            enabled: false
     tlsOptions:
       default:
         minVersion: VersionTLS12
