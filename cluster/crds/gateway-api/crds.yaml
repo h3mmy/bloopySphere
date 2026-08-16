@@ -12,7 +12,7 @@ spec:
   secretRef:
     name: flux-system
   ref:
-    tag: 1.6.1
+    tag: v1.6.1
   ignore: |
     # exclude all
     /*
