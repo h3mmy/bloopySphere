@@ -4,6 +4,8 @@ kind: Middleware
 metadata:
   name: redirect-regex
   namespace: networking
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
 spec:
   redirectRegex:
     regex: "^(https?://[^/]+/[a-z0-9_]+)$"
@@ -15,6 +17,8 @@ kind: Middleware
 metadata:
   name: strip-prefix-regex
   namespace: networking
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
 spec:
   stripPrefixRegex:
     regex:
