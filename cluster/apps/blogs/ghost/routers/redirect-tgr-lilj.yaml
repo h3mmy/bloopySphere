@@ -7,5 +7,5 @@ metadata:
 spec:
   redirectRegex:
     regex: ^https://${TGR_DOMAIN}/(.*)
-    replacement: https://${LILJ_DOMAIN}/${1}
+    replacement: https://${LILJ_DOMAIN}/$${1}
     # permanent: true
