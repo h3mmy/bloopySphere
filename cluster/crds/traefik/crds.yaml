@@ -16,6 +16,10 @@ spec:
         kind: HelmRepository
         name: traefik-charts
         namespace: flux-system
+  install:
+    serverSideApply: true
+  upgrade:
+    serverSideApply: true
   values:
     traefik: true
     hub: true
