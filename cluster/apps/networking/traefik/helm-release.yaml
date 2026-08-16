@@ -345,8 +345,6 @@ spec:
           certificateRefs:
             - kind: Secret
               name: "tls.${XYZ_DOMAIN/./-}"
-    pilot:
-      enabled: false
 
     resources:
       requests:
