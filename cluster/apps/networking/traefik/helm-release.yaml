@@ -58,8 +58,8 @@ spec:
       replicas: 2
       # podAnnotations:
       #   linkerd.io/inject: ingress
-    podSecurityPolicy:
-      enabled: false
+    #podSecurityPolicy:
+      #enabled: false
     api:
       disableDashboardAd: true
     service:
