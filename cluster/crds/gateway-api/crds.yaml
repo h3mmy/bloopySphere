@@ -1,0 +1,33 @@
+
+# kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.5.1/standard-install.yaml
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: gateway-api-crds
+  namespace: flux-system
+spec:
+  interval: 30m
+  url: ssh://github.com/kubernetes-sigs/gateway-api.git
+  secretRef:
+    name: flux-system
+  ref:
+    tag: 1.6.1
+  ignore: |
+    # exclude all
+    /*
+    # path to crds
+    !/config/crd
+    !/config/crd/experimental
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: gateway-api-crds
+  namespace: flux-system
+spec:
+  interval: 30m
+  prune: false
+  sourceRef:
+    kind: GitRepository
+    name: gateway-api-crds
