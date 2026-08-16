@@ -2277,8 +2277,8 @@ synology:
   auth:
     community: synology
     security_level: authNoPriv
-    username: ${SYNO_SNMP_USER}
-    password: ${SYNO_SNMP_PASS}
+    username: ${SNMP_SYNO_USER}
+    password: ${SNMP_SYNO_PASS}
     auth_protocol: SHA
     priv_protocol: DES
     priv_password: otherPass
