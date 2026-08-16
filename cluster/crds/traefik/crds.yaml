@@ -18,5 +18,4 @@ spec:
         namespace: flux-system
   values:
     traefik: true
-    gatewayAPI: true
     hub: true
