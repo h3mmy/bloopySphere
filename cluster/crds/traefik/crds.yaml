@@ -1,24 +1,31 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd/flux-schema/refs/heads/main/catalog/latest/helm.toolkit.fluxcd.io/helmrelease_v2.json
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
 metadata:
-  name: traefik-crds
-  namespace: networking
+  name: traefik-crd-source
+  namespace: flux-system
 spec:
   interval: 30m
-  chart:
-    spec:
-      # renovate: registryUrl=https://helm.traefik.io/traefik chart=traefik-crds
-      chart: traefik-crds
-      version: 1.14.1
-      sourceRef:
-        kind: HelmRepository
-        name: traefik-charts
-        namespace: flux-system
-  install:
-    serverSideApply: true
-  upgrade:
-    serverSideApply: "enabled"
-  values:
-    traefik: true
-    hub: true
+  url: ssh://github.com/traefik/traefik-helm-chart.git
+  secretRef:
+    name: flux-system
+  ref:
+    # renovate: registryUrl=https://traefik.github.io/charts/ chart=traefik
+    tag: v40.2.0
+  ignore: |
+    # exclude all
+    /*
+    # path to crds
+    !/traefik/crds
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: traefik-crds
+  namespace: flux-system
+spec:
+  interval: 30m
+  prune: false
+  sourceRef:
+    kind: GitRepository
+    name: traefik-crd-source
