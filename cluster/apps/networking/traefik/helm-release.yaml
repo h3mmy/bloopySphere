@@ -61,7 +61,7 @@ spec:
     podSecurityPolicy:
       enabled: false
     api:
-      disabledashboardad: true
+      disableDashboardAd: true
     service:
       enabled: true
       type: LoadBalancer
@@ -222,7 +222,6 @@ spec:
             - 2405:8100::/32
             - 2a06:98c0::/29
             - 2c0f:f248::/32
-        insecure: false
         #
         ## Enable HTTP/3 on the entrypoint
         ## Enabling it will also enable http3 experimental feature
@@ -298,7 +297,7 @@ spec:
         port: 5432
         expose:
           default: true
-        expostedPort: 5432
+        exposedPort: 5432
         http:
           tls:
             enabled: false
