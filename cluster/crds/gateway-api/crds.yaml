@@ -18,8 +18,7 @@ spec:
     /*
     # path to crds
     !/config/crd
-    !/config/crd/kustomization.yaml
-    !/config/crd/experimental/kustomization.yaml
+    !/config/crd/experimental
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
