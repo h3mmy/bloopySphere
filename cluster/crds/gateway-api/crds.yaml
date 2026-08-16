@@ -17,6 +17,7 @@ spec:
     # exclude all
     /*
     # path to crds
+    !/config/crd
     !/config/crd/kustomization.yaml
     !/config/crd/experimental/kustomization.yaml
 ---
