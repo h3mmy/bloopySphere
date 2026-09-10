@@ -27,7 +27,7 @@ spec:
   values:
     image:
       repository: ghcr.io/home-operations/tautulli
-      tag: 2.16.1@sha256:492b201778383bc58ef061dbd2584d9c0e5cfbd5090a1d48340b65589e26b144
+      tag: 2.18.1@sha256:2cc92abed174f89d4fa75ab98e39af0114f37829e9c675718b264cc80931c4f5
     env:
       TZ: "${TZ}"
       TAUTULLI__BASE_URL: "https://tautulli.${XYZ_DOMAIN}/"
