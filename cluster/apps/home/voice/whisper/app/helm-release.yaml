@@ -37,7 +37,7 @@ spec:
               # repository: rhasspy/wyoming-whisper
               # tag: 3.1.0@sha256:9501d2659eee83b6eead98d53842193e5fed011eda6c5b1c3ad36f3146b28fed
               repository: onerahmet/openai-whisper-asr-webservice
-              tag: v1.9.1-gpu@sha256:1132aa08c6eb9b440408864e8c25733d22a197ffea7c6975d60a4f4b6fd7b08b
+              tag: v1.10.0-gpu@sha256:3deb30cfd3d5614fd3885e6dfbef7dfcf95fe897300ecc703f7f3b3682b717ae
             env: #https://ahmetoner.com/whisper-asr-webservice/environmental-variables/#faster_whisper
               # HF_HOME: /data/huggingface
               TZ: "${TZ}"
