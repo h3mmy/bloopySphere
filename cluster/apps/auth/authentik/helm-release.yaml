@@ -111,11 +111,11 @@ spec:
           secret_key: "${AUTHENTIK_S3_SECRET}"
           host: http://s3.minio.storage
       email:
-        host: "smtp.sendgrid.net"
+        host: "smtp.mailgun.org"
         port: 587
         use_tls: true
-        username: "apikey"
-        password: "${SECRET_SENDGRID_API_KEY}"
+        username: "no-reply@mg.${XYZ_DOMAIN}"
+        password: "${SMTP_MAILGUN_PASS_NR}"
         from: "no-reply@${XYZ_DOMAIN}"
     # service:
     #   type: ClusterIP

@@ -54,7 +54,7 @@ creation_rules:
           - age1hr5v66mq2rtflw8vrzmdlaku48v0j5l2wr58lrdmxqp5decczugs3rr6yt
           - age1rp9r7wvsgy6zcl3j4v7kvnrv29sawvqhlm759j9x6zvs0f9ry4kqtmajrq
           - age1pzky92h7assvm9vlyxwpv3q09lcxsz47drjmyvu8eq4j5834792qwsy3ff
-  - path_regex: (k8s|cluster)/.*\.ya?ml
+  - path_regex: (k8s|cluster)(\\|/).*\.ya?ml
     encrypted_regex: "^(data|stringData)$"
     key_groups:
       # personal, flux
