@@ -10,7 +10,7 @@ spec:
       app.kubernetes.io/instance: &outpostName ldap-external
       app.kubernetes.io/managed-by: goauthentik.io
       app.kubernetes.io/name: authentik-outpost-ldap
-      app.kubernetes.io/version: 2023.2.3
+      app.kubernetes.io/version: 2026.5.7
       goauthentik.io/outpost-type: ldap
       goauthentik.io/outpost-name: *outpostName
   template:
@@ -19,7 +19,7 @@ spec:
         app.kubernetes.io/instance: *outpostName
         app.kubernetes.io/managed-by: goauthentik.io
         app.kubernetes.io/name: authentik-outpost-ldap
-        app.kubernetes.io/version: 2023.2.3
+        app.kubernetes.io/version: 2026.5.7
         goauthentik.io/outpost-type: ldap
         goauthentik.io/outpost-name: *outpostName
     spec:

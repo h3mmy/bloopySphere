@@ -9,5 +9,4 @@ resources:
   - media
   # Additional RBAC needed for spiffe
   - rbac.yaml
- # - sp-authentik.yaml
   - helm-release.yaml
