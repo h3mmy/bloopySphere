@@ -1,6 +1,6 @@
 ---
 creation_rules:
-  - path_regex: (provision|infrastructure)/.*(cloudflare/).*\.sops\.ya?ml
+  - path_regex: (provision|infrastructure)(\\|/).*(cloudflare(/|\\)).*\.sops\.ya?ml
     unencrypted_regex: "^(kind)$"
     key_groups:
       # personal, flux, tf-cloud-cloudflare, tf-controller

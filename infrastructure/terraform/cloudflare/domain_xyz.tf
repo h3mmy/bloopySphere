@@ -98,6 +98,57 @@ module "cf_domain_xyz" {
       type      = "CNAME"
       value     = "s2.domainkey.u24570643.wl144.sendgrid.net"
     },
+    # Mailgun
+    {
+      id    = "mailgun_dkim_2"
+      name  = "k1._domainkey.mg.${local.domains["xyz"]}"
+      type  = "TXT"
+      value = "${local.cloudflare_secrets["xyz_mailgun_dkim"]}"
+    },
+    {
+      id    = "mailgun_dmarc_xyz"
+      name  = "_dmarc.mg.${local.domains["xyz"]}"
+      type  = "TXT"
+      value = "${local.cloudflare_secrets["xyz_mailgun_dmarc"]}"
+    },
+    {
+      hostname  = "mg.${local.domains["xyz"]}"
+      id        = "mailgun_spf"
+      name      = "mg.${local.domains["xyz"]}"
+      proxiable = false
+      proxied   = false
+      ttl       = 1
+      type      = "TXT"
+      value     = "v=spf1 include:mailgun.org ~all"
+    },
+    {
+      id        = "mailgun_mx_2"
+      name      = "mg.${local.domains["xyz"]}"
+      priority  = 10
+      proxiable = false
+      proxied   = false
+      ttl       = 1
+      type      = "MX"
+      value     = "mxb.mailgun.org"
+    },
+    {
+      id        = "mailgun_mx_1"
+      name      = "mg.${local.domains["xyz"]}"
+      priority  = 10
+      proxiable = false
+      proxied   = false
+      ttl       = 1
+      type      = "MX"
+      value     = "mxa.mailgun.org"
+    },
+    {
+      name      = "email.mg.${local.domains["xyz"]}"
+      proxiable = true
+      proxied   = true
+      ttl       = 1
+      type      = "CNAME"
+      value     = "mailgun.org"
+    },
     # CF Mail
     {
       hostname  = "${local.domains["xyz"]}"
@@ -146,7 +197,7 @@ module "cf_domain_xyz" {
         priority  = 0
         weight = 0
         port   = 0
-        name = "imap.${local.domains["xyz"]}"
+        name = "_imap._tcp.${local.domains["xyz"]}"
         target = "."
       }
     },
@@ -159,7 +210,7 @@ module "cf_domain_xyz" {
         priority  = 0
         weight = 0
         port   = 0
-        name = "pop3.${local.domains["xyz"]}"
+        name = "_pop3._tcp.${local.domains["xyz"]}"
         target = "."
       }
     }
