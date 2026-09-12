@@ -160,7 +160,7 @@ mdblist:
   cache_expiration: 60
 
 # notifiarr:
-#   API_KEY: ${NOTIFIARR_API_KEY}
+#   API_KEY: NOTIFIARR_API_KEY
 
 radarr:
   url: http://radarr.media.svc.cluster.local:7878
