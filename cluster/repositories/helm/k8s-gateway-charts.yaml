@@ -6,5 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: https://k8s-gateway.github.io/k8s_gateway/
+  # url: https://k8s-gateway.github.io/k8s_gateway/
+  # moved to codeberg: https://codeberg.org/k8s-gateway/k8s_gateway
+  url: https://k8s-gateway.kryptonian.kapsi.fi/
   timeout: 3m
