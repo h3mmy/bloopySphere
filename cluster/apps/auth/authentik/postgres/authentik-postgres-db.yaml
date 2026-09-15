@@ -18,8 +18,7 @@ spec:
       cpu: 22m
       memory: 70M
     limits:
-      cpu: 141m
-      memory: 304M
+      memory: 504M
   failover:
     isDisabled: false
   backup:
