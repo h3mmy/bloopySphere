@@ -145,7 +145,7 @@ spec:
       exporter:
         image:
           repository: esanchezm/prometheus-qbittorrent-exporter
-          tag: v1.6.0
+          tag: v1.7.0
         env:
           user: "${QB_USER}"
           password: "${QB_PASSWORD}"
