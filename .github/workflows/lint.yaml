@@ -40,7 +40,7 @@ jobs:
           private_key: "${{ secrets.APP_PRIVATE_KEY }}"
 
       - name: Lint
-        uses: megalinter/megalinter/flavors/terraform@ef3e84b8b836d76db562d0f3ed7da61e8fd538bc # v9
+        uses: megalinter/megalinter/flavors/terraform@9949bad031045f366be2467e00e8371a7328a2e2 # v10
         env:
           GITHUB_TOKEN: "${{ steps.generate-token.outputs.token }}"
           MEGALINTER_CONFIG: ${{ env.MEGALINTER_CONFIG }}
