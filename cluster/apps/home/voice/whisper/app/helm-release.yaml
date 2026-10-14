@@ -41,7 +41,7 @@ spec:
             env: #https://ahmetoner.com/whisper-asr-webservice/environmental-variables/#faster_whisper
               # HF_HOME: /data/huggingface
               TZ: "${TZ}"
-              ASR_MODE: small
+              ASR_MODEL: small
               ASR_ENGINE: faster_whisper # openai_whisper, faster_whisper
             resources:
               requests:
@@ -52,9 +52,9 @@ spec:
                 nvidia.com/gpu: 1
             probes:
               startup:
-                enabled: false # for initial model download
+                enabled: true # for initial model download
                 spec:
-                  failureThreshold: 30
+                  failureThreshold: 60
                   periodSeconds: 5
               liveness:
                 enabled: true
