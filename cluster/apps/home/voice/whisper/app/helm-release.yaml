@@ -47,9 +47,12 @@ spec:
               requests:
                 cpu: 200m
                 memory: 600Mi
+              limits:
+                memory: 4Gi
+                nvidia.com/gpu: 1
             probes:
               startup:
-                enabled: true
+                enabled: false # for initial model download
                 spec:
                   failureThreshold: 30
                   periodSeconds: 5
