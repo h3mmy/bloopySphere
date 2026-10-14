@@ -22,6 +22,8 @@ spec:
       system-upgrade-controller:
         strategy: RollingUpdate
         replicas: 1
+        serviceAccount:
+          name: *app
         containers:
           app:
             image:
@@ -45,6 +47,7 @@ spec:
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
     defaultPodOptions:
+      # automountServiceAccountToken: true
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -57,5 +60,5 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
     serviceAccount:
-      name: *app
-      create: true
+      *app :
+        enabled: true
