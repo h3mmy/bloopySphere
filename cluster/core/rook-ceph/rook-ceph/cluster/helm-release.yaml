@@ -58,7 +58,7 @@ spec:
        # image: quay.io/ceph/ceph:v19.2.3
       cephImage:
         repository: quay.io/ceph/ceph
-        tag: v19.2.6
+        tag: v19.2.7
 
       csi:
         readAffinity:
