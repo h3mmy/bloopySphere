@@ -147,7 +147,19 @@ spec:
 
       mon:
         count: 3
-
+      cephx:
+        daemon:
+          keyRotationPolicy: KeyGeneration
+          keyGeneration: 2
+        csi:
+          keyRotationPolicy: KeyGeneration
+          keyGeneration: 2
+          keepPriorKeyCountMax: 1  # keep one prior key also
+          keyType: aes # keep the old aes key type when the host kernels do not yet support aes256k
+        rbdMirrorPeer:
+          keyRotationPolicy: KeyGeneration
+          keyGeneration: 2
+          keyType: aes # keep the old aes key type when the peer does not yet support aes256k
       security:
         cephx:
           daemon:
