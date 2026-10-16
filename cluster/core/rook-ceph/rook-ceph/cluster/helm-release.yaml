@@ -148,6 +148,13 @@ spec:
       mon:
         count: 3
 
+      security:
+        cephx:
+          daemon:
+            enabled: true  # Securely upgrades all core daemons to aes256k
+          csi:
+            keyType: aes   # Keeps CSI mount keys compatible with your 6.8 kernel
+
       storage:
         useAllNodes: false
         useAllDevices: false
