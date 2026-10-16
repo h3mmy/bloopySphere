@@ -23,7 +23,7 @@ spec:
     - default
   nodeSelectors:
     - matchLabels:
-        kubernetes.io/hostname: k8s-6
+        kubernetes.io/hostname: k8s-3
   interfaces:
     - enp3s0
 ---
@@ -38,5 +38,33 @@ spec:
   nodeSelectors:
     - matchLabels:
         kubernetes.io/hostname: k8s-2
+  interfaces:
+    - eno1
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: l2-advertisement-4
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+    - default
+  nodeSelectors:
+    - matchLabels:
+        kubernetes.io/hostname: k8s-4
+  interfaces:
+    - eno1
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: l2-advertisement-5
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+    - default
+  nodeSelectors:
+    - matchLabels:
+        kubernetes.io/hostname: k8s-5
   interfaces:
     - eno1
