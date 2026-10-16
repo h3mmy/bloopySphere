@@ -66,7 +66,7 @@ spec:
           terminationGracePeriodSeconds: 1
 
     defaultPodOptions:
-      # Not required with operator v25+ since CDI is used by default 
+      # Not required with operator v25+ since CDI is used by default
       # runtimeClassName: nvidia
       affinity:
         nodeAffinity:
@@ -116,7 +116,7 @@ spec:
                 extensionRef:
                   group: traefik.io
                   kind: Middleware
-                  name: rfc-1918
+                  name: rfc1918
 
     persistence:
       cache:
