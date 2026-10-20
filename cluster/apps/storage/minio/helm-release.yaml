@@ -34,7 +34,7 @@ spec:
         containers:
           app:
             image:
-              repository: quay.io/minio/minio
+              repository: pgsty/minio
               tag: RELEASE.2025-09-07T16-13-09Z
             env:
               TZ: "${TZ}"
