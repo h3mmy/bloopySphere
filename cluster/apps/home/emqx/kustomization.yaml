@@ -8,3 +8,4 @@ resources:
   - ./dashboard
   - ./helm-release.yaml
   - ./pdb.yaml
+  - ./gatus.yaml
