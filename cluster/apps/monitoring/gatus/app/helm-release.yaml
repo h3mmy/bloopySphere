@@ -227,11 +227,11 @@ spec:
           gethomepage.dev/name: Gatus
           gethomepage.dev/icon: gatus.png
         hosts:
-          - host: &host status-in.${XYZ_DOMAIN}
+          - host: &host2 status-in.${XYZ_DOMAIN}
             paths:
               - path: /
                 service:
                   identifier: app
         tls:
           - hosts:
-              - *host
+              - *host2
