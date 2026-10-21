@@ -22,3 +22,17 @@ spec:
           - name: tls.${XYZ_DOMAIN/./-}
             kind: Secret
             group: core
+    - name: mqtts
+      protocol: TLS
+      port: 8883
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - group: core
+            kind: Secret
+            name: tls.${XYZ_DOMAIN/./-} # Your exact secret name
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TCPRoute
