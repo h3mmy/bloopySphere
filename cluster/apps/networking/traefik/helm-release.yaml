@@ -267,6 +267,7 @@ spec:
         expose:
           default: true
         exposedPort: 8084
+        protocol: TCP
         http:
           tls:
             enabled: true
@@ -276,6 +277,7 @@ spec:
         expose:
           default: true
         exposedPort: 8883
+        protocol: TCP
         http:
           tls:
             enabled: true
@@ -295,6 +297,7 @@ spec:
           default: true
         exposedPort: 8082
       postgres:
+        protocol: TCP
         port: 5432
         expose:
           default: true
