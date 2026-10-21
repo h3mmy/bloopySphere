@@ -11,7 +11,7 @@ data:
     endpoints:
       - name: mqtt-broker-internal
         url: "tcp://emqx-headless.svc.home.cluster.internal:1883"
-        interval: 30s
+        interval: 300s
         conditions:
           - "[CONNECTED] == true"
         alerts:
@@ -23,7 +23,7 @@ data:
               thresholds: [40, 100, 500, 900, 3100]
       - name: mqtt-broker-external
         url: "tcp://mqtt.${XYZ_DOMAIN}:8883"
-        interval: 30s
+        interval: 300s
         conditions:
           - "[CONNECTED] == true"
         alerts:
