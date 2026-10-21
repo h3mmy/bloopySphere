@@ -210,3 +210,28 @@ spec:
         tls:
           - hosts:
               - *host
+      internal:
+        enabled: true
+        className: traefik
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
+          traefik.ingress.kubernetes.io/affinity: "true"
+          gatus.io/enabled: "true"
+          gatus.io/path: *path
+          hajimari.io/icon: simple-icons:statuspage
+          hajimari.io/url: https://status-in.${XYZ_DOMAIN}
+          # external-dns.alpha.kubernetes.io/target: external.${XYZ_DOMAIN}
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Observability
+          gethomepage.dev/name: Gatus
+          gethomepage.dev/icon: gatus.png
+        hosts:
+          - host: &host status-in.${XYZ_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+        tls:
+          - hosts:
+              - *host
