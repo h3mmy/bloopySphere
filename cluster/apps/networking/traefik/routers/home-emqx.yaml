@@ -31,12 +31,13 @@ spec:
     - backendRefs:
         - name: emqx
           port: 1883
-      filters:
-        - type: ExtensionRef
-          extensionRef:
-            group: traefik.io
-            kind: MiddlewareTCP
-            name: rfc1918-tcp
+      # TODO: Set via kube network policy. currently restricted by network controller so commenting this is safe
+      # filters:
+      #   - type: ExtensionRef
+      #     extensionRef:
+      #       group: traefik.io
+      #       kind: MiddlewareTCP
+      #       name: rfc1918-tcp
 # ---
 # apiVersion: traefik.io/v1alpha1
 # kind: IngressRouteTCP
