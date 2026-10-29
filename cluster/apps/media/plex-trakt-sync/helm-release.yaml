@@ -35,7 +35,7 @@ spec:
           app:
             image:
               repository: ghcr.io/taxel/plextraktsync
-              tag: 0.35.21
+              tag: 0.35.22
             args:
               - watch
             env:
