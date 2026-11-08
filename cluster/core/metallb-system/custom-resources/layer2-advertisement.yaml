@@ -25,7 +25,7 @@ spec:
     - matchLabels:
         kubernetes.io/hostname: k8s-3
   interfaces:
-    - enp3s0
+    - enp1s0
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
