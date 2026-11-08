@@ -38,7 +38,7 @@ spec:
               #repository: ghcr.io/home-operations/lidarr
               #tag: 2.11.1.4621@sha256:6eb5615d9fe120fad8dde2687d45718517bdb6983f4f3a66d86e53fe0bfca597
               repository: ghcr.io/home-operations/lidarr
-              tag: 3.2.0.5144@sha256:d460ea8d1a02673c4d82b911acea01d5496ddf2ef28be57d30c60bf208ae6765
+              tag: 3.2.1.5196@sha256:ecbcc0dc629576ccba4af6d54de2fd0ac83b175f3c4fccf3024c44a2d01dbc7f
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
