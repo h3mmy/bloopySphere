@@ -8,3 +8,4 @@ resources:
   - middlewares
   - routers
   - external-services
+  - bloopy-transport.yaml
