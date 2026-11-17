@@ -13,6 +13,11 @@ metadata:
   name: bloopy-trust-ca
   namespace: cert-manager
 spec:
+  secretTemplate:
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+      reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
+      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "networking,kube-system"
   isCA: true
   commonName: root.bloop.cluster.local
   secretName: bloopy-0-trust-roots
