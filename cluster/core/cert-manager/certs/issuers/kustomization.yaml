@@ -7,3 +7,4 @@ resources:
   - ./secret.sops.yaml
   - ./csi-driver-spiffe-ca.yaml
   - ./snapshot-validation-webhook-ca.yaml
+  - ./bloopy-ssi.yaml
