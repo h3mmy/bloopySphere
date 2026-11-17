@@ -7,6 +7,8 @@ metadata:
 spec:
   path: ./cluster/apps/media/stash/config
   prune: true
+  dependsOn:
+    - name: cluster-cert-issuers
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -33,6 +35,7 @@ spec:
     name: flux-system
   dependsOn:
     - name: cluster-core-rook-ceph-cluster
+    - name: apps-media-stash-config
   decryption:
     provider: sops
     secretRef:
