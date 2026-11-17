@@ -83,6 +83,10 @@ spec:
             enabled: false
           https:
             enabled: true
+            annotations:
+              traefik.ingress.kubernetes.io/service.passhostheader: "true"
+              traefik.ingress.kubernetes.io/service.serversscheme: https
+              traefik.ingress.kubernetes.io/service.serverstransport: networking-bloopy-transport@kubernetescrd
             port: 9999
             protocol: TCP
 
@@ -125,14 +129,14 @@ spec:
           - path: /root/.stash
       tls-crt:
         enabled: true
-        name: tls.stash
+        name: tls.stash-internal
         type: secret
         globalMounts:
           - subPath: tls.crt
             path: /root/.stash/stash.crt
       tls-key:
         enabled: true
-        name: tls.stash
+        name: tls.stash-internal
         type: secret
         globalMounts:
           - subPath: tls.key
