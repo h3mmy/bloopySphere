@@ -141,6 +141,13 @@ spec:
         globalMounts:
           - subPath: tls.key
             path: /root/.stash/stash.key
+      ca-certs:
+        enabled: true
+        type: configMap
+        name: public-bundle
+        globalMounts:
+          - subPath: ca-certificates.crt
+            path: /etc/ssl/certs/ca-bloop-certs.crt
       media:
         enabled: true
         type: custom
