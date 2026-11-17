@@ -1,0 +1,26 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: stash-internal
+  namespace: media
+spec:
+  secretTemplate:
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+      reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
+      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "home,flux-system,auth,networking"
+  secretName: "tls.stash-internal"
+  issuerRef:
+    name: bloopy-trust-issuer
+    kind: ClusterIssuer
+  commonName: stash.bloop.cluster.local
+  dnsNames:
+    - stash.bloop.cluster.local
+    - stash.media.svc.cluster.local
+    - stash.media.services.cluster.local
+  ipAddresses:
+    - "127.0.0.1"
+    - "::1"
+  additionalOutputFormats:
+    - type: CombinedPEM
