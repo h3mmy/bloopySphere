@@ -1,0 +1,34 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: default-ssi
+  namespace: cert-manager
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: default-trust-anchor
+  namespace: cert-manager
+spec:
+  isCA: true
+  commonName: root.bloopysphere.cluster.local
+  secretName: bloopy-0-trust-roots
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: default-ssi
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: bloopysphere-trust-anchor
+  namespace: cert-manager
+spec:
+  ca:
+    secretName: bloopy-0-trust-roots
