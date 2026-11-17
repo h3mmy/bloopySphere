@@ -7,5 +7,5 @@ metadata:
 
 spec:
   rootCAs:
-    - bloopy-0-trust-roots
+    - secretRef: bloopy-0-trust-roots
   insecureSkipVerify: false
