@@ -52,7 +52,7 @@ spec:
               # repository: ghcr.io/home-operations/k8s-sidecar
               # tag: 2.1.2@sha256:d9e169add4e71fd5931a24e11696853f3d804ebc2022cd81f038e7ef22f4d626
               repository: ghcr.io/kiwigrid/k8s-sidecar
-              tag: 1.30.9@sha256:8c06e1ba643a4625de14b2db65c356f5db6b1482a25fce4754380a2936207338
+              tag: 1.30.11@sha256:91b49e5b6d2fb03e7a9014f8b072d0de199987845b02d96ce458dd9f14e753f5
               pullPolicy: IfNotPresent
             env: &configSyncEnv
               FOLDER: /config
@@ -70,7 +70,7 @@ spec:
           app:
             image:
               repository: twinproduction/gatus
-              tag: v5.31.0@sha256:3a432fcc2826b8eb2b38caceb83e7777fda139b8058b1d022c73a82be7342682
+              tag: v5.37.0@sha256:094eb186e55235db367e90e9d56140e5897b7044c41de23cde4cc18e6da1242e
             env:
           #    INIT_POSTGRES_DBNAME: *app
           #    INIT_POSTGRES_HOST: *pghost
@@ -210,3 +210,28 @@ spec:
         tls:
           - hosts:
               - *host
+      internal:
+        enabled: true
+        className: traefik
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-chain-no-auth@kubernetescrd
+          traefik.ingress.kubernetes.io/affinity: "true"
+          gatus.io/enabled: "true"
+          gatus.io/path: *path
+          hajimari.io/icon: simple-icons:statuspage
+          hajimari.io/url: https://status-in.${XYZ_DOMAIN}
+          # external-dns.alpha.kubernetes.io/target: external.${XYZ_DOMAIN}
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Observability
+          gethomepage.dev/name: Gatus
+          gethomepage.dev/icon: gatus.png
+        hosts:
+          - host: &host2 status-in.${XYZ_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+        tls:
+          - hosts:
+              - *host2

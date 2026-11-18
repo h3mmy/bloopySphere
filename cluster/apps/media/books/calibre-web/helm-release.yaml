@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: calibre-web
@@ -30,7 +30,7 @@ spec:
   values:
     image:
       repository: ghcr.io/bjw-s-labs/calibre-web
-      tag: 0.6.25@sha256:f923701b7cbe6e5e7bf9fb9789262a4978369a2c4b6bb60724fa084fcc59551c
+      tag: 0.6.27@sha256:5d08f83d3bb2ca51bcce0ca46c2c2c59aa4bbb6c384317dac7f241e51c976e58
 
     env:
       TZ: "${TZ}"

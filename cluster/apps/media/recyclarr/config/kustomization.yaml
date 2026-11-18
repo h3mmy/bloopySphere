@@ -11,8 +11,9 @@ configMapGenerator:
   - name: recyclarr-sub-configs
     namespace: media
     files:
-      # - sonarr-hd.yaml
+      - sonarr-hd.yaml
       - radarr-hd.yaml
+      - radarr-uhd.yaml
 generatorOptions:
   disableNameSuffixHash: true
   annotations:

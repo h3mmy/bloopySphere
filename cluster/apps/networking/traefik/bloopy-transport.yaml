@@ -1,0 +1,11 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: bloopy-transport
+  namespace: networking
+
+spec:
+  rootCAs:
+    - secret: bloopy-0-trust-roots
+  insecureSkipVerify: false

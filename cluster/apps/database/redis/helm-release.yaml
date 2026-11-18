@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: redis
@@ -52,7 +52,7 @@ spec:
                     - i686
                     - x86
     metrics:
-      enabled: true  
+      enabled: true
       image:
         registry: docker.io
         repository: bitnamilegacy/redis-exporter

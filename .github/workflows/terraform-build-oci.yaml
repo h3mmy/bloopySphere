@@ -27,13 +27,13 @@ jobs:
           private_key: "${{ secrets.APP_PRIVATE_KEY }}"
 
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           token: "${{ steps.generate-token.outputs.token }}"
 
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62 # v47.0.0
+        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
           dir_names: true
           dir_names_max_depth: 3
@@ -48,7 +48,7 @@ jobs:
           echo $ALL_CHANGED_FILES
 
       - name: Install jo
-        uses: awalsh128/cache-apt-pkgs-action@v1.6.0
+        uses: awalsh128/cache-apt-pkgs-action@553a35bb8ebd9fcabcb1c9451aa4c98e1b4ca8a9 # v1.6.3
         with:
           packages: jo
 
@@ -81,18 +81,18 @@ jobs:
           private_key: "${{ secrets.APP_PRIVATE_KEY }}"
 
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           token: "${{ steps.generate-token.outputs.token }}"
 
       - name: Setup Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+        uses: Homebrew/actions/setup-homebrew@8f3d1ec8a696b3b9d9a6c3696b6c73033cab69e4 # master
 
       - name: Setup Tools
         run: |
           brew install cosign fluxcd/tap/flux
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}

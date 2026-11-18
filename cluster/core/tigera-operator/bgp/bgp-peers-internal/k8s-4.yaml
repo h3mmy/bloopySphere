@@ -1,0 +1,9 @@
+---
+apiVersion: crd.projectcalico.org/v1
+kind: BGPPeer
+metadata:
+  name: ipv4-k8s-4
+spec:
+  peerIP: 10.1.0.79
+  asNumber: ${NETWORK_BGP_K8S_ASN}
+  keepOriginalNextHop: true

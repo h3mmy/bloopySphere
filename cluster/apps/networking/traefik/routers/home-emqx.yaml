@@ -17,6 +17,28 @@ spec:
   tls:
     secretName: tls.${XYZ_DOMAIN/./-}
 ---
+apiVersion: gateway.networking.k8s.io/v1
+kind: TCPRoute
+metadata:
+  name: emqx-mqtt-tcp
+  namespace: home
+spec:
+  parentRefs:
+    - name: traefik
+      namespace: networking
+      sectionName: mqtts
+  rules:
+    - backendRefs:
+        - name: emqx
+          port: 1883
+      # TODO: Set via kube network policy. currently restricted by network controller so commenting this is safe
+      # filters:
+      #   - type: ExtensionRef
+      #     extensionRef:
+      #       group: traefik.io
+      #       kind: MiddlewareTCP
+      #       name: rfc1918-tcp
+---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRouteTCP
 metadata:
@@ -34,6 +56,7 @@ spec:
         - name: networking-rfc1918-tcp@kubernetescrd
   tls:
     secretName: tls.${XYZ_DOMAIN/./-}
+
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute

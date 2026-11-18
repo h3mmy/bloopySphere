@@ -20,11 +20,11 @@ terraform {
     }
     tls = {
       source  = "hashicorp/tls"
-      version = "4.1.0"
+      version = "4.3.0"
     }
     sops = {
       source  = "carlpett/sops"
-      version = "1.3.0"
+      version = "1.4.1"
     }
 
   }

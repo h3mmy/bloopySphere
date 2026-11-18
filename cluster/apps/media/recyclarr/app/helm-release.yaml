@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: recyclarr
@@ -36,7 +36,7 @@ spec:
           main:
             image:
               repository: ghcr.io/recyclarr/recyclarr
-              tag: 7.4.1
+              tag: 7.5.2
             env:
               TZ: ${TZ}
               SONARR_API_KEY: ${SONARR_API_KEY}

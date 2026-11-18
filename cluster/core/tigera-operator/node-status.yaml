@@ -34,3 +34,27 @@ spec:
     - Routes
   node: *node
   updatePeriodSeconds: 10
+---
+apiVersion: projectcalico.org/v3
+kind: CalicoNodeStatus
+metadata:
+  name: &node k8s-4
+spec:
+  classes:
+    - Agent
+    - BGP
+    - Routes
+  node: *node
+  updatePeriodSeconds: 10
+---
+apiVersion: projectcalico.org/v3
+kind: CalicoNodeStatus
+metadata:
+  name: &node k8s-5
+spec:
+  classes:
+    - Agent
+    - BGP
+    - Routes
+  node: *node
+  updatePeriodSeconds: 10

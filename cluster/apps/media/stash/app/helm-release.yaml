@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: stash
@@ -32,6 +32,17 @@ spec:
     keepHistory: false
 
   values:
+    defaultPodOptions:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/instance
+                    operator: In
+                    values:
+                      - "plex"
+              topologyKey: "kubernetes.io/hostname"
     controllers:
       main:
         type: statefulset
@@ -43,7 +54,7 @@ spec:
           main:
             image:
               repository: stashapp/stash
-              tag: v0.29.3@sha256:a62f2d8afadbe029403777d18f54b2455b209a223aa28c6d3985c3cf9df2e08a
+              tag: v0.32.0@sha256:1099ffd7cc53f165916a07644874448011308a46eadbcd4edd328786e59b5eb9
               pullPolicy: IfNotPresent
 
             env:
@@ -72,6 +83,10 @@ spec:
             enabled: false
           https:
             enabled: true
+            annotations:
+              traefik.ingress.kubernetes.io/service.passhostheader: "true"
+              traefik.ingress.kubernetes.io/service.serversscheme: https
+              traefik.ingress.kubernetes.io/service.serverstransport: networking-bloopy-transport@kubernetescrd
             port: 9999
             protocol: TCP
 
@@ -86,12 +101,13 @@ spec:
           hajimari.io/group: "media"
           hajimari.io/instance: "bloop-quarky"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-          cert-manager.io/ip-sans: 127.0.0.1
+          cert-manager.io/ip-sans: "127.0.0.1"
+          cert-manager.io/uri-sans: "stash.media,stash.media.svc.cluster.local"
           traefik.ingress.kubernetes.io/service.passhostheader: "true"
           traefik.ingress.kubernetes.io/router.priority: "99"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          ingress.kubernetes.io/protocol: https
-          traefik.ingress.kubernetes.io/service.serversscheme: https
+          #ingress.kubernetes.io/protocol: https
+          #raefik.ingress.kubernetes.io/service.serversscheme: https
           traefik.ingress.kubernetes.io/router.middlewares: networking-bloopnet-xyz-auth@kubernetescrd
         hosts:
           - host: &host stash.${XYZ_DOMAIN}
@@ -113,18 +129,25 @@ spec:
           - path: /root/.stash
       tls-crt:
         enabled: true
-        name: tls.stash
+        name: tls.stash-internal
         type: secret
         globalMounts:
           - subPath: tls.crt
             path: /root/.stash/stash.crt
       tls-key:
         enabled: true
-        name: tls.stash
+        name: tls.stash-internal
         type: secret
         globalMounts:
           - subPath: tls.key
             path: /root/.stash/stash.key
+      ca-certs:
+        enabled: true
+        type: configMap
+        name: public-bundle
+        globalMounts:
+          - subPath: ca-certificates.crt
+            path: /etc/ssl/certs/ca-certificates-b.crt
       media:
         enabled: true
         type: custom

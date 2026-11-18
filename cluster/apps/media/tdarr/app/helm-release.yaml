@@ -1,6 +1,6 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: tdarr
@@ -46,7 +46,7 @@ spec:
           main:
             image:
               repository: ghcr.io/haveagitgat/tdarr_acc
-              tag: 2.56.01
+              tag: 2.86.01
               pullPolicy: IfNotPresent
             env:
               webUIPort: &web-port 8265

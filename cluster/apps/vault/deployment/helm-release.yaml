@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: vault
@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.releases.hashicorp.com
       chart: vault
-      version: 0.28.1
+      version: 0.31.0
       sourceRef:
         kind: HelmRepository
         name: hashicorp-charts

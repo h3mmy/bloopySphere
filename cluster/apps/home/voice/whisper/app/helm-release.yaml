@@ -1,0 +1,134 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app whisper
+spec:
+  driftDetection:
+    mode: enabled
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 4.6.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    # https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/values.yaml
+    controllers:
+      whisper:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              # repository: rhasspy/wyoming-whisper
+              # tag: 3.1.0@sha256:9501d2659eee83b6eead98d53842193e5fed011eda6c5b1c3ad36f3146b28fed
+              repository: onerahmet/openai-whisper-asr-webservice
+              tag: v1.9.1-gpu@sha256:1132aa08c6eb9b440408864e8c25733d22a197ffea7c6975d60a4f4b6fd7b08b
+            env: #https://ahmetoner.com/whisper-asr-webservice/environmental-variables/#faster_whisper
+              # HF_HOME: /data/huggingface
+              TZ: "${TZ}"
+              ASR_MODEL: small
+              ASR_ENGINE: faster_whisper # openai_whisper, faster_whisper
+            resources:
+              requests:
+                cpu: 200m
+                memory: 600Mi
+              limits:
+                memory: 4Gi
+                nvidia.com/gpu: 1
+            probes:
+              startup:
+                enabled: true # for initial model download
+                spec:
+                  failureThreshold: 60
+                  periodSeconds: 5
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+            securityContext:
+              readOnlyRootFilesystem: true
+        pod:
+          terminationGracePeriodSeconds: 1
+
+    defaultPodOptions:
+      # Not required with operator v25+ since CDI is used by default
+      # runtimeClassName: nvidia
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: nvidia.feature.node.kubernetes.io/gpu
+                    operator: In
+                    values:
+                      - "true"
+
+    service:
+      app:
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        ipFamilyPolicy: PreferDualStack
+        ipFamilies:
+          - IPv4
+          - IPv6
+        annotations:
+          metallb.io/loadBalancerIPs: "${LB_V4_WHISPER},${LB_V6_WHISPER}"
+          external-dns.alpha.kubernetes.io/hostname: "whisper.${XYZ_DOMAIN}"
+
+        controller: *app
+        ports:
+          wyoming:
+            port: &port 9000
+
+    route:
+      app:
+        hostnames: ["{{ .Release.Name }}.${XYZ_DOMAIN}"]
+        parentRefs:
+          - name: traefik
+            namespace: networking
+            sectionName: websecure
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            filters:
+              - type: ExtensionRef
+                extensionRef:
+                  group: traefik.io
+                  kind: Middleware
+                  name: rfc1918
+
+    persistence:
+      cache:
+        existingClaim: whisper-cache-v1
+        globalMounts:
+          - path: /root/.cache
+            subPath: cache
+          - path: /root/.config
+            subPath: config
+
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
+            readOnly: false

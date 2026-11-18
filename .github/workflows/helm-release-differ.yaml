@@ -18,8 +18,8 @@ jobs:
     name: Detect File Changes
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
-      - uses: dorny/paths-filter@v3
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: dorny/paths-filter@0e4a8c6effa4802afeda77dc8d303f8176d7dfad # v3
         id: filter
         with:
           list-files: json
@@ -38,22 +38,22 @@ jobs:
         file: ${{ fromJSON(needs.detect-file-changes.outputs.yaml_files) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Generate Token
-        uses: tibdex/github-app-token@v2
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2
         id: generate-token
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Checkout default branch
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: "${{ env.DEFAULT_BRANCH }}"
           path: default
       - name: Install Helm
-        uses: azure/setup-helm@v4
+        uses: azure/setup-helm@1a275c3b69536ee54be43f2070a358922e12c8d4 # v4
         with:
-          version: v3.18.4
+          version: v4.2.4
       - name: Helm Release Differ
         id: diff
         run: |
@@ -69,14 +69,14 @@ jobs:
               echo 'EOF'
           } >> $GITHUB_OUTPUT
       - name: Find Comment
-        uses: peter-evans/find-comment@v4
+        uses: peter-evans/find-comment@b30e6a3c0ed37e7c023ccd3f1db5c6c0b0c23aad # v4
         id: find-comment
         with:
           issue-number: "${{ github.event.pull_request.number }}"
           comment-author: "${{ env.BOT_USERNAME }}"
           body-includes: helm-release.yaml
       - name: Create or update comment
-        uses: peter-evans/create-or-update-comment@v5
+        uses: peter-evans/create-or-update-comment@e8674b075228eee787fea43ef493e45ece1004c9 # v5
         with:
           token: "${{ steps.generate-token.outputs.token }}"
           comment-id: "${{ steps.find-comment.outputs.comment-id }}"

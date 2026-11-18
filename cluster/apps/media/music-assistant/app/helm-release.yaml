@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd/flux-schema/refs/heads/main/catalog/latest/helm.toolkit.fluxcd.io/helmrelease_v2.json
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -52,7 +52,7 @@ spec:
           main:
             image:
               repository: ghcr.io/music-assistant/server
-              tag: 2.7.0b9@sha256:d4f1f291a29f341fef6953f11fdeeed597112c8a41201d1b83d7cf0847739219
+              tag: 2.9.13@sha256:5ded610a2804fb7a973d2cbe390df09ceb67f0d7f603bcacd21ebaaa5a8a9b62
             env:
               TZ: "${TZ}"
             resources:

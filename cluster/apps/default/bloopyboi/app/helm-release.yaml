@@ -1,7 +1,8 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: bloopyboi
+  name: &app bloopyboi
   namespace: default
   labels:
     component.bloopysphere-0/aspect: automata
@@ -10,7 +11,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 4.4.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -19,18 +20,24 @@ spec:
     remediation:
       retries: 4
   upgrade:
+    cleanupOnFail: true
     remediation:
       remediateLastFailure: true
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: ["/spec/replicas"]
   values:
     controllers:
-      main:
+      bloopyboi:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
+              # renovate datasource=docker depName=h3mmy/bloopyboi
               repository: ghcr.io/h3mmy/bloopyboi
-              tag: dev@sha256:605235c688db24f8c3c1cc951bdb2815ee8769eb43a03045de303ad41d4be873
+              tag: dev@sha256:19284051566426e24946b5ef602ea775d69d25bf14766f3c4acf3b75fd956c36
             env:
               TZ: ${TZ}
               GOOGLE_APPLICATION_CREDENTIALS: &svc-keyfile /bloopy-ops-dev.json
@@ -55,16 +62,62 @@ spec:
               #   valueFrom:
               #     fieldRef:
               #       fieldPath: spec.serviceAccountName
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 100
+        fsGroup: 100
+        fsGroupChangePolicy: OnRootMismatch
 
     service:
-      main:
-        controller: main
+      app:
+        controller: *app
         primary: true
         # externalTrafficPolicy: Local
         ports:
-          http:
+          health:
             port: 3000
+          http:
+            port: &port 8080
 
+    route:
+      app:
+        hostnames: ["{{ .Release.Name }}.${XYZ_DOMAIN}"]
+        parentRefs:
+          - name: traefik
+            namespace: networking
+            sectionName: websecure
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /discord/linked-roles
+              - path:
+                  type: PathPrefix
+                  value: /discord/linked-roles/callback
+            filters:
+              - type: ExtensionRef
+                extensionRef:
+                  group: traefik.io
+                  kind: Middleware
+                  name: chain-no-auth
+          - backendRefs:
+              - name: *app
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            filters:
+              - type: ExtensionRef
+                extensionRef:
+                  group: traefik.io
+                  kind: Middleware
+                  name: bloopnet-xyz-auth
     persistence:
       config:
         enabled: true

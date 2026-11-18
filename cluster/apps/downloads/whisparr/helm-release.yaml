@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app whisparr
@@ -24,8 +24,8 @@ spec:
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
-    - name: vpn-gateway
-      namespace: vpn-gateway
+    #- name: vpn-gateway
+    #  namespace: vpn-gateway
   valuesFrom:
     - kind: Secret
       name: *app
@@ -39,7 +39,7 @@ spec:
       type: statefulset
     image:
       repository: ghcr.io/drag0n141/whisparr-nightly
-      tag: 2.0.0.1331@sha256:90460f3e6d3d3f0d233b58fab3419221d73a1e3d79983b8fbe628d024f5379ee
+      tag: 2.0.0.2151@sha256:fbd01710debf7db3b98edbe9ab3f9fcc4f241e16bf490254c48fd71a36c4557f
     env:
       TZ: "${TZ}"
       PGID: ${MEDIA_GID}

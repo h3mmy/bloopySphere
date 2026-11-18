@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubernetes-external
+  namespace: default
+  labels:
+    component: apiserver
+  annotations:
+    metallb.io/address-pool: vip
+    metallb.io/loadBalancerIPs: "10.1.0.165"
+spec:
+  # The essential requirement
+  type: LoadBalancer
+  selector:
+    component: apiserver
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 6443

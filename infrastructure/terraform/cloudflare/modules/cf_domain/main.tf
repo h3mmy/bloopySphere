@@ -2,7 +2,7 @@ terraform {
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "4.49.1"
+      version = "4.52.10"
     }
   }
 }
@@ -27,7 +27,7 @@ resource "cloudflare_zone_settings_override" "cloudflare_settings" {
   zone_id = cloudflare_zone.zone.id
   settings {
     # /ssl-tls
-    ssl = "full"
+    ssl = "strict"
     # /ssl-tls/edge-certificates
     always_use_https         = "on"
     min_tls_version          = "1.2"

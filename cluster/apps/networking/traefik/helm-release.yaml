@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd/flux-schema/refs/heads/main/catalog/latest/helm.toolkit.fluxcd.io/helmrelease_v2.json
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -11,7 +11,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.traefik.io/traefik
       chart: *name
-      version: 37.3.0
+      version: 40.3.0
       sourceRef:
         kind: HelmRepository
         name: traefik-charts
@@ -19,12 +19,11 @@ spec:
   dependsOn:
     - name: cert-manager
       namespace: cert-manager
-    - name: traefik-crds
-      namespace: networking
   install:
     timeout: 10m
     replace: true
-    crds: CreateReplace
+    # CRDs managed by Flux, so skip Helm CRD install
+    crds: Skip
     remediation:
       retries: 3
   upgrade:
@@ -33,7 +32,8 @@ spec:
       retries: 3
       strategy: rollback
     cleanupOnFail: true
-    crds: CreateReplace
+    # CRDs managed by Flux, so skip Helm CRD upgrade
+    crds: Skip
   test:
     enable: true
   rollback:
@@ -49,6 +49,7 @@ spec:
         target:
           kind: Deployment
   maxHistory: 5
+  # helm-values schema=https://raw.githubusercontent.com/traefik/traefik-helm-chart/refs/heads/v39.0/traefik/values.schema.json
   values:
     image:
       repository: traefik
@@ -57,22 +58,23 @@ spec:
       replicas: 2
       # podAnnotations:
       #   linkerd.io/inject: ingress
-    podSecurityPolicy:
-      enabled: false
+    #podSecurityPolicy:
+      #enabled: false
     api:
-      disabledashboardad: true
+      disableDashboardAd: true
     service:
       enabled: true
-      type: LoadBalancer
-      # See https://github.com/kubernetes/enhancements/pull/1992
-      loadBalancerIPs:
-        - "${LB_V4_TRAEFIK}"
-        - "${LB_V6_TRAEFIK}"
-      externalTrafficPolicy: Local
-      ipFamilyPolicy: PreferDualStack
-      ipFamilies:
-        - "IPv4"
-        - "IPv6"
+      spec:
+        type: LoadBalancer
+        # See https://github.com/kubernetes/enhancements/pull/1992
+        loadBalancerIPs:
+          - "${LB_V4_TRAEFIK}"
+          - "${LB_V6_TRAEFIK}"
+        externalTrafficPolicy: Local
+        ipFamilyPolicy: PreferDualStack
+        ipFamilies:
+          - "IPv4"
+          - "IPv6"
       annotations:
         metallb.io/loadBalancerIPs: "${LB_V4_TRAEFIK}, ${LB_V6_TRAEFIK}"
         metallb.io/allow-shared-ip: traefik
@@ -117,7 +119,7 @@ spec:
       - "--global.checknewversion=true"
       - "--global.sendanonymoususage=false"
       - "--metrics.prometheus=true"
-      - "--entryPoints.websecure.forwardedHeaders.trustedIPs=10.0.0.0/8,192.168.0.0/16,172.16.0.0/12,${NETWORK_K8S_CLUSTER_CIDR_V6},${CALICO_NODE_CIDR_IPV6},${CIDR_V6_SN_1},${CIDR_V6_SN_2},103.21.244.0/22,103.22.200.0/22,103.31.4.0/22,104.16.0.0/13,104.24.0.0/14,108.162.192.0/18,131.0.72.0/22,141.101.64.0/18,162.158.0.0/15,172.64.0.0/13,173.245.48.0/20,188.114.96.0/20,190.93.240.0/20,197.234.240.0/22,198.41.128.0/17,2400:cb00::/32,2606:4700::/32,2803:f800::/32,2405:b500::/32,2405:8100::/32,2a06:98c0::/29,2c0f:f248::/32"
+      # - "--entryPoints.websecure.forwardedHeaders.trustedIPs=${CALICO_NODE_CIDR},${NETWORK_K8S_CLUSTER_CIDR_V6},${CALICO_NODE_CIDR_IPV6},${CIDR_V6_SN_1},${CIDR_V6_SN_2},103.21.244.0/22,103.22.200.0/22,103.31.4.0/22,104.16.0.0/13,104.24.0.0/14,108.162.192.0/18,131.0.72.0/22,141.101.64.0/18,162.158.0.0/15,172.64.0.0/13,173.245.48.0/20,188.114.96.0/20,190.93.240.0/20,197.234.240.0/22,198.41.128.0/17,2400:cb00::/32,2606:4700::/32,2803:f800::/32,2405:b500::/32,2405:8100::/32,2a06:98c0::/29,2c0f:f248::/32"
     providers:
       kubernetesCRD:
         enabled: true
@@ -154,15 +156,16 @@ spec:
           default: true
         exposedPort: 80
         protocol: TCP
-        # Port Redirections
-        # Added in 2.2, you can make permanent redirects via entrypoints.
-        # https://docs.traefik.io/routing/entrypoints/#redirection
-        redirections:
-          entryPoint:
-            to: websecure
-            scheme: https
-            # permanent: true
-            priority: 10
+        http:
+          # Port Redirections
+          # Added in 2.2, you can make permanent redirects via entrypoints.
+          # https://docs.traefik.io/routing/entrypoints/#redirection
+          redirections:
+            entryPoint:
+              to: websecure
+              scheme: https
+              # permanent: true
+              priority: 10
         # Trust forwarded  headers information (X-Forwarded-*)
         # forwardedHeaders:
 
@@ -181,46 +184,45 @@ spec:
         # The port protocol (TCP/UDP)
         protocol: TCP
         # nodePort: 32443
-        trustedIPs:
-          # Local Servers
-          - ${CALICO_NODE_CIDR}
-          - ${CALICO_NODE_CIDR_IPV6}
-          - ${LOCAL_CIDR_1}
-          - ${LOCAL_CIDR_2}
-          - ${LOCAL_GATEWAY_MAIN}
-          - ${LOCAL_GATEWAY_BGP}
-          - ${LOCAL_GATEWAY_CORE_BLOOP}
-          - ${NETWORK_K8S_CLUSTER_CIDR}
-          - ${NETWORK_K8S_CLUSTER_CIDR_V6}
-          - ${NETWORK_K8S_SERVICE_CIDR}
-          - ${NETWORK_K8S_SERVICE_CIDR_V6}
-          - ${NETWORK_BGP_BLOCK_V4}
-          - ${NETWORK_BGP_BLOCK_V6}
-          - 172.16.0.0/12
-          # Cloudflare IPs
-          - 103.21.244.0/22
-          - 103.22.200.0/22
-          - 103.31.4.0/22
-          - 104.16.0.0/13
-          - 104.24.0.0/14
-          - 108.162.192.0/18
-          - 131.0.72.0/22
-          - 141.101.64.0/18
-          - 162.158.0.0/15
-          - 172.64.0.0/13
-          - 173.245.48.0/20
-          - 188.114.96.0/20
-          - 190.93.240.0/20
-          - 197.234.240.0/22
-          - 198.41.128.0/17
-          - 2400:cb00::/32
-          - 2606:4700::/32
-          - 2803:f800::/32
-          - 2405:b500::/32
-          - 2405:8100::/32
-          - 2a06:98c0::/29
-          - 2c0f:f248::/32
-        insecure: false
+        forwardedHeaders:
+          trustedIPs:
+            # Local Servers
+            - ${CALICO_NODE_CIDR}
+            - ${CALICO_NODE_CIDR_IPV6}
+            - ${LOCAL_CIDR_1}
+            - ${LOCAL_CIDR_2}
+            - ${LOCAL_GATEWAY_MAIN}
+            - ${LOCAL_GATEWAY_BGP}
+            - ${LOCAL_GATEWAY_CORE_BLOOP}
+            - ${NETWORK_K8S_CLUSTER_CIDR}
+            - ${NETWORK_K8S_CLUSTER_CIDR_V6}
+            - ${NETWORK_K8S_SERVICE_CIDR}
+            - ${NETWORK_K8S_SERVICE_CIDR_V6}
+            - ${NETWORK_BGP_BLOCK_V4}
+            - ${NETWORK_BGP_BLOCK_V6}
+            # Cloudflare IPs
+            - 103.21.244.0/22
+            - 103.22.200.0/22
+            - 103.31.4.0/22
+            - 104.16.0.0/13
+            - 104.24.0.0/14
+            - 108.162.192.0/18
+            - 131.0.72.0/22
+            - 141.101.64.0/18
+            - 162.158.0.0/15
+            - 172.64.0.0/13
+            - 173.245.48.0/20
+            - 188.114.96.0/20
+            - 190.93.240.0/20
+            - 197.234.240.0/22
+            - 198.41.128.0/17
+            - "2400:cb00::/32"
+            - "2606:4700::/32"
+            - "2803:f800::/32"
+            - "2405:b500::/32"
+            - "2405:8100::/32"
+            - "2a06:98c0::/29"
+            - "2c0f:f248::/32"
         #
         ## Enable HTTP/3 on the entrypoint
         ## Enabling it will also enable http3 experimental feature
@@ -231,69 +233,78 @@ spec:
         http3:
           enabled: true
           # advertisedPort: 4443
-        ## Set TLS at the entrypoint
-        ## https://doc.traefik.io/traefik/routing/entrypoints/#tls
-        tls:
-          enabled: true
-          options: default
-          domains:
-            - main: "${XYZ_DOMAIN}"
-              sans:
-                - "*.${XYZ_DOMAIN}"
-            - bloop: "${SECRET_DOMAIN}"
-              sans:
-                - "*.${SECRET_DOMAIN}"
-            - tyg3r: "${TGR_DOMAIN}"
-              sans:
-                - "*.${TGR_DOMAIN}"
-            - lilj: "${LILJ_DOMAIN}"
-              sans:
-                - "*.${LILJ_DOMAIN}"
-          stores: networking-default@kubernetescrd
+        http:
+          ## Set TLS at the entrypoint
+          ## https://doc.traefik.io/traefik/routing/entrypoints/#tls
+          tls:
+            enabled: true
+            options: default
+            domains:
+              - main: "${XYZ_DOMAIN}"
+                sans:
+                  - "*.${XYZ_DOMAIN}"
+              - bloop: "${SECRET_DOMAIN}"
+                sans:
+                  - "*.${SECRET_DOMAIN}"
+              - tyg3r: "${TGR_DOMAIN}"
+                sans:
+                  - "*.${TGR_DOMAIN}"
+              - lilj: "${LILJ_DOMAIN}"
+                sans:
+                  - "*.${LILJ_DOMAIN}"
+            stores: networking-default@kubernetescrd
       dns-tls:
         port: 8853
         expose:
           default: true
         exposedPort: 853
-        tls:
-          enabled: true
-          options: default
+        http:
+          tls:
+            enabled: true
+            options: default
       wss:
         port: 8284
         expose:
           default: true
         exposedPort: 8084
-        tls:
-          enabled: true
-          options: default
+        protocol: TCP
+        http:
+          tls:
+            enabled: true
+            options: default
       mqtts:
         port: 8183
         expose:
           default: true
         exposedPort: 8883
-        tls:
-          enabled: true
-          options: default
+        protocol: TCP
+        http:
+          tls:
+            enabled: true
+            options: default
       ldaps:
         port: 8636
         expose:
           default: true
         exposedPort: 636
-        tls:
-          enabled: true
-          options: default
+        http:
+          tls:
+            enabled: true
+            options: default
       metrics:
         port: 8082
         expose:
           default: true
         exposedPort: 8082
       postgres:
+        protocol: TCP
         port: 5432
         expose:
           default: true
-        expostedPort: 5432
-        tls:
-          enabled: false
+        exposedPort: 5432
+        http:
+          tls:
+            enabled: false
     tlsOptions:
       default:
         minVersion: VersionTLS12
@@ -338,8 +349,6 @@ spec:
           certificateRefs:
             - kind: Secret
               name: "tls.${XYZ_DOMAIN/./-}"
-    pilot:
-      enabled: false
 
     resources:
       requests:

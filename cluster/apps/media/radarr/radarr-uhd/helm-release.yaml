@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: radarr-uhd
@@ -41,7 +41,7 @@ spec:
           main:
             image:
               repository: ghcr.io/home-operations/radarr
-              tag: 6.0.3.10276
+              tag: 6.4.4.10685
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"

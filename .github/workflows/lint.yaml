@@ -28,26 +28,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
 
       - name: Generate Token
-        uses: tibdex/github-app-token@v2
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2
         id: generate-token
         with:
           app_id: "${{ secrets.APP_ID }}"
           private_key: "${{ secrets.APP_PRIVATE_KEY }}"
 
       - name: Lint
-        uses: megalinter/megalinter/flavors/terraform@v9
+        uses: megalinter/megalinter/flavors/terraform@ef3e84b8b836d76db562d0f3ed7da61e8fd538bc # v9
         env:
           GITHUB_TOKEN: "${{ steps.generate-token.outputs.token }}"
           MEGALINTER_CONFIG: ${{ env.MEGALINTER_CONFIG }}
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'workflow_dispatch' }}
       - name: Archive production artifacts
         if: ${{ success() }} || ${{ failure() }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: MegaLinter reports
           path: |
@@ -58,7 +58,7 @@ jobs:
       - name: Create Pull Request with applied fixes
         id: cpr
         if: steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT == 'all' || env.APPLY_FIXES_EVENT == github.event_name) && env.APPLY_FIXES_MODE == 'pull_request' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8
         with:
           token: ${{ steps.generate-token.outputs.token }}
           commit-message: "[MegaLinter] Apply linters automatic fixes"
@@ -76,7 +76,7 @@ jobs:
         run: sudo chown -Rc $UID .git/
       - name: Commit and push applied linter fixes
         if: steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT == 'all' || env.APPLY_FIXES_EVENT == github.event_name) && env.APPLY_FIXES_MODE == 'commit' && github.ref != 'refs/heads/main' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
-        uses: stefanzweifel/git-auto-commit-action@v7
+        uses: stefanzweifel/git-auto-commit-action@d0b01107b5db882071f96de5dd4b54961ea93f4c # v7
         with:
           branch: ${{ github.event.pull_request.head.ref || github.head_ref || github.ref }}
           commit_message: "[MegaLinter] Apply linters fixes"

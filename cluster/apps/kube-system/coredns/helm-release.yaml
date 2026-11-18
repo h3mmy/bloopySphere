@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: coredns
@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: coredns
-      version: 1.45.0
+      version: 1.47.1
       sourceRef:
         kind: HelmRepository
         name: coredns-charts
@@ -41,7 +41,7 @@ spec:
       create: true
     image:
       repository: coredns/coredns
-      tag: 1.13.1
+      tag: 1.15.0
 
     fullnameOverride: coredns
 

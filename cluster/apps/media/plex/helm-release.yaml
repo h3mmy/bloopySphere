@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: plex
@@ -29,7 +29,7 @@ spec:
   values:
     image:
       repository: ghcr.io/home-operations/plex # {"$imagepolicy": "flux-system:plex:name"}
-      tag: "1.42.2.10156" # {"$imagepolicy": "flux-system:plex:tag"}
+      tag: "1.43.5.11079" # {"$imagepolicy": "flux-system:plex:tag"}
       imagePullPolicy: IfNotPresent
     env:
       TZ: "${TZ}"
@@ -108,6 +108,14 @@ spec:
         storageClass: "local-path"
         accessMode: ReadWriteOnce
         size: 20Gi
+      config-cache:
+        enabled: true
+        readOnly: false
+        existingClaim: plex-cache
+        # Uncomment when upgrading to v2.0.0+ of the chart
+        # globalMounts:
+        #   - path: /config/Library/Application Support/Plex Media Server/Cache
+        mountPath: /config/Library/Application Support/Plex Media Server/Cache
       transcode:
         enabled: true
         type: emptyDir

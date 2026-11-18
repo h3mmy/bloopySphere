@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: kometa
@@ -40,7 +40,7 @@ spec:
           app:
             image:
               repository: kometateam/kometa
-              tag: v2.2.2@sha256:32992226d1a505da3ed5d4e9c97bed8a6deb7aef36cd5ef8b1f519762607df45
+              tag: v2.5.5@sha256:864cec57d099c71a26a5a5ce2784d34d9b53874c91269c3a12df3949eab96562
             command:
               - /bin/sh
               - -c

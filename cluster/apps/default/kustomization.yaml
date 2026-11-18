@@ -5,7 +5,10 @@ resources:
   - hajimari-bloop
   - hajimari-xyz
   # Temporarily disabling pending #4771
-#  - jupyterhub
+  #  - jupyterhub
   - ./bloopyboi/ks.yaml
   - minecraft
   - ./wiki
+  # temporary until I figure out a sustainable way to do cross-namespace extensionRefs
+  - ./middlewares/chain-no-auth.yaml
+  - ./middlewares/bloopnet-xyz-auth.yaml

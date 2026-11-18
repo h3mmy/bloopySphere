@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Get Changed Files
         id: changed-files
-        uses: bjw-s-labs/action-changed-files@1a5aeab1bfa64d0c4e786f501d5a3f1fad4a24da # v0.4.1
+        uses: bjw-s-labs/action-changed-files@a9a36fb08ce06db9b02fbd8026cc2c0945eb9841 # v0.6.0
         with:
           patterns: kubernetes/**/*
 
@@ -36,12 +36,12 @@ jobs:
       pull: ${{ steps.extract.outputs.pull }}
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ matrix.branch == 'default' && github.event.repository.default_branch || '' }}
 
       - name: Gather Images
-        uses: docker://ghcr.io/allenporter/flux-local:v7.11.0
+        uses: docker://ghcr.io/allenporter/flux-local:v8.4.0
         with:
           args: >-
             get cluster

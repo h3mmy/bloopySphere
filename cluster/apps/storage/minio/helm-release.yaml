@@ -1,6 +1,6 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app minio
@@ -34,7 +34,7 @@ spec:
         containers:
           app:
             image:
-              repository: quay.io/minio/minio
+              repository: public.ecr.aws/y9w4h2u9/minio
               tag: RELEASE.2025-09-07T16-13-09Z
             env:
               TZ: "${TZ}"

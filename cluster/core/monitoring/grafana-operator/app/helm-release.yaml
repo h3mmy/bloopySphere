@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: grafana-operator
@@ -8,7 +8,7 @@ spec:
   interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=ghcr.io/grafana/helm-charts/grafana-operator
+      # renovate: registryUrl=https://ghcr.io/grafana/helm-charts/grafana-operator
       chart: grafana-operator
       version: v5.5.2
       sourceRef:

@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: sonarr
@@ -33,7 +33,7 @@ spec:
           main:
             image:
               repository: ghcr.io/home-operations/sonarr
-              tag: 4.0.16.2943@sha256:0a1b8f5cb5b072f7ad8c6ff64a25dc512115d1a114ecf19a58a3b4f870207ddd
+              tag: 4.0.20.3012@sha256:1f19eb5e0f421418c1a956bbe01310a0141423afe28bd9a4b1dcb8629ff2bce2
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"

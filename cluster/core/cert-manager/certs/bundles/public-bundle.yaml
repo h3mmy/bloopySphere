@@ -6,6 +6,16 @@ metadata:
 spec:
   sources:
     - useDefaultCAs: true
+    - secret:
+        name: "bloopy-0-trust-roots"
+        key: "ca.crt"
   target:
     configMap:
       key: "ca-certificates.crt"
+    namespaceSelector:
+      matchExpressions:
+        - key: "kubernetes.io/metadata.name"
+          operator: "In"
+          value: ["media", "networking", "cert-manager", "auth"]
+      
+      

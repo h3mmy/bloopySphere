@@ -9,7 +9,7 @@ metadata:
 spec:
   customConfig: authentik-postgres-conf
   replicas: 1
-  image: docker.io/library/postgres:15.8
+  image: docker.io/library/postgres:15.17
   database:
     size: 10Gi
     storageClassName: ceph-block
@@ -18,8 +18,7 @@ spec:
       cpu: 22m
       memory: 70M
     limits:
-      cpu: 141m
-      memory: 304M
+      memory: 504M
   failover:
     isDisabled: false
   backup:

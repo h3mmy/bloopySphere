@@ -18,21 +18,21 @@ jobs:
       matrix: ${{ steps.changed-clusters.outputs.all_changed_and_modified_files }}
     steps:
       - name: Generate Token
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3
         id: app-token
         with:
           app-id: "${{ secrets.APP_ID }}"
           private-key: "${{ secrets.APP_PRIVATE_KEY }}"
 
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           token: "${{ steps.app-token.outputs.token }}"
           fetch-depth: 0
 
       - name: Get Changed Clusters
         id: changed-clusters
-        uses: tj-actions/changed-files@v47
+        uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62 # v47
         with:
           files: k8s/**
           files_ignore: k8s/base/**
@@ -58,34 +58,34 @@ jobs:
       matrix: ${{ steps.extract-images.outputs.images }}
     steps:
       - name: Generate Token
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3
         id: app-token
         with:
           app-id: "${{ secrets.APP_ID }}"
           private-key: "${{ secrets.APP_PRIVATE_KEY }}"
 
       - name: Setup Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+        uses: Homebrew/actions/setup-homebrew@8f3d1ec8a696b3b9d9a6c3696b6c73033cab69e4 # master
 
       - name: Setup Workflow Tools
         shell: bash
         run: brew install jo yq
 
       - name: Checkout Default Branch
-        uses: actions/checkout@v5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           token: "${{ steps.app-token.outputs.token }}"
           ref: "${{ github.event.repository.default_branch }}"
           path: default
 
       - name: Checkout Pull Request Branch
-        uses: actions/checkout@v5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           token: "${{ steps.app-token.outputs.token }}"
           path: pull
 
       - name: Gather Images in Default Branch
-        uses: docker://ghcr.io/allenporter/flux-local:v7.11.0
+        uses: docker://ghcr.io/allenporter/flux-local:v8.4.0
         with:
           args: >-
             get cluster
@@ -95,7 +95,7 @@ jobs:
             --output-file default.yaml
 
       - name: Gather Images in Pull Request Branch
-        uses: docker://ghcr.io/allenporter/flux-local:v7.11.0
+        uses: docker://ghcr.io/allenporter/flux-local:v8.4.0
         with:
           args: >-
             get cluster

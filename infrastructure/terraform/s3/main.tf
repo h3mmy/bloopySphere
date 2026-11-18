@@ -2,15 +2,15 @@ terraform {
   required_providers {
     b2 = {
       source  = "Backblaze/b2"
-      version = "0.10.0"
+      version = "0.13.2"
     }
     minio = {
       source  = "aminueza/minio"
-      version = "3.11.4"
+      version = "3.11.5"
     }
     sops = {
       source  = "carlpett/sops"
-      version = "1.3.0"
+      version = "1.4.1"
     }
   }
 }

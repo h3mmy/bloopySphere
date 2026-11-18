@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app readarr-audio
@@ -33,7 +33,7 @@ spec:
   values:
     image:
       repository: ghcr.io/home-operations/readarr
-      tag:  0.4.18.2805@sha256:8f7551205fbdccd526db23a38a6fba18b0f40726e63bb89be0fb2333ff4ee4cd
+      tag: 0.4.18.2805@sha256:8f7551205fbdccd526db23a38a6fba18b0f40726e63bb89be0fb2333ff4ee4cd
     env:
       TZ: "${TZ}"
       PGID: ${MEDIA_GID}

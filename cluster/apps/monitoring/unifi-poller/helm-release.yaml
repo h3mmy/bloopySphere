@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: unifi-poller
@@ -27,7 +27,7 @@ spec:
   values:
     image:
       repository: ghcr.io/unpoller/unpoller
-      tag: v2.15.4
+      tag: v2.39.0
     env:
       TZ: "${TZ}"
       UP_UNIFI_DEFAULT_ROLE: "bloopnet-controller"

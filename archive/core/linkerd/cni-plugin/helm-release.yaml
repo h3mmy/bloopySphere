@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: linkerd-cni-plugin
@@ -12,7 +12,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.linkerd.io/edge
       chart: linkerd2-cni
-      version: 2025.11.1
+      version: 2025.11.3
       sourceRef:
         kind: HelmRepository
         name: linkerd-edge-charts

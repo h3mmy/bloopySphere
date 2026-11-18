@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: emqx
@@ -11,7 +11,7 @@ spec:
       reconcileStrategy: Revision
       # renovate: registryUrl=https://repos.emqx.io/charts
       chart: emqx
-      version: 5.8.8
+      version: 5.8.9
       sourceRef:
         kind: HelmRepository
         name: emqx-charts

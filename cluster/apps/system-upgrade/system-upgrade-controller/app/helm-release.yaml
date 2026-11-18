@@ -22,11 +22,13 @@ spec:
       system-upgrade-controller:
         strategy: RollingUpdate
         replicas: 1
+        serviceAccount:
+          name: *app
         containers:
           app:
             image:
               repository: docker.io/rancher/system-upgrade-controller
-              tag: v0.17.0@sha256:7b334b59a48c1653c9f4f18016032255fd874916c78557bc671b7c7877642f1c
+              tag: v0.19.2@sha256:34fa058fe453da2e1d6cf9052d2961976d5c7294921f8a6a6fb75098a27b0e89
             env:
               SYSTEM_UPGRADE_CONTROLLER_LEADER_ELECT: true
               SYSTEM_UPGRADE_CONTROLLER_NAME: *app
@@ -45,6 +47,7 @@ spec:
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
     defaultPodOptions:
+      # automountServiceAccountToken: true
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -57,5 +60,5 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
     serviceAccount:
-      name: *app
-      create: true
+      *app :
+        enabled: true

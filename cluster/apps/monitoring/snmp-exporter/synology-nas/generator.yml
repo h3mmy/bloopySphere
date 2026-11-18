@@ -43,10 +43,10 @@ modules:
       # Which are required depends on the security_level.
       # The equivalent options on NetSNMP commands like snmpbulkwalk
       # and snmpget are also listed. See snmpcmd(1).
-      username: ${SYNO_SNMP_USER}  # Required, no default. -u option to NetSNMP.
+      username: ${SNMP_SYNO_USER}  # Required, no default. -u option to NetSNMP.
       security_level: authNoPriv  # Defaults to noAuthNoPriv. -l option to NetSNMP.
                                     # Can be noAuthNoPriv, authNoPriv or authPriv.
-      password: ${SYNO_SNMP_PASS}  # Has no default. Also known as authKey, -A option to NetSNMP.
+      password: ${SNMP_SYNO_PASS}  # Has no default. Also known as authKey, -A option to NetSNMP.
                       # Required if security_level is authNoPriv or authPriv.
       auth_protocol: SHA  # MD5, SHA, SHA224, SHA256, SHA384, or SHA512. Defaults to MD5. -a option to NetSNMP.
                           # Used if security_level is authNoPriv or authPriv.

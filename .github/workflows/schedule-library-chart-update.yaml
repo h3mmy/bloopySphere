@@ -12,17 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Generate Token
-        uses: tibdex/github-app-token@v2
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2
         id: generate-token
         with:
           app_id: "${{ secrets.APP_ID }}"
           private_key: "${{ secrets.APP_PRIVATE_KEY }}"
       - name: Install Helm
-        uses: azure/setup-helm@v4
+        uses: azure/setup-helm@1a275c3b69536ee54be43f2070a358922e12c8d4 # v4
         with:
-          version: v3.6.3
+          version: v4.2.4
       - name: Add library chart
         run: helm repo add k8s-at-home-library https://library-charts.k8s-at-home.com
       - name: Update helm repositories
@@ -31,7 +31,7 @@ jobs:
         run: helm dep update
         working-directory: charts/kah-common
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8
         with:
           token: "${{ steps.generate-token.outputs.token }}"
           branch: github-action/renovate-kah-library-chart

@@ -20,12 +20,16 @@ spec:
     spec:
       containers:
         - name: kube-vip
-          image: ghcr.io/kube-vip/kube-vip:v1.0.1
+          image: ghcr.io/kube-vip/kube-vip:v1.1.2
           imagePullPolicy: IfNotPresent
           args:
             - manager
           env:
             - name: vip_arp
+              value: "true"
+            # - name: vip_interface
+            #   value: lo
+            - name: vip_ddns
               value: "false"
             - name: port
               value: "6443"
@@ -35,22 +39,38 @@ spec:
               value: "true"
             - name: cp_namespace
               value: kube-system
+            - name: vip_leaderelection
+              value: "true"
+            - name: vip_leaseduration
+              value: "15"
+            - name: vip_renewdeadline
+              value: "10"
+            - name: vip_retryperiod
+              value: "2"
+            # - name: bgp_routerinterface
+            #  value: "eno1" # will only work for some nodes because they have different names, but this is theoretically overwritten by the routerId. Fortunately this is only needed until I figure out address assignment without manual steps for calico to use bgp anycast
             - name: svc_enable
               value: "false"
-            - name: vip_address
-              value: "10.1.0.165"
-            - name: bgp_enable
-              value: "true"
-            - name: bgp_peeraddress
-              value: "10.1.0.1"
-            - name: bgp_as
-              value: "64514"
-            - name: bgp_peeras
-              value: "64513"
-            - name: bgp_routerid
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.podIP
+            - name: address
+              value: "10.1.0.65"
+            # - name: bgp_enable
+            #   value: "true"
+            # - name: bgp_peeraddress
+            #   value: "10.1.0.1"
+            # - name: bgp_as
+            #   value: "64515" # avoid using same asn as calico so they aren't competing
+            # - name: bgp_peeras
+            #   value: "64513"
+            # - name: bgp_routerid
+            #   valueFrom:
+            #     fieldRef:
+            #       fieldPath: status.podIP
+            # - name: bgp_sourceip
+            #   valueFrom:
+            #     fieldRef:
+            #       fieldPath: status.podIP
+            # - name: bgp_peers
+            #   value: "10.1.0.85:65414::false,10.1.0.87:65414::false,10.1.0.91:65414::false"
           securityContext:
             capabilities:
               add:

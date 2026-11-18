@@ -15,15 +15,15 @@ on: # yamllint disable-line rule:truthy
 jobs:
   markdownlint:
     name: Markdownlint
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 1
 
       - name: markdownlint-cli
-        uses: nosborn/github-action-markdown-cli@v3.5.0
+        uses: nosborn/github-action-markdown-cli@508d6cefd8f0cc99eab5d2d4685b1d5f470042c1 # v3.5.0
         with:
           files: "README.md docs/**"
           ignore_files: "docs/_*"
@@ -31,14 +31,14 @@ jobs:
 
   markdown-link-check:
     name: Markdown link check
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 1
 
-      - uses: gaurav-nelson/github-action-markdown-link-check@v1
+      - uses: gaurav-nelson/github-action-markdown-link-check@5c5dfc0ac2e225883c0e5f03a85311ec2830d368 # v1
         with:
           config-file: ".github/markdown-link-check_config.json"
           file-path: "./README.md"
@@ -46,7 +46,7 @@ jobs:
   deploy:
     name: Deploy to GitHub Pages
     if: github.event.pull_request.head.repo.fork == false
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - markdownlint
       - markdown-link-check
@@ -54,16 +54,16 @@ jobs:
     steps:
       - name: Get bloopy-boi token
         id: get-app-token
-        uses: getsentry/action-github-app-token@v3
+        uses: getsentry/action-github-app-token@5c1e90706fe007857338ac1bfbd7a4177db2f789 # v4.0.0
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           token: ${{ steps.get-app-token.outputs.token }}
 
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: 3.x
 

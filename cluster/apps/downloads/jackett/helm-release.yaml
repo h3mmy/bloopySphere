@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: jackett
@@ -23,7 +23,7 @@ spec:
   values:
     image:
       repository: ghcr.io/home-operations/jackett
-      tag: 0.23.87
+      tag: 0.24.2981
     env:
       TZ: ${TZ}
     service:
