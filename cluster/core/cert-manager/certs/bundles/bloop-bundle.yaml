@@ -15,5 +15,12 @@ spec:
       matchExpressions:
         - key: "kubernetes.io/metadata.name"
           operator: "In"
-          value: ["media", "networking", "cert-manager", "auth"]
+          values:
+            - "media"
+            - "networking"
+            - "cert-manager"
+            - "auth"
+            - "default"
+            - "home"
+            - "kube-system"
       
