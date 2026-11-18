@@ -15,7 +15,6 @@ spec:
     namespaceSelector:
       matchExpressions:
         - key: "kubernetes.io/metadata.name"
-          operator: "In"
-          value: ["media", "networking", "cert-manager", "auth"]
+          operator: "Exists"
       
       
