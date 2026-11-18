@@ -147,7 +147,13 @@ spec:
         name: public-bundle
         globalMounts:
           - subPath: ca-certificates.crt
-            path: /etc/ssl/certs/ca-certificates-b.crt
+            path: /etc/ssl/certs/ca-certificates.crt
+      ca-bloop:
+        enabled: true
+        type: configMap
+        globalMounts:
+          - subPath: ca-bloop.crt
+            path: /etc/ssl/certs/ca-bloop.crt
       media:
         enabled: true
         type: custom
