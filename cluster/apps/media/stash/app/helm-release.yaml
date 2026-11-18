@@ -151,6 +151,7 @@ spec:
       ca-bloop:
         enabled: true
         type: configMap
+        name: bloop-bundle
         globalMounts:
           - subPath: ca-bloop.crt
             path: /etc/ssl/certs/ca-bloop.crt
