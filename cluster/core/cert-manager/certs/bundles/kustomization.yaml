@@ -5,3 +5,4 @@ resources:
   - ./public-bundle.yaml
   - ./csi-driver-spiffe.yaml
   - ./snapshot-controller-webhook.yaml
+  - ./bloop-bundle.yaml
