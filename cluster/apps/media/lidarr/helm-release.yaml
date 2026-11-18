@@ -40,6 +40,9 @@ spec:
               repository: ghcr.io/home-operations/lidarr
               tag: 3.2.1.5196@sha256:ecbcc0dc629576ccba4af6d54de2fd0ac83b175f3c4fccf3024c44a2d01dbc7f
               pullPolicy: IfNotPresent
+            securityContext:
+              runAsUser: 0
+              runAsGroup: 0
             env:
               TZ: "${TZ}"
               LIDARR__INSTANCE_NAME: Lidarr
@@ -63,7 +66,6 @@ spec:
                 memory: 1500Mi
         pod:
           securityContext:
-            runAsUser: 568
             fsGroup: "${MEDIA_GID}"
             fsGroupChangePolicy: "OnRootMismatch"
             supplementalGroups:
