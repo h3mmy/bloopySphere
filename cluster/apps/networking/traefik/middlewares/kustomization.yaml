@@ -6,6 +6,7 @@ resources:
   - rfc1918.yaml
   - redirect-path.yaml
   - ak-forward-auth-extra-headers.yaml
+  - ak-tls-forward-auth-extra.yaml
   - rate-limit.yaml
   - keycloak-forward-auth.yaml
   - bloopnet-xyz-auth.yaml
