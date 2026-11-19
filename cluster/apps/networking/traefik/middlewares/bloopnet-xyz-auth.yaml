@@ -39,3 +39,16 @@ spec:
       - name: networking-rate-limit@kubernetescrd
       - name: auth-ak-outpost-authentik-embedded-outpost@kubernetescrd
       - name: networking-error-pages@kubernetescrd
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: bloopnet-xyz-auth-tls
+  namespace: networking
+spec:
+  chain:
+    middlewares:
+      - name: networking-secure-headers@kubernetescrd
+      - name: networking-rate-limit@kubernetescrd
+      - name: networking-ak-tls-forward-auth-extra@kubernetescrd
+      - name: networking-error-pages@kubernetescrd
