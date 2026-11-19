@@ -8,6 +8,9 @@ spec:
   forwardAuth:
     address: https://ak-outpost-authentik-embedded-outpost.auth.svc.cluster.local:9443/outpost.goauthentik.io/auth/traefik
     trustForwardHeader: true
+    tls:
+      # TODO: temporarily disable this for the https outpost until we figure out which strategy to use for final solution 
+      insecureSkipVerify: true
     authResponseHeaders:
       - Authorization
       - Set-Cookie
