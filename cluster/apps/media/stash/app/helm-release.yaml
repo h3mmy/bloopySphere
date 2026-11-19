@@ -108,7 +108,7 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           #ingress.kubernetes.io/protocol: https
           #raefik.ingress.kubernetes.io/service.serversscheme: https
-          traefik.ingress.kubernetes.io/router.middlewares: networking-bloopnet-xyz-auth@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: networking-bloopnet-xyz-auth-tls@kubernetescrd
         hosts:
           - host: &host stash.${XYZ_DOMAIN}
             paths:
