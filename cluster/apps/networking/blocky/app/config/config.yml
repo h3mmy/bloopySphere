@@ -58,6 +58,7 @@ blocking:
       - |
         doh.dns.apple.com.v.aaplimg.com
       - https://raw.githubusercontent.com/Sekhan/TheGreatWall/master/TheGreatWall.txt
+      - https://raw.githubusercontent.com/crypt0rr/public-doh-servers/refs/heads/main/dns.list
       - mask.icloud.com
       - mask-h2.icloud.com
       - https://gist.githubusercontent.com/ckuethe/f71185f604be9cde370e702aa179fc2e/raw/53fe52046836ac3009e9505b7b8b8b5de42d84e3/doh-blocklist.txt
