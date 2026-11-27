@@ -20,7 +20,7 @@ spec:
   values:
     image:
       repository: ghcr.io/tarampampam/error-pages
-      tag: 4.2.7
+      tag: 4.2.8
     controller:
       enabled: true
       type: deployment
